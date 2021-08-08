@@ -68,10 +68,10 @@ namespace qptech.src
                 
                 switch (bee.Block.LastCodePart())
                 {
-                    case "east": rot = 90;break;
-                    case "south": rot = 0;break;
-                    case "west": rot = 270;break;
-                    case "north": rot = 180;break;
+                    case "east": rot = 270;break;
+                    case "south": rot = 180;break;
+                    case "west": rot = 90;break;
+                    case "north": rot = 0;break;
                 }
                 if (bee.IsOn)
                 {

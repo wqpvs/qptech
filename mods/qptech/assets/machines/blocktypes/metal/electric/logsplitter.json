@@ -29,7 +29,8 @@
 
 		"*-lv-*": {
 			"maxFlux": 2,
-			
+			"materialInputFace": "east",
+			"materialOutputFace": "west",
 			"capacitance": 2,
 			"requiredFlux": 1,
 			"processingTicks": 5,
@@ -39,22 +40,22 @@
 
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/metal/electric/washplant2" },
+	"shape": { "base": "block/metal/electric/logsplitter" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/washplant2",
+			"base": "block/metal/electric/logsplitter",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/washplant2",
+			"base": "block/metal/electric/logsplitter",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/washplant2",
+			"base": "block/metal/electric/logsplitter",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/washplant2",
+			"base": "block/metal/electric/logsplitter",
 			"rotateY": 180
 		}
 	},

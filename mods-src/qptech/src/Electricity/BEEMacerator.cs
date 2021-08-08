@@ -232,9 +232,11 @@ namespace qptech.src
             //TODO: change this to "CanMacerate", add a FindMacerate that returns items:
             //   - from the maceratelist directly - adding extra output based on RNG
             //   - generically where possible - eg stone block to stone gravel etc
+            
             if (maceratelist == null) { LoadMacerateLists(api); }
             if (co == null) { return false; }
             if (co.FirstCodePart() == "ore") { return true; }
+            if (co.ToString().Contains("log")&&machinename=="logsplitter") { return true; }
             if (co.FirstCodePart() == "nugget") { return false; } //disabling nugget processing for now
             if (maceratelist.ContainsKey(co.FirstCodePart())) {
                 bool result = maceratelist[co.FirstCodePart()].Any(val => val.machinename==machinename);
@@ -256,6 +258,12 @@ namespace qptech.src
             string fcp = co.FirstCodePart();
             string fullcode = co.Code.ToString();
             Random rand = new Random();
+            /*if (fullcode.Contains("log")&&machinename=="logsplitter")
+            {
+                Item outputItem = api.World.GetItem(new AssetLocation("game:firewood"));
+                ItemStack itmstk = new ItemStack(outputItem, 16);
+                outputstack.Add(itmstk);
+            }*/
             if (fcp == "ore")
             {
                 ItemOre oreitem = co as ItemOre;
@@ -361,6 +369,7 @@ namespace qptech.src
                 }
             }
             }
+           
             return outputstack;
         }
         static void LoadMacerateLists(ICoreAPI api)

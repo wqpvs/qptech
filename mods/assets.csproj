@@ -363,9 +363,11 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\electrickiln-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\forge-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\heatsink.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\logsplitter.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\motor-rotor.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\motor-stator.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\motor.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0 - Copy.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\washplant2.json" />
     <None Include="qptech\assets\machines\shapes\block\wood\basin.json" />
