@@ -257,23 +257,7 @@
 								"west": { "texture": "#machinery", "uv": [ 5.0, 5.0, 8.0, 13.0 ] },
 								"up": { "texture": "#machinery", "uv": [ 6.0, 5.5, 16.0, 8.5 ] },
 								"down": { "texture": "#machinery", "uv": [ 4.5, 6.0, 14.5, 9.0 ] }
-							},
-							"children": [
-								{
-									"name": "PowerGaugePoint",
-									"from": [ 4.0, 4.0, 3.0 ], 
-									"to": [ 5.0, 5.0, 4.0 ], 
-									"rotationOrigin": [ 4.0, 4.0, 3.0 ],
-									"faces": {
-										"north": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-										"east": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-										"south": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-										"west": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-										"up": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-										"down": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-									}
-								}
-							]
+							}
 						},
 						{
 							"name": "Cube17",
@@ -304,6 +288,21 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "PowerGaugePoint",
+					"from": [ 4.0, 10.0, 3.0 ], 
+					"to": [ 8.0, 14.0, 3.1 ], 
+					"renderInEditor": false,
+					"rotationOrigin": [ 4.0, 10.0, 3.0 ],
+					"faces": {
+						"north": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+						"east": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 0.5, 4.0 ] },
+						"south": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+						"west": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 0.5, 4.0 ] },
+						"up": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 0.5 ] },
+						"down": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 0.5 ] }
+					}
 				}
 			],
 			"attachmentpoints": [

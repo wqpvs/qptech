@@ -271,6 +271,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\macerator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\metalpress.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\electricfan.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\dummygauge.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\heatsink.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\other\hiddenchute\chute-cross.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\other\hiddenchute\chute-straight.json" />

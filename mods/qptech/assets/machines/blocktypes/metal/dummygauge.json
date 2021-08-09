@@ -1,15 +1,15 @@
 {
-	"code": "gauge",
+	"code": "dummygauge",
 	"creativeinventory": {
 		
-		"qptech": [ "*" ]
+		"qptech": [ "" ]
 	},
 	
 	"entityclass": "BETextureTest",
 	
 	"shape": {
 		
-			"base": "machines:block/metal/electric/logsplitter",
+			"base": "machines:block/metal/electric/roundgauge0",
 			
 	},
 	"blockmaterial": "Wood",

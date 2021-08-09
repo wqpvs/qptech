@@ -26,11 +26,13 @@ namespace qptech.src
             get
             {
                 //capi.BlockTextureAtlas.Positions[Block.Textures[path].Baked.TextureSubId];
-                return capi.BlockTextureAtlas.Positions[Block.Textures[gaugetextures[texno]].Baked.TextureSubId];
+                return capi.BlockTextureAtlas.Positions[atlasBlock.Textures[gaugetextures[texno]].Baked.TextureSubId];
             }
         }
         public Size2i AtlasSize => (Api as ICoreClientAPI).BlockTextureAtlas.Size;
         ICoreClientAPI capi;
+        Block atlasBlock;
+       
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -51,6 +53,7 @@ namespace qptech.src
             gaugetextures.Add("roundgauge-90");
             gaugetextures.Add("roundgauge-100");
             RegisterGameTickListener(OnTick, 100);
+            atlasBlock = api.World.GetBlock(new AssetLocation("machines:dummygauge"));
 
         }
         float rot = 0;
@@ -100,13 +103,20 @@ namespace qptech.src
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
             
-            Shape shape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/metal/electric/roundgauge0"));
+            Shape gaugeshape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/metal/electric/roundgauge0"));
+            
             
             MeshData meshdata;
-            capi.Tesselator.TesselateShape("roundgauge0"+Pos.ToString(), shape, out meshdata, this);
-            meshdata.Rotate(new Vec3f(0.5f,0.5f,0.5f), 0, GameMath.DEG2RAD*rot, 0);
+            capi.Tesselator.TesselateShape("roundgauge0"+Pos.ToString(), gaugeshape, out meshdata, this);
+
+            //5,12,13 in model program units = what in actual coordinates?
+            float translatefactor = 16;
+            meshdata.Translate(new Vec3f(4/translatefactor, 10/translatefactor, 3/translatefactor));
+            
+            meshdata.Rotate(new Vec3f(0,0,0), 0, GameMath.DEG2RAD*rot, 0);
+            
             mesher.AddMeshData(meshdata);
-            return true;
+            return base.OnTesselation(mesher,tessThreadTesselator);
         }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
