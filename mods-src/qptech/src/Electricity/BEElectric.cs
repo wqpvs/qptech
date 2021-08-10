@@ -38,6 +38,7 @@ namespace qptech.src
         protected virtual string UseTexture => displayTextures[texno];
         public int Capacitance => capacitance;//how many packets it can store
         protected int capacitance = 1;
+        public virtual float DisplayPercentage => CapacitorPercentage;
         //protected int cachedCapacitance = 0;
         public int Capacitor => capacitor;  //TF currently stored
         protected int capacitor = 0;
@@ -272,7 +273,7 @@ namespace qptech.src
         }
         protected virtual void UpdateFluxDisplay()
         {
-            float pcttracker = CapacitorPercentage;
+            float pcttracker = DisplayPercentage;
             if (pcttracker > 1) { pcttracker = 1; }
             if (pcttracker < 0) { pcttracker = 0; }
             int newtexno = (int)((float)(displayTextures.Count - 1) * pcttracker);
