@@ -41,6 +41,8 @@ namespace qptech.src
         {
             get { return 0.1f; }
         }
+
+        public override float DisplayPercentage => isOn&&trypower ? 1 : 0;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -79,9 +81,10 @@ namespace qptech.src
             
         }
         //Attempts to generate power
+        bool trypower = false;
         public virtual void GeneratePower()
         {
-            bool trypower = DoGeneratePower();
+            trypower = DoGeneratePower();
             generating = trypower;
 
             if (Api.World.Side == EnumAppSide.Client && animUtil != null)

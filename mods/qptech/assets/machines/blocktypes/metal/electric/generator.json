@@ -8,18 +8,19 @@
 		"qptech": [ "*-east" ]
 	},
 	"attributes": {
-		"maxFlux": 2,
+		"maxFlux": 4,
 
 		"capacitance": 4,
-		"genFlux": 20,
+		"genFlux": 2,
 		"distributionFaces": [ "north" ],
-		"requiredHeat": 900,
+		"requiredHeat": 800,
 		"heatFace": "down",
 		"waterUsage": 1,
 		"waterUsePeriod": 0.25,
 		"waterFace": "up",
-		"overloadIfNoWater": "true"
-
+		"overloadIfNoWater": "true",
+		"showFluxDisplay": true,
+		"displayOffset": [ 10, 12, 16 ]
 	},
 	"variantgroups": [
 		{
