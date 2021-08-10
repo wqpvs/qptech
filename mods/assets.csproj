@@ -257,6 +257,7 @@
     <None Include="qptech\assets\game\shapes\block\can-full.json" />
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\watertower.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\creativegenerator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\battery.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\electrickiln.json" />
@@ -407,6 +408,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wires\wireplate-tin-2a-t.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wires\wireplate-tin-2a.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wires\wireplate-tin-4a.json" />
+    <None Include="qptech\assets\machines\shapes\block\wood\watertower.json" />
     <None Include="qptech\assets\machines\shapes\item\part\drilledplate.json" />
     <None Include="qptech\assets\machines\shapes\item\part\machineplate.json" />
     <None Include="qptech\assets\machines\shapes\item\part\mold-metalplate.json" />

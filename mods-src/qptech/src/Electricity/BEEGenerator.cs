@@ -221,6 +221,7 @@ namespace qptech.src
             BlockPos bp = Pos.Copy().Offset(waterFace);
             BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
             if (checkblock == null) { haswater = false; return false; }
+            
             var checkcontainer = checkblock as BlockEntityContainer;
             if (checkcontainer != null)
             {

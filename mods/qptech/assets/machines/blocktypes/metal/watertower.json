@@ -1,0 +1,23 @@
+{
+	"code": "watertower",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+
+	},
+	"entityclass": "BEWaterTower",
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+	"shape": { "base": "block/wood/watertower" },
+
+	"resistance": 1,
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+	
+
+}
