@@ -82,7 +82,7 @@ namespace qptech.src
             string displaytextureatlasblockname = "machines:dummygauge";
             displaytextureatlasblockname = Block.Attributes["atlasBlock"].AsString(displaytextureatlasblockname);
             atlasBlock = api.World.GetBlock(new AssetLocation(displaytextureatlasblockname));
-            float[] displayoffset = Block.Attributes["displayOffest"].AsArray<float>();
+            float[] displayoffset = Block.Attributes["displayOffset"].AsArray<float>();
             if (displayoffset == null||displayoffset.Length!=3)
             {
                 displayOffset = new Vec3f(4, 10, 3);

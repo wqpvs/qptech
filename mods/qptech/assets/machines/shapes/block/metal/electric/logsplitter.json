@@ -288,21 +288,6 @@
 							}
 						}
 					]
-				},
-				{
-					"name": "PowerGaugePoint",
-					"from": [ 4.0, 10.0, 3.0 ], 
-					"to": [ 8.0, 14.0, 3.1 ], 
-					"renderInEditor": false,
-					"rotationOrigin": [ 4.0, 10.0, 3.0 ],
-					"faces": {
-						"north": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
-						"east": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 0.5, 4.0 ] },
-						"south": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
-						"west": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 0.5, 4.0 ] },
-						"up": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 0.5 ] },
-						"down": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 0.5 ] }
-					}
 				}
 			],
 			"attachmentpoints": [
@@ -312,5 +297,19 @@
 					"rotationX": "90.0","rotationY": "0.0","rotationZ": "0.0"
 				}
 			]
+		},
+		{
+			"name": "PowerGaugePoint",
+			"from": [ 4.0, 10.0, 3.0 ], 
+			"to": [ 8.0, 14.0, 3.1 ], 
+			"rotationOrigin": [ 4.0, 10.0, 3.0 ],
+			"faces": {
+				"north": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"east": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 0.5, 4.0 ] },
+				"south": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"west": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 0.5, 4.0 ] },
+				"up": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 0.5 ] },
+				"down": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 4.0, 0.5 ] }
+			}
 		}
 	]}
