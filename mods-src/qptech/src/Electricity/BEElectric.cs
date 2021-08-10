@@ -10,14 +10,32 @@ using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 using Vintagestory.API.Server;
 using Electricity.API;
+using Vintagestory.API.Util;
+using Vintagestory.API.Client;
 
 namespace qptech.src
 {
-    public class BEElectric : BlockEntity, IElectricity
+    public class BEElectric : BlockEntity, IElectricity, ITexPositionSource
     {
         /*base class to handle electrical devices*/
         protected int maxFlux = 16;    //how many packets that can move at once
-        
+        public TextureAtlasPosition this[string textureCode]
+        {
+            get
+            {
+                //capi.BlockTextureAtlas.Positions[Block.Textures[path].Baked.TextureSubId];
+                return capi.BlockTextureAtlas.Positions[atlasBlock.Textures[UseTexture].Baked.TextureSubId];
+            }
+        }
+        public Size2i AtlasSize => (Api as ICoreClientAPI).BlockTextureAtlas.Size;
+        protected ICoreClientAPI capi;
+        protected Block atlasBlock; //this block will reference a shape which will reference all used textures
+        protected List<string> displayTextures; //this is a list of texture file names, must be include in the atlas block's shape
+        int texno = 0; //the index number
+        protected Vec3f displayOffset; //where the display will be located (if used)
+        protected bool showFluxDisplay = false;
+        protected float translatefactor => 16;
+        protected virtual string UseTexture => displayTextures[texno];
         public int Capacitance => capacitance;//how many packets it can store
         protected int capacitance = 1;
         //protected int cachedCapacitance = 0;
@@ -30,6 +48,7 @@ namespace qptech.src
         protected List<IElectricity> usedconnections; //track if already traded with in a given turn (to prevent bouncing)
         protected List<BlockFacing> distributionFaces; //what faces are valid for distributing power
         protected List<BlockFacing> receptionFaces; //what faces are valid for receiving power
+        
         bool distributiontick = false;
         public int MaxFlux { get { return maxFlux; } }
         
@@ -38,6 +57,7 @@ namespace qptech.src
         public virtual bool IsOn { get { return isOn; } }
         protected bool notfirsttick = false;
         protected bool justswitched = false; //create a delay after the player switches power
+        
         public BlockEntity EBlock { get { return this as BlockEntity; } }
         public override void Initialize(ICoreAPI api)
         {
@@ -50,11 +70,50 @@ namespace qptech.src
             if (inputConnections == null) { inputConnections = new List<IElectricity>(); }
             if (Block.Attributes == null) { api.World.Logger.Error("ERROR BEE INITIALIZE HAS NO BLOCK"); return; }
             maxFlux = Block.Attributes["maxFlux"].AsInt(maxFlux)*10;
-            
             capacitance = Block.Attributes["capacitance"].AsInt(Capacitance);
 
             RegisterGameTickListener(OnTick, 75);
             notfirsttick = false;
+            if (api is ICoreClientAPI)
+            {
+                capi = api as ICoreClientAPI;
+            }
+            displayTextures = new List<string>();
+            string displaytextureatlasblockname = "machines:dummygauge";
+            displaytextureatlasblockname = Block.Attributes["atlasBlock"].AsString(displaytextureatlasblockname);
+            atlasBlock = api.World.GetBlock(new AssetLocation(displaytextureatlasblockname));
+            float[] displayoffset = Block.Attributes["displayOffest"].AsArray<float>();
+            if (displayoffset == null||displayoffset.Length!=3)
+            {
+                displayOffset = new Vec3f(4, 10, 3);
+                displayOffset = displayOffset / translatefactor;
+            }
+            else
+            {
+                displayOffset = new Vec3f(displayoffset);
+                displayOffset = displayOffset / translatefactor;
+            }
+            string[] displaytexturelist = Block.Attributes["displayTextures"].AsArray<string>();
+            if (displaytexturelist == null || displaytexturelist.Length==0)
+            {
+                displayTextures = new List<string>();
+                displayTextures.Add("roundgauge-0");
+                displayTextures.Add("roundgauge-10");
+                displayTextures.Add("roundgauge-20");
+                displayTextures.Add("roundgauge-30");
+                displayTextures.Add("roundgauge-40");
+                displayTextures.Add("roundgauge-50");
+                displayTextures.Add("roundgauge-60");
+                displayTextures.Add("roundgauge-70");
+                displayTextures.Add("roundgauge-80");
+                displayTextures.Add("roundgauge-90");
+                displayTextures.Add("roundgauge-100");
+            }
+            else
+            {
+                displayTextures = displayTextures.ToList<string>();
+            }
+            showFluxDisplay = Block.Attributes["showFluxDisplay"].AsBool(showFluxDisplay);
         }
 
         //attempt to load power distribution and reception faces from attributes, and orient them to this blocks face if necessary
@@ -206,14 +265,72 @@ namespace qptech.src
             }
             distributiontick = !distributiontick;
             justswitched = false;
+            if (Api is ICoreClientAPI && showFluxDisplay)
+            {
+                UpdateFluxDisplay();
+            }
+        }
+        protected virtual void UpdateFluxDisplay()
+        {
+            float pcttracker = CapacitorPercentage;
+            if (pcttracker > 1) { pcttracker = 1; }
+            if (pcttracker < 0) { pcttracker = 0; }
+            int newtexno = (int)((float)(displayTextures.Count - 1) * pcttracker);
+
+            if (newtexno != texno)
+            {
+                texno = newtexno;
+                this.MarkDirty(true);
+            }
         }
 
+        protected virtual float DisplayRotation()
+        {
+            float rot = 0;
+            switch (Block.LastCodePart())
+            {
+                case "east": rot = 270; break;
+                case "south": rot = 180; break;
+                case "west": rot = 90; break;
+                case "north": rot = 0; break;
+            }
+            return rot;
+        }
+        protected virtual Vec3f DisplayOffset() //display offset but translated directionally
+        {
+            switch (Block.LastCodePart())
+            {
+                case "east": return displayOffset;
+                case "south": return displayOffset;
+                case "west": return displayOffset;
+            }
+            return displayOffset;
+        }
+        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
+        {
+
+            if (!showFluxDisplay) { return base.OnTesselation(mesher, tessThreadTesselator); }
+            Shape displayshape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/metal/electric/roundgauge0"));
+
+
+            MeshData meshdata;
+            capi.Tesselator.TesselateShape("roundgauge0" + Pos.ToString(), displayshape, out meshdata, this);
+
+
+
+            meshdata.Translate(DisplayOffset());
+            meshdata.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD * DisplayRotation(), 0);
+
+
+            mesher.AddMeshData(meshdata);
+            return base.OnTesselation(mesher, tessThreadTesselator);
+        }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
             if (IsOn) { dsc.AppendLine("Turned On (right click with screwdriver or hammer to turn on/off)"); }
             else { dsc.AppendLine("Turned Off (right click with screwdriver or hammer to turn on/off)"); }
-            dsc.AppendLine("Stored Temporal Flux " + Capacitor.ToString() + " of " + maxFlux.ToString());
+            dsc.AppendLine("Stored Temporal Flux " + Capacitor.ToString() + " of " + Capacitance.ToString());
             
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
@@ -236,7 +353,7 @@ namespace qptech.src
             if (useflux != 0) { MarkDirty(); }//not zero should be dirty
             return useflux;//return 2
         }
-
+        
         //Attempt to send out power (can be overridden for devices that only use power)
         public virtual void DistributePower()
         {

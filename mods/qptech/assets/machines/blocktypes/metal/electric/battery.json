@@ -35,7 +35,8 @@
 
 			"capacitance": 5000,
 			"receptionFaces": [ "south" ],
-			"distributionFaces": [ "north", "east", "west", "down" ]
+			"distributionFaces": [ "north", "east", "west", "down" ],
+			"showFluxDisplay": true
 		}
 	},
 	"blockmaterial": "Metal",

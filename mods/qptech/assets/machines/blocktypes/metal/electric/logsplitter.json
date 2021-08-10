@@ -28,13 +28,14 @@
 	"attributesbytype": {
 
 		"*-lv-*": {
-			"maxFlux": 2,
+			"maxFlux": 10,
 			"materialInputFace": "east",
 			"materialOutputFace": "west",
-			"capacitance": 2,
+			"capacitance": 10,
 			"requiredFlux": 1,
 			"processingTicks": 5,
-			"machinename": "logsplitter"
+			"machinename": "logsplitter",
+			"showFluxDisplay": true
 		}
 	},
 

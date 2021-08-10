@@ -108,7 +108,8 @@ namespace qptech.src
             
             MeshData meshdata;
             capi.Tesselator.TesselateShape("roundgauge0"+Pos.ToString(), gaugeshape, out meshdata, this);
-
+            //TextureAtlasPosition tap = capi.BlockTextureAtlas.Positions[atlasBlock.Textures[gaugetextures[texno]].Baked.TextureSubId];
+           // meshdata = meshdata.WithTexPos(tap);
             //5,12,13 in model program units = what in actual coordinates?
             float translatefactor = 16;
             meshdata.Translate(new Vec3f(4/translatefactor, 10/translatefactor, 3/translatefactor));
