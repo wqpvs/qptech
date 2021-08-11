@@ -75,7 +75,7 @@
 			"processingTime": 0.045,
 			"animationSpeed": 0.45,
 			"heatRequirement": 800,
-			"materials": [ "brass" ]
+			"materials": [ "brass","copper" ]
 		},
 		"*-lvbender-*": {
 			"maxFlux": 40,
