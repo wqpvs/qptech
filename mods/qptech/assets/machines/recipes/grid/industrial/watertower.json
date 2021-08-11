@@ -1,0 +1,37 @@
+{
+	"ingredientPattern": "STS	PBM	S_S",
+	"ingredients": {
+		"T": {
+			"type": "item",
+			"code": "screwdriver-*",
+			"isTool": true
+		},
+		"P": {
+			"type": "item",
+			"code": "game:plank-*",
+			"quantity": 8
+		},
+		"B": {
+			"type": "item",
+			"code": "game:metalplate-brass",
+			"quantity": 2
+		},
+		"M": {
+			"type": "item",
+			"code": "game:chutesection-copper",
+			"quantity": 1
+		},
+		"S": {
+			"type": "item",
+			"code": "screw-brass",
+			"quantity": 1
+		}
+	},
+	"width": 3,
+	"height": 3,
+	"output": {
+		"type": "block",
+		"code": "watertower",
+		"quantity": 1
+	}
+}

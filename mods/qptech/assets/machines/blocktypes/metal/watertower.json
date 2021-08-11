@@ -9,7 +9,11 @@
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 	"shape": { "base": "block/wood/watertower" },
-
+	"attributes": {
+		"tick": 40000,
+		"waterPerTick": 1,
+		"bonusRainWaterPerTick": 2
+	},
 	"resistance": 1,
 	"sideopaque": {
 		"all": false

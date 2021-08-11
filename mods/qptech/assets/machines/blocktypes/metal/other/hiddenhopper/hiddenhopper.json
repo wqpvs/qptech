@@ -61,7 +61,7 @@
 	"emitsideao": { "all": true },
 	"sideao": { "all": false },
 	"sidesolid": {
-		"all": false
+		"all": true
 	},
 	"sideopaque": {
 		"all": false

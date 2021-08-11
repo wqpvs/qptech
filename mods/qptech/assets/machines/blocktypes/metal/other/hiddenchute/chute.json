@@ -55,7 +55,7 @@
 	replaceable: 160,
 	resistance: 1.75,
 	sidesolid: {
-		all: false
+		all: true
 	},
 	sideopaque: {
 		all: false

@@ -1,5 +1,6 @@
 {
 	"block-machineryblock": "Bronze Machine Hull",
+	
 	"block-ringedbarrel": "Barrel With A Wooden Ring",
 	"blockdesc-machineryblock": "This intermediate part is the basis of LV electrical items. Also looks cool if you have lots of extra materials.",
 	"block-firepitloader": "Bronze Fire Pit Loader (Unpowered)",
@@ -123,6 +124,8 @@
 	"block-mpgenerator-*": "Electric Generator (*PREVIEW* Mechanical Power)(LV)",
 	"blockdesc-mpgenerator-*": "Create electricity from mechanical power! NOTE: THIS IS FOR TESTING AND MAY BE UNPREDICTABLE",
 	"block-mpmotor-*": "Electric Motor (*PREVIEW* Mechanical Power)(LV)",
-	"blockdesc-mpmotor-*": "Electric Motor - Create mechanical power from electricity! NOTE: THIS IS FOR TESTING AND MAY BE UNPREDICTABLE"
+	"blockdesc-mpmotor-*": "Electric Motor - Create mechanical power from electricity! NOTE: THIS IS FOR TESTING AND MAY BE UNPREDICTABLE",
+	"block-watertower": "Small Water Tower",
+	"blockdesc-watertower": "Must have direct access to sky. Will slowly collect water and insert into a container below. Collects more water if raining"
 
 }

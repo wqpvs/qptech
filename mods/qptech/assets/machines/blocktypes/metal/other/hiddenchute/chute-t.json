@@ -58,7 +58,7 @@
 		all: false
 	},
 	sideopaque: {
-		all: false
+		all: true
 	},
 	sounds: {
 		"place": "game:block/chute",

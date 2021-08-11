@@ -328,6 +328,7 @@
     <None Include="qptech\assets\machines\recipes\grid\decor\sink.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\battery-lv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\electrickilnlv.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\watertower.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mpmotor.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mpgenerator-alt.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mpgenerator.json" />
