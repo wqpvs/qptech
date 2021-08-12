@@ -11,10 +11,10 @@
 	"drawtype": "json",
 	"shape": { "base": "block/wood/watertower" },
 	"attributes": {
-		"tick": 20000,
+		"tick": 10000,
 		"waterPerTick": 1,
 		"bonusRainWaterPerTick": 2,
-		"internalStorageCapacity": 64,
+		"internalStorageCapacity": 512,
 		"mboffset": [ 1, 1, 0 ],
 		"multiblockStructure": {
 			"blockNumbers": {

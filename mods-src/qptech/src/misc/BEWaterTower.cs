@@ -27,6 +27,7 @@ namespace qptech.src
         int waterStored = 0;
         int bonusRainWaterPerTick = 1; //this is in liters, not a multiplier
         bool structurecomplete = false;
+        bool opentosky = false;
         MultiblockStructure ms;
         public BlockPos mboffset;
         public override void Initialize(ICoreAPI api)
@@ -44,19 +45,29 @@ namespace qptech.src
             ms.InitForUse(0);
             RegisterGameTickListener(OnTick, tick);
         }
-
+        bool CheckClearSky()
+        {
+            int worldheight = Api.World.BlockAccessor.GetRainMapHeightAt(Pos);
+            if (worldheight > Pos.Y) { return false; }
+            return true;
+        }
+        bool CheckCompleteStructure()
+        {
+            if (ms==null) { return false; }
+            if (ms.InCompleteBlockCount(Api.World, mboffset) > 0)
+            {
+                
+                return false;
+            }
+            return true;
+        }
         public void OnTick(float tf)
         {
             //Make sure there is a valid container
-            if (ms.InCompleteBlockCount(Api.World, mboffset)>0)
-            {
-                structurecomplete = false;
-                return;
-            }
-            else
-            {
-                structurecomplete = true;
-            }
+            structurecomplete = CheckCompleteStructure();
+            if (!structurecomplete) { return; }
+            opentosky = CheckClearSky();
+            if (!opentosky) { return; }
             BlockPos bp = Pos.Copy().Offset(BlockFacing.DOWN);
             BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
             int waterqty = waterPerTick;
@@ -70,9 +81,7 @@ namespace qptech.src
             if (checkblock == null) { return; }
             var checkcontainer = checkblock as BlockEntityContainer;
             if (checkcontainer == null) { return; }
-            //Make sure block is exposed to sky
-            int worldheight = Api.World.BlockAccessor.GetRainMapHeightAt(Pos);
-            if (worldheight > Pos.Y) { return; }
+
 
             //Setup some water to insert
            
@@ -122,8 +131,12 @@ namespace qptech.src
                 dsc.AppendLine("STRUCTURE NOT COMPLETE!");
                 return;
             }
+            if (!opentosky)
+            {
+                dsc.AppendLine("WATER TOWER SKY ACCESS IS BLOCKED!");
+            }
 
-            dsc.AppendLine("Stored Water " + waterStored +"/"+internalStorageCapacity+"L");
+            dsc.AppendLine("Stored Water " + waterStored/16 +"/"+internalStorageCapacity/16+"L");
             
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
@@ -147,6 +160,8 @@ namespace qptech.src
         public bool Interact(IPlayer byPlayer)
         {
             showingcontents = !showingcontents;
+            opentosky = CheckClearSky();
+            structurecomplete = CheckCompleteStructure();
             if (Api.Side == EnumAppSide.Client)
             {
                 if (showingcontents)
