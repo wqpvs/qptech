@@ -63,6 +63,13 @@ namespace qptech.src.misc
                 (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.HeldItemInteract);
                 return true;
             }
+            BEWaterTower bewt = world.BlockAccessor.GetBlockEntity(pos) as BEWaterTower;
+            if (bewt != null)
+            {
+                bewt.Interact(byPlayer);
+                (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.HeldItemInteract);
+                return true;
+            }
 
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }

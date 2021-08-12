@@ -23,21 +23,50 @@ namespace qptech.src
     {
         int tick = 7*5000;
         int waterPerTick = 1;
+        int internalStorageCapacity = 32;
+        int waterStored = 0;
         int bonusRainWaterPerTick = 1; //this is in liters, not a multiplier
+        bool structurecomplete = false;
+        MultiblockStructure ms;
+        public BlockPos mboffset;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
             tick = Block.Attributes["tick"].AsInt(tick);
             waterPerTick = Block.Attributes["waterPerTick"].AsInt(waterPerTick);
             bonusRainWaterPerTick = Block.Attributes["bonusRainWaterPerTick"].AsInt(bonusRainWaterPerTick);
+            internalStorageCapacity = Block.Attributes["internalStorageCapacity"].AsInt(internalStorageCapacity);
+            ms = Block.Attributes["multiblockStructure"].AsObject<MultiblockStructure>();
+            int[] offsarray = { 0, 0, 0 };
+            offsarray = Block.Attributes["mboffset"].AsArray<int>(offsarray);
+            mboffset = new BlockPos(offsarray[0]+Pos.X,offsarray[1]+Pos.Y,offsarray[2]+Pos.Z);
+            
+            ms.InitForUse(0);
             RegisterGameTickListener(OnTick, tick);
         }
 
         public void OnTick(float tf)
         {
             //Make sure there is a valid container
+            if (ms.InCompleteBlockCount(Api.World, mboffset)>0)
+            {
+                structurecomplete = false;
+                return;
+            }
+            else
+            {
+                structurecomplete = true;
+            }
             BlockPos bp = Pos.Copy().Offset(BlockFacing.DOWN);
             BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
+            int waterqty = waterPerTick;
+            int rainnear = Api.World.BlockAccessor.GetDistanceToRainFall(Pos);
+            if (rainnear < 99)
+            {
+                waterqty += bonusRainWaterPerTick;
+            }
+            waterStored += waterqty;
+            if (waterStored > internalStorageCapacity) { waterStored = internalStorageCapacity; }
             if (checkblock == null) { return; }
             var checkcontainer = checkblock as BlockEntityContainer;
             if (checkcontainer == null) { return; }
@@ -46,13 +75,9 @@ namespace qptech.src
             if (worldheight > Pos.Y) { return; }
 
             //Setup some water to insert
-            int waterqty = waterPerTick;
-            int rainnear = Api.World.BlockAccessor.GetDistanceToRainFall(Pos);
-            if (rainnear < 99) { 
-                waterqty+=bonusRainWaterPerTick;
-            }
+           
             Item outputItem = Api.World.GetItem(new AssetLocation("game:waterportion"));
-            ItemStack itmstk = new ItemStack(outputItem, waterqty);
+            ItemStack itmstk = new ItemStack(outputItem, waterStored);
             DummyInventory dummy = new DummyInventory(Api);
             dummy[0].Itemstack = itmstk;
 
@@ -60,32 +85,80 @@ namespace qptech.src
             if (tryoutput.slot != null) {
                 ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, dummy[0].StackSize);
 
+                int usedwater=dummy[0].TryPutInto(tryoutput.slot, ref op);
+                waterStored -= usedwater;
+                if (waterStored < 0) { waterStored = 0; }
+                tryoutput.slot.MarkDirty();
+                return;
+            }
+           
+        /*for (int c = 0; c < checkcontainer.Inventory.Count;c++)
+        {
+            ItemSlotLiquidOnly lo = checkcontainer.Inventory[c] as ItemSlotLiquidOnly;
+            if (lo == null) { continue; }
+            if (lo.CanHold(dummy[0]))
+            {
+                ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, dummy[0].StackSize);
+
                 dummy[0].TryPutInto(tryoutput.slot, ref op);
                 tryoutput.slot.MarkDirty();
                 return;
             }
-            
-            /*for (int c = 0; c < checkcontainer.Inventory.Count;c++)
+
+        }*/
+
+
+
+
+
+        //waterportion
+
+    }
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
+        {
+            base.GetBlockInfo(forPlayer, dsc);
+            if (!structurecomplete)
             {
-                ItemSlotLiquidOnly lo = checkcontainer.Inventory[c] as ItemSlotLiquidOnly;
-                if (lo == null) { continue; }
-                if (lo.CanHold(dummy[0]))
+                dsc.AppendLine("STRUCTURE NOT COMPLETE!");
+                return;
+            }
+
+            dsc.AppendLine("Stored Water " + waterStored +"/"+internalStorageCapacity+"L");
+            
+            //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
+        }
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
+        {
+            base.FromTreeAttributes(tree, worldAccessForResolve);
+
+
+            //if (type == null) type = defaultType; // No idea why. Somewhere something has no type. Probably some worldgen ruins
+            waterStored = tree.GetInt("waterStored");
+
+        }
+        public override void ToTreeAttributes(ITreeAttribute tree)
+        {
+            base.ToTreeAttributes(tree);
+
+            tree.SetInt("waterStored", waterStored);
+
+        }
+        bool showingcontents = false;
+        public bool Interact(IPlayer byPlayer)
+        {
+            showingcontents = !showingcontents;
+            if (Api.Side == EnumAppSide.Client)
+            {
+                if (showingcontents)
                 {
-                    ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, dummy[0].StackSize);
-
-                    dummy[0].TryPutInto(tryoutput.slot, ref op);
-                    tryoutput.slot.MarkDirty();
-                    return;
+                    ms.HighlightIncompleteParts(Api.World, byPlayer, mboffset);
                 }
-
-            }*/
-            
-            
-            
-
-            
-            //waterportion
-
+                else
+                {
+                    ms.ClearHighlights(Api.World, byPlayer);
+                }
+            }
+            return true;
         }
     }
 }
