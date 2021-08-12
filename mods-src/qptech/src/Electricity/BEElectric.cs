@@ -70,7 +70,9 @@ namespace qptech.src
             if (outputConnections == null) { outputConnections = new List<IElectricity>(); }
             if (inputConnections == null) { inputConnections = new List<IElectricity>(); }
             //if (Block.Attributes == null) { api.World.Logger.Error("ERROR BEE INITIALIZE HAS NO BLOCK"); return; }
-            maxFlux = Block.Attributes["maxFlux"].AsInt(maxFlux)*10;
+            
+            maxFlux = Block.Attributes["maxFlux"].AsInt(maxFlux);
+            maxFlux *= 10;
             capacitance = Block.Attributes["capacitance"].AsInt(Capacitance);
 
             RegisterGameTickListener(OnTick, 75);
