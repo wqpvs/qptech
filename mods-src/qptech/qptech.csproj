@@ -87,6 +87,7 @@
     <Compile Include="src\Electricity\BEElectric.cs" />
     <Compile Include="src\Electricity\BEEGenerator.cs" />
     <Compile Include="src\Electricity\BEEMacerator.cs" />
+    <Compile Include="src\Electricity\BEEJunction.cs" />
     <Compile Include="src\Electricity\BEEWire.cs" />
     <Compile Include="src\Electricity\BEMPGenerator.cs" />
     <Compile Include="src\Electricity\BEMPMotor.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="src\Electricity\BlockFacingExt.cs" />
     <Compile Include="src\Electricity\BlockMPGenerator.cs" />
     <Compile Include="src\Electricity\BlockMetalPress.cs" />
+    <Compile Include="src\Electricity\BlockJunction.cs" />
     <Compile Include="src\Electricity\BlockWire.cs" />
     <Compile Include="src\Electricity\EForgeContentsRenderer.cs" />
     <Compile Include="src\Electricity\GUIAssemblerStatus.cs" />

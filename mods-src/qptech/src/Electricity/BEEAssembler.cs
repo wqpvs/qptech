@@ -165,8 +165,8 @@ namespace qptech.src
                         Animation = animationName,
                         Code = animationName,
                         AnimationSpeed = animationSpeed,
-                        EaseInSpeed = 1,
-                        EaseOutSpeed = 1,
+                        EaseInSpeed = 2,
+                        EaseOutSpeed = 4,
                         Weight = 1,
                         BlendMode = EnumAnimationBlendMode.Average
                     });

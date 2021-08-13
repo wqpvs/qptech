@@ -28,12 +28,12 @@
 	"attributesbytype": {
 
 		"*-lv-*": {
-			"maxFlux": 2,
-			
-			"capacitance": 2,
+			"maxFlux": 4,
+			"capacitance": 4,
 			"requiredFlux": 1,
 			"processingTicks": 5,
-			"animationName": "macerator-process"
+			"animationName": "macerator-process",
+			"receptionFaces": [ "north" ]
 		}
 	},
 

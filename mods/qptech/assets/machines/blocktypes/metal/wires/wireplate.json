@@ -1,63 +1,144 @@
 {
-	"code": "wireplate",
-	"class": "BlockWire",
-	"entityclass": "BEEWire",
-	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
-	},
-	"variantgroups": [
-		{
-			"code": "type",
-			"states": [ "tin-2a-cross"]
-		}
-	],
-	
-	"attributesByType": {
+  "code": "wireplatetest",
+  "class": "BlockWire",
+  "entityclass": "BEEWire",
+  "creativeinventory": {
+    "general": [ "*-ew-uncovered" ],
+    "qptech": [ "*-ew-uncovered" ]
+  },
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": [ "empty", "n", "e", "s", "w", "ne", "ns", "nw", "es", "ew", "sw", "nes", "new", "nsw", "esw", "nesw" ]
+    },
 
-		"*-tin-2a-cross": {
-			"maxFlux": 64,
-			
-			"capacitance": 65,
-			"receptionFaces": [ "north", "south", "east", "west","down" ],
-			"distributionFaces": [ "north", "south", "east", "west","down" ]
-		}
-		
-	},
-	"shape": { "base": "block/metal/electric/wires/wireplate-{type}" },
-	
-	"textures": {
-		"wires": { "base": "block/metal/wires/tin-wires" },
-		"castiron": { "base": "block/castiron" }
-	},
-	"resistance": 1,
-	"drawtype": "json",
-	"faceCullMode": "NeverCull",
-	"renderpass": "OpaqueNoCull",
-	"sidesolid": { "all": false },
-	"sideopaque": { "all": false },
-	"emitSideAo": {
-		"all": false,
-		"up": true
-	},
-	"selectionBox": {
-		"x1": 0,
-		"y1": 0,
-		"z1": 0,
-		"x2": 1,
-		"y2": 0.25,
-		"z2": 1
-	},
-	"collisionBox": {
-		"x1": 0,
-		"y1": 0,
-		"z1": 0,
-		"x2": 1,
-		"y2": 0.25,
-		"z2": 1
-	},
-	"sounds": {
-		"place": "game:block/anvil",
-		"walk": "game:walk/stone"
-	}
+    {
+      "code": "wirecover",
+      "states": [ "uncovered", "covered" ]
+    }
+  ],
+
+  "attributesByType": {
+    "*": {
+      "capacitance": 50,
+      "maxFlux": 100,
+      "receptionFaces": [
+        "north",
+        "south",
+        "east",
+        "west"
+      ],
+      "distributionFaces": [
+        "north",
+        "south",
+        "east",
+        "west"
+      ]
+    }
+  },
+  "shapebytype": {
+    "*-empty-uncovered": { "base": "block/metal/electric/wires/wireplate-tin-2a-empty" },
+    "*-n-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-normal",
+      "rotateY": 270
+    },
+
+    "*-e-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-normal",
+      "rotateY": 180
+    },
+    "*-s-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-normal",
+      "rotateY": 90
+    },
+    "*-w-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-normal",
+      "rotateY": 0
+    },
+
+    "*-ns-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-normal",
+      "rotateY": 90
+    },
+    "*-ew-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-normal",
+      "rotateY": 0
+    },
+
+    "*-ne-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-l",
+      "rotateY": 180
+    },
+    "*-nw-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-l",
+      "rotateY": 270
+    },
+    "*-es-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-l",
+      "rotateY": 90
+    },
+    "*-sw-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-l",
+      "rotateY": 0
+    },
+
+    "*-nes-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-t",
+      "rotateY": 180
+    },
+    "*-new-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-t",
+      "rotateY": 270
+    },
+    "*-nsw-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-t",
+      "rotateY": 0
+    },
+    "*-esw-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-t",
+      "rotateY": 90
+    },
+
+    "*-nesw-uncovered": {
+      "base": "block/metal/electric/wires/wireplate-tin-2a-cross",
+      "rotateY": 0
+    }
+
+  },
+  "textures": {
+    "wires": { "base": "block/metal/wires/tin-wires" },
+    "castiron": { "base": "block/castiron" }
+  },
+  "resistance": 1,
+  "drawtypeByType": {
+    "*-uncovered": "JSON"
+  },
+  "faceCullMode": "NeverCull",
+  "renderpass": "OpaqueNoCull",
+  "sidesolid": { "all": false },
+  "sideopaque": { "all": false },
+  "emitSideAo": {
+    "all": false,
+    "up": true
+  },
+  "selectionBox": {
+    "x1": 0,
+    "y1": 0,
+    "z1": 0,
+    "x2": 1,
+    "y2": 0.25,
+    "z2": 1
+  },
+  "collisionBox": {
+    "x1": 0,
+    "y1": 0,
+    "z1": 0,
+    "x2": 1,
+    "y2": 0.25,
+    "z2": 1
+  },
+  "sounds": {
+    "place": "game:block/anvil",
+    "walk": "game:walk/stone"
+  }
 }

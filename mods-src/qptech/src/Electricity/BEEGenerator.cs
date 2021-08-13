@@ -14,16 +14,21 @@ namespace qptech.src
     class BEEGenerator:BEElectric
     {
         //how many power packets we can generate - will see if every more than one
+        protected List<string> fuelCodes;   //Valid item & block codes usable as fuel
+        protected int fuelTicks = 0;  //how many OnTicks a piece of fuel will last for
+        int fuelCounter = 0; //counts down to use fuel
         protected bool animInit = false;
         bool usesFuel = false;          //Whether item uses fuel
-        protected List<string> fuelCodes;   //Valid item & block codes usable as fuel
-        ILoadedSound ambientSound;
-        protected int fuelTicks = 0;    //how many OnTicks a piece of fuel will last for
-        int fuelCounter = 0;            //counts down to use fuel
-        protected int genFlux = 1;      //how much TF (power packets) are generated per OnTick
-        BlockFacing fuelHopperFace;     //which face fuel is loaded from
         bool fueled = false;            //whether device is currently fueld
         bool usesFuelWhileOn = false;  //always use fuel, even if no load (unless turned off)
+        BlockFacing fuelHopperFace;     //which face fuel is loaded from
+
+
+        ILoadedSound ambientSound;
+       
+               
+        protected int genFlux = 1;      //how much TF (power packets) are generated per OnTick
+
         bool requiresHeat = false;      //will check for heat to produce power
         public bool RequiresHeat => requiresHeat;
         float requiredHeat =0;      //how much heat is necessary
@@ -49,6 +54,7 @@ namespace qptech.src
             animInit = false;
             if (Block.Attributes != null)
             {
+
                 genFlux = Block.Attributes["genFlux"].AsInt(genFlux);
                 fuelHopperFace = BlockFacing.FromCode(Block.Attributes["fuelHopperFace"].AsString("up"));
                 fuelHopperFace = OrientFace(Block.Code.ToString(), fuelHopperFace);
@@ -96,15 +102,9 @@ namespace qptech.src
                     animInit = true;
                 }
                 if (trypower)
-                    animUtil.StartAnimation(new AnimationMetaData()
-                    {
-                        Animation = "run",
-                        Code = "run",
-                        AnimationSpeed = 1,
-                        EaseInSpeed = 1,
-                        EaseOutSpeed = 1,
-                        Weight = 1,
-                        BlendMode = EnumAnimationBlendMode.Average
+                    animUtil.StartAnimation(new AnimationMetaData() 
+                    { 
+                        Animation = "run", Code = "run", AnimationSpeed = 0.7f, EaseInSpeed = 2, EaseOutSpeed = 8, Weight = 1, BlendMode = EnumAnimationBlendMode.Average 
                     });
 
             }
@@ -189,8 +189,17 @@ namespace qptech.src
                 }
                 if (!isOn && !heated && !haswater)
                 {
-                    
-                    animUtil.StartAnimation(new AnimationMetaData() { Animation = "run", Code = "run", AnimationSpeed = 0.8f, EaseInSpeed = 4, EaseOutSpeed = 8, Weight = 1, BlendMode = EnumAnimationBlendMode.Average });
+
+                    animUtil.StartAnimation(new AnimationMetaData()
+                    {
+                        Animation = "run",
+                        Code = "run",
+                        AnimationSpeed = 0.7f,
+                        EaseInSpeed = 2,
+                        EaseOutSpeed = 8,
+                        Weight = 1,
+                        BlendMode = EnumAnimationBlendMode.Average
+                    });
                 }
                 else
                 {
@@ -306,6 +315,7 @@ namespace qptech.src
             }
 
         }
+
         public override void OnBlockBroken()
         {
             ambientSound?.Stop();

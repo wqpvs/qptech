@@ -18,11 +18,11 @@ namespace qptech.src
         
         protected double internalheat;
         protected double stackheat;
-        protected double restingheat = 20;
-        protected double heatPerTick = 10;
-        protected double insulationFactor = 0.99;
+        protected double restingheat = 30;
+        protected double heatPerTick = 5;
+        protected double insulationFactor = 0.5;
         protected double maxHeat = 1000;
-        protected double stackHeatFactor = 100; //averages up the heat over this factor
+        protected double stackHeatFactor = 50; //averages up the heat over this factor
         public double StackHeatChange => (internalheat + stackheat * (stackHeatFactor - 1)) / stackHeatFactor;
         /// <summary>
         /// Internal heat starts at resting heat
@@ -36,9 +36,9 @@ namespace qptech.src
         protected int processQty = 1; //how many items to process at once
         protected BlockFacing rmInputFace; //what faces will be checked for input containers
         protected BlockFacing outputFace ;
-        string outputcode="";
-        string inputcode="";
-        string blockoritem="";
+        string outputcode = "";
+        string inputcode = "";
+        string blockoritem = "";
         double requiredheat;
         DummyInventory dummy;
         private SimpleParticleProperties smokeParticles;
@@ -269,9 +269,9 @@ namespace qptech.src
         {
             base.GetBlockInfo(forPlayer, dsc);
 
-            dsc.AppendLine("INTERNAL TEMP :" + Math.Floor(internalheat).ToString());
-            dsc.AppendLine("Make :" + outputcode);
-            dsc.AppendLine("ITEMTEMP/REQ TEMP: " + Math.Floor(stackheat).ToString()+"/"+ Math.Floor(requiredheat).ToString());
+            dsc.AppendLine("INTERNAL TEMP : " + Math.Floor(internalheat).ToString());
+            dsc.AppendLine("Make : " + outputcode);
+            dsc.AppendLine("ITEM TEMP : " + Math.Floor(stackheat).ToString()/*+"/"+ Math.Floor(requiredheat).ToString()*/);
             
         }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)

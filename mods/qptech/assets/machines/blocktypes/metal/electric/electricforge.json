@@ -23,15 +23,15 @@
 		}
 	],
 	"attributes": {
-		"maxFlux": 2,
-
+		"maxFlux": 4,
 		"capacitance": 4,
 		"requiredFlux": 1,
 		"maxHeat": 1000,
 		"degreesPerHour": 1500,
 		"maxItems": 2,
 		"stackRenderHeight": 0.1,
-		"unloadable": false
+		"unloadable": false,
+		"receptionFaces": [ "north" ]
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
@@ -54,6 +54,12 @@
 			"base": "block/metal/electric/forge-lv",
 			"rotateY": 180
 		}
+	},
+	"textures": {
+		"wires": { "base": "block/metal/wires/tin-wires" },
+		"castiron": { "base": "block/castiron" },
+		"machinery-back": { "base": "block/metal/generator/machinery-back" },
+		"machinery-border-small": { "base": "block/metal/generator/machinery-border-small" }
 	},
 	"resistance": 1,
 	"sideAo": { "all": false },

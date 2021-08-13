@@ -1,49 +1,152 @@
 {
 	"code": "wireplate",
-	"class": "BlockWire",
-	"entityclass": "BEEWire",
+	"class": "BlockJunction",
+	"entityclass": "BEEJunction",
+	"creativeinventory": {
+		"general": [ "*-ew-uncovered" ],
+		"qptech": [ "*-ew-uncovered" ]
+	},
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "tin-electricjunction" ]
+			"states": [ "empty", "n", "e", "s", "w", "ne", "ns", "nw", "es", "ew", "sw", "nes", "new", "nsw", "esw", "nesw" ]
+		},
+
+		{
+			"code": "wirecover",
+			"states": [ "uncovered", "covered" ]
 		}
 	],
-	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
-	},
-	"attributesByType": {
-		"*tin-electricjunction": {
-			"maxFlux": 500,
 
-			"capacitance": 500,
-			"receptionFaces": [ "up", "down", "north", "south", "east", "west" ],
-			"distributionFaces": [ "up", "down", "north", "south", "east", "west" ]
+	"attributesByType": {
+		"*": {
+			"capacitance": 120,
+			"maxFlux": 180,
+			"receptionFaces": [
+				"north",
+				"south",
+				"east",
+				"west",
+				"up",
+				"down"
+			],
+			"distributionFaces": [
+				"north",
+				"south",
+				"east",
+				"west",
+				"up",
+				"down"
+			]
 		}
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/metal/electric/wires/wireplate-{type}" },
-	"textures": {
-		"wires": { "base": "block/metal/wires/tin-wires" },
-		"castiron": { "base": "block/castiron" }
+	"shapebytype": {
+		"*-empty-uncovered": { "base": "block/metal/electric/wires/wireplate-tall-empty" },
+		"*-n-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-normal",
+			"rotateY": 270
+		},
+
+		"*-e-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-normal",
+			"rotateY": 180
+		},
+		"*-s-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-normal",
+			"rotateY": 90
+		},
+		"*-w-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-normal",
+			"rotateY": 0
+		},
+
+		"*-ns-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-normal",
+			"rotateY": 90
+		},
+		"*-ew-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-normal",
+			"rotateY": 0
+		},
+
+		"*-ne-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-l",
+			"rotateY": 180
+		},
+		"*-nw-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-l",
+			"rotateY": 270
+		},
+		"*-es-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-l",
+			"rotateY": 90
+		},
+		"*-sw-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-l",
+			"rotateY": 0
+		},
+
+		"*-nes-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-t",
+			"rotateY": 180
+		},
+		"*-new-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-t",
+			"rotateY": 270
+		},
+		"*-nsw-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-t",
+			"rotateY": 0
+		},
+		"*-esw-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-t",
+			"rotateY": 90
+		},
+
+		"*-nesw-uncovered": {
+			"base": "block/metal/electric/wires/wireplate-tall-cross",
+			"rotateY": 0
+		}
 	},
-	"resistance": 1,
-	"sideopaque": {
-		"all": false
-	},
-	"sidesolid": {
-		"up": true,
-		"down": true,
-		"north": false,
-		"east": false,
-		"south": false,
-		"west": false
-	},
-	"selectionBox": { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1.125, z2: 1 },
-	"collisionBox": { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1.125, z2: 1 },
-	"sounds": {
-		"place": "game:block/anvil",
-		"walk": "game:walk/stone"
+		"textures": {
+			"wires": { "base": "block/metal/wires/tin-wires" },
+			"castiron": { "base": "block/castiron" },
+			"fences": { "base": "block/metal/wires/fence" }
+
+		},
+		"resistance": 1,
+		"sideopaque": { "all": false },
+		"sidesolid": {
+			"up": true,
+			"down": true,
+			"north": false,
+			"east": false,
+			"south": false,
+			"west": false
+		},
+		"emitSideAo": {
+			"all": false
+		},
+		"selectionBox": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0,
+			"x2": 1,
+			"y2": 1,
+			"z2": 1
+		},
+		"collisionBox": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0,
+			"x2": 1,
+			"y2": 1,
+			"z2": 1
+		},
+		"sounds": {
+			"place": "game:block/anvil",
+			"walk": "game:walk/stone"
+		}
 	}
-}

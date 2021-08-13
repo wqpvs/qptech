@@ -26,10 +26,8 @@
 	"attributesbytype": {
 		"*-lvsoftmetalplate-*": {
 			"maxFlux": 40,
-
 			"capacitance": 40,
-			"requiredFlux": 40,
-
+			"requiredFlux": 20,
 			"inputFace": "west",
 			"outputFace": "east",
 			"inputQuantity": 2,

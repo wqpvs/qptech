@@ -7,6 +7,7 @@ using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent.Mechanics;
+using Vintagestory.API.Client;
 
 namespace qptech.src
 {

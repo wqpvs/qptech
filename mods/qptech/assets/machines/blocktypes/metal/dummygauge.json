@@ -9,7 +9,7 @@
 	
 	"shape": {
 		
-			"base": "machines:block/metal/electric/roundgauge0",
+			"base": "machines:block/metal/electric/roundgauge0"
 			
 	},
 	"blockmaterial": "Wood",

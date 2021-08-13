@@ -69,7 +69,9 @@ namespace qptech.src
 
             if (outputConnections == null) { outputConnections = new List<IElectricity>(); }
             if (inputConnections == null) { inputConnections = new List<IElectricity>(); }
-            //if (Block.Attributes == null) { api.World.Logger.Error("ERROR BEE INITIALIZE HAS NO BLOCK"); return; }
+
+            if (Block.Attributes == null) { api.World.Logger.Error("ERROR BEE INITIALIZE HAS NO BLOCK"); return; }
+            maxFlux = Block.Attributes["maxFlux"].AsInt(maxFlux);
             
             maxFlux = Block.Attributes["maxFlux"].AsInt(maxFlux);
             maxFlux *= 10;
@@ -128,6 +130,7 @@ namespace qptech.src
             {
                 distributionFaces = BlockFacing.HORIZONTALS.ToList<BlockFacing>();
                 receptionFaces = BlockFacing.HORIZONTALS.ToList<BlockFacing>();
+
                 return;
             }
             if (!Block.Attributes.KeyExists("receptionFaces")) { receptionFaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
@@ -333,6 +336,7 @@ namespace qptech.src
             base.GetBlockInfo(forPlayer, dsc);
             if (IsOn) { dsc.AppendLine("Turned On (right click with screwdriver or hammer to turn on/off)"); }
             else { dsc.AppendLine("Turned Off (right click with screwdriver or hammer to turn on/off)"); }
+
             dsc.AppendLine("Stored Temporal Flux " + Capacitor.ToString() + " of " + Capacitance.ToString());
             
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
@@ -396,16 +400,16 @@ namespace qptech.src
 
             //Not enough power to go around, have to divide it up
             int eachavail = Capacitor / tempconnections.Count;
-            int leftover = Capacitor % tempconnections.Count;//remainder
+            int leftover = Capacitor % tempconnections.Count; //remainder
             foreach (IElectricity ie in tempconnections)
             {
-                int offer = ie.ReceivePacketOffer(this,  eachavail);
+                int offer = ie.ReceivePacketOffer(this, eachavail);
                 if (offer == 0) { continue; }
                 gavepower = true;
                 ChangeCapacitor(-offer);
                 if (leftover > 0)
                 {
-                    offer = ie.ReceivePacketOffer(this,  leftover);
+                    offer = ie.ReceivePacketOffer(this, leftover);
                     if (offer > 0)
                     {
                         leftover -= offer;
@@ -414,9 +418,9 @@ namespace qptech.src
                 }
             }
             if (gavepower) { MarkDirty(true); }
-            
+
         }
-        
+
         public virtual void DoOverload()
         {
             ////BOOOOM!

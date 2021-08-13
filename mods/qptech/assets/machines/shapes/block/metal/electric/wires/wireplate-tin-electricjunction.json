@@ -14,9 +14,9 @@
 	"elements": [
 		{
 			"name": "Main Top",
-			"from": [ 0.0, 15.0, 0.0 ], 
-			"to": [ 0.0, 15.0, 0.0 ], 
-			"rotationOrigin": [ 8.0, 23.0, 8.0 ],
+			"from": [ 0.0, 14.0, 0.0 ], 
+			"to": [ 0.0, 14.0, 0.0 ], 
+			"rotationOrigin": [ 8.0, 22.0, 8.0 ],
 			"faces": {
 				"north": { "texture": "#castiron", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false },
 				"east": { "texture": "#castiron", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false },

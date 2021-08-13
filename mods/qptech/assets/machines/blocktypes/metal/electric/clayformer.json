@@ -23,9 +23,8 @@
 
 	"attributesbytype": {
 		"*-bowl-*": {
-			"maxFlux": 2,
-			
-			"capacitance": 2,
+			"maxFlux": 4,
+			"capacitance": 4,
 			"requiredFlux": 2,
 			"inputFace": "west",
 			"outputFace": "east",
@@ -38,9 +37,8 @@
 
 		},
 		"*-clayplanter-*": {
-			"maxFlux": 2,
-			
-			"capacitance": 2,
+			"maxFlux": 4,
+			"capacitance": 4,
 			"requiredFlux": 2,
 			"inputFace": "west",
 			"outputFace": "east",
@@ -52,9 +50,8 @@
 			"animationSpeed": 0.04
 		},
 		"*-flowerpot-*": {
-			"maxFlux": 2,
-			
-			"capacitance": 2,
+			"maxFlux": 4,
+			"capacitance": 4,
 			"requiredFlux": 2,
 			"inputFace": "west",
 			"outputFace": "east",
@@ -66,9 +63,8 @@
 			"animationSpeed": 0.04
 		},
 		"*-ingotmold-*": {
-			"maxFlux": 2,
-			
-			"capacitance": 2,
+			"maxFlux": 4,
+			"capacitance": 4,
 			"requiredFlux": 2,
 			"inputFace": "west",
 			"outputFace": "east",
@@ -80,9 +76,8 @@
 			"animationSpeed": 0.05
 		},
 		"*-blueshingle-*": {
-			"maxFlux": 2,
-			
-			"capacitance": 2,
+			"maxFlux": 4,
+			"capacitance": 4,
 			"requiredFlux": 2,
 			"inputFace": "west",
 			"outputFace": "east",
@@ -94,9 +89,8 @@
 			"animationSpeed": 0.05
 		},
 		"*-fireshingle-*": {
-			"maxFlux": 2,
-			
-			"capacitance": 2,
+			"maxFlux": 4,
+			"capacitance": 4,
 			"requiredFlux": 2,
 			"inputFace": "west",
 			"outputFace": "east",

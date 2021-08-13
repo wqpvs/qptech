@@ -96,7 +96,7 @@
 					"factor": 1.5
 				},
 				"particleModel": "Quad",
-				"windAffectednes": 0.7
+				"windAffectednes": 0
 			}
 		],
 		"smelterfurnace-lit": [
@@ -164,7 +164,7 @@
 				},
 				"lifeLength": { "avg": 1.5 },
 				"vertexFlags": 128,
-				"windAffectednes": 0.2
+				"windAffectednes": 0
 			},
 			{
 				"__comment": "Smoke quads",
@@ -234,7 +234,7 @@
 				"particleModel": "Quad",
 				"lifeLength": { "avg": 18 },
 				"selfPropelled": true,
-				"windAffectednes": 0.7
+				"windAffectednes": 0
 			},
 			{
 				"__comment": "Fire quads",
@@ -304,7 +304,7 @@
 				},
 				"particleModel": "Quad",
 				"vertexFlags": 128,
-				"windAffectednes": 0.7
+				"windAffectednes": 0
 			}
 		]
 	},

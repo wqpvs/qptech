@@ -19,8 +19,9 @@
 	],
 	"attributes": {
 		"maxFlux": 80,
-		"capacitance": 40,
-		"requiredFlux": 80,
+		"capacitance": 80,
+		"requiredFlux": 40,
+		"receptionFaces": [ "north" ]
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",

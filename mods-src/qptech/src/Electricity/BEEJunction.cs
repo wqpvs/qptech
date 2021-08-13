@@ -8,7 +8,7 @@ using Vintagestory.API.Common.Entities;
 
 namespace qptech.src
 {
-    class BEEWire: BEElectric
+    class BEEJunction : BEElectric
     {
         bool isInsulated = false;
         public override void Initialize(ICoreAPI api)

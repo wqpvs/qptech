@@ -27,8 +27,9 @@
 	"attributesbytype": {
 		"*-lv-*": {
 			"maxFlux": 8,
-			"capacitance": 16,
-			"requiredFlux": 4
+			"capacitance": 8,
+			"requiredFlux": 4,
+			"receptionFaces": [ "north" ]
 		}
 
 	},

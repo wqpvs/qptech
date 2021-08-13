@@ -8,10 +8,9 @@
 		"qptech": [ "*-east" ]
 	},
 	"attributes": {
-		"maxFlux": 2,
-		
-		"capacitance": 50,
-		"genFlux": 50,
+		"capacitance": 64,
+		"maxFlux": 64,
+		"genFlux": 64,
 		"distributionFaces": [ "north" ]
 	},
 	"variantgroups": [

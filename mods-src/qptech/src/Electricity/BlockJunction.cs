@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace qptech.src
 {
 
-    class BlockWire : ElectricalBlock
+    class BlockJunction : ElectricalBlock
     {
 
         ICoreClientAPI capi;
@@ -50,7 +50,7 @@ namespace qptech.src
                 GetWireCode(world, pos, BlockFacing.NORTH) +
                 GetWireCode(world, pos, BlockFacing.EAST) +
                 GetWireCode(world, pos, BlockFacing.SOUTH) +
-                GetWireCode(world, pos, BlockFacing.WEST) 
+                GetWireCode(world, pos, BlockFacing.WEST)
             ;
 
             if (orientations.Length == 0) orientations = "empty";
@@ -93,7 +93,7 @@ namespace qptech.src
 
                 world.BlockAccessor.SetBlock(block.BlockId, pos);
                 world.BlockAccessor.TriggerNeighbourBlockUpdate(pos);
-      
+
             }
             else
             {
@@ -128,8 +128,8 @@ namespace qptech.src
             }
 
             return
-               block is ElectricalBlock ||
-               block is BlockEForge;
+                     block is ElectricalBlock ||
+                        block is BlockEForge;
         }
 
 
@@ -141,7 +141,7 @@ namespace qptech.src
 
         static Dictionary<string, KeyValuePair<string[], int>> AngleGroups = new Dictionary<string, KeyValuePair<string[], int>>();
 
-        static BlockWire()
+        static BlockJunction()
         {
             AngleGroups["n"] = new KeyValuePair<string[], int>(OneDir, 0);
             AngleGroups["e"] = new KeyValuePair<string[], int>(OneDir, 1);
@@ -161,7 +161,7 @@ namespace qptech.src
             AngleGroups["nsw"] = new KeyValuePair<string[], int>(ThreeDir, 2);
             AngleGroups["esw"] = new KeyValuePair<string[], int>(ThreeDir, 3);
 
-    
+
 
         }
 
@@ -185,10 +185,10 @@ namespace qptech.src
         public override void OnEntityCollide(IWorldAccessor world, Entity entity, BlockPos pos, BlockFacing facing, Vec3d collideSpeed, bool isImpact)
         {
             base.OnEntityCollide(world, entity, pos, facing, collideSpeed, isImpact);
-            var mywire = world.BlockAccessor.GetBlockEntity(pos) as BEEWire;
+            var mywire = world.BlockAccessor.GetBlockEntity(pos) as BEEJunction;
             if (mywire != null)
             {
-                mywire.EntityCollide(entity) ;
+                mywire.EntityCollide(entity);
             }
         }
     }
