@@ -9,7 +9,7 @@
 	height: 3,
 	output: {
 		"type": "block",
-		"code": "wireplate-tin-2a-cross",
+		"code": "wireplate-ew-uncovered",
 		"quantity": 1
 	}
 }

@@ -1,0 +1,33 @@
+{
+	"code": "wireplate-tin-2a-cross",
+	"creativeinventory": {
+		"general": [ "" ],
+		"qptech": [ "" ]
+
+	},
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+
+	"shape": { "base": "item/part/wire" },
+
+	"resistance": 1,
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	},
+	"drops": [
+
+		{
+			"type": "item",
+			"code": "wire-copper",
+			"quantity": {
+				"avg": 3,
+				"var": 1
+			}
+		}
+	]
+
+}

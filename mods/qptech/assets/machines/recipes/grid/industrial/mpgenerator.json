@@ -3,9 +3,9 @@
 	ingredients: {
 		"T": { type: "item", code: "screwdriver-*", isTool: true },
 		"P": {
-			"type": "block",
-			"code": "wireplate-tin-electricjunction",
-			"quantity": 1
+			"type": "item",
+			"code": "wire-*",
+			"quantity": 4
 		},
 		"B": {
 			"type": "block",

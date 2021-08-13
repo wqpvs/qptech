@@ -136,23 +136,19 @@ namespace qptech.src
                 dsc.AppendLine("WATER TOWER SKY ACCESS IS BLOCKED!");
             }
 
-            dsc.AppendLine("Stored Water " + waterStored/16 +"/"+internalStorageCapacity/16+"L");
+            dsc.AppendLine("Stored Water " + waterStored +"/"+internalStorageCapacity+"L");
             
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
-
-
-            //if (type == null) type = defaultType; // No idea why. Somewhere something has no type. Probably some worldgen ruins
             waterStored = tree.GetInt("waterStored");
-
+            int dummy = waterStored;
         }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
-
             tree.SetInt("waterStored", waterStored);
 
         }

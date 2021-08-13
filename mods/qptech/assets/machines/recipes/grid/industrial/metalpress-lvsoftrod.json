@@ -3,9 +3,9 @@
 	ingredients: {
 		"T": { type: "item", code: "screwdriver-*", isTool: true },
 		"P": {
-			"type": "block",
-			"code": "wireplate-tin-2a-cross",
-			"quantity": 1
+			"type": "item",
+			"code": "wire-*",
+			"quantity": 2
 		},
 		"B": { type: "block", code: "machineryblock", quantity: 1},
 		"M": { type: "item", code: "motor-primitive", quantity: 1},

@@ -58,10 +58,10 @@
 	"block-creativegenerator-primitive-*": "Creative LV Generator",
 	"block-itemhatch-*": "Bronze Item Hatch",
 	"blockdesc-itemhatch-*": "An expensive 24 slot storage block. Good for if you need more storage, or just want to flex your vast bronze reserves.",
-	"block-wireplate-tin-2a-cross": "Primitive Electric Wireplate (LV, 16 amp)",
-	"block-wireplate-tin-electricjunction": "Primitive Electric Junction (LV, 16 amp)",
-	"blockdesc-wireplate-tin-electricjunction": "Transmits power in all directions",
-	"blockdesc-wireplate-tin-2a-cross": "Transmits power in four directions",
+	"block-wireplate-tin-2a-cross": "Old Pile of Wires (break to recover wires to make new wire plate)",
+	"block-wireplate-tin-electricjunction": "Large Old Pile of Wires (break to recover wires to make new junction)",
+	"blockdesc-wireplate-tin-electricjunction": "Old electric junction removed to make way for the cool new one, breaking this will return your wire",
+	"blockdesc-wireplate-tin-2a-cross": "Old wireplate removed to make way for cool new one break to recover wires",
 	"item-drilledplate-*": "Drilled Metal Plate (Bronze)",
 	"itemdesc-drilledplate-*": "Intermediate part smith by hand, or one day maybe make on a machine?",
 	"item-machineplate-*": "Bronze Machine Plate",
@@ -126,6 +126,6 @@
 	"block-mpmotor-*": "Electric Motor (*PREVIEW* Mechanical Power)(LV)",
 	"blockdesc-mpmotor-*": "Electric Motor - Create mechanical power from electricity! NOTE: THIS IS FOR TESTING AND MAY BE UNPREDICTABLE",
 	"block-watertower": "Small Water Tower",
-	"blockdesc-watertower": "Must have direct access to sky. Will slowly collect water and insert into a container below. Collects more water if raining"
+	"blockdesc-watertower": "Must have direct access to sky. Will slowly collect water and insert into a container below. Collects more water if raining. Multiblock structure: 3x4x3, ring of fencegates with this block in middle, then a ring of planks, a ring of metal blocks, and another ring of planks."
 
 }

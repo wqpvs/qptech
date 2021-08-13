@@ -7,9 +7,9 @@
 			"isTool": true
 		},
 		"P": {
-			"type": "block",
-			"code": "wireplate-tin-2a-cross",
-			"quantity": 1
+			"type": "item",
+			"code": "wire-*",
+			"quantity": 2
 		},
 		"B": {
 			"type": "block",

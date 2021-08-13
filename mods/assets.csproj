@@ -25,6 +25,8 @@
     <None Include="qptech\assets\game\shapes\block\can-full.json" />
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\oldwireplatelarge.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\oldwireplate.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\multiblocktest.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\watertower.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\creativegenerator.json" />
@@ -121,7 +123,6 @@
     <None Include="qptech\assets\machines\recipes\grid\part\machineryblock.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\motor-primitive.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\wire-copper.json" />
-    <None Include="qptech\assets\machines\recipes\grid\part\wire-tin.json" />
     <None Include="qptech\assets\machines\recipes\grid\tool\screwdriver.json" />
     <None Include="qptech\assets\machines\recipes\smithing\part\drilledplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\part\heavymold-metalplate.json" />
