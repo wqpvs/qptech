@@ -48,7 +48,7 @@
 	"blockdesc-icebox-*": "Place lake or glacial ice in the icebox in order to greatly extend food storage! Ice will be used up over time",
 	"block-blocklantern": "Encased Lantern",
 	"blockdesc-blocklantern": "Full Block lantern to add options to your builds",
-	"block-battery-primitive-*": "Primitive Electric Battery (LV)",
+	
 	"blockdesc-battery-*": "Batteries store power, they have a single input and one or more outputs.",
 	"block-battery-lv-*": "Electric Battery (LV)",
 	"block-electricforge-lv-*": "Primitive Electric Forge (LV)",

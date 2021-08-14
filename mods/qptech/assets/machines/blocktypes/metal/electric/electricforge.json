@@ -31,7 +31,7 @@
 		"maxItems": 2,
 		"stackRenderHeight": 0.1,
 		"unloadable": false,
-		"receptionFaces": [ "north" ]
+		"receptionFaces": [ "north","east","west","south","down"]
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",

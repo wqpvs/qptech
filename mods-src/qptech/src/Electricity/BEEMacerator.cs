@@ -184,22 +184,7 @@ namespace qptech.src
 
             }
         }
-        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
-        {
-            base.FromTreeAttributes(tree, worldAccessForResolve);
-            string wic = tree.GetString("workingitem");
-            Item tryasitem= Api.World.GetItem(new AssetLocation(wic));
-            if (tryasitem != null) { workingitem = tryasitem as CollectibleObject; return; }
-            Block tryasblock = Api.World.GetBlock(new AssetLocation(wic));
-            if (tryasblock != null) { workingitem = tryasblock as CollectibleObject; return; }
-            
-        }
-        public override void ToTreeAttributes(ITreeAttribute tree)
-        {
-            base.ToTreeAttributes(tree);
-            tree.SetString("workingitem", workingitem.Code.ToShortString());
-
-        }
+        
     }
     public class MacerationRecipe
     {

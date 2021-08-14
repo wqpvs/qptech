@@ -26,13 +26,13 @@
         "north",
         "south",
         "east",
-        "west"
+        "west","down"
       ],
       "distributionFaces": [
         "north",
         "south",
         "east",
-        "west"
+        "west","down"
       ]
     }
   },

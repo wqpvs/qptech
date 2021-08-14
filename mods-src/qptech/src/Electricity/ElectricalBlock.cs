@@ -11,8 +11,16 @@ using Vintagestory.API.Client;
 
 namespace qptech.src
 {
-    class ElectricalBlock : BlockMPBase
+    class ElectricalBlock : BlockMPBase,IBlockItemFlow
     {
+        public string[] PullFaces => Attributes["pullFaces"].AsArray<string>(new string[0]);
+        public string[] PushFaces => Attributes["pushFaces"].AsArray<string>(new string[0]);
+        public string[] AcceptFaces => Attributes["acceptFromFaces"].AsArray<string>(new string[0]);
+
+        public bool HasItemFlowConnectorAt(BlockFacing facing)
+        {
+            return PullFaces.Contains(facing.Code) || PushFaces.Contains(facing.Code) || AcceptFaces.Contains(facing.Code);
+        }
         long powertogglecooldown = 1200;
         long nextpowertoggleat = 0;
         public override void DidConnectAt(IWorldAccessor world, BlockPos pos, BlockFacing face)

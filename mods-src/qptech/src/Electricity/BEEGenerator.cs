@@ -337,5 +337,15 @@ namespace qptech.src
             ambientSound = null;
             base.OnBlockUnloaded();
         }
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
+        {
+            //base.GetBlockInfo(forPlayer, dsc);
+            
+            dsc.Append("Output "+genFlux+" Flux");
+            if (IsOn && !heated) { dsc.AppendLine(" (NO HEAT)"); }
+            else if (IsOn) { dsc.AppendLine(" (ON)"); }
+            else { dsc.AppendLine(" (OFF)"); }
+            //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
+        }
     }
 }
