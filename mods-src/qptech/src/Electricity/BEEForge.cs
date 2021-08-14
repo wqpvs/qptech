@@ -53,7 +53,7 @@ namespace qptech.src
                 if (Contents == null) { return false; }
                 if (Contents.StackSize < 1) { return false; }
                 if (Contents.Collectible == null) { return false; }
-                if (Contents.Collectible.GetTemperature(Api.World, Contents) >= maxHeat * 0.95f) { return true; }
+                if (Contents.Collectible.GetTemperature(Api.World, Contents) >= maxHeat * 0.90f) { return true; }
                 return false;
             }
         }
@@ -101,7 +101,7 @@ namespace qptech.src
                 }
             }
             lastTickTotalHours = Api.World.Calendar.TotalHours;
-            if (contents!=null && contents.StackSize > 0) { CheckAndOfferInventory(); }
+            if (ContentsReady) { CheckAndOfferInventory(); }
         }
         void CheckAndOfferInventory()
         {
@@ -122,6 +122,7 @@ namespace qptech.src
                         int used = checkconduit.ReceiveItemOffer(contents, bf.Opposite);
                         if (used != 0)
                         {
+                            renderer?.SetContents(contents, stackRenderHeight, burning, true);
                             MarkDirty(true);
                         }
                     }
@@ -223,6 +224,7 @@ namespace qptech.src
             if (!byPlayer.Entity.Controls.Sneak)
             {
                 if (contents == null) return false;
+                if (contents.StackSize == 0) { return false; }
                 ItemStack split = contents.Clone();
                 split.StackSize = 1;
                 contents.StackSize--;
@@ -325,6 +327,7 @@ namespace qptech.src
             base.GetBlockInfo(forPlayer, dsc);
             if (contents == null) { dsc.AppendLine("EMPTY"); return; }
             if (contents.StackSize == 0) { dsc.AppendLine("EMPTY"); return; }
+            if (contents.Item == null) { dsc.AppendLine("EMPTY"); return; }
             string d = contents.StackSize.ToString() + " of " + contents.Item.Code.ToString();
             d += " at " + contents.Collectible.GetTemperature(Api.World, contents).ToString() + "C";
             dsc.AppendLine(d);
