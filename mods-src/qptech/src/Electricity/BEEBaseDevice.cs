@@ -13,7 +13,7 @@ namespace qptech.src
 {
     //Device to use up electricity
     //intermediate class, shouldn't generally be used
-    public class BEEBaseDevice:BEElectric
+    public class BEEBaseDevice:BEElectric,IConduit
     {
         
         public enum enDeviceState { IDLE, RUNNING, WARMUP, MATERIALHOLD, ERROR }
@@ -27,6 +27,7 @@ namespace qptech.src
 
         protected enDeviceState deviceState = enDeviceState.WARMUP;
         public enDeviceState DeviceState { get { return deviceState; } }
+        
         public override void OnTick(float par)
         {
             base.OnTick(par);
@@ -149,6 +150,15 @@ namespace qptech.src
             
         }
 
+        public virtual int ReceiveItemOffer(ItemStack offerstack, BlockFacing onFace)
+        {
+            return 0;
+        }
+    }
+
+    public interface IConduit
+    {
+        int ReceiveItemOffer(ItemStack offerstack, BlockFacing onFace);
         
     }
 }

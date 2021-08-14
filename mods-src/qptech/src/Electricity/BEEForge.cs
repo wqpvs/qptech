@@ -101,8 +101,33 @@ namespace qptech.src
                 }
             }
             lastTickTotalHours = Api.World.Calendar.TotalHours;
+            if (contents!=null && contents.StackSize > 0) { CheckAndOfferInventory(); }
         }
-
+        void CheckAndOfferInventory()
+        {
+            BlockEForge eblock = Block as BlockEForge;
+            if (eblock != null)
+            {
+                if (eblock.PushFaces == null) { return; }
+                if (eblock.PushFaces.Count() == 0) { return; }
+                foreach (string bfs in eblock.PushFaces)
+                {
+                    if (contents == null || contents.StackSize == 0) { return; }
+                    BlockFacing bf = BlockFacing.FromCode(bfs);
+                    BlockPos bfp = Pos.Copy().Offset(bf);
+                    BlockEntity checkblocke = Api.World.BlockAccessor.GetBlockEntity(bfp);
+                    IConduit checkconduit = checkblocke as IConduit;
+                    if (checkconduit != null)
+                    {
+                        int used = checkconduit.ReceiveItemOffer(contents, bf.Opposite);
+                        if (used != 0)
+                        {
+                            MarkDirty(true);
+                        }
+                    }
+                }
+            }
+        }
         protected override void DoDeviceComplete()
         {
             deviceState = enDeviceState.IDLE;

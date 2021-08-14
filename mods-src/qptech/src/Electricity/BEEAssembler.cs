@@ -10,6 +10,7 @@ using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 using Vintagestory.API.Client;
 using HarmonyLib;
+using Electricity.API;
 
 namespace qptech.src
 {
@@ -84,11 +85,12 @@ namespace qptech.src
          DummyInventory dummy;
         double processstarted;
         float lastheatreading = 0;
+        ElectricalBlock myElectricalBlock;
         /// </summary>
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            
+            myElectricalBlock = Block as ElectricalBlock;
             
             if (Block.Attributes != null) {
                 //requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
@@ -222,22 +224,31 @@ namespace qptech.src
             
             dummy[0].Itemstack = outputStack;
             outputStack.Collectible.SetTemperature(Api.World, outputStack, lastheatreading);
+
             BlockPos bp = Pos.Copy().Offset(outputFace);
             BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
-            var outputContainer = checkblock as BlockEntityContainer;
-            if (outputContainer != null)
+            IConduit checkic = checkblock as IConduit;
+            if (checkic != null)
             {
-                WeightedSlot tryoutput = outputContainer.Inventory.GetBestSuitedSlot(dummy[0]);
-
-                if (tryoutput.slot != null) {
-                    ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, outputQuantity);
-                    
-                    dummy[0].TryPutInto(tryoutput.slot, ref op);
-                    
-                }
+                int used=checkic.ReceiveItemOffer(dummy[0].Itemstack, outputFace.Opposite);
+                if (used > 0) { }
             }
- 
-            if (!dummy.Empty)
+            
+                var outputContainer = checkblock as BlockEntityContainer;
+                if (outputContainer != null && dummy[0].Itemstack.StackSize>0)
+                {
+                    WeightedSlot tryoutput = outputContainer.Inventory.GetBestSuitedSlot(dummy[0]);
+
+                    if (tryoutput.slot != null)
+                    {
+                        ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, outputQuantity);
+
+                        dummy[0].TryPutInto(tryoutput.slot, ref op);
+
+                    }
+                }
+            
+            if (outputStack.StackSize!=0)
             {
                 //If no storage then spill on the ground
                 Vec3d pos = Pos.ToVec3d();
@@ -265,55 +276,66 @@ namespace qptech.src
             for (int c = 0; c < inputContainer.Inventory.Count; c++)
             {
                 ItemSlot checkslot = inputContainer.Inventory[c];
-                if (checkslot == null) { continue; }
-                if (checkslot.StackSize < inputQuantity) { continue; }
-                bool match = false;
-                Item checkitem = checkslot.Itemstack.Item;
-                Block checkiblock = checkslot.Itemstack.Block;
-                ingredient_subtype = "";
-
-                if (checkitem == null && checkiblock == null) { continue; }
-                if (checkitem != null) {
-                    string fcp = checkitem.FirstCodePart().ToString();
-                    string lcp = checkitem.LastCodePart().ToString();
-                    //no materials list so we don't need check for subtypes
-                    if (checkitem.Code.ToString() == ingredient) { match = true; }
-                    else if (checkitem.FirstCodePart() == ingredient && (materials == null || materials.Length == 0)) { match = true; }
-                    else if (checkitem.FirstCodePart().ToString() == ingredient && materials.Contains(checkitem.LastCodePart().ToString()))
-                    {
-                        match = true;
-                        ingredient_subtype = checkitem.LastCodePart();
-                    }
-
-                }
-                else if (checkiblock != null) {
-                    if (checkiblock.Code.ToString() == ingredient) { match = true; }
-                    else if(checkiblock.FirstCodePart().ToString() == ingredient && (materials == null || materials.Length == 0)) { match = true; }
-                    else if (checkiblock.FirstCodePart().ToString()==ingredient && materials.Contains(checkiblock.LastCodePart().ToString())){
-                        match = true;
-                        ingredient_subtype = checkiblock.LastCodePart();
-                    }
-                }
+                bool match = CheckCode(checkslot.Itemstack);
                 if (match)
                 {
-                    bool heatok = true;
-                    lastheatreading= checkslot.Itemstack.Collectible.GetTemperature(Api.World, checkslot.Itemstack);
-                    if (heatRequirement > 0 && lastheatreading<heatRequirement)
-                    {
-                        heatok = false;
-                    }
-                    if (heatok)
-                    {
-                        int reqQty = Math.Min(checkslot.StackSize, inputQuantity - internalQuantity);
-                        checkslot.TakeOut(reqQty);
-                        internalQuantity += reqQty;
-                        checkslot.MarkDirty();
-                    }
+                  int reqQty = Math.Min(checkslot.StackSize, inputQuantity - internalQuantity);
+                  checkslot.TakeOut(reqQty);
+                  internalQuantity += reqQty;
+                  checkslot.MarkDirty();
+                   
                 }
             }
                 
             
             return;
+        }
+
+        bool CheckCode(ItemStack checkstack)
+        {
+            
+            if (checkstack == null) { return false; }
+            if (checkstack.StackSize < inputQuantity) { return false; }
+            bool match = false;
+            Item checkitem = checkstack.Item;
+            Block checkiblock = checkstack.Block;
+            ingredient_subtype = "";
+
+            if (checkitem == null && checkiblock == null) { return false; }
+            if (checkitem != null)
+            {
+                string fcp = checkitem.FirstCodePart().ToString();
+                string lcp = checkitem.LastCodePart().ToString();
+                //no materials list so we don't need check for subtypes
+                if (checkitem.Code.ToString() == ingredient) { match = true; }
+                else if (checkitem.FirstCodePart() == ingredient && (materials == null || materials.Length == 0)) { match = true; }
+                else if (checkitem.FirstCodePart().ToString() == ingredient && materials.Contains(checkitem.LastCodePart().ToString()))
+                {
+                    
+                    ingredient_subtype = checkitem.LastCodePart();
+                    match = true;
+                }
+
+            }
+            else if (checkiblock != null)
+            {
+                if (checkiblock.Code.ToString() == ingredient) { match = true; }
+                else if (checkiblock.FirstCodePart().ToString() == ingredient && (materials == null || materials.Length == 0)) { match = true; }
+                else if (checkiblock.FirstCodePart().ToString() == ingredient && materials.Contains(checkiblock.LastCodePart().ToString()))
+                {
+                    
+                    ingredient_subtype = checkiblock.LastCodePart();
+                    match = true;
+                }
+            }
+            if (!match) { return false; }
+            bool heatok = true;
+            lastheatreading = checkstack.Collectible.GetTemperature(Api.World, checkstack);
+            if (heatRequirement > 0 && lastheatreading < heatRequirement)
+            {
+                heatok = false;
+            }
+            return heatok;
         }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
@@ -353,6 +375,27 @@ namespace qptech.src
                     dsc.AppendLine(ing + ",");
                 }
             }
+        }
+        public override int ReceiveItemOffer(ItemStack offerstack, BlockFacing onFace)
+        {
+            if (!IsOn) { return 0; }
+            
+            if (myElectricalBlock == null) { return 0; }
+            //if (onFace!=rmInputFace) { return 0; }
+            if (DeviceState != enDeviceState.MATERIALHOLD) { return 0; }
+            if (internalQuantity >= inputQuantity) { return 0; }
+            
+            bool match = CheckCode(offerstack);
+            if (match)
+            {
+                int reqQty = Math.Min(offerstack.StackSize, inputQuantity - internalQuantity);
+                offerstack.StackSize -= reqQty;
+                internalQuantity += reqQty;
+                return reqQty;
+
+            }
+
+            return 0;
         }
     }
 }

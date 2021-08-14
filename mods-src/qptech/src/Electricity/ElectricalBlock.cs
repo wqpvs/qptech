@@ -13,13 +13,13 @@ namespace qptech.src
 {
     class ElectricalBlock : BlockMPBase,IBlockItemFlow
     {
-        public string[] PullFaces => Attributes["pullFaces"].AsArray<string>(new string[0]);
-        public string[] PushFaces => Attributes["pushFaces"].AsArray<string>(new string[0]);
-        public string[] AcceptFaces => Attributes["acceptFromFaces"].AsArray<string>(new string[0]);
+        public virtual string[] PullFaces => Attributes["pullFaces"].AsArray<string>(new string[0]);
+        public virtual string[] PushFaces => Attributes["pushFaces"].AsArray<string>(new string[0]);
+        public virtual string[] AcceptFaces => Attributes["acceptFromFaces"].AsArray<string>(new string[0]);
 
-        public bool HasItemFlowConnectorAt(BlockFacing facing)
+        public virtual bool HasItemFlowConnectorAt(BlockFacing facing)
         {
-            return PullFaces.Contains(facing.Code) || PushFaces.Contains(facing.Code) || AcceptFaces.Contains(facing.Code);
+            return PullFaces.Contains(BEElectric.OrientFace(Code.ToString(), facing).ToString()) || PushFaces.Contains(BEElectric.OrientFace(Code.ToString(), facing).ToString()) || AcceptFaces.Contains(BEElectric.OrientFace(Code.ToString(), facing).ToString());
         }
         long powertogglecooldown = 1200;
         long nextpowertoggleat = 0;

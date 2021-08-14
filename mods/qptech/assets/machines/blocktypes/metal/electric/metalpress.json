@@ -30,6 +30,7 @@
 			"requiredFlux": 20,
 			"inputFace": "west",
 			"outputFace": "east",
+			"acceptFromFaces": ["west"],
 			"inputQuantity": 2,
 			"outputQuantity": 1,
 			"recipe": "game:metalplate",
@@ -37,7 +38,7 @@
 			"processingTime": 0.045,
 			"animationSpeed": 0.45,
 			"heatRequirement": 800,
-			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc","tinbronze","bismuthbronze","blackbronze" ]
+			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze" ]
 
 		},
 		"*-lvsoftscrew-*": {
