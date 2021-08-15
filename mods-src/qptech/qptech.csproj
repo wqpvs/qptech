@@ -84,6 +84,7 @@
     <Compile Include="src\Electricity\BEEHVAC.cs" />
     <Compile Include="src\Electricity\BEEForge.cs" />
     <Compile Include="src\Electricity\BEEKiln.cs" />
+    <Compile Include="src\Electricity\BEElectricCrucible.cs" />
     <Compile Include="src\Electricity\BEElectric.cs" />
     <Compile Include="src\Electricity\BEEGenerator.cs" />
     <Compile Include="src\Electricity\BEEMacerator.cs" />

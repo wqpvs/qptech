@@ -25,6 +25,7 @@
     <None Include="qptech\assets\game\shapes\block\can-full.json" />
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\electriccrucible.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\oldwireplatelarge.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\oldwireplate.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\multiblocktest.json" />
