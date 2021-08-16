@@ -119,7 +119,9 @@ namespace qptech.src
                     IConduit checkconduit = checkblocke as IConduit;
                     if (checkconduit != null)
                     {
-                        int used = checkconduit.ReceiveItemOffer(contents, bf.Opposite);
+                        DummyInventory di = new DummyInventory(Api, 1);
+                        di[0].Itemstack = contents;
+                        int used = checkconduit.ReceiveItemOffer(di[0], bf.Opposite);
                         if (used != 0)
                         {
                             renderer?.SetContents(contents, stackRenderHeight, burning, true);

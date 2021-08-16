@@ -230,7 +230,7 @@ namespace qptech.src
             IConduit checkic = checkblock as IConduit;
             if (checkic != null)
             {
-                int used=checkic.ReceiveItemOffer(dummy[0].Itemstack, outputFace.Opposite);
+                int used=checkic.ReceiveItemOffer(dummy[0], outputFace.Opposite);
                 if (used > 0) { }
             }
             
@@ -376,7 +376,7 @@ namespace qptech.src
                 }
             }
         }
-        public override int ReceiveItemOffer(ItemStack offerstack, BlockFacing onFace)
+        public override int ReceiveItemOffer(ItemSlot offerslot, BlockFacing onFace)
         {
             if (!IsOn) { return 0; }
             
@@ -385,11 +385,11 @@ namespace qptech.src
             if (DeviceState != enDeviceState.MATERIALHOLD) { return 0; }
             if (internalQuantity >= inputQuantity) { return 0; }
             
-            bool match = CheckCode(offerstack);
+            bool match = CheckCode(offerslot.Itemstack);
             if (match)
             {
-                int reqQty = Math.Min(offerstack.StackSize, inputQuantity - internalQuantity);
-                offerstack.StackSize -= reqQty;
+                int reqQty = Math.Min(offerslot.Itemstack.StackSize, inputQuantity - internalQuantity);
+                offerslot.TakeOut (reqQty);
                 internalQuantity += reqQty;
                 return reqQty;
 

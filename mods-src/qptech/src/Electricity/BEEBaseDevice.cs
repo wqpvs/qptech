@@ -150,7 +150,7 @@ namespace qptech.src
             
         }
 
-        public virtual int ReceiveItemOffer(ItemStack offerstack, BlockFacing onFace)
+        public virtual int ReceiveItemOffer(ItemSlot offerslot, BlockFacing onFace)
         {
             return 0;
         }
@@ -158,7 +158,7 @@ namespace qptech.src
 
     public interface IConduit
     {
-        int ReceiveItemOffer(ItemStack offerstack, BlockFacing onFace);
+        int ReceiveItemOffer(ItemSlot offerslot, BlockFacing onFace);
         
     }
 }
