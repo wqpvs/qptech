@@ -63,11 +63,7 @@ namespace qptech.src
             base.OnTick(par);
             //TEMP CODE TO MAKE COPPER
             if (!(Api is ICoreServerAPI)) { return; }
-            if (storage!=null&& storage.ContainsKey("copper") && storage["copper"] >= 100 && currentOrder == 0)
-            {
-                currentOrder = storage["copper"] / 100;
-                currentMetalRecipe = "copper";
-            }
+            
             if (status == enStatus.CONSTRUCTION) { CheckConstruction();return; }
             
             CheckInventories();
@@ -139,7 +135,13 @@ namespace qptech.src
         {
             //TODO if set to produce, check if anything can be made
             //     - make and distribute it
-            if (recipes == null) { return; }
+            if (recipes == null) {
+                FindValidRecipes();
+                if (recipes == null)
+                {
+                    return;
+                }
+            }
             if (status != enStatus.PRODUCING) { return; } //should probably pre check this
             if (currentOrder == 0 || currentMetalRecipe == "") { HaltProduction();return; } //problem with order, or it's done - reset status
             if (!recipes.ContainsKey(currentMetalRecipe)) { HaltProduction();return; } //recipe doesn't exist - reset status
@@ -158,30 +160,54 @@ namespace qptech.src
         void MakeOne()
         {
             //first check if we have the materials to directly make ingot
+            AssetLocation al=new AssetLocation("game:ingot-" + currentMetalRecipe); ;
+            Item makeitem= Api.World.GetItem(al); ;
             if (storage.ContainsKey(currentMetalRecipe))
             {
+                
                 if (storage[currentMetalRecipe] >=ingotsize) //enough material to make an ingot
                 {
-                    AssetLocation al = new AssetLocation("game:ingot-" + currentMetalRecipe);
-                    //TODO Will have to check for ingots in other domains?
-                    Item makeitem=Api.World.GetItem(al);
+                    
                     
                     //Try to make the item
                     if (CreateItem(makeitem, 1)) {
                         currentOrder--;
                         storage[currentMetalRecipe] =storage[currentMetalRecipe]- ingotsize; //take metals out of storage
                         FindValidRecipes();
-                        
+                        return;
                     }
-                    else { HaltProduction(); }
+                    else { HaltProduction(); return; }
                     //MarkDirty(true);
-                    return;
+                    
                 }
             }
 
             //next see if there's an alloy recipe matching what we're trying to make
-            AlloyRecipe ar = Api.World.Alloys.Where(i => Api.World.GetItem(i.Output.Code).LastCodePart() == currentMetalRecipe) as AlloyRecipe;
-            if (ar == null) { HaltProduction(); return; }
+            AlloyRecipe ar=null;
+            foreach (AlloyRecipe arc in Api.World.Alloys)
+            {
+                if (arc.Output.Code.ToString() == makeitem.Code.ToString()) { ar = arc; }
+            }
+            if (ar == null) {
+                HaltProduction(); return; 
+            }
+            bool canmake = true;
+            foreach (MetalAlloyIngredient mi in ar.Ingredients)
+            {
+                string ingmetal = Api.World.GetItem(mi.Code).LastCodePart();
+                if (!storage.ContainsKey(ingmetal)) { canmake = false;break; }
+                if (storage[ingmetal] < (int)(mi.MinRatio * (float)ingotsize)) { canmake = false;break; }
+            }
+            if (!canmake) { HaltProduction();return; }
+            al = new AssetLocation("game:ingot-" + currentMetalRecipe);
+            makeitem = Api.World.GetItem(al);
+            if (CreateItem(makeitem, 1)) {
+                foreach (MetalAlloyIngredient mi in ar.Ingredients)
+                {
+                    string ingmetal = Api.World.GetItem(mi.Code).LastCodePart();
+                    storage[ingmetal] -= (int)(mi.MinRatio * (float)ingotsize);
+                }
+            }
         }
         /// <summary>
         /// actually create the ingot or other item, return false if something went wrong
@@ -212,8 +238,7 @@ namespace qptech.src
         }
         public int ReceiveItemOffer(ItemSlot offerslot)
         {
-            //ingot = 20
-            //nugget =5
+           
             //todo - add a hatch part that will transmit these offers to the main device, the main device needs to tell hatch it is part of the multiblock
             //maybe add special liquid metal transfer stuff?
             if (offerslot == null) { return 0; }
@@ -250,6 +275,7 @@ namespace qptech.src
             base.GetBlockInfo(forPlayer, dsc);
             if (status == enStatus.CONSTRUCTION) { dsc.AppendLine("STRUCTURE INCOMPLETE"); return; }
             if (UsedStorage == 0) { dsc.AppendLine("EMPTY"); return; }
+            dsc.AppendLine(status.ToString());
             dsc.AppendLine(UsedStorage + " units used out of " + tankCapacity);
             dsc.AppendLine("Heated to " + internalHeat + "C");
             dsc.AppendLine("--------");
@@ -266,7 +292,7 @@ namespace qptech.src
             if (currentOrder > 0)
             {
                 dsc.AppendLine("------");
-                dsc.AppendLine(status.ToString());
+                
                 dsc.AppendLine("Production order " + currentOrder + " of " + currentMetalRecipe);
             }
         }
@@ -336,7 +362,7 @@ namespace qptech.src
                     string metal= Api.World.GetItem(i.Code).LastCodePart();
                     if (!storage.ContainsKey(metal)) { hasenoughfor = 0; break; }
                     
-                    int enoughthisingredient= storage[metal]/(int)(i.MaxRatio*(float)ingotsize);
+                    int enoughthisingredient= storage[metal]/(int)(i.MinRatio*(float)ingotsize);
                     if (enoughthisingredient < 1) { hasenoughfor = 0;break; }
                     if (hasenoughfor == 0) { hasenoughfor = enoughthisingredient; }
                     hasenoughfor = Math.Min(hasenoughfor, enoughthisingredient);
