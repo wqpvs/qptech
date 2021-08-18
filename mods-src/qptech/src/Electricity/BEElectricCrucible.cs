@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Runtime;
 using Vintagestory.API.Common;
@@ -26,6 +29,7 @@ namespace qptech.src
         int heatLossPerTickPerLiter = 10; //how fast to cool contents if not heating
         int fluxPerTick = 1;           //how much power to use
         int ingotsize = 100;
+        public Dictionary<string, int> Recipes => recipes;
         public int FreeStorage
         {
             get
@@ -370,10 +374,111 @@ namespace qptech.src
                 
                 if (hasenoughfor < 1) { continue; }
                 string outmetal = Api.World.GetItem(ar.Output.Code).LastCodePart();
-                recipes[outmetal] = (int)hasenoughfor;
+                if (recipes.ContainsKey(outmetal)) { recipes[outmetal] += (int)hasenoughfor; }
+                else { recipes[outmetal] = (int)hasenoughfor; }
                 //TEMP CODE TO SET PRODUCTION:
                 
             }
+        }
+
+        GUIElectricCrucible gas;
+        public void OpenStatusGUI()
+        {
+            ICoreClientAPI capi = Api as ICoreClientAPI;
+            if (capi != null)
+            {
+                if (gas == null)
+                {
+                    gas = new GUIElectricCrucible("Crucible Status", Pos, capi);
+
+                    gas.TryOpen();
+                    gas.SetupDialog(this);
+
+                }
+                else
+                {
+                    gas.TryClose();
+                    gas.TryOpen();
+                    gas.SetupDialog(this);
+                }
+            }
+
+
+        }
+        /// <summary>
+        /// Set the order for this electric crucible
+        /// </summary>
+        /// <param name="formetal">what metal to make</param>
+        /// <param name="qty">how many to make</param>
+        /// <param name="onlycompleteorder">if true will only start production if order can be completed, if false will make what it can</param>
+        /// <returns>Whether order can be delivered</returns>
+        public void SetOrder(string formetal, int qty, bool onlycompleteorder)
+        {
+            ICoreClientAPI capi = Api as ICoreClientAPI;
+            if (capi != null)
+            {
+                if (status != enStatus.READY) { return; }
+                FindValidRecipes();
+                if (!recipes.ContainsKey(formetal)) { return ; }
+                if (recipes[formetal] < qty && onlycompleteorder) { return; }
+                currentOrder = Math.Min(recipes[formetal], qty);
+                currentMetalRecipe = formetal;
+                Dictionary<string, int> neworder = new Dictionary<string, int>();
+                neworder[formetal] = currentOrder;
+                byte[] data = ObjectToByteArray(neworder);
+                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, 123456789,data);
+
+            }
+            else if (Api is ICoreServerAPI)
+            {
+                if (status != enStatus.READY) { return; }
+                FindValidRecipes();
+                if (!recipes.ContainsKey(formetal)) { return; }
+                if (recipes[formetal] < qty && onlycompleteorder) { return; }
+                currentOrder = Math.Min(recipes[formetal], qty);
+                currentMetalRecipe = formetal;
+                status = enStatus.PRODUCING;
+            }
+            
+        }
+
+        public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
+        
+        {
+            
+            if (packetid == 123456789)
+            {
+                var inmetal = ByteArrayToObject(data) as Dictionary<string,int>;
+                foreach (string key in inmetal.Keys)
+                {
+                    SetOrder(key, inmetal[key], true);
+                }
+                return;
+            }
+            base.OnReceivedServerPacket(packetid, data);
+        }
+        private byte[] ObjectToByteArray(Object obj)
+        {
+            if (obj == null)
+                return null;
+
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+            bf.Serialize(ms, obj);
+
+            return ms.ToArray();
+        }
+
+        // Convert a byte array to an Object
+        private Object ByteArrayToObject(byte[] arrBytes)
+        {
+            MemoryStream memStream = new MemoryStream();
+            BinaryFormatter binForm = new BinaryFormatter();
+            memStream.Write(arrBytes, 0, arrBytes.Length);
+            memStream.Seek(0, SeekOrigin.Begin);
+            Object obj = (Object)binForm.Deserialize(memStream);
+
+            return obj;
         }
     }
 }
