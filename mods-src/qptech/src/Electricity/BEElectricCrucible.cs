@@ -22,13 +22,16 @@ namespace qptech.src
     class BEElectricCrucible : BEElectric, IConduit
     {
         int tankCapacity = 25600;         //total storage
+        public int TotalStorage => tankCapacity;
         float maxHeat = 2000;              //how hot can it go
         float minHeat = 20;
         float internalHeat = 20;          //current heat of everything (added items will instantly average their heat)
         int heatPerTickPerLiter = 25000;    //how quickly it can heat it contents
         int heatLossPerTickPerLiter = 10; //how fast to cool contents if not heating
         int fluxPerTick = 1;           //how much power to use
+        public int FluxPerTick => fluxPerTick;
         int ingotsize = 100;
+        public float internalTempPercent => (internalHeat - minHeat) / (maxHeat - minHeat);
         public Dictionary<string, int> Recipes => recipes;
         public int FreeStorage
         {
@@ -48,13 +51,14 @@ namespace qptech.src
         }
 
         public bool Full => UsedStorage == FreeStorage;
-
+        public enum enStatus { READY, HEATING, PRODUCING, CONSTRUCTION }
         enStatus status = enStatus.CONSTRUCTION;
+        public enStatus Status => status;
         string currentMetalRecipe = "";
         int currentOrder = 0;
         Dictionary<string, int> storage; //track internal metals
         public Dictionary<string, int> recipes;
-        public enum enStatus { READY,HEATING,PRODUCING,CONSTRUCTION}
+        
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
