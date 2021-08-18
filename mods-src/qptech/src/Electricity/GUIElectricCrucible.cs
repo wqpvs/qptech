@@ -38,14 +38,14 @@ namespace qptech.src
         {
             ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterMiddle);
 
-            // Just a simple 300x100 pixel box with 40 pixels top spacing for the title bar
+            
             int sectionwidth = 280;
             int sectionheight = 1000;
             ElementBounds textBounds = ElementBounds.Fixed(0, 40, sectionwidth, sectionheight);
 
             // Background boundaries. Again, just make it fit it's child elements, then add the text as a child element
             //ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
-            ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
+            ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(5);
             
             // bgBounds.BothSizing = ElementSizing.FitToChildren;
             //bgBounds.WithChildren(textBounds);
@@ -70,11 +70,13 @@ namespace qptech.src
             SingleComposer = capi.Gui.CreateCompo(guicomponame, dialogBounds)
                 //.AddShadedDialogBG(bgBounds)
                 //.AddImageBG(bgBounds,"castiron")
-                .AddImageBG(bgBounds, "environment/stars-bg.png")
+                //.AddImageBG(bgBounds, "environment/stars-bg.png")
+                .AddImageBG(bgBounds, "gui/backgrounds/mainmenu2.png",0)
+                
                 //.AddDialogTitleBar("Electric Crucible Interface", OnTitleBarCloseClicked)
                 .AddRichtext(statustext, CairoFont.WhiteDetailText(), textBounds)
                 //.AddSmallButton("Close", OnCloseButton, ElementBounds.Fixed(buttonx, buttony, buttonwidth, buttonheight), EnumButtonStyle.Normal, EnumTextOrientation.Center)
-                .AddButton("CLOSE",OnCloseButton,buttonbounds,EnumButtonStyle.Normal,EnumTextOrientation.Center)
+                .AddButton("EXIT",OnCloseButton,buttonbounds,EnumButtonStyle.Normal,EnumTextOrientation.Center)
             ;
             if (mycrucible.Status == BEElectricCrucible.enStatus.PRODUCING)
             {
@@ -156,6 +158,7 @@ namespace qptech.src
         }
         public bool onTogglePower()
         {
+            mycrucible.ButtonTogglePower();
             TryClose();
             return true;
         }

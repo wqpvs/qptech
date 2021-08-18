@@ -416,6 +416,12 @@ namespace qptech.src
         /// <param name="qty">how many to make</param>
         /// <param name="onlycompleteorder">if true will only start production if order can be completed, if false will make what it can</param>
         /// <returns>Whether order can be delivered</returns>
+        
+        public enum enPacketIDs
+        {
+            SetOrder=99990001,
+            TogglePower=99990002
+        }
         public void SetOrder(string formetal, int qty, bool onlycompleteorder)
         {
             ICoreClientAPI capi = Api as ICoreClientAPI;
@@ -430,7 +436,7 @@ namespace qptech.src
                 Dictionary<string, int> neworder = new Dictionary<string, int>();
                 neworder[formetal] = currentOrder;
                 byte[] data = ObjectToByteArray(neworder);
-                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, 123456789,data);
+                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.SetOrder,data);
 
             }
             else if (Api is ICoreServerAPI)
@@ -445,12 +451,15 @@ namespace qptech.src
             }
             
         }
-
+        public void ButtonTogglePower()
+        {
+            (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.TogglePower, null);
+        }
         public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
         
         {
             
-            if (packetid == 123456789)
+            if (packetid == (int)enPacketIDs.SetOrder)
             {
                 var inmetal = ByteArrayToObject(data) as Dictionary<string,int>;
                 foreach (string key in inmetal.Keys)
@@ -459,8 +468,14 @@ namespace qptech.src
                 }
                 return;
             }
+            if (packetid == (int)enPacketIDs.TogglePower)
+            {
+                isOn = !isOn;
+                MarkDirty(true);
+            }
             base.OnReceivedServerPacket(packetid, data);
         }
+
         private byte[] ObjectToByteArray(Object obj)
         {
             if (obj == null)
