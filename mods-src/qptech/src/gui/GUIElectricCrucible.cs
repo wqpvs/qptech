@@ -184,50 +184,20 @@ namespace qptech.src
             }
             text += "</font>";
             SingleComposer.AddRichtext(text, CairoFont.WhiteDetailText(), textBounds);
-           
-        }
-        public void SetupReadyDialog()
-        {
-            ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterMiddle);
-
-            // Just a simple 300x100 pixel box with 40 pixels top spacing for the title bar
-            ElementBounds textBounds = ElementBounds.Fixed(40, 40, 1500, 2000);
-
-            // Background boundaries. Again, just make it fit it's child elements, then add the text as a child element
-            ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
-            bgBounds.BothSizing = ElementSizing.FitToChildren;
-            bgBounds.WithChildren(textBounds);
-            string guicomponame =mycrucible.Pos.ToString() + "Electric Crucible";
-            
-            string statustext = "SELECT INGOT FOR PRODUCTION";
-            statustext += "\nHeat at " + (int)(mycrucible.internalTempPercent * 100) + "%";
-            //string alertred = "<font color=\"#ffbbaa\">";//<font <color=\"#ffdddd\">>";
-            double buttonx = 0;
-            double buttony = 100;
-            double buttonwidth = 200;
-            double buttonheight = 35;
-
-            SingleComposer = capi.Gui.CreateCompo(guicomponame, dialogBounds)
-                .AddShadedDialogBG(bgBounds)
-                .AddDialogTitleBar("Electric Crucible Interface", OnTitleBarCloseClicked)
-                .AddRichtext(statustext, CairoFont.WhiteDetailText(), textBounds)
-
-            ;
-            if (mycrucible.Recipes != null && mycrucible.Recipes.Count > 0)
+            // DRAW MAKE BUTTONS
+            double ytrack = sectiony + titleheight;
+            int buttonheight = 28;
+            foreach (string key in mycrucible.recipes.Keys)
             {
-
-                foreach (string key in mycrucible.Recipes.Keys)
-                {
-
-                    SingleComposer.AddSmallButton(key.ToUpperInvariant(), ()=>onMetalSelect(key), ElementBounds.Fixed(buttonx, buttony, buttonwidth, buttonheight), EnumButtonStyle.Normal, EnumTextOrientation.Center);
-                    buttony += buttonheight;
-                }
+                textBounds = ElementBounds.Fixed(column1start + columnpad*2 + (inventorywidth - 15) / 2, ytrack, columnwidth, buttonheight);
+                SingleComposer.AddButton("MAKE", ()=>onMetalSelect(key,1), textBounds, EnumButtonStyle.Normal, EnumTextOrientation.Center);
+                ytrack += buttonheight;
             }
-            SingleComposer.Compose();
         }
-        private bool onMetalSelect(string key)
+        
+        private bool onMetalSelect(string key, int qty)
         {
-            mycrucible.SetOrder(key, 1, true);
+            mycrucible.SetOrder(key, qty, true);
             TryClose();
             return true;
            
