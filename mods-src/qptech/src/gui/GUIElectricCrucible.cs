@@ -104,7 +104,7 @@ namespace qptech.src
             double titleheight = 50;
             ElementBounds textBounds = ElementBounds.Fixed(column1start, sectiony, (inventorywidth - 15) / 2, titleheight);
             string text = "<font size=\"24\" align=\"left\" >";
-            text += "INVENTORY\n\n";
+            text += "INVENTORY(UNITS)\n\n";
             text += "</font>";
             
 
@@ -146,7 +146,45 @@ namespace qptech.src
         }
         public void SetupProductionScreen()
         {
+            if (mycrucible.Recipes == null || mycrucible.Recipes.Count == 0) { return; }
+            //FIRST ADD TITLE BAR
+            double inventorywidth = sectionwidth * 2;
+            double column1start = sectionx + sectionwidth*3 + 100;
+            double columnwidth = sectionwidth / 2;
 
+            double columnpad = 25;
+            double titleheight = 50;
+            ElementBounds textBounds = ElementBounds.Fixed(column1start, sectiony, (inventorywidth - 15) / 2, titleheight);
+            string text = "<font size=\"24\" align=\"left\" >";
+            text += "RECIPES(INGOTS)\n\n";
+            text += "</font>";
+
+
+            
+
+            //OTHERWISE FIRST DRAW METALS IN FIRST COLUMN
+
+            
+            SingleComposer.AddRichtext(text, CairoFont.WhiteDetailText(), textBounds); //complete adding the title bar
+            textBounds = ElementBounds.Fixed(column1start, sectiony + titleheight, (inventorywidth - 15) / 2, sectionheight - titleheight);
+            text = "<font size=\"24\" align=\"left\" >";
+            foreach (string key in mycrucible.Recipes.Keys)
+            {
+                text += key.ToUpper() + "\n";
+            }
+            text += "</font>";
+            SingleComposer.AddRichtext(text, CairoFont.WhiteDetailText(), textBounds);
+            //THEN DRAW METAL QUANTITIES IN SECOND COLUMN
+
+            textBounds = ElementBounds.Fixed(column1start + columnpad + columnwidth, sectiony + titleheight, (inventorywidth - 15) / 2, sectionheight - titleheight);
+            text = "<font size=\"24\" align=\"right\" >";
+            foreach (string key in mycrucible.Recipes.Keys)
+            {
+                text += mycrucible.Recipes[key] + "\n";
+            }
+            text += "</font>";
+            SingleComposer.AddRichtext(text, CairoFont.WhiteDetailText(), textBounds);
+           
         }
         public void SetupReadyDialog()
         {

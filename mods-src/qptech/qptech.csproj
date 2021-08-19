@@ -103,8 +103,8 @@
     <Compile Include="src\Electricity\BlockJunction.cs" />
     <Compile Include="src\Electricity\BlockWire.cs" />
     <Compile Include="src\Electricity\EForgeContentsRenderer.cs" />
-    <Compile Include="src\Electricity\GUIAssemblerStatus.cs" />
-    <Compile Include="src\Electricity\GUIElectricCrucible.cs" />
+    <Compile Include="src\gui\GUIAssemblerStatus.cs" />
+    <Compile Include="src\gui\GUIElectricCrucible.cs" />
     <Compile Include="src\Electricity\HVACEnvironmentUpdater.cs" />
     <Compile Include="src\misc\APIExtensions.cs" />
     <Compile Include="src\misc\BETextureTest.cs" />
