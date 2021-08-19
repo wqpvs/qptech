@@ -57,6 +57,7 @@ namespace qptech.src
         string currentMetalRecipe = "";
         int currentOrder = 0;
         Dictionary<string, int> storage; //track internal metals
+        public Dictionary<string, int> Storage => storage;
         public Dictionary<string, int> recipes;
         
         public override void Initialize(ICoreAPI api)
