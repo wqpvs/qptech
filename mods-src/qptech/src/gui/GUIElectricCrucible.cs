@@ -45,8 +45,33 @@ namespace qptech.src
         {
             ElementBounds dialogBounds = ElementBounds.Fixed(sectionx, sectiony, 256, 256);
             SingleComposer.AddDynamicCustomDraw(dialogBounds, testdraw, "testbar");
-            ElementBounds switchBounds = ElementBounds.Fixed(sectionx, sectiony, 43, 15);
+            double switchx=11;
+            double switchy = 177;
+            string statustext = "";
+            if (!mycrucible.IsOn)
+            {
+                switchy = 211;
+                statustext = "<font align=\"center\">OFF</font>";
+            }
+            else if (!mycrucible.IsPowered)
+            {
+                statustext = "<font align=\"center\">NO POWER</font>";
+            }
+            else
+            {
+                statustext = "<font style=\"bold\" align =\"center\">Charge at " + mycrucible.CapacitorPercentage * 100 + "%\nPower Usage:"+mycrucible.FluxPerTick+" Flux</font>";
+            }
+            //perfect for switch off double switchy = 211;
+            ElementBounds switchBounds = ElementBounds.Fixed(switchx, switchy, 43, 16);
             SingleComposer.AddDynamicCustomDraw(switchBounds, powerswitch, "powerswitch");
+            double screenwidth = 205-6;
+            double screenheight = 55-6;
+            double screenx = 36;
+            double screeny = 71;
+            ElementBounds screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
+            
+            
+            SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
         }
         public void SetupStatusScreen()
         {
