@@ -21,6 +21,7 @@ namespace qptech.src
         double buttonheight = 35;
         double buttonpad = 5;
         string selection = "";
+        bool isopen = false;
         BEElectricCrucible mycrucible;
         public GUIElectricCrucible(string dialogTitle, BlockPos blockEntityPos, ICoreClientAPI capi) : base(dialogTitle, blockEntityPos, capi)
         {
@@ -34,6 +35,7 @@ namespace qptech.src
             SetupInventoryScreen();
             SetupProductionScreen();
             SingleComposer.Compose();
+            isopen = true;
         }
        
         public void SetupStatusScreen()
@@ -54,7 +56,14 @@ namespace qptech.src
             string statustext = "";
             statustext += "<font size=\"24\" align=\"center\" >";
             statustext += "CRUCIBLE STATUS\n\n";
-            statustext += "Power\n"+(int)(mycrucible.CapacitorPercentage*100)+"%";
+            if (!mycrucible.IsOn)
+            {
+                statustext += "<font color=#ffff00>POWER OFF</font>";
+            }
+            else
+            {
+                statustext += "Power\n" + (int)(mycrucible.CapacitorPercentage * 100) + "%";
+            }
             statustext += "\n(flux required: " + mycrucible.FluxPerTick + " flux)";
             statustext += "\n\nTemperature\n" + (int)(mycrucible.internalTempPercent * 100) + "%";
             statustext += "\n\nStorage\n" + mycrucible.UsedStorage + "/" + mycrucible.TotalStorage + "\nUnits";
@@ -198,7 +207,7 @@ namespace qptech.src
 
             //Temp code for dynamic draw
             currentcolumnstart += columnpad + columnwidth;
-            textBounds = ElementBounds.Fixed(currentcolumnstart, ytrack, 256, 256);
+            textBounds = ElementBounds.Fixed(currentcolumnstart, sectionheight-50-256, 256, 256);
             SingleComposer.AddDynamicCustomDraw(textBounds, testdraw, "testbar");
         }
         private void testdraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
@@ -226,7 +235,10 @@ namespace qptech.src
         private bool onMetalSelect(string key, int qty)
         {
             mycrucible.SetOrder(key, qty, true);
-            TryClose();
+            SetupStatusScreen();
+            SetupInventoryScreen();
+            SetupProductionScreen();
+            SingleComposer.Compose();
             return true;
            
         }
@@ -246,14 +258,20 @@ namespace qptech.src
         }
         public bool onHaltProduction()
         {
-            TryClose();
+            
             return true;
         }
         public bool onTogglePower()
         {
             mycrucible.ButtonTogglePower();
-            TryClose();
+            SetupStatusScreen();
+            SingleComposer.Compose();
             return true;
+        }
+        public override bool TryClose()
+        {
+            opened = false;
+            return base.TryClose();
         }
     }
 }

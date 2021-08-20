@@ -29,6 +29,8 @@ namespace qptech.src
         int fluxPerTick = 1;           //how much power to use
         public int FluxPerTick => fluxPerTick;
         int ingotsize = 100;
+        int uiUpdateEvery = 20;
+        int uiUpdateSkipCounter = 0;
         public float internalTempPercent => (internalHeat - minHeat) / (maxHeat - minHeat);
         public Dictionary<string, int> Recipes => recipes;
         public int FreeStorage
@@ -68,6 +70,10 @@ namespace qptech.src
         public override void OnTick(float par)
         {
             base.OnTick(par);
+            if (Api is ICoreClientAPI)
+            {
+                UpdateUI();
+            }
             //TEMP CODE TO MAKE COPPER
             if (!(Api is ICoreServerAPI)) { return; }
             
@@ -79,7 +85,18 @@ namespace qptech.src
             if (status == enStatus.PRODUCING) { DoProduction(); }
             MarkDirty(true);
         }
-
+        void UpdateUI()
+        {
+            uiUpdateSkipCounter++;
+            if (uiUpdateSkipCounter >= uiUpdateEvery)
+            {
+                uiUpdateSkipCounter = 0;
+                if (gas != null && gas.IsOpened())
+                {
+                    gas.SetupDialog(this);
+                }
+            }
+        }
         void SetStatus()
         {
             if (internalHeat < maxHeat) { status = enStatus.HEATING; return; }
@@ -476,7 +493,7 @@ namespace qptech.src
             }
             base.OnReceivedServerPacket(packetid, data);
         }
-
+        
         private byte[] ObjectToByteArray(Object obj)
         {
             if (obj == null)
