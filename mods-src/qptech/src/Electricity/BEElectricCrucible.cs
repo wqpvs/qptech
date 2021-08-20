@@ -208,11 +208,13 @@ namespace qptech.src
             if (!canmake) { HaltProduction();return; }
             al = new AssetLocation("game:ingot-" + currentMetalRecipe);
             makeitem = Api.World.GetItem(al);
+            
             if (CreateItem(makeitem, 1)) {
                 foreach (MetalAlloyIngredient mi in ar.Ingredients)
                 {
                     string ingmetal = Api.World.GetItem(mi.Code).LastCodePart();
                     storage[ingmetal] -= (int)(mi.MinRatio * (float)ingotsize);
+                    currentOrder--;
                 }
             }
         }

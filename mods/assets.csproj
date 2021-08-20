@@ -217,6 +217,7 @@
     <Content Include="qptech\assets\game\sounds\quarrytemp.ogg" />
     <Content Include="qptech\assets\game\sounds\steamburst.ogg" />
     <Content Include="qptech\assets\game\sounds\waterslosh.ogg" />
+    <Content Include="qptech\assets\game\textures\block\sigh.png" />
     <Content Include="qptech\assets\game\textures\block\tincan.png" />
     <Content Include="qptech\assets\machines\textures\block\castiron.png" />
     <Content Include="qptech\assets\machines\textures\block\castironpeekaboo.png" />

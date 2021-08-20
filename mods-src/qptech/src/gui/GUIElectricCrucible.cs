@@ -151,50 +151,78 @@ namespace qptech.src
             double inventorywidth = sectionwidth * 2;
             double column1start = sectionx + sectionwidth*3 + 100;
             double columnwidth = sectionwidth / 2;
-
             double columnpad = 25;
             double titleheight = 50;
-            ElementBounds textBounds = ElementBounds.Fixed(column1start, sectiony, (inventorywidth - 15) / 2, titleheight);
+            int lineheight = 50;
+            ElementBounds textBounds = ElementBounds.Fixed(column1start, sectiony, columnwidth*2, titleheight);
             string text = "<font size=\"24\" align=\"left\" >";
-            text += "RECIPES(INGOTS)\n\n";
+            text += "RECIPES(INGOTS)";
             text += "</font>";
-
-
-            
-
-            //OTHERWISE FIRST DRAW METALS IN FIRST COLUMN
-
-            
             SingleComposer.AddRichtext(text, CairoFont.WhiteDetailText(), textBounds); //complete adding the title bar
-            textBounds = ElementBounds.Fixed(column1start, sectiony + titleheight, (inventorywidth - 15) / 2, sectionheight - titleheight);
-            text = "<font size=\"24\" align=\"left\" >";
-            foreach (string key in mycrucible.Recipes.Keys)
-            {
-                text += key.ToUpper() + "\n";
-            }
-            text += "</font>";
-            SingleComposer.AddRichtext(text, CairoFont.WhiteDetailText(), textBounds);
-            //THEN DRAW METAL QUANTITIES IN SECOND COLUMN
 
-            textBounds = ElementBounds.Fixed(column1start + columnpad + columnwidth, sectiony + titleheight, (inventorywidth - 15) / 2, sectionheight - titleheight);
-            text = "<font size=\"24\" align=\"right\" >";
+            //FIRST COLUMN
+            double yorigin = sectiony + titleheight * 1.25;
+            double currentcolumnstart = column1start;
+            double column1width = columnwidth * 2;
+            double ytrack = yorigin;
+            double textoffset = -11;
+            double buttonheight = lineheight - 10;
             foreach (string key in mycrucible.Recipes.Keys)
             {
-                text += mycrucible.Recipes[key] + "\n";
+                textBounds = ElementBounds.Fixed(currentcolumnstart, ytrack-textoffset, column1width, lineheight);
+                text = "<font size=\"24\" align=\"left\" >"+key.ToUpper() + "</font>";
+                SingleComposer.AddRichtext(text, CairoFont.WhiteDetailText(), textBounds);
+                ytrack += lineheight;
             }
-            text += "</font>";
-            SingleComposer.AddRichtext(text, CairoFont.WhiteDetailText(), textBounds);
+       
+            //THEN DRAW METAL QUANTITIES IN SECOND COLUMN
+            ytrack = yorigin;
+            currentcolumnstart += columnpad + column1width;
+            foreach (string key in mycrucible.Recipes.Keys)
+            {      
+                textBounds = ElementBounds.Fixed(currentcolumnstart, ytrack-textoffset, columnwidth, lineheight);
+                text = "<font size=\"24\" align=\"right\">"+mycrucible.Recipes[key] + "</font>";
+                SingleComposer.AddRichtext(text, CairoFont.WhiteDetailText(), textBounds);
+                ytrack += lineheight;
+            }
+
             // DRAW MAKE BUTTONS
-            double ytrack = sectiony + titleheight;
-            int buttonheight = 28;
+            currentcolumnstart += columnpad + columnwidth;
+            ytrack = yorigin;
             foreach (string key in mycrucible.recipes.Keys)
             {
-                textBounds = ElementBounds.Fixed(column1start + columnpad*2 + (inventorywidth - 15) / 2, ytrack, columnwidth, buttonheight);
+                textBounds = ElementBounds.Fixed(currentcolumnstart, ytrack, columnwidth, buttonheight);
                 SingleComposer.AddButton("MAKE", ()=>onMetalSelect(key,1), textBounds, EnumButtonStyle.Normal, EnumTextOrientation.Center);
-                ytrack += buttonheight;
+                ytrack += lineheight;
+            }
+
+            //Temp code for dynamic draw
+            currentcolumnstart += columnpad + columnwidth;
+            textBounds = ElementBounds.Fixed(currentcolumnstart, ytrack, 256, 256);
+            SingleComposer.AddDynamicCustomDraw(textBounds, testdraw, "testbar");
+        }
+        private void testdraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
+        {
+            
+            ctx.Rectangle(0, 0, currentBounds.InnerWidth, currentBounds.InnerHeight);
+            //CompositeTexture tex = liquidSlot.Itemstack.Collectible.Attributes?["waterTightContainerProps"]?["texture"]?.AsObject<CompositeTexture>(null, liquidSlot.Itemstack.Collectible.Code.Domain);
+            CompositeTexture tex = new CompositeTexture(new AssetLocation("game:block/sigh.png"));
+            
+            if (tex != null)
+            {
+                ctx.Save();
+                Matrix m = ctx.Matrix;
+                //m.Scale(GuiElement.scaled(3), GuiElement.scaled(3));
+                ctx.Matrix = m;
+                
+
+                AssetLocation loc = tex.Base.Clone().WithPathAppendixOnce(".png");
+
+                GuiElement.fillWithPattern(capi, ctx, loc.Path, true, false);
+
+                ctx.Restore();
             }
         }
-        
         private bool onMetalSelect(string key, int qty)
         {
             mycrucible.SetOrder(key, qty, true);
