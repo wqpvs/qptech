@@ -31,13 +31,23 @@ namespace qptech.src
         {
             mycrucible = bea;
             if (bea == null) { return; }
-            SetupStatusScreen();
-            SetupInventoryScreen();
-            SetupProductionScreen();
+            ElementBounds dialogBounds = ElementBounds.Fixed(sectionx, sectiony, 256, 256);
+            string guicomponame = mycrucible.Pos.ToString() + "Electric Crucible";
+            SingleComposer = capi.Gui.CreateCompo(guicomponame, dialogBounds);
+            SetupPowerScreen();
+            //SetupStatusScreen();
+            //SetupInventoryScreen();
+            //SetupProductionScreen();
             SingleComposer.Compose();
             isopen = true;
         }
-       
+        public void SetupPowerScreen()
+        {
+            ElementBounds dialogBounds = ElementBounds.Fixed(sectionx, sectiony, 256, 256);
+            SingleComposer.AddDynamicCustomDraw(dialogBounds, testdraw, "testbar");
+            ElementBounds switchBounds = ElementBounds.Fixed(sectionx, sectiony, 43, 15);
+            SingleComposer.AddDynamicCustomDraw(switchBounds, powerswitch, "powerswitch");
+        }
         public void SetupStatusScreen()
         {
             //ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterMiddle);
@@ -52,7 +62,7 @@ namespace qptech.src
             
             // bgBounds.BothSizing = ElementSizing.FitToChildren;
             //bgBounds.WithChildren(textBounds);
-            string guicomponame = mycrucible.Pos.ToString() + "Electric Crucible";
+            
             string statustext = "";
             statustext += "<font size=\"24\" align=\"center\" >";
             statustext += "CRUCIBLE STATUS\n\n";
@@ -76,7 +86,7 @@ namespace qptech.src
             //string sigh = GuiElement.dirtTextureName; //"gui/backgrounds/soil.png"
             ElementBounds buttonbounds = ElementBounds.Fixed(buttonx, buttony, buttonwidth, buttonheight);
             //C:\Users\quent\AppData\Roaming\Vintagestory\assets\game\textures\gui\backgrounds
-            SingleComposer = capi.Gui.CreateCompo(guicomponame, dialogBounds)
+            SingleComposer 
                 //.AddShadedDialogBG(bgBounds)
                 //.AddImageBG(bgBounds,"castiron")
                 //.AddImageBG(bgBounds, "environment/stars-bg.png")
@@ -205,17 +215,31 @@ namespace qptech.src
                 ytrack += lineheight;
             }
 
-            //Temp code for dynamic draw
-            currentcolumnstart += columnpad + columnwidth;
-            textBounds = ElementBounds.Fixed(currentcolumnstart, sectionheight-50-256, 256, 256);
-            SingleComposer.AddDynamicCustomDraw(textBounds, testdraw, "testbar");
+            
+            
+        }
+        private void powerswitch(Context ctx, ImageSurface surface, ElementBounds currentBounds)
+        {
+            ctx.Rectangle(0, 0, currentBounds.InnerWidth, currentBounds.InnerHeight);
+            CompositeTexture tex = new CompositeTexture(new AssetLocation("game:block/panel elements.png"));
+            Matrix m = ctx.Matrix;
+            //m.Scale(GuiElement.scaled(3), GuiElement.scaled(3));
+            ctx.Matrix = m;
+
+
+            AssetLocation loc = tex.Base.Clone().WithPathAppendixOnce(".png");
+
+            GuiElement.fillWithPattern(capi, ctx, loc.Path, true, false);
+
+            ctx.Restore();
+            ctx.Save();
         }
         private void testdraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
         {
             
             ctx.Rectangle(0, 0, currentBounds.InnerWidth, currentBounds.InnerHeight);
             //CompositeTexture tex = liquidSlot.Itemstack.Collectible.Attributes?["waterTightContainerProps"]?["texture"]?.AsObject<CompositeTexture>(null, liquidSlot.Itemstack.Collectible.Code.Domain);
-            CompositeTexture tex = new CompositeTexture(new AssetLocation("game:block/sigh.png"));
+            CompositeTexture tex = new CompositeTexture(new AssetLocation("game:block/electrical panel.png"));
             
             if (tex != null)
             {
