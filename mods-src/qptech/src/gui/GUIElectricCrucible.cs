@@ -303,7 +303,7 @@ namespace qptech.src
             ctx.Rectangle(0, 0, currentBounds.InnerWidth, currentBounds.InnerHeight);
             CompositeTexture tex = new CompositeTexture(new AssetLocation("game:block/panel elements.png"));
             Matrix m = ctx.Matrix;
-            //m.Scale(GuiElement.scaled(3), GuiElement.scaled(3));
+            m.Scale(GuiElement.scaled(GEDrawTexture.scalefactor), GuiElement.scaled(GEDrawTexture.scalefactor));
             ctx.Matrix = m;
 
 
@@ -328,7 +328,7 @@ namespace qptech.src
             {
                 ctx.Save();
                 Matrix m = ctx.Matrix;
-                //m.Scale(GuiElement.scaled(3), GuiElement.scaled(3));
+                m.Scale(GuiElement.scaled(GEDrawTexture.scalefactor), GuiElement.scaled(GEDrawTexture.scalefactor));
                 ctx.Matrix = m;
                 
 
