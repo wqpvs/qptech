@@ -103,6 +103,7 @@
     <Compile Include="src\Electricity\BlockJunction.cs" />
     <Compile Include="src\Electricity\BlockWire.cs" />
     <Compile Include="src\Electricity\EForgeContentsRenderer.cs" />
+    <Compile Include="src\gui\GEDrawTexture.cs" />
     <Compile Include="src\gui\GUIAssemblerStatus.cs" />
     <Compile Include="src\gui\GUIElectricCrucible.cs" />
     <Compile Include="src\Electricity\HVACEnvironmentUpdater.cs" />

@@ -54,6 +54,7 @@ namespace qptech.src
             ElementBounds screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
             //x try and add a switch
             SingleComposer.AddInteractiveElement(new GuiElementSwitch(api, TogglePower, screenBounds, 68, 0));
+            activepaneltexture = "electrical panel.png";
             SingleComposer.AddDynamicCustomDraw(dialogBounds, testdraw, "testbar");
             double switchx=11;
             double switchy = 177;
@@ -86,7 +87,44 @@ namespace qptech.src
 
             SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
 
-            
+            if (mycrucible.Storage != null && mycrucible.Storage.Count > 0)
+            {
+
+                //Now let's try and draw the inventory panel
+                double screenxoffest = 256;
+                dialogBounds = ElementBounds.Fixed(sectionx + screenxoffest, sectiony, 256, 256);
+                GEDrawTexture gdt = new GEDrawTexture(capi, dialogBounds, "big status panel.png");
+                SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
+
+                //Draw title
+                screenwidth = 116; screenheight = 15;
+                screenx = sectionx + 71 + screenxoffest;
+                screeny = sectiony + 21;
+                screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
+                statustext = "<font align=\"center\" color=#4a2200>INVENTORY</font>";
+                SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
+                screenwidth = 200; screenheight = 160;
+                screenx = sectionx + screenxoffest + 28;
+                screeny = sectiony + 55;
+                screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
+                statustext = "<font align=\"left\" >";
+                foreach (string key in mycrucible.Storage.Keys)
+                {
+                    statustext += key + "\n";
+                }
+                statustext += "</font>";
+                SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
+                screenx = sectionx + 160 + screenwidth / 2;
+                screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
+                statustext = "<font align=\"right\">";
+                foreach (string key in mycrucible.Storage.Keys)
+                {
+                    statustext += mycrucible.Storage[key] + "\n";
+                }
+                statustext += "</font>";
+                SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
+            }
+
         }
         public void SetupStatusScreen()
         {
@@ -258,6 +296,8 @@ namespace qptech.src
             
             
         }
+        
+
         private void powerswitch(Context ctx, ImageSurface surface, ElementBounds currentBounds)
         {
             ctx.Rectangle(0, 0, currentBounds.InnerWidth, currentBounds.InnerHeight);
@@ -274,12 +314,15 @@ namespace qptech.src
             ctx.Restore();
             ctx.Save();
         }
+
+        string activepaneltexture = "electrical panel.png";
+
         private void testdraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
         {
             
             ctx.Rectangle(0, 0, currentBounds.InnerWidth, currentBounds.InnerHeight);
             //CompositeTexture tex = liquidSlot.Itemstack.Collectible.Attributes?["waterTightContainerProps"]?["texture"]?.AsObject<CompositeTexture>(null, liquidSlot.Itemstack.Collectible.Code.Domain);
-            CompositeTexture tex = new CompositeTexture(new AssetLocation("game:block/electrical panel.png"));
+            CompositeTexture tex = new CompositeTexture(new AssetLocation("game:block/"+activepaneltexture));
             
             if (tex != null)
             {
