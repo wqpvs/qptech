@@ -472,6 +472,8 @@ namespace qptech.src
         public void ButtonTogglePower()
         {
             (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.TogglePower, null);
+            TogglePower();
+            UpdateUI();
         }
         public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
         

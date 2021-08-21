@@ -22,7 +22,10 @@ namespace qptech.src
         double buttonpad = 5;
         string selection = "";
         bool isopen = false;
+        //public Vintagestory.API.Common.Action<bool> idkaction ;
         BEElectricCrucible mycrucible;
+
+     
         public GUIElectricCrucible(string dialogTitle, BlockPos blockEntityPos, ICoreClientAPI capi) : base(dialogTitle, blockEntityPos, capi)
         {
             api = capi;
@@ -44,6 +47,13 @@ namespace qptech.src
         public void SetupPowerScreen()
         {
             ElementBounds dialogBounds = ElementBounds.Fixed(sectionx, sectiony, 256, 256);
+            double screenx = sectionx + 21;
+            double screeny = sectiony + 128;
+            double screenwidth = 82;
+            double screenheight = 68;
+            ElementBounds screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
+            //x try and add a switch
+            SingleComposer.AddInteractiveElement(new GuiElementSwitch(api, TogglePower, screenBounds, 68, 0));
             SingleComposer.AddDynamicCustomDraw(dialogBounds, testdraw, "testbar");
             double switchx=11;
             double switchy = 177;
@@ -51,7 +61,7 @@ namespace qptech.src
             if (!mycrucible.IsOn)
             {
                 switchy = 211;
-                statustext = "<font align=\"center\">OFF</font>";
+                statustext = "<font align=\"center\"></font>";//should probably just not draw it but welp
             }
             else if (!mycrucible.IsPowered)
             {
@@ -61,17 +71,22 @@ namespace qptech.src
             {
                 statustext = "<font style=\"bold\" align =\"center\">Charge at " + mycrucible.CapacitorPercentage * 100 + "%\nPower Usage:"+mycrucible.FluxPerTick+" Flux</font>";
             }
-            //perfect for switch off double switchy = 211;
-            ElementBounds switchBounds = ElementBounds.Fixed(switchx, switchy, 43, 16);
+            ElementBounds switchBounds = ElementBounds.Fixed(switchx, switchy, 51, 23);
             SingleComposer.AddDynamicCustomDraw(switchBounds, powerswitch, "powerswitch");
-            double screenwidth = 205-6;
-            double screenheight = 55-6;
-            double screenx = 36;
-            double screeny = 71;
-            ElementBounds screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
-            
-            
+            //Draw status info
+            screenwidth = 205-6;screenheight = 55-6;screenx = 36;screeny = 100;
+            screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
             SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
+            //Draw title
+            screenwidth = 116;screenheight = 15;
+            screenx = sectionx+71;
+            screeny = sectiony+21;
+            screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
+            statustext = "<font align=\"center\" color=#4a2200>Electric Crucible</font>";
+
+            SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
+
+            
         }
         public void SetupStatusScreen()
         {
@@ -316,6 +331,12 @@ namespace qptech.src
             SetupStatusScreen();
             SingleComposer.Compose();
             return true;
+        }
+        public void TogglePower(bool onoff)
+        {
+            mycrucible.ButtonTogglePower();
+            SetupStatusScreen();
+            SingleComposer.Compose();
         }
         public override bool TryClose()
         {
