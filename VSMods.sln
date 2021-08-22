@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSModLauncher", "VSModLaunc
 		{28583445-ABF9-47C2-BA6D-57384D5FC2AC} = {28583445-ABF9-47C2-BA6D-57384D5FC2AC}
 		{2321A551-A32D-49B0-BF4F-22138D95A207} = {2321A551-A32D-49B0-BF4F-22138D95A207}
 		{36C91EE7-484E-4A49-8834-E3502F0FF8CF} = {36C91EE7-484E-4A49-8834-E3502F0FF8CF}
+		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0} = {7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qptech", "mods-src\qptech\qptech.csproj", "{36C91EE7-484E-4A49-8834-E3502F0FF8CF}"
@@ -18,6 +19,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "assets", "mods\assets.csproj", "{2321A551-A32D-49B0-BF4F-22138D95A207}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qptechapi", "mods-src\qptechapi\qptechapi.csproj", "{28583445-ABF9-47C2-BA6D-57384D5FC2AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "questbook", "mods-src\questbook\questbook.csproj", "{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +70,14 @@ Global
 		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.Release x64|Any CPU.Build.0 = Release|Any CPU
 		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.assets|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.assets|Any CPU.Build.0 = Debug|Any CPU
+		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Release x64|Any CPU.ActiveCfg = Release|Any CPU
+		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Release x64|Any CPU.Build.0 = Release|Any CPU
+		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

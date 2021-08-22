@@ -205,6 +205,7 @@
     <None Include="qptech\modinfo.json" />
     <None Include="qptech\qptech1.1.0-pre1.zip" />
     <None Include="qptech\qptech1.1.1-pre2.zip" />
+    <None Include="questbook\modinfo.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="qptechapi\qptechapi.dll" />
@@ -274,5 +275,7 @@
     <Content Include="qptech\qptech.dll" />
     <Content Include="qptech\qptech.pdb" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="questbook\assets\game\" />
+  </ItemGroup>
 </Project>

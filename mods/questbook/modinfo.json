@@ -1,0 +1,11 @@
+{
+  "type": "code",
+  "modid": "questbook",
+  "name": "Quest Book",
+  "description": "",
+  "author": "WQP",
+  "version": "0.1",
+  "dependency": {
+    "game": "1.15.1"
+  }
+}
