@@ -56,7 +56,7 @@ namespace qptech.src
             SingleComposer.AddInteractiveElement(new GuiElementSwitch(api, TogglePower, screenBounds, 68, 0));
             activepaneltexture = "electrical panel.png";
             SingleComposer.AddDynamicCustomDraw(dialogBounds, testdraw, "testbar");
-            double switchx=11;
+            double switchx=5;
             double switchy = 177;
             string statustext = "";
             if (!mycrucible.IsOn)
@@ -72,7 +72,7 @@ namespace qptech.src
             {
                 statustext = "<font style=\"bold\" align =\"center\">Charge at " + mycrucible.CapacitorPercentage * 100 + "%\nPower Usage:"+mycrucible.FluxPerTick+" Flux</font>";
             }
-            ElementBounds switchBounds = ElementBounds.Fixed(switchx, switchy, 51, 23);
+            ElementBounds switchBounds = ElementBounds.Fixed(switchx, switchy, 64, 24);
             SingleComposer.AddDynamicCustomDraw(switchBounds, powerswitch, "powerswitch");
             //Draw status info
             screenwidth = 205-6;screenheight = 55-6;screenx = 36;screeny = 100;
@@ -104,7 +104,7 @@ namespace qptech.src
                 statustext = "<font align=\"center\" color=#4a2200>INVENTORY</font>";
                 SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
                 screenwidth = 200; screenheight = 160;
-                screenx = sectionx + screenxoffest + 28;
+                screenx = sectionx + screenxoffest + 36;
                 screeny = sectiony + 55;
                 screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
                 statustext = "<font align=\"left\" >";
@@ -114,7 +114,7 @@ namespace qptech.src
                 }
                 statustext += "</font>";
                 SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
-                screenx = sectionx + 160 + screenwidth / 2;
+                screenx = sectionx + 160 + screenwidth / 2+20;
                 screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
                 statustext = "<font align=\"right\">";
                 foreach (string key in mycrucible.Storage.Keys)
@@ -301,16 +301,20 @@ namespace qptech.src
         private void powerswitch(Context ctx, ImageSurface surface, ElementBounds currentBounds)
         {
             ctx.Rectangle(0, 0, currentBounds.InnerWidth, currentBounds.InnerHeight);
-            CompositeTexture tex = new CompositeTexture(new AssetLocation("game:block/panel elements.png"));
+            
+            CompositeTexture tex = new CompositeTexture(new AssetLocation("game:block/redhandle.png"));
             Matrix m = ctx.Matrix;
+            
             m.Scale(GuiElement.scaled(GEDrawTexture.scalefactor), GuiElement.scaled(GEDrawTexture.scalefactor));
+            
             ctx.Matrix = m;
-
+            
 
             AssetLocation loc = tex.Base.Clone().WithPathAppendixOnce(".png");
-
+            //ImageSurface isurf=new ImageSurface("C:\\Users\\quent\\source\\repos\\wqpvs\\qptech\\mods\\qptech\\assets\\game\\textures\\block\\panel elements.png");
+            //ctx.SetSourceSurface(isurf,0,0);
             GuiElement.fillWithPattern(capi, ctx, loc.Path, true, false);
-
+            
             ctx.Restore();
             ctx.Save();
         }

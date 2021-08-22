@@ -220,6 +220,7 @@
     <Content Include="qptech\assets\game\textures\block\big status panel.png" />
     <Content Include="qptech\assets\game\textures\block\electrical panel.png" />
     <Content Include="qptech\assets\game\textures\block\panel elements.png" />
+    <Content Include="qptech\assets\game\textures\block\redhandle.png" />
     <Content Include="qptech\assets\game\textures\block\sigh.png" />
     <Content Include="qptech\assets\game\textures\block\tincan.png" />
     <Content Include="qptech\assets\machines\textures\block\castiron.png" />

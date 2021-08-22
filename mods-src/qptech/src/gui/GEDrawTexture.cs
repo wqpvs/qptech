@@ -33,8 +33,9 @@ namespace qptech.src
                 Matrix m = ctx.Matrix;
                 
                 m.Scale(GuiElement.scaled(scalefactor), GuiElement.scaled(scalefactor));
+                
                 ctx.Matrix = m;
-
+                
 
                 AssetLocation loc = tex.Base.Clone().WithPathAppendixOnce(".png");
 
