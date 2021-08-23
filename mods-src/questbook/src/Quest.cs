@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace questbook.src
 {
-    interface Quest
+    interface IQuest
     {
         string ID();
         string Name();
         string Description();
         bool IsComplete();
         bool RewardsClaimed();
-        List<QuestReward> Rewards();
-        List<QuestRequirement> Requirements();
+        List<IQuestReward> Rewards();
+        List<IQuestRequirement> Requirements();
 
     }
 }

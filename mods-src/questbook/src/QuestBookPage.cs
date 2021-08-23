@@ -9,12 +9,12 @@ namespace questbook.src
     /// <summary>
     /// A page from a questbook, including its rendering information
     /// </summary>
-    interface QuestBookPage
+    interface IQuestBookPage
     {
         string ID();
         string Name();
         string Description();
-        List<Quest> Quests();
+        List<IQuest> Quests();
         bool Unlocked();
         void ShowPage();
         void HidePage();

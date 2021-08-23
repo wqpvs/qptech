@@ -10,7 +10,7 @@ namespace questbook.src
 /// <summary>
 /// Requirement to finish a given quest
 /// </summary>
-    interface QuestRequirement
+    interface IQuestRequirement
     {
         string ID();
         string Name();

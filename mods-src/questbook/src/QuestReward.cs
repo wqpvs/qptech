@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace questbook.src
 {
-    interface QuestReward
+    interface IQuestReward
     {
         string RewardID();
         string RewardText();
