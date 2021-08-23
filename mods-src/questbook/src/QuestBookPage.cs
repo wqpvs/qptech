@@ -9,12 +9,15 @@ namespace questbook.src
     /// <summary>
     /// A page from a questbook, including its rendering information
     /// </summary>
-    class QuestBookPage
+    interface QuestBookPage
     {
-        public string pageID;
-        public string pageName;
-        public string backgroundTextureName;
-        public List<QuestBookEntry> entries;
+        string ID();
+        string Name();
+        string Description();
+        List<Quest> Quests();
+        bool Unlocked();
+        void ShowPage();
+        void HidePage();
 
     }
 }

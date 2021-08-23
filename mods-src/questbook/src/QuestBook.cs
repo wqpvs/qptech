@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace questbook.src
 {
-    class QuestBook
+    interface QuestBook
     {
-        public string bookID;
-        public string title;
-        public string description;
-        public string coverTextureName;
-        public string interiorTextureName;
-        public List<string> questBookPageIDs;
+        string ID();
+        string Name();
+        string Description();
+        void OpenBook();
+        void CloseBook();
+
     }
 }

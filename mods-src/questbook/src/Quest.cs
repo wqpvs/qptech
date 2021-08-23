@@ -6,22 +6,15 @@ using System.Threading.Tasks;
 
 namespace questbook.src
 {
-    class Quest
+    interface Quest
     {
-        public string questID;
-        public string questName;
-        public string questDescription;
-        public string questTexture;
-        public bool hidden;
-        public bool locked;
-        public bool completed;
-        public List<QuestRequirement> questRequirements;
-        public List<QuestReward> questRewards;
-        public List<Quest> unlockedQuests;
+        string ID();
+        string Name();
+        string Description();
+        bool IsComplete();
+        bool RewardsClaimed();
+        List<QuestReward> Rewards();
+        List<QuestRequirement> Requirements();
 
-        public Quest()
-        {
-
-        }
     }
 }
