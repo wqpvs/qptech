@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vintagestory.API.Common;
 
-namespace questbook
+namespace questbook.src
 {
     class QuestBookLoader : ModSystem
     {
@@ -13,6 +13,7 @@ namespace questbook
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
+            api.RegisterItemClass("ItemQuestBook", typeof(ItemQuestBook));
         }
     }
 }

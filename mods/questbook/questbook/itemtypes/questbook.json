@@ -1,0 +1,10 @@
+{
+	"code": "questbook",
+	"class": "ItemQuestBook",
+	"creativeinventory": {
+		"general": [ "*" ]
+	},
+	"texture": {
+		"base": "item/wand"
+	}
+}

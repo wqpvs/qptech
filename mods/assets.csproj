@@ -206,6 +206,7 @@
     <None Include="qptech\qptech1.1.0-pre1.zip" />
     <None Include="qptech\qptech1.1.1-pre2.zip" />
     <None Include="questbook\modinfo.json" />
+    <None Include="questbook\questbook\itemtypes\questbook.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="qptechapi\qptechapi.dll" />
@@ -274,8 +275,10 @@
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-copper.png" />
     <Content Include="qptech\qptech.dll" />
     <Content Include="qptech\qptech.pdb" />
+    <Content Include="questbook\game\textures\gui\questbook.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="questbook\assets\game\" />
+    <Folder Include="questbook\game\textures\item\" />
+    <Folder Include="questbook\questbook\textures\item\" />
   </ItemGroup>
 </Project>
