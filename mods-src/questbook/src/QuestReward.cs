@@ -8,8 +8,8 @@ namespace questbook.src
 {
     interface IQuestReward
     {
-        string RewardID();
-        string RewardText();
+        string ID { get; }
+        string RewardText { get; }
         bool IsClaimed();
         bool TryClaim();
 

@@ -11,10 +11,15 @@ namespace questbook.src
     /// </summary>
     interface IQuestBookPage
     {
-        string ID();
-        string Name();
-        string Description();
+        string ID { get; }
+        string Name { get; }
+        string Description
+        {
+            get;
+        }
         List<IQuest> Quests();
+
+        void AddQuest();
         bool Unlocked();
         void ShowPage();
         void HidePage();

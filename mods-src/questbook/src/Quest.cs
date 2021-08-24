@@ -8,9 +8,15 @@ namespace questbook.src
 {
     interface IQuest
     {
-        string ID();
-        string Name();
-        string Description();
+        string ID
+        {
+            get;
+        }
+        string Name
+        {
+            get;
+        }
+        string Description { get; }
         bool IsComplete();
         bool RewardsClaimed();
         List<IQuestReward> Rewards();

@@ -8,9 +8,12 @@ namespace questbook.src
 {
     interface IQuestBook
     {
-        string ID();
-        string Name();
-        string Description();
+        string ID { get; }
+        string Name
+        {
+            get;
+        }
+        string Description { get; }
         void OpenBook();
         void CloseBook();
 

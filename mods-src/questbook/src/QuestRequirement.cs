@@ -12,9 +12,12 @@ namespace questbook.src
 /// </summary>
     interface IQuestRequirement
     {
-        string ID();
-        string Name();
-        string Description();
+        string ID { get; }
+        string Name { get; }
+        string Description
+        {
+            get;
+        }
 
         bool IsComplete();
 
