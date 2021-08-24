@@ -5,6 +5,7 @@
 		"general": [ "*" ]
 	},
 	"texture": {
-		"base": "item/wand"
+		"base": "questbook:item/wand"
 	}
+	
 }

@@ -16,7 +16,7 @@ namespace questbook.src.GUI
     {
         ICoreClientAPI api;
         string texturename;
-        public static double scalefactor = 1.15;
+        public static double scalefactor = 1.145;
         public GEDrawTexture(ICoreClientAPI capi, ElementBounds bounds, string texturename) : base(capi, "", CairoFont.WhiteDetailText(), bounds)
         {
             this.texturename = texturename;
