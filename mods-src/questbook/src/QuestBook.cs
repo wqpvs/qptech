@@ -18,6 +18,6 @@ namespace questbook.src
         void CloseBook();
 
         List<IQuestBookPage>Pages();
-
+        void AddPage(IQuestBookPage questBookPage);
     }
 }

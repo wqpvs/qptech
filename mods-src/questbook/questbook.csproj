@@ -72,6 +72,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\GUI\GEDrawTexture.cs" />
+    <Compile Include="src\GUI\QuestRenderer.cs" />
+    <Compile Include="src\GUI\QuestBookPageRenderer.cs" />
     <Compile Include="src\GUI\GUIQuestBook.cs" />
     <Compile Include="src\ItemQuestBook.cs" />
     <Compile Include="src\Quest.cs" />
@@ -80,6 +82,9 @@
     <Compile Include="src\QuestLoader.cs" />
     <Compile Include="src\QuestRequirement.cs" />
     <Compile Include="src\QuestReward.cs" />
+    <Compile Include="src\SampleQuest\SimpleQuest.cs" />
+    <Compile Include="src\SampleQuest\SimpleQuestBook.cs" />
+    <Compile Include="src\SampleQuest\SimpleQuestBookPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="modinfo.json" />
@@ -89,6 +94,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Target Name="CopyToBin" AfterTargets="AfterBuild">
     <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'$(BinaryDir)/%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>

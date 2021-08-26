@@ -19,7 +19,7 @@ namespace questbook.src
         }
         List<IQuest> Quests();
 
-        void AddQuest();
+        void AddQuest(IQuest quest);
         bool Unlocked();
         void ShowPage();
         void HidePage();

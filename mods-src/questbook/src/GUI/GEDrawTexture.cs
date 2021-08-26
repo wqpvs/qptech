@@ -12,12 +12,12 @@ using Vintagestory.API.Config;
 
 namespace questbook.src.GUI
 {
-    class GEDrawTexture : GuiElementTextBase
+    class GEDrawTexture : GuiElement
     {
         ICoreClientAPI api;
         string texturename;
         public static double scalefactor = 1.145;
-        public GEDrawTexture(ICoreClientAPI capi, ElementBounds bounds, string texturename) : base(capi, "", CairoFont.WhiteDetailText(), bounds)
+        public GEDrawTexture(ICoreClientAPI capi, ElementBounds bounds, string texturename) : base(capi, bounds)
         {
             this.texturename = texturename;
 
