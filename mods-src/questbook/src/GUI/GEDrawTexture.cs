@@ -14,14 +14,15 @@ namespace questbook.src.GUI
 {
     class GEDrawTexture : GuiElement
     {
-        ICoreClientAPI api;
+        
         string texturename;
         public static double scalefactor = 1.145;
+        ICoreClientAPI capi;
         public GEDrawTexture(ICoreClientAPI capi, ElementBounds bounds, string texturename) : base(capi, bounds)
         {
             this.texturename = texturename;
 
-            api = capi;
+            this.capi = capi;
         }
         public void OnDraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
         {
@@ -43,7 +44,7 @@ namespace questbook.src.GUI
                 AssetLocation loc = tex.Base.Clone().WithPathAppendixOnce(".png");
 
                 //GuiElement.fillWithPattern(api, ctx, loc.Path, true, false);
-                GuiElement.fillWithPattern(api, ctx, loc.Path, true, false);
+                GuiElement.fillWithPattern(capi, ctx, loc.Path, true, false);
 
                 ctx.Restore();
             }

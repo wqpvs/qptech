@@ -18,24 +18,30 @@ namespace questbook.src
         GUIQuestBook myGUI;
         public string basetexture= "gui/questbook.png";
         public double basetexturesize=512;
-        
+        SimpleQuestBook book;
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
-            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+            //base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
             if (!(api is ICoreClientAPI)) { return; }
-            SimpleQuestBook book = new SimpleQuestBook();
-            book.id = "test";
-            book.description = "magical test book";
-            book.name = "Test Book";
-            SimpleQuestBookPage bookpage = new SimpleQuestBookPage("test1","Page One","Page the First");
-            SimpleQuest quest = new SimpleQuest("quest1", "Testor", "Do a Thing", "gui/bubblewindow.png");
-            bookpage.AddQuest(quest);
-            SimpleQuest quest2 = new SimpleQuest("quest2", "Testy", "Do another Thing", "gui/bubblewindow.png");
-            bookpage.AddQuest(quest2);
-            book.AddPage(bookpage);
-
-
-            if (myGUI == null) { myGUI = new GUIQuestBook("Questbook" + byEntity.EntityId, api as ICoreClientAPI,book); }
+            if (book == null)
+            {
+                book = new SimpleQuestBook();
+                book.id = "test";
+                book.description = "magical test book";
+                book.name = "Test Book";
+                SimpleQuestBookPage bookpage = new SimpleQuestBookPage("test1", "Page One", "Page the First");
+                SimpleQuest quest = new SimpleQuest("quest1", "Test Quest", "Do a Thing", "gui/bubblewindow.png", "gui/bubblewindowchecked.png");
+                bookpage.AddQuest(quest);
+                SimpleQuest quest2 = new SimpleQuest("quest2", "Another Test", "Do another Thing", "gui/bubblewindow.png", "gui/bubblewindowchecked.png");
+                quest2.iscomplete = true;
+                bookpage.AddQuest(quest2);
+                book.AddPage(bookpage);
+                
+            }
+           
+            if (myGUI == null) {
+                myGUI = new GUIQuestBook("Questbook" + byEntity.EntityId, api as ICoreClientAPI,book); 
+            }
             myGUI.TryOpen();
             myGUI.SetupDialog(basetexture,basetexturesize);
         }

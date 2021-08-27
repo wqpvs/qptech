@@ -32,10 +32,12 @@ namespace questbook.src.GUI
             ElementBounds qbBounds = ElementBounds.Fixed(0, 0,basetexturesize,basetexturesize);
             GEDrawTexture gdt = new GEDrawTexture(capi, qbBounds, texturename);
             SingleComposer.AddDynamicCustomDraw(qbBounds, gdt.OnDraw);
+            SingleComposer.BeginChildElements(qbBounds);
             if (myBook != null&&myBook.Pages()!=null&&myBook.Pages().Count>currentPage)
             {
                 QuestBookPageRenderer renderpage= new QuestBookPageRenderer(capi, qbBounds, myBook.Pages()[currentPage],SingleComposer);
             }
+            SingleComposer.EndChildElements();
             SingleComposer.Compose();
 
         }

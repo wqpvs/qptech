@@ -23,9 +23,16 @@ namespace questbook.src.GUI
             if (myQuest is SimpleQuest)
             {
                 SimpleQuest sq = myQuest as SimpleQuest;
-                GEDrawTexture gdt = new GEDrawTexture(capi, bounds, sq.texturename);
-                SingleComposer.AddDynamicCustomDraw(bounds, gdt.OnDraw);
+                //GEDrawTexture gdt = new GEDrawTexture(capi, bounds, sq.texturename);
+                ElementBounds iconbounds = ElementBounds.Fixed(bounds.fixedX, bounds.fixedY, 32, 32);
+                GECCheckbox gdt = new GECCheckbox(capi, iconbounds, sq.texturename, sq.completedtexturename, ()=>OnQuestClick(sq),sq.IsComplete());
+                SingleComposer.AddDynamicCustomDraw(iconbounds, gdt.OnDraw);
             }
+        }
+        public void OnQuestClick(IQuest quest)
+        {
+            quest.CheckComplete();
+
         }
     }
 }

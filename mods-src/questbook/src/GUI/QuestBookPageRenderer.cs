@@ -22,27 +22,33 @@ namespace questbook.src.GUI
         double questSpacing = 6;
         double xtrack = 0;
         double ytrack = 0;
+        double ytextshift = 5;
+        
         public QuestBookPageRenderer(ICoreClientAPI capi, ElementBounds bounds, IQuestBookPage qbpage,GuiComposer SingleComposer) 
         { 
             myPage = qbpage;
             api = capi;
-            xtrack = 10;
-            ytrack = 10;
+            xtrack = 20;
+            ytrack = 20;
+            
             if (myPage != null)
             {
                 foreach (IQuest quest in qbpage.Quests())
                 {
                     //create GEQuest Renderer
-                    if (quest is SimpleQuest)
-                    {
-                        SimpleQuest squest = quest as SimpleQuest;
-                        ElementBounds qbounds = ElementBounds.Fixed(bounds.drawX + xtrack, bounds.drawY + ytrack, questIconSize, questIconSize);
-                        GEDrawTexture gdt = new GEDrawTexture(capi, qbounds, squest.texturename);
-                        SingleComposer.AddDynamicCustomDraw(qbounds, gdt.OnDraw);
-                        xtrack += questIconSize + questSpacing;
-                    }
+                                                           
+                    ElementBounds qbounds = ElementBounds.Fixed(bounds.drawX + xtrack, bounds.drawY + ytrack, bounds.fixedWidth, questIconSize);
+                    QuestRenderer qr = new QuestRenderer(capi, qbounds, SingleComposer, quest);
+                    ytrack += questIconSize + questSpacing;
+                    /*GEDrawTexture gdt = new GEDrawTexture(capi, qbounds, texturename);
+                    SingleComposer.AddDynamicCustomDraw(qbounds, gdt.OnDraw);
+                    qbounds = ElementBounds.Fixed(xtrack + bounds.drawX + questIconSize + questSpacing, ytrack+ytextshift, questIconSize * 10, questIconSize);
+                    string text = "<font color=#000000>" + quest.Name + "</font>";
+                    SingleComposer.AddRichtext(text, CairoFont.WhiteDetailText(), qbounds);
+                    ytrack += questIconSize + questSpacing;*/
                 }
             }
         }
+        
     }
 }

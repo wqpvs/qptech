@@ -15,6 +15,7 @@ namespace questbook.src.SampleQuest
         public string description ;
 
         public string texturename;
+        public string completedtexturename;
         public string ID => id;
         public bool iscomplete;
         string IQuest.Name => name;
@@ -25,13 +26,15 @@ namespace questbook.src.SampleQuest
 
         }
 
-        public SimpleQuest(string id,string name,string description, string texturename)
+        public SimpleQuest(string id,string name,string description, string texturename, string completedtexturename)
         {
             this.id = id;
             this.name = name;
             this.description = description;
             this.texturename = texturename;
+            this.completedtexturename = completedtexturename;
             this.iscomplete = false;
+
         }
         public bool IsComplete()
         {
@@ -51,6 +54,11 @@ namespace questbook.src.SampleQuest
         public bool RewardsClaimed()
         {
             return false;
+        }
+
+        public void CheckComplete()
+        {
+            iscomplete = true;
         }
     }
 }

@@ -19,6 +19,8 @@ namespace questbook.src
         string Description { get; }
         bool IsComplete();
         bool RewardsClaimed();
+
+        void CheckComplete();
         List<IQuestReward> Rewards();
         List<IQuestRequirement> Requirements();
 
