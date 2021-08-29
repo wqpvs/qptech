@@ -18,16 +18,19 @@ namespace questbook.src.GUI
         string texturename;
         public static double scalefactor = 1.145;
         ICoreClientAPI capi;
+        ElementBounds bounds;
         public GEDrawTexture(ICoreClientAPI capi, ElementBounds bounds, string texturename) : base(capi, bounds)
         {
             this.texturename = texturename;
 
             this.capi = capi;
+            this.bounds = bounds;
         }
-        public void OnDraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
-        {
 
-            ctx.Rectangle(0, 0, currentBounds.InnerWidth, currentBounds.InnerHeight);
+        public override void ComposeElements(Context ctx, ImageSurface surface)
+        {
+            Bounds.CalcWorldBounds();
+            ctx.Rectangle(Bounds.drawX, Bounds.drawY, Bounds.InnerWidth, Bounds.InnerHeight);
             //CompositeTexture tex = liquidSlot.Itemstack.Collectible.Attributes?["waterTightContainerProps"]?["texture"]?.AsObject<CompositeTexture>(null, liquidSlot.Itemstack.Collectible.Code.Domain);
             CompositeTexture tex = new CompositeTexture(new AssetLocation("game:" + texturename));
 
@@ -36,7 +39,7 @@ namespace questbook.src.GUI
                 ctx.Save();
                 Matrix m = ctx.Matrix;
 
-                m.Scale(GuiElement.scaled(scalefactor), GuiElement.scaled(scalefactor));
+                //m.Scale(GuiElement.scaled(scalefactor), GuiElement.scaled(scalefactor));
 
                 ctx.Matrix = m;
 
@@ -49,5 +52,7 @@ namespace questbook.src.GUI
                 ctx.Restore();
             }
         }
+
+        
     }
 }

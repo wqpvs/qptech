@@ -21,6 +21,7 @@ namespace questbook.src.GUI
         bool ischecked=false;
         string UseTexture => ischecked ? checkedtexture : uncheckedtexture;
         public override bool Focusable => true;
+        ElementBounds bounds;
         
         public GECCheckbox(ICoreClientAPI capi, ElementBounds bounds, string uncheckedtexture,string checkedtexture, Vintagestory.API.Common.Action handler, bool ischecked) : base(capi, bounds)
         {
@@ -29,25 +30,35 @@ namespace questbook.src.GUI
             this.uncheckedtexture = uncheckedtexture;
             this.checkedtexture = checkedtexture;
             this.ischecked = ischecked;
+            this.bounds = bounds;
         }
-        public void OnDraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
-        {
+        
 
-            ctx.Rectangle(0, 0, currentBounds.InnerWidth, currentBounds.InnerHeight);
+        public override void ComposeElements(Context ctx, ImageSurface surface)
+        {
+            
             //CompositeTexture tex = liquidSlot.Itemstack.Collectible.Attributes?["waterTightContainerProps"]?["texture"]?.AsObject<CompositeTexture>(null, liquidSlot.Itemstack.Collectible.Code.Domain);
             CompositeTexture tex = new CompositeTexture(new AssetLocation("game:" + UseTexture));
 
             if (tex != null)
             {
-                ctx.Save();
-                Matrix m = ctx.Matrix;
-                m.Scale(GuiElement.scaled(GEDrawTexture.scalefactor), GuiElement.scaled(GEDrawTexture.scalefactor));
-                ctx.Matrix = m;
                 AssetLocation loc = tex.Base.Clone().WithPathAppendixOnce(".png");
-                //GuiElement.fillWithPattern(api, ctx, loc.Path, true, false);
-                GuiElement.fillWithPattern(capi, ctx, loc.Path, true, false);
+                ImageSurface mysurface = new ImageSurface("C:\\Users\\quent\\source\\repos\\wqpvs\\qptech\\mods\\questbook\\assets\\game\\textures\\gui\\bubblewindow.png");
+                
+                Bounds.CalcWorldBounds();
+                ctx.Save();
+                
+                ctx.SetSourceSurface(mysurface, 0,0);
+                ctx.Rectangle(Bounds.drawX, Bounds.drawY, Bounds.InnerWidth, Bounds.InnerHeight);
+                ctx.Fill();
                 ctx.Restore();
+                mysurface.Dispose();
             }
+        }
+
+        public override void RenderInteractiveElements(float deltaTime)
+        {
+
         }
         public override void OnMouseDownOnElement(ICoreClientAPI api, MouseEvent args)
         {
@@ -55,13 +66,6 @@ namespace questbook.src.GUI
             handler?.Invoke();
             api.Gui.PlaySound("toggleswitch");
         }
-        public override void OnFocusGained()
-        {
-            base.OnFocusGained();
-        }
-        public override void OnFocusLost()
-        {
-            base.OnFocusLost();
-        }
+
     }
 }

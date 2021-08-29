@@ -35,6 +35,9 @@ namespace questbook.src
                 SimpleQuest quest2 = new SimpleQuest("quest2", "Another Test", "Do another Thing", "gui/bubblewindow.png", "gui/bubblewindowchecked.png");
                 quest2.iscomplete = true;
                 bookpage.AddQuest(quest2);
+                SimpleQuest quest3 = new SimpleQuest("quest2", "Another Test", "Do another Thing", "gui/bubblewindow.png", "gui/bubblewindowchecked.png");
+                quest2.iscomplete = false;
+                bookpage.AddQuest(quest3);
                 book.AddPage(bookpage);
                 
             }

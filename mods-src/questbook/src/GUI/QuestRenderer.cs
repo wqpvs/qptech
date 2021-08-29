@@ -26,7 +26,7 @@ namespace questbook.src.GUI
                 //GEDrawTexture gdt = new GEDrawTexture(capi, bounds, sq.texturename);
                 ElementBounds iconbounds = ElementBounds.Fixed(bounds.fixedX, bounds.fixedY, 32, 32);
                 GECCheckbox gdt = new GECCheckbox(capi, iconbounds, sq.texturename, sq.completedtexturename, ()=>OnQuestClick(sq),sq.IsComplete());
-                SingleComposer.AddDynamicCustomDraw(iconbounds, gdt.OnDraw);
+                SingleComposer.AddInteractiveElement(gdt);
             }
         }
         public void OnQuestClick(IQuest quest)
