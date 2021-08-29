@@ -27,6 +27,8 @@
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\electriccrucible.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\multiblock\powerhatch.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\inputhatch.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\itemhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\structureblock.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\oldwireplatelarge.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\oldwireplate.json" />
@@ -66,7 +68,6 @@
     <None Include="qptech\assets\machines\blocktypes\other\firepitstoker.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitunloader.json" />
     <None Include="qptech\assets\machines\blocktypes\other\icebox.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\itemhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\machineryblock.json" />
     <None Include="qptech\assets\machines\blocktypes\other\oven-castiron.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\powerflag.json" />
@@ -139,6 +140,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\electrickiln-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\forge-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\heatsink.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\inputhatch.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\logsplitter.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\motor-rotor.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\motor-stator.json" />

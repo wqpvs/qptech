@@ -47,7 +47,7 @@
 
 	"resistance": 1,
 	"sideopaque": {
-		"all": true
+		"all": false
 	},
 	"sounds": {
 		"place": "game:block/anvil",

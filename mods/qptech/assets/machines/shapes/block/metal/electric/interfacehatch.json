@@ -1,0 +1,100 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"wornsteelplate": "block/metal/wornsteelplate",
+		"wornsteelterminal": "block/metal/wornsteelterminal"
+	},
+	"elements": [
+		{
+			"name": "Cube1",
+			"from": [ 0.0, 0.0, 0.0 ], 
+			"to": [ 16.0, 16.0, 12.0 ], 
+			"faces": {
+				"north": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+				"east": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 12.0, 16.0 ] },
+				"south": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+				"west": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 12.0, 16.0 ] },
+				"up": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 16.0, 12.0 ] },
+				"down": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 16.0, 12.0 ] }
+			}
+		},
+		{
+			"name": "Cube2",
+			"from": [ 3.0, 3.0, 12.0 ], 
+			"to": [ 13.0, 13.0, 14.0 ], 
+			"rotationOrigin": [ 3.0, 3.0, 12.0 ],
+			"faces": {
+				"north": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 10.0, 10.0 ] },
+				"east": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 2.0, 10.0 ] },
+				"south": { "texture": "#wornsteelterminal", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"west": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 2.0, 10.0 ] },
+				"up": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 10.0, 2.0 ] },
+				"down": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 10.0, 2.0 ] }
+			}
+		},
+		{
+			"name": "Cube3",
+			"from": [ 0.0, 0.0, 12.0 ], 
+			"to": [ 3.0, 16.0, 15.0 ], 
+			"rotationOrigin": [ 0.0, 0.0, 12.0 ],
+			"faces": {
+				"north": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 16.0 ] },
+				"east": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 16.0 ] },
+				"south": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 16.0 ] },
+				"west": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 16.0 ] },
+				"up": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+				"down": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 3.0 ] }
+			}
+		},
+		{
+			"name": "Cube6",
+			"from": [ 3.0, 13.0, 12.0 ], 
+			"to": [ 13.0, 16.0, 15.0 ], 
+			"rotationOrigin": [ 3.0, 13.0, 12.0 ],
+			"faces": {
+				"north": { "texture": "#wornsteelplate", "uv": [ 4.0, 7.0, 14.0, 10.0 ], "enabled": false },
+				"east": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 3.0 ], "enabled": false },
+				"south": { "texture": "#wornsteelplate", "uv": [ 3.0, 0.0, 13.0, 3.0 ] },
+				"west": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 3.0 ], "enabled": false },
+				"up": { "texture": "#wornsteelplate", "uv": [ 3.0, 0.0, 13.0, 3.0 ] },
+				"down": { "texture": "#wornsteelplate", "uv": [ 3.0, 12.5, 13.0, 15.5 ] }
+			}
+		},
+		{
+			"name": "Cube5",
+			"from": [ 13.0, 3.0, 12.0 ], 
+			"to": [ 23.0, 6.0, 15.0 ], 
+			"rotationOrigin": [ 13.0, 3.0, 12.0 ],
+			"rotationZ": -180.0,
+			"faces": {
+				"north": { "texture": "#wornsteelplate", "uv": [ 4.0, 7.0, 14.0, 10.0 ], "enabled": false },
+				"east": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 3.0 ], "enabled": false },
+				"south": { "texture": "#wornsteelplate", "uv": [ 3.0, 0.0, 13.0, 3.0 ] },
+				"west": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 3.0 ], "enabled": false },
+				"up": { "texture": "#wornsteelplate", "uv": [ 3.0, 0.0, 13.0, 3.0 ] },
+				"down": { "texture": "#wornsteelplate", "uv": [ 3.0, 12.5, 13.0, 15.5 ] }
+			}
+		},
+		{
+			"name": "Cube7",
+			"from": [ 16.0, 16.0, 12.0 ], 
+			"to": [ 19.0, 32.0, 15.0 ], 
+			"rotationOrigin": [ 16.0, 16.0, 12.0 ],
+			"rotationZ": -180.0,
+			"faces": {
+				"north": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 16.0 ] },
+				"east": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 16.0 ] },
+				"south": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 16.0 ] },
+				"west": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 16.0 ] },
+				"up": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+				"down": { "texture": "#wornsteelplate", "uv": [ 13.0, 0.0, 16.0, 3.0 ] }
+			}
+		}
+	]}

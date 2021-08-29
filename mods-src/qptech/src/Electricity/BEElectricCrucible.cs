@@ -13,11 +13,12 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 using Vintagestory.API.Client;
 using Vintagestory.API.Server;
+using qptech.src.multiblock;
 using Newtonsoft.Json;
 
 namespace qptech.src
 {
-    class BEElectricCrucible : BEElectric, IConduit
+    class BEElectricCrucible : BEElectric, IConduit, IFunctionalMultiblockMaster
     {
         int tankCapacity = 25600;         //total storage
         public int TotalStorage => tankCapacity;
@@ -58,6 +59,14 @@ namespace qptech.src
         int currentOrder = 0;
         Dictionary<string, int> storage; //track internal metals
         public Dictionary<string, int> Storage => storage;
+
+        List<IFunctionalMultiblockPart> parts;
+        public List<IFunctionalMultiblockPart> Parts { get { return parts; } }
+        MultiblockStructure ms;
+        public MultiblockStructure MBStructure { get { return ms; } }
+
+        public string StructureName =>"Electric Crucible";
+
         public Dictionary<string, int> recipes;
         
         public override void Initialize(ICoreAPI api)
@@ -519,5 +528,7 @@ namespace qptech.src
 
             return obj;
         }
+
+
     }
 }

@@ -27,10 +27,9 @@ namespace qptech.src.multiblock
 
     interface IFunctionalMultiblockMaster
     {
-        List<IFunctionalMultiblockPart> Parts { get; set; }
-        MultiblockStructure MBStructure { get; set; }
-        void OnWalkBlocks(Block block, BlockPos bp);
+        List<IFunctionalMultiblockPart> Parts { get; }
+        MultiblockStructure MBStructure { get; }
+
         string StructureName { get; }
-        bool Interact(IPlayer byPlayer);
     }
 }

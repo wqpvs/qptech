@@ -21,15 +21,9 @@
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/metal/electric/battery/primitive" },
+	"shape": { "base": "block/metal/electric/interfacehatch" },
 
-	"textures": {
-		"wires": { "base": "block/metal/wires/tin-wires" },
-		"shinybrass": { "base": "block/shinybrass" },
-		"machinery-border-small": { "base": "block/metal/metalpress/machinery-border-small" },
-		"machinery-back": { "base": "block/metal/generator/machinery-back" },
-		"castiron": { "base": "block/castiron" }
-	},
+
 	"resistance": 1,
 	"sideAo": { "all": false },
 	"sidesolid": {
@@ -41,5 +35,25 @@
 	"sounds": {
 		"place": "game:block/anvil",
 		"walk": "game:walk/stone"
+	},
+	"fpHandTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0.5
+		},
+		"rotation": {
+			"x": -35,
+			"y": -72,
+			"z": 0
+		}
+	},
+	"guiTransform": {
+		"rotation": {
+			"x": -10,
+			"y": -160,
+			"z": 0
+		},
+		"scale": 1.4
 	}
 }
