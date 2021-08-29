@@ -126,6 +126,7 @@
     <Compile Include="src\misc\PowerSink.cs" />
     <Compile Include="src\misc\BETemporalPocket.cs" />
     <Compile Include="src\multiblock\BEEPowerHatch.cs" />
+    <Compile Include="src\multiblock\BlockMBT.cs" />
     <Compile Include="src\multiblock\IFunctionalMultiblock.cs" />
   </ItemGroup>
   <ItemGroup>

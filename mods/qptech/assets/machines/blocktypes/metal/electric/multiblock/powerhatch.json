@@ -1,0 +1,33 @@
+{
+	"code": "powerhatch",
+	"class": "ElectricalBlock",
+	"entityclass":  "BEEPowerHatch",
+	
+	
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "lv" ]
+		}
+	
+	],
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"blockmaterial": "Metal",
+	"shape": { "base": "block/metal/electric/powerhatch-lv" },
+	
+	"drawtype": "json",
+
+	"resistance": 1,
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+
+
+}

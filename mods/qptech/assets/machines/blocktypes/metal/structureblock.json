@@ -1,0 +1,26 @@
+{
+	"code": "structureblock",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "iron" ]
+		}
+		
+	],
+	"blockmaterial": "Metal",
+	"drawtype": "Cube",
+	"textures": {
+		"all": {
+			"base": "block/metal/wornsteelplate"
+		}
+	},
+	"resistance": 1,
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+}

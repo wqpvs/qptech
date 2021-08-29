@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vintagestory.API.Common;
 using qptech.src.misc;
+using qptech.src.multiblock;
 
 
 
@@ -51,6 +52,8 @@ namespace qptech.src
             api.RegisterBlockEntityClass("BEWaterTower", typeof(BEWaterTower));
             api.RegisterBlockEntityClass("BEElectricCrucible",typeof(BEElectricCrucible));
             api.RegisterBlockClass("BlockElectricCrucible", typeof(BlockElectricCrucible));
+
+            api.RegisterBlockEntityClass("BEEPowerHatch", typeof(BEEPowerHatch));
             //api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
             //api.RegisterBlockEntityClass("BEEMotor", typeof(BEEMotor));
 

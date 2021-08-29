@@ -26,6 +26,8 @@
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\electriccrucible.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\multiblock\powerhatch.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\structureblock.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\oldwireplatelarge.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\oldwireplate.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\multiblocktest.json" />
@@ -141,6 +143,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\motor-rotor.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\motor-stator.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\motor.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\powerhatch-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0 - Copy.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\washplant2.json" />
@@ -194,6 +197,7 @@
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriver.json" />
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\shapes\item\worn\jetpack.json" />
+    <None Include="qptech\assets\machines\textures\block\copperspool.psd" />
     <None Include="qptech\assets\machines\textures\block\metal\generator\machinery-glass.aseprite" />
     <None Include="qptech\assets\machines\textures\block\glass\glass.aseprite" />
     <None Include="qptech\assets\machines\textures\block\glass\light\light.aseprite" />
@@ -227,6 +231,12 @@
     <Content Include="qptech\assets\game\textures\block\tincan.png" />
     <Content Include="qptech\assets\machines\textures\block\castiron.png" />
     <Content Include="qptech\assets\machines\textures\block\castironpeekaboo.png" />
+    <Content Include="qptech\assets\machines\textures\block\conductingbars.png" />
+    <Content Include="qptech\assets\machines\textures\block\copperspool.png" />
+    <Content Include="qptech\assets\machines\textures\block\copperspooldiagonal.png" />
+    <Content Include="qptech\assets\machines\textures\block\copperspoolwrapped.png" />
+    <Content Include="qptech\assets\machines\textures\block\lit.png" />
+    <Content Include="qptech\assets\machines\textures\block\machinery-largefan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\fan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\machinery-back.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\machinery-border-small.png" />
@@ -253,6 +263,7 @@
     <Content Include="qptech\assets\machines\textures\block\machinery.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\hopper\machinery-border.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\hopper\tinbronze1.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\wornsteelplate.png" />
     <Content Include="qptech\assets\machines\textures\block\notchedbrass.png" />
     <Content Include="qptech\assets\machines\textures\block\oak1.png" />
     <Content Include="qptech\assets\machines\textures\block\redfabric.png" />
