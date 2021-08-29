@@ -15,7 +15,7 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Util;
 using Vintagestory.ServerMods;
-using qptech.src.extensions;
+
 
 namespace qptech.src
 {
@@ -30,6 +30,7 @@ namespace qptech.src
         bool opentosky = false;
         MultiblockStructure ms;
         public BlockPos mboffset;
+        
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -59,8 +60,12 @@ namespace qptech.src
                 
                 return false;
             }
+            
             return true;
         }
+        
+
+        
         public void OnTick(float tf)
         {
             //Make sure there is a valid container

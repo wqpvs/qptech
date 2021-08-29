@@ -164,7 +164,7 @@ namespace qptech.src
             FindOutputConnections();
 
         }
-        void ClearConnections()
+        protected void ClearConnections()
         {
             if (inputConnections != null)
             {
