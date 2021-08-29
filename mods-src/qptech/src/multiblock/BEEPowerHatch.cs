@@ -15,6 +15,7 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Util;
 using Vintagestory.ServerMods;
+using Electricity.API;
 
 namespace qptech.src.multiblock
 {
@@ -25,7 +26,31 @@ namespace qptech.src.multiblock
 
         public void OnPartTick(float f)
         {
-            
+            //relying on the master to only call this if the MB is functional
+            if (IsOn&&IsPowered&&Capacitor>0)
+            {
+                IElectricity mastere = master as IElectricity;
+                int fluxused = 0;
+
+                //FIRST Offer Power to the master
+                if (mastere !=null)
+                {
+                    int used = mastere.ReceivePacketOffer(this, Math.Min(Capacitor, maxFlux));
+                    ChangeCapacitor(-used);
+                    fluxused += used;
+                }
+                //Offer power to each part
+                foreach (Block b in master.Parts)
+                {
+                    int availablepower = Math.Min(Capacitor, MaxFlux - fluxused);
+                    if (availablepower < 1) { break; }
+                    IElectricity ie = b as IElectricity;
+                    if (ie == null) { continue; }
+                    int used = ie.ReceivePacketOffer(this, availablepower);
+                    ChangeCapacitor(-used);
+                    fluxused += used;
+                }
+            }   
         }
         public override void FindConnections()
         {
