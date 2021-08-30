@@ -29,7 +29,7 @@ namespace qptech.src.multiblock
     {
         List<IFunctionalMultiblockPart> Parts { get; }
         MultiblockStructure MBStructure { get; }
-
+        BlockPos MBOffset { get; }
         string StructureName { get; }
     }
 }

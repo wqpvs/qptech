@@ -17,7 +17,7 @@ namespace qptech.src
         {
             
             BEElectricCrucible bee = (BEElectricCrucible)api.World.BlockAccessor.GetBlockEntity(blockSel.Position);
-            if (bee != null) { bee.OpenStatusGUI(); return true; }
+            if (bee != null) { bee.Interact(byPlayer); return true; }
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
     }

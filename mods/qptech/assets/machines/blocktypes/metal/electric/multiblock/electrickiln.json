@@ -29,7 +29,8 @@
 			"maxFlux": 8,
 			"capacitance": 8,
 			"requiredFlux": 4,
-			"receptionFaces": [ "north" ]
+			"receptionFaces": [ "north" ],
+			
 		}
 
 	},

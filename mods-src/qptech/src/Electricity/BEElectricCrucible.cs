@@ -62,8 +62,10 @@ namespace qptech.src
 
         List<IFunctionalMultiblockPart> parts;
         public List<IFunctionalMultiblockPart> Parts { get { return parts; } }
+        BlockPos mboffset;
         MultiblockStructure ms;
         public MultiblockStructure MBStructure { get { return ms; } }
+        public BlockPos MBOffset { get { return mboffset; } }
 
         public string StructureName =>"Electric Crucible";
 
@@ -72,8 +74,13 @@ namespace qptech.src
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            
-            status = enStatus.READY; //TODO REMOVE THIS LINE AFTER TESTING!
+            ms = Block.Attributes["multiblockStructure"].AsObject<MultiblockStructure>();
+            int[] offsarray = { 0, 0, 0 };
+            offsarray = Block.Attributes["mboffset"].AsArray<int>(offsarray);
+            mboffset = new BlockPos(offsarray[0] + Pos.X, offsarray[1] + Pos.Y, offsarray[2] + Pos.Z);
+
+            ms.InitForUse(0);
+            status = enStatus.CONSTRUCTION; //TODO REMOVE THIS LINE AFTER TESTING!
         }
 
         public override void OnTick(float par)
@@ -114,9 +121,23 @@ namespace qptech.src
         }
         void CheckConstruction()
         {
-           
+            if (CheckCompleteStructure()) {
+                status = enStatus.READY;
+                
+            }
+            else { status = enStatus.CONSTRUCTION; }
         }
-        
+        bool CheckCompleteStructure()
+        {
+            if (ms == null) { return false; }
+            if (ms.InCompleteBlockCount(Api.World, mboffset) > 0)
+            {
+
+                return false;
+            }
+
+            return true;
+        }
         void CheckInventories()
         {
             
@@ -435,6 +456,40 @@ namespace qptech.src
             }
 
 
+        }
+
+
+        public bool Interact(IPlayer byPlayer)
+        {
+            CheckConstruction();
+            if (status != enStatus.CONSTRUCTION) { OpenStatusGUI(); }
+            else {
+                if (showingcontents)
+                {
+                    
+                    ms.ClearHighlights(Api.World, byPlayer);
+                    showingcontents = false;
+                }
+                ToggleBuildStatus(byPlayer);
+            }
+            return true;
+        }
+        bool showingcontents = false;
+        void ToggleBuildStatus(IPlayer byPlayer)
+        {
+            showingcontents = !showingcontents;
+            
+            if (Api.Side == EnumAppSide.Client)
+            {
+                if (showingcontents)
+                {
+                    ms.HighlightIncompleteParts(Api.World, byPlayer, mboffset);
+                }
+                else
+                {
+                    ms.ClearHighlights(Api.World, byPlayer);
+                }
+            }
         }
         /// <summary>
         /// Set the order for this electric crucible

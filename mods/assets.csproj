@@ -36,7 +36,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\watertower.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\creativegenerator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\battery.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\electric\electrickiln.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\multiblock\electrickiln.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\clayformer.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\blastfurnace.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\electricforge.json" />
