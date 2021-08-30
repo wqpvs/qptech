@@ -68,5 +68,10 @@ namespace qptech.src.multiblock
             //TODO Add special output connections - maybe go thru the multiblock list and offer to add each member as connection
             //will have to add this functionality to IElectricty (direct power offer or something?)
         }
+
+        public void InitializePart(IFunctionalMultiblockMaster master)
+        {
+           
+        }
     }
 }

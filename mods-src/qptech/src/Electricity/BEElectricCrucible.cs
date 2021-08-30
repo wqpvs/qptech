@@ -175,27 +175,35 @@ namespace qptech.src
             
             if (storage == null) { storage = new Dictionary<string, int>();return; }
             if (Full) { return; }
-            
-            //TODO Check appropriate containers for inventory
-            BlockPos tempcheckpos = Pos.Copy().Up();
-            BlockEntity checkbe = Api.World.BlockAccessor.GetBlockEntity(tempcheckpos);
-            var inputContainer = checkbe as BlockEntityContainer;
-            if (inputContainer == null) { return; }
-            if (inputContainer.Inventory.Empty) { return; }
-            for (int c = 0; c < inputContainer.Inventory.Count; c++)
+            if (ms == null) { return; }
+            //Checking parts for input hatches
+            foreach (IFunctionalMultiblockPart p in parts)
             {
-                if (Full) { return; }
-                ItemSlot checkslot = inputContainer.Inventory[c];
-                if (checkslot.Itemstack == null) { continue; }
-                if (checkslot.StackSize == 0) { continue; }
-                int used=ReceiveItemOffer(checkslot);
-                if (used > 0)
+
+
+                
+                var hatch = p as MBItemHatch;
+                if (hatch == null) { continue; }
+                if (hatch.IsOutput) { continue; }
+                var inputContainer = p as IBlockEntityContainer;
+                if (inputContainer == null) { continue; }
+                if (inputContainer.Inventory.Empty) { continue; }
+                bool dirty = false;
+                for (int c = 0; c < inputContainer.Inventory.Count; c++)
                 {
-                    
-                    checkbe.MarkDirty(true);
-                   // MarkDirty(true);
+                    if (Full) { break; }
+                    ItemSlot checkslot = inputContainer.Inventory[c];
+                    if (checkslot.Itemstack == null) { continue; }
+                    if (checkslot.StackSize == 0) { continue; }
+                    int used = ReceiveItemOffer(checkslot);
+                    if (used > 0)
+                    {
+                        dirty = true;
+                        // MarkDirty(true);
+                    }
+                    //if (checkslot.Itemstack.StackSize == 0) { checkslot.Itemstack = new ItemStack(); }
                 }
-                //if (checkslot.Itemstack.StackSize == 0) { checkslot.Itemstack = new ItemStack(); }
+                if (dirty) { MarkDirty(true); }
             }
             
         }
