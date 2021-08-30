@@ -316,14 +316,36 @@ namespace qptech.src
             if (makeitem == null) { return false; }
             //if (!(Api is ICoreClientAPI))
             //{
-                DummyInventory di = new DummyInventory(Api, 1);
-                di[0].Itemstack = new ItemStack(makeitem, makeqty);
-                di[0].Itemstack.Collectible.SetTemperature(Api.World,di[0].Itemstack,internalHeat);
-                
-                Vec3d pos = Pos.ToVec3d();
+            DummyInventory di = new DummyInventory(Api, 1);
+            di[0].Itemstack = new ItemStack(makeitem, makeqty);
+            di[0].Itemstack.Collectible.SetTemperature(Api.World,di[0].Itemstack,internalHeat);
+            
+            if (parts != null)
+            {
+                foreach (IFunctionalMultiblockPart p in parts)
+                {
+                    if (di[0].StackSize == 0) { break; }
+                    var phatch = p as MBItemHatch;
+                    if (phatch == null||phatch.IsInput) { continue; } //This isn't a hatch or this isn't an output hatch
+                    var pc = p as IBlockEntityContainer;
+                    if (pc == null) { continue; } //part isn't a container continue
+                    foreach (ItemSlot slot in pc.Inventory)
+                    {
+                        if (!slot.CanHold(di[0])) { continue; }
+                        ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, di[0].StackSize);
 
+                        int taken=di[0].TryPutInto(slot, ref op);
+                        
+                    }
+                }
+            }
+            //dump the left overs
+            if (di[0].StackSize > 0)
+            {
+
+                Vec3d pos = Pos.SouthCopy().UpCopy().ToVec3d();
                 di.DropAll(pos);
-            //}
+            }
             return true;
         }
 

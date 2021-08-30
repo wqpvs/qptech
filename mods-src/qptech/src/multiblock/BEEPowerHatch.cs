@@ -36,7 +36,7 @@ namespace qptech.src.multiblock
         public void OnPartTick(float f)
         {
             //relying on the master to only call this if the MB is functional
-            if (IsOn&&IsPowered&&Capacitor>0)
+            if (IsOn&&IsPowered&&Capacitor>0&&master!=null&&master.Parts!=null)
             {
                 IElectricity mastere = master as IElectricity;
                 int fluxused = 0;
@@ -71,7 +71,7 @@ namespace qptech.src.multiblock
 
         public void InitializePart(IFunctionalMultiblockMaster master)
         {
-           
+            this.master = master;
         }
     }
 }

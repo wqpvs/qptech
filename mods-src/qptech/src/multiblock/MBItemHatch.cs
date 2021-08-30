@@ -45,10 +45,11 @@ namespace qptech.src.multiblock
 
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
-            base.GetBlockInfo(forPlayer, dsc);
+            
             if (master == null || master.MBStructure == null) { return; }
             if (isOutput) { dsc.AppendLine("OUTPUT"); }
             if (IsInput) { dsc.AppendLine("INPUT"); }
+            base.GetBlockInfo(forPlayer, dsc);
         }
 
     }

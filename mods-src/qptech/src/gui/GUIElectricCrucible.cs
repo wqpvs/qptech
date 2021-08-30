@@ -37,10 +37,10 @@ namespace qptech.src
             ElementBounds dialogBounds = ElementBounds.Fixed(sectionx, sectiony, 256, 256);
             string guicomponame = mycrucible.Pos.ToString() + "Electric Crucible";
             SingleComposer = capi.Gui.CreateCompo(guicomponame, dialogBounds);
-            SetupPowerScreen();
-            //SetupStatusScreen();
-            //SetupInventoryScreen();
-            //SetupProductionScreen();
+            //SetupPowerScreen();
+            SetupStatusScreen();
+            SetupInventoryScreen();
+            SetupProductionScreen();
             SingleComposer.Compose();
             isopen = true;
         }

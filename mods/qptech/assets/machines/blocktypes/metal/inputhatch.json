@@ -1,6 +1,6 @@
 {
 	"code": "inputhatch",
-	"entityclass": "GenericTypedContainer",
+	"entityclass": "MBItemHatch",
 	"attributes": {
 		"partialAttachable": true,
 		"inventoryClassName": "chest",
