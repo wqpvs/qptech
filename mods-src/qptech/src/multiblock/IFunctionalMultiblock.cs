@@ -23,6 +23,7 @@ namespace qptech.src.multiblock
     {
         IFunctionalMultiblockMaster Master { get; set; }
         void OnPartTick(float f);
+        void InitializePart(IFunctionalMultiblockMaster master);
     }
 
     interface IFunctionalMultiblockMaster

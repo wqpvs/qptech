@@ -128,6 +128,7 @@
     <Compile Include="src\multiblock\BEEPowerHatch.cs" />
     <Compile Include="src\multiblock\BlockMBT.cs" />
     <Compile Include="src\multiblock\IFunctionalMultiblock.cs" />
+    <Compile Include="src\multiblock\MBItemHatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="modinfo.json">

@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 
 namespace qptech.src
 {
-    class BEElectricCrucible : BEElectric, IConduit, IFunctionalMultiblockMaster
+    class BEElectricCrucible : BEElectric, IFunctionalMultiblockMaster
     {
         int tankCapacity = 25600;         //total storage
         public int TotalStorage => tankCapacity;
@@ -72,6 +72,8 @@ namespace qptech.src
 
         public Dictionary<string, int> recipes;
         
+
+
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -155,7 +157,7 @@ namespace qptech.src
             IFunctionalMultiblockPart part = Api.World.BlockAccessor.GetBlockEntity(bp) as IFunctionalMultiblockPart;
             if (part == null) { return; }
             parts.Add(part);
-            part.Master = this;
+            part.InitializePart(this);
         }
         bool CheckCompleteStructure()
         {
