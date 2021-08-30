@@ -32,6 +32,7 @@ namespace qptech.src
         int ingotsize = 100;
         int uiUpdateEvery = 20;
         int uiUpdateSkipCounter = 0;
+        Vintagestory.API.Common.Action<Block, BlockPos> OnInitializeMember => InitializeBlock;
         public float internalTempPercent => (internalHeat - minHeat) / (maxHeat - minHeat);
         public Dictionary<string, int> Recipes => recipes;
         public int FreeStorage
@@ -94,12 +95,21 @@ namespace qptech.src
             if (!(Api is ICoreServerAPI)) { return; }
             
             if (status == enStatus.CONSTRUCTION) { CheckConstruction();return; }
-            
+            ProcessBlocks(par);
             CheckInventories();
             DoStorageHeat();
             SetStatus();
             if (status == enStatus.PRODUCING) { DoProduction(); }
             MarkDirty(true);
+        }
+
+        void ProcessBlocks(float par)
+        {
+            if (parts==null || parts.Count == 0) { return; }
+            foreach (IFunctionalMultiblockPart p in parts)
+            {
+                if (p != null) { p.OnPartTick(par); }
+            }
         }
         void UpdateUI()
         {
@@ -122,10 +132,30 @@ namespace qptech.src
         void CheckConstruction()
         {
             if (CheckCompleteStructure()) {
-                status = enStatus.READY;
+                if (status == enStatus.CONSTRUCTION)
+                {
+                    InitializeCompletedStructure();
+                }
                 
             }
             else { status = enStatus.CONSTRUCTION; }
+        }
+
+        void InitializeCompletedStructure()
+        {
+            
+            parts = new List<IFunctionalMultiblockPart>();
+            ms.WalkMatchingBlocks(Api.World, mboffset,OnInitializeMember);
+            status = enStatus.READY;
+        }
+        
+        public void InitializeBlock(Block memberblock, BlockPos bp)
+        {
+
+            IFunctionalMultiblockPart part = Api.World.BlockAccessor.GetBlockEntity(bp) as IFunctionalMultiblockPart;
+            if (part == null) { return; }
+            parts.Add(part);
+            part.Master = this;
         }
         bool CheckCompleteStructure()
         {

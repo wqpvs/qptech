@@ -21,9 +21,18 @@ namespace qptech.src.multiblock
 {
     class BEEPowerHatch : BEElectric, IFunctionalMultiblockPart
     {
+        /// <summary>
+        /// TODO - update tree!
+        /// </summary>
         IFunctionalMultiblockMaster master;
         public IFunctionalMultiblockMaster Master { get { return master; } set { master = value; } }
 
+        public override void Initialize(ICoreAPI api)
+        {
+            base.Initialize(api);
+            maxFlux = Block.Attributes["maxFlux"].AsInt(maxFlux);
+            capacitance = Block.Attributes["capacitance"].AsInt(Capacitance);
+        }
         public void OnPartTick(float f)
         {
             //relying on the master to only call this if the MB is functional
@@ -40,7 +49,7 @@ namespace qptech.src.multiblock
                     fluxused += used;
                 }
                 //Offer power to each part
-                foreach (Block b in master.Parts)
+                foreach (IFunctionalMultiblockPart b in master.Parts)
                 {
                     int availablepower = Math.Min(Capacitor, MaxFlux - fluxused);
                     if (availablepower < 1) { break; }

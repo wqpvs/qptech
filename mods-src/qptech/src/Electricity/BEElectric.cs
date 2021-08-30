@@ -72,8 +72,6 @@ namespace qptech.src
 
             if (Block.Attributes == null) { api.World.Logger.Error("ERROR BEE INITIALIZE HAS NO BLOCK"); return; }
             maxFlux = Block.Attributes["maxFlux"].AsInt(maxFlux);
-            
-            maxFlux = Block.Attributes["maxFlux"].AsInt(maxFlux);
             maxFlux *= 10;
             capacitance = Block.Attributes["capacitance"].AsInt(Capacitance);
 

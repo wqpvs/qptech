@@ -141,6 +141,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\forge-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\heatsink.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\inputhatch.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\interfacehatch.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\logsplitter.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\motor-rotor.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\motor-stator.json" />
