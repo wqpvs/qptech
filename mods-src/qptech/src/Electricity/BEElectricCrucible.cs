@@ -575,7 +575,8 @@ namespace qptech.src
         {
             SetOrder=99990001,
             TogglePower=99990002,
-            ToggleMode=99990003
+            ToggleMode=99990003,
+            Halt=99990004
         }
         public void SetOrder(string formetal, int qty, bool onlycompleteorder)
         {
@@ -619,6 +620,12 @@ namespace qptech.src
             UpdateUI();
         }
 
+        public void HaltButton()
+        {
+            (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.Halt, null);
+            //Add an alarm sound?
+        }
+
         void ToggleMode()
         {
             if (mode == enProductionMode.ONE) { mode = enProductionMode.REPEAT; }
@@ -646,6 +653,13 @@ namespace qptech.src
             {
                 ToggleMode();
                 MarkDirty(true);
+            }
+            if (packetid == (int)enPacketIDs.Halt)
+            {
+                HaltProduction();
+                isOn = false;
+                MarkDirty(true);
+                
             }
             base.OnReceivedServerPacket(packetid, data);
         }

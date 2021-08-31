@@ -115,21 +115,40 @@ namespace qptech.src
                 SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
 
                 //Now let's try and draw the production panel
-                screenxoffest = 0;
-                double screenyoffset = 256;
-                dialogBounds = ElementBounds.Fixed(sectionx + screenxoffest, sectiony+screenyoffset, 512, 256);
-                //gdt = new GEDrawTexture(capi, dialogBounds, "blankpanel.png");
-                //SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
-                double buttonstartx = 20;
-                double buttonstarty = 266;
-                double buttonwidth = 216;
-                double buttonheight = 16;
-                string buttontext = "SINGLE MODE";
-                dialogBounds = ElementBounds.Fixed(sectionx+buttonstartx, sectiony+buttonstarty, buttonwidth, buttonheight);
-                if (mycrucible.Mode == enProductionMode.REPEAT) { buttontext = "REPEAT MODE"; }
+                double psectionx = 0;
+                double psectiony = 256+32;
+                dialogBounds = ElementBounds.Fixed(psectionx, psectiony, 512, 256);
+                gdt = new GEDrawTexture(capi, dialogBounds, "blankpanel.png");
+                SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
+
+                //drawing the production mode button
+                double buttonstartx = 26;
+                double buttonstarty = 24;
+                double buttonwidth = 32;
+                double buttonheight = 32;
+                double labelxpad = 5;
+                double labelypad = 10;
+                double maxVertSize = buttonheight * 6;
+                string buttontexture = "indicatorblack.png";
+                dialogBounds = ElementBounds.Fixed(psectionx+buttonstartx, psectiony+buttonstarty, buttonwidth, buttonheight);
+                if (mycrucible.Mode == enProductionMode.REPEAT) { buttontexture = "indicatorgreen.png"; }
                 //TODO why don't buttons render - possibly we can just cheat here and draw our own buttons?
-                SingleComposer.AddGrayBG(dialogBounds);
-                SingleComposer.AddButton(buttontext, onToggleMode, dialogBounds);
+                
+                SingleComposer.AddButton("", onToggleMode, dialogBounds);
+                gdt = new GEDrawTexture(capi, dialogBounds, buttontexture);
+                SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
+                dialogBounds = ElementBounds.Fixed(psectionx + buttonstartx + buttonwidth + labelxpad, psectiony+labelypad + buttonstarty, 200, buttonheight);
+                SingleComposer.AddRichtext("REPEAT MODE", CairoFont.WhiteDetailText(), dialogBounds);
+                buttonstarty += buttonheight;
+
+                dialogBounds = ElementBounds.Fixed(psectionx + buttonstartx, psectiony + buttonstarty, buttonwidth, buttonheight);
+                SingleComposer.AddButton("", onHaltProduction, dialogBounds);
+                gdt = new GEDrawTexture(capi, dialogBounds, "stopbutton.png");
+                SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
+                dialogBounds = ElementBounds.Fixed(psectionx + buttonstartx + buttonwidth + labelxpad, psectiony + labelypad + buttonstarty, 200, buttonheight);
+                SingleComposer.AddRichtext("EMERGENCY STOP", CairoFont.WhiteDetailText(), dialogBounds);
+
+                
             }
 
         }
@@ -183,7 +202,8 @@ namespace qptech.src
         }
         public bool onHaltProduction()
         {
-            
+            mycrucible.HaltButton();
+            TryClose();
             return true;
         }
         public bool onTogglePower()
@@ -206,6 +226,7 @@ namespace qptech.src
             
             SingleComposer.Compose();
         }
+
         public override bool TryClose()
         {
             opened = false;
