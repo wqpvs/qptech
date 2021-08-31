@@ -37,10 +37,11 @@ namespace qptech.src
             ElementBounds dialogBounds = ElementBounds.Fixed(sectionx, sectiony, 256, 256);
             string guicomponame = mycrucible.Pos.ToString() + "Electric Crucible";
             SingleComposer = capi.Gui.CreateCompo(guicomponame, dialogBounds);
-            //SetupPowerScreen();
-            SetupStatusScreen();
-            SetupInventoryScreen();
-            SetupProductionScreen();
+            SetupPowerScreen();
+            //Below is the old gui code
+            //SetupStatusScreen();
+            //SetupInventoryScreen();
+            //SetupProductionScreen();
             SingleComposer.Compose();
             isopen = true;
         }
@@ -123,6 +124,13 @@ namespace qptech.src
                 }
                 statustext += "</font>";
                 SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
+
+                //Now let's try and draw the production panel
+                screenxoffest = 0;
+                double screenyoffset = 256;
+                dialogBounds = ElementBounds.Fixed(sectionx + screenxoffest, sectiony+screenyoffset, 512, 256);
+                gdt = new GEDrawTexture(capi, dialogBounds, "blankpanel.png");
+                SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
             }
 
         }
@@ -156,23 +164,12 @@ namespace qptech.src
             statustext += "\n\nTemperature\n" + (int)(mycrucible.internalTempPercent * 100) + "%";
             statustext += "\n\nStorage\n" + mycrucible.UsedStorage + "/" + mycrucible.TotalStorage + "\nUnits";
             statustext += "</font>";
-            //string alertred = "<font color=\"#ffbbaa\">";//<font <color=\"#ffdddd\">>";
-            
-            
             buttonx = (sectionwidth / 2)-buttonwidth/2;
             buttony = sectionheight-50;
-            //string sigh = GuiElement.dirtTextureName; //"gui/backgrounds/soil.png"
             ElementBounds buttonbounds = ElementBounds.Fixed(buttonx, buttony, buttonwidth, buttonheight);
-            //C:\Users\quent\AppData\Roaming\Vintagestory\assets\game\textures\gui\backgrounds
             SingleComposer 
-                //.AddShadedDialogBG(bgBounds)
-                //.AddImageBG(bgBounds,"castiron")
-                //.AddImageBG(bgBounds, "environment/stars-bg.png")
                 .AddImageBG(bgBounds, "gui/backgrounds/mainmenu2.png",0)
-                
-                //.AddDialogTitleBar("Electric Crucible Interface", OnTitleBarCloseClicked)
                 .AddRichtext(statustext, CairoFont.WhiteDetailText(), textBounds)
-                //.AddSmallButton("Close", OnCloseButton, ElementBounds.Fixed(buttonx, buttony, buttonwidth, buttonheight), EnumButtonStyle.Normal, EnumTextOrientation.Center)
                 .AddButton("EXIT",OnCloseButton,buttonbounds,EnumButtonStyle.Normal,EnumTextOrientation.Center)
             ;
             if (mycrucible.Status == BEElectricCrucible.enStatus.PRODUCING)
@@ -375,6 +372,13 @@ namespace qptech.src
         public bool onTogglePower()
         {
             mycrucible.ButtonTogglePower();
+            SetupStatusScreen();
+            SingleComposer.Compose();
+            return true;
+        }
+        public bool onToggleMode()
+        {
+            mycrucible.ButtonToggleMode();
             SetupStatusScreen();
             SingleComposer.Compose();
             return true;

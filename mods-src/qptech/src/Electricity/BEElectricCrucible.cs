@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 
 namespace qptech.src
 {
+    public enum enProductionMode { ONE,REPEAT}
     class BEElectricCrucible : BEElectric, IFunctionalMultiblockMaster
     {
         int tankCapacity = 25600;         //total storage
@@ -32,6 +33,8 @@ namespace qptech.src
         int ingotsize = 100;
         int uiUpdateEvery = 20;
         int uiUpdateSkipCounter = 0;
+        enProductionMode mode = enProductionMode.ONE;
+        public enProductionMode Mode => mode;
         Vintagestory.API.Common.Action<Block, BlockPos> OnInitializeMember => InitializeBlock;
         public float internalTempPercent => (internalHeat - minHeat) / (maxHeat - minHeat);
         public Dictionary<string, int> Recipes => recipes;
@@ -128,7 +131,7 @@ namespace qptech.src
         void SetStatus()
         {
             if (internalHeat < maxHeat) { status = enStatus.HEATING; return; }
-            if (currentOrder > 0 && currentMetalRecipe != "") { status = enStatus.PRODUCING; return; }
+            if ((currentOrder > 0||mode==enProductionMode.REPEAT) && currentMetalRecipe != "") { status = enStatus.PRODUCING; return; }
             status = enStatus.READY;
         }
         void CheckConstruction()
@@ -465,11 +468,18 @@ namespace qptech.src
             if (Api == null) { return; }
             recipes = new Dictionary<string, int>();
             if (storage == null || storage.Count == 0) { return; }
+            List<string> emptykeys = new List<string>();
             //First just add the basic ingot recipes (need 20 units to make an ingot)
             foreach (string key in storage.Keys)
             {
+                if (storage[key] == 0) { emptykeys.Add(key); continue; }
                 if (storage[key] <ingotsize) { continue; }
                 recipes[key] = storage[key] / ingotsize;
+            }
+            //remove storage listings for zero quantity items
+            foreach (string key in emptykeys)
+            {
+                storage.Remove(key);
             }
             foreach (AlloyRecipe ar in Api.World.Alloys)
             {
@@ -564,7 +574,8 @@ namespace qptech.src
         public enum enPacketIDs
         {
             SetOrder=99990001,
-            TogglePower=99990002
+            TogglePower=99990002,
+            ToggleMode=99990003
         }
         public void SetOrder(string formetal, int qty, bool onlycompleteorder)
         {
@@ -601,6 +612,18 @@ namespace qptech.src
             TogglePower();
             UpdateUI();
         }
+        public void ButtonToggleMode()
+        {
+            (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.ToggleMode, null);
+            ToggleMode();
+            UpdateUI();
+        }
+
+        void ToggleMode()
+        {
+            if (mode == enProductionMode.ONE) { mode = enProductionMode.REPEAT; }
+            else { mode = enProductionMode.ONE; }
+        }
         public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
         
         {
@@ -617,6 +640,11 @@ namespace qptech.src
             if (packetid == (int)enPacketIDs.TogglePower)
             {
                 isOn = !isOn;
+                MarkDirty(true);
+            }
+            if (packetid == (int)enPacketIDs.ToggleMode)
+            {
+                ToggleMode();
                 MarkDirty(true);
             }
             base.OnReceivedServerPacket(packetid, data);
