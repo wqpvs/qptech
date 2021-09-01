@@ -33,6 +33,8 @@ namespace qptech.src
         int ingotsize = 100;
         int uiUpdateEvery = 20;
         int uiUpdateSkipCounter = 0;
+        double productionTime = 1/60;
+        double nextproductionat = 0;
         enProductionMode mode = enProductionMode.ONE;
         public enProductionMode Mode => mode;
         Vintagestory.API.Common.Action<Block, BlockPos> OnInitializeMember => InitializeBlock;
@@ -97,7 +99,7 @@ namespace qptech.src
                 UpdateUI();
             }
             //TEMP CODE TO MAKE COPPER
-            if (!(Api is ICoreServerAPI)) { return; }
+            //if (!(Api is ICoreServerAPI)) { return; }
             
             if (status == enStatus.CONSTRUCTION) { CheckConstruction();return; }
             ProcessBlocks(par);
@@ -243,8 +245,11 @@ namespace qptech.src
             if (currentOrder == 0 || currentMetalRecipe == "") { HaltProduction();return; } //problem with order, or it's done - reset status
             if (!recipes.ContainsKey(currentMetalRecipe)) { HaltProduction();return; } //recipe doesn't exist - reset status
             if (recipes[currentMetalRecipe] < 1) { return; } //Can't make any of order right now, do nothing
-            
+            if (Api.World.Calendar == null) { return; }
+            if (Api.World.Calendar.TotalHours > nextproductionat)
+            {
                 MakeOne(); //We should be able to make part of order, do so
+            }
             
         }
         void HaltProduction()
@@ -257,6 +262,11 @@ namespace qptech.src
         void MakeOne()
         {
             //first check if we have the materials to directly make ingot
+            if (Api is ICoreClientAPI)
+            {
+                Api.World.PlaySoundAt(new AssetLocation("sounds/outputchunk"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
+                return;
+            }
             AssetLocation al=new AssetLocation("game:ingot-" + currentMetalRecipe); ;
             Item makeitem= Api.World.GetItem(al); ;
             if (storage.ContainsKey(currentMetalRecipe))
@@ -271,6 +281,10 @@ namespace qptech.src
                         currentOrder--;
                         storage[currentMetalRecipe] =storage[currentMetalRecipe]- ingotsize; //take metals out of storage
                         FindValidRecipes();
+                        if (currentOrder==0 && mode != enProductionMode.REPEAT) { HaltProduction(); }
+                        else { nextproductionat = Api.World.Calendar.TotalHours + productionTime; }
+                        
+                        MarkDirty(true);
                         return;
                     }
                     else { HaltProduction(); return; }
@@ -578,6 +592,7 @@ namespace qptech.src
             ToggleMode=99990003,
             Halt=99990004
         }
+
         public void SetOrder(string formetal, int qty, bool onlycompleteorder)
         {
             ICoreClientAPI capi = Api as ICoreClientAPI;
@@ -593,7 +608,7 @@ namespace qptech.src
                 neworder[formetal] = currentOrder;
                 byte[] data = ObjectToByteArray(neworder);
                 (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.SetOrder,data);
-
+                if (Api.World.Calendar != null) { nextproductionat = Api.World.Calendar.TotalHours + productionTime; }
             }
             else if (Api is ICoreServerAPI)
             {
@@ -604,6 +619,7 @@ namespace qptech.src
                 currentOrder = Math.Min(recipes[formetal], qty);
                 currentMetalRecipe = formetal;
                 status = enStatus.PRODUCING;
+                if (Api.World.Calendar != null) { nextproductionat = Api.World.Calendar.TotalHours + productionTime; }
             }
             
         }
@@ -688,6 +704,16 @@ namespace qptech.src
             return obj;
         }
 
-
+        public string Making
+        {
+            get
+            {
+                if (currentOrder > 0 || mode == enProductionMode.REPEAT && IsOn)
+                {
+                    return currentMetalRecipe;
+                }
+                return "---";
+            }
+        }
     }
 }

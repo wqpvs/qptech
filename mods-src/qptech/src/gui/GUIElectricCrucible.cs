@@ -134,20 +134,38 @@ namespace qptech.src
                 if (mycrucible.Mode == enProductionMode.REPEAT) { buttontexture = "indicatorgreen.png"; }
                 //TODO why don't buttons render - possibly we can just cheat here and draw our own buttons?
                 
+                //REPEAT MODE
                 SingleComposer.AddButton("", onToggleMode, dialogBounds);
                 gdt = new GEDrawTexture(capi, dialogBounds, buttontexture);
                 SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
                 dialogBounds = ElementBounds.Fixed(psectionx + buttonstartx + buttonwidth + labelxpad, psectiony+labelypad + buttonstarty, 200, buttonheight);
                 SingleComposer.AddRichtext("REPEAT MODE", CairoFont.WhiteDetailText(), dialogBounds);
                 buttonstarty += buttonheight;
-
+                
+                //EMERGENCY STOP
                 dialogBounds = ElementBounds.Fixed(psectionx + buttonstartx, psectiony + buttonstarty, buttonwidth, buttonheight);
                 SingleComposer.AddButton("", onHaltProduction, dialogBounds);
                 gdt = new GEDrawTexture(capi, dialogBounds, "stopbutton.png");
                 SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
                 dialogBounds = ElementBounds.Fixed(psectionx + buttonstartx + buttonwidth + labelxpad, psectiony + labelypad + buttonstarty, 200, buttonheight);
                 SingleComposer.AddRichtext("EMERGENCY STOP", CairoFont.WhiteDetailText(), dialogBounds);
+                buttonstarty += buttonheight;
 
+                if (mycrucible.recipes == null || mycrucible.recipes.Count == 0) { return; }
+                //PRODUCTION BUTTONS
+                foreach (string key in mycrucible.recipes.Keys)
+                {
+                    string switchtexture = "dialswitchup.png";
+                    if (mycrucible.Making == key) { switchtexture = "dialswitchright.png"; }
+                    dialogBounds = ElementBounds.Fixed(psectionx + buttonstartx, psectiony + buttonstarty, buttonwidth, buttonheight);
+                    SingleComposer.AddButton("", ()=>onProductionButton(key), dialogBounds);
+                    gdt = new GEDrawTexture(capi, dialogBounds, switchtexture);
+                    SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
+                    dialogBounds = ElementBounds.Fixed(psectionx + buttonstartx + buttonwidth + labelxpad, psectiony + labelypad + buttonstarty, 200, buttonheight);
+                    SingleComposer.AddRichtext(key, CairoFont.WhiteDetailText(), dialogBounds);
+                    buttonstarty += buttonheight;
+                    if (buttonstarty > maxVertSize) { buttonstarty = 24;buttonstartx += 256; }
+                }
                 
             }
 
@@ -231,6 +249,12 @@ namespace qptech.src
         {
             opened = false;
             return base.TryClose();
+        }
+
+        public bool onProductionButton(string material)
+        {
+            mycrucible.SetOrder(material, 1, true);
+            return true;
         }
     }
 }
