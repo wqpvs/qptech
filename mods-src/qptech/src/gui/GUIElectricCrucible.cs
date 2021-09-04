@@ -127,11 +127,11 @@ namespace qptech.src
                 double buttonwidth = 32;
                 double buttonheight = 32;
                 double labelxpad = 5;
-                double labelypad = 10;
+                double labelypad = 8;
                 double maxVertSize = buttonheight * 6;
-                string buttontexture = "indicatorblack.png";
+                string buttontexture = "dialswitchup.png";
                 dialogBounds = ElementBounds.Fixed(psectionx+buttonstartx, psectiony+buttonstarty, buttonwidth, buttonheight);
-                if (mycrucible.Mode == enProductionMode.REPEAT) { buttontexture = "indicatorgreen.png"; }
+                if (mycrucible.Mode == enProductionMode.REPEAT) { buttontexture = "dialswitchright.png"; }
                 //TODO why don't buttons render - possibly we can just cheat here and draw our own buttons?
                 
                 //REPEAT MODE
@@ -148,7 +148,7 @@ namespace qptech.src
                 gdt = new GEDrawTexture(capi, dialogBounds, "stopbutton.png");
                 SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
                 dialogBounds = ElementBounds.Fixed(psectionx + buttonstartx + buttonwidth + labelxpad, psectiony + labelypad + buttonstarty, 200, buttonheight);
-                SingleComposer.AddRichtext("EMERGENCY STOP", CairoFont.WhiteDetailText(), dialogBounds);
+                SingleComposer.AddRichtext("HALT PRODUCTION", CairoFont.WhiteDetailText(), dialogBounds);
                 buttonstarty += buttonheight;
 
                 if (mycrucible.recipes == null || mycrucible.recipes.Count == 0) { return; }
@@ -254,6 +254,7 @@ namespace qptech.src
         public bool onProductionButton(string material)
         {
             mycrucible.SetOrder(material, 1, true);
+            TryClose();
             return true;
         }
     }

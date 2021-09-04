@@ -33,13 +33,15 @@ namespace qptech.src
         int ingotsize = 100;
         int uiUpdateEvery = 20;
         int uiUpdateSkipCounter = 0;
-        double productionTime = 1/60;
+        double productionTime = 0.05;
         double nextproductionat = 0;
         enProductionMode mode = enProductionMode.ONE;
         public enProductionMode Mode => mode;
         Vintagestory.API.Common.Action<Block, BlockPos> OnInitializeMember => InitializeBlock;
         public float internalTempPercent => (internalHeat - minHeat) / (maxHeat - minHeat);
         public Dictionary<string, int> Recipes => recipes;
+
+        public bool ActiveOrder => (currentOrder > 0 || mode == enProductionMode.REPEAT) && currentMetalRecipe != "";
         public int FreeStorage
         {
             get
@@ -94,20 +96,22 @@ namespace qptech.src
         public override void OnTick(float par)
         {
             base.OnTick(par);
+
+            //Only process if multiblock is built
+            if (Api is ICoreServerAPI)
+            {
+                if (status == enStatus.CONSTRUCTION) { CheckConstruction(); return; }
+
+                ProcessBlocks(par);  //do ticks for the multiblocks
+                CheckInventories();  //refresh inventory
+                DoStorageHeat();     //heat things up if need & possible
+                SetStatus();         //update status of block
+                if (status == enStatus.PRODUCING) { DoProduction(); }
+            }
             if (Api is ICoreClientAPI)
             {
                 UpdateUI();
             }
-            //TEMP CODE TO MAKE COPPER
-            //if (!(Api is ICoreServerAPI)) { return; }
-            
-            if (status == enStatus.CONSTRUCTION) { CheckConstruction();return; }
-            ProcessBlocks(par);
-            CheckInventories();
-            DoStorageHeat();
-            SetStatus();
-            if (status == enStatus.PRODUCING) { DoProduction(); }
-            MarkDirty(true);
         }
 
         void ProcessBlocks(float par)
@@ -132,9 +136,13 @@ namespace qptech.src
         }
         void SetStatus()
         {
-            if (internalHeat < maxHeat) { status = enStatus.HEATING; return; }
-            if ((currentOrder > 0||mode==enProductionMode.REPEAT) && currentMetalRecipe != "") { status = enStatus.PRODUCING; return; }
-            status = enStatus.READY;
+            if (internalHeat < maxHeat * 0.95) { status = enStatus.HEATING; }
+            else if (ActiveOrder) { status = enStatus.PRODUCING; }
+            
+            else { 
+                if (status == enStatus.PRODUCING) { currentOrder = 0;currentMetalRecipe = ""; }
+                status = enStatus.READY;
+            }
         }
         void CheckConstruction()
         {
@@ -241,8 +249,6 @@ namespace qptech.src
                     return;
                 }
             }
-            if (status != enStatus.PRODUCING) { return; } //should probably pre check this
-            if (currentOrder == 0 || currentMetalRecipe == "") { HaltProduction();return; } //problem with order, or it's done - reset status
             if (!recipes.ContainsKey(currentMetalRecipe)) { HaltProduction();return; } //recipe doesn't exist - reset status
             if (recipes[currentMetalRecipe] < 1) { return; } //Can't make any of order right now, do nothing
             if (Api.World.Calendar == null) { return; }
@@ -261,43 +267,29 @@ namespace qptech.src
 
         void MakeOne()
         {
-            //first check if we have the materials to directly make ingot
-            if (Api is ICoreClientAPI)
-            {
-                Api.World.PlaySoundAt(new AssetLocation("sounds/outputchunk"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
-                return;
-            }
+        
+           Api.World.PlaySoundAt(new AssetLocation("sounds/outputchunk"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
             AssetLocation al=new AssetLocation("game:ingot-" + currentMetalRecipe); ;
-            Item makeitem= Api.World.GetItem(al); ;
-            if (storage.ContainsKey(currentMetalRecipe))
+            Item makeitem= Api.World.GetItem(al);
+            nextproductionat = Api.World.Calendar.TotalHours + productionTime;
+            if (storage.ContainsKey(currentMetalRecipe)&& storage[currentMetalRecipe] >= ingotsize)
             {
-                
-                if (storage[currentMetalRecipe] >=ingotsize) //enough material to make an ingot
-                {
-                    
-                    
-                    //Try to make the item
-                    if (CreateItem(makeitem, 1)) {
-                        currentOrder--;
-                        storage[currentMetalRecipe] =storage[currentMetalRecipe]- ingotsize; //take metals out of storage
-                        FindValidRecipes();
-                        if (currentOrder==0 && mode != enProductionMode.REPEAT) { HaltProduction(); }
-                        else { nextproductionat = Api.World.Calendar.TotalHours + productionTime; }
-                        
-                        MarkDirty(true);
-                        return;
-                    }
-                    else { HaltProduction(); return; }
-                    //MarkDirty(true);
-                    
+
+                if (CreateItem(makeitem, 1)) {
+                    currentOrder--;
+                    storage[currentMetalRecipe] =storage[currentMetalRecipe]- ingotsize; //take metals out of storage
+                    FindValidRecipes();
+                    MarkDirty(true);
+                    return;
                 }
+
             }
 
             //next see if there's an alloy recipe matching what we're trying to make
             AlloyRecipe ar=null;
             foreach (AlloyRecipe arc in Api.World.Alloys)
             {
-                if (arc.Output.Code.ToString() == makeitem.Code.ToString()) { ar = arc; }
+                if (arc.Output.Code.ToString() == makeitem.Code.ToString()) { ar = arc; break; }
             }
             if (ar == null) {
                 HaltProduction(); return; 
@@ -318,8 +310,10 @@ namespace qptech.src
                 {
                     string ingmetal = Api.World.GetItem(mi.Code).LastCodePart();
                     storage[ingmetal] -= (int)(mi.MinRatio * (float)ingotsize);
-                    currentOrder--;
+                    
                 }
+                currentOrder--;
+                
             }
         }
         /// <summary>
@@ -411,25 +405,14 @@ namespace qptech.src
             if (status == enStatus.CONSTRUCTION) { dsc.AppendLine("STRUCTURE INCOMPLETE"); return; }
             if (UsedStorage == 0) { dsc.AppendLine("EMPTY"); return; }
             dsc.AppendLine(status.ToString());
-            dsc.AppendLine(UsedStorage + " units used out of " + tankCapacity);
-            dsc.AppendLine("Heated to " + internalHeat + "C");
-            dsc.AppendLine("--------");
-            dsc.AppendLine("CAN MAKE THESE INGOTS");
-            foreach (string metal in recipes.Keys)
-            {
-                dsc.AppendLine(recipes[metal]+" "+metal+" ingots");
+            dsc.AppendLine(mode.ToString());
+            dsc.AppendLine("Temp at " + internalHeat + "/" + maxHeat + "C");
+            if (ActiveOrder) {
+                dsc.AppendLine(currentMetalRecipe + " x" + currentOrder);
+                dsc.AppendLine((nextproductionat+" (Current time: "+Api.World.Calendar.TotalHours+")").ToString());
             }
-            dsc.AppendLine("------");
-            foreach (string key in storage.Keys)
-            {
-                dsc.AppendLine(storage[key] + " units of " + key);
-            }
-            if (currentOrder > 0)
-            {
-                dsc.AppendLine("------");
-                
-                dsc.AppendLine("Production order " + currentOrder + " of " + currentMetalRecipe);
-            }
+            
+          
         }
         //TODO: Control UI
 
@@ -459,6 +442,9 @@ namespace qptech.src
             }
             string statstring = tree.GetString("status");
             Enum.TryParse(statstring, out enStatus status);
+            string modestring = tree.GetString("mode");
+            Enum.TryParse(modestring, out enProductionMode mode);
+            nextproductionat = tree.GetDouble("nextproductionat");
             FindValidRecipes();
         }
         public override void ToTreeAttributes(ITreeAttribute tree)
@@ -472,6 +458,8 @@ namespace qptech.src
             var asString = JsonConvert.SerializeObject(storage);
             tree.SetString("storage", asString);
             tree.SetString("status", status.ToString());
+            tree.SetString("mode",mode.ToString());
+            tree.SetDouble("nextproductionat", nextproductionat);
         }
         //TODO: Start Production, Output Items, Return to Idle status (locks out UI while producing?)
                 
@@ -673,7 +661,7 @@ namespace qptech.src
             if (packetid == (int)enPacketIDs.Halt)
             {
                 HaltProduction();
-                isOn = false;
+                
                 MarkDirty(true);
                 
             }
