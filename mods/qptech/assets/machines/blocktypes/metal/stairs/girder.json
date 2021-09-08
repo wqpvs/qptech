@@ -1,0 +1,22 @@
+{
+	"code": "girder",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+
+	},
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+	"shape": { "base": "block/metal/stairs/girder" },
+	
+	"resistance": 1,
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+
+
+}
