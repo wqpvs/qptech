@@ -8,8 +8,6 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"fan": "block/metal/generator/fan",
-		"machinery-back": "block/metal/generator/machinery-back"
 	},
 	"elements": [
 		{

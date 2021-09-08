@@ -9,7 +9,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [  "lv" ]
+			"states": [ "lv" ]
 		},
 		{
 			"code": "side",
@@ -18,20 +18,21 @@
 	],
 	"behaviors": [
 		{
+			"name": "UnstableFalling"
+
+		},
+		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "east" }
 		}
 	],
 	"attributesbytype": {
-		
 		"*-lv-*": {
-			"maxFlux": 320,
-
 			"capacitance": 2500,
 			"receptionFaces": [ "south" ],
 			"distributionFaces": [ "north", "east", "west", "down" ],
 			"showFluxDisplay": true,
-			"displayOffset": [10,12,11.5]
+			"displayOffset": [ 10, 12, 11.5 ]
 		}
 	},
 	"blockmaterial": "Metal",
@@ -62,6 +63,7 @@
 		"machinery-back": { "base": "block/metal/generator/machinery-back" },
 		"castiron": { "base": "block/castiron" }
 	},
+	"lightAbsorption": 0,
 	"resistance": 1,
 	"sideAo": { "all": false },
 	"sidesolid": {

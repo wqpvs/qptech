@@ -8,7 +8,8 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"castiron": "C:/Users/andy-/Documents/GitHub/qptech/mods/qptech/assets/machines/textures/block/castiron"
+		"wires": "qptech/assets/machines/textures/block/metal/wires/tin-wires-1",
+		"castiron": "qptech/assets/machines/textures/block/castiron"
 	},
 	"elements": [
 		{
@@ -50,7 +51,7 @@
 						"east": { "texture": "#wires", "uv": [ 0.0, 0.0, 1.0, 16.0 ], "rotation": 90 },
 						"south": { "texture": "#wires", "uv": [ 0.0, 1.0, 1.5, 2.0 ] },
 						"west": { "texture": "#wires", "uv": [ 0.0, 0.0, 1.0, 16.0 ], "rotation": 90 },
-						"up": { "texture": "#wires", "uv": [ 0.0, 0.0, 2.5, 16.0 ], "autoUv": false },
+						"up": { "texture": "#wires", "uv": [ 0.0, 0.0, 3.0, 16.0 ], "autoUv": false },
 						"down": { "texture": "#wires", "uv": [ 0.0, 0.0, 3.0, 16.0 ], "autoUv": false }
 					}
 				},

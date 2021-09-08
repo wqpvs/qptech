@@ -9,32 +9,111 @@
 		{
 			"outputmaterial": "stone",
 			"outputquantity": 4,
-			"odds": 50
+			"odds": 60
+		},
+		{
+			"outputmaterial": "game:nugget-nativecopper",
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 3
+		},
+		{
+			"outputmaterial": "game:nugget-cassiterite",
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 2
+		},
+		{
+			"outputmaterial": "game:nugget-sphalerite",
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 2
+		},
+		{
+			"outputmaterial": "game:nugget-bismuth",
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 3
+		},
+		{
+			"outputmaterial": "game:nugget-magnetite",
+			"outputquantity": 1,
+			"odds": 1
 		}
-
 	],
 	"gravel": [
 		{
 			"outputmaterial": "sand",
 			"outputquantity": 1,
+			"type": "PARTIAL",
 			"odds": 100
 		},
 		{
 			"outputmaterial": "stone",
-			"outputquantity": 2,
-			"odds": 10
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 20
+		},
+		{
+			"outputmaterial": "game:nugget-nativecopper",
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 5.5
+		},
+		{
+			"outputmaterial": "game:nugget-cassiterite",
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 3.5
+		},
+		{
+			"outputmaterial": "game:nugget-sphalerite",
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 2
+		},
+		{
+			"outputmaterial": "game:nugget-bismuth",
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 1.3
+		},
+		{
+			"outputmaterial": "game:nugget-magnetite",
+			"outputquantity": 1,
+			"odds": 1.8
 		}
 	],
 	"stone": [
 		{
-			"outputmaterial": "sand",
+			"outputmaterial": "game:nugget-nativecopper",
 			"outputquantity": 1,
-			"odds": 25
+			"odds": 0.6,
+			"type": "PARTIAL"
 		},
 		{
-			"outputmaterial": "gravel",
+			"outputmaterial": "game:nugget-cassiterite",
 			"outputquantity": 1,
-			"odds": 25
+			"odds": 0.5,
+			"type": "PARTIAL"
+		},
+		{
+			"outputmaterial": "game:nugget-sphalerite",
+			"outputquantity": 1,
+			"odds": 0.3,
+			"type": "PARTIAL"
+		},
+		{
+			"outputmaterial": "game:nugget-bismuth",
+			"outputquantity": 1,
+			"odds": 0.4,
+			"type": "PARTIAL"
+		},
+		{
+			"outputmaterial": "game:nugget-magnetite",
+			"outputquantity": 1,
+			"odds": 0.5,
+			"type": "PARTIAL"
 		}
 	],
 	"grain": [

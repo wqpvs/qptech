@@ -13,6 +13,10 @@
   },
   "behaviors": [
     {
+      "name": "UnstableFalling"
+
+    },
+    {
       "name": "HorizontalOrientable"
     }
   ],
@@ -106,6 +110,7 @@
       "loadFromProperties": "abstract/horizontalorientation"
     }
   ],
+  "lightAbsorption": 0,
   "sidesolid": {
     "all": false
   },

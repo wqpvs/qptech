@@ -33,6 +33,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\oldwireplatelarge.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\oldwireplate.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\multiblocktest.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\stairs\metalstairs.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\watertower.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\creativegenerator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\battery.json" />
@@ -150,6 +151,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0 - Copy.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\washplant2.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\stairs\metalstair.json" />
     <None Include="qptech\assets\machines\shapes\block\wood\basin.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\battery\primitive.json" />
     <None Include="qptech\assets\machines\shapes\block\glass\BlockLantern.json" />
@@ -212,8 +214,6 @@
     <None Include="qptech\modinfo.json" />
     <None Include="qptech\qptech1.1.0-pre1.zip" />
     <None Include="qptech\qptech1.1.1-pre2.zip" />
-    <None Include="questbook\modinfo.json" />
-    <None Include="questbook\assets\questbook\itemtypes\questbook.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="qptechapi\qptechapi.dll" />
@@ -295,12 +295,6 @@
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-copper.png" />
     <Content Include="qptech\qptech.dll" />
     <Content Include="qptech\qptech.pdb" />
-    <Content Include="questbook\assets\game\textures\gui\bubblewindow.png" />
-    <Content Include="questbook\assets\game\textures\gui\bubblewindowchecked.png" />
-    <Content Include="questbook\assets\game\textures\gui\questbook.png" />
-    <Content Include="questbook\assets\questbook\textures\item\wand.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="questbook\assets\game\textures\item\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

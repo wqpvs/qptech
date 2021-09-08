@@ -10,7 +10,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "lvsoftmetalplate", "lvsoftscrew", "lvsoftrod","lvbender"]
+			"states": [ "lvsoftmetalplate", "lvsoftscrew", "lvsoftrod", "lvbender" ]
 		},
 		{
 			"code": "side",
@@ -18,6 +18,10 @@
 		}
 	],
 	"behaviors": [
+		{
+			"name": "UnstableFalling"
+
+		},
 		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "east" }
@@ -30,7 +34,7 @@
 			"requiredFlux": 20,
 			"inputFace": "west",
 			"outputFace": "east",
-			"acceptFromFaces": ["west"],
+			"acceptFromFaces": [ "west" ],
 			"inputQuantity": 2,
 			"outputQuantity": 1,
 			"recipe": "game:metalplate",
@@ -74,7 +78,7 @@
 			"processingTime": 0.045,
 			"animationSpeed": 0.45,
 			"heatRequirement": 800,
-			"materials": [ "brass","copper" ]
+			"materials": [ "brass", "copper" ]
 		},
 		"*-lvbender-*": {
 			"maxFlux": 40,
@@ -124,6 +128,7 @@
 		"machinery-border-small": { "base": "block/metal/metalpress/machinery-border-small" },
 		"wires": { "base": "block/metal/wires/tin-wires" }
 	},
+	"lightAbsorption": 0,
 	"resistance": 1,
 	"sideAo": { "all": false },
 	"sidesolid": {

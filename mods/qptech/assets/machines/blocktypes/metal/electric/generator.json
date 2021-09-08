@@ -34,6 +34,10 @@
 	],
 	"behaviors": [
 		{
+			"name": "UnstableFalling"
+
+		},
+		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "east" }
 		}
@@ -70,7 +74,7 @@
 			"rotateY": 180
 		}
 	},
-
+	"lightAbsorption": 0,
 	"resistance": 1,
 	"sidesolid": {
 		"all": false,

@@ -40,32 +40,32 @@ namespace qptech.src
     class BEEMacerator:BEEBaseDevice
     {
         string materialInputFace = "up";
-        string materialOutputFace = "down";
+        string materialOutputFace = "east";
         protected BlockFacing rmInputFace=>BlockFacing.FromCode(materialInputFace); //what faces will be checked for input containers
         protected BlockFacing outputFace=> BlockFacing.FromCode(materialOutputFace);
         CollectibleObject workingitem;
         protected string machinename = "macerator";
-        
+
         public string MachineName => machinename;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
+            animInit = false;
             if (Block.Attributes != null)
             {
                 
                 machinename = Block.Attributes["machinename"].AsString(machinename);
                 materialInputFace = Block.Attributes["materialInputFace"].AsString(materialInputFace);
                 materialOutputFace = Block.Attributes["materialOutputFace"].AsString(materialOutputFace);
-
             }
-            SetupAnimation();
+
         }
         protected override void DoDeviceStart()
         {
             if (Capacitor < requiredFlux) { DoFailedStart(); }
             tickCounter = 0;
-            TryStart();
-                        
+            if (IsPowered) { TryStart(); }
+            Start();
         }
         protected override void DoDeviceComplete()
         {
@@ -158,34 +158,66 @@ namespace qptech.src
             base.DoDeviceProcessing();
         }
 
-
-
-
-        void SetupAnimation()
+        void Start()
         {
+
             if (Api.World.Side == EnumAppSide.Client && animUtil != null)
             {
                 if (!animInit)
                 {
                     float rotY = Block.Shape.rotateY;
-                    animUtil.InitializeAnimator(Pos.ToString()+ "process", new Vec3f(0, rotY, 0));
+                    animUtil.InitializeAnimator(Pos.ToString() + "process", new Vec3f(0, rotY, 0));
                     animInit = true;
                 }
-                animUtil.StartAnimation(new AnimationMetaData()
-                {
-                    Animation = animationName,
-                    Code = animationName,
-                    AnimationSpeed = 1,
-                    EaseInSpeed = 1,
-                    EaseOutSpeed = 1,
-                    Weight = 1,
-                    BlendMode = EnumAnimationBlendMode.Add
-                });
-
+                if (IsPowered)
+                    animUtil.StartAnimation(new AnimationMetaData()
+                    {
+                        Animation = "process",
+                        Code = "process",
+                        AnimationSpeed = 1,
+                        EaseInSpeed = 1,
+                        EaseOutSpeed = 2,
+                        Weight = 1,
+                        BlendMode = EnumAnimationBlendMode.Average
+                    });
+                else { animUtil.StopAnimation("process"); }
             }
         }
-        
+
+        public override void TogglePower()
+        {
+
+            if (justswitched) { return; }
+            isOn = !isOn;
+
+            //ToggleAmbientSounds(isOn);
+            justswitched = true;
+            if (Api.World.Side == EnumAppSide.Client && animUtil != null)
+            {
+                if (!animInit)
+                {
+                    float rotY = Block.Shape.rotateY;
+                    animUtil.InitializeAnimator(Pos.ToString() + "process", new Vec3f(0, rotY, 0));
+                    animInit = true;
+                }
+                if (isOn && IsPowered)
+                        animUtil.StartAnimation(new AnimationMetaData()
+                        {
+                            Animation = "process",
+                            Code = "process",
+                            AnimationSpeed = 1,
+                            EaseInSpeed = 1,
+                            EaseOutSpeed = 2,
+                            Weight = 1,
+                            BlendMode = EnumAnimationBlendMode.Average
+                        });
+                    else { animUtil.StopAnimation("process"); }
+                }
+            Api.World.PlaySoundAt(new AssetLocation("sounds/electriczap"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
+        }
+
     }
+
     public class MacerationRecipe
     {
         public string machinename = "macerator";
@@ -237,7 +269,7 @@ namespace qptech.src
             if (maceratelist == null) { LoadMacerateLists(api); }
             if (co == null) { return false; }
             if (co.FirstCodePart() == "ore") { return true; }
-            if (co.ToString().Contains("log")&&machinename=="logsplitter") { return true; }
+            if (co.ToString().Contains("log") && machinename=="logsplitter") { return true; }
             if (co.FirstCodePart() == "nugget") { return false; } //disabling nugget processing for now
             if (maceratelist.ContainsKey(co.FirstCodePart())) {
                 bool result = maceratelist[co.FirstCodePart()].Any(val => val.machinename==machinename);

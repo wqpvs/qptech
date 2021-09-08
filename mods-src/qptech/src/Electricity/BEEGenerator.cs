@@ -106,7 +106,6 @@ namespace qptech.src
                     { 
                         Animation = "run", Code = "run", AnimationSpeed = 0.7f, EaseInSpeed = 2, EaseOutSpeed = 8, Weight = 1, BlendMode = EnumAnimationBlendMode.Average 
                     });
-
             }
 
             if (trypower) { ChangeCapacitor(MaxFlux); }

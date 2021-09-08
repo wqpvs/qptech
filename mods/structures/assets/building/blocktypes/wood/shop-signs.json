@@ -1,0 +1,65 @@
+{
+	"code": "shopsigns",
+	"behaviors": [
+		{
+			"name": "HorizontalOrientable"
+		}
+	],
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "bakery", "smithy", "general", "tailor" ]
+		},
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+	"creativeinventory": {
+		"general": [ "*-north" ]
+	},
+	"blockmaterial": "Wood",
+	"shape": { "base": "building:block/wood/board" },
+	"shapeByType": {
+		"*-north": {
+			"base": "building:block/wood/board",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "building:block/wood/board",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "building:block/wood/board",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "building:block/wood/board",
+			"rotateY": 180
+		}
+	},
+	"drawtype": "json",
+	"textures": {
+		"bolt": { "base": "game:block/metal/plate/iron" },
+		"wood": { "base": "block/wood/board/frame" },
+		"text": { "base": "block/wood/board/shop-{type}" }
+	},
+	"resistance": 250,
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/wood"
+	},
+	//selectionBox: { x1: 0.92, y1: 0.29, z1: 0.2, x2: 1, y2: 0.69, z2: 0.8 },
+	//collisionbox: { x1: 0.92, y1: 0.29, z1: 0.2, x2: 1, y2: 0.69, z2: 0.8 },
+	"guiTransform": {
+		"origin": {
+			"x": 0.5,
+			"y": 0.5,
+			"z": 0.5
+		},
+		"scale": 1
+	}
+
+}

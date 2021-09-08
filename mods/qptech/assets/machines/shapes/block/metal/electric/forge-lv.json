@@ -8,10 +8,10 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"machinery-back": "qptech/assets/machines/textures/block/metal/generator/machinery-back",
-		"wires": "qptech/assets/machines/textures/block/metal/wires/tin-wires",
-		"castiron": "qptech/assets/machines/textures/block/castiron",
-		"machinery-border-small": "qptech/assets/machines/textures/block/metal/metalpress/machinery-border-small"
+		"machinery-back": "block/metal/generator/machinery-back",
+		"wires": "block/metal/wires/tin-wires",
+		"castiron": "block/castiron",
+		"machinery-border-small": "block/metal/metalpress/machinery-border-small"
 	},
 	"elements": [
 		{

@@ -22,11 +22,12 @@
 		{ "name": "HeatSource" }
 	],
 	"renderpass": "OpaqueNoCull",
-	"shape": { "base": "block/metal/smelter-furnace-closed" },
+	"shape": { "base": "block/metal/firepit/smelter-furnace-closed" },
 	"blockmaterial": "Metal",
 	"lightAbsorption": 0,
 	"lightHsvByType": {
-		"smelterfurnace-extinct": [ 7, 7, 3 ],
+		"smelterfurnace-cold": [ 1, 1, 3 ],
+		"smelterfurnace-extinct": [ 3, 3, 3 ],
 		"smelterfurnace-lit": [ 7, 7, 16 ]
 	},
 	"particlePropertiesByType": {
@@ -145,8 +146,8 @@
 						"var": 0.15
 					},
 					{
-						"avg": 0.5,
-						"var": 0.1
+						"avg": -0,
+						"var": -0.5
 					},
 					{
 						"avg": 0,
@@ -214,7 +215,7 @@
 						"var": 0.025
 					},
 					{
-						"avg": 0.2,
+						"avg": 0.25,
 						"var": 0.05
 					},
 					{
@@ -284,15 +285,15 @@
 						"var": 0.1
 					},
 					{
-						"avg": 0.125,
-						"var": 0.05
+						"avg": -0,
+						"var": -0.5
 					},
 					{
 						"avg": 0,
 						"var": 0.1
 					}
 				],
-				"quantity": { "avg": 0.4 },
+				"quantity": { "avg": 0.5 },
 				"size": {
 					"avg": 0.25,
 					"var": 0.05
@@ -317,20 +318,18 @@
 	"replaceable": 10,
 	"resistance": 2.5,
 
-
 	"guiTransform": {
 		"origin": {
 			"x": 0.5,
-			"y": 0.0625,
+			"y": 0.525,
 			"z": 0.5
-		},
-		"scale": 1
+		}
 	},
 
 	"materialDensity": 600,
 	"sounds": {
-		"place": "block/planks",
-		"hit": "block/planks",
-		"break": "block/planks"
+		"place": "block/anvil",
+		"walk": "walk/stone",
+		"break": "block/anvil"
 	}
 }

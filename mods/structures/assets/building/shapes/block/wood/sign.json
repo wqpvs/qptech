@@ -1,0 +1,143 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"rope": "C:/Users/andy-/AppData/Roaming/Vintagestory/assets/survival/textures/item/resource/rope",
+		"wood": "C:/Users/andy-/AppData/Roaming/Vintagestory/assets/survival/textures/block/wood/chest/aged/corners"
+	},
+	"elements": [
+		{
+			"name": "Board",
+			"from": [ 1.2, 5.4, 7.25 ], 
+			"to": [ 11.76, 12.0, 8.306 ], 
+			"rotationOrigin": [ 1.2, 10.44, 8.24 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 6.5 ], "enabled": false },
+				"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 6.5 ], "enabled": false },
+				"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 10.5, 1.0 ], "enabled": false },
+				"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 10.5, 1.0 ], "enabled": false }
+			},
+			"children": [
+				{
+					"name": "Face",
+					"from": [ 0.0, -0.33, -0.165 ], 
+					"to": [ 10.56, 6.27, 1.155 ], 
+					"renderPass": 3,
+					"faces": {
+						"north": { "texture": "#text", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+						"east": { "texture": "#text", "uv": [ 0.0, 0.0, 1.0, 5.0 ], "enabled": false },
+						"south": { "texture": "#text", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+						"west": { "texture": "#text", "uv": [ 0.0, 0.0, 1.0, 5.0 ], "enabled": false },
+						"up": { "texture": "#text", "uv": [ 0.0, 0.0, 8.0, 1.0 ], "enabled": false },
+						"down": { "texture": "#text", "uv": [ 0.0, 0.0, 8.0, 1.0 ], "enabled": false }
+					}
+				},
+				{
+					"name": "Frame Top",
+					"from": [ 0.0, 6.6, -0.264 ], 
+					"to": [ 10.56, 7.26, 1.32 ], 
+					"rotationOrigin": [ -1.32, 6.6, 0.0 ],
+					"faces": {
+						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false, "autoUv": false },
+						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false, "autoUv": false },
+						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false }
+					}
+				},
+				{
+					"name": "Frame Left",
+					"from": [ -0.66, -0.66, -0.264 ], 
+					"to": [ 0.0, 7.26, 1.32 ], 
+					"rotationOrigin": [ 0.0, -1.32, 0.0 ],
+					"faces": {
+						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "rotation": 90, "autoUv": false }
+					}
+				},
+				{
+					"name": "Frame Bottom",
+					"from": [ 0.0, -0.66, -0.264 ], 
+					"to": [ 10.56, 0.0, 1.32 ], 
+					"rotationOrigin": [ -1.32, -1.32, 0.0 ],
+					"faces": {
+						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false, "autoUv": false },
+						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false, "autoUv": false },
+						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false }
+					}
+				},
+				{
+					"name": "Frame Right",
+					"from": [ 10.56, -0.66, -0.264 ], 
+					"to": [ 11.22, 7.26, 1.32 ], 
+					"rotationOrigin": [ 11.88, -1.32, 0.0 ],
+					"faces": {
+						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "autoUv": false },
+						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "rotation": 90, "autoUv": false }
+					}
+				},
+				{
+					"name": "Frame Log",
+					"from": [ -1.98, 9.24, -0.264 ], 
+					"to": [ 15.84, 10.56, 1.32 ], 
+					"rotationOrigin": [ -1.32, 9.24, 0.0 ],
+					"faces": {
+						"north": { "texture": "#wood", "uv": [ 1.5, 9.0, 14.0, 11.0 ], "autoUv": false },
+						"east": { "texture": "#wood", "uv": [ 4.0, 5.0, 5.5, 7.0 ], "autoUv": false },
+						"south": { "texture": "#wood", "uv": [ 1.5, 7.5, 14.0, 9.5 ], "autoUv": false },
+						"west": { "texture": "#wood", "uv": [ 4.0, 2.5, 5.5, 4.5 ], "autoUv": false },
+						"up": { "texture": "#wood", "uv": [ 1.5, 9.0, 14.0, 11.0 ], "autoUv": false },
+						"down": { "texture": "#wood", "uv": [ 1.5, 7.0, 14.0, 9.0 ], "autoUv": false }
+					}
+				},
+				{
+					"name": "Frame Rope 1",
+					"from": [ 9.24, 7.26, 0.264 ], 
+					"to": [ 9.9, 10.692, 0.924 ], 
+					"rotationOrigin": [ 10.56, 6.6, 0.0 ],
+					"faces": {
+						"north": { "texture": "#rope", "uv": [ 2.5, 3.5, 3.5, 6.5 ], "autoUv": false },
+						"east": { "texture": "#rope", "uv": [ 2.5, 4.5, 3.5, 7.5 ], "autoUv": false },
+						"south": { "texture": "#rope", "uv": [ 2.0, 3.5, 3.0, 6.5 ], "autoUv": false },
+						"west": { "texture": "#rope", "uv": [ 3.0, 3.5, 4.0, 6.5 ], "autoUv": false },
+						"up": { "texture": "#rope", "uv": [ 1.5, 2.5, 2.5, 1.5 ], "autoUv": false },
+						"down": { "texture": "#rope", "uv": [ 1.5, 7.0, 2.0, 7.5 ], "enabled": false }
+					}
+				},
+				{
+					"name": "Frame Rope 2",
+					"from": [ 0.66, 7.26, 0.264 ], 
+					"to": [ 1.32, 10.692, 0.924 ], 
+					"rotationOrigin": [ 2.64, 6.6, 0.0 ],
+					"faces": {
+						"north": { "texture": "#rope", "uv": [ 4.5, 4.5, 5.5, 7.5 ], "autoUv": false },
+						"east": { "texture": "#rope", "uv": [ 5.0, 4.5, 6.0, 7.5 ], "autoUv": false },
+						"south": { "texture": "#rope", "uv": [ 5.5, 4.0, 6.5, 7.0 ], "autoUv": false },
+						"west": { "texture": "#rope", "uv": [ 5.5, 2.0, 6.5, 5.0 ], "autoUv": false },
+						"up": { "texture": "#rope", "uv": [ 3.0, 2.0, 4.0, 1.0 ], "autoUv": false },
+						"down": { "texture": "#rope", "uv": [ 1.5, 7.0, 2.0, 7.5 ], "enabled": false }
+					}
+				}
+			]
+		}
+	]}

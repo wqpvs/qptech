@@ -9,10 +9,13 @@
 	"entityBehaviors": [ { "name": "Animatable" } ],
 	"behaviors": [
 		{
+			"name": "UnstableFalling"
+
+		},
+		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "east" }
 		}
-
 	],
 	"variantgroups": [
 		{
@@ -57,6 +60,7 @@
 			"rotateY": 180
 		}
 	},
+	"lightAbsorption": 0,
 	"resistance": 1,
 	"sideopaque": {
 		"all": false

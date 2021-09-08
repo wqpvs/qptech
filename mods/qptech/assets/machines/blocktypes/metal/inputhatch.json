@@ -8,10 +8,10 @@
 		"quantitySlots": { "normal-generic": 24 },
 		"storageType": { "normal-generic": 169 },
 		"dialogTitleLangCode": {
-			"normal-generic": "chestcontents"
+			"normal-generic": "content"
 		},
-		"typedOpenSound": { "normal-generic": "sounds/block/largechestopen" },
-		"typedCloseSound": { "normal-generic": "sounds/block/largechestclose" },
+		"typedOpenSound": { "normal-generic": "game:sounds/block/cokeovendoor-open" },
+		"typedCloseSound": { "normal-generic": "game:sounds/block/cokeovendoor-close" }
 		
 	},
 	"behaviors": [

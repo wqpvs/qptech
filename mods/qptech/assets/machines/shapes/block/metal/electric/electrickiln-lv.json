@@ -8,11 +8,11 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"wires": "qptech/assets/machines/textures/block/metal/wires/tin-wires",
-		"machinery-back": "qptech/assets/machines/textures/block/metal/generator/machinery-back",
-		"castiron": "qptech/assets/machines/textures/block/castironpeekaboo",
-		"machinery-firebox": "qptech/assets/machines/textures/block/metal/firebox/machinery-firebox",
-		"machinery": "qptech/assets/machines/textures/block/machinery"
+		"wires": "block/metal/wires/tin-wires",
+		"machinery-back": "block/metal/generator/machinery-back",
+		"castiron": "block/castironpeekaboo",
+		"machinery-firebox": "block/metal/firebox/machinery-firebox",
+		"machinery": "block/machinery"
 	},
 	"elements": [
 		{

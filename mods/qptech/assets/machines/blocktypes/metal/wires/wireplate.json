@@ -6,6 +6,12 @@
     "general": [ "*-ew-uncovered" ],
     "qptech": [ "*-ew-uncovered" ]
   },
+  "behaviors": [
+    {
+      "name": "UnstableFalling"
+
+    }
+  ],
   "variantgroups": [
     {
       "code": "type",
@@ -26,13 +32,15 @@
         "north",
         "south",
         "east",
-        "west","down"
+        "west",
+        "down"
       ],
       "distributionFaces": [
         "north",
         "south",
         "east",
-        "west","down"
+        "west",
+        "down"
       ]
     }
   },
@@ -113,6 +121,7 @@
   "drawtypeByType": {
     "*-uncovered": "JSON"
   },
+  "lightAbsorption": 0,
   "faceCullMode": "NeverCull",
   "renderpass": "OpaqueNoCull",
   "sidesolid": { "all": false },
@@ -123,19 +132,19 @@
   },
   "selectionBox": {
     "x1": 0,
-    "y1": 0,
-    "z1": 0,
+    "y1": 0.0625,
+    "z1": 0.375,
     "x2": 1,
-    "y2": 0.25,
-    "z2": 1
+    "y2": 0.125,
+    "z2": 0.625
   },
   "collisionBox": {
     "x1": 0,
-    "y1": 0,
-    "z1": 0,
+    "y1": 0.0625,
+    "z1": 0.375,
     "x2": 1,
-    "y2": 0.25,
-    "z2": 1
+    "y2": 0.125,
+    "z2": 0.625
   },
   "sounds": {
     "place": "game:block/anvil",

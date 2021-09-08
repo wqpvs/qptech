@@ -1,0 +1,132 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"bolt": "C:/Users/andy-/Documents/GitHub/qptech/mods/qptech/assets/machines/textures/block/castiron",
+		"text": "C:/Users/andy-/Documents/GitHub/qptech/mods/structures/assets/building/textures/block/wood/board/shop-tailor",
+		"frame": "C:/Users/andy-/Documents/GitHub/qptech/mods/structures/assets/building/textures/block/wood/board/frame"
+	},
+	"elements": [
+		{
+			"name": "Board",
+			"from": [ 0.0, 4.0, 0.0 ], 
+			"to": [ 16.0, 12.0, 0.5 ], 
+			"rotationOrigin": [ 0.0, 4.0, 0.0 ],
+			"faces": {
+				"north": { "texture": "#frame", "uv": [ 0.0, 0.0, 16.0, 8.0 ] },
+				"east": { "texture": "#frame", "uv": [ 15.5, 0.5, 16.0, 8.5 ] },
+				"south": { "texture": "#frame", "uv": [ 0.0, 0.0, 16.0, 8.0 ] },
+				"west": { "texture": "#frame", "uv": [ 0.0, 0.0, 0.5, 8.0 ] },
+				"up": { "texture": "#frame", "uv": [ 0.0, 0.0, 16.0, 0.5 ] },
+				"down": { "texture": "#frame", "uv": [ 0.0, 7.5, 16.0, 8.0 ] }
+			},
+			"children": [
+				{
+					"name": "Bolt",
+					"from": [ 0.5, 7.0, 0.54 ], 
+					"to": [ 1.0, 8.5, 0.74 ], 
+					"rotationOrigin": [ 0.0, 7.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 10.5 ] },
+						"east": { "texture": "#bolt", "uv": [ 1.5, 8.5, 2.0, 10.0 ] },
+						"south": { "texture": "#bolt", "uv": [ 1.0, 9.5, 1.5, 11.0 ] },
+						"west": { "texture": "#bolt", "uv": [ 1.5, 9.5, 2.0, 11.0 ] },
+						"up": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] },
+						"down": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] }
+					},
+					"children": [
+						{
+							"name": "Cube7",
+							"from": [ 0.1, 1.2, -0.55 ], 
+							"to": [ 0.4, 1.4, 0.3 ], 
+							"rotationOrigin": [ 0.0, 1.0, 0.0 ],
+							"faces": {
+								"north": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] },
+								"east": { "texture": "#bolt", "uv": [ 1.5, 8.5, 2.0, 9.0 ] },
+								"south": { "texture": "#bolt", "uv": [ 1.0, 9.5, 1.5, 10.0 ] },
+								"west": { "texture": "#bolt", "uv": [ 1.5, 9.5, 2.0, 10.0 ] },
+								"up": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] },
+								"down": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] }
+							}
+						},
+						{
+							"name": "Cube8",
+							"from": [ 0.1, 0.2, -0.3 ], 
+							"to": [ 0.4, 0.4, 0.3 ], 
+							"faces": {
+								"north": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] },
+								"east": { "texture": "#bolt", "uv": [ 1.5, 8.5, 2.0, 9.0 ] },
+								"south": { "texture": "#bolt", "uv": [ 1.0, 9.5, 1.5, 10.0 ] },
+								"west": { "texture": "#bolt", "uv": [ 1.5, 9.5, 2.0, 10.0 ] },
+								"up": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] },
+								"down": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] }
+							}
+						}
+					]
+				},
+				{
+					"name": "Bolt5",
+					"from": [ 15.0, 7.0, 0.54 ], 
+					"to": [ 15.5, 8.5, 0.74 ], 
+					"rotationOrigin": [ 15.0, 7.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 10.5 ] },
+						"east": { "texture": "#bolt", "uv": [ 1.5, 8.5, 2.0, 10.0 ] },
+						"south": { "texture": "#bolt", "uv": [ 1.0, 9.5, 1.5, 11.0 ] },
+						"west": { "texture": "#bolt", "uv": [ 1.5, 9.5, 2.0, 11.0 ] },
+						"up": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] },
+						"down": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] }
+					},
+					"children": [
+						{
+							"name": "Cube6",
+							"from": [ 0.1, 1.2, -0.55 ], 
+							"to": [ 0.4, 1.4, 0.3 ], 
+							"rotationOrigin": [ 0.0, 1.0, 0.0 ],
+							"faces": {
+								"north": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] },
+								"east": { "texture": "#bolt", "uv": [ 1.5, 8.5, 2.0, 9.0 ] },
+								"south": { "texture": "#bolt", "uv": [ 1.0, 9.5, 1.5, 10.0 ] },
+								"west": { "texture": "#bolt", "uv": [ 1.5, 9.5, 2.0, 10.0 ] },
+								"up": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] },
+								"down": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] }
+							}
+						},
+						{
+							"name": "Cube9",
+							"from": [ 0.1, 0.2, -0.3 ], 
+							"to": [ 0.4, 0.4, 0.3 ], 
+							"faces": {
+								"north": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] },
+								"east": { "texture": "#bolt", "uv": [ 1.5, 8.5, 2.0, 9.0 ] },
+								"south": { "texture": "#bolt", "uv": [ 1.0, 9.5, 1.5, 10.0 ] },
+								"west": { "texture": "#bolt", "uv": [ 1.5, 9.5, 2.0, 10.0 ] },
+								"up": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] },
+								"down": { "texture": "#bolt", "uv": [ 1.5, 9.0, 2.0, 9.5 ] }
+							}
+						}
+					]
+				},
+				{
+					"name": "Face",
+					"from": [ 0.6, -0.35, 0.0 ], 
+					"to": [ 15.6, 7.65, 0.55 ], 
+					"renderPass": 3,
+					"faces": {
+						"north": { "texture": "#text", "uv": [ 0.0, 0.0, 15.0, 8.0 ], "enabled": false },
+						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 8.0 ], "enabled": false },
+						"south": { "texture": "#text", "uv": [ 0.0, 3.25, 16.0, 11.25 ], "autoUv": false },
+						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 0.5, 8.0 ], "enabled": false },
+						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 15.0, 0.5 ], "enabled": false },
+						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 15.0, 0.5 ], "enabled": false }
+					}
+				}
+			]
+		}
+	]}
