@@ -12,10 +12,7 @@
     "receptionFaces": [ "north" ]
   },
   "behaviors": [
-    {
-      "name": "UnstableFalling"
 
-    },
     {
       "name": "HorizontalOrientable"
     }

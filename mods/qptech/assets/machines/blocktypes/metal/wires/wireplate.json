@@ -6,12 +6,7 @@
     "general": [ "*-ew-uncovered" ],
     "qptech": [ "*-ew-uncovered" ]
   },
-  "behaviors": [
-    {
-      "name": "UnstableFalling"
 
-    }
-  ],
   "variantgroups": [
     {
       "code": "type",

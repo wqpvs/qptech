@@ -17,10 +17,7 @@
 		}
 	],
 	"behaviors": [
-		{
-			"name": "UnstableFalling"
 
-		},
 		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "east" }

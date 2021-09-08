@@ -29,6 +29,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\multiblock\powerhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\inputhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\itemhatch.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\stairs\metalplatform.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\structureblock.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\oldwireplatelarge.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\oldwireplate.json" />
@@ -151,6 +152,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0 - Copy.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\washplant2.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\stairs\metalplatform.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\stairs\metalstair.json" />
     <None Include="qptech\assets\machines\shapes\block\wood\basin.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\battery\primitive.json" />

@@ -8,10 +8,7 @@
 	},
 	"entityBehaviors": [ { "name": "Animatable" } ],
 	"behaviors": [
-		{
-			"name": "UnstableFalling"
 
-		},
 		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "east" }

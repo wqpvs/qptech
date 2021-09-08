@@ -12,10 +12,7 @@
     "distributionFaces": [ "north" ]
   },
   "behaviors": [
-    {
-      "name": "UnstableFalling"
 
-    },
     {
       "name": "HorizontalOrientable"
     }
