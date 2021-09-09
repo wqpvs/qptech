@@ -3,8 +3,8 @@
 	"class":  "BlockMBT",
 	"entityclass": "MultiBlockTest",
 	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+		"general": [ "" ],
+		"qptech": [ "" ]
 	},
 	"attributes": {
 		"multiblockStructure": {

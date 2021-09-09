@@ -125,6 +125,7 @@
     <Compile Include="src\misc\firepitloader.cs" />
     <Compile Include="src\misc\PowerSink.cs" />
     <Compile Include="src\misc\BETemporalPocket.cs" />
+    <Compile Include="src\multiblock\BEEMBHeater.cs" />
     <Compile Include="src\multiblock\BEEPowerHatch.cs" />
     <Compile Include="src\multiblock\BlockMBT.cs" />
     <Compile Include="src\multiblock\IFunctionalMultiblock.cs" />

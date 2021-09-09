@@ -22,7 +22,7 @@
 				"machines:structureblock-iron": 1,
 				"machines:electriccrucible": 2,
 				"machines:inputhatch-north": 3,
-				"machines:heatsink-lowtemp-*": 4,
+				"machines:heaterblock": 4,
 				"machines:powerhatch-lv": 5
 			},
 			"offsets": [

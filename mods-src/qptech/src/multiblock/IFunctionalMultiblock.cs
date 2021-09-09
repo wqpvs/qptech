@@ -33,4 +33,9 @@ namespace qptech.src.multiblock
         BlockPos MBOffset { get; }
         string StructureName { get; }
     }
+
+    interface IMultiblockHeatUser
+    {
+        bool ReceiveHeat(float amt);
+    }
 }
