@@ -20,8 +20,8 @@
 		}
 	],
 	"creativeinventory": {
-		"general": [ "*-east" ],
-		"qptech": [ "*-east" ]
+		"general": [ "" ],
+		"qptech": [ "" ]
 	},
 	"blockmaterial": "Stone",
 	"shape": { "base": "block/metal/electric/electricfan" },

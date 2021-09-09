@@ -25,7 +25,8 @@
     <None Include="qptech\assets\game\shapes\block\can-full.json" />
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\electric\electriccrucible.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\blastfurnace.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\multiblock\electriccrucible.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\multiblock\powerhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\inputhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\itemhatch.json" />
@@ -39,9 +40,8 @@
     <None Include="qptech\assets\machines\blocktypes\metal\watertower.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\creativegenerator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\battery.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\electric\multiblock\electrickiln.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\electrickiln.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\clayformer.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\electric\blastfurnace.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\electricforge.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\generator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\logsplitter.json" />
@@ -53,11 +53,6 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\electricfan.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\dummygauge.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\heatsink.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\other\hiddenchute\chute-cross.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\other\hiddenchute\chute-straight.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\other\hiddenchute\chute-t.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\other\hiddenchute\chute.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\other\hiddenhopper\hiddenhopper.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\gauge.json" />
     <None Include="qptech\assets\machines\blocktypes\other\blocklantern.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\light\light-bulb.json" />
@@ -238,6 +233,7 @@
     <Content Include="qptech\assets\game\textures\block\indicatorblack.png" />
     <Content Include="qptech\assets\game\textures\block\indicatorgreen.png" />
     <Content Include="qptech\assets\game\textures\block\panel elements.png" />
+    <Content Include="qptech\assets\game\textures\block\pip.png" />
     <Content Include="qptech\assets\game\textures\block\redhandle.png" />
     <Content Include="qptech\assets\game\textures\block\sigh.png" />
     <Content Include="qptech\assets\game\textures\block\stopbutton.png" />

@@ -56,11 +56,16 @@ namespace qptech.src
             }
             else if (!mycrucible.IsPowered)
             {
-                statustext = "<font align=\"center\">NO POWER</font>";
+                statustext = "<font align=\"center\">LOW POWER</font>";
             }
             else
             {
-                statustext = "<font style=\"bold\" align =\"center\">Charge at " + mycrucible.CapacitorPercentage * 100 + "%\nPower Usage:"+mycrucible.FluxPerTick+" Flux</font>";
+                string statcolor = " color=#55ff00";
+                if (mycrucible.Capacitor < mycrucible.FluxPerTick)
+                {
+                    statcolor = " color=#ff3300";
+                }
+                statustext = "<font style=\"bold\" align =\"center\""+statcolor+">Charge at " + mycrucible.CapacitorPercentage * 100 + "%\nPower Usage:"+mycrucible.FluxPerTick+" Flux</font>";
             }
             ElementBounds switchBounds = ElementBounds.Fixed(switchx, switchy, 64, 24);
             SingleComposer.AddDynamicCustomDraw(switchBounds, powerswitch, "powerswitch");
@@ -68,6 +73,15 @@ namespace qptech.src
             screenwidth = 205-6;screenheight = 55-6;screenx = 36;screeny = 100;
             screenBounds = ElementBounds.Fixed(screenx, screeny, screenwidth, screenheight);
             SingleComposer.AddRichtext(statustext, CairoFont.WhiteDetailText(), screenBounds);
+
+            //Draw Temperature Pip
+            double pipmin = 34;
+            double pipmax = 213;
+            double pipx = pipmin + (pipmax - pipmin) * mycrucible.internalTempPercent;
+            ElementBounds pipBounds = ElementBounds.Fixed(pipx, 265, 16, 16);
+            GEDrawTexture pgdt = new GEDrawTexture(capi, pipBounds, "pip.png");
+            SingleComposer.AddDynamicCustomDraw(pipBounds, pgdt.OnDraw);
+
             //Draw title
             screenwidth = 116;screenheight = 15;
             screenx = sectionx+71;

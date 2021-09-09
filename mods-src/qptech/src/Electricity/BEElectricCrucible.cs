@@ -26,9 +26,9 @@ namespace qptech.src
         float maxHeat = 2000;              //how hot can it go
         float minHeat = 20;
         float internalHeat = 20;          //current heat of everything (added items will instantly average their heat)
-        int heatPerTickPerLiter = 25000;    //how quickly it can heat it contents
-        int heatLossPerTickPerLiter = 10; //how fast to cool contents if not heating
-        int fluxPerTick = 1;           //how much power to use
+        int heatPerTickPerLiter = 2500;    //how quickly it can heat it contents
+        int heatLossPerTickPerLiter = 1000; //how fast to cool contents if not heating
+        int fluxPerTick = 16;           //how much power to use
         public int FluxPerTick => fluxPerTick;
         int ingotsize = 100;
         int uiUpdateEvery = 20;
@@ -223,7 +223,7 @@ namespace qptech.src
         void DoStorageHeat()
         {
             //if (Api is ICoreClientAPI) { return; }
-            if (UsedStorage == 0) { return; }
+            if (UsedStorage == 0) { internalHeat = minHeat; return; }
             
             //TODO Heat if powered, or cool storage as necessary
             if (IsOn&&Capacitor >= fluxPerTick)
@@ -233,10 +233,13 @@ namespace qptech.src
                 internalHeat = Math.Min(internalHeat, maxHeat);
                 return;
             }
+            else
+            {
+                ChangeCapacitor(-Capacitor); //this will eat up any residual power, being a constant drain on system
+            }
             internalHeat-=(heatLossPerTickPerLiter / (float)UsedStorage);
             internalHeat = Math.Max(internalHeat, minHeat);
             
-            //MarkDirty(true);
         }
         void DoProduction()
         {

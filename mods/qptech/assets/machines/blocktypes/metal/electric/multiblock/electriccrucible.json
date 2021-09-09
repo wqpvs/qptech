@@ -10,9 +10,9 @@
 	"attributes": {
 
 
-		"maxFlux": 500,
+		"maxFlux": 128,
 
-		"capacitance": 2500,
+		"capacitance": 256,
 
 		"distributionFaces": [],
 
