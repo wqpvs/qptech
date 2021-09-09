@@ -27,7 +27,7 @@ namespace qptech.src.multiblock
     class BEEMBHeater : BEElectric, IFunctionalMultiblockPart
     {
         int fluxPerTick = 5;
-        float heatPerTickPerLiter = 600;
+        float heatPerTickPerLiter = 700;
 
         IFunctionalMultiblockMaster master;
         public IFunctionalMultiblockMaster Master { get { return master; } set { master = value; } }
@@ -37,8 +37,9 @@ namespace qptech.src.multiblock
             if (Capacitor < fluxPerTick || !IsOn || master == null) { return; }
             
             IMultiblockHeatUser masterheat = master as IMultiblockHeatUser;
-            if (masterheat != null && masterheat.ReceiveHeat(heatPerTickPerLiter))
+            if (masterheat != null )
             {
+                masterheat.ReceiveHeat(heatPerTickPerLiter);
                 ChangeCapacitor(-fluxPerTick);
             }
             //TODO IN FUTURE - check each part for heat usage?

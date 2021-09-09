@@ -26,9 +26,9 @@ namespace qptech.src
         float maxHeat = 2000;              //how hot can it go
         float minHeat = 20;
         float internalHeat = 20;          //current heat of everything (added items will instantly average their heat)
-        int heatPerTickPerLiter = 2500;    //how quickly it can heat it contents
+       
         int heatLossPerTickPerLiter = 1000; //how fast to cool contents if not heating
-        int fluxPerTick = 1;           //how much power to use
+        int fluxPerTick = 10;           //how much power to use (during production, rest of power usage comes from other elements)
         public int FluxPerTick => fluxPerTick;
         int ingotsize = 100;
         int uiUpdateEvery = 20;
@@ -84,6 +84,7 @@ namespace qptech.src
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
+            if (Block.Attributes == null) { return; }
             ms = Block.Attributes["multiblockStructure"].AsObject<MultiblockStructure>();
             int[] offsarray = { 0, 0, 0 };
             offsarray = Block.Attributes["mboffset"].AsArray<int>(offsarray);
@@ -108,7 +109,7 @@ namespace qptech.src
                 SetStatus();         //update status of block
                 if (status == enStatus.PRODUCING) { DoProduction(); }
             }
-            if (Api is ICoreClientAPI)
+            else if (Api is ICoreClientAPI)
             {
                 UpdateUI();
             }
@@ -122,17 +123,20 @@ namespace qptech.src
                 if (p != null) { p.OnPartTick(par); }
             }
         }
+
+        
         void UpdateUI()
         {
-            uiUpdateSkipCounter++;
-            if (uiUpdateSkipCounter >= uiUpdateEvery)
-            {
-                uiUpdateSkipCounter = 0;
+            //uiUpdateSkipCounter++;
+            //if (uiUpdateSkipCounter >= uiUpdateEvery)
+            //{
+                //uiUpdateSkipCounter = 0;
+                
                 if (gas != null && gas.IsOpened())
                 {
                     gas.SetupDialog(this);
                 }
-            }
+            //}
         }
         void SetStatus()
         {
@@ -162,6 +166,7 @@ namespace qptech.src
             parts = new List<IFunctionalMultiblockPart>();
             ms.WalkMatchingBlocks(Api.World, mboffset,OnInitializeMember);
             status = enStatus.READY;
+            MarkDirty(true);
         }
         
         public void InitializeBlock(Block memberblock, BlockPos bp)
@@ -239,7 +244,7 @@ namespace qptech.src
             }*/
             internalHeat-=(heatLossPerTickPerLiter / (float)UsedStorage);
             internalHeat = Math.Max(internalHeat, minHeat);
-            
+            MarkDirty();
         }
         public bool ReceiveHeat(float amt)
         {
@@ -255,6 +260,8 @@ namespace qptech.src
         {
             //TODO if set to produce, check if anything can be made
             //     - make and distribute it
+            if (Capacitor < fluxPerTick) { return; }
+            ChangeCapacitor(-fluxPerTick);
             if (recipes == null) {
                 FindValidRecipes();
                 if (recipes == null)
@@ -420,10 +427,10 @@ namespace qptech.src
             dsc.AppendLine(status.ToString());
             dsc.AppendLine(mode.ToString());
             dsc.AppendLine("Temp at " + internalHeat + "/" + maxHeat + "C");
-            if (ActiveOrder) {
+            //if (ActiveOrder) {
                 dsc.AppendLine(currentMetalRecipe + " x" + currentOrder);
                 dsc.AppendLine((nextproductionat+" (Current time: "+Api.World.Calendar.TotalHours+")").ToString());
-            }
+            //}
             
           
         }
@@ -459,6 +466,11 @@ namespace qptech.src
             Enum.TryParse(modestring, out enProductionMode mode);
             nextproductionat = tree.GetDouble("nextproductionat");
             FindValidRecipes();
+            if (Api is ICoreClientAPI)
+            {
+                UpdateUI();
+
+            }
         }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
@@ -597,7 +609,7 @@ namespace qptech.src
         public void SetOrder(string formetal, int qty, bool onlycompleteorder)
         {
             ICoreClientAPI capi = Api as ICoreClientAPI;
-            if (capi != null)
+            /*if (capi != null)
             {
                 if (status != enStatus.READY) { return; }
                 FindValidRecipes();
@@ -610,8 +622,9 @@ namespace qptech.src
                 byte[] data = ObjectToByteArray(neworder);
                 (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.SetOrder,data);
                 if (Api.World.Calendar != null) { nextproductionat = Api.World.Calendar.TotalHours + productionTime; }
-            }
-            else if (Api is ICoreServerAPI)
+                
+            }*/
+            if (Api is ICoreServerAPI)
             {
                 if (status != enStatus.READY) { return; }
                 FindValidRecipes();
@@ -621,6 +634,7 @@ namespace qptech.src
                 currentMetalRecipe = formetal;
                 status = enStatus.PRODUCING;
                 if (Api.World.Calendar != null) { nextproductionat = Api.World.Calendar.TotalHours + productionTime; }
+                MarkDirty();
             }
             
         }
@@ -628,13 +642,13 @@ namespace qptech.src
         {
             (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.TogglePower, null);
             TogglePower();
-            UpdateUI();
+            
         }
         public void ButtonToggleMode()
         {
             (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.ToggleMode, null);
             ToggleMode();
-            UpdateUI();
+            
         }
 
         public void HaltButton()
@@ -659,6 +673,7 @@ namespace qptech.src
                 {
                     SetOrder(key, inmetal[key], true);
                 }
+                MarkDirty(true);
                 return;
             }
             if (packetid == (int)enPacketIDs.TogglePower)
@@ -680,7 +695,7 @@ namespace qptech.src
             }
             base.OnReceivedServerPacket(packetid, data);
         }
-        
+
         private byte[] ObjectToByteArray(Object obj)
         {
             if (obj == null)
