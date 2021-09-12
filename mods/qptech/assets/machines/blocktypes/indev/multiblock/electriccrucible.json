@@ -3,8 +3,8 @@
 	"class": "BlockElectricCrucible",
 	"entityclass": "BEElectricCrucible",
 	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+		"general": [ "" ],
+		"qptech": [ "" ]
 	},
 
 	"attributes": {

@@ -29,7 +29,7 @@
 		cabinet: { base: "block/wood/cabinets/acacia/cabinet" },
 	},
 	heldTpIdleAnimation: "holdunderarm",
-	creativeinventory: { "general": ["*-east"], "decorative": ["*-east"] },
+	creativeinventory: { "general": [""], "decorative": [""] },
 	blockmaterial: "Wood",
 	replaceable: 900,
 	resistance: 1.5,

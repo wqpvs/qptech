@@ -12,8 +12,8 @@
 
 	],
 	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+		"general": [ "" ],
+		"qptech": [ "" ]
 	},
 	"attributes": {
 

@@ -29,8 +29,8 @@
 
 		"*-lv-*": {
 			"maxFlux": 10,
-			"materialInputFace": "east",
-			"materialOutputFace": "west",
+			"inputFace": "west",
+			"outputFace": "east",
 			"capacitance": 10,
 			"requiredFlux": 1,
 			"processingTicks": 5,

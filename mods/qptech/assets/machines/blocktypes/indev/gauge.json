@@ -2,7 +2,7 @@
 	"code": "gauge",
 	"creativeinventory": {
 		
-		"qptech": [ "*" ]
+		"qptech": [ "" ]
 	},
 	
 	"entityclass": "BETextureTest",

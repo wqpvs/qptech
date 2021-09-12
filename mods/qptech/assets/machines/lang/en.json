@@ -1,6 +1,6 @@
 {
 	"block-machineryblock": "Bronze Machine Hull",
-	
+
 	"block-ringedbarrel": "Barrel With A Wooden Ring",
 	"blockdesc-machineryblock": "This intermediate part is the basis of LV electrical items. Also looks cool if you have lots of extra materials.",
 	"block-firepitloader": "Bronze Fire Pit Loader (Unpowered)",
@@ -48,7 +48,7 @@
 	"blockdesc-icebox-*": "Place lake or glacial ice in the icebox in order to greatly extend food storage! Ice will be used up over time",
 	"block-blocklantern": "Encased Lantern",
 	"blockdesc-blocklantern": "Full Block lantern to add options to your builds",
-	
+
 	"blockdesc-battery-*": "Batteries store power, they have a single input and one or more outputs.",
 	"block-battery-lv-*": "Electric Battery (LV)",
 	"block-electricforge-lv-*": "Primitive Electric Forge (LV)",
@@ -116,9 +116,9 @@
 	"item-heavymold-rod": "Heavy Mold - Rods",
 	"itemdesc-heavymold-*": "Insert (Sneak+Right Click in hand) into Metal Press to change recipe - molds are not returned",
 	"block-macerator-lv-*": "Macerator (LV)",
-	"blockdesc-macerator-*": "Basic Ore and Aggregate procesing. May yield extra ore or different bonus ores.",
+	"blockdesc-macerator-*": "Grind up your stuff! Processes: Grain->Flour, Halite->Salt, Stone->Gravel & maybe a few nuggets, Nuggets->Bits (yielding extra ore!). Feed in your metal scrap and you may get some iron out of it also! Draws from the top, outputs to the right side.",
 	"block-washplant-lv-*": "Wash Plant (LV)",
-	"blockdesc-washplant-*": "Washing your gravel and sand may yield extra or different items. Note: in future this would require a water supply, and the model will be updated!",
+	"blockdesc-washplant-*": "Washing your gravel and sand may yield extra or different items. Note: in future this would require a water supply, and the model will be updated! Draws from the top, outputs out the bottom.",
 	"block-electrickiln-lv-*": "Electric Kiln (LV)",
 	"blockdesc-electrickiln-lv-*": "Will fire your raw clay items. Input on left, output on right.",
 	"block-mpgenerator-*": "Electric Generator (*PREVIEW* Mechanical Power)(LV)",
@@ -126,6 +126,8 @@
 	"block-mpmotor-*": "Electric Motor (*PREVIEW* Mechanical Power)(LV)",
 	"blockdesc-mpmotor-*": "Electric Motor - Create mechanical power from electricity! NOTE: THIS IS FOR TESTING AND MAY BE UNPREDICTABLE",
 	"block-watertower": "Small Water Tower",
-	"blockdesc-watertower": "Must have direct access to sky. Will slowly collect water and insert into a container below. Collects more water if raining. Multiblock structure: 3x4x3, ring of fencegates with this block in middle, then a ring of planks, a ring of metal blocks, and another ring of planks."
+	"blockdesc-watertower": "Must have direct access to sky. Will slowly collect water and insert into a container below. Collects more water if raining. Multiblock structure: 3x4x3, ring of fencegates with this block in middle, then a ring of planks, a ring of metal blocks, and another ring of planks.",
+	"block-logsplitter-*": "Log Splitter (LV)",
+	"blockdesc-logsplitter-*": "A fast and efficient way to make firewood from logs! Draws from the left, outputs to the right."
 
 }

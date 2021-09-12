@@ -1,8 +1,8 @@
 {
 	"code": "structureblock",
 	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+		"general": [ "" ],
+		"qptech": [ "" ]
 	},
 	"variantgroups": [
 		{
