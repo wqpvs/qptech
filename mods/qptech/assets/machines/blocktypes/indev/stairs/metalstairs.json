@@ -13,6 +13,7 @@
 		}
 	},
 	"creativeinventory": {
+		"qptech": [ "*-north" ],
 		"general": [ "*-north" ],
 		"construction": [ "*-north" ]
 	},
@@ -69,13 +70,8 @@
 	"resistance": 4,
 	"emitSideAo": { "all": true },
 	"sounds": {
-		"walk": "walk/metal",
-		"byTool": {
-			"Pickaxe": {
-				"hit": "block/rock-hit-pickaxe",
-				"break": "block/rock-break-pickaxe"
-			}
-		}
+		"place": "game:block/anvil",
+		"walk": "walk/metal"
 	},
 	"collisionSelectionBoxesByType": {
 		"*": [

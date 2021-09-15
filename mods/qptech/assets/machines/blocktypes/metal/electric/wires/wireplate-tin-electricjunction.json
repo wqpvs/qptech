@@ -121,7 +121,10 @@
 	"renderpass": "OpaqueNoCull",
 	"lightAbsorption": 0,
 	"resistance": 1,
-	"sideopaque": { "all": false },
+	"sideAo": { "all": false },
+	"sideopaque": {
+		"all": false
+	},
 	"sidesolid": {
 		"up": true,
 		"down": true,

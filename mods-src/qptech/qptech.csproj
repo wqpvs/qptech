@@ -101,6 +101,8 @@
     <Compile Include="src\Electricity\BlockMPGenerator.cs" />
     <Compile Include="src\Electricity\BlockMetalPress.cs" />
     <Compile Include="src\Electricity\BlockJunction.cs" />
+    <Compile Include="src\Electricity\BEETank .cs" />
+    <Compile Include="src\Electricity\BlockTank.cs" />
     <Compile Include="src\Electricity\BlockWire.cs" />
     <Compile Include="src\Electricity\EForgeContentsRenderer.cs" />
     <Compile Include="src\gui\GEDrawTexture.cs" />

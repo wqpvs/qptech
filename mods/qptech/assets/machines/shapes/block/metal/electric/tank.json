@@ -1,0 +1,28 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"machinery-tank": "block/metal/tank/machinery-tank"
+	},
+	"elements": [
+		{
+			"name": "Cube1",
+			"from": [ 0.0, 0.0, 0.0 ], 
+			"to": [ 16.0, 16.0, 16.0 ], 
+			"renderPass": 3,
+			"faces": {
+				"north": { "texture": "#machinery-tank", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+				"east": { "texture": "#machinery-tank", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+				"south": { "texture": "#machinery-tank", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+				"west": { "texture": "#machinery-tank", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+				"up": { "texture": "#machinery-tank", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+				"down": { "texture": "#machinery-tank", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
+			}
+		}
+	]}

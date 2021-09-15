@@ -9,6 +9,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 using Vintagestory.API.Client;
+using Vintagestory.API.Config;
 using Vintagestory.API.Server;
 
 namespace qptech.src
@@ -241,7 +242,6 @@ namespace qptech.src
         
         static Dictionary<string, List<MacerationRecipe>> maceratelist;
         static Dictionary<string, string> orelookups;
-
         public MacerationRecipe()
         {
          
@@ -266,7 +266,8 @@ namespace qptech.src
             //TODO: change this to "CanMacerate", add a FindMacerate that returns items:
             //   - from the maceratelist directly - adding extra output based on RNG
             //   - generically where possible - eg stone block to stone gravel etc
-            
+
+    
             if (maceratelist == null) { LoadMacerateLists(api); }
             if (co == null) { return false; }
             if (co.FirstCodePart() == "ore") { return true; }

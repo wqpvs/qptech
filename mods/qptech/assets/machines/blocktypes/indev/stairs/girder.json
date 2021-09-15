@@ -8,8 +8,7 @@
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 	"shape": { "base": "block/metal/stairs/girder" },
-	
-	"resistance": 1,
+	"resistance": 4,
 	"sideopaque": {
 		"all": false
 	},

@@ -60,6 +60,11 @@
 	},
 	"lightAbsorption": 0,
 	"resistance": 1,
+	"sidesolid": {
+		"all": false,
+		"up": true
+	},
+	"sideAo": { "all": false },
 	"sideopaque": {
 		"all": false
 	},

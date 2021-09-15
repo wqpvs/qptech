@@ -1,19 +1,19 @@
 {
-	code: "statusflag-up",
-	creativeinventory: {
-		"general": [  ],
-		"qptech": [  ]
-	},
-	blockmaterial: "Metal",
-	drawtype: "json",
-	"shape": { "base": "block/metal/statusflag-up" },
-	resistance: 1,
-	"sideAo": { "all": false },
-	"sideopaque": {
-		"all": false
-	},
-	sounds: {
-		"place": "game:block/anvil",
-		"walk": "game:walk/stone"
+		"code": "statusflag-up",
+		"creativeinventory": {
+			"general": [],
+			"qptech": []
+		},
+		"blockmaterial": "Metal",
+		"drawtype": "json",
+		"shape": { "base": "block/metal/statusflag-up" },
+		"resistance": 1,
+		"sideAo": { "all": false },
+		"sideopaque": {
+			"all": false
+		},
+		"sounds": {
+			"place": "game:block/anvil",
+			"walk": "game:walk/stone"
+		}
 	}
-}

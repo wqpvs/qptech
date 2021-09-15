@@ -6,7 +6,6 @@
     "general": [ "*-ew-uncovered" ],
     "qptech": [ "*-ew-uncovered" ]
   },
-
   "variantgroups": [
     {
       "code": "type",
@@ -119,12 +118,14 @@
   "lightAbsorption": 0,
   "faceCullMode": "NeverCull",
   "renderpass": "OpaqueNoCull",
-  "sidesolid": { "all": false },
-  "sideopaque": { "all": false },
   "emitSideAo": {
-    "all": false,
-    "up": true
+    "all": false
   },
+  "sideAo": { "all": false },
+  "sideopaque": {
+    "all": false
+  },
+  "sidesolid": { "all": false },
   "selectionBox": {
     "x1": 0,
     "y1": 0.0625,

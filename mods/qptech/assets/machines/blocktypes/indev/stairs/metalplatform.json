@@ -9,7 +9,7 @@
 	"drawtype": "json",
 	"shape": { "base": "block/metal/stairs/metalplatform" },
 
-	"resistance": 1,
+	"resistance": 4,
 	"sideopaque": {
 		"all": false
 	},

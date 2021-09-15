@@ -118,8 +118,8 @@ namespace qptech.src
             if (!isOn) { return false; }
             
             //if (Capacitor == Capacitance && !usesFuelWhileOn) { return false; }//not necessary to generate power
-            if (requiresHeat&&!CheckHeat()) { return false; } //perform a check for heat
-            if (requiresWater&&(!requiresHeat||heated) && !CheckWater()) { return false; } //check if water available
+            if (requiresHeat && !CheckHeat()) { return false; } //perform a check for heat
+            if (requiresWater && (!requiresHeat || heated) && !CheckWater()) { return false; } //check if water available
             
             if (!usesFuel) { return true; } //if we don't use fuel, we can make power
             
@@ -230,7 +230,7 @@ namespace qptech.src
             BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
             if (checkblock == null) { haswater = false; return false; }
             
-            var checkcontainer = checkblock as BlockEntityContainer;
+            var checkcontainer = checkblock as BlockEntityBarrel;
             if (checkcontainer != null)
             {
                 for (int c = 0; c < checkcontainer.Inventory.Count; c++)
