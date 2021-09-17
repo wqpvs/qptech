@@ -52,8 +52,54 @@ namespace qptech.src
                 currentMesh = GenMesh();
                 MarkDirty(true);
             }
+           
         }
 
+        protected override void OnTick(float dt)
+        {
+            if (inventory.Empty) { return; }
+            
+            //Check for tanks below and beside and fill appropriately
+            foreach (BlockFacing bf in BlockFacing.ALLFACES)
+            {
+                //don't push water up
+                if (bf == BlockFacing.UP) { continue; }
+                BlockEntityContainer outputContainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BlockEntityContainer;
+                //is it a container?
+                if (outputContainer == null) { continue; }
+                //is it a fellow tank person?
+                BEETank bt = outputContainer as BEETank;
+                if (bt == null) { continue; }
+                //a null inventory is weird, so skip it
+                if (bt.inventory == null) { continue; }
+                int outputQuantity = inventory[0].StackSize; 
+
+                //try to fill if container is below us or the container is beside us and has less water than us
+                if (bt.inventory[0].StackSize < inventory[0].StackSize||bf==BlockFacing.DOWN)
+                {
+                    //if it's not below us we want to equalize water instead of filling all of it
+                    if (bf != BlockFacing.DOWN)
+                    {
+                        outputQuantity = (inventory[0].StackSize - outputContainer.Inventory[0].StackSize)/2;
+                        if (outputQuantity<=0) { continue; }
+                    }
+                    WeightedSlot tryoutput = outputContainer.Inventory.GetBestSuitedSlot(inventory[0]);
+
+                    if (tryoutput.slot != null)
+                    {
+                        ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, outputQuantity);
+
+                        inventory[0].TryPutInto(tryoutput.slot, ref op);
+                        
+                        MarkDirty(true);
+                        bt.MarkDirty(true);
+                        if (inventory.Empty || inventory[0].StackSize == 0) { break; }
+                        
+
+                    }
+                }
+            }
+        }
 
         public override void OnBlockBroken()
         {

@@ -133,6 +133,12 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\tank-10.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\tank-20.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\tank-30.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\tank-40.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\tank-50.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\tank-empty.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\electricfan.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\electrickiln-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\forge-lv.json" />
@@ -146,6 +152,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\powerhatch-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0 - Copy.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\tank.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\washplant2.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\stairs\girder.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\stairs\metalplatform.json" />

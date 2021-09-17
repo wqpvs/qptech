@@ -11,7 +11,7 @@ using Vintagestory.GameContent;
 
 namespace qptech.src
 {
-    public class BlockTank : BlockLiquidContainerBase
+    public class BlockTank : BlockLiquidContainerBase, IBlockItemFlow
     {
 
         public string tank
@@ -362,5 +362,9 @@ namespace qptech.src
             return null;
         }
 
+        public bool HasItemFlowConnectorAt(BlockFacing facing)
+        {
+            return true;
+        }
     }
 }

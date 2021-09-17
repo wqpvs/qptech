@@ -26,7 +26,7 @@
 	"blockmaterial": "Metal",
 	"lightAbsorption": 1,
 	"sidesolid": {
-		"all": false
+		"all": true
 	},
 	"sideopaque": {
 		"all": false

@@ -103,6 +103,8 @@ namespace qptech.src
                 waterStored -= usedwater;
                 if (waterStored < 0) { waterStored = 0; }
                 tryoutput.slot.MarkDirty();
+                MarkDirty(true);
+                checkcontainer.MarkDirty(true);
                 return;
             }
            

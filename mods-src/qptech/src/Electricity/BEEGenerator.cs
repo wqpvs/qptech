@@ -230,7 +230,7 @@ namespace qptech.src
             BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
             if (checkblock == null) { haswater = false; return false; }
             
-            var checkcontainer = checkblock as BlockEntityBarrel;
+            var checkcontainer = checkblock as BlockEntityContainer;
             if (checkcontainer != null)
             {
                 for (int c = 0; c < checkcontainer.Inventory.Count; c++)

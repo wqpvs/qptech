@@ -111,7 +111,7 @@
     <Compile Include="src\Electricity\HVACEnvironmentUpdater.cs" />
     <Compile Include="src\misc\APIExtensions.cs" />
     <Compile Include="src\misc\BETextureTest.cs" />
-    <Compile Include="src\misc\BEWaterTower.cs" />
+    <Compile Include="src\multiblock\BEWaterTower.cs" />
     <Compile Include="src\misc\BlockCannedMeal.cs" />
     <Compile Include="src\Electricity\ElectricalBlock.cs" />
     <Compile Include="src\Electricity\ElectricityLoader.cs" />

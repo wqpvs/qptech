@@ -1,5 +1,5 @@
 {
-	"code": "container",
+	"code": "xxxcontainer",
 	"class": "BlockTank",
 	"entityClass": "BEETank",
 	"attributes": {
@@ -14,8 +14,8 @@
 		}
 	],
 	"creativeinventory": {
-		"general": [ "container-*" ],
-		"decorative": [ "container-*" ]
+		"general": [ "" ],
+		"decorative": [ "" ]
 	},
 	"drawtype": "json",
 	"shape": { "base": "block/metal/container/{content}-empty" },
