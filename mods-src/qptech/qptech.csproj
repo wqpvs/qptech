@@ -101,7 +101,7 @@
     <Compile Include="src\Electricity\BlockMPGenerator.cs" />
     <Compile Include="src\Electricity\BlockMetalPress.cs" />
     <Compile Include="src\Electricity\BlockJunction.cs" />
-    <Compile Include="src\Electricity\BEETank .cs" />
+    <Compile Include="src\misc\BEClearFluidTank.cs" />
     <Compile Include="src\Electricity\BlockTank.cs" />
     <Compile Include="src\Electricity\BlockWire.cs" />
     <Compile Include="src\Electricity\EForgeContentsRenderer.cs" />
@@ -111,6 +111,7 @@
     <Compile Include="src\Electricity\HVACEnvironmentUpdater.cs" />
     <Compile Include="src\misc\APIExtensions.cs" />
     <Compile Include="src\misc\BETextureTest.cs" />
+    <Compile Include="src\misc\IFluidTank.cs" />
     <Compile Include="src\multiblock\BEWaterTower.cs" />
     <Compile Include="src\misc\BlockCannedMeal.cs" />
     <Compile Include="src\Electricity\ElectricalBlock.cs" />

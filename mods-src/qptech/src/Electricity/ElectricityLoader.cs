@@ -37,7 +37,7 @@ namespace qptech.src
             api.RegisterBlockEntityClass("BEEBlastFurnace", typeof(BEEBlastFurnace));
             api.RegisterBlockEntityClass("BEEHVAC",typeof(BEEHVAC));
             api.RegisterBlockEntityClass("BEEKiln", typeof(BEEKiln));
-            api.RegisterBlockEntityClass("BEETank", typeof(BEETank));
+            api.RegisterBlockEntityClass("BEClearFluidTank", typeof(BEClearFluidTank));
 
             api.RegisterBlockClass("BlockTank", typeof(BlockTank));
             api.RegisterBlockClass("BlockJunction", typeof(BlockJunction));

@@ -24,10 +24,19 @@ namespace qptech.src
     //   - waterTightContainerProps: { containable: true, whenSpilled: { action: "dropcontents", stack: { class: "item", code: "honeyportion" } }  }
     // 
     // - BlockBucket has methods for placing/taking liquids from a bucket stack or a placed bucket block
-    public class BEETank : BlockEntityContainer
+    public class BEClearFluidTank : BlockEntityContainer,IFluidTank
     {
         public int CapacityLitres { get; set; } = 50;
-
+        public int CurrentLevel {
+            get
+            {
+                if (inventory == null) { return 0; }
+                if (inventory.Empty) { return 0; }
+                if (inventory[0] == null) { return 0; }
+                return inventory[0].StackSize;
+                
+            }
+        }
         internal InventoryGeneric inventory;
         public override InventoryBase Inventory => inventory;
         public override string InventoryClassName => "tank";
@@ -36,8 +45,8 @@ namespace qptech.src
         BlockTank ownBlock;
 
         public float MeshAngle;
-
-        public BEETank()
+        BlockFacing[] facechecker = new BlockFacing[] { BlockFacing.DOWN, BlockFacing.NORTH, BlockFacing.EAST, BlockFacing.SOUTH, BlockFacing.WEST };
+        public BEClearFluidTank()
         {
             inventory = new InventoryGeneric(1, null, null);
         }
@@ -57,50 +66,59 @@ namespace qptech.src
 
         protected override void OnTick(float dt)
         {
+            Equalize();
+        }
+        public void Equalize()
+        {
             if (inventory.Empty) { return; }
-            
+
             //Check for tanks below and beside and fill appropriately
-            foreach (BlockFacing bf in BlockFacing.ALLFACES)
+            foreach (BlockFacing bf in facechecker) //used facechecker to make sure down is processed first
             {
-                //don't push water up
-                if (bf == BlockFacing.UP) { continue; }
+                
                 BlockEntityContainer outputContainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BlockEntityContainer;
-                //is it a container?
-                if (outputContainer == null) { continue; }
-                //is it a fellow tank person?
-                BEETank bt = outputContainer as BEETank;
-                if (bt == null) { continue; }
-                //a null inventory is weird, so skip it
-                if (bt.inventory == null) { continue; }
-                int outputQuantity = inventory[0].StackSize; 
-
-                //try to fill if container is below us or the container is beside us and has less water than us
-                if (bt.inventory[0].StackSize < inventory[0].StackSize||bf==BlockFacing.DOWN)
+                if (outputContainer == null) { continue; }              //is it a container?
+                IFluidTank bt = outputContainer as IFluidTank;
+                if (bt == null) { continue; }                           //is it a fellow tank person?
+                if (outputContainer.Inventory == null) { continue; }    //a null inventory is weird, so skip it
+                int outputQuantity = inventory[0].StackSize;            //default to dumping entire stack
+                if (bf != BlockFacing.DOWN && bt.CurrentLevel >= CurrentLevel) { continue; }    //beside us and already has more liquid
+                if (bt.CurrentLevel == bt.CapacityLitres) { continue; }                         //its already full
+                if (bf != BlockFacing.DOWN) {
+                    outputQuantity = (CurrentLevel - bt.CurrentLevel) / 2;
+                }
+                int usedQuantity = bt.ReceiveFluidOffer(inventory[0].Itemstack.Item, outputQuantity);
+                if (usedQuantity > 0)
                 {
-                    //if it's not below us we want to equalize water instead of filling all of it
-                    if (bf != BlockFacing.DOWN)
+                    inventory[0].Itemstack.StackSize -= usedQuantity;
+                    if (inventory[0].Itemstack.StackSize <= 0)
                     {
-                        outputQuantity = (inventory[0].StackSize - outputContainer.Inventory[0].StackSize)/2;
-                        if (outputQuantity<=0) { continue; }
+                        inventory[0].Itemstack = null;
                     }
-                    WeightedSlot tryoutput = outputContainer.Inventory.GetBestSuitedSlot(inventory[0]);
-
-                    if (tryoutput.slot != null)
-                    {
-                        ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, outputQuantity);
-
-                        inventory[0].TryPutInto(tryoutput.slot, ref op);
-                        
-                        MarkDirty(true);
-                        bt.MarkDirty(true);
-                        if (inventory.Empty || inventory[0].StackSize == 0) { break; }
-                        
-
-                    }
+                    MarkDirty(true);
                 }
             }
         }
 
+        public int ReceiveFluidOffer(Item offeredItem, int offeredAmount)
+        {
+            if (inventory[0].Itemstack!=null&&inventory[0].Itemstack.Item!=null&&offeredItem != inventory[0].Itemstack.Item) { return 0; }
+            int useamount = offeredAmount;
+            useamount = Math.Min(CapacityLitres - CurrentLevel, useamount);
+            if (useamount <= 0) { return 0; }
+            if (inventory[0].Itemstack == null || inventory[0].Itemstack.Item == null)
+            {
+                ItemStack newstack = new ItemStack(offeredItem, useamount);
+                inventory[0].Itemstack = newstack;
+                
+            }
+            else
+            {
+                inventory[0].Itemstack.StackSize += useamount;
+            }
+            MarkDirty(true);
+            return useamount;
+        }
         public override void OnBlockBroken()
         {
             // Don't drop inventory contents
@@ -192,6 +210,7 @@ namespace qptech.src
                 dsc.AppendLine(Lang.Get("Contents: {0}x{1}", slot.Itemstack.StackSize, slot.Itemstack.GetName()));
             }
         }
+
 
     }
 }
