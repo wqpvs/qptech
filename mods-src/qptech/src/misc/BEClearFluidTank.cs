@@ -24,8 +24,15 @@ namespace qptech.src
     //   - waterTightContainerProps: { containable: true, whenSpilled: { action: "dropcontents", stack: { class: "item", code: "honeyportion" } }  }
     // 
     // - BlockBucket has methods for placing/taking liquids from a bucket stack or a placed bucket block
+
+    /// <summary>
+    /// TODO Fix up or figure out extended fluid transfer, probably need to not use capacity liters for this!!
+    /// </summary>
+
     public class BEClearFluidTank : BlockEntityContainer,IFluidTank
     {
+        
+        
         public int CapacityLitres { get; set; } = 50;
         public int CurrentLevel {
             get
@@ -33,10 +40,24 @@ namespace qptech.src
                 if (inventory == null) { return 0; }
                 if (inventory.Empty) { return 0; }
                 if (inventory[0] == null) { return 0; }
+                
                 return inventory[0].StackSize;
                 
             }
         }
+        public Item CurrentItem
+        {
+            get
+            {
+                if (inventory != null && inventory[0] != null && !inventory.Empty)
+                {
+                    return inventory[0].Itemstack.Item;
+                }
+                return null;
+            }
+        }
+        public BlockPos TankPos { get { return Pos; } }
+        public bool IsFull { get { return CapacityLitres == CurrentLevel; } }
         internal InventoryGeneric inventory;
         public override InventoryBase Inventory => inventory;
         public override string InventoryClassName => "tank";
@@ -54,7 +75,8 @@ namespace qptech.src
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-
+            //
+            //RegisterGameTickListener(OnFluidTick, 1000);
             ownBlock = Block as BlockTank;
             if (Api.Side == EnumAppSide.Client)
             {
@@ -66,28 +88,37 @@ namespace qptech.src
 
         protected override void OnTick(float dt)
         {
+            NeighbourCheck();
             Equalize();
         }
+
+        void NeighbourCheck()
+        {
+            
+        }
+
         public void Equalize()
         {
             if (inventory.Empty) { return; }
-
+            
             //Check for tanks below and beside and fill appropriately
             foreach (BlockFacing bf in facechecker) //used facechecker to make sure down is processed first
             {
-                
+
+                if (inventory.Empty) { break; }
                 BlockEntityContainer outputContainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BlockEntityContainer;
                 if (outputContainer == null) { continue; }              //is it a container?
                 IFluidTank bt = outputContainer as IFluidTank;
                 if (bt == null) { continue; }                           //is it a fellow tank person?
                 if (outputContainer.Inventory == null) { continue; }    //a null inventory is weird, so skip it
                 int outputQuantity = inventory[0].StackSize;            //default to dumping entire stack
-                if (bf != BlockFacing.DOWN && bt.CurrentLevel >= CurrentLevel) { continue; }    //beside us and already has more liquid
-                if (bt.CurrentLevel == bt.CapacityLitres) { continue; }                         //its already full
+                if (bf != BlockFacing.DOWN && bt.CurrentLevel > CurrentLevel) { continue; }    //beside us and already has more liquid
+                if (bt.IsFull) { continue; }                         //its already full
                 if (bf != BlockFacing.DOWN) {
-                    outputQuantity = (CurrentLevel - bt.CurrentLevel) / 2;
+                    int targetQuantity = (CurrentLevel + bt.CurrentLevel) / 2;
+                    outputQuantity = CurrentLevel - targetQuantity;
                 }
-                int usedQuantity = bt.ReceiveFluidOffer(inventory[0].Itemstack.Item, outputQuantity);
+                int usedQuantity = bt.ReceiveFluidOffer(inventory[0].Itemstack.Item, outputQuantity,Pos);
                 if (usedQuantity > 0)
                 {
                     inventory[0].Itemstack.StackSize -= usedQuantity;
@@ -100,23 +131,26 @@ namespace qptech.src
             }
         }
 
-        public int ReceiveFluidOffer(Item offeredItem, int offeredAmount)
+        public int ReceiveFluidOffer(Item offeredItem, int offeredAmount,BlockPos offeredFromPos)
         {
             if (inventory[0].Itemstack!=null&&inventory[0].Itemstack.Item!=null&&offeredItem != inventory[0].Itemstack.Item) { return 0; }
             int useamount = offeredAmount;
             useamount = Math.Min(CapacityLitres - CurrentLevel, useamount);
-            if (useamount <= 0) { return 0; }
-            if (inventory[0].Itemstack == null || inventory[0].Itemstack.Item == null)
+            if (useamount <= 0) { useamount=0; }
+            else if (inventory[0].Itemstack == null || inventory[0].Itemstack.Item == null)
             {
                 ItemStack newstack = new ItemStack(offeredItem, useamount);
                 inventory[0].Itemstack = newstack;
-                
+                MarkDirty(true);
             }
             else
             {
                 inventory[0].Itemstack.StackSize += useamount;
+                MarkDirty(true);
             }
-            MarkDirty(true);
+            
+            offeredAmount -= useamount;
+            ///TODO Here we could push overflow?
             return useamount;
         }
         public override void OnBlockBroken()

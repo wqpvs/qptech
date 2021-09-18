@@ -95,11 +95,24 @@ namespace qptech.src
             DummyInventory dummy = new DummyInventory(Api);
             dummy[0].Itemstack = itmstk;
 
+            IFluidTank ft = checkcontainer as IFluidTank;
+
+            if (ft != null)
+            {
+                int used = ft.ReceiveFluidOffer(itmstk.Item, itmstk.StackSize,Pos);
+                if (used > 0)
+                {
+                    waterStored -= used;
+                    MarkDirty(true);
+                }
+                return;
+            }
+
             WeightedSlot tryoutput = checkcontainer.Inventory.GetBestSuitedSlot(dummy[0]);
             if (tryoutput.slot != null) {
-                ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, dummy[0].StackSize);
+                //ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, dummy[0].StackSize);
 
-                int usedwater=dummy[0].TryPutInto(tryoutput.slot, ref op);
+                int usedwater=dummy[0].TryPutInto(Api.World,tryoutput.slot,dummy[0].StackSize);
                 waterStored -= usedwater;
                 if (waterStored < 0) { waterStored = 0; }
                 tryoutput.slot.MarkDirty();
@@ -107,27 +120,7 @@ namespace qptech.src
                 checkcontainer.MarkDirty(true);
                 return;
             }
-           
-        /*for (int c = 0; c < checkcontainer.Inventory.Count;c++)
-        {
-            ItemSlotLiquidOnly lo = checkcontainer.Inventory[c] as ItemSlotLiquidOnly;
-            if (lo == null) { continue; }
-            if (lo.CanHold(dummy[0]))
-            {
-                ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, dummy[0].StackSize);
 
-                dummy[0].TryPutInto(tryoutput.slot, ref op);
-                tryoutput.slot.MarkDirty();
-                return;
-            }
-
-        }*/
-
-
-
-
-
-        //waterportion
 
     }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)

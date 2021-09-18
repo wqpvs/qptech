@@ -15,8 +15,10 @@ namespace qptech.src
     public interface IFluidTank
     {
         int CapacityLitres { get; set; }
+        bool IsFull { get; }
         int CurrentLevel { get;  }
-        
-        int ReceiveFluidOffer(Item offeredItem, int offeredAmount);
+        Item CurrentItem { get; }
+        int ReceiveFluidOffer(Item offeredItem, int offeredAmount,BlockPos offerFromPos);
+        BlockPos TankPos { get; }
     }
 }
