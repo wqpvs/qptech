@@ -1,0 +1,114 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"conductingbars": "block/conductingbars",
+		"machinery-grate": "block/machinery-grate",
+		"machinery": "block/machinery"
+	},
+	"elements": [
+		{
+			"name": "Cube1",
+			"from": [ 4.0, 2.0, 4.0 ], 
+			"to": [ 12.0, 14.0, 12.0 ], 
+			"rotationOrigin": [ 4.0, 2.0, 4.0 ],
+			"faces": {
+				"north": { "texture": "#conductingbars", "uv": [ 4.0, 1.5, 12.0, 13.5 ] },
+				"east": { "texture": "#conductingbars", "uv": [ 3.5, 1.5, 11.5, 13.5 ] },
+				"south": { "texture": "#conductingbars", "uv": [ 4.5, 1.0, 12.5, 13.0 ] },
+				"west": { "texture": "#conductingbars", "uv": [ 3.0, 1.5, 11.0, 13.5 ] },
+				"up": { "texture": "#machinery", "uv": [ 4.0, 4.0, 12.0, 12.0 ] },
+				"down": { "texture": "#machinery", "uv": [ 4.0, 3.5, 12.0, 11.5 ] }
+			}
+		},
+		{
+			"name": "PipeCore",
+			"from": [ 0.0, 5.0, 5.0 ], 
+			"to": [ 6.0, 11.0, 11.0 ], 
+			"rotationOrigin": [ 2.0, 7.0, 7.0 ],
+			"faces": {
+				"north": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"west": { "texture": "#machinery-grate", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false }
+			}
+		},
+		{
+			"name": "PipeCore3",
+			"from": [ 10.0, 5.0, 5.0 ], 
+			"to": [ 16.0, 11.0, 11.0 ], 
+			"rotationOrigin": [ 12.0, 7.0, 7.0 ],
+			"faces": {
+				"north": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"east": { "texture": "#machinery-grate", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false }
+			}
+		},
+		{
+			"name": "PipeCore4",
+			"from": [ 5.0, 5.0, 10.0 ], 
+			"to": [ 11.0, 11.0, 16.0 ], 
+			"rotationOrigin": [ 7.0, 7.0, 12.0 ],
+			"faces": {
+				"north": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"south": { "texture": "#machinery-grate", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false }
+			}
+		},
+		{
+			"name": "PipeCore5",
+			"from": [ 5.0, 5.0, 0.0 ], 
+			"to": [ 11.0, 11.0, 6.0 ], 
+			"rotationOrigin": [ 7.0, 7.0, 2.0 ],
+			"faces": {
+				"north": { "texture": "#machinery-grate", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false }
+			}
+		},
+		{
+			"name": "PipeCore6",
+			"from": [ 5.0, 10.0, 5.0 ], 
+			"to": [ 11.0, 16.0, 11.0 ], 
+			"rotationOrigin": [ 7.0, 12.0, 7.0 ],
+			"faces": {
+				"north": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"up": { "texture": "#machinery-grate", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false }
+			}
+		},
+		{
+			"name": "PipeCore7",
+			"from": [ 5.0, 0.0, 5.0 ], 
+			"to": [ 11.0, 6.0, 11.0 ], 
+			"rotationOrigin": [ 7.0, 2.0, 7.0 ],
+			"faces": {
+				"north": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+				"down": { "texture": "#machinery-grate", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false }
+			}
+		}
+	]}

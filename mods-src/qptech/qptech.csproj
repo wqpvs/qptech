@@ -90,6 +90,7 @@
     <Compile Include="src\Electricity\BEEMacerator.cs" />
     <Compile Include="src\Electricity\BEEJunction.cs" />
     <Compile Include="src\Electricity\BEEWire.cs" />
+    <Compile Include="src\Electricity\BEFluidPump.cs" />
     <Compile Include="src\Electricity\BEMPGenerator.cs" />
     <Compile Include="src\Electricity\BEMPMotor.cs" />
     <Compile Include="src\Electricity\BEPowerFlag.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="src\Electricity\BlockMPGenerator.cs" />
     <Compile Include="src\Electricity\BlockMetalPress.cs" />
     <Compile Include="src\Electricity\BlockJunction.cs" />
+    <Compile Include="src\Electricity\BlockPump.cs" />
     <Compile Include="src\misc\BEClearFluidTank.cs" />
     <Compile Include="src\Electricity\BlockTank.cs" />
     <Compile Include="src\Electricity\BlockWire.cs" />

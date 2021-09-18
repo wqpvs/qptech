@@ -19,6 +19,7 @@ namespace qptech.src
         int CurrentLevel { get;  }
         Item CurrentItem { get; }
         int ReceiveFluidOffer(Item offeredItem, int offeredAmount,BlockPos offerFromPos);
+        int TryTakeFluid(int requestedamount, BlockPos offerFromPos);
         BlockPos TankPos { get; }
     }
 }

@@ -27,6 +27,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidpump.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\tank.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\itemhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\stairs\girder.json" />
@@ -133,6 +134,9 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\pump.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\quarterpipe-core.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\quarterpipe-segment.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-10.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-20.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-30.json" />

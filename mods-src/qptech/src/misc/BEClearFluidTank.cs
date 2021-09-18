@@ -97,7 +97,7 @@ namespace qptech.src
             
         }
 
-        public void Equalize()
+        public  virtual void Equalize()
         {
             if (inventory.Empty) { return; }
             
@@ -244,7 +244,16 @@ namespace qptech.src
                 dsc.AppendLine(Lang.Get("Contents: {0}x{1}", slot.Itemstack.StackSize, slot.Itemstack.GetName()));
             }
         }
+        public int TryTakeFluid(int requestedamount, BlockPos offerFromPos)
+        {
+            int giveamount = 0;
 
+            giveamount = Math.Min(requestedamount, CurrentLevel);
+            inventory[0].Itemstack.StackSize -= giveamount;
+            if (inventory[0].Itemstack.StackSize == 0) { inventory[0].Itemstack = null; }
+            MarkDirty(true);
+            return giveamount;
+        }
 
     }
 }
