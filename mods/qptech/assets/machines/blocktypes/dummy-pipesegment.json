@@ -1,0 +1,12 @@
+{
+	"code": "dummy-pipesegment",
+
+	"creativeinventory": {
+		"general": ["*"]
+
+	},
+	
+	"blockmaterial": "Metal",
+	"shape": { "base": "block/metal/container/quarterpipe-segment" },
+	
+}

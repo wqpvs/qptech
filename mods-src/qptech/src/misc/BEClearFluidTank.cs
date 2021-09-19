@@ -33,7 +33,7 @@ namespace qptech.src
     {
         
         
-        public int CapacityLitres { get; set; } = 50;
+        public int CapacityLitres { get; set; } = 100;
         public int CurrentLevel {
             get
             {
