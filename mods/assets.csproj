@@ -89,6 +89,7 @@
     <None Include="qptech\assets\machines\itemtypes\tool\jetpackcontrol.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\pullplate.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\quarrytool.json" />
+    <None Include="qptech\assets\machines\itemtypes\tool\pipewrench.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\screwdriver.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\lang\en.json" />
@@ -209,6 +210,7 @@
     <None Include="qptech\assets\machines\shapes\item\part\rod.json" />
     <None Include="qptech\assets\machines\shapes\item\part\screw.json" />
     <None Include="qptech\assets\machines\shapes\item\part\wire.json" />
+    <None Include="qptech\assets\machines\shapes\item\tool\pipewrench.json" />
     <None Include="qptech\assets\machines\shapes\item\tool\pullplate.json" />
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriver.json" />
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriverhead.json" />
