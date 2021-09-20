@@ -57,8 +57,12 @@ namespace qptech.src
             //Note the pipesegment by default is north facing
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
-                IFluidTank t = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as IFluidTank;
-                if (t == null) { continue; }
+                BlockEntity ent = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf));
+                if (ent == null) { continue; }
+                IFluidTank t = ent as IFluidTank;
+                BEEGenerator g = ent as BEEGenerator;
+                BEWaterTower w = ent as BEWaterTower;
+                if (t == null&&g==null&&w==null) { continue; }
                 
                 capi.Tesselator.TesselateBlock(pipesegment, out mesh);
                 if (bf == BlockFacing.NORTH)

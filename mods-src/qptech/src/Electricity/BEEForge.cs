@@ -102,6 +102,25 @@ namespace qptech.src
             }
             lastTickTotalHours = Api.World.Calendar.TotalHours;
             if (ContentsReady) { CheckAndOfferInventory(); }
+            LoadForge();
+            
+        }
+        /// <summary>
+        /// Try to Load forge from a container above the forge
+        /// </summary>
+        void LoadForge()
+        {
+            BlockEntityContainer upcont = Api.World.BlockAccessor.GetBlockEntity(Pos.UpCopy()) as BlockEntityContainer;
+            if (upcont == null) { return; }
+            if (upcont.Inventory.Empty) { return; }
+            
+            //if empty just check for valid items
+            foreach (ItemSlot slot in upcont.Inventory) {
+                //if (contents != null && contents.StackSize >= maxItems) { break; }
+                TryAddStack(slot);
+                
+            }
+            
         }
         void CheckAndOfferInventory()
         {
@@ -218,6 +237,49 @@ namespace qptech.src
             base.ToTreeAttributes(tree);
             tree.SetItemstack("contents", contents);
             tree.SetDouble("lastTickTotalHours", lastTickTotalHours);
+        }
+
+        internal void TryAddStack(ItemSlot slot)
+        {
+            if (slot==null||slot.Itemstack == null || slot.Itemstack.Collectible == null) { return; }
+            string firstCodePart = slot.Itemstack.Collectible.FirstCodePart();
+            bool forgableGeneric = slot.Itemstack.Collectible.Attributes?.IsTrue("forgable") == true;
+
+            // Add heatable item
+            if (contents == null && (firstCodePart == "ingot" || firstCodePart == "metalplate" || firstCodePart == "workitem" || forgableGeneric))
+            {
+                contents = slot.Itemstack.Clone();
+                contents.StackSize = 1;
+
+                slot.TakeOut(1);
+                slot.MarkDirty();
+
+                renderer?.SetContents(contents, stackRenderHeight, burning, true);
+                MarkDirty();
+                //Api.World.PlaySoundAt(new AssetLocation("sounds/block/ingot"), Pos.X, Pos.Y, Pos.Z, byPlayer, false);
+
+                return;
+            }
+
+            // Merge heatable item
+            if (!forgableGeneric && contents != null && contents.Equals(Api.World, slot.Itemstack, GlobalConstants.IgnoredStackAttributes) && contents.StackSize < maxItems && contents.StackSize < contents.Collectible.MaxStackSize)
+            {
+                float myTemp = contents.Collectible.GetTemperature(Api.World, contents);
+                float histemp = slot.Itemstack.Collectible.GetTemperature(Api.World, slot.Itemstack);
+
+                contents.Collectible.SetTemperature(Api.World, contents, (myTemp * contents.StackSize + histemp * 1) / (contents.StackSize + 1)); ;
+                contents.StackSize++;
+
+                slot.TakeOut(1);
+                slot.MarkDirty();
+
+                renderer?.SetContents(contents, stackRenderHeight, burning, true);
+                //Api.World.PlaySoundAt(new AssetLocation("sounds/block/ingot"), Pos.X, Pos.Y, Pos.Z, byPlayer, false);
+
+                MarkDirty();
+                return;
+            }
+
         }
         internal bool OnPlayerInteract(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
