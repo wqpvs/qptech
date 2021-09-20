@@ -1,0 +1,43 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"machinery": "block/machinery"
+	},
+	"elements": [
+		{
+			"name": "Pipe",
+			"from": [ 5.0, 5.0, 4.0 ], 
+			"to": [ 11.0, 11.0, 5.0 ], 
+			"rotationOrigin": [ 8.0, 8.0, 5.0 ],
+			"faces": {
+				"north": { "texture": "#machinery", "uv": [ 5.5, 5.5, 11.5, 11.5 ] },
+				"east": { "texture": "#machinery", "uv": [ 7.0, 5.5, 8.0, 11.5 ] },
+				"south": { "texture": "#machinery", "uv": [ 6.0, 7.5, 12.0, 13.5 ] },
+				"west": { "texture": "#machinery", "uv": [ 4.5, 5.5, 5.5, 11.5 ] },
+				"up": { "texture": "#machinery", "uv": [ 4.5, 7.5, 10.5, 8.5 ] },
+				"down": { "texture": "#machinery", "uv": [ 8.0, 7.5, 14.0, 8.5 ] }
+			}
+		},
+		{
+			"name": "Pipe2",
+			"from": [ 6.0, 6.0, 3.0 ], 
+			"to": [ 10.0, 10.0, 4.0 ], 
+			"rotationOrigin": [ 8.0, 8.0, 4.0 ],
+			"rotationZ": -45.0,
+			"faces": {
+				"north": { "texture": "#machinery", "uv": [ 5.5, 5.5, 9.5, 9.5 ] },
+				"east": { "texture": "#machinery", "uv": [ 7.0, 5.5, 8.0, 9.5 ] },
+				"south": { "texture": "#machinery", "uv": [ 6.0, 7.5, 10.0, 11.5 ] },
+				"west": { "texture": "#machinery", "uv": [ 4.5, 5.5, 5.5, 9.5 ] },
+				"up": { "texture": "#machinery", "uv": [ 4.5, 7.5, 8.5, 8.5 ] },
+				"down": { "texture": "#machinery", "uv": [ 8.0, 7.5, 12.0, 8.5 ] }
+			}
+		}
+	]}

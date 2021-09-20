@@ -72,13 +72,22 @@ namespace qptech.src
             //Note the pipesegment by default is north facing
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
-                if (disabledFaces!=null&&disabledFaces.Contains(bf)) { continue; }
+                bool isdisabled = false;
+                if (disabledFaces != null && disabledFaces.Contains(bf))
+                {
+                    pipesegment = Api.World.GetBlock(new AssetLocation("machines:dummy-pipeblock"));
+                    isdisabled = true;
+                }
+                else
+                {
+                    pipesegment = Api.World.GetBlock(new AssetLocation("machines:dummy-pipesegment"));
+                }
                 BlockEntity ent = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf));
-                if (ent == null) { continue; }
+                if (ent == null&&!isdisabled) { continue; }
                 IFluidTank t = ent as IFluidTank;
                 BEEGenerator g = ent as BEEGenerator;
                 BEWaterTower w = ent as BEWaterTower;
-                if (t == null&&g==null&&w==null) { continue; }
+                if (t == null&&g==null&&w==null&&!isdisabled) { continue; }
                 
                 capi.Tesselator.TesselateBlock(pipesegment, out mesh);
                 if (bf == BlockFacing.NORTH)
@@ -107,6 +116,7 @@ namespace qptech.src
                     mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), -GameMath.DEG2RAD * 90, 0, 0));
                 }
             }
+            
             return base.OnTesselation(mesher, tessThreadTesselator);
         }
         public virtual void Equalize()

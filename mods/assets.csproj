@@ -22,7 +22,8 @@
     <None Include="qptech\assets\game\shapes\block\can-full.json" />
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
-    <None Include="qptech\assets\machines\blocktypes\dummy-pipesegment.json" />
+    <None Include="qptech\assets\machines\blocktypes\dummy-pipesegment - Copy.json" />
+    <None Include="qptech\assets\machines\blocktypes\dummy-pipeblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\blastfurnace.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\electriccrucible.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
