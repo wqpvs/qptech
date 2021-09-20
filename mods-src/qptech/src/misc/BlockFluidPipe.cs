@@ -19,5 +19,13 @@ namespace qptech.src
             BEFluidPipe myentity= world.BlockAccessor.GetBlockEntity(pos) as BEFluidPipe;
             if (myentity != null) { myentity.OnNeighborChange(); }
         }
+        public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
+        {
+            BEFluidPipe myentity = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BEFluidPipe;
+            if (myentity != null) {
+                if (myentity.OnInteract(world, byPlayer, blockSel)) { return true; } ;
+            }
+            return base.OnBlockInteractStart(world, byPlayer, blockSel);
+        }
     }
 }

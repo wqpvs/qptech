@@ -26,5 +26,14 @@
 		"place": "game:block/anvil",
 		"walk": "game:walk/stone"
 	},
-	"lightabsorption":"8"
+	"lightabsorption": "8",
+	"selectionBox": {
+		"x1": 0.1875,
+		"y1": 0.1875,
+		"z1": 0.1875,
+		"x2": 0.8125,
+		"y2": 0.8125,
+		"z2": 0.9375
+	}
+
 }

@@ -266,5 +266,31 @@ namespace qptech.src
 
             return obj;
         }
+        
+        public bool OnInteract(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
+        {
+            if (byPlayer.InventoryManager.ActiveHotbarSlot.Empty) { return false; }
+            if (byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack == null) { return false; }
+            if (byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack.Item == null) { return false; }
+            if (!byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack.Item.Code.ToString().Contains("pipewrench")) { return false; }
+            
+            string faceclicked = blockSel.Face.ToString();
+            byte[] data = ObjectToByteArray(faceclicked);
+            if (Api is ICoreServerAPI)
+            {
+                if (disabledFaces == null) { disabledFaces = new List<BlockFacing>(); }
+                if (disabledFaces.Contains(blockSel.Face)) { disabledFaces.Remove(blockSel.Face); }
+                else { disabledFaces.Add(blockSel.Face); }
+                MarkDirty(true);
+            }
+            //(Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.Wrench, data);
+            else
+            {
+                Api.World.PlaySoundAt(new AssetLocation("sounds/valve"), Pos.X, Pos.Y, Pos.Z, byPlayer, false, 8, 1);
+            }
+            return true;
+        }
+
+       
     }
 }
