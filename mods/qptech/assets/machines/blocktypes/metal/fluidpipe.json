@@ -1,18 +1,18 @@
 {
 	"code": "fluidpipe",
-	"class" :  "BlockFluidPipe",
+	"class": "BlockFluidPipe",
 	"entityclass": "BEFluidPipe",
-	
+
 	"creativeinventory": {
 		"general": [ "*" ],
 		"qptech": [ "*" ]
 	},
-	
+
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 	"shape": { "base": "block/metal/container/quarterpipe-core" },
-	
-	
+
+
 	"resistance": 1,
 	"sidesolid": {
 		"all": false,
@@ -25,5 +25,6 @@
 	"sounds": {
 		"place": "game:block/anvil",
 		"walk": "game:walk/stone"
-	}
+	},
+	"lightabsorption":"8"
 }

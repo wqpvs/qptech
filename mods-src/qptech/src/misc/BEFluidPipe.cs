@@ -10,11 +10,17 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 using Vintagestory.API.Client;
+using Vintagestory.API.Server;
+using Newtonsoft.Json;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace qptech.src
 {
     class BEFluidPipe : BlockEntityContainer, IFluidTank
     {
+        public List<BlockFacing> disabledFaces;
         public int CapacityLitres { get; set; } = 25;
 
         public bool IsFull { get { return CurrentLevel == CapacityLitres; } }
@@ -37,6 +43,15 @@ namespace qptech.src
         {
             NeighbourCheck();
             Equalize();
+
+            //temp code to set a random face as inactive
+            /*if (Api is ICoreServerAPI&&(disabledFaces==null||disabledFaces.Count==0))
+            {
+                Random r = new Random(Pos.X+Pos.Z+Pos.Y);
+                int randomindex = r.Next(0, 5);
+                disabledFaces.Add(BlockFacing.ALLFACES[randomindex]);
+                MarkDirty(true);
+            }*/
         }
 
         void NeighbourCheck()
@@ -57,6 +72,7 @@ namespace qptech.src
             //Note the pipesegment by default is north facing
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
+                if (disabledFaces!=null&&disabledFaces.Contains(bf)) { continue; }
                 BlockEntity ent = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf));
                 if (ent == null) { continue; }
                 IFluidTank t = ent as IFluidTank;
@@ -101,6 +117,7 @@ namespace qptech.src
             foreach (BlockFacing bf in facechecker) //used facechecker to make sure down is processed first
             {
 
+                if (disabledFaces.Contains(bf)) { continue; }
                 if (inventory.Empty) { break; }
                 BlockEntityContainer outputContainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BlockEntityContainer;
                 if (outputContainer == null) { continue; }              //is it a container?
@@ -130,6 +147,15 @@ namespace qptech.src
 
         public int ReceiveFluidOffer(Item offeredItem, int offeredAmount, BlockPos offeredFromPos)
         {
+            if (disabledFaces != null&&disabledFaces.Count>0) {
+                foreach (BlockFacing bf in disabledFaces)
+                {
+                    if (Pos.Copy().Offset(bf) == offeredFromPos)
+                    {
+                        return 0;
+                    }
+                }
+            }
             if (inventory[0].Itemstack != null && inventory[0].Itemstack.Item != null && offeredItem != inventory[0].Itemstack.Item) { return 0; }
             int useamount = offeredAmount;
             useamount = Math.Min(CapacityLitres - CurrentLevel, useamount);
@@ -172,6 +198,73 @@ namespace qptech.src
             {
                 dsc.AppendLine(Lang.Get("Contents: {0}x{1}", slot.Itemstack.StackSize, slot.Itemstack.GetName()));
             }
+            if (disabledFaces != null && disabledFaces.Count > 0)
+            {
+                foreach (BlockFacing bf in disabledFaces)
+                {
+                    dsc.AppendLine(bf.ToString() + " is disabled");
+                }
+            }
+        }
+
+        public override void ToTreeAttributes(ITreeAttribute tree)
+        {
+            base.ToTreeAttributes(tree);
+            
+            if (disabledFaces == null) { disabledFaces = new List<BlockFacing>(); }
+            List<string> dfstring = new List<string>();
+            foreach (BlockFacing bf in disabledFaces)
+            {
+                dfstring.Add(bf.ToString());
+            }
+            var asString = JsonConvert.SerializeObject(dfstring);
+            tree.SetString("disabledfaces", asString);
+        }
+
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
+        {
+            base.FromTreeAttributes(tree, worldForResolving);
+            var asString = tree.GetString("disabledfaces");
+            List<string> dfstring = new List<string>();
+            if (asString != "")
+            {
+                try
+                {
+                    dfstring = JsonConvert.DeserializeObject<List<string>>(asString);
+                    disabledFaces = new List<BlockFacing>();
+                    foreach (string s in dfstring)
+                    {
+                        disabledFaces.Add(BlockFacing.FromCode(s));
+                    }
+                }
+                catch
+                {
+                    disabledFaces = new List<BlockFacing>();
+                }
+            }
+        }
+        private byte[] ObjectToByteArray(Object obj)
+        {
+            if (obj == null)
+                return null;
+
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+            bf.Serialize(ms, obj);
+
+            return ms.ToArray();
+        }
+
+        // Convert a byte array to an Object
+        private Object ByteArrayToObject(byte[] arrBytes)
+        {
+            MemoryStream memStream = new MemoryStream();
+            BinaryFormatter binForm = new BinaryFormatter();
+            memStream.Write(arrBytes, 0, arrBytes.Length);
+            memStream.Seek(0, SeekOrigin.Begin);
+            Object obj = (Object)binForm.Deserialize(memStream);
+
+            return obj;
         }
     }
 }
