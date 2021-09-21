@@ -3,23 +3,22 @@
 	"class": "BlockTank",
 	"entityClass": "BEClearFluidTank",
 	"attributes": {
-		"capacityLitres": 50,
+		"capacityLitres": 100,
 		"canhold": [ "water-*" ]
 	},
 	"variantgroups": [
 		{
-			"code": "content",
+			"code": "containers",
 			"states": [ "tank" ]
 		}
 	],
 	"creativeinventory": {
 		"general": [ "container-*" ],
 		"decorative": [ "container-*" ],
-		"qptech": ["container-*"]
+		"qptech": [ "container-*" ]
 	},
 	"drawtype": "json",
-
-	"shape": { "base": "block/metal/container/tank-empty.json" },
+	"shape": { "base": "block/metal/container/tank" },
 	"textures": {
 		"machinery": { "base": "block/metal/tank/machinery-tank" },
 		"glass": { "base": "block/metal/tank/glass" }

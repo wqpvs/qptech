@@ -9,7 +9,6 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
-using Vintagestory.API.Client;
 using Vintagestory.API.Server;
 using Newtonsoft.Json;
 using System.IO;

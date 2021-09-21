@@ -18,8 +18,8 @@ namespace qptech.src
         {
             get
             {
-                string content = Variant["content"];
-                if (content == "tank-empty" || content == "tank" ||  content == "tank-10" || content == "tank-20" || content == "tank-30" || content == "tank-40" || content == "tank-50") return content;
+                string content = Variant["containers"];
+                if (content == "tank" || content == "tank-10" || content == "tank-20" || content == "tank-30" || content == "tank-40" || content == "tank-50") return content;
                 return null;
             }
         }
@@ -32,7 +32,7 @@ namespace qptech.src
             return true;
         }
 
-                public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, float dropQuantityMultiplier = 1)
+        public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, float dropQuantityMultiplier = 1)
         {
             if (world.Side == EnumAppSide.Server && (byPlayer == null || byPlayer.WorldData.CurrentGameMode != EnumGameMode.Creative))
             {
@@ -109,30 +109,32 @@ namespace qptech.src
         #region Render
         public override void OnBeforeRender(ICoreClientAPI capi, ItemStack itemstack, EnumItemRenderTarget target, ref ItemRenderInfo renderinfo)
         {
-            Dictionary<string, MeshRef> meshrefs = null;
+            Dictionary<int, MeshRef> meshrefs = null;
 
             object obj;
             if (capi.ObjectCache.TryGetValue("tankMeshRefs", out obj))
             {
-                meshrefs = obj as Dictionary<string, MeshRef>;
+                meshrefs = obj as Dictionary<int, MeshRef>;
             }
             else
             {
-                capi.ObjectCache["tankMeshRefs"] = meshrefs = new Dictionary<string, MeshRef>();
+                capi.ObjectCache["tankMeshRefs"] = meshrefs = new Dictionary<int, MeshRef>();
             }
 
             ItemStack contentStack = GetContent(capi.World, itemstack);
             if (contentStack == null) return;
 
+            int hashcode = GetBucketHashCode(capi.World, contentStack);
+
             MeshRef meshRef = null;
 
-            if (!meshrefs.TryGetValue(contentStack.Collectible.Code.Path + Code.Path + contentStack.StackSize, out meshRef))
+            if (!meshrefs.TryGetValue(hashcode, out meshRef))
             {
                 MeshData meshdata = GenMesh(capi, contentStack);
                 //meshdata.Rgba2 = null;
 
 
-                meshrefs[contentStack.Collectible.Code.Path + Code.Path + contentStack.StackSize] = meshRef = capi.Render.UploadMesh(meshdata);
+                meshrefs[hashcode] = meshRef = capi.Render.UploadMesh(meshdata);
 
             }
 
@@ -140,11 +142,14 @@ namespace qptech.src
         }
 
 
-        public int GetTankHashCode(IClientWorldAccessor world, ItemStack contentStack)
+
+        public int GetBucketHashCode(IClientWorldAccessor world, ItemStack contentStack)
         {
             string s = contentStack.StackSize + "x" + contentStack.Collectible.Code.ToShortString();
             return s.GetHashCode();
         }
+
+
 
         public override void OnUnloaded(ICoreAPI api)
         {
@@ -152,7 +157,7 @@ namespace qptech.src
             if (capi == null) return;
 
             object obj;
-            if (capi.ObjectCache.TryGetValue("bucketMeshRefs", out obj))
+            if (capi.ObjectCache.TryGetValue("tankMeshRefs", out obj))
             {
                 Dictionary<int, MeshRef> meshrefs = obj as Dictionary<int, MeshRef>;
 
@@ -161,7 +166,7 @@ namespace qptech.src
                     val.Value.Dispose();
                 }
 
-                capi.ObjectCache.Remove("bucketMeshRefs");
+                capi.ObjectCache.Remove("tankMeshRefs");
             }
         }
 
@@ -169,7 +174,7 @@ namespace qptech.src
         public MeshData GenMesh(ICoreClientAPI capi, ItemStack contentStack, BlockPos forBlockPos = null)
         {
 
-            Shape shape = capi.Assets.TryGet("machines:shapes/block/metal/container/tank-empty.json").ToObject<Shape>();
+            Shape shape = capi.Assets.TryGet("machines:shapes/block/metal/container/" + (tank) + ".json").ToObject<Shape>();
             MeshData bucketmesh;
             capi.Tesselator.TesselateShape(this, shape, out bucketmesh);
 
@@ -183,30 +188,31 @@ namespace qptech.src
 
                 MeshData contentMesh;
 
-                if (level <= 10f)
+                if (level <= 10f % 20f)
                 {
                     shape = capi.Assets.TryGet("machines:shapes/block/metal/container/" + (tank + "-" + "10") + ".json").ToObject<Shape>();
                 }
 
-                else if (level <= 20f)
+                else if (level <= 30f % 40f)
                 {
                     shape = capi.Assets.TryGet("machines:shapes/block/metal/container/" + (tank + "-" + "20") + ".json").ToObject<Shape>();
                 }
 
-                else if (level <= 30f)
+                else if (level <= 50f % 60f)
                 {
                     shape = capi.Assets.TryGet("machines:shapes/block/metal/container/" + (tank + "-" + "30") + ".json").ToObject<Shape>();
                 }
 
-                else if (level <= 40f)
+                else if (level <= 70f % 80f)
                 {
                     shape = capi.Assets.TryGet("machines:shapes/block/metal/container/" + (tank + "-" + "40") + ".json").ToObject<Shape>();
                 }
 
-                else if (level <= 50f)
+                else if (level <= 90f % 100f)
                 {
                     shape = capi.Assets.TryGet("machines:shapes/block/metal/container/" + (tank + "-" + "50") + ".json").ToObject<Shape>();
                 }
+                else { shape = capi.Assets.TryGet("machines:shapes/block/metal/container/" + (tank + "-" + "50") + ".json").ToObject<Shape>(); }
 
                 capi.Tesselator.TesselateShape("tank", shape, out contentMesh, contentSource, new Vec3f(Shape.rotateX, Shape.rotateY, Shape.rotateZ));
 
