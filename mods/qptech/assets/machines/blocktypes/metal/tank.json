@@ -14,7 +14,8 @@
 	],
 	"creativeinventory": {
 		"general": [ "container-*" ],
-		"decorative": [ "container-*" ]
+		"decorative": [ "container-*" ],
+		"qptech": ["container-*"]
 	},
 	"drawtype": "json",
 

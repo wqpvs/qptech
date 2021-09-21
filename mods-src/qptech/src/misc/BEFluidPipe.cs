@@ -215,6 +215,11 @@ namespace qptech.src
                     dsc.AppendLine(bf.ToString() + " is disabled");
                 }
             }
+            if (looky != null)
+            {
+                //dsc.AppendLine(looky.HitPosition.ToString());
+                dsc.AppendLine("Selecting "+GetSubFace(looky).ToString());
+            }
         }
 
         public override void ToTreeAttributes(ITreeAttribute tree)
@@ -253,29 +258,7 @@ namespace qptech.src
                 }
             }
         }
-        private byte[] ObjectToByteArray(Object obj)
-        {
-            if (obj == null)
-                return null;
 
-            BinaryFormatter bf = new BinaryFormatter();
-            MemoryStream ms = new MemoryStream();
-            bf.Serialize(ms, obj);
-
-            return ms.ToArray();
-        }
-
-        // Convert a byte array to an Object
-        private Object ByteArrayToObject(byte[] arrBytes)
-        {
-            MemoryStream memStream = new MemoryStream();
-            BinaryFormatter binForm = new BinaryFormatter();
-            memStream.Write(arrBytes, 0, arrBytes.Length);
-            memStream.Seek(0, SeekOrigin.Begin);
-            Object obj = (Object)binForm.Deserialize(memStream);
-
-            return obj;
-        }
         
         public bool OnInteract(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
@@ -284,13 +267,14 @@ namespace qptech.src
             if (byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack.Item == null) { return false; }
             if (!byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack.Item.Code.ToString().Contains("pipewrench")) { return false; }
             
-            string faceclicked = blockSel.Face.ToString();
-            byte[] data = ObjectToByteArray(faceclicked);
+            
             if (Api is ICoreServerAPI)
             {
+                BlockFacing subface = GetSubFace(blockSel);
+                
                 if (disabledFaces == null) { disabledFaces = new List<BlockFacing>(); }
-                if (disabledFaces.Contains(blockSel.Face)) { disabledFaces.Remove(blockSel.Face); }
-                else { disabledFaces.Add(blockSel.Face); }
+                if (disabledFaces.Contains(subface)) { disabledFaces.Remove(subface); }
+                else { disabledFaces.Add(subface); }
                 MarkDirty(true);
             }
             //(Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.Wrench, data);
@@ -300,7 +284,38 @@ namespace qptech.src
             }
             return true;
         }
-
-       
+        BlockSelection looky;
+        public void OnBeingLookedAt(IPlayer byPlayer, BlockSelection blockSel, bool firstTick)
+        {
+            looky = blockSel;
+        }
+        const float selectionzone = 0.15f;
+       public BlockFacing GetSubFace(BlockSelection blockSelection)
+        {
+            if (BlockFacing.HORIZONTALS.Contains(blockSelection.Face))
+            {
+                if (blockSelection.HitPosition.Y < selectionzone) { return BlockFacing.DOWN; }
+                else if (blockSelection.HitPosition.Y > 1 - selectionzone) { return BlockFacing.UP; }
+                else if (blockSelection.Face == BlockFacing.EAST || blockSelection.Face == BlockFacing.WEST)
+                {
+                    if (blockSelection.HitPosition.Z < selectionzone) { return BlockFacing.NORTH; }
+                    else if (blockSelection.HitPosition.Z > 1 - selectionzone) { return BlockFacing.SOUTH; }
+                }
+                else if (blockSelection.Face== BlockFacing.NORTH || blockSelection.Face == BlockFacing.SOUTH)
+                {
+                    if (blockSelection.HitPosition.X < selectionzone) { return BlockFacing.WEST; }
+                    else if (blockSelection.HitPosition.X > 1 - selectionzone) { return BlockFacing.EAST; }
+                }
+            }
+            else
+            {
+                if (blockSelection.HitPosition.Z < selectionzone) { return BlockFacing.NORTH; }
+                else if (blockSelection.HitPosition.Z > 1 - selectionzone) { return BlockFacing.SOUTH; }
+                else if (blockSelection.HitPosition.X < selectionzone) { return BlockFacing.WEST; }
+                else if (blockSelection.HitPosition.X > 1 - selectionzone) { return BlockFacing.EAST; }
+            }
+            
+            return blockSelection.Face;
+        }
     }
 }

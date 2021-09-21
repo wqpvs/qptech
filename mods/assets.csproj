@@ -139,6 +139,7 @@
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pump.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\quarterpipe-block.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\quarterpipe-core.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\quarterpipe-segment.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-10.json" />

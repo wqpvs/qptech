@@ -27,5 +27,14 @@ namespace qptech.src
             }
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
+        public override void OnBeingLookedAt(IPlayer byPlayer, BlockSelection blockSel, bool firstTick)
+        {
+            BEFluidPipe myentity = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BEFluidPipe;
+            if (myentity != null)
+            {
+                myentity.OnBeingLookedAt(byPlayer, blockSel, firstTick);
+            }
+            base.OnBeingLookedAt(byPlayer, blockSel, firstTick);
+        }
     }
 }
