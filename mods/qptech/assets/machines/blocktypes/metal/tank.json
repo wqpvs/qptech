@@ -20,7 +20,7 @@
 	"drawtype": "json",
 	"shape": { "base": "block/metal/container/tank" },
 	"textures": {
-		"machinery": { "base": "block/metal/tank/machinery-tank" },
+		"machinery": { "base": "block/metal/bluepaintedwornsteelplate" },
 		"glass": { "base": "block/metal/tank/glass" }
 	},
 	"blockmaterial": "Metal",

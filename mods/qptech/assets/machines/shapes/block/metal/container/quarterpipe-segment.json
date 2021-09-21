@@ -9,37 +9,77 @@
 	},
 	"textures": {
 		"machinery-openhatch": "block/machinery-openhatch",
-		"machinery": "block/machinery"
+		"bluepaintedwornsteelplate": "block/metal/bluepaintedwornsteelplate"
 	},
 	"elements": [
 		{
 			"name": "Pipe",
-			"from": [ 5.0, 5.0, 4.0 ], 
+			"from": [ 5.0, 5.0, 1.0 ], 
 			"to": [ 11.0, 11.0, 5.0 ], 
-			"rotationOrigin": [ 8.0, 8.0, 5.0 ],
+			"rotationOrigin": [ 8.0, 8.0, 2.0 ],
 			"faces": {
-				"north": { "texture": "#machinery", "uv": [ 5.5, 5.5, 11.5, 11.5 ] },
-				"east": { "texture": "#machinery", "uv": [ 7.0, 5.5, 8.0, 11.5 ] },
-				"south": { "texture": "#machinery", "uv": [ 6.0, 7.5, 12.0, 13.5 ] },
-				"west": { "texture": "#machinery", "uv": [ 4.5, 5.5, 5.5, 11.5 ] },
-				"up": { "texture": "#machinery", "uv": [ 4.5, 7.5, 10.5, 8.5 ] },
-				"down": { "texture": "#machinery", "uv": [ 8.0, 7.5, 14.0, 8.5 ] }
-			},
-			"children": [
-				{
-					"name": "Flange",
-					"from": [ -1.0, -1.0, -4.0 ], 
-					"to": [ 7.0, 7.0, 0.0 ], 
-					"rotationOrigin": [ 3.0, 3.0, -2.0 ],
-					"faces": {
-						"north": { "texture": "#machinery-openhatch", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-						"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-						"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-						"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-						"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-						"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false }
-					}
-				}
-			]
+				"north": { "texture": "#machinery-openhatch", "uv": [ 5.5, 5.5, 11.5, 11.5 ] },
+				"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 7.0, 5.5, 11.0, 11.5 ] },
+				"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 6.0, 7.5, 12.0, 13.5 ] },
+				"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 4.5, 5.5, 8.5, 11.5 ] },
+				"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 4.5, 7.5, 10.5, 11.5 ] },
+				"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 8.0, 7.5, 14.0, 11.5 ] }
+			}
+		},
+		{
+			"name": "Pipe2",
+			"from": [ 4.0, 4.0, 0.0 ], 
+			"to": [ 12.0, 5.0, 1.0 ], 
+			"rotationOrigin": [ 7.0, 7.0, 1.0 ],
+			"faces": {
+				"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.5, 5.5, 13.5, 6.5 ] },
+				"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 7.0, 5.5, 8.0, 6.5 ] },
+				"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 6.0, 7.5, 14.0, 8.5 ] },
+				"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 4.5, 5.5, 5.5, 6.5 ] },
+				"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 4.5, 7.5, 12.5, 8.5 ] },
+				"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 8.0, 7.5, 16.0, 8.5 ] }
+			}
+		},
+		{
+			"name": "Pipe3",
+			"from": [ 4.0, 11.0, 0.0 ], 
+			"to": [ 12.0, 12.0, 1.0 ], 
+			"rotationOrigin": [ 7.0, 14.0, 1.0 ],
+			"faces": {
+				"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.5, 5.5, 13.5, 6.5 ] },
+				"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 7.0, 5.5, 8.0, 6.5 ] },
+				"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 6.0, 7.5, 14.0, 8.5 ] },
+				"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 4.5, 5.5, 5.5, 6.5 ] },
+				"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 4.5, 7.5, 12.5, 8.5 ] },
+				"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 8.0, 7.5, 16.0, 8.5 ] }
+			}
+		},
+		{
+			"name": "Pipe4",
+			"from": [ 11.0, 5.0, 0.0 ], 
+			"to": [ 12.0, 11.0, 1.0 ], 
+			"rotationOrigin": [ 14.0, 8.0, 1.0 ],
+			"faces": {
+				"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.5, 5.5, 6.5, 11.5 ] },
+				"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 7.0, 5.5, 8.0, 11.5 ] },
+				"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 6.0, 7.5, 7.0, 13.5 ] },
+				"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 4.5, 5.5, 5.5, 11.5 ] },
+				"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 4.5, 7.5, 5.5, 8.5 ] },
+				"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 8.0, 7.5, 9.0, 8.5 ] }
+			}
+		},
+		{
+			"name": "Pipe5",
+			"from": [ 4.0, 5.0, 0.0 ], 
+			"to": [ 5.0, 11.0, 1.0 ], 
+			"rotationOrigin": [ 7.0, 8.0, 1.0 ],
+			"faces": {
+				"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.5, 5.5, 6.5, 11.5 ] },
+				"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 7.0, 5.5, 8.0, 11.5 ] },
+				"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 6.0, 7.5, 7.0, 13.5 ] },
+				"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 4.5, 5.5, 5.5, 11.5 ] },
+				"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 4.5, 7.5, 5.5, 8.5 ] },
+				"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 8.0, 7.5, 9.0, 8.5 ] }
+			}
 		}
 	]}

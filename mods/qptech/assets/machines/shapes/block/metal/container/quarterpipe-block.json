@@ -8,36 +8,80 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"machinery": "block/machinery"
+		"redpaintedsteelwrench": "item/redpaintedsteelwrench",
+		"bluepaintedwornsteelplate": "block/metal/bluepaintedwornsteelplate"
 	},
 	"elements": [
 		{
 			"name": "Pipe",
-			"from": [ 5.0, 5.0, 4.0 ], 
-			"to": [ 11.0, 11.0, 5.0 ], 
-			"rotationOrigin": [ 8.0, 8.0, 5.0 ],
+			"from": [ 5.75, 5.75, 4.5 ], 
+			"to": [ 10.25, 10.25, 5.25 ], 
+			"rotationOrigin": [ 8.0, 8.0, 4.75 ],
 			"faces": {
-				"north": { "texture": "#machinery", "uv": [ 5.5, 5.5, 11.5, 11.5 ] },
-				"east": { "texture": "#machinery", "uv": [ 7.0, 5.5, 8.0, 11.5 ] },
-				"south": { "texture": "#machinery", "uv": [ 6.0, 7.5, 12.0, 13.5 ] },
-				"west": { "texture": "#machinery", "uv": [ 4.5, 5.5, 5.5, 11.5 ] },
-				"up": { "texture": "#machinery", "uv": [ 4.5, 7.5, 10.5, 8.5 ] },
-				"down": { "texture": "#machinery", "uv": [ 8.0, 7.5, 14.0, 8.5 ] }
-			}
-		},
-		{
-			"name": "Pipe2",
-			"from": [ 6.0, 6.0, 3.0 ], 
-			"to": [ 10.0, 10.0, 4.0 ], 
-			"rotationOrigin": [ 8.0, 8.0, 4.0 ],
-			"rotationZ": -45.0,
-			"faces": {
-				"north": { "texture": "#machinery", "uv": [ 5.5, 5.5, 9.5, 9.5 ] },
-				"east": { "texture": "#machinery", "uv": [ 7.0, 5.5, 8.0, 9.5 ] },
-				"south": { "texture": "#machinery", "uv": [ 6.0, 7.5, 10.0, 11.5 ] },
-				"west": { "texture": "#machinery", "uv": [ 4.5, 5.5, 5.5, 9.5 ] },
-				"up": { "texture": "#machinery", "uv": [ 4.5, 7.5, 8.5, 8.5 ] },
-				"down": { "texture": "#machinery", "uv": [ 8.0, 7.5, 12.0, 8.5 ] }
-			}
+				"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.5, 9.0, 5.0, 13.5 ], "rotation": 180 },
+				"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 2.5, 8.5, 3.0, 13.0 ] },
+				"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.0, 8.0, 9.5, 12.5 ], "enabled": false },
+				"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 10.5, 7.5, 11.0, 12.0 ] },
+				"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 14.0, 4.5, 14.5 ] },
+				"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 7.5, 5.5, 12.0, 6.0 ], "rotation": 180 }
+			},
+			"children": [
+				{
+					"name": "Bolt",
+					"from": [ 3.5, 3.5, -0.375 ], 
+					"to": [ 4.25, 4.25, 0.0 ], 
+					"rotationOrigin": [ 5.25, 5.25, 0.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 4.0, 8.5, 4.5 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 9.5, 3.5, 10.0, 4.0 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 5.5, 8.5, 6.0, 9.0 ], "enabled": false },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 3.5, 8.5, 4.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 9.0, 3.0, 9.5, 3.5 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 8.5, 1.5, 9.0, 2.0 ] }
+					}
+				},
+				{
+					"name": "Bolt4",
+					"from": [ 0.25, 3.5, -0.375 ], 
+					"to": [ 1.0, 4.25, 0.0 ], 
+					"rotationOrigin": [ 1.5, 5.25, 0.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 4.0, 8.5, 4.5 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 9.5, 3.5, 10.0, 4.0 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 5.5, 8.5, 6.0, 9.0 ], "enabled": false },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 3.5, 8.5, 4.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 9.0, 3.0, 9.5, 3.5 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 8.5, 1.5, 9.0, 2.0 ] }
+					}
+				},
+				{
+					"name": "Bolt5",
+					"from": [ 0.24, 0.24, -0.375 ], 
+					"to": [ 0.99, 0.99, 0.0 ], 
+					"rotationOrigin": [ 1.5, 1.5, 0.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 4.0, 8.5, 4.5 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 9.5, 3.5, 10.0, 4.0 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 5.5, 8.5, 6.0, 9.0 ], "enabled": false },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 3.5, 8.5, 4.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 9.0, 3.0, 9.5, 3.5 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 8.5, 1.5, 9.0, 2.0 ] }
+					}
+				},
+				{
+					"name": "Bolt6",
+					"from": [ 3.5, 0.25, -0.375 ], 
+					"to": [ 4.25, 1.0, 0.0 ], 
+					"rotationOrigin": [ 5.25, 1.5, 0.75 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 4.0, 8.5, 4.5 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 9.5, 3.5, 10.0, 4.0 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 5.5, 8.5, 6.0, 9.0 ], "enabled": false },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 3.5, 8.5, 4.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 9.0, 3.0, 9.5, 3.5 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 8.5, 1.5, 9.0, 2.0 ] }
+					}
+				}
+			]
 		}
 	]}

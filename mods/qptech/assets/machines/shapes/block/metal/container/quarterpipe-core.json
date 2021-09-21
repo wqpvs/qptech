@@ -8,7 +8,7 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"machinery": "block/machinery"
+		"bluepaintedwornsteelplate": "block/metal/bluepaintedwornsteelplate"
 	},
 	"elements": [
 		{
@@ -17,12 +17,12 @@
 			"to": [ 11.0, 11.0, 11.0 ], 
 			"rotationOrigin": [ 7.0, 7.0, 7.0 ],
 			"faces": {
-				"north": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-				"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-				"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-				"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-				"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-				"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false }
+				"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.5, 5.5, 11.5, 11.5 ] },
+				"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.0, 5.0, 11.0, 11.0 ] },
+				"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.0, 4.5, 11.0, 10.5 ] },
+				"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.0, 5.0, 11.0, 11.0 ] },
+				"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.0, 5.0, 11.0, 11.0 ] },
+				"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 5.0, 5.0, 11.0, 11.0 ] }
 			}
 		}
 	]}

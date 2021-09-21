@@ -263,6 +263,7 @@
     <Content Include="qptech\assets\machines\textures\block\copperspoolwrapped.png" />
     <Content Include="qptech\assets\machines\textures\block\lit.png" />
     <Content Include="qptech\assets\machines\textures\block\machinery-largefan.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\bluepaintedwornsteelplate.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\fan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\machinery-back.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\machinery-border-small.png" />
