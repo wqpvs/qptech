@@ -308,6 +308,7 @@
     <Content Include="qptech\assets\machines\textures\block\stone\other\front-granite.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\wires\tin-wires.png" />
     <Content Include="qptech\assets\machines\textures\block\wood\hopper\frame.png" />
+    <Content Include="qptech\assets\machines\textures\item\redpaintedsteelwrench.png" />
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-brass.png" />
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-copper.png" />
     <Content Include="qptech\qptech.dll" />

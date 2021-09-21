@@ -8,96 +8,162 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"wornsteelplate": "block/metal/wornsteelplate"
+		"redpaintedsteelwrench": "item/redpaintedsteelwrench"
 	},
 	"elements": [
 		{
 			"name": "Handle",
-			"from": [ 2.0, 0.0, 7.0 ], 
-			"to": [ 10.0, 2.0, 9.0 ], 
-			"rotationOrigin": [ 2.0, 0.0, 7.0 ],
+			"from": [ 2.0, 1.0, 7.0 ], 
+			"to": [ 12.0, 2.0, 9.0 ], 
+			"rotationOrigin": [ 2.0, 1.0, 7.0 ],
 			"faces": {
-				"north": { "texture": "#wornsteelplate", "uv": [ 3.0, 6.5, 11.0, 8.5 ] },
-				"east": { "texture": "#wornsteelplate", "uv": [ 6.0, 8.0, 8.0, 10.0 ] },
-				"south": { "texture": "#wornsteelplate", "uv": [ 2.0, 7.5, 10.0, 9.5 ] },
-				"west": { "texture": "#wornsteelplate", "uv": [ 7.0, 8.0, 9.0, 10.0 ] },
-				"up": { "texture": "#wornsteelplate", "uv": [ 5.0, 8.0, 13.0, 10.0 ] },
-				"down": { "texture": "#wornsteelplate", "uv": [ 3.0, 5.5, 11.0, 7.5 ] }
+				"north": { "texture": "#redpaintedsteelwrench", "uv": [ 0.5, 8.5, 10.5, 9.5 ] },
+				"east": { "texture": "#redpaintedsteelwrench", "uv": [ 7.0, 14.0, 9.0, 15.0 ] },
+				"south": { "texture": "#redpaintedsteelwrench", "uv": [ 1.0, 10.0, 11.0, 11.0 ] },
+				"west": { "texture": "#redpaintedsteelwrench", "uv": [ 7.0, 8.0, 9.0, 9.0 ] },
+				"up": { "texture": "#redpaintedsteelwrench", "uv": [ 0.5, 8.0, 10.5, 10.0 ] },
+				"down": { "texture": "#redpaintedsteelwrench", "uv": [ 1.0, 8.5, 11.0, 10.5 ] }
 			},
 			"children": [
 				{
-					"name": "Cube4",
-					"from": [ 10.0, 0.0, 2.0 ], 
-					"to": [ 13.0, 2.0, 3.0 ], 
-					"rotationOrigin": [ 10.0, 0.0, 2.0 ],
-					"rotationY": -90.0,
+					"name": "HandleBit",
+					"from": [ -2.0, 0.0, 0.5 ], 
+					"to": [ -1.0, 1.0, 1.5 ], 
+					"rotationOrigin": [ -2.0, 0.0, 0.0 ],
 					"faces": {
-						"north": { "texture": "#wornsteelplate", "uv": [ 5.5, 10.5, 8.5, 12.5 ] },
-						"east": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 1.0, 2.0 ] },
-						"south": { "texture": "#wornsteelplate", "uv": [ 4.5, 11.5, 7.5, 13.5 ] },
-						"west": { "texture": "#wornsteelplate", "uv": [ 4.5, 10.5, 5.5, 12.5 ] },
-						"up": { "texture": "#wornsteelplate", "uv": [ 8.0, 6.5, 11.0, 7.5 ] },
-						"down": { "texture": "#wornsteelplate", "uv": [ 7.0, 12.5, 10.0, 13.5 ] }
-					},
-					"children": [
-						{
-							"name": "Cube3",
-							"from": [ 0.0, 0.0, -4.0 ], 
-							"to": [ 4.0, 2.0, -3.0 ], 
-							"rotationOrigin": [ 0.0, 0.0, -4.0 ],
-							"faces": {
-								"north": { "texture": "#wornsteelplate", "uv": [ 6.5, 12.0, 10.5, 14.0 ] },
-								"east": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 1.0, 2.0 ] },
-								"south": { "texture": "#wornsteelplate", "uv": [ 6.0, 12.0, 10.0, 14.0 ] },
-								"west": { "texture": "#wornsteelplate", "uv": [ 6.0, 10.5, 7.0, 12.5 ] },
-								"up": { "texture": "#wornsteelplate", "uv": [ 5.0, 11.0, 9.0, 12.0 ] },
-								"down": { "texture": "#wornsteelplate", "uv": [ 7.0, 13.0, 11.0, 14.0 ] }
-							}
-						},
-						{
-							"name": "Cube1",
-							"from": [ -1.0003, 0.0, 0.9972 ], 
-							"to": [ 2.9997, 2.0, 1.9972 ], 
-							"rotationOrigin": [ -1.0, 0.0, 1.0 ],
-							"rotationY": 89.9802127184967,
-							"faces": {
-								"north": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.5, 4.0, 2.5 ] },
-								"east": { "texture": "#wornsteelplate", "uv": [ 1.0, 0.5, 2.0, 2.5 ] },
-								"south": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 4.0, 2.0 ] },
-								"west": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 1.0, 2.0 ] },
-								"up": { "texture": "#wornsteelplate", "uv": [ 0.0, 4.5, 1.0, 8.5 ], "rotation": 90 },
-								"down": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "rotation": 90 }
-							}
-						},
-						{
-							"name": "Cube5",
-							"from": [ 3.0, 0.0, -3.0 ], 
-							"to": [ 4.0, 2.0, -2.0 ], 
-							"rotationOrigin": [ 3.0, 0.0, -3.0 ],
-							"faces": {
-								"north": { "texture": "#wornsteelplate", "uv": [ 6.5, 9.0, 7.5, 11.0 ] },
-								"east": { "texture": "#wornsteelplate", "uv": [ 4.0, 11.5, 5.0, 13.5 ] },
-								"south": { "texture": "#wornsteelplate", "uv": [ 5.5, 11.0, 6.5, 13.0 ] },
-								"west": { "texture": "#wornsteelplate", "uv": [ 5.5, 11.0, 6.5, 13.0 ] },
-								"up": { "texture": "#wornsteelplate", "uv": [ 4.0, 11.5, 5.0, 12.5 ] },
-								"down": { "texture": "#wornsteelplate", "uv": [ 7.5, 13.0, 8.5, 14.0 ] }
-							}
-						},
-						{
-							"name": "Cube6",
-							"from": [ -1.0, 0.5, 1.0 ], 
-							"to": [ 0.0, 1.5, 2.0 ], 
-							"rotationOrigin": [ -1.0, 0.0, 1.0 ],
-							"faces": {
-								"north": { "texture": "#wornsteelplate", "uv": [ 8.0, 2.5, 9.0, 3.5 ] },
-								"east": { "texture": "#wornsteelplate", "uv": [ 6.5, 1.5, 7.5, 2.5 ] },
-								"south": { "texture": "#wornsteelplate", "uv": [ 7.0, 1.5, 8.0, 2.5 ] },
-								"west": { "texture": "#wornsteelplate", "uv": [ 5.5, 3.5, 6.5, 4.5 ] },
-								"up": { "texture": "#wornsteelplate", "uv": [ 4.5, 2.5, 5.5, 3.5 ] },
-								"down": { "texture": "#wornsteelplate", "uv": [ 7.0, 4.5, 8.0, 5.5 ] }
-							}
-						}
-					]
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 3.5, 6.5, 4.5, 7.5 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 5.5, 8.0, 6.5, 9.0 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 2.5, 4.5, 3.5, 5.5 ] },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 4.5, 4.0, 5.5, 5.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 5.5, 4.5, 6.5, 5.5 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 4.0, 6.0, 5.0, 7.0 ] }
+					}
+				},
+				{
+					"name": "Handelbit1",
+					"from": [ -1.0, 0.0, -0.5 ], 
+					"to": [ 0.0, 1.0, 0.5 ], 
+					"rotationOrigin": [ -1.0, 0.0, -1.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 3.5, 6.5, 4.5, 7.5 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 5.5, 8.0, 6.5, 9.0 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 2.5, 4.5, 3.5, 5.5 ] },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 4.5, 4.0, 5.5, 5.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 5.5, 4.5, 6.5, 5.5 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 4.0, 6.0, 5.0, 7.0 ] }
+					}
+				},
+				{
+					"name": "Handlebit2",
+					"from": [ -1.0, 0.0, 1.5 ], 
+					"to": [ 0.0, 1.0, 2.5 ], 
+					"rotationOrigin": [ -1.0, 0.0, 1.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 3.5, 6.5, 4.5, 7.5 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 5.5, 8.0, 6.5, 9.0 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 2.5, 4.5, 3.5, 5.5 ] },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 4.5, 4.0, 5.5, 5.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 5.5, 4.5, 6.5, 5.5 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 4.0, 6.0, 5.0, 7.0 ] }
+					}
+				},
+				{
+					"name": "Cube7",
+					"from": [ 12.0, -0.25, 1.0 ], 
+					"to": [ 13.0, 1.25, 5.0 ], 
+					"rotationOrigin": [ 12.0, 0.0, 1.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 13.5, 1.5, 14.5, 3.0 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 11.5, 2.0, 15.5, 3.5 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 12.5, 2.0, 13.5, 3.5 ] },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 12.0, 1.5, 16.0, 3.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 13.5, 1.0, 14.5, 5.0 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 13.0, 1.5, 14.0, 5.5 ] }
+					}
+				},
+				{
+					"name": "Cube6",
+					"from": [ 13.0, 0.0, -1.0 ], 
+					"to": [ 14.0, 1.0, 3.0 ], 
+					"rotationOrigin": [ 13.0, 0.0, -1.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 9.0, 1.5, 10.0, 2.5 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 7.5, 2.0, 8.5, 6.0 ], "rotation": 90 },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 9.0, 2.0, 10.0, 3.0 ] },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 2.0, 9.0, 6.0 ], "rotation": 90 },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 2.0, 9.0, 6.0 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 9.0, 1.0, 10.0, 5.0 ] }
+					}
+				},
+				{
+					"name": "Cube8",
+					"from": [ 10.0, -0.25, 1.0 ], 
+					"to": [ 11.0, 1.25, 5.0 ], 
+					"rotationOrigin": [ 10.0, 0.0, 1.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 13.5, 1.5, 14.5, 3.0 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 11.5, 2.0, 15.5, 3.5 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 12.5, 2.0, 13.5, 3.5 ] },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 12.0, 1.5, 16.0, 3.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 13.5, 1.0, 14.5, 5.0 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 13.0, 1.5, 14.0, 5.5 ] }
+					}
+				},
+				{
+					"name": "Handlebit8",
+					"from": [ 9.0, 0.0, 2.0 ], 
+					"to": [ 10.0, 1.0, 4.0 ], 
+					"rotationOrigin": [ 9.0, 0.0, 2.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 4.0, 3.5, 5.0, 4.5 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 7.5, 9.5, 9.5, 10.5 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 7.5, 9.5, 8.5, 10.5 ] },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 7.5, 10.5, 9.5, 11.5 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 9.0, 10.5, 10.0, 12.5 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 8.5, 8.5, 9.5, 10.5 ] }
+					}
+				},
+				{
+					"name": "Cube9",
+					"from": [ 10.0, 0.0, -2.0 ], 
+					"to": [ 13.0, 1.0, 0.0 ], 
+					"rotationOrigin": [ 10.0, 0.0, -2.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 2.5, 9.0, 5.5 ], "rotation": 90 },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 7.5, 2.0, 8.5, 4.0 ], "rotation": 90 },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 7.5, 2.5, 8.5, 5.5 ], "rotation": 90 },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 8.0, 2.0, 9.0, 4.0 ], "rotation": 90 },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 7.0, 2.5, 9.0, 5.5 ], "rotation": 90 },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 7.5, 2.5, 9.5, 5.5 ], "rotation": 90 }
+					}
+				},
+				{
+					"name": "Handlebit10",
+					"from": [ 7.0, -0.5, -2.0 ], 
+					"to": [ 10.0, 1.5, 0.0 ], 
+					"rotationOrigin": [ 7.0, 0.0, -2.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 2.0, 5.0, 5.0, 7.0 ] },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 6.5, 9.0, 8.5, 11.0 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 3.5, 10.5, 6.5, 12.5 ] },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 7.5, 10.0, 9.5, 12.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 6.5, 9.0, 9.5, 11.0 ] },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 7.5, 8.5, 10.5, 10.5 ] }
+					}
+				},
+				{
+					"name": "Cube11",
+					"from": [ 5.0, 0.0, -1.5 ], 
+					"to": [ 7.0, 1.0, -0.5 ], 
+					"rotationOrigin": [ 5.0, 0.0, -2.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 14.0, 10.5, 15.0, 12.5 ], "rotation": 90 },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 13.0, 4.0, 14.0, 5.0 ], "rotation": 90 },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 14.5, 9.0, 15.5, 11.0 ], "rotation": 90 },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 13.0, 4.0, 14.0, 5.0 ], "rotation": 90 },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 14.5, 9.0, 15.5, 11.0 ], "rotation": 90 },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 13.5, 9.0, 14.5, 11.0 ], "rotation": 90 }
+					}
 				}
 			]
 		}
