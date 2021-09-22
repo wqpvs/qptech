@@ -1,0 +1,38 @@
+{
+	"code": "pipe-segment-bronze",
+	"class": "BlockFluidPipe",
+	"entityclass": "BEFluidPipe",
+	"creativeinventory": {
+		"qptech": [ "*" ]
+	},
+	"blockmaterial": "Metal",
+	"shape": { "base": "block/metal/container/pipes/pipe-segment" },
+	"textures": {
+		"metal": { "base": "block/metal/pipes/bronze" },
+		"black": { "base": "block/machinery-openhatch" },
+		"bolt": { "base": "block/castiron" }
+	},
+	"resistance": 1,
+	"sidesolid": {
+		"all": true
+	},
+	"sideAo": { "all": true },
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	},
+	"collisionselectionboxes": [
+		{
+			"x1": 0.25,
+			"y1": 0.25,
+			"z1": 0,
+			"x2": 0.75,
+			"y2": 0.75,
+			"z2": 0.3125
+		}
+	],
+	"lightabsorption": "8"
+}

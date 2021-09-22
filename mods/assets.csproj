@@ -22,15 +22,16 @@
     <None Include="qptech\assets\game\shapes\block\can-full.json" />
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
-    <None Include="qptech\assets\machines\blocktypes\dummy-pipesegment - Copy.json" />
-    <None Include="qptech\assets\machines\blocktypes\dummy-pipeblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\blastfurnace.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\electriccrucible.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidpump.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\fluidpipe.json" />
+    <None Include="qptech\assets\machines\blocktypes\pipe-core-bluesteel.json" />
+    <None Include="qptech\assets\machines\blocktypes\pipe-closed-bronze.json" />
+    <None Include="qptech\assets\machines\blocktypes\pipe-core-bronze.json" />
+    <None Include="qptech\assets\machines\blocktypes\pipe-segment-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\tank.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\itemhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\stairs\girder.json" />
@@ -63,6 +64,8 @@
     <None Include="qptech\assets\machines\blocktypes\other\cabinet.json" />
     <None Include="qptech\assets\machines\blocktypes\other\castironovenlarge.json" />
     <None Include="qptech\assets\machines\blocktypes\dummy-element.json" />
+    <None Include="qptech\assets\machines\blocktypes\pipe-closed-bluesteel.json" />
+    <None Include="qptech\assets\machines\blocktypes\pipe-segment-bluesteel.json" />
     <None Include="qptech\assets\machines\blocktypes\stone\firebox.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitloader.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitstoker.json" />
@@ -138,16 +141,16 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-block.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-core.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-segment.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pump.json" />
-    <None Include="qptech\assets\machines\shapes\block\metal\container\quarterpipe-block.json" />
-    <None Include="qptech\assets\machines\shapes\block\metal\container\quarterpipe-core.json" />
-    <None Include="qptech\assets\machines\shapes\block\metal\container\quarterpipe-segment.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-10.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-20.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-30.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-40.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-50.json" />
-    <None Include="qptech\assets\machines\shapes\block\metal\container\tank-empty.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\tank.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\electricfan.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\electrickiln-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\forge-lv.json" />
@@ -317,5 +320,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="qptech\assets\game\blocktypes\" />
+    <Folder Include="qptech\assets\machines\blocktypes\metal\pipes\types\" />
   </ItemGroup>
 </Project>

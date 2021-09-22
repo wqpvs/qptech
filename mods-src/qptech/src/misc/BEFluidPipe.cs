@@ -22,6 +22,17 @@ namespace qptech.src
         public List<BlockFacing> disabledFaces;
         public int CapacityLitres { get; set; } = 25;
 
+        public string metal
+        {
+            get
+            {
+                string content = Block.LastCodePart();
+                if (content == "bronze" || content == "bluesteel") return content;
+                return null;
+            }
+        }
+
+
         public bool IsFull { get { return CurrentLevel == CapacityLitres; } }
 
         public int CurrentLevel => inventory[0].StackSize;
@@ -37,7 +48,9 @@ namespace qptech.src
         internal InventoryGeneric inventory;
         public override InventoryBase Inventory => inventory;
         public override string InventoryClassName => "pipe";
+
         BlockFacing[] facechecker = new BlockFacing[] { BlockFacing.DOWN, BlockFacing.NORTH, BlockFacing.EAST, BlockFacing.SOUTH, BlockFacing.WEST };
+
         protected override void OnTick(float dt)
         {
             NeighbourCheck();
@@ -66,41 +79,44 @@ namespace qptech.src
         {
             ICoreClientAPI capi = Api as ICoreClientAPI;
             if (capi == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
-            Block pipesegment = Api.World.GetBlock(new AssetLocation("machines:dummy-pipesegment"));
+            Block pipesegment = Api.World.GetBlock(new AssetLocation("machines:pipe-segment" + "-" + (metal)));
             MeshData mesh;
+            Cuboidf[] collboxes = Block.GetCollisionBoxes(Api.World.BlockAccessor, Pos);
             //Note the pipesegment by default is north facing
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
                 bool isdisabled = false;
                 if (disabledFaces != null && disabledFaces.Contains(bf))
                 {
-                    pipesegment = Api.World.GetBlock(new AssetLocation("machines:dummy-pipeblock"));
+                    pipesegment = Api.World.GetBlock(new AssetLocation("machines:pipe-closed" + "-" + (metal)));
                     isdisabled = true;
                 }
                 else
                 {
-                    pipesegment = Api.World.GetBlock(new AssetLocation("machines:dummy-pipesegment"));
+                    pipesegment = Api.World.GetBlock(new AssetLocation("machines:pipe-segment" + "-" + (metal)));
                 }
                 BlockEntity ent = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf));
-                if (ent == null&&!isdisabled) { continue; }
+                if (ent == null && !isdisabled) { continue; }
                 IFluidTank t = ent as IFluidTank;
                 BEEGenerator g = ent as BEEGenerator;
                 BEWaterTower w = ent as BEWaterTower;
-                if (t == null&&g==null&&w==null&&!isdisabled) { continue; }
-                
+                if (t == null && g == null && w == null && !isdisabled) { continue; }
+
                 capi.Tesselator.TesselateBlock(pipesegment, out mesh);
                 if (bf == BlockFacing.NORTH)
                 {
                     mesher.AddMeshData(mesh);
+
                     //do nothing, the block is setup how we want it
                 }
                 else if (bf == BlockFacing.EAST)
                 {
-                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0,GameMath.DEG2RAD*270, 0));
+                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD * 270, 0));
+     
                 }
                 else if (bf == BlockFacing.SOUTH)
                 {
-                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD *180, 0));
+                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD * 180, 0));
                 }
                 else if (bf == BlockFacing.WEST)
                 {
@@ -108,14 +124,17 @@ namespace qptech.src
                 }
                 else if (bf == BlockFacing.UP)
                 {
-                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), GameMath.DEG2RAD * 90,0, 0));
+
+                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), GameMath.DEG2RAD * 90, 0, 0));
+  
                 }
                 else if (bf == BlockFacing.DOWN)
                 {
                     mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), -GameMath.DEG2RAD * 90, 0, 0));
+        
                 }
             }
-            
+
             return base.OnTesselation(mesher, tessThreadTesselator);
         }
         public virtual void Equalize()
@@ -224,7 +243,7 @@ namespace qptech.src
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
-            
+
             if (disabledFaces == null) { disabledFaces = new List<BlockFacing>(); }
             List<string> dfstring = new List<string>();
             foreach (BlockFacing bf in disabledFaces)
@@ -238,6 +257,7 @@ namespace qptech.src
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
         {
             base.FromTreeAttributes(tree, worldForResolving);
+
             var asString = tree.GetString("disabledfaces");
             List<string> dfstring = new List<string>();
             if (asString != "")

@@ -13,6 +13,7 @@ namespace qptech.src
 {
     class BlockFluidPipe:Block
     {
+ 
         public override void OnNeighbourBlockChange(IWorldAccessor world, BlockPos pos, BlockPos neibpos)
         {
             base.OnNeighbourBlockChange(world, pos, neibpos);
@@ -27,6 +28,17 @@ namespace qptech.src
             }
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
+
+
+        public override Cuboidf[] GetCollisionBoxes(IBlockAccessor blockAccessor, BlockPos pos) {
+            return base.GetCollisionBoxes(blockAccessor, pos); 
+        }
+
+        public override Cuboidf[] GetSelectionBoxes(IBlockAccessor blockAccessor, BlockPos pos)
+        {
+            return base.GetSelectionBoxes(blockAccessor, pos);
+        }
+
         public override void OnBeingLookedAt(IPlayer byPlayer, BlockSelection blockSel, bool firstTick)
         {
             BEFluidPipe myentity = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BEFluidPipe;
