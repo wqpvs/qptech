@@ -8,7 +8,7 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"metal": "block/metal/bluepaintedwornsteelplate"
+		"metal": "block/metal/pipes/bronze"
 	},
 	"elements": [
 		{

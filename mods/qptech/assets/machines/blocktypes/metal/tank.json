@@ -10,6 +10,10 @@
 		{
 			"code": "containers",
 			"states": [ "tank" ]
+		},
+		{
+			"code": "metal",
+			"states": [ "bronze", "bluesteel" ]
 		}
 	],
 	"creativeinventory": {
@@ -18,10 +22,13 @@
 		"qptech": [ "container-*" ]
 	},
 	"drawtype": "json",
+	"shapeinventory": { "base": "block/metal/container/tank" },
 	"shape": { "base": "block/metal/container/tank" },
 	"textures": {
-		"machinery": { "base": "block/metal/bluepaintedwornsteelplate" },
-		"glass": { "base": "block/metal/tank/glass" }
+		"machinery": { "base": "block/metal/tank/{metal}" },
+		"glass": {
+			"base": "block/metal/tank/glass"
+		}
 	},
 	"blockmaterial": "Metal",
 	"lightAbsorption": 1,
@@ -33,14 +40,13 @@
 	},
 	"replaceable": 500,
 	"resistance": 1.5,
-	"liquidSelectable": 1,
-	"faceCullMode": "NeverCull",
-	"renderpass": "OpaqueNoCull",
+	"liquidSelectable": true,
 	"sounds": {
 		"place": "game:block/anvil",
 		"hit": "game:block/meteoriciron-hit-pickaxe0",
 		"walk": "game:walk/stone"
 	},
+	"drops": [],
 	"materialDensity": 400,
 	"heldTpIdleAnimation": "holdbothhandslarge",
 	"heldTpUseAnimation": "twohandplaceblock",

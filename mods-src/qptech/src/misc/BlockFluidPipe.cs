@@ -31,13 +31,15 @@ namespace qptech.src
 
 
         public override Cuboidf[] GetCollisionBoxes(IBlockAccessor blockAccessor, BlockPos pos) {
-            return base.GetCollisionBoxes(blockAccessor, pos); 
+            return base.GetCollisionBoxes(blockAccessor, pos);
         }
 
         public override Cuboidf[] GetSelectionBoxes(IBlockAccessor blockAccessor, BlockPos pos)
         {
             return base.GetSelectionBoxes(blockAccessor, pos);
         }
+
+
 
         public override void OnBeingLookedAt(IPlayer byPlayer, BlockSelection blockSel, bool firstTick)
         {

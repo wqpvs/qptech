@@ -27,7 +27,7 @@ namespace qptech.src
             get
             {
                 string content = Block.LastCodePart();
-                if (content == "bronze" || content == "bluesteel") return content;
+                if (content == "copper" || content == "bronze" || content == "bluesteel" || content == "steel") return content;
                 return null;
             }
         }

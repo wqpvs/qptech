@@ -29,7 +29,7 @@ namespace qptech.src
     /// TODO Fix up or figure out extended fluid transfer, probably need to not use capacity liters for this!!
     /// </summary>
 
-    public class BEClearFluidTank : BlockEntityContainer,IFluidTank
+    public class BEClearFluidTank : BlockEntityContainer, IFluidTank
     {
         
         
@@ -153,12 +153,7 @@ namespace qptech.src
             ///TODO Here we could push overflow?
             return useamount;
         }
-        public override void OnBlockBroken()
-        {
-            // Don't drop inventory contents
-        }
-
-
+  
         public override void OnBlockPlaced(ItemStack byItemStack = null)
         {
             base.OnBlockPlaced(byItemStack);

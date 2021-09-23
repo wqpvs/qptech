@@ -221,9 +221,12 @@
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\shapes\item\worn\jetpack.json" />
     <None Include="qptech\assets\machines\textures\block\copperspool.psd" />
+    <None Include="qptech\assets\machines\textures\block\glass\glass-colour.aseprite" />
     <None Include="qptech\assets\machines\textures\block\metal\generator\machinery-glass.aseprite" />
     <None Include="qptech\assets\machines\textures\block\glass\glass.aseprite" />
     <None Include="qptech\assets\machines\textures\block\glass\light\light.aseprite" />
+    <None Include="qptech\assets\machines\textures\block\metal\tank\bluesteel.xcf" />
+    <None Include="qptech\assets\machines\textures\block\metal\tank\glass.aseprite" />
     <None Include="qptech\assets\machines\textures\block\metal\wires\wires-1.aseprite" />
     <None Include="qptech\assets\qptech\config\clayformerswaps.json" />
     <None Include="qptech\assets\qptech\config\macerationrecipes.json" />
@@ -267,6 +270,8 @@
     <Content Include="qptech\assets\machines\textures\block\lit.png" />
     <Content Include="qptech\assets\machines\textures\block\machinery-largefan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\bluepaintedwornsteelplate.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\conveyor\machinery-border-small.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\firebox\machinery-border-small.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\fan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\machinery-back.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\machinery-border-small.png" />
@@ -293,6 +298,19 @@
     <Content Include="qptech\assets\machines\textures\block\machinery.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\hopper\machinery-border.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\hopper\tinbronze1.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\macerator\machinery-back.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\macerator\machinery-border-small.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\metalpress\castiron-back.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\metalpress\castiron-bar.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\metalpress\castiron-fence.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\metalpress\castiron-top.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\metalpress\machinery-border-small.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\pipes\bluesteel.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\pipes\bronze.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\stairs\metal.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\tank\bluesteel.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\tank\bronze.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\tank\glass.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\wornsteelplate.png" />
     <Content Include="qptech\assets\machines\textures\block\notchedbrass.png" />
     <Content Include="qptech\assets\machines\textures\block\oak1.png" />
@@ -311,7 +329,6 @@
     <Content Include="qptech\assets\machines\textures\block\shinybrass.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\other\front-granite.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\wires\tin-wires.png" />
-    <Content Include="qptech\assets\machines\textures\block\wood\hopper\frame.png" />
     <Content Include="qptech\assets\machines\textures\item\redpaintedsteelwrench.png" />
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-brass.png" />
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-copper.png" />
@@ -320,6 +337,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="qptech\assets\game\blocktypes\" />
-    <Folder Include="qptech\assets\machines\blocktypes\metal\pipes\types\" />
   </ItemGroup>
 </Project>

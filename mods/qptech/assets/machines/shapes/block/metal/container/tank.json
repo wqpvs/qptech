@@ -8,8 +8,7 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"glass": "block/metal/tank/glass",
-		"machinery": "block/metal/macerator/machinery-back"
+		"glass": "block/metal/tank/glass"
 	},
 	"elements": [
 		{
