@@ -28,6 +28,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidpump.json" />
+    <None Include="qptech\assets\machines\blocktypes\pipe-core-soaker-bluesteel.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-bluesteel.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-closed-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-bronze.json" />
@@ -144,6 +145,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-block.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-core.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-segment.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-soaker.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pump.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-10.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-20.json" />

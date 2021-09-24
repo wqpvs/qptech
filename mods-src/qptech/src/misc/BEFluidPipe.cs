@@ -20,6 +20,8 @@ namespace qptech.src
     class BEFluidPipe : BlockEntityContainer, IFluidTank
     {
         public List<BlockFacing> disabledFaces;
+        public List<BlockFacing> soakerFaces;
+        public int soaker = 0;
         public int CapacityLitres { get; set; } = 25;
 
         public string metal
@@ -55,7 +57,7 @@ namespace qptech.src
         {
             NeighbourCheck();
             Equalize();
-
+            Soaker();
             //temp code to set a random face as inactive
             /*if (Api is ICoreServerAPI&&(disabledFaces==null||disabledFaces.Count==0))
             {
@@ -75,6 +77,63 @@ namespace qptech.src
             MarkDirty(true);
         }
 
+        public void Soaker()
+        {
+            if (soaker == 0 || soakerFaces == null || soakerFaces.Count == 0) { return; }
+            if (inventory.Empty||inventory[0].StackSize<soaker) { return; }
+            if (inventory[0].Itemstack.Collectible.Code.ToString().Contains("water"))
+            {
+                int wateredblocks = 0; ;
+
+                for (int xc = -1; xc < 2; xc++)
+                {
+                    for (int zc= -1; zc<2; zc++)
+                    {
+                        BlockPos p = Pos.Copy();
+                        p.X += xc;
+                        p.Z += zc;
+                        p.Y += 1;
+                        BlockEntityFarmland beup = Api.World.BlockAccessor.GetBlockEntity(p) as BlockEntityFarmland;
+                        if (beup == null) { continue; }
+                        if (beup.MoistureLevel > 0.75f) { continue; }
+                        wateredblocks++;
+                        beup.WaterFarmland(1, false);
+                    }
+                }
+                if (wateredblocks == 0) { return; }
+                inventory[0].Itemstack.StackSize -= soaker;
+                if (inventory[0].Itemstack.StackSize <= 0) { inventory[0].Itemstack = null; }
+                MarkDirty(true); 
+               
+
+            }
+            
+        }
+        public override void Initialize(ICoreAPI api)
+        {
+            base.Initialize(api);
+            soakerFaces = new List<BlockFacing>();
+            if (Block.Attributes != null)
+            {
+                soaker= Block.Attributes["soaker"].AsInt(soaker);
+                string[] soakerfacename;
+                soakerfacename = Block.Attributes["soakerFaces"].AsArray<string>();
+                if (soakerfacename != null && soakerfacename.Length > 0)
+                {
+                    foreach (string s in soakerfacename)
+                    {
+                        BlockFacing bf = BlockFacing.FromCode(s);
+                        if (bf == null) { continue; }
+                        soakerFaces.Add(bf);
+                        if (disabledFaces != null && !disabledFaces.Contains(bf)){ disabledFaces.Add(bf); }
+                    }
+                }
+                else
+                {
+                    soaker = 0;
+                }
+            }
+        }   
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
             ICoreClientAPI capi = Api as ICoreClientAPI;
@@ -276,6 +335,16 @@ namespace qptech.src
                     disabledFaces = new List<BlockFacing>();
                 }
             }
+            if (soaker != 0)
+            {
+                if (soakerFaces!=null && soakerFaces.Count > 0)
+                {
+                    foreach (BlockFacing bf in soakerFaces)
+                    {
+                        if (!disabledFaces.Contains(bf)) { disabledFaces.Add(bf); }
+                    }
+                }
+            }
         }
 
         
@@ -292,6 +361,10 @@ namespace qptech.src
                 BlockFacing subface = GetSubFace(blockSel);
                 
                 if (disabledFaces == null) { disabledFaces = new List<BlockFacing>(); }
+                if (soaker != 0 && soakerFaces != null && soakerFaces.Count > 0)
+                {
+                    if (soakerFaces.Contains(subface)) { return true; }
+                }
                 if (disabledFaces.Contains(subface)) { disabledFaces.Remove(subface); }
                 else { disabledFaces.Add(subface); }
                 MarkDirty(true);

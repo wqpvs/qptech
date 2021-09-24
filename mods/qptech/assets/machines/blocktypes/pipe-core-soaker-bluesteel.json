@@ -1,0 +1,42 @@
+{
+	"code": "pipe-core-soaker-bluesteel",
+	"class": "BlockFluidPipe",
+	"entityclass": "BEFluidPipe",
+	"creativeinventory": {
+		"qptech": [ "*" ]
+	},
+	"attributes": {
+		"soaker": 1,
+		"soakerFaces": ["up"]
+	},
+	"blockmaterial": "Metal",
+	"shape": { "base": "block/metal/container/pipes/pipe-soaker" },
+	"textures": {
+		"metal": { "base": "block/metal/pipes/bluesteel" },
+		"black": { "base": "block/machinery-openhatch" },
+		"bolt": { "base": "block/castiron" }
+	},
+	"resistance": 1,
+	"sidesolid": {
+		"all": true
+	},
+	"sideAo": { "all": true },
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	},
+	"collisionselectionboxes": [
+		{
+			"x1": 0.3125,
+			"y1": 0.3125,
+			"z1": 0.3125,
+			"x2": 0.6875,
+			"y2": 1,
+			"z2": 0.6875
+		}
+	],
+	"lightabsorption": "8"
+}
