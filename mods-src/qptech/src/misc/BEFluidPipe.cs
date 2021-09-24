@@ -22,8 +22,8 @@ namespace qptech.src
         public List<BlockFacing> disabledFaces;
         public List<BlockFacing> soakerFaces;
         public int soaker = 0;
-        public int CapacityLitres { get; set; } = 25;
-
+        public int CapacityLitres { get { return capacitylitres; } set{ capacitylitres = value; } }
+        int capacitylitres = 50;
         public string metal
         {
             get
@@ -118,6 +118,7 @@ namespace qptech.src
                 soaker= Block.Attributes["soaker"].AsInt(soaker);
                 string[] soakerfacename;
                 soakerfacename = Block.Attributes["soakerFaces"].AsArray<string>();
+                capacitylitres = Block.Attributes["capacitylitres"].AsInt(capacitylitres);
                 if (soakerfacename != null && soakerfacename.Length > 0)
                 {
                     foreach (string s in soakerfacename)

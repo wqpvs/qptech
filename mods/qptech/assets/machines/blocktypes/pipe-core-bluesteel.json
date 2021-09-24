@@ -5,6 +5,9 @@
 	"creativeinventory": {
 		"qptech": [ "*" ]
 	},
+	"attributes": {
+		"capacitylitres":50,
+	},
 	"blockmaterial": "Metal",
 	"shape": { "base": "block/metal/container/pipes/pipe-core" },
 	"textures": {
