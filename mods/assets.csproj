@@ -28,6 +28,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidpump.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\sheetroller.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-soaker-bluesteel.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-bluesteel.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-closed-bronze.json" />
@@ -166,6 +167,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\powerhatch-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0 - Copy.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\sheetroller.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\tank.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\washplant2.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\stairs\girder.json" />

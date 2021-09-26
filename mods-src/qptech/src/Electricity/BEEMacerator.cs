@@ -227,7 +227,7 @@ namespace qptech.src
         public int outputquantity=1;
         public int inputquantity = 1;
         public float odds=1;
-        
+        public string suffix="";
         public enTypes type = enTypes.SWAP;
         /// <summary>
         /// enTypes
@@ -362,6 +362,7 @@ namespace qptech.src
                     {
                         al = mr.outputmaterial;
                     }
+                    if (mr.suffix != "") { al = al + mr.suffix; }
                     int outqty = mr.outputquantity;
                     if (mr.odds != 100) { outqty = rand.Next(1, mr.outputquantity + 1); }
                     Block outputBlock = api.World.GetBlock(new AssetLocation(al));

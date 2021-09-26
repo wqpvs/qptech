@@ -269,7 +269,16 @@
 			"odds": 10,
 			"type": "DIRECT"
 		}
+	],
+	"metalplate": [
+		{
+			"outputmaterial": "metalsheet",
+			"outputquantity": 1,
+			"odds": 100,
+			"type": "SWAP",
+			"machinename": "sheetroller",
+			"suffix": "-down"
+		}
 	]
-
 
 }

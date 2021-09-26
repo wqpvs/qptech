@@ -1,0 +1,86 @@
+{
+	"code": "sheetroller",
+	"class": "ElectricalBlock",
+	"entityclass": "BEEMacerator",
+	"creativeinventory": {
+		"general": [ "*-east" ],
+		"qptech": [ "*-east" ]
+	},
+	"entityBehaviors": [ { "name": "Animatable" } ],
+	"behaviors": [
+
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "east" }
+		}
+	],
+	"variantgroups": [
+		{
+			"code": "class",
+			"states": [ "mv" ]
+		},
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+
+	"attributesbytype": {
+
+		"*-mv-*": {
+			"maxFlux": 64,
+			"capacitance": 64,
+			"requiredFlux": 32,
+			"processingTicks": 15,
+			"machinename": "sheetroller",
+			"outputFace": "east",
+			"inputFace": "west"
+		}
+	},
+
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+	"shape": { "base": "block/metal/electric/sheetroller" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/metal/electric/sheetroller",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/metal/electric/sheetroller",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "block/metal/electric/sheetroller",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "block/metal/electric/sheetroller",
+			"rotateY": 180
+		}
+	},
+	"lightAbsorption": 0,
+	"resistance": 1,
+	"sideAo": { "all": false },
+	"sidesolid": {
+		"all": false,
+		"up":  true
+	},
+	"sideopaque": {
+		"all": false
+	},
+	"fpHandTransform": {
+		"rotation": {
+			"x": 53,
+			"y": 46,
+			"z": 0
+		},
+		"scale": 1.28
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+
+
+}
