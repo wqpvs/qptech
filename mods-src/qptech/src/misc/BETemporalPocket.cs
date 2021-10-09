@@ -26,19 +26,21 @@ namespace qptech.src
         public bool Busy => (accessing!="");
         protected override void OnInvOpened(IPlayer player)
         {
-            if (simpleinventory.openinventories == null) { simpleinventory.openinventories = new List<string>(); }
+            //if (simpleinventory.openinventories == null) { simpleinventory.openinventories = new List<string>(); }
            // if (simpleinventory.openinventories.Contains(player.PlayerUID)) { return; }
             //if (accessing != "") { return; }
             //accessing = player.PlayerUID;
-            simpleinventory.openinventories.Add(player.PlayerUID);
+            //simpleinventory.openinventories.Add(player.PlayerUID);
+            if (Api is ICoreClientAPI) { return; }
             TryLoadInventory(player);
             base.OnInvOpened(player);
         }
 
         protected override void OnInvClosed(IPlayer player)
         {
+            
             TrySaveInventory(player);
-            simpleinventory.openinventories.Remove(player.PlayerUID);
+            //simpleinventory.openinventories.Remove(player.PlayerUID);
             accessing = "";
             this.MarkDirty();
             
@@ -48,9 +50,16 @@ namespace qptech.src
         void TryLoadInventory(IPlayer player)
         {
             this.Inventory.DiscardAll();
-            simpleinventory loadedinv = ApiExtensions.LoadOrCreateDataFile<simpleinventory>(Api, "helloworld.json");
-            
-            if (loadedinv == null) { return; }
+
+            try
+            {
+                TreeAttribute loadtree = ApiExtensions.LoadOrCreateDataFile<TreeAttribute>(Api, "helloworld.json");
+                if (loadtree != null) { Inventory.SlotsFromTreeAttributes(loadtree); }
+            }
+            catch
+            {
+
+            }
             
             this.MarkDirty();
         }
@@ -63,10 +72,7 @@ namespace qptech.src
         {
             
             this.Inventory.DiscardAll();
-            if (accessing != "" && simpleinventory.openinventories != null && simpleinventory.openinventories.Contains(accessing))
-            {
-                simpleinventory.openinventories.Remove(accessing);
-            }
+            
         }
         public override void OnBlockRemoved()
         {
@@ -80,44 +86,15 @@ namespace qptech.src
         }
         void TrySaveInventory(IPlayer player)
         {
-            simpleinventory items = new simpleinventory();
-            items.uid = player.PlayerUID;
-            items.uname = player.PlayerName;
-            items.StoreInventory(this.Inventory.ToList());
             
-            ApiExtensions.SaveDataFile<simpleinventory>(Api, "helloworld.json", items);
+            TreeAttribute newtree=new TreeAttribute();
+
+            Inventory.SlotsToTreeAttributes(Inventory.ToArray<ItemSlot>(),newtree);
+
+            ApiExtensions.SaveDataFile<TreeAttribute>(Api, "helloworld.json", newtree);
             this.Inventory.DiscardAll();
         }
     }
 
-    public class simpleinventory
-    {
-        public string uid;
-        public string uname;
-        public Dictionary<string, string> testdic;        
-        
-        
-        public simpleinventory()
-        {
-            if (openinventories == null) { openinventories = new List<string>(); }
-            testdic = new Dictionary<string, string>();
-            testdic.Add("keya", "valuea");
-            testdic.Add("keyb", "valueb");
-        }
-        public void StoreInventory(List<ItemSlot> itemslots)
-        {
-            
-        
-            foreach (ItemSlot itemslot in itemslots)
-            {
-                if (itemslot.StackSize > 0)
-                {
-
-        
-                }
-            }
-
-        }
-        public static List<string> openinventories;
-    }
+    
 }

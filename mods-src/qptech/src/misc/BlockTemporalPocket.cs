@@ -24,7 +24,7 @@ namespace qptech.src
         {
             BETemporalPocket mypocket = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BETemporalPocket;
             if (mypocket!=null && mypocket.Busy) { return false; }
-            if (simpleinventory.openinventories != null && simpleinventory.openinventories.Contains(byPlayer.PlayerUID)) { return false; }
+            //if (simpleinventory.openinventories != null && simpleinventory.openinventories.Contains(byPlayer.PlayerUID)) { return false; }
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
 
