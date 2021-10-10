@@ -116,6 +116,7 @@
     <Compile Include="src\misc\BEFluidPipe.cs" />
     <Compile Include="src\misc\BETextureTest.cs" />
     <Compile Include="src\misc\IFluidTank.cs" />
+    <Compile Include="src\multiblock\BESlidingDoorCore.cs" />
     <Compile Include="src\multiblock\BEWaterTower.cs" />
     <Compile Include="src\misc\BlockCannedMeal.cs" />
     <Compile Include="src\Electricity\ElectricalBlock.cs" />
@@ -136,6 +137,8 @@
     <Compile Include="src\multiblock\BEEPowerHatch.cs" />
     <Compile Include="src\multiblock\BlockMBT.cs" />
     <Compile Include="src\multiblock\IFunctionalMultiblock.cs" />
+    <Compile Include="src\multiblock\IMasterBlock.cs" />
+    <Compile Include="src\multiblock\ISlaveBlock.cs" />
     <Compile Include="src\multiblock\MBItemHatch.cs" />
   </ItemGroup>
   <ItemGroup>

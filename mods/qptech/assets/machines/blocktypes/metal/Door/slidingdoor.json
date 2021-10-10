@@ -2,16 +2,157 @@
 	"code": "sliding_door",
 
 	"creativeinventory": {
-		"qptech": [ "*" ]
+		"qptech": [ "*-lowerleft-closed-east" ]
 
 	},
 
+	"behaviors": [
 
-
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "east" }
+		}
+	],
+	"variantgroups": [
+		{
+			"code": "position",
+			"states": [ "lowerleft", "lowerright", "upperleft", "upperright" ]
+		},
+		{
+			"code": "state",
+			"states": [ "open", "closed" ]
+		},
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
 	"shape": { "base": "block/metal/doors/sliding/single_sliding_inventory" },
+	"shapeinventory": { "base": "block/metal/doors/sliding/single_sliding_inventory" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/metal/doors/sliding/sliding-{position}-{state}",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/metal/doors/sliding/sliding-{position}-{state}",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "block/metal/doors/sliding/sliding-{position}-{state}",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "block/metal/doors/sliding/sliding-{position}-{state}",
+			"rotateY": 180
+		}
+	},
+
+	"selectionBoxByType": {
+		"*-east": {
+			"x1": 0.3125,
+			"y1": 0,
+			"z1": 0,
+			"x2": 0.5,
+			"y2": 1,
+			"z2": 1
+		},
+		"*-west": {
+			"x1": 0.5,
+			"y1": 0,
+			"z1": 0,
+			"x2": 0.6875,
+			"y2": 1,
+			"z2": 1
+		},
+
+		"*-north": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0.5,
+			"x2": 1,
+			"y2": 1,
+			"z2": 0.6875
+		},
+		"*-south": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0.3125,
+			"x2": 1,
+			"y2": 1,
+			"z2": 0.5
+		}
 
 
+	},
+	"collisionBoxByType": {
+		"*-lowerleft-open-east": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0,
+			"x2": 0,
+			"y2": 0,
+			"z2": 0
+		},
+		"*-upperleft-open-east": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0,
+			"x2": 0,
+			"y2": 0,
+			"z2": 0
+		},
+		"*-lowerleft-open-west": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0,
+			"x2": 0,
+			"y2": 0,
+			"z2": 0
+		},
+		"*-upperleft-open-west": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0,
+			"x2": 0,
+			"y2": 0,
+			"z2": 0
+		},
+		"*-lowerleft-open-north": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0,
+			"x2": 0,
+			"y2": 0,
+			"z2": 0
+		},
+		"*-upperleft-open-north": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0,
+			"x2": 0,
+			"y2": 0,
+			"z2": 0
+		},
+		"*-lowerleft-open-south": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0,
+			"x2": 0,
+			"y2": 0,
+			"z2": 0
+		},
+		"*-upperleft-open-south": {
+			"x1": 0,
+			"y1": 0,
+			"z1": 0,
+			"x2": 0,
+			"y2": 0,
+			"z2": 0
+		}
 
+
+	},
 	"blockmaterial": "Wood",
 	"sideopaque": {
 		"all": false
@@ -24,8 +165,20 @@
 		"break": "game:block/planks",
 		"place": "game:block/planks",
 		"walk": "game:walk/wood"
+	},
+	"guiTransform": {
+		"translation": {
+			"x": 6,
+			"y": 11,
+			"z": 0
+		},
+		"rotation": {
+			"x": -10,
+			"y": -45,
+			"z": 0
+		},
+		"scale": 0.79
 	}
-
 
 
 }

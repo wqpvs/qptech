@@ -156,9 +156,15 @@
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-40.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-50.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank.json" />
-    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\single_closed_down.json" />
-    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\single_closed_up.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\single_sliding_inventory.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\sliding-lowerleft-closed.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\sliding-lowerleft-open.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\sliding-lowerright-closed.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\sliding-lowerright-open.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\sliding-upperleft-closed.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\sliding-upperleft-open.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\sliding-upperright-closed.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\sliding-upperright-open.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\electricfan.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\electrickiln-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\forge-lv.json" />
