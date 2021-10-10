@@ -18,10 +18,20 @@ using Vintagestory.ServerMods;
 
 namespace qptech.src.multiblock
 {
-    interface ISlaveBlock
+    class BEReportsClicks:BlockEntity,ISlaveBlock
     {
-        IMasterBlock Master { get;}
-        bool Initialized { get; }
-        void Initialize(IMasterBlock master);
+        IMasterBlock master;
+        bool initialized = false;
+        public IMasterBlock Master => master;
+        public bool Initialized => initialized;
+        public override void Initialize(ICoreAPI api)
+        {
+            base.Initialize(api);
+        }
+        public void Initialize(IMasterBlock master)
+        {
+            this.master = master;
+            initialized = true;
+        }
     }
 }
