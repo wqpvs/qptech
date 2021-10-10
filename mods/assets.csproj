@@ -28,6 +28,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\Door\slidingdoor.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidpump.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\sheetroller.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-soaker-bluesteel.json" />
@@ -155,6 +156,9 @@
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-40.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-50.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\single_closed_down.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\single_closed_up.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\doors\sliding\single_sliding_inventory.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\electricfan.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\electrickiln-lv.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\forge-lv.json" />

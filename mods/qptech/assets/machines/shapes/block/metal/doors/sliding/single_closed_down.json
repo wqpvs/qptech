@@ -1,0 +1,87 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"shinyiron": "block/shinyiron",
+		"oak1": "block/oak1"
+	},
+	"elements": [
+		{
+			"name": "Door",
+			"from": [ 0.0, 15.0, 0.0 ], 
+			"to": [ 16.0, 16.0, 1.0 ], 
+			"rotationOrigin": [ 16.0, -1.0, 0.0 ],
+			"faces": {
+				"north": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+				"east": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"south": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+				"west": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"up": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+				"down": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 16.0, 1.0 ] }
+			},
+			"children": [
+				{
+					"name": "frame8",
+					"from": [ 0.0, -15.0, 0.0 ], 
+					"to": [ 16.0, -14.0, 1.0 ], 
+					"rotationOrigin": [ 0.0, -31.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+						"east": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"south": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+						"west": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"up": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+						"down": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 16.0, 1.0 ] }
+					}
+				},
+				{
+					"name": "frame9",
+					"from": [ 0.0, -14.0, 0.0 ], 
+					"to": [ 1.0, 0.0, 1.0 ], 
+					"rotationOrigin": [ -1.0, -30.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 14.0 ] },
+						"east": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 14.0 ] },
+						"south": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 14.0 ] },
+						"west": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 14.0 ] },
+						"up": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"down": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+					}
+				},
+				{
+					"name": "frame10",
+					"from": [ 15.0, -14.0, 0.0 ], 
+					"to": [ 16.0, 0.0, 1.0 ], 
+					"rotationOrigin": [ 14.0, -30.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 14.0 ] },
+						"east": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 14.0 ] },
+						"south": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 14.0 ] },
+						"west": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 14.0 ] },
+						"up": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"down": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+					}
+				},
+				{
+					"name": "DoorPanel",
+					"from": [ 1.0, -14.0, 0.125 ], 
+					"to": [ 15.0, 0.0, 0.875 ], 
+					"rotationOrigin": [ 1.0, -14.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#oak1", "uv": [ 0.0, 0.0, 14.0, 14.0 ] },
+						"east": { "texture": "#oak1", "uv": [ 0.0, 0.0, 0.5, 14.0 ] },
+						"south": { "texture": "#oak1", "uv": [ 0.0, 0.0, 14.0, 14.0 ] },
+						"west": { "texture": "#oak1", "uv": [ 0.0, 0.0, 0.5, 14.0 ] },
+						"up": { "texture": "#oak1", "uv": [ 0.0, 0.0, 14.0, 0.5 ] },
+						"down": { "texture": "#oak1", "uv": [ 0.0, 0.0, 14.0, 0.5 ] }
+					}
+				}
+			]
+		}
+	]}

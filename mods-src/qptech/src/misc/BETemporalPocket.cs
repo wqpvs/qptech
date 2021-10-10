@@ -28,8 +28,8 @@ namespace qptech.src
         {
             //if (simpleinventory.openinventories == null) { simpleinventory.openinventories = new List<string>(); }
            // if (simpleinventory.openinventories.Contains(player.PlayerUID)) { return; }
-            //if (accessing != "") { return; }
-            //accessing = player.PlayerUID;
+            if (accessing != "") { return; }
+            accessing = player.PlayerUID;
             //simpleinventory.openinventories.Add(player.PlayerUID);
             if (Api is ICoreClientAPI) { return; }
             TryLoadInventory(player);
@@ -38,22 +38,25 @@ namespace qptech.src
 
         protected override void OnInvClosed(IPlayer player)
         {
-            
+
+            base.OnInvClosed(player);
             TrySaveInventory(player);
             //simpleinventory.openinventories.Remove(player.PlayerUID);
             accessing = "";
             this.MarkDirty();
             
-            base.OnInvClosed(player);
+            
         }
         
         void TryLoadInventory(IPlayer player)
         {
-            this.Inventory.DiscardAll();
+            //this.Inventory.DiscardAll();
 
             try
             {
-                TreeAttribute loadtree = ApiExtensions.LoadOrCreateDataFile<TreeAttribute>(Api, "helloworld.json");
+                byte[] data= ApiExtensions.LoadOrCreateDataFile<List<byte>>(Api, "helloworld.json").ToArray();
+                TreeAttribute loadtree = TreeAttribute.CreateFromBytes(data);
+
                 if (loadtree != null) { Inventory.SlotsFromTreeAttributes(loadtree); }
             }
             catch
@@ -71,7 +74,7 @@ namespace qptech.src
         void Cleanup()
         {
             
-            this.Inventory.DiscardAll();
+            //this.Inventory.DiscardAll();
             
         }
         public override void OnBlockRemoved()
@@ -86,13 +89,14 @@ namespace qptech.src
         }
         void TrySaveInventory(IPlayer player)
         {
-            
+            if (Api is ICoreClientAPI) { return; }
             TreeAttribute newtree=new TreeAttribute();
 
             Inventory.SlotsToTreeAttributes(Inventory.ToArray<ItemSlot>(),newtree);
-
-            ApiExtensions.SaveDataFile<TreeAttribute>(Api, "helloworld.json", newtree);
-            this.Inventory.DiscardAll();
+            byte[] data = newtree.ToBytes();
+            List<byte> datalist = data.ToList<byte>();
+            ApiExtensions.SaveDataFile<List<byte>>(Api, "helloworld.json", datalist);
+            //this.Inventory.DiscardAll();
         }
     }
 

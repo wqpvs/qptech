@@ -1,0 +1,31 @@
+{
+	"code": "sliding_door",
+
+	"creativeinventory": {
+		"qptech": [ "*" ]
+
+	},
+
+
+
+	"shape": { "base": "block/metal/doors/sliding/single_sliding_inventory" },
+
+
+
+	"blockmaterial": "Wood",
+	"sideopaque": {
+		"all": false
+	},
+
+	"resistance": 1,
+	"facecullmode": "nevercull",
+	"sounds": {
+		"hit": "game:block/planks",
+		"break": "game:block/planks",
+		"place": "game:block/planks",
+		"walk": "game:walk/wood"
+	}
+
+
+
+}

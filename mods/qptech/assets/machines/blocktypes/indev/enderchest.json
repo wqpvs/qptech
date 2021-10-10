@@ -30,8 +30,8 @@
 		}
 	],
 	"creativeinventory": {
-		"general": [ "*-east" ],
-		"qptech": [ "*-east" ]
+		"general": [ "" ],
+		"qptech": [ "" ]
 	},
 	"blockmaterial": "Metal",
 	"shape": { "base": "block/metal/itemhatch" },
