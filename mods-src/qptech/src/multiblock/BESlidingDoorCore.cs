@@ -26,6 +26,7 @@ namespace qptech.src.multiblock
         int blocksHigh = 2;
         int blocksWide = 2;
         bool isChangingState = false;
+        bool goodtogo = false;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -35,6 +36,13 @@ namespace qptech.src.multiblock
                 blocksWide = Block.Attributes["blocksWide"].AsInt(blocksWide);
                 SetupBlocks();
             }
+            RegisterDelayedCallback(OnTick, 10);
+        }
+        public void OnTick(float t)
+        {
+            goodtogo = true;
+            
+
         }
         public override void OnBlockBroken()
         {
@@ -138,6 +146,7 @@ namespace qptech.src.multiblock
 
         public void Interact(IPlayer player)
         {
+            if (!goodtogo) { return; }
             if (Api is ICoreClientAPI) {
                 //if (!isChangingState)
                // {

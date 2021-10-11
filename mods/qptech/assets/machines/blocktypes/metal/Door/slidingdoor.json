@@ -39,8 +39,8 @@
 	"behaviors": [
 
 		{
-			"name": "HorizontalOrientable",
-			"dropBlockFace": "east"
+			"name": "HorizontalOrientable"
+			
 		}
 	],
 	"variantgroups": [
@@ -208,7 +208,8 @@
 			"z": 0
 		},
 		"scale": 0.79
-	},
+	}
+	
 
 
 }
