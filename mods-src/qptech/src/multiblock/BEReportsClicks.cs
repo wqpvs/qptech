@@ -23,7 +23,7 @@ namespace qptech.src.multiblock
         IMasterBlock master;
         bool initialized = false;
         public IMasterBlock Master => master;
-        public bool Initialized => initialized;
+        public bool Initialized => initialized&&Master!=null;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -33,5 +33,14 @@ namespace qptech.src.multiblock
             this.master = master;
             initialized = true;
         }
+        public override void OnBlockRemoved()
+        {
+            if (initialized)
+            {
+                master.OnMemberRemoved();
+            }
+            base.OnBlockRemoved();
+        }
+
     }
 }

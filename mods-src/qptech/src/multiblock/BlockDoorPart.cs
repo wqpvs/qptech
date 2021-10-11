@@ -20,14 +20,13 @@ namespace qptech.src.multiblock
 {
     class BlockDoorPart:Block
     {
-        public override void OnNeighbourBlockChange(IWorldAccessor world, BlockPos pos, BlockPos neibpos)
+        public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
-            ISlaveBlock me = world.BlockAccessor.GetBlockEntity(pos) as ISlaveBlock;
-            if (me!=null && me.Initialized && me.Master == null)
-            {
-                world.BlockAccessor.BreakBlock(pos, null);
-            }
-            base.OnNeighbourBlockChange(world, pos, neibpos);
+            BESlidingDoorCore bee = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BESlidingDoorCore;
+            if (bee != null) { bee.Interact(byPlayer); return true; }
+            BEReportsClicks brc = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BEReportsClicks;
+            if (brc != null&&brc.Initialized) { brc.Master.Interact(byPlayer); return true; }
+            return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
     }
 }

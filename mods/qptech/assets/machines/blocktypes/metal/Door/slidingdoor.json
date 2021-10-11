@@ -1,6 +1,6 @@
 {
 	"code": "sliding_door",
-	"class":  "BlockDoorPart",
+	"class": "BlockDoorPart",
 	"entityClassByType": {
 		"sliding_door-upperleft-*": "BEReportsClicks",
 		"sliding_door-upperright-*": "BEReportsClicks",
@@ -9,7 +9,7 @@
 
 	},
 	"creativeinventory": {
-		"qptech": [ "*-lowerleft-closed-east" ]
+		"qptech": [ "*-lowerleft-closed-north" ]
 
 	},
 	"attributesByType": {
@@ -22,14 +22,25 @@
 				"sliding_door-upperleft-closed-{side}",
 				"sliding_door-upperright-closed-{side}"
 			],
-			"replacement": "slider_door-lowerleft-open-{side}"
+			"replacement": "sliding_door-lowerleft-open-{side}"
+		},
+		"sliding_door-lowerleft-open-*": {
+			"blocksHigh": 2,
+			"blocksWide": 2,
+			"blocks": [
+				"sliding_door-lowerleft-open-{side}",
+				"sliding_door-lowerright-open-{side}",
+				"sliding_door-upperleft-open-{side}",
+				"sliding_door-upperright-open-{side}"
+			],
+			"replacement": "sliding_door-lowerleft-closed-{side}"
 		}
 	},
 	"behaviors": [
 
 		{
 			"name": "HorizontalOrientable",
-			
+			"dropBlockFace": "east"
 		}
 	],
 	"variantgroups": [
@@ -198,6 +209,6 @@
 		},
 		"scale": 0.79
 	},
-	"drops": []
-	
+
+
 }

@@ -21,5 +21,7 @@ namespace qptech.src.multiblock
     interface IMasterBlock
     {
         List<ISlaveBlock> SlaveBlocks { get; set; }
+        void OnMemberRemoved();
+        void Interact(IPlayer player);
     }
 }
