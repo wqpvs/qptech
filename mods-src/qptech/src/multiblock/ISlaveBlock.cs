@@ -20,8 +20,8 @@ namespace qptech.src.multiblock
 {
     interface ISlaveBlock
     {
-        IMasterBlock Master { get;}
+        BlockPos Master { get;}
         bool Initialized { get; }
-        void Initialize(IMasterBlock master);
+        void Initialize(BlockPos master);
     }
 }

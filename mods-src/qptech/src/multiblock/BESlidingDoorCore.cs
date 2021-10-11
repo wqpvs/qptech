@@ -66,6 +66,7 @@ namespace qptech.src.multiblock
         /// <returns>true or false</returns>
         public bool VerifyClear()
         {
+            
             string[] blocklist = Block.Attributes["blocks"].AsArray<string>();
             //if no valid block list will just destroy itself
             if (blocklist == null || blocklist.Length < blocksHigh * blocksWide)
@@ -121,7 +122,7 @@ namespace qptech.src.multiblock
                     {
                         ISlaveBlock isb = Api.World.BlockAccessor.GetBlockEntity(chkpos) as ISlaveBlock;
                         if (isb == null) { Api.World.BlockAccessor.SetBlock(0, chkpos); }
-                        else { isb.Initialize(this); }
+                        else { isb.Initialize(Pos); }
                         return true;
                     }
                     if (!existingblock.Code.ToString().Contains("air")) { return false; }
@@ -137,9 +138,15 @@ namespace qptech.src.multiblock
 
         public void Interact(IPlayer player)
         {
-            //if (!Api is ICoreClientAPI)
-            //(Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)packetChangeState, null);
-            if (!isChangingState) { ChangeState(); }
+            if (Api is ICoreClientAPI) {
+                //if (!isChangingState)
+               // {
+                    (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)packetChangeState, null);
+                //}
+            }
+            else 
+            { ChangeState();  }
+
         }
 
         public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
@@ -150,9 +157,11 @@ namespace qptech.src.multiblock
 
         public void ChangeState()
         {
-            if (isChangingState) { return; }
+            if (Api is ICoreClientAPI) { return; }
+            //if (isChangingState) { return; }
             VerifyClear();
             isChangingState = true;
+            
             ClearBlocks();
             string replacement = "machines:" + Block.Attributes["replacement"].AsString();
             AssetLocation al = new AssetLocation(replacement);
@@ -160,6 +169,7 @@ namespace qptech.src.multiblock
             if (replacementBlock == null) { BreakMe(); }
             Api.World.BlockAccessor.SetBlock(replacementBlock.Id, Pos);
         }
+
         public void SetupBlocks()
         {
             if (Api is ICoreClientAPI) { return; }
@@ -201,7 +211,9 @@ namespace qptech.src.multiblock
                     if (isb != null)
                     {
                         SlaveBlocks.Add(isb);
-                        isb.Initialize(this);
+                        isb.Initialize(Pos);
+                        BlockEntity be = isb as BlockEntity;
+                        if (be != null) { be.MarkDirty(); }
                     }
                     indexc++;
                 } 

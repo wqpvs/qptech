@@ -20,27 +20,69 @@ namespace qptech.src.multiblock
 {
     class BEReportsClicks:BlockEntity,ISlaveBlock
     {
-        IMasterBlock master;
+        BlockPos master;
         bool initialized = false;
-        public IMasterBlock Master => master;
-        public bool Initialized => initialized&&Master!=null;
+        public BlockPos Master => master;
+        public bool Initialized => initialized&&master!=null;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
         }
-        public void Initialize(IMasterBlock master)
+        public void Initialize(BlockPos masterpos)
         {
-            this.master = master;
+            master=masterpos;
             initialized = true;
+            this.MarkDirty(true);
         }
         public override void OnBlockRemoved()
         {
-            if (initialized)
+            if (initialized&&master!=null)
             {
-                master.OnMemberRemoved();
+                IMasterBlock mb = Api.World.BlockAccessor.GetBlockEntity(master) as IMasterBlock;
+                if (mb != null)
+                {
+                    mb.OnMemberRemoved();
+                }
             }
             base.OnBlockRemoved();
         }
+        public override void ToTreeAttributes(ITreeAttribute tree)
+        {
+            if (master == null) { initialized = false; }
+            tree.SetBool("Initialized", initialized);
+            if (initialized && master != null)
+            {
+                tree.SetInt("masterx", master.X);
+                tree.SetInt("mastery", master.Y);
+                tree.SetInt("masterz", master.Z);
+            }
+            base.ToTreeAttributes(tree);
+        }
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
+        {
+            initialized = tree.GetBool("Initialized", false);
+            if (initialized && Pos!=null)
+            {
+                BlockPos master = Pos.Copy();
+                master.X = tree.GetInt("masterx", master.X);
+                master.Y = tree.GetInt("masterx", master.Y);
+                master.Z = tree.GetInt("masterz", master.Z);
+            }
+            else
+            {
+                initialized = false;
+            }
+            base.FromTreeAttributes(tree, worldAccessForResolve);
+        }
 
+        public void Interact(IPlayer player)
+        {
+            if (!Initialized) { return; }
+            IMasterBlock mb = Api.World.BlockAccessor.GetBlockEntity(master) as IMasterBlock;
+            if (mb != null)
+            {
+                mb.Interact(player);
+            }
+        }
     }
 }
