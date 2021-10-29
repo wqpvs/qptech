@@ -1,7 +1,7 @@
 {
 	"code": "sheetroller",
-	"class": "ElectricalBlock",
-	"entityclass": "BEEMacerator",
+	"class": "BlockMetalPress",
+	"entityclass": "BEEAssembler",
 	"creativeinventory": {
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
@@ -16,7 +16,7 @@
 	],
 	"variantgroups": [
 		{
-			"code": "class",
+			"code": "type",
 			"states": [ "mv" ]
 		},
 		{
@@ -25,16 +25,25 @@
 		}
 	],
 
-	"attributesbytype": {
+	"attributesByType": {
 
 		"*-mv-*": {
 			"maxFlux": 64,
-			"capacitance": 64,
-			"requiredFlux": 32,
-			"processingTicks": 15,
-			"machinename": "sheetroller",
+			"capacitance": 128,
+			"requiredFlux": 64,
+			"inputFace": "west",
 			"outputFace": "east",
-			"inputFace": "west"
+			"acceptFromFaces": [ "west" ],
+			"inputQuantity": 1,
+			"outputQuantity": 2,
+			"recipe": "game:metalsheet",
+			"recipeSuffix": "down",
+			"ingredient": "metalplate",
+			"processingTime": 0.045,
+			"animationSpeed": 0.45,
+			"heatRequirement": 0,
+			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze","iron","meteoriciron","steel" ]
+			
 		}
 	},
 
@@ -64,7 +73,7 @@
 	"sideAo": { "all": false },
 	"sidesolid": {
 		"all": false,
-		"up":  true
+		"up": true
 	},
 	"sideopaque": {
 		"all": false

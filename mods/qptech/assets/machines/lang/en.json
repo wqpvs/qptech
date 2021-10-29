@@ -128,6 +128,10 @@
 	"block-watertower": "Small Water Tower",
 	"blockdesc-watertower": "Must have direct access to sky. Will slowly collect water and insert into a container below. Collects more water if raining. Multiblock structure: 3x4x3, ring of fencegates with this block in middle, then a ring of planks, a ring of metal blocks, and another ring of planks.",
 	"block-logsplitter-*": "Log Splitter (LV)",
-	"blockdesc-logsplitter-*": "A fast and efficient way to make firewood from logs! Draws from the left, outputs to the right."
+	"blockdesc-logsplitter-*": "A fast and efficient way to make firewood from logs! Draws from the left, outputs to the right.",
+	"block-sliding_door-*": "Sliding Door",
+	"blockdesc-sliding_door-*": "2x2 sliding door, place bottom left block.",
+	"block-sheetroller-*": "Sheet Roller",
+	"blockdesc-sheetroller-*": "Takes metal plates from the left and outputs two metal sheets on the right."
 
 }

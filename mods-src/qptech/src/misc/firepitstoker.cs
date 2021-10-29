@@ -105,6 +105,7 @@ namespace qptech.src
                     if (sourceSlot == null) { continue; }
                     
                     //check if slot contains fuel
+                    if (sourceSlot.Itemstack == null) { continue; }
                     CollectibleObject co = sourceSlot.Itemstack.Collectible;
                     if (co == null) { continue; }
                     CombustibleProperties cp = co.CombustibleProps;

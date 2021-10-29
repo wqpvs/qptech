@@ -29,6 +29,7 @@ namespace qptech.src
         protected string blockoritem = "block";
         protected int outputQuantity = 1;
         protected string ingredient = "clay";
+        protected string recipeSuffix = "";
         protected string ingredient_subtype = "";
         protected int inputQuantity = 4;
         protected int internalQuantity = 0; //will store ingredients virtually
@@ -95,7 +96,7 @@ namespace qptech.src
             if (Block.Attributes != null) {
                 //requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
                 rmInputFace = BlockFacing.FromCode(Block.Attributes["inputFace"].AsString("up"));
-                
+                recipeSuffix = Block.Attributes["recipeSuffix"].AsString(recipeSuffix);
                 outputFace = BlockFacing.FromCode(Block.Attributes["outputFace"].AsString("down"));
                 animationSpeed = Block.Attributes["animationSpeed"].AsFloat(animationSpeed);
                 inputQuantity = Block.Attributes["inputQuantity"].AsInt(inputQuantity);
@@ -208,6 +209,10 @@ namespace qptech.src
             if (ingredient_subtype != "")
             {
                 userecipe += "-" + ingredient_subtype;
+            }
+            if (recipeSuffix != "")
+            {
+                userecipe += "-" + recipeSuffix;
             }
             Block outputBlock = Api.World.GetBlock(new AssetLocation(userecipe));
             Item outputItem = Api.World.GetItem(new AssetLocation(userecipe));
