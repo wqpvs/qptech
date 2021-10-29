@@ -85,11 +85,10 @@
 	},
 	"textures": {
 
-		"all": {
-			"base": "game:block/wood/planks/{wood}*",
-			"castiron": {
-				"castiron": "block/castiron"
-			}
+		"oak1": {
+			"base": "game:block/wood/planks/{wood}*"
+			
+			
 		}
 	},
 	"selectionBoxByType": {
