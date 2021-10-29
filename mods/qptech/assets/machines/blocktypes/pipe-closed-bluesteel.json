@@ -3,7 +3,7 @@
 	"class": "BlockFluidPipe",
 	"entityclass": "BEFluidPipe",
 	"creativeinventory": {
-		"qptech": [ "*" ]
+		"qptech": [ "" ]
 	},
 	"blockmaterial": "Metal",
 	"shape": { "base": "block/metal/container/pipes/pipe-block" },

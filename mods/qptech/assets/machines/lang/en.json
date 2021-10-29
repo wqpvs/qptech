@@ -71,6 +71,7 @@
 	"item-rod-copper": "Metal Rod (Copper)",
 	"item-rod-brass": "Metal Rod (Brass)",
 	"item-rod-*bronze": "Metal Rod (Bronze)",
+	"item-rod-iron":  "Metal Rod (Iron)",
 	"itemdesc-rod-*": "Inanimate Rod, hero of the people",
 	"item-screw-brass": "Metal Screw (Brass)",
 	"itemdesc-screw-*": "Screw this!",

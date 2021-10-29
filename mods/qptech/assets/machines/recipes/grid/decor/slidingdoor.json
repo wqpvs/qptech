@@ -1,0 +1,25 @@
+{
+	ingredientPattern: "P_P	_L_	P_P",
+	ingredients: {
+		"P": {
+			"type": "item",
+			"code": "rod-iron",
+			"quantity": 1
+		},
+		"L": {
+			"type": "item",
+			"code": "game:plank-*",
+			"name": "wood",
+			"quantity": 2
+		}
+
+
+	},
+	width: 3,
+	height: 3,
+	output: {
+		"type": "block",
+		"code": "sliding_door-lowerleft-closed-{wood}-north",
+		"quantity": 1
+	}
+}
