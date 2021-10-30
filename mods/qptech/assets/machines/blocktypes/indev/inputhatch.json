@@ -19,7 +19,7 @@
 		{ "name": "Container" },
 		{
 			"name": "HorizontalOrientable",
-			"properties": { "dropBlockFace": "east" }
+			"properties": { "dropBlockFace": "north" }
 		}
 	],
 	"variantgroups": [
@@ -30,7 +30,7 @@
 	],
 	"creativeinventory": {
 		"general": [ "" ],
-		"qptech": [ "" ]
+		"qptech": [ "*-north" ]
 	},
 	"blockmaterial": "Metal",
 	"shape": { "base": "block/metal/electric/inputhatch" },

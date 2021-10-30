@@ -127,7 +127,7 @@
 	"block-mpmotor-*": "Electric Motor (*PREVIEW* Mechanical Power)(LV)",
 	"blockdesc-mpmotor-*": "Electric Motor - Create mechanical power from electricity! NOTE: THIS IS FOR TESTING AND MAY BE UNPREDICTABLE",
 	"block-watertower": "Small Water Tower",
-	"blockdesc-watertower": "Must have direct access to sky. Will slowly collect water and insert into a container below. Collects more water if raining. Multiblock structure: 3x4x3, ring of fencegates with this block in middle, then a ring of planks, a ring of metal blocks, and another ring of planks.",
+	"blockdesc-watertower": "Must have direct access to sky. Will slowly collect water and insert into a container below. Collects more water if raining. Multiblock structure: 3x4x3, ring of fences with this block in middle, then a ring of planks, a ring of metal blocks, and another ring of planks.",
 	"block-logsplitter-*": "Log Splitter (LV)",
 	"blockdesc-logsplitter-*": "A fast and efficient way to make firewood from logs! Draws from the left, outputs to the right.",
 	"block-sliding_door-*": "Sliding Door",
@@ -141,5 +141,7 @@
 	"block-container-tank-bluesteel": "Fluid Tank (Steel)",
 	"blockdesc-container-tank-*": "Can store fluid, breaking it will retain the fluid (though in inventory it can't currently show its fluid level",
 	"block-pipe-core-soaker-bluesteel": "Soaker Pipe (Steel)",
-	"blockdesc-pipe-core-soaker-bluesteel": "Soaker pipe will irrigate crops in a 3x3 grid above the pipe (will add liquid fertilizer one day)"
+	"blockdesc-pipe-core-soaker-bluesteel": "Soaker pipe will irrigate crops in a 3x3 grid above the pipe (will add liquid fertilizer one day)",
+	"block-fluidpump": "Fluid Pump",
+	"blockdesc-fluidpump": "Pumps fluid from pipes & containers below to pipes and containers above. (Power not currently required)"
 }

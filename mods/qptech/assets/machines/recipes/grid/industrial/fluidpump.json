@@ -1,0 +1,40 @@
+{
+	"ingredientPattern": "CSC	PMP	CWC",
+	"ingredients": {
+
+		"C": {
+			"type": "item",
+			"code": "screw-*",
+			"quantity": 1
+
+		},
+
+		"S": {
+			"type": "item",
+			"code": "screwdriver-*",
+			"isTool": true
+		},
+		"P": {
+			"type": "block",
+			"code": "pipe-core-*",
+			"quantity": 1
+		},
+		"W": {
+			"type": "item",
+			"code": "wire-*",
+			"quantity": 4
+		},
+		"M": {
+			"type": "item",
+			"code": "motor-*",
+			"quantity": 1
+		}
+	},
+	"width": 3,
+	"height": 3,
+	"output": {
+		"type": "block",
+		"code": "fluidpump",
+		"quantity": 1
+	}
+}

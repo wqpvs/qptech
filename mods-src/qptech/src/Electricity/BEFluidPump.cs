@@ -35,7 +35,7 @@ namespace qptech.src
             if (inventory == null) { return 0; }
             if (offeredItem == null) { return 0; }
             if (!inventory.Empty && offeredItem != CurrentItem) { return 0; }
-            if (offerFromPos.Y > Pos.Y) { return 0; } //special for pump, we don't want to receive liquid from above us
+            if (offerFromPos.Y > Pos.Y||offerFromPos.X!=Pos.X||offerFromPos.Z!=Pos.Z) { return 0; } //special for pump, we don't want to receive liquid from above us
             int useamount = Math.Min(CapacityLitres - CurrentLevel, offeredAmount);
             if (inventory.Empty)
             {

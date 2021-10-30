@@ -55,7 +55,7 @@ namespace qptech.src
 
         protected override void OnTick(float dt)
         {
-            NeighbourCheck();
+            
             Equalize();
             Soaker();
             //temp code to set a random face as inactive
@@ -67,10 +67,84 @@ namespace qptech.src
                 MarkDirty(true);
             }*/
         }
-
+        protected void OnFastTick(float dt)
+        {
+            NeighbourCheck();
+        }
+        
         void NeighbourCheck()
         {
+            FillBarrels();
+            DrainBarrels();
+        }
+        
+        void DrainBarrels()
+        {
+            if (Api is ICoreClientAPI) { return; }
+            if (disabledFaces.Contains(BlockFacing.UP)) { return; }
+            BlockPos p = Pos.UpCopy();
+            BlockEntityBarrel barrel = Api.World.BlockAccessor.GetBlockEntity(p) as BlockEntityBarrel;
+            if (barrel == null) { return; }
+            if (barrel.Sealed) { return; }
+            if (barrel.CanSeal) { return; }
+            if (barrel.Inventory == null) { return; }
+            if (barrel.Inventory[1] == null) { return; }
+            if (barrel.Inventory[1].StackSize == 0) { return; }
+            if (inventory[0].Inventory.Empty || inventory[0].Itemstack == null || inventory[0].StackSize == 0 || inventory[0].Itemstack.Item == null)
+            {
+                int useamt = Math.Min(this.CapacityLitres, barrel.Inventory[1].StackSize);
+                ItemStack newstack = new ItemStack(barrel.Inventory[1].Itemstack.Item, useamt);
+                inventory[0].Itemstack = newstack;
+                barrel.Inventory[1].Itemstack.StackSize -= useamt;
+                if (barrel.Inventory[1].Itemstack.StackSize <= 0) { barrel.Inventory[1].Itemstack = null; }
+                this.MarkDirty(true);
+                barrel.MarkDirty(true);
+            }
 
+        }
+
+        void FillBarrels()
+        {
+            //check for other containers
+            if (Api is ICoreClientAPI) { return; }
+            if (inventory==null||inventory.Empty||inventory[0].Itemstack==null||inventory[0].StackSize<1) { return; }
+            if (!disabledFaces.Contains(BlockFacing.DOWN) && !inventory.Empty)
+            {
+                BlockPos p = Pos.DownCopy();
+                BlockEntityBarrel barrel = Api.World.BlockAccessor.GetBlockEntity(p) as BlockEntityBarrel;
+                if (barrel == null) { return; }
+                if (barrel.Sealed) { return; }
+                if (barrel.CanSeal) { return; }
+                if (barrel.Inventory == null) { return; }
+                if (barrel.Inventory[1] == null) { return; }
+                
+                if (barrel.Inventory[1].StackSize >= barrel.CapacityLitres) { return; }
+                int useliquid = 0;
+                if ((barrel.Inventory[1].Itemstack == null || barrel.Inventory[1].Itemstack.Item == null))
+                {
+                    
+                    inventory[0].Itemstack.StackSize-=1;
+                    ItemStack newstack = new ItemStack(inventory[0].Itemstack.Item, 1);
+                    barrel.Inventory[1].Itemstack = newstack;
+                    this.MarkDirty(true);
+                    barrel.MarkDirty(true);
+                    return;
+                }
+
+                if (barrel.Inventory[1].Itemstack.Item != inventory[0].Itemstack.Item) { return; }
+
+
+
+                //if there is matching inventory than just change around amounts
+                useliquid = 1;
+                
+                inventory[0].Itemstack.StackSize -= useliquid;
+                barrel.Inventory[1].Itemstack.StackSize += useliquid;
+               
+                this.MarkDirty(true);
+                barrel.MarkDirty(true);
+
+            }
         }
         public void OnNeighborChange()
         {
@@ -134,6 +208,7 @@ namespace qptech.src
                     soaker = 0;
                 }
             }
+            RegisterGameTickListener(OnFastTick, 100);
         }   
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
@@ -382,7 +457,7 @@ namespace qptech.src
         {
             looky = blockSel;
         }
-        const float selectionzone = 0.15f;
+        const float selectionzone = 0.4f;
        public BlockFacing GetSubFace(BlockSelection blockSelection)
         {
             if (BlockFacing.HORIZONTALS.Contains(blockSelection.Face))
