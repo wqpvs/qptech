@@ -1,0 +1,37 @@
+{
+	"ingredientPattern": "HRR	SRC	_R_",
+	"ingredients": {
+		"H": {
+			"type": "item",
+			"code": "game:hammer-*",
+			"isTool": true,
+			"quantity": 1
+		},
+		"S": {
+			"type": "item",
+			"code": "screwdriver-*",
+			"isTool": true,
+			"quantity": 2
+		},
+		
+		"R": {
+			"type": "item",
+			"code": "rod-*",
+			
+			"quantity": 1,
+			
+		},
+		"C": {
+			"type": "item",
+			"code": "screw-*",
+			"name": "metal",
+			"quantity": 1
+			
+		}
+
+
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "pipewrench", quantity: 1  }
+}

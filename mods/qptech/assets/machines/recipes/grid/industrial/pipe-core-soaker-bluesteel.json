@@ -1,0 +1,29 @@
+{
+	"ingredientPattern": "H	S	P",
+	"ingredients": {
+
+
+		"H": {
+			"type": "item",
+			"code": "game:hammer-*",
+			"isTool": true
+		},
+		"S": {
+			"type": "item",
+			"code": "screwdriver-*",
+			"isTool": true
+		},
+		"P": {
+			"type": "block",
+			"code": "pipe-core-bluesteel",
+			"isTool": true
+		}
+	},
+	"width": 1,
+	"height": 3,
+	"output": {
+		"type": "block",
+		"code": "pipe-core-soaker-bluesteel",
+		"quantity": 1
+	}
+}

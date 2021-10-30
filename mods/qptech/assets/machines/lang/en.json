@@ -71,7 +71,7 @@
 	"item-rod-copper": "Metal Rod (Copper)",
 	"item-rod-brass": "Metal Rod (Brass)",
 	"item-rod-*bronze": "Metal Rod (Bronze)",
-	"item-rod-iron":  "Metal Rod (Iron)",
+	"item-rod-iron": "Metal Rod (Iron)",
 	"itemdesc-rod-*": "Inanimate Rod, hero of the people",
 	"item-screw-brass": "Metal Screw (Brass)",
 	"itemdesc-screw-*": "Screw this!",
@@ -133,6 +133,13 @@
 	"block-sliding_door-*": "Sliding Door",
 	"blockdesc-sliding_door-*": "2x2 sliding door, place bottom left block.",
 	"block-sheetroller-*": "Sheet Roller",
-	"blockdesc-sheetroller-*": "Takes metal plates from the left and outputs two metal sheets on the right."
-
+	"blockdesc-sheetroller-*": "Takes metal plates from the left and outputs two metal sheets on the right.",
+	"block-pipe-core-bronze": "Fluid Pipe (Bronze)",
+	"block-pipe-core-bluesteel": "Fluid Pipe (Steel)",
+	"blockdesc-pipe-core-*": "Will self connect with other pipe segments and appropriate blocks. Use a pipewrench to enable, disable connections to certain faces.",
+	"block-container-tank-bronze": "Fluid Tank (Bronze)",
+	"block-container-tank-bluesteel": "Fluid Tank (Steel)",
+	"blockdesc-container-tank-*": "Can store fluid, breaking it will retain the fluid (though in inventory it can't currently show its fluid level",
+	"block-pipe-core-soaker-bluesteel": "Soaker Pipe (Steel)",
+	"blockdesc-pipe-core-soaker-bluesteel": "Soaker pipe will irrigate crops in a 3x3 grid above the pipe (will add liquid fertilizer one day)"
 }
