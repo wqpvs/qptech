@@ -90,16 +90,25 @@ namespace qptech.src
             if (barrel.Inventory == null) { return; }
             if (barrel.Inventory[1] == null) { return; }
             if (barrel.Inventory[1].StackSize == 0) { return; }
+            int useamt = 0;
             if (inventory[0].Inventory.Empty || inventory[0].Itemstack == null || inventory[0].StackSize == 0 || inventory[0].Itemstack.Item == null)
             {
-                int useamt = Math.Min(this.CapacityLitres, barrel.Inventory[1].StackSize);
+                useamt = Math.Min(this.CapacityLitres, barrel.Inventory[1].StackSize);
                 ItemStack newstack = new ItemStack(barrel.Inventory[1].Itemstack.Item, useamt);
                 inventory[0].Itemstack = newstack;
                 barrel.Inventory[1].Itemstack.StackSize -= useamt;
                 if (barrel.Inventory[1].Itemstack.StackSize <= 0) { barrel.Inventory[1].Itemstack = null; }
                 this.MarkDirty(true);
                 barrel.MarkDirty(true);
+                return;
             }
+            else if (inventory[0].Itemstack.Item != barrel.Inventory[1].Itemstack.Item) { return; }
+            useamt = Math.Min(this.capacitylitres - inventory[0].Itemstack.StackSize, barrel.Inventory[1].StackSize);
+            inventory[0].Itemstack.StackSize += useamt;
+            barrel.Inventory[1].Itemstack.StackSize -= useamt;
+            if (barrel.Inventory[1].Itemstack.StackSize <= 0) { barrel.Inventory[1].Itemstack = null; }
+            this.MarkDirty(true);
+            barrel.MarkDirty(true);
 
         }
 
@@ -126,6 +135,7 @@ namespace qptech.src
                     inventory[0].Itemstack.StackSize-=1;
                     ItemStack newstack = new ItemStack(inventory[0].Itemstack.Item, 1);
                     barrel.Inventory[1].Itemstack = newstack;
+                    if (inventory[0].Itemstack.StackSize <= 0) { inventory[0].Itemstack = null; }
                     this.MarkDirty(true);
                     barrel.MarkDirty(true);
                     return;
@@ -140,7 +150,7 @@ namespace qptech.src
                 
                 inventory[0].Itemstack.StackSize -= useliquid;
                 barrel.Inventory[1].Itemstack.StackSize += useliquid;
-               
+                if (inventory[0].Itemstack.StackSize <= 0) { inventory[0].Itemstack = null; }
                 this.MarkDirty(true);
                 barrel.MarkDirty(true);
 
