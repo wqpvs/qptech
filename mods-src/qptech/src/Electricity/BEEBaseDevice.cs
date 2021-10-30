@@ -58,7 +58,7 @@ namespace qptech.src
             if (DeviceState == enDeviceState.IDLE||DeviceState==enDeviceState.MATERIALHOLD)
             {
                 DoDeviceStart();
-                ChangeCapacitor(-1);
+                
             }
             else if (deviceState == enDeviceState.WARMUP)
             {

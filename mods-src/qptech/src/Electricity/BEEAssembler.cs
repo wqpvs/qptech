@@ -147,7 +147,7 @@ namespace qptech.src
             if (Capacitor < requiredFlux) { return; }//not enough power
             FetchMaterial();
             processstarted = Api.World.Calendar.TotalHours;      
-            if (internalQuantity<inputQuantity) { ChangeCapacitor(-1); deviceState = enDeviceState.MATERIALHOLD; return; }//check for and extract the required RM
+            if (internalQuantity<inputQuantity) {  deviceState = enDeviceState.MATERIALHOLD; return; }//check for and extract the required RM
             //TODO - do we make sure there's an output container?
             if (Capacitor >= requiredFlux)
             {
