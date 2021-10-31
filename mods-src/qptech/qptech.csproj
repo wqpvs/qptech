@@ -76,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\misc\BlockFluidPipe.cs" />
+    <Compile Include="src\pipes\BlockFluidPipe.cs" />
     <Compile Include="src\Electricity\BEBMPGenerator.cs" />
     <Compile Include="src\Electricity\BEBMPMotor.cs" />
     <Compile Include="src\Electricity\BEEAssembler.cs" />
@@ -91,7 +91,7 @@
     <Compile Include="src\Electricity\BEEMacerator.cs" />
     <Compile Include="src\Electricity\BEEJunction.cs" />
     <Compile Include="src\Electricity\BEEWire.cs" />
-    <Compile Include="src\Electricity\BEFluidPump.cs" />
+    <Compile Include="src\pipes\BEFluidPump.cs" />
     <Compile Include="src\Electricity\BEMPGenerator.cs" />
     <Compile Include="src\Electricity\BEMPMotor.cs" />
     <Compile Include="src\Electricity\BEPowerFlag.cs" />
@@ -105,7 +105,7 @@
     <Compile Include="src\Electricity\BlockJunction.cs" />
     <Compile Include="src\Electricity\BlockPump.cs" />
     <Compile Include="src\misc\BEClearFluidTank.cs" />
-    <Compile Include="src\misc\BlockTank.cs" />
+    <Compile Include="src\pipes\BlockTank.cs" />
     <Compile Include="src\Electricity\BlockWire.cs" />
     <Compile Include="src\Electricity\EForgeContentsRenderer.cs" />
     <Compile Include="src\gui\GEDrawTexture.cs" />
@@ -113,9 +113,9 @@
     <Compile Include="src\gui\GUIElectricCrucible.cs" />
     <Compile Include="src\Electricity\HVACEnvironmentUpdater.cs" />
     <Compile Include="src\misc\APIExtensions.cs" />
-    <Compile Include="src\misc\BEFluidPipe.cs" />
+    <Compile Include="src\pipes\BEFluidPipe.cs" />
     <Compile Include="src\misc\BETextureTest.cs" />
-    <Compile Include="src\misc\IFluidTank.cs" />
+    <Compile Include="src\pipes\IFluidTank.cs" />
     <Compile Include="src\multiblock\BEReportsClicks.cs" />
     <Compile Include="src\multiblock\BESlidingDoorCore.cs" />
     <Compile Include="src\multiblock\BEWaterTower.cs" />

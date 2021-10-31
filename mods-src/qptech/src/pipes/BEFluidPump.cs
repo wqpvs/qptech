@@ -28,14 +28,53 @@ namespace qptech.src
             inventory = new InventoryGeneric(1, null, null);
         }
         public BlockPos TankPos => Pos;
+        BlockFacing inputFace = BlockFacing.DOWN;
+        BlockFacing outputFace = BlockFacing.UP;
+        BlockPos inputPos;
+        BlockPos outputPos;
+        public override void Initialize(ICoreAPI api)
+        {
+            inputPos = Pos.DownCopy();
+            outputPos = Pos.UpCopy();
 
+            if (Block.LastCodePart() == "north")
+            {
+                inputFace = BlockFacing.SOUTH;
+                outputFace = BlockFacing.NORTH;
+                inputPos = Pos.SouthCopy();
+                outputPos = Pos.NorthCopy();
+            }
+            else if (Block.LastCodePart()=="south")
+            {
+                inputFace = BlockFacing.NORTH;
+                outputFace = BlockFacing.SOUTH;
+                inputPos = Pos.NorthCopy();
+                outputPos = Pos.SouthCopy();
+            }
+            else if (Block.LastCodePart() == "east")
+            {
+                inputFace = BlockFacing.WEST;
+                outputFace = BlockFacing.EAST;
+                inputPos = Pos.WestCopy();
+                outputPos = Pos.EastCopy();
+            }
+            else if (Block.LastCodePart() == "west")
+            {
+                inputFace = BlockFacing.EAST;
+                outputFace = BlockFacing.WEST;
+                inputPos = Pos.EastCopy();
+                outputPos = Pos.WestCopy();
+            }
+            base.Initialize(api);
+        }
         public int ReceiveFluidOffer(Item offeredItem, int offeredAmount, BlockPos offerFromPos)
         {
             if (IsFull) { return 0; }
             if (inventory == null) { return 0; }
             if (offeredItem == null) { return 0; }
             if (!inventory.Empty && offeredItem != CurrentItem) { return 0; }
-            if (offerFromPos.Y > Pos.Y||offerFromPos.X!=Pos.X||offerFromPos.Z!=Pos.Z) { return 0; } //special for pump, we don't want to receive liquid from above us
+            
+            if (offerFromPos!=inputPos) { return 0; } //special for pump, we don't want to receive liquid from above us
             int useamount = Math.Min(CapacityLitres - CurrentLevel, offeredAmount);
             if (inventory.Empty)
             {
@@ -67,7 +106,7 @@ namespace qptech.src
         {
             if (!IsFull) { Pump(); }
             if (inventory.Empty) { return; }
-            IFluidTank uptank = Api.World.BlockAccessor.GetBlockEntity(Pos.UpCopy()) as IFluidTank;
+            IFluidTank uptank = Api.World.BlockAccessor.GetBlockEntity(outputPos) as IFluidTank;
             if (uptank == null || uptank.IsFull) { return; }
             int used=uptank.ReceiveFluidOffer(CurrentItem, CurrentLevel, Pos);
             if (used == 0) { return; }

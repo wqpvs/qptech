@@ -1,0 +1,19 @@
+{
+	"ingredientPattern": "P",
+	"ingredients": {
+
+		"P": {
+			"type": "block",
+			"code": "fluidpump",
+			"quantity": 1
+		}
+		
+	},
+	"width": 1,
+	"height": 1,
+	"output": {
+		"type": "block",
+		"code": "fluidhorpump-east",
+		"quantity": 1
+	}
+}

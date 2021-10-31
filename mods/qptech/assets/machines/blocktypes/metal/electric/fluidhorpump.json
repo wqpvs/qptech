@@ -1,0 +1,59 @@
+{
+	"code": "fluidhorpump",
+
+	"entityclass": "BEFluidPump",
+
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*-east" ]
+	},
+	"variantgroups": [
+		
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+	"behaviors": [
+
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "east" }
+		}
+	],
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+	"shape": { "base": "block/metal/container/pump-horizontal" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/metal/container/pump-horizontal",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/metal/container/pump-horizontal",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "block/metal/container/pump-horizontal",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "block/metal/container/pump-horizontal",
+			"rotateY": 180
+		}
+	},
+
+	"resistance": 1,
+	"sidesolid": {
+		"all": false,
+		"up": true
+	},
+	"sideAo": { "all": false },
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+}

@@ -29,6 +29,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\Door\slidingdoor.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidhorpump.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidpump.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\sheetroller.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-soaker-bluesteel.json" />
@@ -110,6 +111,8 @@
     <None Include="qptech\assets\machines\recipes\grid\decor\castironovenlarge.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\icebox.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\sink.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\fluidpumpconvert.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\fluidhorpump.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\fluidpump.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\pipe-core-soaker-bluesteel.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\tank-bluesteel.json" />
@@ -158,6 +161,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-core.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-segment.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-soaker.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\pump-horizontal.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pump.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-10.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\tank-20.json" />
@@ -295,6 +299,7 @@
     <Content Include="qptech\assets\machines\textures\block\machinery-largefan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\bluepaintedwornsteelplate.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\conveyor\machinery-border-small.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\directionalpipe_bluesteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\firebox\machinery-border-small.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\fan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\machinery-back.png" />
