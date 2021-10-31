@@ -246,7 +246,7 @@ namespace qptech.src
         }   
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
-            if (disabledFaces == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
+            
             ICoreClientAPI capi = Api as ICoreClientAPI;
             if (capi == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
             Block pipesegment = Api.World.GetBlock(new AssetLocation("machines:pipe-segment" + "-" + (metal)));
@@ -304,14 +304,14 @@ namespace qptech.src
         
                 }
             }
-            if (filler&&!disabledFaces.Contains(BlockFacing.DOWN))
+            if (disabledFaces!=null&&filler&&!disabledFaces.Contains(BlockFacing.DOWN))
             {
                 
                 Block sprinkler = Api.World.GetBlock(new AssetLocation("machines:pipe-sprinkler"));
                 capi.Tesselator.TesselateBlock(sprinkler, out mesh);
                 mesher.AddMeshData(mesh.Clone());
             }
-            if (drainer && !disabledFaces.Contains(BlockFacing.UP))
+            if (disabledFaces!=null&&drainer && !disabledFaces.Contains(BlockFacing.UP))
             {
 
                 Block drainer = Api.World.GetBlock(new AssetLocation("machines:pipe-drainer"));
