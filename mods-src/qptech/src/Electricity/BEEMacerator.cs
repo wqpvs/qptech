@@ -163,7 +163,7 @@ namespace qptech.src
         void Start()
         {
 
-            if (Api.World.Side == EnumAppSide.Client && animUtil != null)
+            if (!disableAnimations && Api.World.Side == EnumAppSide.Client && animUtil != null)
             {
                 if (!animInit)
                 {
@@ -194,7 +194,7 @@ namespace qptech.src
 
             //ToggleAmbientSounds(isOn);
             justswitched = true;
-            if (Api.World.Side == EnumAppSide.Client && animUtil != null)
+            if (!disableAnimations && Api.World.Side == EnumAppSide.Client && animUtil != null)
             {
                 if (!animInit)
                 {

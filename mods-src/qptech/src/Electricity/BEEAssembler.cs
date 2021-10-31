@@ -37,6 +37,7 @@ namespace qptech.src
         protected double processingTime = 10;
         protected float heatRequirement = 0;
         string readablerecipe="";
+       
         public string Making => outputQuantity.ToString() + "x " + recipe + ingredient_subtype;
         public string RM
         {
@@ -155,7 +156,7 @@ namespace qptech.src
                 tickCounter = 0;
                 deviceState = enDeviceState.RUNNING;
                 
-                if (Api.World.Side == EnumAppSide.Client && animUtil != null)
+                if (!disableAnimations&& Api.World.Side == EnumAppSide.Client && animUtil != null)
                 {
                     if (!animInit)
                     {
@@ -261,7 +262,7 @@ namespace qptech.src
                 dummy.DropAll(pos);
             }
             Api.World.PlaySoundAt(new AssetLocation("sounds/doorslide"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
-            if (Api.World.Side == EnumAppSide.Client && animUtil != null)
+            if (!disableAnimations&& Api.World.Side == EnumAppSide.Client && animUtil != null)
             {
                 
                 animUtil.StopAnimation(Pos.ToString() + animationName);

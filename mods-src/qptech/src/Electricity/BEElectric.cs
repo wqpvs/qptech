@@ -18,6 +18,7 @@ namespace qptech.src
     public class BEElectric : BlockEntity, IElectricity, ITexPositionSource
     {
         /*base class to handle electrical devices*/
+        public virtual bool disableAnimations => true;
         protected int maxFlux = 16;    //how many packets that can move at once
         public TextureAtlasPosition this[string textureCode]
         {

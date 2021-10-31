@@ -42,7 +42,7 @@ namespace qptech.src
         bool generating = false;
         bool haswater = true;
         bool heated = false;
-        bool disableanimations = true;
+        
         public virtual float SoundLevel
         {
             get { return 0.1f; }
@@ -94,7 +94,7 @@ namespace qptech.src
             trypower = DoGeneratePower();
             generating = trypower;
 
-            if (!disableanimations&&Api.World.Side == EnumAppSide.Client && animUtil != null)
+            if (!disableAnimations&&Api.World.Side == EnumAppSide.Client && animUtil != null)
             {
                 if (!animInit)
                 {
@@ -179,7 +179,7 @@ namespace qptech.src
 
             ToggleAmbientSounds(isOn);
             justswitched = true;
-            if (disableanimations) { return; }
+            if (disableAnimations) { return; }
             if (Api.World.Side == EnumAppSide.Client && animUtil != null)
             {
                 if (!animInit)

@@ -24,6 +24,8 @@ namespace qptech.src
         public int soaker = 0;
         public int CapacityLitres { get { return capacitylitres; } set{ capacitylitres = value; } }
         int capacitylitres = 50;
+        public bool filler=false;
+        public bool drainer=false;
         public string metal
         {
             get
@@ -111,17 +113,38 @@ namespace qptech.src
             barrel.MarkDirty(true);
 
         }
-
+        void AttachmentCheck()
+        {
+            BlockPos p = Pos.DownCopy();
+            BlockEntityBarrel barrel = Api.World.BlockAccessor.GetBlockEntity(p) as BlockEntityBarrel;
+            bool dothedirty = false;
+            bool oldfiller = filler;
+            if (barrel != null) { filler = true; }
+            else { filler = false; }
+            if (filler != oldfiller) { dothedirty=true; }
+            p = Pos.UpCopy();
+            barrel = Api.World.BlockAccessor.GetBlockEntity(p) as BlockEntityBarrel;
+            bool olddrainer = drainer;
+            if (barrel != null) { drainer = true; }
+            else { drainer = false; }
+            if (olddrainer != drainer) { dothedirty = true; }
+            if (dothedirty) { MarkDirty(true); }
+        }
         void FillBarrels()
         {
             //check for other containers
-            if (Api is ICoreClientAPI) { return; }
+            
+            if (Api is ICoreClientAPI) { AttachmentCheck(); }
+            
             if (inventory==null||inventory.Empty||inventory[0].Itemstack==null||inventory[0].StackSize<1) { return; }
             if (!disabledFaces.Contains(BlockFacing.DOWN) && !inventory.Empty)
             {
+                
                 BlockPos p = Pos.DownCopy();
                 BlockEntityBarrel barrel = Api.World.BlockAccessor.GetBlockEntity(p) as BlockEntityBarrel;
+
                 if (barrel == null) { return; }
+                
                 if (barrel.Sealed) { return; }
                 if (barrel.CanSeal) { return; }
                 if (barrel.Inventory == null) { return; }
@@ -155,6 +178,7 @@ namespace qptech.src
                 barrel.MarkDirty(true);
 
             }
+            
         }
         public void OnNeighborChange()
         {
@@ -222,6 +246,7 @@ namespace qptech.src
         }   
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
+            if (disabledFaces == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
             ICoreClientAPI capi = Api as ICoreClientAPI;
             if (capi == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
             Block pipesegment = Api.World.GetBlock(new AssetLocation("machines:pipe-segment" + "-" + (metal)));
@@ -278,6 +303,20 @@ namespace qptech.src
                     mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), -GameMath.DEG2RAD * 90, 0, 0));
         
                 }
+            }
+            if (filler&&!disabledFaces.Contains(BlockFacing.DOWN))
+            {
+                
+                Block sprinkler = Api.World.GetBlock(new AssetLocation("machines:pipe-sprinkler"));
+                capi.Tesselator.TesselateBlock(sprinkler, out mesh);
+                mesher.AddMeshData(mesh.Clone());
+            }
+            if (drainer && !disabledFaces.Contains(BlockFacing.UP))
+            {
+
+                Block drainer = Api.World.GetBlock(new AssetLocation("machines:pipe-drainer"));
+                capi.Tesselator.TesselateBlock(drainer, out mesh);
+                mesher.AddMeshData(mesh.Clone());
             }
 
             return base.OnTesselation(mesher, tessThreadTesselator);
@@ -383,6 +422,9 @@ namespace qptech.src
                 //dsc.AppendLine(looky.HitPosition.ToString());
                 dsc.AppendLine("Selecting "+GetSubFace(looky).ToString());
             }
+            
+                dsc.AppendLine("Filling:"+filler.ToString());
+            
         }
 
         public override void ToTreeAttributes(ITreeAttribute tree)
@@ -397,12 +439,13 @@ namespace qptech.src
             }
             var asString = JsonConvert.SerializeObject(dfstring);
             tree.SetString("disabledfaces", asString);
+            
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
         {
             base.FromTreeAttributes(tree, worldForResolving);
-
+            
             var asString = tree.GetString("disabledfaces");
             List<string> dfstring = new List<string>();
             if (asString != "")
