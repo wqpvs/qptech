@@ -149,7 +149,7 @@ namespace qptech.src
                 //TODO why don't buttons render - possibly we can just cheat here and draw our own buttons?
                 
                 //REPEAT MODE
-                SingleComposer.AddButton("", onToggleMode, dialogBounds);
+                SingleComposer.AddButton("REPEAT", onToggleMode, dialogBounds);
                 gdt = new GEDrawTexture(capi, dialogBounds, buttontexture);
                 SingleComposer.AddDynamicCustomDraw(dialogBounds, gdt.OnDraw);
                 dialogBounds = ElementBounds.Fixed(psectionx + buttonstartx + buttonwidth + labelxpad, psectiony+labelypad + buttonstarty, 200, buttonheight);
@@ -235,28 +235,29 @@ namespace qptech.src
         public bool onHaltProduction()
         {
             mycrucible.HaltButton();
-            TryClose();
+            
             return true;
         }
         public bool onTogglePower()
         {
             mycrucible.ButtonTogglePower();
-            
-            SingleComposer.Compose();
+
+            TryClose();
             return true;
         }
         public bool onToggleMode()
         {
             mycrucible.ButtonToggleMode();
+            TryClose();
             
-            SingleComposer.Compose();
+
             return true;
         }
         public void TogglePower(bool onoff)
         {
             mycrucible.ButtonTogglePower();
             
-            SingleComposer.Compose();
+            TryClose();
         }
 
         public override bool TryClose()

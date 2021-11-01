@@ -111,7 +111,7 @@ namespace qptech.src
             }
             else if (Api is ICoreClientAPI)
             {
-                UpdateUI();
+                //UpdateUI();
             }
         }
 
@@ -132,10 +132,10 @@ namespace qptech.src
             //{
                 //uiUpdateSkipCounter = 0;
                 
-                if (gas != null && gas.IsOpened())
-                {
-                    gas.SetupDialog(this);
-                }
+               // if (gas != null && gas.IsOpened())
+               // {
+               //     gas.SetupDialog(this);
+               // }
             //}
         }
         void SetStatus()
@@ -609,7 +609,7 @@ namespace qptech.src
         public void SetOrder(string formetal, int qty, bool onlycompleteorder)
         {
             ICoreClientAPI capi = Api as ICoreClientAPI;
-            /*if (capi != null)
+            if (capi != null)
             {
                 if (status != enStatus.READY) { return; }
                 FindValidRecipes();
@@ -623,7 +623,7 @@ namespace qptech.src
                 (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.SetOrder,data);
                 if (Api.World.Calendar != null) { nextproductionat = Api.World.Calendar.TotalHours + productionTime; }
                 
-            }*/
+            }
             if (Api is ICoreServerAPI)
             {
                 if (status != enStatus.READY) { return; }
