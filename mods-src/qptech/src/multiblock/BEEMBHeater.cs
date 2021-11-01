@@ -23,7 +23,7 @@ namespace qptech.src.multiblock
     using Vintagestory.API.Config;
     using Vintagestory.API.Util;
     using Vintagestory.ServerMods;
-    using Electricity.API;
+    using qptechElectricity.API;
     class BEEMBHeater : BEElectric, IFunctionalMultiblockPart
     {
         int fluxPerTick = 5;

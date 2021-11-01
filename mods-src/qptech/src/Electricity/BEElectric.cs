@@ -9,7 +9,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 using Vintagestory.API.Server;
-using Electricity.API;
+using qptechElectricity.API;
 using Vintagestory.API.Util;
 using Vintagestory.API.Client;
 

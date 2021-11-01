@@ -10,7 +10,7 @@ using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 using Vintagestory.API.Client;
 using HarmonyLib;
-using Electricity.API;
+using qptechElectricity.API;
 
 namespace qptech.src
 {

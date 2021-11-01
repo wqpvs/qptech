@@ -4,20 +4,13 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSModLauncher", "VSModLauncher.csproj", "{203DFBF1-3599-43FD-8487-E1C79C2B788F}"
 	ProjectSection(ProjectDependencies) = postProject
-		{28583445-ABF9-47C2-BA6D-57384D5FC2AC} = {28583445-ABF9-47C2-BA6D-57384D5FC2AC}
 		{2321A551-A32D-49B0-BF4F-22138D95A207} = {2321A551-A32D-49B0-BF4F-22138D95A207}
 		{36C91EE7-484E-4A49-8834-E3502F0FF8CF} = {36C91EE7-484E-4A49-8834-E3502F0FF8CF}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qptech", "mods-src\qptech\qptech.csproj", "{36C91EE7-484E-4A49-8834-E3502F0FF8CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qptechfurniture", "mods-src\qptechfurniture\qptechfurniture.csproj", "{AC97867E-F12D-453E-A844-0BB3C7D33E87}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "assets", "mods\assets.csproj", "{2321A551-A32D-49B0-BF4F-22138D95A207}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qptechapi", "mods-src\qptechapi\qptechapi.csproj", "{28583445-ABF9-47C2-BA6D-57384D5FC2AC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "questbook", "mods-src\questbook\questbook.csproj", "{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,33 +33,11 @@ Global
 		{36C91EE7-484E-4A49-8834-E3502F0FF8CF}.Release x64|Any CPU.Build.0 = Release|Any CPU
 		{36C91EE7-484E-4A49-8834-E3502F0FF8CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36C91EE7-484E-4A49-8834-E3502F0FF8CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC97867E-F12D-453E-A844-0BB3C7D33E87}.assets|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC97867E-F12D-453E-A844-0BB3C7D33E87}.assets|Any CPU.Build.0 = Debug|Any CPU
-		{AC97867E-F12D-453E-A844-0BB3C7D33E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC97867E-F12D-453E-A844-0BB3C7D33E87}.Release x64|Any CPU.ActiveCfg = Release|Any CPU
-		{AC97867E-F12D-453E-A844-0BB3C7D33E87}.Release x64|Any CPU.Build.0 = Release|Any CPU
-		{AC97867E-F12D-453E-A844-0BB3C7D33E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC97867E-F12D-453E-A844-0BB3C7D33E87}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2321A551-A32D-49B0-BF4F-22138D95A207}.assets|Any CPU.ActiveCfg = Debug|Any CPU
 		{2321A551-A32D-49B0-BF4F-22138D95A207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2321A551-A32D-49B0-BF4F-22138D95A207}.Release x64|Any CPU.ActiveCfg = Debug|Any CPU
 		{2321A551-A32D-49B0-BF4F-22138D95A207}.Release x64|Any CPU.Build.0 = Debug|Any CPU
 		{2321A551-A32D-49B0-BF4F-22138D95A207}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.assets|Any CPU.ActiveCfg = Debug|Any CPU
-		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.assets|Any CPU.Build.0 = Debug|Any CPU
-		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.Release x64|Any CPU.ActiveCfg = Release|Any CPU
-		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.Release x64|Any CPU.Build.0 = Release|Any CPU
-		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28583445-ABF9-47C2-BA6D-57384D5FC2AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.assets|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.assets|Any CPU.Build.0 = Debug|Any CPU
-		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Release x64|Any CPU.ActiveCfg = Release|Any CPU
-		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Release x64|Any CPU.Build.0 = Release|Any CPU
-		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7D30F0F7-1362-41C9-A23A-7AF3527F1AB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

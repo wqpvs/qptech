@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Electricity\ElectricityAPI.cs" />
     <Compile Include="src\pipes\BlockFluidPipe.cs" />
     <Compile Include="src\Electricity\BEBMPGenerator.cs" />
     <Compile Include="src\Electricity\BEBMPMotor.cs" />
@@ -147,13 +148,6 @@
     <Content Update="modinfo.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\qptechapi\qptechapi.csproj">
-      <Project>{28583445-abf9-47c2-ba6d-57384d5fc2ac}</Project>
-      <Name>qptechapi</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Target Name="CopyToBin" AfterTargets="AfterBuild">

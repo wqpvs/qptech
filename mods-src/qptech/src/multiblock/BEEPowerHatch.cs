@@ -15,7 +15,7 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Util;
 using Vintagestory.ServerMods;
-using Electricity.API;
+using qptechElectricity.API;
 
 namespace qptech.src.multiblock
 {
