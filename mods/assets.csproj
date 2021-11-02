@@ -197,6 +197,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\sheetroller.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\tank.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\washplant2.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\wires\socketedwire.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\stairs\girder.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\stairs\metalplatform.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\stairs\metalstair.json" />
