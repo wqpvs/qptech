@@ -9,15 +9,17 @@ namespace qptech.src.networks
 {
     class PowerNetwork : FlexNetwork
     {
-        string networkid;
+        Guid networkid;
         string productid="power";
         int availablePower;
         public int Power => availablePower;
         List<FlexNetworkMember> members;
-        public string NetworkID => networkid;
+        public Guid NetworkID => networkid;
         public string ProductID => productid;
-        public PowerNetwork()
+        public PowerNetwork(Guid g)
         {
+            networkid = g;
+           
             //SET NETWORK ID - need a master network manager
         }
         public List<FlexNetworkMember> GetMembers()
@@ -26,7 +28,7 @@ namespace qptech.src.networks
             return members;
         }
 
-        public bool MergeWith(string newnetworkID)
+        public bool MergeWith(Guid newnetworkID)
         {
             return true;
         }

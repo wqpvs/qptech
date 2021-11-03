@@ -78,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Electricity\ElectricityAPI.cs" />
     <Compile Include="src\networks\FlexNetwork.cs" />
+    <Compile Include="src\networks\FlexNetworkManager.cs" />
     <Compile Include="src\networks\PowerNetwork.cs" />
     <Compile Include="src\pipes\BlockFluidPipe.cs" />
     <Compile Include="src\Electricity\BEBMPGenerator.cs" />
