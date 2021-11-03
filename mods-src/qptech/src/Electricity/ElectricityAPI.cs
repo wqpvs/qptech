@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vintagestory.API.Common;
 
-namespace qptechElectricity.API
+namespace qptech.src
 {
 
     /// <summary>
@@ -31,14 +31,15 @@ namespace qptechElectricity.API
 
     public interface IElectricity
     {
+        
         ///the block entity this IElectricity belongs to
         BlockEntity EBlock { get; }
         ///MaxAmps - How much power can be transferred in one turn
 
-        int MaxFlux { get;  }
-        
+        int MaxFlux { get; }
+
         ///if device is on
-        bool IsOn { get;  }
+        bool IsOn { get; }
         ///Device has power
         bool IsPowered { get; }
         ///Receive an offer for a power packet, return how much power it uses

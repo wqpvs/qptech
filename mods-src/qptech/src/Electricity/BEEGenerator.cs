@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 using Vintagestory.API.MathTools;
-using Vintagestory.API.Client;  
-using qptechElectricity.API;
+using Vintagestory.API.Client;
 
 namespace qptech.src
 {
