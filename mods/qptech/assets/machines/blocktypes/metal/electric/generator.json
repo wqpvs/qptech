@@ -11,7 +11,7 @@
 		"maxFlux": 4,
 		"capacitance": 20,
 		"genFlux": 20,
-		"distributionFaces": [ "north" ],
+		"receptionFaces": [ "north" ],
 		"requiredHeat": 800,
 		"heatFace": "down",
 		"waterUsage": 1,

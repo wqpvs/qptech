@@ -23,9 +23,9 @@ namespace qptech.src.networks
         string ProductID { get; } //the product id for compatible networks - eg "power" 
 
         List<FlexNetworkMember> GetMembers();
-        
+        bool JoinNetwork(FlexNetworkMember member);
         void RemoveNetwork(); //remove all members deal with any inventory
-        
+        void OnTick(float dt);
         bool MergeWith(Guid newnetworkID); //
 
     }    

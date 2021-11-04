@@ -21,14 +21,8 @@ namespace qptech.src
         bool fueled = false;            //whether device is currently fueld
         bool usesFuelWhileOn = false;  //always use fuel, even if no load (unless turned off)
         BlockFacing fuelHopperFace;     //which face fuel is loaded from
-
-
         ILoadedSound ambientSound;
-       
-               
-        protected int genFlux = 1;      //how much TF (power packets) are generated per OnTick
-
-        bool requiresHeat = false;      //will check for heat to produce power
+         bool requiresHeat = false;      //will check for heat to produce power
         public bool RequiresHeat => requiresHeat;
         float requiredHeat =0;      //how much heat is necessary
         BlockFacing heatFace = BlockFacing.DOWN; //which face to check for heat
@@ -46,7 +40,11 @@ namespace qptech.src
         {
             get { return 0.1f; }
         }
-
+        public override int AvailablePower()
+        {
+            if (!isOn&&!generating) { return 0; }
+            return genPower;
+        }
         public override float DisplayPercentage => isOn&&trypower ? 1 : 0;
         public override void Initialize(ICoreAPI api)
         {
@@ -55,7 +53,7 @@ namespace qptech.src
             if (Block.Attributes != null)
             {
 
-                genFlux = Block.Attributes["genFlux"].AsInt(genFlux);
+                
                 fuelHopperFace = BlockFacing.FromCode(Block.Attributes["fuelHopperFace"].AsString("up"));
                 fuelHopperFace = OrientFace(Block.Code.ToString(), fuelHopperFace);
                 string[] fc = Block.Attributes["fuelCodes"].AsArray<string>();
@@ -108,7 +106,7 @@ namespace qptech.src
                     });
             }
 
-            if (trypower) { ChangeCapacitor(MaxFlux); }
+            
             ToggleAmbientSounds(trypower);
             return;
         }
@@ -157,10 +155,7 @@ namespace qptech.src
             return fueled;
         }
         //generators don't receive power
-        public override int ReceivePacketOffer(IElectricity from, int hf)
-        {
-            return 0;
-        }
+        
         BlockEntityAnimationUtil animUtil
         {
             get {
@@ -209,10 +204,7 @@ namespace qptech.src
             }
             Api.World.PlaySoundAt(new AssetLocation("sounds/electriczap"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
         }
-        public override int NeedPower()
-        {
-            return 0;
-        }
+        
 
         //will check and see if there's enough water, and will use water if necessary
         bool CheckWater()
@@ -339,9 +331,9 @@ namespace qptech.src
         }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
-            //base.GetBlockInfo(forPlayer, dsc);
+            base.GetBlockInfo(forPlayer, dsc);
             
-            dsc.Append("Output "+genFlux+" Flux");
+            
             if (IsOn && !heated) { dsc.AppendLine(" (NO HEAT)"); }
             else if (IsOn) { dsc.AppendLine(" (ON)"); }
             else { dsc.AppendLine(" (OFF)"); }

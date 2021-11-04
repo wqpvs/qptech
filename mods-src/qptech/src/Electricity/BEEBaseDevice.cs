@@ -27,7 +27,17 @@ namespace qptech.src
 
         protected enDeviceState deviceState = enDeviceState.WARMUP;
         public enDeviceState DeviceState { get { return deviceState; } }
-        
+        public override int RequestPower()
+        {
+            if (!isOn||DeviceState!=enDeviceState.RUNNING) { return 0; }
+            return usePower;
+        }
+        public override int ReceivePowerOffer(int amt)
+        {
+            if (DeviceState != enDeviceState.RUNNING) { return 0; }
+            
+            return base.ReceivePowerOffer(amt);
+        }
         public override void OnTick(float par)
         {
             base.OnTick(par);
@@ -72,14 +82,14 @@ namespace qptech.src
         {
 
             if (Api.World.Side is EnumAppSide.Client) { return; }
-            if (Capacitor < requiredFlux) { DoFailedStart(); return; }
+            if (!IsPowered) { DoFailedStart(); return; }
             tickCounter = 0;
             if (deviceState == enDeviceState.IDLE)
             {
                 
-               if (Capacitor >= requiredFlux)
+               if (IsPowered)
                 {
-                    ChangeCapacitor(-requiredFlux);
+               
                     deviceState = enDeviceState.RUNNING;
                 }
                 
@@ -95,13 +105,13 @@ namespace qptech.src
                 DoDeviceComplete();
                 return;
             }
-            if (Capacitor < requiredFlux)
+            if (!IsPowered)
             {
                 DoFailedProcessing();
                 return;
             }
             tickCounter++;
-            ChangeCapacitor(-requiredFlux);
+            
             
         }
         //can do some feedback if device can't run

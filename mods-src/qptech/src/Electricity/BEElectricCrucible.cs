@@ -260,8 +260,8 @@ namespace qptech.src
         {
             //TODO if set to produce, check if anything can be made
             //     - make and distribute it
-            if (Capacitor < fluxPerTick) { return; }
-            ChangeCapacitor(-fluxPerTick);
+            if (!IsPowered) { return; }
+            
             if (recipes == null) {
                 FindValidRecipes();
                 if (recipes == null)

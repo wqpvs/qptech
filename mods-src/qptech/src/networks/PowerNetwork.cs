@@ -29,7 +29,13 @@ namespace qptech.src.networks
             if (members == null) { members = new List<FlexNetworkMember>(); }
             return members;
         }
-
+        public bool JoinNetwork(FlexNetworkMember newmember)
+        {
+            if (newmember.ProductID != ProductID) { return false; }
+            if (newmember as PowerNetworkMember == null) { return false; }
+            if (!GetMembers().Contains(newmember)) { GetMembers().Add(newmember); }
+            return true;
+        }
         public bool MergeWith(Guid newnetworkID)
         {
             return true;
@@ -40,13 +46,13 @@ namespace qptech.src.networks
             //power would be lost, need to remove this from the master list, remove members etc
             foreach (FlexNetworkMember m in GetMembers())
             {
-                if (m != null) { m.NetworkRemove(); }
+                if (m != null&&m.NetworkID==NetworkID) { m.NetworkRemove(); }
                 
             }
             
         }
 
-        public void PowerTick()
+        public void OnTick(float dt)
         {
             poweruse = 0;
             powergen = 0;

@@ -9,11 +9,7 @@ namespace qptech.src
 
         protected override void DoDeviceProcessing()
         {
-            if (capacitor >= requiredFlux)
-            {
-                ChangeCapacitor(-requiredFlux);
-            }
-            else
+            if (!IsPowered)
             {
                 deviceState = enDeviceState.IDLE;
             }

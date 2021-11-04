@@ -73,9 +73,8 @@ namespace qptech.src
             network.NetworkResistance += OwnResistance;
             if (network.Speed < MinimumSpeed) { generated = 0; return; }
             generated = (int)(network.Speed * SpeedToFlux);
-            generator.ChangeCapacitor(generated);
-            
-            
+            generator.SetAvailablePower(true);
+            // **** THIS NEEDS TO BE REDONE!
             
         }
 

@@ -66,7 +66,7 @@ namespace qptech.src
         protected override void DoDeviceStart()
         {
             if (Api.World.Side is EnumAppSide.Client) { return; }
-            if (Capacitor < requiredFlux) { DoFailedStart(); }
+            if (!IsPowered) { DoFailedStart(); }
             tickCounter = 0;
             if (deviceState == enDeviceState.IDLE)
             {
@@ -95,8 +95,8 @@ namespace qptech.src
             {
                 return;
             }
-            if (Capacitor < requiredFlux) { DoCooling(); return; }
-            ChangeCapacitor(-requiredFlux);
+            if (!IsPowered) { DoCooling(); return; }
+            
             if (internalheat < maxHeat)
             {
                 internalheat += heatPerTick;

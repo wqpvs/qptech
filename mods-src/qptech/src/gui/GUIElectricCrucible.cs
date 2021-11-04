@@ -61,11 +61,11 @@ namespace qptech.src
             else
             {
                 string statcolor = " color=#55ff00";
-                if (mycrucible.Capacitor < mycrucible.FluxPerTick)
+                if (!mycrucible.IsPowered)
                 {
                     statcolor = " color=#ff3300";
                 }
-                statustext = "<font style=\"bold\" align =\"center\""+statcolor+">Charge at " + mycrucible.CapacitorPercentage * 100 + "%\nPower Usage:"+mycrucible.FluxPerTick+" Flux</font>";
+                statustext = "<font style=\"bold\" align =\"center\""+statcolor+">"+(mycrucible.IsPowered?"POWER OK":"NO POWER")+ "%\nPower Usage:"+mycrucible.FluxPerTick+" Flux</font>";
             }
             ElementBounds switchBounds = ElementBounds.Fixed(switchx, switchy, 64, 24);
             SingleComposer.AddDynamicCustomDraw(switchBounds, powerswitch, "powerswitch");

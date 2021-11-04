@@ -19,8 +19,13 @@ namespace qptech.src
         /*base class to handle electrical devices*/
         public virtual bool disableAnimations => true;
         public virtual int AvailablePower() {
-            if (!isOn) { return 0; }
+            if (!isOn||!generatorready) { return 0; }
             return genPower;
+        }
+        bool generatorready = true;
+        public void SetAvailablePower(bool onoff)
+        {
+            generatorready = onoff;
         }
         public virtual int RequestPower()
         {
@@ -40,10 +45,14 @@ namespace qptech.src
         {
             networkID = Guid.Empty;
             lastPower = 0;
+            MarkDirty(true);
         }
+        public virtual int LastPower => lastPower;
         public virtual void NetworkJoin(Guid newnetwork)
         {
-            networkID = newnetwork;
+            
+            bool ok=FlexNetworkManager.JoinNetworkWithID(newnetwork,this as FlexNetworkMember);
+            if (ok) { networkID = newnetwork; MarkDirty(true); }            
         }
         public virtual Guid GetNetworkID(BlockPos requestedby, string fortype)
         {
@@ -71,11 +80,9 @@ namespace qptech.src
         protected bool isOn = true;        //if it's not on it won't do any power processing
         protected List<BlockFacing> distributionFaces; //what faces are valid for distributing power
         protected List<BlockFacing> receptionFaces; //what faces are valid for receiving power
-        
-        bool distributiontick = false;
-        int lastPower = 0;
-        int genPower = 0;
-        int usePower = 0;
+        protected int lastPower = 0;
+        protected int genPower = 0;
+        protected int usePower = 0;
         public bool IsPowered { get { return IsOn && lastPower>0; } }
         public virtual bool IsOn { get { return isOn; } }
         protected bool notfirsttick = false;
@@ -92,7 +99,7 @@ namespace qptech.src
             
             if (Block.Attributes == null) { api.World.Logger.Error("ERROR BEE INITIALIZE HAS NO BLOCK"); return; }
             usePower = Block.Attributes["usePower"].AsInt(usePower);
-            genPower = Block.Attributes["genPower"].AsInt(genPower);
+            genPower = Block.Attributes["genFlux"].AsInt(genPower);
             RegisterGameTickListener(OnTick, 75);
             notfirsttick = false;
             if (api is ICoreClientAPI)
@@ -175,48 +182,66 @@ namespace qptech.src
         
         public virtual void FindConnections()
         {
-            ClearConnections(); 
-            FindInputConnections();
-            FindOutputConnections();
-
-        }
-        
-        
-        /*
-        protected virtual void ()
-        {
-            //BlockFacing probably has useful stuff to do this right
-
-            foreach (BlockFacing bf in distributionFaces)
+           
+            if (Api is ICoreClientAPI) { return; }
+            bool anychanges = false;
+            bool netok = false;
+            if (NetworkID != Guid.Empty)
             {
-                BlockPos bp = Pos.Copy().Offset(bf);
+                if (FlexNetworkManager.GetNetworkWithID(NetworkID) == null)
+                {
+                    networkID = Guid.Empty;
+                    lastPower = 0;
+                    anychanges = true;
+                }
+                else { netok = true; }
+            }
+            if (!netok)
+            {
+                networkID = FlexNetworkManager.RequestNewNetwork(ProductID);
+                NetworkJoin(networkID);
+                anychanges = true;
+            }
+            else
+            {
+                GrowPowerNetwork();
+                anychanges = true;
+            }
+            if (anychanges) { MarkDirty(true); }
+        }
+        protected virtual void GrowPowerNetwork()
+        {
+            foreach (BlockFacing f in receptionFaces)
+            {
+                BlockPos bp = Pos.Copy().Offset(f);
                 BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
-                var bee = checkblock as IElectricity;
-                if (bee == null) { continue; }
+                PowerNetworkMember pnw = checkblock as PowerNetworkMember;
+                if (pnw == null) { continue; }
+                if (pnw.NetworkID == NetworkID) { continue; }
+                if (pnw.NetworkID == Guid.Empty)
+                {
+                    pnw.NetworkJoin(NetworkID);
+                    continue;
+                }
+                FlexNetworkManager.MergeNetworks(NetworkID, pnw.NetworkID);
                 
-
             }
         }
-        */
-        //Allow devices to connection to each other
-
-        //API
-        
-        //API
         
 
-        //Tell a connection to remove itself
-        //API
-        
+
 
         public override void OnBlockBroken()
         {
             base.OnBlockBroken();
-
+            if (Api is ICoreServerAPI)
+            {
+                FlexNetworkManager.DeleteNetwork(NetworkID);
+            }
         }
         public virtual void OnTick(float par)
         {
-            if (!notfirsttick)
+            if (!notfirsttick&&Api is ICoreServerAPI)
             {
                 FindConnections();
                 notfirsttick = true;
@@ -289,9 +314,9 @@ namespace qptech.src
             base.GetBlockInfo(forPlayer, dsc);
             if (IsOn) { dsc.AppendLine("Turned On (right click with screwdriver or hammer to turn on/off)"); }
             else { dsc.AppendLine("Turned Off (right click with screwdriver or hammer to turn on/off)"); }
-
-            
-            
+            if (networkID == Guid.Empty) { dsc.AppendLine("not connected to any network"); }
+            else { dsc.AppendLine("connected to network:" + NetworkID.ToString()); }
+            dsc.AppendLine("Power Availabe " + LastPower.ToString());
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
 
@@ -328,8 +353,14 @@ namespace qptech.src
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
-
-
+            lastPower = tree.GetInt("lastPower");
+            string gid = "";
+            gid = tree.GetString("networkID");
+            if (gid != "")
+            {
+                networkID = Guid.Parse(gid);
+            }
+            else { networkID = Guid.Empty; }
             //if (type == null) type = defaultType; // No idea why. Somewhere something has no type. Probably some worldgen ruins
             
             isOn = tree.GetBool("isOn");
@@ -337,8 +368,14 @@ namespace qptech.src
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
-            
-            
+            tree.SetInt("lastPower", lastPower);
+            if (networkID != Guid.Empty) {
+                tree.SetString("networkID", networkID.ToString());
+            }
+            else
+            {
+                tree.SetString("networkID", "");
+            }
             tree.SetBool("isOn", isOn);
         }
        

@@ -29,41 +29,16 @@ namespace qptech.src.multiblock
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            maxFlux = Block.Attributes["maxFlux"].AsInt(maxFlux);
-            capacitance = Block.Attributes["capacitance"].AsInt(Capacitance);
+            
         }
         public void OnPartTick(float f)
         {
             //relying on the master to only call this if the MB is functional
-            if (IsOn&&IsPowered&&Capacitor>0&&master!=null&&master.Parts!=null)
-            {
-                IElectricity mastere = master as IElectricity;
-                int fluxused = 0;
-
-                //FIRST Offer Power to the master
-                if (mastere !=null)
-                {
-                    int used = mastere.ReceivePacketOffer(this, Math.Min(Capacitor, maxFlux));
-                    ChangeCapacitor(-used);
-                    fluxused += used;
-                }
-                //Offer power to each part
-                foreach (IFunctionalMultiblockPart b in master.Parts)
-                {
-                    int availablepower = Math.Min(Capacitor, MaxFlux - fluxused);
-                    if (availablepower < 1) { break; }
-                    IElectricity ie = b as IElectricity;
-                    if (ie == null) { continue; }
-                    int used = ie.ReceivePacketOffer(this, availablepower);
-                    ChangeCapacitor(-used);
-                    fluxused += used;
-                }
-            }   
+            
         }
         public override void FindConnections()
         {
-            ClearConnections();
-            FindInputConnections();
+            
             //TODO Add special output connections - maybe go thru the multiblock list and offer to add each member as connection
             //will have to add this functionality to IElectricty (direct power offer or something?)
         }

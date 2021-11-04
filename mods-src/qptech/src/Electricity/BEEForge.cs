@@ -158,7 +158,7 @@ namespace qptech.src
         protected override void DoDeviceStart()
         {
 
-            if (Capacitor >= requiredFlux && IsOn && contents.StackSize > 0)
+            if (IsPowered && IsOn && contents.StackSize > 0)
             {
 
                 tickCounter = 0;
@@ -177,13 +177,13 @@ namespace qptech.src
                 return;
             }*/
             if (contents == null) { DoDeviceComplete(); return; }
-            if (Capacitor < requiredFlux || contents.StackSize == 0)
+            if (!IsPowered || contents.StackSize == 0)
             {
                 DoDeviceComplete();
                 return;
             }
             //tickCounter++;
-            ChangeCapacitor(-requiredFlux);
+            
         }
 
         protected override void DoRunningParticles()

@@ -27,7 +27,7 @@ namespace qptech.src
 
         public virtual void EntityCollide(Entity entity)
         {
-            if (!isInsulated && Capacitor > 0 && IsPowered ) { entity.IsOnFire = true; }
+            //if (!isInsulated && IsPowered ) { entity.IsOnFire = true; }
         }
 
     }

@@ -64,7 +64,7 @@ namespace qptech.src
         }
         protected override void DoDeviceStart()
         {
-            if (Capacitor < requiredFlux) { DoFailedStart(); }
+            if (!IsPowered) { DoFailedStart(); }
             tickCounter = 0;
             if (IsPowered) { TryStart(); }
             Start();

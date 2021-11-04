@@ -78,9 +78,7 @@ namespace qptech.src
                 }
                 if (bee.IsOn)
                 {
-                    pcttracker = bee.CapacitorPercentage;
-                    if (pcttracker > 1) { pcttracker = 1; }
-                    if (pcttracker < 0) { pcttracker = 0; }
+                    pcttracker = 0;
                 }
             }
 

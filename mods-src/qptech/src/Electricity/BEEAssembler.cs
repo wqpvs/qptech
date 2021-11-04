@@ -145,12 +145,12 @@ namespace qptech.src
         {
             //TODO
             
-            if (Capacitor < requiredFlux) { return; }//not enough power
+            if (!IsPowered) { return; }//not enough power
             FetchMaterial();
             processstarted = Api.World.Calendar.TotalHours;      
             if (internalQuantity<inputQuantity) {  deviceState = enDeviceState.MATERIALHOLD; return; }//check for and extract the required RM
             //TODO - do we make sure there's an output container?
-            if (Capacitor >= requiredFlux)
+            if (IsPowered)
             {
                 internalQuantity = 0;
                 tickCounter = 0;
@@ -182,6 +182,7 @@ namespace qptech.src
             }
             else { DoFailedStart(); }
         }
+        
         protected override void DoDeviceProcessing()
         {
             
@@ -190,13 +191,13 @@ namespace qptech.src
                 DoDeviceComplete();
                 return;
             }
-            if (Capacitor < requiredFlux)
+            if (!IsPowered)
             {
                 DoFailedProcessing();
                 return;
             }
             tickCounter++;
-            ChangeCapacitor(-requiredFlux);
+            
 
         }
         GUIAssemblerStatus gas;

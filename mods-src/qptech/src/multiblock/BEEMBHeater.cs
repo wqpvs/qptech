@@ -34,13 +34,13 @@ namespace qptech.src.multiblock
 
         public void OnPartTick(float f)
         {
-            if (Capacitor < fluxPerTick || !IsOn || master == null) { return; }
+            if (!IsPowered || !IsOn || master == null) { return; }
             
             IMultiblockHeatUser masterheat = master as IMultiblockHeatUser;
             if (masterheat != null )
             {
                 masterheat.ReceiveHeat(heatPerTickPerLiter);
-                ChangeCapacitor(-fluxPerTick);
+                
             }
             //TODO IN FUTURE - check each part for heat usage?
         }
