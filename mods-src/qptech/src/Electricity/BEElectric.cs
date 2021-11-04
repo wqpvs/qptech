@@ -50,9 +50,12 @@ namespace qptech.src
         public virtual int LastPower => lastPower;
         public virtual void NetworkJoin(Guid newnetwork)
         {
+            if (newnetwork == Guid.Empty) { return; }
+            if (newnetwork == NetworkID) { return; }
             
             bool ok=FlexNetworkManager.JoinNetworkWithID(newnetwork,this as FlexNetworkMember);
-            if (ok) { networkID = newnetwork; MarkDirty(true); }            
+            if (ok) { networkID = newnetwork; }
+            MarkDirty(true);
         }
         public virtual Guid GetNetworkID(BlockPos requestedby, string fortype)
         {
@@ -186,32 +189,20 @@ namespace qptech.src
             if (Api is ICoreClientAPI) { return; }
             bool anychanges = false;
             bool netok = false;
-            if (NetworkID != Guid.Empty)
-            {
-                if (FlexNetworkManager.GetNetworkWithID(NetworkID) == null)
-                {
-                    networkID = Guid.Empty;
-                    lastPower = 0;
-                    anychanges = true;
-                }
-                else { netok = true; }
-            }
-            if (!netok)
+            
+            if (NetworkID == Guid.Empty || FlexNetworkManager.GetNetworkWithID(NetworkID)==null)
             {
                 networkID = FlexNetworkManager.RequestNewNetwork(ProductID);
                 NetworkJoin(networkID);
-                anychanges = true;
+                MarkDirty(true);
             }
-            else
-            {
-                GrowPowerNetwork();
-                anychanges = true;
-            }
-            if (anychanges) { MarkDirty(true); }
+            GrowPowerNetwork();
+            
+            
         }
         protected virtual void GrowPowerNetwork()
         {
-            foreach (BlockFacing f in receptionFaces)
+            foreach (BlockFacing f in BlockFacing.ALLFACES)//ALL FACES IS A TEMPORARY MEASURE!
             {
                 BlockPos bp = Pos.Copy().Offset(f);
                 BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
@@ -221,6 +212,7 @@ namespace qptech.src
                 if (pnw.NetworkID == Guid.Empty)
                 {
                     pnw.NetworkJoin(NetworkID);
+                    MarkDirty(true);
                     continue;
                 }
                 FlexNetworkManager.MergeNetworks(NetworkID, pnw.NetworkID);

@@ -44,9 +44,12 @@ namespace qptech.src.networks
         }
         public static bool JoinNetworkWithID(Guid networkid,FlexNetworkMember newmember)
         {
+            
             FlexNetwork n = GetNetworkWithID(networkid);
             if (n == null) { return false; }
-            return n.JoinNetwork(newmember);
+            bool result = n.JoinNetwork(newmember);
+            
+            return result;
         }
         public static Guid RequestNewNetwork(string networktype)
         {
@@ -79,6 +82,7 @@ namespace qptech.src.networks
             FlexNetwork n2 = GetNetworkWithID(id2);
             if (n2 == null) { return; }
             if (n1.ProductID != n2.ProductID) { return; }
+
             foreach (FlexNetworkMember n2member in n2.GetMembers())
             {
                 n2member.NetworkJoin(id1);
@@ -89,11 +93,27 @@ namespace qptech.src.networks
         }
         public void OnTick(float dt)
         {
+            if (!(api is ICoreServerAPI)) { return; }
+            if (manager != this) { 
+                if (1 == 1)
+                {
+
+                }
+            }
+            List<FlexNetwork> prune = new List<FlexNetwork>();
             foreach (FlexNetwork n in NetworkList)
             {
-                if (n != null) { 
+                if (n.GetMembers().Count == 0)
+                {
+                    prune.Add(n);
+                }
+                else if (n != null) { 
                     n.OnTick(dt);
                 }
+            }
+            foreach (FlexNetwork pn in prune)
+            {
+                NetworkList.Remove(pn);
             }
         }
     }

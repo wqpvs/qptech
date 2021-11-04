@@ -33,8 +33,8 @@ namespace qptech.src.networks
         {
             if (newmember.ProductID != ProductID) { return false; }
             if (newmember as PowerNetworkMember == null) { return false; }
-            if (!GetMembers().Contains(newmember)) { GetMembers().Add(newmember); }
-            return true;
+            if (!GetMembers().Contains(newmember)) { GetMembers().Add(newmember);return true; }
+            return false;
         }
         public bool MergeWith(Guid newnetworkID)
         {
