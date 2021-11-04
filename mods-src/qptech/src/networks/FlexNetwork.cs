@@ -13,8 +13,8 @@ namespace qptech.src.networks
         Guid NetworkID { get; }
         string ProductID { get; }
         void NetworkRemove();
-        void NetworkJoin(string newnetwork);
-        string GetNetworkID(BlockPos requestedby, string fortype);
+        void NetworkJoin(Guid newnetwork);
+        Guid GetNetworkID(BlockPos requestedby, string fortype);
 
     }
     interface FlexNetwork

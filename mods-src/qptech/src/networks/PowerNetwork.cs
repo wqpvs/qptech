@@ -11,8 +11,10 @@ namespace qptech.src.networks
     {
         Guid networkid;
         string productid="power";
-        int availablePower;
-        public int Power => availablePower;
+        int powergen;
+        int poweruse;
+        public int PowerGeneration => powergen;
+        public int PowerUse => poweruse;
         List<FlexNetworkMember> members;
         public Guid NetworkID => networkid;
         public string ProductID => productid;
@@ -36,13 +38,43 @@ namespace qptech.src.networks
         public void RemoveNetwork()
         {
             //power would be lost, need to remove this from the master list, remove members etc
+            foreach (FlexNetworkMember m in GetMembers())
+            {
+                if (m != null) { m.NetworkRemove(); }
+                
+            }
+            
         }
 
         public void PowerTick()
         {
-            //query all power producers and add up available power
-            //query all power users and supply power *if* there's enough power
-            //I guess at this point would also set electrical devices to be powered or not
+            poweruse = 0;
+            powergen = 0;
+            List<PowerNetworkMember> requestors = new List<PowerNetworkMember>();
+            foreach (FlexNetworkMember m in GetMembers())
+            {
+                PowerNetworkMember pm = m as PowerNetworkMember;
+                if (pm == null) { continue; }
+                powergen += pm.AvailablePower();
+                
+                poweruse += pm.RequestPower();
+                if (pm.RequestPower() > 0) { requestors.Add(pm); }
+            }
+            int powerusecounter = powergen;
+            foreach (PowerNetworkMember puser in requestors)
+            {
+                
+                powerusecounter-= puser.ReceivePowerOffer(powerusecounter);
+                powerusecounter = Math.Max(0, powerusecounter);
+            }
+
         }
+    }
+
+    interface PowerNetworkMember : FlexNetworkMember
+    {
+        int AvailablePower();
+        int RequestPower();
+        int ReceivePowerOffer(int amt);//if sent 0 or less device will no it is unpowered
     }
 }
