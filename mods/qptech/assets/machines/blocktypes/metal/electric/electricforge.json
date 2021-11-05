@@ -24,9 +24,8 @@
 		}
 	],
 	"attributes": {
-		"maxFlux": 4,
-		"capacitance": 4,
-		"requiredFlux": 1,
+		"genFlux": 0,
+		"useFlux": 8,
 		"maxHeat": 1000,
 		"degreesPerHour": 1500,
 		"maxItems": 2,

@@ -28,11 +28,10 @@
 	"attributesbytype": {
 
 		"*-lv-*": {
-			"maxFlux": 10,
+			"genFlux": 0,
+			"useFlux": 4,
 			"inputFace": "west",
 			"outputFace": "east",
-			"capacitance": 10,
-			"requiredFlux": 1,
 			"processingTicks": 5,
 			"machinename": "logsplitter",
 			"showFluxDisplay": true

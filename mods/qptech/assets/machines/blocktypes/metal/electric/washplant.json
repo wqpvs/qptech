@@ -28,9 +28,8 @@
 	"attributesbytype": {
 
 		"*-lv-*": {
-			"maxFlux": 12,
-			"capacitance": 12,
-			"requiredFlux": 4,
+			"genFlux": 0,
+			"useFlux": 8,
 			"processingTicks": 5,
 			"machinename": "washplant",
 			"outputFace": "down"

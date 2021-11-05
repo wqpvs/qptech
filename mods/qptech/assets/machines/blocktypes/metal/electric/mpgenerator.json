@@ -6,7 +6,8 @@
 
     "capacitance": 350,
     "speedToFlux": 4,
-
+    "genFlux": 16,
+    "useFlux": 4,
     "ownResistance": 0.075,
     "receptionFaces": null,
     "distributionFaces": [ "north" ]

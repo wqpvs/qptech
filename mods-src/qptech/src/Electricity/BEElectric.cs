@@ -314,6 +314,8 @@ namespace qptech.src
                 }
                 
             }
+            if (IsPowered) { dsc.AppendLine("POWERED"); }
+            dsc.AppendLine("This Device: uses:" + usePower + " gens:" + genPower + " netoffer:" + LastPower);
             
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }

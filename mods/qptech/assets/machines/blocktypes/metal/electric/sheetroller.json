@@ -28,9 +28,8 @@
 	"attributesByType": {
 
 		"*-mv-*": {
-			"maxFlux": 64,
-			"capacitance": 128,
-			"requiredFlux": 64,
+			"genFlux": 0,
+			"useFlux": 16,
 			"inputFace": "west",
 			"outputFace": "east",
 			"acceptFromFaces": [ "west" ],
@@ -42,8 +41,8 @@
 			"processingTime": 0.045,
 			"animationSpeed": 0.45,
 			"heatRequirement": 0,
-			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze","iron","meteoriciron","steel" ]
-			
+			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel" ]
+
 		}
 	},
 

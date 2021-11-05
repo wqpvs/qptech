@@ -28,9 +28,8 @@
 	"attributesbytype": {
 
 		"*-lv-*": {
-			"maxFlux": 4,
-			"capacitance": 4,
-			"requiredFlux": 2,
+			"genFlux": 0,
+			"useFlux": 10,
 			"processingTicks": 15,
 			"receptionFaces": [ "north" ]
 		}

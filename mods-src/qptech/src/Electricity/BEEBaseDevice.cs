@@ -8,6 +8,8 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
+using Vintagestory.API.Server;
+using Vintagestory.API.Client;
 
 namespace qptech.src
 {
@@ -16,7 +18,7 @@ namespace qptech.src
     public class BEEBaseDevice:BEElectric,IConduit
     {
         
-        public enum enDeviceState { IDLE, RUNNING, WARMUP, MATERIALHOLD, ERROR }
+        public enum enDeviceState { IDLE, RUNNING, WARMUP, MATERIALHOLD, ERROR, POWERHOLD }
        
         protected int requiredFlux = 1;     //how much TF to run
         protected int processingTicks = 30; //how many ticks for process to run
@@ -43,7 +45,9 @@ namespace qptech.src
         {
             base.OnTick(par);
             if (deviceState == enDeviceState.RUNNING) { DoRunningParticles(); }
+            if (Api is ICoreClientAPI) { return; }
             UsePower();
+            MarkDirty(true);
         }
         protected bool animInit = false;
         public override void Initialize(ICoreAPI api)
@@ -66,6 +70,15 @@ namespace qptech.src
         protected virtual void UsePower()
         {
             if (!isOn) { return; }
+            if (lastPower < usePower && DeviceState == enDeviceState.RUNNING)
+            {
+                deviceState = enDeviceState.POWERHOLD;
+
+            }
+            if (lastPower>=usePower && DeviceState == enDeviceState.POWERHOLD)
+            {
+                deviceState = enDeviceState.RUNNING;
+            }
             if (DeviceState == enDeviceState.IDLE||DeviceState==enDeviceState.MATERIALHOLD)
             {
                 DoDeviceStart();

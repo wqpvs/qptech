@@ -163,7 +163,7 @@ namespace qptech.src
 
                 tickCounter = 0;
                 deviceState = enDeviceState.RUNNING;
-                MarkDirty(true);
+                
                 //sounds/blocks/doorslide.ogg
                 DoDeviceProcessing();
             }
@@ -464,6 +464,15 @@ namespace qptech.src
         protected override void UsePower()
         {
             if (!isOn) { deviceState = enDeviceState.IDLE; return; }
+            if (lastPower < usePower && DeviceState == enDeviceState.RUNNING)
+            {
+                deviceState = enDeviceState.POWERHOLD;
+
+            }
+            if (lastPower >= usePower && DeviceState == enDeviceState.POWERHOLD)
+            {
+                deviceState = enDeviceState.RUNNING;
+            }
             if (DeviceState == enDeviceState.IDLE || DeviceState == enDeviceState.MATERIALHOLD)
             {
                 DoDeviceStart();

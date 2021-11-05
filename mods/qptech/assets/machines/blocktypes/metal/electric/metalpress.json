@@ -26,9 +26,8 @@
 	],
 	"attributesbytype": {
 		"*-lvsoftmetalplate-*": {
-			"maxFlux": 40,
-			"capacitance": 40,
-			"requiredFlux": 20,
+			"genFlux": 0,
+			"useFlux": 4,
 			"inputFace": "west",
 			"outputFace": "east",
 			"acceptFromFaces": [ "west" ],
@@ -43,10 +42,8 @@
 
 		},
 		"*-lvsoftscrew-*": {
-			"maxFlux": 40,
-
-			"capacitance": 40,
-			"requiredFlux": 40,
+			"genFlux": 0,
+			"useFlux": 4,
 			"receptionFaces": [ "north" ],
 			"inputFace": "west",
 			"outputFace": "east",
@@ -61,10 +58,8 @@
 
 		},
 		"*-lvsoftrod-*": {
-			"maxFlux": 40,
-
-			"capacitance": 40,
-			"requiredFlux": 40,
+			"genFlux": 0,
+			"useFlux": 4,
 			"receptionFaces": [ "north" ],
 			"inputFace": "west",
 			"outputFace": "east",
@@ -78,10 +73,8 @@
 			"materials": [ "brass", "copper" ]
 		},
 		"*-lvbender-*": {
-			"maxFlux": 40,
-
-			"capacitance": 40,
-			"requiredFlux": 40,
+			"genFlux": 0,
+			"useFlux": 4,
 			"receptionFaces": [ "north" ],
 			"inputFace": "west",
 			"outputFace": "east",
