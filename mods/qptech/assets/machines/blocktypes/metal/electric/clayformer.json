@@ -26,9 +26,9 @@
 	],
 	"attributesbytype": {
 		"*-bowl-*": {
-			"maxFlux": 4,
-			"capacitance": 4,
-			"requiredFlux": 2,
+			
+			"genFlux": 0,
+			"useFlux": 4,
 			"inputFace": "west",
 			"outputFace": "east",
 			"inputQuantity": 4,
@@ -40,9 +40,8 @@
 
 		},
 		"*-clayplanter-*": {
-			"maxFlux": 4,
-			"capacitance": 4,
-			"requiredFlux": 2,
+			"genFlux": 0,
+			"useFlux": 4,
 			"inputFace": "west",
 			"outputFace": "east",
 			"inputQuantity": 12,
@@ -53,9 +52,8 @@
 			"animationSpeed": 0.04
 		},
 		"*-flowerpot-*": {
-			"maxFlux": 4,
-			"capacitance": 4,
-			"requiredFlux": 2,
+			"genFlux": 0,
+			"useFlux": 4,
 			"inputFace": "west",
 			"outputFace": "east",
 			"inputQuantity": 10,
@@ -66,9 +64,8 @@
 			"animationSpeed": 0.04
 		},
 		"*-ingotmold-*": {
-			"maxFlux": 4,
-			"capacitance": 4,
-			"requiredFlux": 2,
+			"genFlux": 0,
+			"useFlux": 4,
 			"inputFace": "west",
 			"outputFace": "east",
 			"inputQuantity": 4,
@@ -79,9 +76,8 @@
 			"animationSpeed": 0.05
 		},
 		"*-blueshingle-*": {
-			"maxFlux": 4,
-			"capacitance": 4,
-			"requiredFlux": 2,
+			"genFlux": 0,
+			"useFlux": 4,
 			"inputFace": "west",
 			"outputFace": "east",
 			"inputQuantity": 1,
@@ -92,9 +88,8 @@
 			"animationSpeed": 0.05
 		},
 		"*-fireshingle-*": {
-			"maxFlux": 4,
-			"capacitance": 4,
-			"requiredFlux": 2,
+			"genFlux": 0,
+			"useFlux": 4,
 			"inputFace": "west",
 			"outputFace": "east",
 			"inputQuantity": 1,

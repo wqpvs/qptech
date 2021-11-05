@@ -34,7 +34,7 @@ namespace qptech.src
         }
         public virtual int ReceivePowerOffer(int amt)
         {
-            lastPower = Math.Min(amt,usePower);
+            lastPower = Math.Min(amt,usePower);MarkDirty(true);
             if (!isOn || lastPower < usePower) { lastPower = 0; return 0; }
             return usePower;
         }
@@ -51,7 +51,7 @@ namespace qptech.src
         public virtual void NetworkJoin(Guid newnetwork)
         {
             if (newnetwork == Guid.Empty) { return; }
-            if (newnetwork == NetworkID) { return; }
+            //if (newnetwork == NetworkID) { return; }
             
             bool ok=FlexNetworkManager.JoinNetworkWithID(newnetwork,this as FlexNetworkMember);
             if (ok) { networkID = newnetwork; }
@@ -101,7 +101,7 @@ namespace qptech.src
 
             
             if (Block.Attributes == null) { api.World.Logger.Error("ERROR BEE INITIALIZE HAS NO BLOCK"); return; }
-            usePower = Block.Attributes["usePower"].AsInt(usePower);
+            usePower = Block.Attributes["useFlux"].AsInt(usePower);
             genPower = Block.Attributes["genFlux"].AsInt(genPower);
             RegisterGameTickListener(OnTick, 75);
             notfirsttick = false;
@@ -145,6 +145,11 @@ namespace qptech.src
                 displayTextures = displayTextures.ToList<string>();
             }
             showFluxDisplay = Block.Attributes["showFluxDisplay"].AsBool(showFluxDisplay);
+            if (NetworkID != Guid.Empty&&(api is ICoreServerAPI))
+            {
+                FlexNetworkManager.RecreateNetwork(NetworkID,ProductID);
+                MarkDirty(true);
+            }
         }
 
         //attempt to load power distribution and reception faces from attributes, and orient them to this blocks face if necessary
@@ -190,12 +195,13 @@ namespace qptech.src
             bool anychanges = false;
             bool netok = false;
             
-            if (NetworkID == Guid.Empty || FlexNetworkManager.GetNetworkWithID(NetworkID)==null)
+            if (NetworkID == Guid.Empty)
             {
                 networkID = FlexNetworkManager.RequestNewNetwork(ProductID);
-                NetworkJoin(networkID);
-                MarkDirty(true);
+                
             }
+            NetworkJoin(networkID);
+           
             GrowPowerNetwork();
             
             
@@ -207,15 +213,8 @@ namespace qptech.src
                 BlockPos bp = Pos.Copy().Offset(f);
                 BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
                 PowerNetworkMember pnw = checkblock as PowerNetworkMember;
-                if (pnw == null) { continue; }
-                if (pnw.NetworkID == NetworkID) { continue; }
-                if (pnw.NetworkID == Guid.Empty)
-                {
-                    pnw.NetworkJoin(NetworkID);
-                    MarkDirty(true);
-                    continue;
-                }
-                FlexNetworkManager.MergeNetworks(NetworkID, pnw.NetworkID);
+                if (pnw == null||pnw.NetworkID==Guid.Empty||pnw.NetworkID==NetworkID) { continue; }
+                NetworkJoin(pnw.NetworkID);break;
                 
             }
         }
@@ -233,14 +232,12 @@ namespace qptech.src
         }
         public virtual void OnTick(float par)
         {
-            if (!notfirsttick&&Api is ICoreServerAPI)
+            if (Api is ICoreServerAPI)
             {
                 FindConnections();
                 notfirsttick = true;
             }
 
-            
-            justswitched = false;
             if (Api is ICoreClientAPI && showFluxDisplay)
             {
                 UpdateFluxDisplay();
@@ -307,8 +304,17 @@ namespace qptech.src
             if (IsOn) { dsc.AppendLine("Turned On (right click with screwdriver or hammer to turn on/off)"); }
             else { dsc.AppendLine("Turned Off (right click with screwdriver or hammer to turn on/off)"); }
             if (networkID == Guid.Empty) { dsc.AppendLine("not connected to any network"); }
-            else { dsc.AppendLine("connected to network:" + NetworkID.ToString()); }
-            dsc.AppendLine("Power Availabe " + LastPower.ToString());
+            else { 
+                dsc.AppendLine("connected to network:" + NetworkID.ToString());
+                PowerNetwork pn = FlexNetworkManager.GetNetworkWithID(NetworkID) as PowerNetwork;
+                if (pn == null) { dsc.AppendLine("INVALID POWER NETWORK"); }
+                else
+                {
+                    dsc.AppendLine("Gen:" + pn.NetworkStatus.generated + " Use:" + pn.NetworkStatus.consumed + " Nodes:" + pn.NetworkStatus.nodes);
+                }
+                
+            }
+            
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
 

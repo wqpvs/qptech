@@ -42,7 +42,7 @@ namespace qptech.src
         }
         public override int AvailablePower()
         {
-            if (!isOn&&!generating) { return 0; }
+            if (!generating||!IsOn) { return 0; }
             return genPower;
         }
         public override float DisplayPercentage => isOn&&trypower ? 1 : 0;

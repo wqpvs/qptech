@@ -29,11 +29,12 @@ namespace qptech.src
         public enDeviceState DeviceState { get { return deviceState; } }
         public override int RequestPower()
         {
-            if (!isOn||DeviceState!=enDeviceState.RUNNING) { return 0; }
+            if (!isOn) { return 0; }
             return usePower;
         }
         public override int ReceivePowerOffer(int amt)
         {
+            lastPower = Math.Min(amt, usePower); MarkDirty(true);
             if (DeviceState != enDeviceState.RUNNING) { return 0; }
             
             return base.ReceivePowerOffer(amt);

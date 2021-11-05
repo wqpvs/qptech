@@ -18,10 +18,12 @@ namespace qptech.src.networks
         List<FlexNetworkMember> members;
         public Guid NetworkID => networkid;
         public string ProductID => productid;
+        PowerNetworkInfo networkstatus;
+        public PowerNetworkInfo NetworkStatus=>networkstatus;
         public PowerNetwork(Guid g)
         {
             networkid = g;
-           
+            networkstatus = new PowerNetworkInfo();
             //SET NETWORK ID - need a master network manager
         }
         public List<FlexNetworkMember> GetMembers()
@@ -73,7 +75,9 @@ namespace qptech.src.networks
                 powerusecounter-= puser.ReceivePowerOffer(powerusecounter);
                 powerusecounter = Math.Max(0, powerusecounter);
             }
-
+            networkstatus.generated = powergen;
+            networkstatus.consumed = poweruse;
+            networkstatus.nodes = GetMembers().Count();
         }
     }
 
@@ -82,5 +86,24 @@ namespace qptech.src.networks
         int AvailablePower();
         int RequestPower();
         int ReceivePowerOffer(int amt);//if sent 0 or less device will no it is unpowered
+    }
+
+    public class PowerNetworkInfo
+    {
+        public int generated;
+        public int consumed;
+        public int nodes;
+        public PowerNetworkInfo()
+        {
+            generated = 0;
+            consumed = 0;
+            nodes = 0;
+        }
+        public PowerNetworkInfo(int generated,int consumed, int nodes)
+        {
+            this.generated = generated;
+            this.consumed = consumed;
+            this.nodes = nodes;
+        }
     }
 }

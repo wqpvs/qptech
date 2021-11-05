@@ -20,22 +20,16 @@
 
   "attributesByType": {
     "*": {
-      "capacitance": 50,
-      "maxFlux": 100,
+      "useFlux": 2,
+      "genFlux":  0,
       "receptionFaces": [
         "north",
         "south",
         "east",
         "west",
         "down"
-      ],
-      "distributionFaces": [
-        "north",
-        "south",
-        "east",
-        "west",
-        "down"
       ]
+
     }
   },
   "shapebytype": {
