@@ -13,6 +13,7 @@ namespace qptech.src.networks
         string productid="power";
         int powergen;
         int poweruse;
+        
         public int PowerGeneration => powergen;
         public int PowerUse => poweruse;
         List<FlexNetworkMember> members;

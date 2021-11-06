@@ -25,7 +25,9 @@
 	],
 	"attributesbytype": {
 		"*-lv-*": {
-			"capacitance": 2500,
+			
+			"fluxStorage": 10000,
+			
 			"receptionFaces": [ "south" ],
 			"distributionFaces": [ "north", "east", "west", "down" ],
 			"showFluxDisplay": true,

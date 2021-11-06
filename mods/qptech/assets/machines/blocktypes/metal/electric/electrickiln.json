@@ -26,11 +26,10 @@
 	],
 	"attributesbytype": {
 		"*-lv-*": {
-			"maxFlux": 8,
-			"capacitance": 8,
-			"requiredFlux": 4,
-			"receptionFaces": [ "north" ],
-			
+			"genFlux": 0,
+			"useFlux": 8,
+			"receptionFaces": [ "north" ]
+
 		}
 
 	},

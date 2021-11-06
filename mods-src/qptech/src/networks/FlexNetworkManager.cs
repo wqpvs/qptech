@@ -19,6 +19,7 @@ namespace qptech.src.networks
         }
         static List<FlexNetwork> networklist;
         public static FlexNetworkManager manager;
+        
         public override void Start(ICoreAPI api)
         {
             if (!(api is ICoreServerAPI)) { return; }
@@ -26,27 +27,41 @@ namespace qptech.src.networks
             ICoreServerAPI capi = api as ICoreServerAPI;
             
             api.Event.RegisterGameTickListener(OnTick, 75);
-            manager = this;
-            
+            if (manager == null) { manager = this; }
+            else
+            {
+                if (1 == 1) { }
+            }
+        }
+        public static void LeaveNetwork(Guid networkid,FlexNetworkMember member)
+        {
+            FlexNetwork fn = GetNetworkWithID(networkid);
+            if (fn == null) { return; }
+            fn.GetMembers().Remove(member);
         }
         public static FlexNetwork GetNetworkWithID(Guid networkid)
         {
             if (networkid == Guid.Empty) { return null; }
             if (NetworkList == null || NetworkList.Count == 0) { return null; }
-            FlexNetwork fn = null;
-            foreach (FlexNetwork f in NetworkList)
+
+            FlexNetwork[] fn=NetworkList.ToArray();
+            
+            foreach (FlexNetwork f in fn)
             {
                 if (f == null) { continue; }
                 if (f.NetworkID == networkid) { return f; }
             }
-
+            
             return null;
         }
         public static bool JoinNetworkWithID(Guid networkid,FlexNetworkMember newmember)
         {
+            
             if (networkid == Guid.Empty) { return false; }
             FlexNetwork n = GetNetworkWithID(networkid);
+            
             if (n == null) { RecreateNetwork(networkid,newmember.ProductID); n = GetNetworkWithID(networkid); }
+            
             bool result = n.JoinNetwork(newmember);
             
             return result;
@@ -61,8 +76,9 @@ namespace qptech.src.networks
             }
             return g;
         }
-        public static void RecreateNetwork(Guid existingid,string networktype)
+        public static void RecreateNetwork(Guid existingid, string networktype)
         {
+            
             if (existingid == Guid.Empty) { return; }
             if (GetNetworkWithID(existingid) != null) { return; }
             if (networktype == "power")
@@ -76,9 +92,10 @@ namespace qptech.src.networks
         {
             FlexNetwork n = GetNetworkWithID(g);
             if (n == null) { return false; }
+            
             NetworkList.Remove(n);
             n.RemoveNetwork();
-
+            
             return true;
         }
         public static void LoadNetworks()
@@ -112,6 +129,8 @@ namespace qptech.src.networks
                 }
             }
             List<FlexNetwork> prune = new List<FlexNetwork>();
+
+            
             foreach (FlexNetwork n in NetworkList)
             {
                 if (n.GetMembers().Count == 0)
@@ -122,10 +141,12 @@ namespace qptech.src.networks
                     n.OnTick(dt);
                 }
             }
+            
             foreach (FlexNetwork pn in prune)
             {
                 NetworkList.Remove(pn);
             }
+            
         }
     }
 }

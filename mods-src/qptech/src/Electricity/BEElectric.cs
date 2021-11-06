@@ -29,6 +29,7 @@ namespace qptech.src
         }
         public virtual int RequestPower()
         {
+            powerpulse = true;
             if (!isOn) { return 0; }
             return usePower;
         }
@@ -52,9 +53,12 @@ namespace qptech.src
         {
             if (newnetwork == Guid.Empty) { return; }
             //if (newnetwork == NetworkID) { return; }
-            
+            FlexNetworkManager.LeaveNetwork(NetworkID, this);
+            lastPower = 0;
             bool ok=FlexNetworkManager.JoinNetworkWithID(newnetwork,this as FlexNetworkMember);
-            if (ok) { networkID = newnetwork; }
+            if (ok) { 
+                networkID = newnetwork;
+            }
             MarkDirty(true);
         }
         public virtual Guid GetNetworkID(BlockPos requestedby, string fortype)
@@ -90,7 +94,7 @@ namespace qptech.src
         public virtual bool IsOn { get { return isOn; } }
         protected bool notfirsttick = false;
         protected bool justswitched = false; //create a delay after the player switches power
-        
+        bool powerpulse = false;
         public BlockEntity EBlock { get { return this as BlockEntity; } }
         public override void Initialize(ICoreAPI api)
         {
@@ -192,8 +196,6 @@ namespace qptech.src
         {
            
             if (Api is ICoreClientAPI) { return; }
-            bool anychanges = false;
-            bool netok = false;
             
             if (NetworkID == Guid.Empty)
             {
@@ -201,7 +203,7 @@ namespace qptech.src
                 
             }
             NetworkJoin(networkID);
-           
+            
             GrowPowerNetwork();
             
             
