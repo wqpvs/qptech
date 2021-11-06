@@ -49,7 +49,12 @@ namespace qptech.src
         public virtual int ReceivePowerOffer(int amt)
         {
             lastPower = Math.Min(amt,usePower);MarkDirty(true);
-            if (!isOn || lastPower < usePower) { lastPower = 0; return 0; }
+            if (lastPower == 0)
+            {
+                //check
+                if (1 == 1) { }
+            }
+            if (!isOn || lastPower < usePower) { return 0; }
             return usePower;
         }
         public virtual int StorePower(int amt)
@@ -67,7 +72,7 @@ namespace qptech.src
         public virtual void NetworkRemove()
         {
             networkID = Guid.Empty;
-            lastPower = 0;
+            //lastPower = 0;
             MarkDirty(true);
         }
         public virtual int LastPower => lastPower;
@@ -76,7 +81,7 @@ namespace qptech.src
             if (newnetwork == Guid.Empty) { return; }
             //if (newnetwork == NetworkID) { return; }
             FlexNetworkManager.LeaveNetwork(NetworkID, this);
-            lastPower = 0;
+            //lastPower = 0;
             bool ok=FlexNetworkManager.JoinNetworkWithID(newnetwork,this as FlexNetworkMember);
             if (ok) { 
                 networkID = newnetwork;
@@ -114,7 +119,7 @@ namespace qptech.src
         protected int usePower = 0;
         protected int fluxStorage = 0;
         protected int storedFlux = 0;
-        public bool IsPowered { get { return IsOn && lastPower>0; } }
+        public virtual bool IsPowered { get { return IsOn && lastPower>0; } }
         public virtual bool IsOn { get { return isOn; } }
         protected bool notfirsttick = false;
         protected bool justswitched = false; //create a delay after the player switches power

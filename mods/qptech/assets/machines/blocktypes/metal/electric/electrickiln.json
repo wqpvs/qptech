@@ -27,7 +27,7 @@
 	"attributesbytype": {
 		"*-lv-*": {
 			"genFlux": 0,
-			"useFlux": 8,
+			"useFlux": 16,
 			"receptionFaces": [ "north" ]
 
 		}

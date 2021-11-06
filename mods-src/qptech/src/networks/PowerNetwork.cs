@@ -81,7 +81,7 @@ namespace qptech.src.networks
             foreach (PowerNetworkMember puser in requestors)
             {
                 int poweroffer = powerusecounter + powerstored-batteryuse;
-                if (poweroffer <= 0) { break; }
+                if (poweroffer <= 0) { poweroffer=0; }
                 int powerused= puser.ReceivePowerOffer(poweroffer);
                 powerusecounter -= powerused;
             }

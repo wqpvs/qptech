@@ -47,7 +47,7 @@ namespace qptech.src
             if (deviceState == enDeviceState.RUNNING) { DoRunningParticles(); }
             if (Api is ICoreClientAPI) { return; }
             UsePower();
-            MarkDirty(true);
+            
         }
         protected bool animInit = false;
         public override void Initialize(ICoreAPI api)
@@ -70,26 +70,28 @@ namespace qptech.src
         protected virtual void UsePower()
         {
             if (!isOn) { return; }
-            if (lastPower < usePower && DeviceState == enDeviceState.RUNNING)
+            if (!IsPowered && DeviceState == enDeviceState.RUNNING)
             {
                 deviceState = enDeviceState.POWERHOLD;
-
+                MarkDirty();
             }
-            if (lastPower>=usePower && DeviceState == enDeviceState.POWERHOLD)
+            if (IsPowered && DeviceState == enDeviceState.POWERHOLD)
             {
                 deviceState = enDeviceState.RUNNING;
+                MarkDirty();
             }
             if (DeviceState == enDeviceState.IDLE||DeviceState==enDeviceState.MATERIALHOLD)
             {
                 DoDeviceStart();
                 
             }
-            else if (deviceState == enDeviceState.WARMUP)
+            /*else if (deviceState == enDeviceState.WARMUP)
             {
                 tickCounter++;
                 if (tickCounter == 10) { tickCounter = 0;deviceState = enDeviceState.IDLE; }
-            }
-            else { DoDeviceProcessing(); }
+            }*/
+            else { if (DeviceState == enDeviceState.RUNNING) { DoDeviceProcessing(); } }
+            if (DeviceState == enDeviceState.WARMUP) { deviceState = enDeviceState.IDLE; }
         }
 
         protected virtual void DoDeviceStart()

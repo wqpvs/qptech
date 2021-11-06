@@ -134,6 +134,9 @@ namespace qptech.src
         }
         protected override void DoDeviceComplete()
         {
+            if (deviceState != enDeviceState.RUNNING) { 
+                return;
+            }
             deviceState = enDeviceState.IDLE;
             ItemStack outputStack;
             
@@ -263,7 +266,6 @@ namespace qptech.src
 
                 }
             }
-
             }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
