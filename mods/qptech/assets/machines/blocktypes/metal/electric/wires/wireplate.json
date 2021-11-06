@@ -20,7 +20,7 @@
 
   "attributesByType": {
     "*": {
-      "useFlux": 2,
+      "useFlux": 0,
       "genFlux":  0,
       "receptionFaces": [
         "north",

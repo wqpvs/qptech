@@ -13,7 +13,7 @@ namespace qptech.src.networks
         string productid="power";
         int powergen;
         int poweruse;
-        
+        int powerstored;
         public int PowerGeneration => powergen;
         public int PowerUse => poweruse;
         List<FlexNetworkMember> members;
@@ -59,7 +59,10 @@ namespace qptech.src.networks
         {
             poweruse = 0;
             powergen = 0;
+            powerstored = 0;
             List<PowerNetworkMember> requestors = new List<PowerNetworkMember>();
+            List<PowerNetworkMember> batteries = new List<PowerNetworkMember>();
+            //EVALUATE POWER NETWORK
             foreach (FlexNetworkMember m in GetMembers())
             {
                 PowerNetworkMember pm = m as PowerNetworkMember;
@@ -68,23 +71,52 @@ namespace qptech.src.networks
                 
                 poweruse += pm.RequestPower();
                 if (pm.RequestPower() > 0) { requestors.Add(pm); }
+
+                
+                if (pm.IsBattery) { batteries.Add(pm); powerstored += pm.AvailableStorage(); }
             }
             int powerusecounter = powergen;
+            int batteryuse = 0;           
+            
             foreach (PowerNetworkMember puser in requestors)
             {
-                
-                powerusecounter-= puser.ReceivePowerOffer(powerusecounter);
-                powerusecounter = Math.Max(0, powerusecounter);
+                int poweroffer = powerusecounter + powerstored-batteryuse;
+                if (poweroffer <= 0) { break; }
+                int powerused= puser.ReceivePowerOffer(poweroffer);
+                powerusecounter -= powerused;
             }
+            foreach (PowerNetworkMember pnm in batteries)
+            {
+                if (powerusecounter == 0) { break; }
+                else if (powerusecounter > 0)
+                {
+                    int stored = pnm.StorePower(powerusecounter);
+                    powerusecounter -= stored;
+                    if (powerusecounter < 0) { powerusecounter = 0; }
+                }                    
+                else
+                {
+                    int used = pnm.DrawStoredPower(-powerusecounter);
+                    powerusecounter += used;
+                    if (powerusecounter > 0) { powerusecounter = 0; }
+                }
+            }
+            
+            
             networkstatus.generated = powergen;
             networkstatus.consumed = poweruse;
+            networkstatus.stored = powerstored;
             networkstatus.nodes = GetMembers().Count();
         }
     }
 
     interface PowerNetworkMember : FlexNetworkMember
     {
+        bool IsBattery { get; }
         int AvailablePower();
+        int AvailableStorage();
+        int DrawStoredPower(int amt);
+        int StorePower(int amt);
         int RequestPower();
         int ReceivePowerOffer(int amt);//if sent 0 or less device will no it is unpowered
     }
@@ -94,17 +126,20 @@ namespace qptech.src.networks
         public int generated;
         public int consumed;
         public int nodes;
+        public int stored;
         public PowerNetworkInfo()
         {
             generated = 0;
             consumed = 0;
             nodes = 0;
+            stored = 0;
         }
-        public PowerNetworkInfo(int generated,int consumed, int nodes)
+        public PowerNetworkInfo(int generated,int consumed, int nodes, int stored)
         {
             this.generated = generated;
             this.consumed = consumed;
             this.nodes = nodes;
+            this.stored = stored;
         }
     }
 }

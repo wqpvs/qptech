@@ -27,6 +27,19 @@ namespace qptech.src
         {
             generatorready = onoff;
         }
+        public virtual bool IsBattery => IsOn&&fluxStorage > 0;
+        public virtual int AvailableStorage() {
+            if (!isOn || !IsBattery) { return 0; }
+            return storedFlux;
+        }
+        public virtual int DrawStoredPower(int amt) {
+            if (!isOn || !IsBattery) { return 0; }
+            int usepower = Math.Min(amt, storedFlux);
+            if (usepower < 0) { usepower = 0; return 0; }
+            storedFlux -= usepower;
+            MarkDirty();
+            return usepower;
+        }
         public virtual int RequestPower()
         {
             powerpulse = true;
@@ -38,6 +51,15 @@ namespace qptech.src
             lastPower = Math.Min(amt,usePower);MarkDirty(true);
             if (!isOn || lastPower < usePower) { lastPower = 0; return 0; }
             return usePower;
+        }
+        public virtual int StorePower(int amt)
+        {
+            if (!isOn || !IsBattery) { return 0; }
+            int storeamt = Math.Min(amt, fluxStorage - storedFlux);
+            if (storeamt < 0) { storeamt = 0; }
+            storedFlux += storeamt;
+            MarkDirty();
+            return storeamt;
         }
         Guid networkID = Guid.Empty;
         public Guid NetworkID => networkID;
@@ -90,6 +112,8 @@ namespace qptech.src
         protected int lastPower = 0;
         protected int genPower = 0;
         protected int usePower = 0;
+        protected int fluxStorage = 0;
+        protected int storedFlux = 0;
         public bool IsPowered { get { return IsOn && lastPower>0; } }
         public virtual bool IsOn { get { return isOn; } }
         protected bool notfirsttick = false;
@@ -107,6 +131,7 @@ namespace qptech.src
             if (Block.Attributes == null) { api.World.Logger.Error("ERROR BEE INITIALIZE HAS NO BLOCK"); return; }
             usePower = Block.Attributes["useFlux"].AsInt(usePower);
             genPower = Block.Attributes["genFlux"].AsInt(genPower);
+            fluxStorage = Block.Attributes["fluxStorage"].AsInt(fluxStorage);
             RegisterGameTickListener(OnTick, 75);
             notfirsttick = false;
             if (api is ICoreClientAPI)
@@ -312,13 +337,16 @@ namespace qptech.src
                 if (pn == null) { dsc.AppendLine("INVALID POWER NETWORK"); }
                 else
                 {
-                    dsc.AppendLine("Gen:" + pn.NetworkStatus.generated + " Use:" + pn.NetworkStatus.consumed + " Nodes:" + pn.NetworkStatus.nodes);
+                    dsc.AppendLine("Gen:" + pn.NetworkStatus.generated + " Use:" + pn.NetworkStatus.consumed + " Nodes:" + pn.NetworkStatus.nodes+" Stored:"+pn.NetworkStatus.stored);
                 }
                 
             }
             if (IsPowered) { dsc.AppendLine("POWERED"); }
             dsc.AppendLine("This Device: uses:" + usePower + " gens:" + genPower + " netoffer:" + LastPower);
-            
+            if (IsBattery)
+            {
+                dsc.AppendLine("Storing " + storedFlux + " out of " + fluxStorage);
+            }
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
 
@@ -356,6 +384,7 @@ namespace qptech.src
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
             lastPower = tree.GetInt("lastPower");
+            storedFlux = tree.GetInt("storedFlux");
             string gid = "";
             gid = tree.GetString("networkID");
             if (gid != "")
@@ -371,6 +400,7 @@ namespace qptech.src
         {
             base.ToTreeAttributes(tree);
             tree.SetInt("lastPower", lastPower);
+            tree.SetInt("storedFlux", storedFlux);
             if (networkID != Guid.Empty) {
                 tree.SetString("networkID", networkID.ToString());
             }

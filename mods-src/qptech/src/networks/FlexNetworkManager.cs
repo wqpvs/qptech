@@ -28,10 +28,7 @@ namespace qptech.src.networks
             
             api.Event.RegisterGameTickListener(OnTick, 75);
             if (manager == null) { manager = this; }
-            else
-            {
-                if (1 == 1) { }
-            }
+
         }
         public static void LeaveNetwork(Guid networkid,FlexNetworkMember member)
         {
@@ -122,12 +119,7 @@ namespace qptech.src.networks
         public void OnTick(float dt)
         {
             if (!(api is ICoreServerAPI)) { return; }
-            if (manager != this) { 
-                if (1 == 1)
-                {
 
-                }
-            }
             List<FlexNetwork> prune = new List<FlexNetwork>();
 
             

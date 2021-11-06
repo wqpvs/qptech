@@ -37,9 +37,9 @@ namespace qptech.src
         public override int ReceivePowerOffer(int amt)
         {
             lastPower = Math.Min(amt, usePower); MarkDirty(true);
-            if (DeviceState != enDeviceState.RUNNING) { return 0; }
+            if (!IsOn||DeviceState != enDeviceState.RUNNING) { return 0; }
             
-            return base.ReceivePowerOffer(amt);
+            return lastPower;
         }
         public override void OnTick(float par)
         {
