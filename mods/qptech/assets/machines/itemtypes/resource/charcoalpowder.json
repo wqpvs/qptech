@@ -1,0 +1,16 @@
+{
+  "code": "charcoalpowder",
+  "variantgroups": [
+    {
+      "code": "material",
+      
+    }
+  ],
+  "texture": { "base": "game:item/resource/crushed/blastingpowder" },
+  "creativeinventory": {
+    
+    "qptech": [ "" ]
+  },
+  "maxstacksize": 64,
+  "materialDensity": 900
+}

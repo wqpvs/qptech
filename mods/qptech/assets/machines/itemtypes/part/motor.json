@@ -1,7 +1,8 @@
 {
 	code: "motor",
 	creativeinventory: {
-		"general": ["*"]
+		"general": [ "*" ],
+		"qptech": [ "*" ]
 	},
 	variantgroups: [
 		{ code: "level", states: ["primitive" ] },

@@ -1,7 +1,8 @@
 {
 	code: "rod",
 	creativeinventory: {
-		"general": ["*"]
+		"general": [ "*" ],
+		"qptech": [ "*" ]
 	},
 	drawtype: "json",
 	shape: { base: "item/part/rod" },

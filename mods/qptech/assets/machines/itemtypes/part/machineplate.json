@@ -1,7 +1,8 @@
 {
 	code: "machineplate",
 	creativeinventory: {
-		"general": ["*"]
+		"general": [ "*" ],
+		"qptech": [ "*" ]
 	},
 	drawtype: "json",
 	shape: { base: "item/part/machineplate" },

@@ -31,6 +31,7 @@ namespace qptech.src
         protected string ingredient = "clay";
         protected string recipeSuffix = "";
         protected string ingredient_subtype = "";
+        protected string ingredientSuffix = "";
         protected int inputQuantity = 4;
         protected int internalQuantity = 0; //will store ingredients virtually
         protected float animationSpeed = 0.5f;
@@ -38,12 +39,12 @@ namespace qptech.src
         protected float heatRequirement = 0;
         string readablerecipe="";
        
-        public string Making => outputQuantity.ToString() + "x " + recipe + ingredient_subtype;
+        public string Making => outputQuantity.ToString() + "x " + recipe + ingredient_subtype+ingredientSuffix;
         public string RM
         {
             get
             {
-                string outstring = inputQuantity.ToString() + "x " + ingredient + ingredient_subtype;
+                string outstring = inputQuantity.ToString() + "x " + ingredient + ingredient_subtype+ingredientSuffix;
                 if (heatRequirement > 0) { outstring += " at " + heatRequirement.ToString() + "°C"; }
                 return outstring;
             }
@@ -104,6 +105,7 @@ namespace qptech.src
                 outputQuantity = Block.Attributes["outputQuantity"].AsInt(outputQuantity);
                 recipe = Block.Attributes["recipe"].AsString(recipe);
                 ingredient = Block.Attributes["ingredient"].AsString(ingredient);
+                ingredientSuffix = Block.Attributes["ingredientSuffix"].AsString(ingredientSuffix);
                 rmInputFace = OrientFace(Block.Code.ToString(), rmInputFace);
                 outputFace = OrientFace(Block.Code.ToString(), outputFace);
                 processingTime = Block.Attributes["processingTime"].AsDouble(processingTime);
@@ -313,8 +315,21 @@ namespace qptech.src
             {
                 string fcp = checkitem.FirstCodePart().ToString();
                 string lcp = checkitem.LastCodePart().ToString();
+                
                 //no materials list so we don't need check for subtypes
                 if (checkitem.Code.ToString() == ingredient) { match = true; }
+                else if (ingredientSuffix != "")
+                {
+                    foreach (string s in materials)
+                    {
+                        string varcode = ingredient + s + ingredientSuffix;
+                        if (checkitem.Code.ToShortString() == varcode) {
+                            match = true;
+                            ingredient_subtype = s;
+                            break;
+                        }
+                    }
+                }
                 else if (checkitem.FirstCodePart() == ingredient && (materials == null || materials.Length == 0)) { match = true; }
                 else if (checkitem.FirstCodePart().ToString() == ingredient && materials.Contains(checkitem.LastCodePart().ToString()))
                 {
@@ -327,6 +342,21 @@ namespace qptech.src
             else if (checkiblock != null)
             {
                 if (checkiblock.Code.ToString() == ingredient) { match = true; }
+                else if (ingredientSuffix != "")
+                {
+                    foreach (string s in materials)
+                    {
+                        string varcode = ingredient +"-"+ s +"-"+ ingredientSuffix;
+                        AssetLocation ial = new AssetLocation(varcode);
+                        Block ibl = Api.World.BlockAccessor.GetBlock(ial);
+                        if (checkiblock==ibl)
+                        {
+                            match = true;
+                            ingredient_subtype = s;
+                            break;
+                        }
+                    }
+                }
                 else if (checkiblock.FirstCodePart().ToString() == ingredient && (materials == null || materials.Length == 0)) { match = true; }
                 else if (checkiblock.FirstCodePart().ToString() == ingredient && materials.Contains(checkiblock.LastCodePart().ToString()))
                 {

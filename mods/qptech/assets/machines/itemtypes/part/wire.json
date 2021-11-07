@@ -1,11 +1,12 @@
 {
 	code: "wire",
 	creativeinventory: {
-		"general": ["*"]
+		"general": [ "*" ],
+		"qptech": [ "*" ]
 	},
 	drawtype: "json",
 	shape: { base: "item/part/wire" },
-	maxstacksize: 64,
+	maxstacksize: 128,
 	
 	variantgroups: [
 		{ code: "material", states: ["copper","tin"] },

@@ -1,7 +1,8 @@
 {
 	code: "drilledplate",
 	creativeinventory: {
-		"general": ["*"]
+		"general": [ "*" ],
+		"qptech": [ "*" ]
 	},
 	drawtype: "json",
 	shape: { base: "item/part/drilledplate" },

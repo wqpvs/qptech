@@ -15,7 +15,8 @@
   "creativeinventory": {
     "general": [ "*" ],
     "items": [ "*" ],
-    "tools": [ "*" ]
+    "tools": [ "*" ],
+    "qptech": [ "*" ]
   },
 
   "guiTransform": {

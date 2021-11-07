@@ -1,0 +1,91 @@
+{
+	"code": "cable",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"drawtype": "json",
+	"shape": { "base": "item/part/cable" },
+	"maxstacksize": 64,
+
+	"variantgroups": [
+		{
+			"code": "material",
+			"states": [ "copper" ]
+		}
+	],
+
+	"guiTransform": {
+		"translation": {
+			"x": 4,
+			"y": 8,
+			"z": 0
+		},
+		"rotation": {
+			"x": -57,
+			"y": 151,
+			"z": -53
+		},
+		"origin": {
+			"x": 0.44,
+			"y": 0,
+			"z": 0.38
+		},
+		"scale": 1.52
+	},
+	"fpHandTransform": {
+		"translation": {
+			"x": -0.1,
+			"y": 0.2,
+			"z": 0
+		},
+		"rotation": {
+			"x": 90,
+			"y": 99,
+			"z": -42
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 2.15
+	},
+	"groundTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 4.31
+	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -0.78,
+			"y": -0.09,
+			"z": -0.67
+		},
+		"rotation": {
+			"x": 9,
+			"y": -1,
+			"z": -16
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 0.76
+	}
+
+}
