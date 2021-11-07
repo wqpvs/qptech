@@ -145,5 +145,11 @@
 	"block-fluidpump": "Fluid Pump (Vertical)",
 	"blockdesc-fluidpump": "Pumps fluid up (Power not currently required)",
 	"block-fluidhorpump-*": "Fluid Pump (Horizontal)",
-	"blockdesc-fluidhorpump-*": "Pumps fluid in a single direction. (Power not currently required)"
+	"blockdesc-fluidhorpump-*": "Pumps fluid in a single direction. (Power not currently required)",
+	"liquidrubberportion": "Liquid Rubber",
+	"item-cable-copper": "Copper Cable",
+	"block-wiremill-*": "Wire Mill",
+	"blockdesc-wiremill-*": "At last, efficient and easy wiremaking!",
+	"incontainer-item-liquidrubberportion": "Liquid Rubber"
+  
 }

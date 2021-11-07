@@ -1,12 +1,20 @@
 {
-	ingredientPattern: "R",
+	ingredientPattern: "RS",
 	ingredients: {
-		"R": { type: "item", code: "game:resin", quantity: 1 },
-		
-		
-		
+		"R": {
+			"type": "item",
+			"code": "game:resin",
+			"quantity": 1
+		},
+		"S": {
+			"type": "item",
+			"code": "game:powderedsulfur",
+			"quantity": 1
+		}
+
+
 	},
-	width: 1,
+	width: 2,
 	height: 1,
 	output: {
 		"type": "item",

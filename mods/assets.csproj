@@ -106,6 +106,7 @@
     <None Include="qptech\assets\machines\itemtypes\tool\screwdriver.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\lang\en.json" />
+    <None Include="qptech\assets\machines\recipes\barrel\cable.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\slidingdoor.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\blocklantern.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\cabinet-lower-door.json" />
