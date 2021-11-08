@@ -44,11 +44,11 @@ namespace qptech.src
             string fcp = byPlayer.Entity.RightHandItemSlot.Itemstack.Item.CodeWithoutParts(1);
             if ((fcp.Contains("screwdriver")&&!fcp.Contains("head"))||fcp.Contains("woodenclub"))
             {
-                if (world.ElapsedMilliseconds > nextpowertoggleat)
-                {
+               // if (world.ElapsedMilliseconds > nextpowertoggleat)
+               // {
                     bee.TogglePower();
-                    nextpowertoggleat = world.ElapsedMilliseconds + powertogglecooldown;
-                }
+                   // nextpowertoggleat = world.ElapsedMilliseconds + powertogglecooldown;
+               // }
                 return true;
             }
             return base.OnBlockInteractStart(world, byPlayer, blockSel);

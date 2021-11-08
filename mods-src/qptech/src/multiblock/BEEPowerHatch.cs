@@ -25,7 +25,15 @@ namespace qptech.src.multiblock
         /// </summary>
         IFunctionalMultiblockMaster master;
         public IFunctionalMultiblockMaster Master { get { return master; } set { master = value; } }
-
+        
+        public override int ReceivePowerOffer(int amt)
+        {
+            return base.ReceivePowerOffer(amt);
+        }
+        public override int RequestPower()
+        {
+            return base.RequestPower();
+        }
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);

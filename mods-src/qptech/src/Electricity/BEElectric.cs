@@ -379,9 +379,14 @@ namespace qptech.src
 
         public virtual void TogglePower()
         {
-            if (justswitched) { return; }
+            ICoreClientAPI capi = Api as ICoreClientAPI;
+            if (Api is ICoreClientAPI) {
+                return;
+            }
+            //if (justswitched) { return; }
             isOn = !isOn;
-            justswitched = true;
+            MarkDirty();
+            //justswitched = true;
             Api.World.PlaySoundAt(new AssetLocation("sounds/electriczap"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
         }
 

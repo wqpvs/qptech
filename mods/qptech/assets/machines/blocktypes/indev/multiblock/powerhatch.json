@@ -17,8 +17,8 @@
 	},
 	"attributes": {
 
-		"maxFlux": 500,
-		"capacitance": 1000
+		"genFlux": 0,
+		"useFlux": 100
 	},
 		"blockmaterial": "Metal",
 		"shape": { "base": "block/metal/electric/powerhatch-lv" },

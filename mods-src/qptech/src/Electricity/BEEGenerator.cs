@@ -168,40 +168,11 @@ namespace qptech.src
         public override void TogglePower()
         {
             
-            if (justswitched) { return; }
+            if (Api is ICoreClientAPI) { return; }
             isOn = !isOn;
-
+            MarkDirty(true);
             ToggleAmbientSounds(isOn);
-            justswitched = true;
-            if (disableAnimations) { return; }
-            if (Api.World.Side == EnumAppSide.Client && animUtil != null)
-            {
-                if (!animInit)
-                {
-                    float rotY = Block.Shape.rotateY;
-                    animUtil.InitializeAnimator(Pos.ToString() + "run", new Vec3f(0, rotY, 0));
-                    animInit = true;
-                }
-                if (!isOn && !heated && !haswater)
-                {
-
-                    animUtil.StartAnimation(new AnimationMetaData()
-                    {
-                        Animation = "run",
-                        Code = "run",
-                        AnimationSpeed = 0.7f,
-                        EaseInSpeed = 2,
-                        EaseOutSpeed = 8,
-                        Weight = 1,
-                        BlendMode = EnumAnimationBlendMode.Average
-                    });
-                }
-                else
-                {
-                    animUtil.StopAnimation("run");
-                }
-
-            }
+            
             Api.World.PlaySoundAt(new AssetLocation("sounds/electriczap"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
         }
         

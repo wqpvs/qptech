@@ -150,6 +150,6 @@
 	"item-cable-copper": "Copper Cable",
 	"block-wiremill-*": "Wire Mill",
 	"blockdesc-wiremill-*": "At last, efficient and easy wiremaking!",
-	"incontainer-item-liquidrubberportion": "Liquid Rubber"
+	"*liquidrubberportion*": "Liquid Rubber"
   
 }
