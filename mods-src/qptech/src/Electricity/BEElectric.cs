@@ -264,7 +264,7 @@ namespace qptech.src
         }
         public virtual void OnTick(float par)
         {
-            if (Api is ICoreServerAPI)
+            if (Api is ICoreServerAPI&&isOn)
             {
                 FindConnections();
                 notfirsttick = true;
@@ -385,6 +385,7 @@ namespace qptech.src
             }
             //if (justswitched) { return; }
             isOn = !isOn;
+            if (!isOn) { FlexNetworkManager.DeleteNetwork(NetworkID); }
             MarkDirty();
             //justswitched = true;
             Api.World.PlaySoundAt(new AssetLocation("sounds/electriczap"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);

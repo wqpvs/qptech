@@ -164,17 +164,7 @@ namespace qptech.src
                 return GetBehavior<BEBehaviorAnimatable>().animUtil;
             }
         }
-        //TODO need turn on and turn off functions
-        public override void TogglePower()
-        {
-            
-            if (Api is ICoreClientAPI) { return; }
-            isOn = !isOn;
-            MarkDirty(true);
-            ToggleAmbientSounds(isOn);
-            
-            Api.World.PlaySoundAt(new AssetLocation("sounds/electriczap"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
-        }
+
         
 
         //will check and see if there's enough water, and will use water if necessary
