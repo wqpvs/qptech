@@ -68,7 +68,7 @@ namespace qptech.src.networks
             
             foreach (IFluidNetworkMember flum in membersByHeight)
             {
-                int used = flum.SetFluidLevel(fluidcounter);
+                int used = flum.SetFluidLevel(fluidcounter,Fluid);
                 fluidcounter -= used;
                 if (fluidcounter <= 0) { break; }
             }
@@ -92,8 +92,8 @@ namespace qptech.src.networks
         int GetFluidTotalCapacity();
         int GetFluidAvailableCapacity();
         bool IsEmpty();
-        int ReceiveFluidOffer(int amt);
+        
         int GetHeight();
-        int SetFluidLevel(int amt); //This would factor in how much fluid a pipe could actualy transfer
+        int SetFluidLevel(int amt,string fluid); //This would factor in how much fluid a pipe could actualy transfer
     }
 }

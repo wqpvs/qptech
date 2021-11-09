@@ -14,10 +14,10 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-
+using qptech.src.networks;
 namespace qptech.src
 {
-    class BEFluidPipe : BlockEntityContainer, IFluidTank
+    class BEFluidPipe : BlockEntityContainer, IFluidTank,IFluidNetworkMember
     {
         public List<BlockFacing> disabledFaces;
         public List<BlockFacing> soakerFaces;
@@ -26,6 +26,93 @@ namespace qptech.src
         int capacitylitres = 50;
         public bool filler=false;
         public bool drainer=false;
+        Guid networkID;
+        public Guid NetworkID => networkID;
+        public string ProductID => "FLUID";
+        public void NetworkRemove() {
+            networkID = Guid.Empty;
+            MarkDirty(true);
+        }
+        public void NetworkJoin(Guid newnetwork)
+        {
+            networkID = newnetwork;
+            MarkDirty(true);
+        }
+        public string Fluid {
+            get
+            {
+                if (inventory == null || inventory[0] == null || inventory.Empty) { return ""; }
+                if (inventory[0].Itemstack == null) { return ""; }
+                return inventory[0].Itemstack.Item.Code.ToString();
+            }
+            set
+            {
+
+            }
+        }
+        int fluidrate = 10;
+        public int FluidRate => fluidrate;
+        
+        public int GetFluidLevel()
+        {
+            if (IsEmpty()) { return 0; }
+            return CurrentLevel;
+        }
+        public int GetFluidTotalCapacity()
+        {
+            return CapacityLitres;
+        }
+        public int GetFluidAvailableCapacity()
+        {
+            return CapacityLitres - CurrentLevel;
+        }
+        public bool IsEmpty()
+        {
+            if (inventory == null || inventory[0] == null || inventory.Empty) { return true; }
+            if (inventory[0].Itemstack == null) { return true; }
+            if (inventory[0].StackSize == 0) { return true; }
+            return false;
+        }
+        
+        public int GetHeight()
+        {
+            return Pos.Y;
+        }
+        public int SetFluidLevel(int amt,string fluid)
+        {
+            if (inventory == null) { return 0; }
+            if (Fluid!="" && Fluid != fluid) { return 0; }
+            if (amt > CurrentLevel)
+            {
+                //eg 1000 we are at 100, we can move 10, we can hold 120
+                int delta = amt - CurrentLevel; //delta is 900
+                delta = Math.Min(delta, FluidRate); //delta is 10
+                int use = CurrentLevel + delta;  //we use 110
+                use = Math.Min(use, CapacityLitres); //still use 110
+                AssetLocation al = new AssetLocation(fluid);
+                Item newitem = Api.World.GetItem(al);
+                if (newitem == null) { return 0; }//this should throw an exception
+                ItemStack newstack = new ItemStack(newitem, use);
+                inventory[0].Itemstack = newstack;
+                MarkDirty(true);
+                return use;
+            }
+            else if (amt < CurrentLevel)
+            {
+                inventory[0].Itemstack.StackSize = amt;
+                MarkDirty(true);
+                return amt;
+            }
+            else
+            {
+                return amt; //keeping inventory the same
+            }
+            
+        }
+        public Guid GetNetworkID(BlockPos requestedby, string fortype)
+        {
+            return NetworkID;
+        }
         public string metal
         {
             get
