@@ -22,6 +22,8 @@ namespace qptech.src.Electricity
         //   - should track time sealed if necessary, have a processing speed bonus
         //   - would only use as much material as can be used, will store remaining
         //   - needs a purge function
+        // Should I use an input tank instead of internal IFluidTank?
+        
         int capacityLitres = 1000;
         int currentLevel = 0;
         

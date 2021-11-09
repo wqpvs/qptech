@@ -8,7 +8,7 @@ using Vintagestory.API.MathTools;
 
 namespace qptech.src.networks
 {
-    interface FlexNetworkMember
+    interface IFlexNetworkMember
     {
         Guid NetworkID { get; }
         string ProductID { get; }
@@ -17,13 +17,13 @@ namespace qptech.src.networks
         Guid GetNetworkID(BlockPos requestedby, string fortype);
 
     }
-    interface FlexNetwork
+    interface IFlexNetwork
     {
         Guid NetworkID { get; } //the main reference id for all networks
         string ProductID { get; } //the product id for compatible networks - eg "power" 
 
-        List<FlexNetworkMember> GetMembers();
-        bool JoinNetwork(FlexNetworkMember member);
+        List<IFlexNetworkMember> GetMembers();
+        bool JoinNetwork(IFlexNetworkMember member);
         void RemoveNetwork(); //remove all members deal with any inventory
         void OnTick(float dt);
         bool MergeWith(Guid newnetworkID); //

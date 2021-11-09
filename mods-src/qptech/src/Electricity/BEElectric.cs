@@ -14,7 +14,7 @@ using Vintagestory.API.Client;
 using qptech.src.networks;
 namespace qptech.src
 {
-    public class BEElectric : BlockEntity, PowerNetworkMember, ITexPositionSource
+    public class BEElectric : BlockEntity, IPowerNetworkMember, ITexPositionSource
     {
         /*base class to handle electrical devices*/
         public virtual bool disableAnimations => true;
@@ -82,7 +82,7 @@ namespace qptech.src
             //if (newnetwork == NetworkID) { return; }
             FlexNetworkManager.LeaveNetwork(NetworkID, this);
             //lastPower = 0;
-            bool ok=FlexNetworkManager.JoinNetworkWithID(newnetwork,this as FlexNetworkMember);
+            bool ok=FlexNetworkManager.JoinNetworkWithID(newnetwork,this as IFlexNetworkMember);
             if (ok) { 
                 networkID = newnetwork;
             }
@@ -244,7 +244,7 @@ namespace qptech.src
             {
                 BlockPos bp = Pos.Copy().Offset(f);
                 BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
-                PowerNetworkMember pnw = checkblock as PowerNetworkMember;
+                IPowerNetworkMember pnw = checkblock as IPowerNetworkMember;
                 if (pnw == null||pnw.NetworkID==Guid.Empty||pnw.NetworkID==NetworkID) { continue; }
                 NetworkJoin(pnw.NetworkID);break;
                 

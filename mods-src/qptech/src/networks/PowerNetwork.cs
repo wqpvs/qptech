@@ -7,7 +7,7 @@ using Vintagestory.API.Common;
 
 namespace qptech.src.networks
 {
-    class PowerNetwork : FlexNetwork
+    class PowerNetwork : IFlexNetwork
     {
         Guid networkid;
         string productid="power";
@@ -16,7 +16,7 @@ namespace qptech.src.networks
         int powerstored;
         public int PowerGeneration => powergen;
         public int PowerUse => poweruse;
-        List<FlexNetworkMember> members;
+        List<IFlexNetworkMember> members;
         public Guid NetworkID => networkid;
         public string ProductID => productid;
         PowerNetworkInfo networkstatus;
@@ -27,15 +27,15 @@ namespace qptech.src.networks
             networkstatus = new PowerNetworkInfo();
             //SET NETWORK ID - need a master network manager
         }
-        public List<FlexNetworkMember> GetMembers()
+        public List<IFlexNetworkMember> GetMembers()
         {
-            if (members == null) { members = new List<FlexNetworkMember>(); }
+            if (members == null) { members = new List<IFlexNetworkMember>(); }
             return members;
         }
-        public bool JoinNetwork(FlexNetworkMember newmember)
+        public bool JoinNetwork(IFlexNetworkMember newmember)
         {
             if (newmember.ProductID != ProductID) { return false; }
-            if (newmember as PowerNetworkMember == null) { return false; }
+            if (newmember as IPowerNetworkMember == null) { return false; }
             if (!GetMembers().Contains(newmember)) { GetMembers().Add(newmember);return true; }
             return false;
         }
@@ -47,7 +47,7 @@ namespace qptech.src.networks
         public void RemoveNetwork()
         {
             //power would be lost, need to remove this from the master list, remove members etc
-            foreach (FlexNetworkMember m in GetMembers())
+            foreach (IFlexNetworkMember m in GetMembers())
             {
                 if (m != null&&m.NetworkID==NetworkID) { m.NetworkRemove(); }
                 
@@ -60,12 +60,12 @@ namespace qptech.src.networks
             poweruse = 0;
             powergen = 0;
             powerstored = 0;
-            List<PowerNetworkMember> requestors = new List<PowerNetworkMember>();
-            List<PowerNetworkMember> batteries = new List<PowerNetworkMember>();
+            List<IPowerNetworkMember> requestors = new List<IPowerNetworkMember>();
+            List<IPowerNetworkMember> batteries = new List<IPowerNetworkMember>();
             //EVALUATE POWER NETWORK
-            foreach (FlexNetworkMember m in GetMembers())
+            foreach (IFlexNetworkMember m in GetMembers())
             {
-                PowerNetworkMember pm = m as PowerNetworkMember;
+                IPowerNetworkMember pm = m as IPowerNetworkMember;
                 if (pm == null) { continue; }
                 powergen += pm.AvailablePower();
                 
@@ -78,14 +78,14 @@ namespace qptech.src.networks
             int powerusecounter = powergen;
             int batteryuse = 0;           
             
-            foreach (PowerNetworkMember puser in requestors)
+            foreach (IPowerNetworkMember puser in requestors)
             {
                 int poweroffer = powerusecounter + powerstored-batteryuse;
                 if (poweroffer <= 0) { poweroffer=0; }
                 int powerused= puser.ReceivePowerOffer(poweroffer);
                 powerusecounter -= powerused;
             }
-            foreach (PowerNetworkMember pnm in batteries)
+            foreach (IPowerNetworkMember pnm in batteries)
             {
                 if (powerusecounter == 0) { break; }
                 else if (powerusecounter > 0)
@@ -110,7 +110,7 @@ namespace qptech.src.networks
         }
     }
 
-    interface PowerNetworkMember : FlexNetworkMember
+    interface IPowerNetworkMember : IFlexNetworkMember
     {
         bool IsBattery { get; }
         int AvailablePower();

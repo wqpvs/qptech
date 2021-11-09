@@ -10,14 +10,14 @@ namespace qptech.src.networks
     class FlexNetworkManager:ModSystem
     {
         ICoreAPI api;
-        public static List<FlexNetwork> NetworkList {
+        public static List<IFlexNetwork> NetworkList {
             get
             {
                 if (networklist == null) { LoadNetworks(); }
                 return networklist;
             }
         }
-        static List<FlexNetwork> networklist;
+        static List<IFlexNetwork> networklist;
         public static FlexNetworkManager manager;
         
         public override void Start(ICoreAPI api)
@@ -30,20 +30,20 @@ namespace qptech.src.networks
             if (manager == null) { manager = this; }
 
         }
-        public static void LeaveNetwork(Guid networkid,FlexNetworkMember member)
+        public static void LeaveNetwork(Guid networkid,IFlexNetworkMember member)
         {
-            FlexNetwork fn = GetNetworkWithID(networkid);
+            IFlexNetwork fn = GetNetworkWithID(networkid);
             if (fn == null) { return; }
             fn.GetMembers().Remove(member);
         }
-        public static FlexNetwork GetNetworkWithID(Guid networkid)
+        public static IFlexNetwork GetNetworkWithID(Guid networkid)
         {
             if (networkid == Guid.Empty) { return null; }
             if (NetworkList == null || NetworkList.Count == 0) { return null; }
 
-            FlexNetwork[] fn=NetworkList.ToArray();
+            IFlexNetwork[] fn=NetworkList.ToArray();
             
-            foreach (FlexNetwork f in fn)
+            foreach (IFlexNetwork f in fn)
             {
                 if (f == null) { continue; }
                 if (f.NetworkID == networkid) { return f; }
@@ -51,11 +51,11 @@ namespace qptech.src.networks
             
             return null;
         }
-        public static bool JoinNetworkWithID(Guid networkid,FlexNetworkMember newmember)
+        public static bool JoinNetworkWithID(Guid networkid,IFlexNetworkMember newmember)
         {
             
             if (networkid == Guid.Empty) { return false; }
-            FlexNetwork n = GetNetworkWithID(networkid);
+            IFlexNetwork n = GetNetworkWithID(networkid);
             
             if (n == null) { RecreateNetwork(networkid,newmember.ProductID); n = GetNetworkWithID(networkid); }
             
@@ -87,7 +87,7 @@ namespace qptech.src.networks
         }
         public static bool DeleteNetwork(Guid g)
         {
-            FlexNetwork n = GetNetworkWithID(g);
+            IFlexNetwork n = GetNetworkWithID(g);
             if (n == null) { return false; }
             
             NetworkList.Remove(n);
@@ -97,18 +97,18 @@ namespace qptech.src.networks
         }
         public static void LoadNetworks()
         {
-            networklist = new List<FlexNetwork>();
+            networklist = new List<IFlexNetwork>();
         }
         public static void MergeNetworks(Guid id1,Guid id2)
         {
             if (id1 == id2 || id1 == Guid.Empty || id2 == Guid.Empty) { return; }
-            FlexNetwork n1 = GetNetworkWithID(id1);
+            IFlexNetwork n1 = GetNetworkWithID(id1);
             if (n1 == null) { return; }
-            FlexNetwork n2 = GetNetworkWithID(id2);
+            IFlexNetwork n2 = GetNetworkWithID(id2);
             if (n2 == null) { return; }
             if (n1.ProductID != n2.ProductID) { return; }
 
-            foreach (FlexNetworkMember n2member in n2.GetMembers())
+            foreach (IFlexNetworkMember n2member in n2.GetMembers())
             {
                 n2member.NetworkJoin(id1);
 
@@ -120,10 +120,10 @@ namespace qptech.src.networks
         {
             if (!(api is ICoreServerAPI)) { return; }
 
-            List<FlexNetwork> prune = new List<FlexNetwork>();
+            List<IFlexNetwork> prune = new List<IFlexNetwork>();
 
             
-            foreach (FlexNetwork n in NetworkList)
+            foreach (IFlexNetwork n in NetworkList)
             {
                 if (n.GetMembers().Count == 0)
                 {
@@ -134,7 +134,7 @@ namespace qptech.src.networks
                 }
             }
             
-            foreach (FlexNetwork pn in prune)
+            foreach (IFlexNetwork pn in prune)
             {
                 NetworkList.Remove(pn);
             }
