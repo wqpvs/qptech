@@ -7,7 +7,7 @@ using Vintagestory.API.MathTools;
 
 namespace qptech.src.networks
 {
-    class LiquidNetwork : IFlexNetwork
+    class FluidNetwork : IFlexNetwork
     {
         Guid networkID;
         public Guid NetworkID => networkID;
@@ -20,6 +20,11 @@ namespace qptech.src.networks
         public double NetworkCapacity => networkCapacity;
         public double NetworkLevel => networkLevel;
         List<IFlexNetworkMember> members;
+        public FluidNetwork(Guid newid)
+        {
+            members = new List<IFlexNetworkMember>();
+            networkID = newid;
+        }
         public List<IFlexNetworkMember> GetMembers()
         {
             if (members == null) { members = new List<IFlexNetworkMember>(); }
@@ -31,8 +36,7 @@ namespace qptech.src.networks
             if (member==null) { return false; }
             IFluidNetworkMember fnm = member as IFluidNetworkMember;
             if (fnm == null) { return false; }
-            if (!fnm.IsEmpty() && fnm.Fluid != Fluid) { return false; }
-            if (fnm.IsEmpty()) { fnm.Fluid = Fluid; }
+            
             if (!GetMembers().Contains(fnm))
             {
                 GetMembers().Add(fnm);

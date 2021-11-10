@@ -11,6 +11,7 @@ namespace qptech.src.networks
     interface IFlexNetworkMember
     {
         Guid NetworkID { get; }
+        
         string ProductID { get; }
         void NetworkRemove();
         void NetworkJoin(Guid newnetwork);

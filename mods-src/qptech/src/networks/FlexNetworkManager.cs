@@ -71,6 +71,12 @@ namespace qptech.src.networks
                 PowerNetwork pn = new PowerNetwork(g);
                 NetworkList.Add(pn);
             }
+            else if (networktype == "FLUID")
+            {
+                FluidNetwork ln = new FluidNetwork(g);
+                NetworkList.Add(ln);
+                if (1 == 1) { }
+            }
             return g;
         }
         public static void RecreateNetwork(Guid existingid, string networktype)
@@ -83,7 +89,13 @@ namespace qptech.src.networks
                 PowerNetwork pn = new PowerNetwork(existingid);
                 NetworkList.Add(pn);
             }
-            
+            else if (networktype == "FLUID")
+            {
+                FluidNetwork ln = new FluidNetwork(existingid);
+                NetworkList.Add(ln);
+                if (1 == 1) { }
+            }
+
         }
         public static bool DeleteNetwork(Guid g)
         {
@@ -123,7 +135,7 @@ namespace qptech.src.networks
             List<IFlexNetwork> prune = new List<IFlexNetwork>();
 
             
-            foreach (IFlexNetwork n in NetworkList)
+            foreach (IFlexNetwork n in NetworkList.ToArray())
             {
                 if (n.GetMembers().Count == 0)
                 {

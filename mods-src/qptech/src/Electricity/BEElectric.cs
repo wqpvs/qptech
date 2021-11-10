@@ -46,6 +46,7 @@ namespace qptech.src
             if (!isOn) { return 0; }
             return usePower;
         }
+
         public virtual int ReceivePowerOffer(int amt)
         {
             lastPower = Math.Min(amt,usePower);MarkDirty(true);
@@ -90,7 +91,13 @@ namespace qptech.src
         }
         public virtual Guid GetNetworkID(BlockPos requestedby, string fortype)
         {
-            return networkID;
+            if (!IsOn) { return Guid.Empty; }
+            foreach (BlockFacing bf in distributionFaces)
+            {
+                BlockPos checkpos = Pos.AddCopy(bf);
+                if (requestedby == checkpos) { return NetworkID; }
+            }
+            return Guid.Empty;
         }
         public TextureAtlasPosition this[string textureCode]
         {
@@ -240,12 +247,15 @@ namespace qptech.src
         }
         protected virtual void GrowPowerNetwork()
         {
-            foreach (BlockFacing f in BlockFacing.ALLFACES)//ALL FACES IS A TEMPORARY MEASURE!
+            foreach (BlockFacing f in distributionFaces)//ALL FACES IS A TEMPORARY MEASURE!
             {
                 BlockPos bp = Pos.Copy().Offset(f);
                 BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
                 IPowerNetworkMember pnw = checkblock as IPowerNetworkMember;
-                if (pnw == null||pnw.NetworkID==Guid.Empty||pnw.NetworkID==NetworkID) { continue; }
+                if (pnw == null) { continue; }
+                Guid othernetwork = pnw.GetNetworkID(Pos,ProductID);
+                if (othernetwork == Guid.Empty) { continue; }
+                if (othernetwork==NetworkID) { continue; }
                 NetworkJoin(pnw.NetworkID);break;
                 
             }

@@ -31,11 +31,19 @@ namespace qptech.src
         public string ProductID => "FLUID";
         public void NetworkRemove() {
             networkID = Guid.Empty;
-            MarkDirty(true);
+            MarkDirty();
         }
-        public void NetworkJoin(Guid newnetwork)
+        public virtual void NetworkJoin(Guid newnetwork)
         {
-            networkID = newnetwork;
+            if (newnetwork == Guid.Empty) { return; }
+            //if (newnetwork == NetworkID) { return; }
+            FlexNetworkManager.LeaveNetwork(NetworkID, this);
+            //lastPower = 0;
+            bool ok = FlexNetworkManager.JoinNetworkWithID(newnetwork, this as IFlexNetworkMember);
+            if (ok)
+            {
+                networkID = newnetwork;
+            }
             MarkDirty(true);
         }
         public string Fluid {
@@ -111,7 +119,18 @@ namespace qptech.src
         }
         public Guid GetNetworkID(BlockPos requestedby, string fortype)
         {
-            return NetworkID;
+            
+            foreach (BlockFacing bf in BlockFacing.ALLFACES)
+            {
+                
+                BlockPos checkpos = Pos.AddCopy(bf);
+                if (requestedby == checkpos) {
+                    if (disabledFaces!=null&&disabledFaces.Contains(bf)) { return Guid.Empty; }
+                    return NetworkID;
+                }
+            }
+            return Guid.Empty;
+            
         }
         public string metal
         {
@@ -158,11 +177,23 @@ namespace qptech.src
         }
         protected void OnFastTick(float dt)
         {
+            if (Api is ICoreServerAPI)
+            {
+                if (NetworkID == Guid.Empty)
+                {
+                    networkID = FlexNetworkManager.RequestNewNetwork(ProductID);
+                    
+                }
+                FlexNetworkManager.JoinNetworkWithID(networkID, this);
+                MarkDirty(true);
+
+            }
             NeighbourCheck();
         }
         
         void NeighbourCheck()
         {
+            HandleFluidNetwork();
             FillBarrels();
             DrainBarrels();
         }
@@ -329,6 +360,11 @@ namespace qptech.src
                     soaker = 0;
                 }
             }
+            if (NetworkID != Guid.Empty && (api is ICoreServerAPI))
+            {
+                FlexNetworkManager.RecreateNetwork(NetworkID, ProductID);
+                MarkDirty(true);
+            }
             RegisterGameTickListener(OnFastTick, 100);
         }   
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
@@ -355,10 +391,11 @@ namespace qptech.src
                 BlockEntity ent = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf));
                 if (ent == null && !isdisabled) { continue; }
                 IFluidTank t = ent as IFluidTank;
+                IFlexNetworkMember ifn = ent as IFluidNetworkMember;
                 BEEGenerator g = ent as BEEGenerator;
                 BEWaterTower w = ent as BEWaterTower;
-                if (t == null && g == null && w == null && !isdisabled) { continue; }
-
+                if (ifn==null && t == null && g == null && w == null && !isdisabled) { continue; }
+                if (ifn!=null && ifn.NetworkID != NetworkID) { continue; }
                 capi.Tesselator.TesselateBlock(pipesegment, out mesh);
                 if (bf == BlockFacing.NORTH)
                 {
@@ -410,13 +447,20 @@ namespace qptech.src
         }
         public virtual void Equalize()
         {
-            if (inventory.Empty) { return; }
+            
 
             //Check for tanks below and beside and fill appropriately
             foreach (BlockFacing bf in facechecker) //used facechecker to make sure down is processed first
             {
 
                 if (disabledFaces.Contains(bf)) { continue; }
+                IFluidNetworkMember fnm = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as IFluidNetworkMember;
+                if (fnm != null)
+                {
+                    
+                    continue;
+                }
+                
                 if (inventory.Empty) { break; }
                 BlockEntityContainer outputContainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BlockEntityContainer;
                 if (outputContainer == null) { continue; }              //is it a container?
@@ -441,9 +485,29 @@ namespace qptech.src
                     }
                     MarkDirty(true);
                 }
-            }
+                            }
         }
+        void HandleFluidNetwork()
+        {
+            foreach (BlockFacing bf in facechecker) //used facechecker to make sure down is processed first
+            {
 
+                if (disabledFaces!=null&&disabledFaces.Contains(bf)) { continue; }
+                IFluidNetworkMember fnm = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as IFluidNetworkMember;
+                if (fnm == null)
+                {
+
+                    continue;
+                }
+                Guid fnid = fnm.GetNetworkID(Pos, ProductID);
+                if (fnid != Guid.Empty && (networkID == Guid.Empty || fnid != networkID))
+                {
+                    NetworkJoin(fnid);
+                    break;
+                }
+            }
+            
+        }
         public int ReceiveFluidOffer(Item offeredItem, int offeredAmount, BlockPos offeredFromPos)
         {
             if (disabledFaces != null&&disabledFaces.Count>0) {
@@ -510,7 +574,8 @@ namespace qptech.src
                 dsc.AppendLine("Selecting "+GetSubFace(looky).ToString());
             }
             
-                dsc.AppendLine("Filling:"+filler.ToString());
+                
+            dsc.AppendLine("NetworkID " + networkID.ToString());
             
         }
 
@@ -526,13 +591,26 @@ namespace qptech.src
             }
             var asString = JsonConvert.SerializeObject(dfstring);
             tree.SetString("disabledfaces", asString);
-            
+            if (networkID != Guid.Empty)
+            {
+                tree.SetString("networkID", networkID.ToString());
+            }
+            else
+            {
+                tree.SetString("networkID", "");
+            }
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
         {
             base.FromTreeAttributes(tree, worldForResolving);
-            
+            string gid = "";
+            gid = tree.GetString("networkID");
+            if (gid != "" && gid!=null)
+            {
+                networkID = Guid.Parse(gid);
+            }
+            else { networkID = Guid.Empty; }
             var asString = tree.GetString("disabledfaces");
             List<string> dfstring = new List<string>();
             if (asString != "")
@@ -596,6 +674,14 @@ namespace qptech.src
         public void OnBeingLookedAt(IPlayer byPlayer, BlockSelection blockSel, bool firstTick)
         {
             looky = blockSel;
+        }
+        public override void OnBlockBroken()
+        {
+            base.OnBlockBroken();
+            if (Api is ICoreServerAPI)
+            {
+                FlexNetworkManager.DeleteNetwork(NetworkID);
+            }
         }
         const float selectionzone = 0.4f;
        public BlockFacing GetSubFace(BlockSelection blockSelection)
