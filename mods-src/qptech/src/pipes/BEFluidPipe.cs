@@ -86,35 +86,24 @@ namespace qptech.src
         {
             return Pos.Y;
         }
-        public int SetFluidLevel(int amt,string fluid)
+        public int SetFluidLevel(int amt,string influid)
         {
             if (inventory == null) { return 0; }
-            if (Fluid!="" && Fluid != fluid) { return 0; }
-            if (amt > CurrentLevel)
-            {
+            if (Fluid!="" && Fluid != influid) { return 0; }
+            
                 //eg 1000 we are at 100, we can move 10, we can hold 120
-                int delta = amt - CurrentLevel; //delta is 900
-                delta = Math.Min(delta, FluidRate); //delta is 10
-                int use = CurrentLevel + delta;  //we use 110
-                use = Math.Min(use, CapacityLitres); //still use 110
-                AssetLocation al = new AssetLocation(fluid);
+                
+                
+                int use = Math.Min(amt, CapacityLitres); //still use 110
+                AssetLocation al = new AssetLocation(influid);
                 Item newitem = Api.World.GetItem(al);
                 if (newitem == null) { return 0; }//this should throw an exception
                 ItemStack newstack = new ItemStack(newitem, use);
                 inventory[0].Itemstack = newstack;
-                MarkDirty(true);
+                MarkDirty();
                 return use;
-            }
-            else if (amt < CurrentLevel)
-            {
-                inventory[0].Itemstack.StackSize = amt;
-                MarkDirty(true);
-                return amt;
-            }
-            else
-            {
-                return amt; //keeping inventory the same
-            }
+
+
             
         }
         public Guid GetNetworkID(BlockPos requestedby, string fortype)

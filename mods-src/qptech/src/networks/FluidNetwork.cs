@@ -36,7 +36,7 @@ namespace qptech.src.networks
             if (member==null) { return false; }
             IFluidNetworkMember fnm = member as IFluidNetworkMember;
             if (fnm == null) { return false; }
-            
+            if (fluid == "" && fnm.Fluid != "") { fluid = fnm.Fluid; }
             if (!GetMembers().Contains(fnm))
             {
                 GetMembers().Add(fnm);
@@ -57,23 +57,34 @@ namespace qptech.src.networks
             networkLevel = 0;
             if (GetMembers().Count == 0) { FlexNetworkManager.DeleteNetwork(NetworkID);return; }
             List<IFluidNetworkMember> fnmlist = new List<IFluidNetworkMember>();
+            Dictionary<int, List<IFluidNetworkMember>> heightindex = new Dictionary<int, List<IFluidNetworkMember>>();
+
             foreach (IFlexNetworkMember fn in GetMembers().ToArray())
             {
                 IFluidNetworkMember flum = fn as IFluidNetworkMember;
                 if (flum == null) { continue; }
                 networkCapacity += flum.GetFluidTotalCapacity();
-                
+                int height = flum.GetHeight();
+                if (!heightindex.ContainsKey(height))
+                {
+                    heightindex[height] = new List<IFluidNetworkMember>();
+                }
+                heightindex[height].Add(flum);
                 networkLevel += flum.GetFluidLevel();
                 fnmlist.Add(flum);
             }
             if (networkLevel==0||networkCapacity==0) { FlexNetworkManager.DeleteNetwork(NetworkID);return; }
             var membersByHeight = fnmlist.OrderBy(m => m.GetHeight());
             int fluidcounter = (int)networkLevel;
-            
-            foreach (IFluidNetworkMember flum in membersByHeight)
+            foreach (int h in heightindex.Keys.OrderBy(x => x))
             {
-                int used = flum.SetFluidLevel(fluidcounter,Fluid);
-                fluidcounter -= used;
+                int heightpop = heightindex[h].Count();
+                int avgfluid = fluidcounter / heightpop;
+                foreach (IFluidNetworkMember fnm in heightindex[h])
+                {
+                    fluidcounter -= fnm.SetFluidLevel(avgfluid, Fluid);
+                    if (fluidcounter <= 0) { break; }
+                }
                 if (fluidcounter <= 0) { break; }
             }
         }
