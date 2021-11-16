@@ -16,7 +16,7 @@ namespace qptech.src.networks
         void NetworkRemove();
         void NetworkJoin(Guid newnetwork);
         Guid GetNetworkID(BlockPos requestedby, string fortype);
-
+        void OnPulse(string channel);
     }
     interface IFlexNetwork
     {
@@ -24,10 +24,11 @@ namespace qptech.src.networks
         string ProductID { get; } //the product id for compatible networks - eg "power" 
 
         List<IFlexNetworkMember> GetMembers();
+        
         bool JoinNetwork(IFlexNetworkMember member);
         void RemoveNetwork(); //remove all members deal with any inventory
         void OnTick(float dt);
         bool MergeWith(Guid newnetworkID); //
-
+        
     }    
 }

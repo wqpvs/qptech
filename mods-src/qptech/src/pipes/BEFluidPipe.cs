@@ -48,8 +48,11 @@ namespace qptech.src
             }
             MarkDirty(true);
         }
-        
-        int fluidrate = 10;
+        public virtual void OnPulse(string channel)
+        {
+
+        }
+        int fluidrate =1;
         public int FluidRate => fluidrate;
         
         public int GetHeight()
@@ -252,7 +255,7 @@ namespace qptech.src
             inputNodes = new List<BlockEntityContainer>();
             outputNodes = new List<BlockEntityContainer>();
             //Check for tanks below and beside and fill appropriately
-            foreach (BlockFacing bf in facechecker) //used facechecker to make sure down is processed first
+            foreach (BlockFacing bf in BlockFacing.ALLFACES) //used facechecker to make sure down is processed first
             {
 
                 if (disabledFaces.Contains(bf)) { continue; }
@@ -273,7 +276,7 @@ namespace qptech.src
                 {
                     outputNodes.Add(findContainer);
                 }
-                else if (bf== BlockFacing.UP)
+                else 
                 {
                     inputNodes.Add(findContainer);
                 }
@@ -283,7 +286,7 @@ namespace qptech.src
         }
         void HandleFluidNetwork()
         {
-            foreach (BlockFacing bf in facechecker) //used facechecker to make sure down is processed first
+            foreach (BlockFacing bf in BlockFacing.ALLFACES) //used facechecker to make sure down is processed first
             {
 
                 if (disabledFaces!=null&&disabledFaces.Contains(bf)) { continue; }
@@ -294,8 +297,15 @@ namespace qptech.src
                     continue;
                 }
                 Guid fnid = fnm.GetNetworkID(Pos, ProductID);
+                IFlexNetwork othernet = FlexNetworkManager.GetNetworkWithID(fnid);
+                if (othernet == null) { continue; }
+                
+                IFlexNetwork mynet = FlexNetworkManager.GetNetworkWithID(NetworkID);
+                if (mynet == null) { NetworkJoin(fnid);MarkDirty(); break; }
+                if (mynet.GetMembers().Count > othernet.GetMembers().Count) { continue; }
                 if (fnid != Guid.Empty && (networkID == Guid.Empty || fnid != networkID))
                 {
+                    MarkDirty();
                     NetworkJoin(fnid);
                     break;
                 }

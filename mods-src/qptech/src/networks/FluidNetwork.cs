@@ -64,6 +64,7 @@ namespace qptech.src.networks
             //if fluid level is zero then set all fluid to ""
             networkCapacity = 0;
             networkLevel = 0;
+            int maxflow = 500;
             if (GetMembers().Count == 0) { FlexNetworkManager.DeleteNetwork(NetworkID); return; }
             List<BlockEntityContainer> validoutputs = new List<BlockEntityContainer>();
             List<BlockEntityContainer> validinputs = new List<BlockEntityContainer>();
@@ -74,6 +75,7 @@ namespace qptech.src.networks
                 IFluidNetworkMember fnm = nm as IFluidNetworkMember;
                 if (fnm == null) { continue; }
                 //Do an inventory of available fluid
+                maxflow = Math.Min(maxflow, fnm.FluidRate);
                 foreach (BlockEntityContainer inputnode in fnm.InputNodes().ToArray())
                 {
                     if (inputnode == null) { continue; }
@@ -107,11 +109,13 @@ namespace qptech.src.networks
                 if (networkLevel <= 0) { break; }
                 IFluidNetworkMember fnm = nm as IFluidNetworkMember;
                 if (fnm == null) { continue; }
+                
                 //Do an inventory of available fluid
                 foreach (BlockEntityContainer outputnode in fnm.OutputNodes().ToArray())
                 {
                     if (networkLevel <= 0) { break; }
                     if (outputnode == null) { continue; }
+                    if (validinputs.Contains(outputnode)) { continue; }
                     if (outputnode.Inventory == null) { continue; }
                     
                     //handle tanks
@@ -123,7 +127,7 @@ namespace qptech.src.networks
                        if (validoutputs.Contains(outputnode)) { continue; }
                         //this all lines up so we could now do inventory transfer
                         //** Need to add a check for tankpos==itself to the fluid tank class!!**
-                        int used = outputtank.ReceiveFluidOffer(fluiditem, networkLevel, outputtank.TankPos);
+                        int used = outputtank.ReceiveFluidOffer(fluiditem, Math.Min(maxflow,networkLevel), outputtank.TankPos);
                         networkLevel -= used;
                         totalfluidused += used;
                         validoutputs.Add(outputnode);
@@ -133,6 +137,15 @@ namespace qptech.src.networks
 
             }
             //Finally we need to go through fluid that was used and take from source containers
+            foreach (BlockEntityContainer srccont in validinputs)
+            {
+                if (totalfluidused <= 0) { break; }
+                IFluidTank ift = srccont as IFluidTank;
+                if (ift == null) { continue; }
+                if (ift.CurrentLevel <= 0){ continue; }
+                int taken = ift.TryTakeFluid(totalfluidused, ift.TankPos);
+                totalfluidused -= taken;
+            }
         }
 
         public void RemoveNetwork()

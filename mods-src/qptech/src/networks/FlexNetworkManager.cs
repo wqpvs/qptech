@@ -18,6 +18,25 @@ namespace qptech.src.networks
             }
         }
         static List<IFlexNetwork> networklist;
+        public static void BroadcastPulse(string channel)
+        {
+            foreach (IFlexNetwork tosend in NetworkList)
+            {
+                if (tosend == null) { continue; }
+                BroadcastPulse(channel, tosend.NetworkID);
+            }
+        }
+        public static void BroadcastPulse(string channel, Guid tonetwork)
+        {
+            if (tonetwork == Guid.Empty) { return; }
+            IFlexNetwork tosend = GetNetworkWithID(tonetwork);
+            if (tosend == null) { return; }
+            foreach (IFlexNetworkMember m in tosend.GetMembers())
+            {
+                if (m != null) { m.OnPulse(channel); }
+            }
+        }
+
         public static FlexNetworkManager manager;
         
         public override void Start(ICoreAPI api)

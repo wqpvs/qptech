@@ -46,7 +46,10 @@ namespace qptech.src
             if (!isOn) { return 0; }
             return usePower;
         }
+        public virtual void OnPulse(string channel)
+        {
 
+        }
         public virtual int ReceivePowerOffer(int amt)
         {
             lastPower = Math.Min(amt,usePower);MarkDirty(true);
