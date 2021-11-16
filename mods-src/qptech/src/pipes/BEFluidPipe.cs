@@ -17,18 +17,20 @@ using System.Runtime.Serialization.Formatters.Binary;
 using qptech.src.networks;
 namespace qptech.src
 {
-    class BEFluidPipe : BlockEntityContainer, IFluidTank,IFluidNetworkMember
+    class BEFluidPipe : BlockEntity, IFluidNetworkMember
     {
         public List<BlockFacing> disabledFaces;
         public List<BlockFacing> soakerFaces;
         public int soaker = 0;
-        public int CapacityLitres { get { return capacitylitres; } set{ capacitylitres = value; } }
-        int capacitylitres = 50;
         public bool filler=false;
         public bool drainer=false;
         Guid networkID;
         public Guid NetworkID => networkID;
         public string ProductID => "FLUID";
+        List<BlockEntityContainer> inputNodes;
+        List<BlockEntityContainer> outputNodes;
+        public List<BlockEntityContainer> InputNodes() { if (inputNodes == null) { inputNodes = new List<BlockEntityContainer>(); } return inputNodes; }
+        public List<BlockEntityContainer> OutputNodes() { if (outputNodes == null) { outputNodes = new List<BlockEntityContainer>(); } return outputNodes; }
         public void NetworkRemove() {
             networkID = Guid.Empty;
             MarkDirty();
@@ -46,41 +48,9 @@ namespace qptech.src
             }
             MarkDirty(true);
         }
-        public string Fluid {
-            get
-            {
-                if (inventory == null || inventory[0] == null || inventory.Empty) { return ""; }
-                if (inventory[0].Itemstack == null) { return ""; }
-                return inventory[0].Itemstack.Item.Code.ToString();
-            }
-            set
-            {
-
-            }
-        }
+        
         int fluidrate = 10;
         public int FluidRate => fluidrate;
-        
-        public int GetFluidLevel()
-        {
-            if (IsEmpty()) { return 0; }
-            return CurrentLevel;
-        }
-        public int GetFluidTotalCapacity()
-        {
-            return CapacityLitres;
-        }
-        public int GetFluidAvailableCapacity()
-        {
-            return CapacityLitres - CurrentLevel;
-        }
-        public bool IsEmpty()
-        {
-            if (inventory == null || inventory[0] == null || inventory.Empty) { return true; }
-            if (inventory[0].Itemstack == null) { return true; }
-            if (inventory[0].StackSize == 0) { return true; }
-            return false;
-        }
         
         public int GetHeight()
         {
@@ -88,24 +58,11 @@ namespace qptech.src
         }
         public int SetFluidLevel(int amt,string influid)
         {
-            if (inventory == null) { return 0; }
-            if (Fluid!="" && Fluid != influid) { return 0; }
-            
-                //eg 1000 we are at 100, we can move 10, we can hold 120
-                
-                
-                int use = Math.Min(amt, CapacityLitres); //still use 110
-                AssetLocation al = new AssetLocation(influid);
-                Item newitem = Api.World.GetItem(al);
-                if (newitem == null) { return 0; }//this should throw an exception
-                ItemStack newstack = new ItemStack(newitem, use);
-                inventory[0].Itemstack = newstack;
-                MarkDirty();
-                return use;
+            return 0;
 
-
-            
         }
+
+
         public Guid GetNetworkID(BlockPos requestedby, string fortype)
         {
             
@@ -130,96 +87,31 @@ namespace qptech.src
                 return null;
             }
         }
-
-
-        public bool IsFull { get { return CurrentLevel == CapacityLitres; } }
-
-        public int CurrentLevel => inventory[0].StackSize;
-
-        public Item CurrentItem => inventory[0] == null || inventory[0].Itemstack == null ? null : inventory[0].Itemstack.Item;
-        public BEFluidPipe()
-        {
-            inventory = new InventoryGeneric(1, null, null);
-        }
-
+        
         public BlockPos TankPos => Pos;
-
-        internal InventoryGeneric inventory;
-        public override InventoryBase Inventory => inventory;
-        public override string InventoryClassName => "pipe";
 
         BlockFacing[] facechecker = new BlockFacing[] { BlockFacing.DOWN, BlockFacing.NORTH, BlockFacing.EAST, BlockFacing.SOUTH, BlockFacing.WEST };
 
-        protected override void OnTick(float dt)
-        {
-            
-            Equalize();
-            Soaker();
-            //temp code to set a random face as inactive
-            /*if (Api is ICoreServerAPI&&(disabledFaces==null||disabledFaces.Count==0))
-            {
-                Random r = new Random(Pos.X+Pos.Z+Pos.Y);
-                int randomindex = r.Next(0, 5);
-                disabledFaces.Add(BlockFacing.ALLFACES[randomindex]);
-                MarkDirty(true);
-            }*/
-        }
+        
         protected void OnFastTick(float dt)
         {
             if (Api is ICoreServerAPI)
             {
+                DoConnections();
                 if (NetworkID == Guid.Empty)
                 {
                     networkID = FlexNetworkManager.RequestNewNetwork(ProductID);
                     
                 }
                 FlexNetworkManager.JoinNetworkWithID(networkID, this);
+                
                 MarkDirty(true);
 
             }
-            NeighbourCheck();
-        }
-        
-        void NeighbourCheck()
-        {
             HandleFluidNetwork();
-            FillBarrels();
-            DrainBarrels();
         }
         
-        void DrainBarrels()
-        {
-            if (Api is ICoreClientAPI) { return; }
-            if (disabledFaces.Contains(BlockFacing.UP)) { return; }
-            BlockPos p = Pos.UpCopy();
-            BlockEntityBarrel barrel = Api.World.BlockAccessor.GetBlockEntity(p) as BlockEntityBarrel;
-            if (barrel == null) { return; }
-            if (barrel.Sealed) { return; }
-            if (barrel.CanSeal) { return; }
-            if (barrel.Inventory == null) { return; }
-            if (barrel.Inventory[1] == null) { return; }
-            if (barrel.Inventory[1].StackSize == 0) { return; }
-            int useamt = 0;
-            if (inventory[0].Inventory.Empty || inventory[0].Itemstack == null || inventory[0].StackSize == 0 || inventory[0].Itemstack.Item == null)
-            {
-                useamt = Math.Min(this.CapacityLitres, barrel.Inventory[1].StackSize);
-                ItemStack newstack = new ItemStack(barrel.Inventory[1].Itemstack.Item, useamt);
-                inventory[0].Itemstack = newstack;
-                barrel.Inventory[1].Itemstack.StackSize -= useamt;
-                if (barrel.Inventory[1].Itemstack.StackSize <= 0) { barrel.Inventory[1].Itemstack = null; }
-                this.MarkDirty(true);
-                barrel.MarkDirty(true);
-                return;
-            }
-            else if (inventory[0].Itemstack.Item != barrel.Inventory[1].Itemstack.Item) { return; }
-            useamt = Math.Min(this.capacitylitres - inventory[0].Itemstack.StackSize, barrel.Inventory[1].StackSize);
-            inventory[0].Itemstack.StackSize += useamt;
-            barrel.Inventory[1].Itemstack.StackSize -= useamt;
-            if (barrel.Inventory[1].Itemstack.StackSize <= 0) { barrel.Inventory[1].Itemstack = null; }
-            this.MarkDirty(true);
-            barrel.MarkDirty(true);
-
-        }
+        
         void AttachmentCheck()
         {
             BlockPos p = Pos.DownCopy();
@@ -237,93 +129,13 @@ namespace qptech.src
             if (olddrainer != drainer) { dothedirty = true; }
             if (dothedirty) { MarkDirty(true); }
         }
-        void FillBarrels()
-        {
-            //check for other containers
-            
-            if (Api is ICoreClientAPI) { AttachmentCheck(); }
-            
-            if (inventory==null||inventory.Empty||inventory[0].Itemstack==null||inventory[0].StackSize<1) { return; }
-            if (!disabledFaces.Contains(BlockFacing.DOWN) && !inventory.Empty)
-            {
-                
-                BlockPos p = Pos.DownCopy();
-                BlockEntityBarrel barrel = Api.World.BlockAccessor.GetBlockEntity(p) as BlockEntityBarrel;
-
-                if (barrel == null) { return; }
-                
-                if (barrel.Sealed) { return; }
-                if (barrel.CanSeal) { return; }
-                if (barrel.Inventory == null) { return; }
-                if (barrel.Inventory[1] == null) { return; }
-                
-                if (barrel.Inventory[1].StackSize >= barrel.CapacityLitres) { return; }
-                int useliquid = 0;
-                if ((barrel.Inventory[1].Itemstack == null || barrel.Inventory[1].Itemstack.Item == null))
-                {
-                    
-                    inventory[0].Itemstack.StackSize-=1;
-                    ItemStack newstack = new ItemStack(inventory[0].Itemstack.Item, 1);
-                    barrel.Inventory[1].Itemstack = newstack;
-                    if (inventory[0].Itemstack.StackSize <= 0) { inventory[0].Itemstack = null; }
-                    this.MarkDirty(true);
-                    barrel.MarkDirty(true);
-                    return;
-                }
-
-                if (barrel.Inventory[1].Itemstack.Item != inventory[0].Itemstack.Item) { return; }
-
-
-
-                //if there is matching inventory than just change around amounts
-                useliquid = 1;
-                
-                inventory[0].Itemstack.StackSize -= useliquid;
-                barrel.Inventory[1].Itemstack.StackSize += useliquid;
-                if (inventory[0].Itemstack.StackSize <= 0) { inventory[0].Itemstack = null; }
-                this.MarkDirty(true);
-                barrel.MarkDirty(true);
-
-            }
-            
-        }
+        
         public void OnNeighborChange()
         {
             MarkDirty(true);
         }
 
-        public void Soaker()
-        {
-            if (soaker == 0 || soakerFaces == null || soakerFaces.Count == 0) { return; }
-            if (inventory.Empty||inventory[0].StackSize<soaker) { return; }
-            if (inventory[0].Itemstack.Collectible.Code.ToString().Contains("water"))
-            {
-                int wateredblocks = 0; ;
-
-                for (int xc = -1; xc < 2; xc++)
-                {
-                    for (int zc= -1; zc<2; zc++)
-                    {
-                        BlockPos p = Pos.Copy();
-                        p.X += xc;
-                        p.Z += zc;
-                        p.Y += 1;
-                        BlockEntityFarmland beup = Api.World.BlockAccessor.GetBlockEntity(p) as BlockEntityFarmland;
-                        if (beup == null) { continue; }
-                        if (beup.MoistureLevel > 0.75f) { continue; }
-                        wateredblocks++;
-                        beup.WaterFarmland(1, false);
-                    }
-                }
-                if (wateredblocks == 0) { return; }
-                inventory[0].Itemstack.StackSize -= soaker;
-                if (inventory[0].Itemstack.StackSize <= 0) { inventory[0].Itemstack = null; }
-                MarkDirty(true); 
-               
-
-            }
-            
-        }
+        
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -333,7 +145,7 @@ namespace qptech.src
                 soaker= Block.Attributes["soaker"].AsInt(soaker);
                 string[] soakerfacename;
                 soakerfacename = Block.Attributes["soakerFaces"].AsArray<string>();
-                capacitylitres = Block.Attributes["capacitylitres"].AsInt(capacitylitres);
+                
                 if (soakerfacename != null && soakerfacename.Length > 0)
                 {
                     foreach (string s in soakerfacename)
@@ -434,10 +246,11 @@ namespace qptech.src
 
             return base.OnTesselation(mesher, tessThreadTesselator);
         }
-        public virtual void Equalize()
+        public virtual void DoConnections()
         {
-            
 
+            inputNodes = new List<BlockEntityContainer>();
+            outputNodes = new List<BlockEntityContainer>();
             //Check for tanks below and beside and fill appropriately
             foreach (BlockFacing bf in facechecker) //used facechecker to make sure down is processed first
             {
@@ -446,35 +259,27 @@ namespace qptech.src
                 IFluidNetworkMember fnm = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as IFluidNetworkMember;
                 if (fnm != null)
                 {
-                    
+
                     continue;
                 }
+
+                ///HERE IS WHERE WE'LL PUT CODE TO FILL IN OUTPUT NODE INFO
+                BlockEntityContainer findContainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BlockEntityContainer;
+                if (findContainer == null) { continue; }              //is it a container?
+                IFluidTank bt = findContainer as IFluidTank;
+                BlockEntityBarrel beb = findContainer as BlockEntityBarrel;
+                if (bt==null && beb == null) { continue; }
+                if (bf == BlockFacing.DOWN)
+                {
+                    outputNodes.Add(findContainer);
+                }
+                else if (bf== BlockFacing.UP)
+                {
+                    inputNodes.Add(findContainer);
+                }
+
+            }    
                 
-                if (inventory.Empty) { break; }
-                BlockEntityContainer outputContainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BlockEntityContainer;
-                if (outputContainer == null) { continue; }              //is it a container?
-                IFluidTank bt = outputContainer as IFluidTank;
-                if (bt == null) { continue; }                           //is it a fellow tank person?
-                if (outputContainer.Inventory == null) { continue; }    //a null inventory is weird, so skip it
-                int outputQuantity = inventory[0].StackSize;            //default to dumping entire stack
-                if (bf != BlockFacing.DOWN && bt.CurrentLevel > CurrentLevel) { continue; }    //beside us and already has more liquid
-                if (bt.IsFull) { continue; }                         //its already full
-                if (bf != BlockFacing.DOWN)
-                {
-                    int targetQuantity = (CurrentLevel + bt.CurrentLevel) / 2;
-                    outputQuantity = CurrentLevel - targetQuantity;
-                }
-                int usedQuantity = bt.ReceiveFluidOffer(inventory[0].Itemstack.Item, outputQuantity, Pos);
-                if (usedQuantity > 0)
-                {
-                    inventory[0].Itemstack.StackSize -= usedQuantity;
-                    if (inventory[0].Itemstack.StackSize <= 0)
-                    {
-                        inventory[0].Itemstack = null;
-                    }
-                    MarkDirty(true);
-                }
-                            }
         }
         void HandleFluidNetwork()
         {
@@ -497,59 +302,11 @@ namespace qptech.src
             }
             
         }
-        public int ReceiveFluidOffer(Item offeredItem, int offeredAmount, BlockPos offeredFromPos)
-        {
-            if (disabledFaces != null&&disabledFaces.Count>0) {
-                foreach (BlockFacing bf in disabledFaces)
-                {
-                    if (Pos.Copy().Offset(bf) == offeredFromPos)
-                    {
-                        return 0;
-                    }
-                }
-            }
-            if (inventory[0].Itemstack != null && inventory[0].Itemstack.Item != null && offeredItem != inventory[0].Itemstack.Item) { return 0; }
-            int useamount = offeredAmount;
-            useamount = Math.Min(CapacityLitres - CurrentLevel, useamount);
-            if (useamount <= 0) { useamount = 0; }
-            else if (inventory[0].Itemstack == null || inventory[0].Itemstack.Item == null)
-            {
-                ItemStack newstack = new ItemStack(offeredItem, useamount);
-                inventory[0].Itemstack = newstack;
-                MarkDirty(true);
-            }
-            else
-            {
-                inventory[0].Itemstack.StackSize += useamount;
-                MarkDirty(true);
-            }
-
-            offeredAmount -= useamount;
-            ///TODO Here we could push overflow?
-            return useamount;
-        }
-        public int TryTakeFluid(int requestedamount, BlockPos offerFromPos)
-        {
-            int giveamount = 0;
-
-            giveamount = Math.Min(requestedamount, CurrentLevel);
-            inventory[0].Itemstack.StackSize -= giveamount;
-            if (inventory[0].Itemstack.StackSize == 0) { inventory[0].Itemstack = null; }
-            MarkDirty(true);
-            return giveamount;
-        }
+    
+    
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
-            ItemSlot slot = inventory[0];
-
-            if (slot.Empty)
-            {
-                dsc.AppendLine(Lang.Get("Empty"));
-            }
-            else
-            {
-                dsc.AppendLine(Lang.Get("Contents: {0}x{1}", slot.Itemstack.StackSize, slot.Itemstack.GetName()));
-            }
+            
             if (disabledFaces != null && disabledFaces.Count > 0)
             {
                 foreach (BlockFacing bf in disabledFaces)
@@ -588,13 +345,16 @@ namespace qptech.src
             {
                 tree.SetString("networkID", "");
             }
+            
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
         {
             base.FromTreeAttributes(tree, worldForResolving);
+            
             string gid = "";
             gid = tree.GetString("networkID");
+            
             if (gid != "" && gid!=null)
             {
                 networkID = Guid.Parse(gid);
@@ -628,6 +388,7 @@ namespace qptech.src
                     }
                 }
             }
+            
         }
 
         

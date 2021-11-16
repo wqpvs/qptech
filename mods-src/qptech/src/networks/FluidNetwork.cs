@@ -4,6 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Client;
+using Vintagestory.API.Common;
+using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
+
+using Vintagestory.API.Util;
+using Vintagestory.GameContent;
+using Vintagestory.API.Server;
 
 namespace qptech.src.networks
 {
@@ -15,10 +24,10 @@ namespace qptech.src.networks
         public string ProductID => "FLUID";
         public string fluid = "";
         public string Fluid => fluid;
-        double networkCapacity;
-        double networkLevel;
-        public double NetworkCapacity => networkCapacity;
-        public double NetworkLevel => networkLevel;
+        int networkCapacity;
+        int networkLevel;
+        public int NetworkCapacity => networkCapacity;
+        public int NetworkLevel => networkLevel;
         List<IFlexNetworkMember> members;
         public FluidNetwork(Guid newid)
         {
@@ -33,10 +42,10 @@ namespace qptech.src.networks
 
         public bool JoinNetwork(IFlexNetworkMember member)
         {
-            if (member==null) { return false; }
+            if (member == null) { return false; }
             IFluidNetworkMember fnm = member as IFluidNetworkMember;
             if (fnm == null) { return false; }
-            if (fluid == "" && fnm.Fluid != "") { fluid = fnm.Fluid; }
+            
             if (!GetMembers().Contains(fnm))
             {
                 GetMembers().Add(fnm);
@@ -55,38 +64,75 @@ namespace qptech.src.networks
             //if fluid level is zero then set all fluid to ""
             networkCapacity = 0;
             networkLevel = 0;
-            if (GetMembers().Count == 0) { FlexNetworkManager.DeleteNetwork(NetworkID);return; }
-            List<IFluidNetworkMember> fnmlist = new List<IFluidNetworkMember>();
-            Dictionary<int, List<IFluidNetworkMember>> heightindex = new Dictionary<int, List<IFluidNetworkMember>>();
+            if (GetMembers().Count == 0) { FlexNetworkManager.DeleteNetwork(NetworkID); return; }
+            List<BlockEntityContainer> validoutputs = new List<BlockEntityContainer>();
+            List<BlockEntityContainer> validinputs = new List<BlockEntityContainer>();
+            Item fluiditem = null;
+            //Do inventory of available fluids, set fluid type
+            foreach (IFlexNetworkMember nm in GetMembers().ToArray())
+            {
+                IFluidNetworkMember fnm = nm as IFluidNetworkMember;
+                if (fnm == null) { continue; }
+                //Do an inventory of available fluid
+                foreach (BlockEntityContainer inputnode in fnm.InputNodes().ToArray())
+                {
+                    if (inputnode == null) { continue; }
+                    if (inputnode.Inventory == null) { continue; }
+                    if (inputnode.Inventory.Empty) { continue; }
+                    //handle tanks
+                    IFluidTank inputtank = inputnode as IFluidTank;
+                    if (inputtank != null)
+                    {
+                        //assign fluid for this cycle if available
+                        if (inputtank.CurrentLevel>0&& inputtank.CurrentItem!=null && fluiditem == null)
+                        {
+                            fluiditem = inputtank.CurrentItem;
+                        }
+                        if (!validinputs.Contains(inputnode)&& inputtank.CurrentLevel > 0 && inputtank.CurrentItem == fluiditem)
+                        {
+                            
+                            validinputs.Add(inputnode);
+                            networkLevel += inputtank.CurrentLevel;
+                        }
+                    }
+                }
+                
+                
+            }
+            //if no fluid is available we won't bother  checking outputs
+            if (fluiditem == null || networkLevel == 0) { return; }
+            int totalfluidused = 0;
+            foreach (IFlexNetworkMember nm in GetMembers().ToArray())
+            {
+                if (networkLevel <= 0) { break; }
+                IFluidNetworkMember fnm = nm as IFluidNetworkMember;
+                if (fnm == null) { continue; }
+                //Do an inventory of available fluid
+                foreach (BlockEntityContainer outputnode in fnm.OutputNodes().ToArray())
+                {
+                    if (networkLevel <= 0) { break; }
+                    if (outputnode == null) { continue; }
+                    if (outputnode.Inventory == null) { continue; }
+                    
+                    //handle tanks
+                    IFluidTank outputtank = outputnode as IFluidTank;
+                    if (outputtank != null)
+                    {
+                       if (outputtank.IsFull) { continue; }
+                       if (outputtank.CurrentItem != null && outputtank.CurrentItem != fluiditem) { continue; }
+                       if (validoutputs.Contains(outputnode)) { continue; }
+                        //this all lines up so we could now do inventory transfer
+                        //** Need to add a check for tankpos==itself to the fluid tank class!!**
+                        int used = outputtank.ReceiveFluidOffer(fluiditem, networkLevel, outputtank.TankPos);
+                        networkLevel -= used;
+                        totalfluidused += used;
+                        validoutputs.Add(outputnode);
+                    }
+                }
 
-            foreach (IFlexNetworkMember fn in GetMembers().ToArray())
-            {
-                IFluidNetworkMember flum = fn as IFluidNetworkMember;
-                if (flum == null) { continue; }
-                networkCapacity += flum.GetFluidTotalCapacity();
-                int height = flum.GetHeight();
-                if (!heightindex.ContainsKey(height))
-                {
-                    heightindex[height] = new List<IFluidNetworkMember>();
-                }
-                heightindex[height].Add(flum);
-                networkLevel += flum.GetFluidLevel();
-                fnmlist.Add(flum);
+
             }
-            if (networkLevel==0||networkCapacity==0) { FlexNetworkManager.DeleteNetwork(NetworkID);return; }
-            var membersByHeight = fnmlist.OrderBy(m => m.GetHeight());
-            int fluidcounter = (int)networkLevel;
-            foreach (int h in heightindex.Keys.OrderBy(x => x))
-            {
-                int heightpop = heightindex[h].Count();
-                int avgfluid = fluidcounter / heightpop;
-                foreach (IFluidNetworkMember fnm in heightindex[h])
-                {
-                    fluidcounter -= fnm.SetFluidLevel(avgfluid, Fluid);
-                    if (fluidcounter <= 0) { break; }
-                }
-                if (fluidcounter <= 0) { break; }
-            }
+            //Finally we need to go through fluid that was used and take from source containers
         }
 
         public void RemoveNetwork()
@@ -98,17 +144,13 @@ namespace qptech.src.networks
             }
         }
     }
-
+    
     interface IFluidNetworkMember : IFlexNetworkMember
     {
-        string Fluid { get; set; }
-        int FluidRate { get; }
-        int GetFluidLevel();
-        int GetFluidTotalCapacity();
-        int GetFluidAvailableCapacity();
-        bool IsEmpty();
         
-        int GetHeight();
-        int SetFluidLevel(int amt,string fluid); //This would factor in how much fluid a pipe could actualy transfer
+        List<BlockEntityContainer> OutputNodes();
+        List<BlockEntityContainer> InputNodes();
+        int FluidRate { get; }
+
     }
 }
