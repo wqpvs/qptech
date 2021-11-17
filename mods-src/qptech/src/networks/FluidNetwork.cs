@@ -28,6 +28,7 @@ namespace qptech.src.networks
         int networkLevel;
         public int NetworkCapacity => networkCapacity;
         public int NetworkLevel => networkLevel;
+        bool purge = false;
         List<IFlexNetworkMember> members;
         public FluidNetwork(Guid newid)
         {
@@ -68,7 +69,9 @@ namespace qptech.src.networks
             if (GetMembers().Count == 0) { FlexNetworkManager.DeleteNetwork(NetworkID); return; }
             List<BlockEntity> validoutputs = new List<BlockEntity>();
             List<BlockEntity> validinputs = new List<BlockEntity>();
+            
             Item fluiditem = null;
+            
             //Do inventory of available fluids, set fluid type
             foreach (IFlexNetworkMember nm in GetMembers().ToArray())
             {
@@ -80,9 +83,11 @@ namespace qptech.src.networks
                 {
                     if (inputnode == null) { continue; }
                     //handle fluidnetworkusers
+                    
                     IFluidNetworkUser fnu = inputnode as IFluidNetworkUser;
                     if (fnu != null)
                     {
+                        
                         if (fluiditem == null) { fluiditem = fnu.QueryFluid(); }
                         if (fluiditem == null) { continue; } //if both are null no point in continuing
                         int avail = fnu.QueryFluid(fluiditem);
@@ -97,7 +102,11 @@ namespace qptech.src.networks
                     IFluidTank inputtank = inputnode as IFluidTank;
                     if (inputtank != null)
                     {
-
+                        if (purge)
+                        {
+                            inputtank.Purge();
+                            continue;
+                        }
                         //assign fluid for this cycle if available
                         if (inputtank.CurrentLevel > 0 && inputtank.CurrentItem != null && fluiditem == null)
                         {
@@ -138,7 +147,7 @@ namespace qptech.src.networks
                             continue;
                         }
                     }
-
+                    
 
                 }
             }
@@ -147,7 +156,7 @@ namespace qptech.src.networks
             int totalfluidused = 0;
             foreach (IFlexNetworkMember nm in GetMembers().ToArray())
             {
-                if (networkLevel <= 0) { break; }
+                if (networkLevel <= 0&&!purge) { break; }
                 
 
                 IFluidNetworkMember fnm = nm as IFluidNetworkMember;
@@ -156,15 +165,16 @@ namespace qptech.src.networks
                 //Do an inventory of available fluid
                 foreach (BlockEntity outnode in fnm.OutputNodes().ToArray())
                 {
+
                     
-                    if (networkLevel <= 0) { break; }
                     if (outnode == null) { continue; }
                     if (validinputs.Contains(outnode)) { continue; }
                     
                     //handle fluid network users
                     IFluidNetworkUser fnu = outnode as IFluidNetworkUser;
-                    if (fnu != null )
+                    if (fnu != null&&networkLevel>0)
                     {
+                        
                         if (validinputs.Contains(outnode)) { continue; }
                         int used = fnu.OfferFluid(fluiditem, Math.Min(networkLevel,maxflow));
                         networkLevel -= used;
@@ -172,12 +182,18 @@ namespace qptech.src.networks
                         validinputs.Add(outnode);
                         continue;
                     }
-
+                    else if (networkLevel <= 0) { continue; }
                     //handle tanks
                     IFluidTank outputtank = outnode as IFluidTank;
                     if (outputtank != null)
                     {
-                       if (outputtank.IsFull) { continue; }
+                       if (purge)
+                        {
+                            outputtank.Purge();
+                            continue;
+                        }
+                       if (networkLevel <= 0) { continue; }
+                        if (outputtank.IsFull) { continue; }
                         if (outputtank.CurrentLevel > 0 && outputtank.CurrentItem != null && fluiditem == null)
                         {
                             fluiditem = outputtank.CurrentItem;
@@ -193,7 +209,7 @@ namespace qptech.src.networks
                         continue;
                     }
                     BlockEntityBarrel outbarrel = outnode as BlockEntityBarrel;
-                    if (outbarrel != null)
+                    if (outbarrel != null&&networkLevel>=0)
                     {
                         if (outbarrel.Sealed ) { continue; }
                         if (outbarrel.CanSeal && !outbarrel.Inventory[0].Empty) { continue; }
@@ -228,10 +244,17 @@ namespace qptech.src.networks
 
             }
             //Finally we need to go through fluid that was used and take from source containers
+            if (purge)
+            {
+                purge = false;
+
+                return;
+            }
             foreach (BlockEntity srcn in validinputs)
             {
                 
                 if (srcn == null) { continue; }
+                
                 if (totalfluidused <= 0) { break; }
                 IFluidNetworkUser fnu = srcn as IFluidNetworkUser;
                 if (fnu != null)
@@ -243,6 +266,7 @@ namespace qptech.src.networks
                 IFluidTank ift = srcn as IFluidTank;
                 if (ift != null)
                 {
+                    
                     if (ift.CurrentLevel <= 0) { continue; }
                     int taken = ift.TryTakeFluid(totalfluidused, ift.TankPos);
                     totalfluidused -= taken;
@@ -262,6 +286,20 @@ namespace qptech.src.networks
                     srcbarrel.MarkDirty(true);
                 }
             }
+            string newfluid = "";
+            if (fluiditem != null) { newfluid = fluiditem.Code.ToString(); }
+            if (newfluid != fluid)
+            {
+                fluid = newfluid;
+                foreach (IFluidNetworkMember m in members)
+                {
+                    if (m != null)
+                    {
+                        if (fluiditem == null) { m.SetFluid(""); }
+                        else { m.SetFluid(fluiditem.Code.ToString()); }
+                    }
+                }
+            }
         }
 
         public void RemoveNetwork()
@@ -272,6 +310,18 @@ namespace qptech.src.networks
 
             }
         }
+
+        public void OnPulse(string channel)
+        {
+            if (channel == "PURGE")
+            {
+                purge = true;return;
+            }
+            foreach (IFlexNetworkMember m in GetMembers().ToArray())
+            {
+                m.OnPulse(channel);
+            }
+        }
     }
     
     interface IFluidNetworkMember : IFlexNetworkMember
@@ -279,6 +329,7 @@ namespace qptech.src.networks
         
         List<BlockEntity> OutputNodes();
         List<BlockEntity> InputNodes();
+        void SetFluid(string fluid);
         int FluidRate { get; }
 
     }

@@ -29,6 +29,7 @@ namespace qptech.src.networks
         void RemoveNetwork(); //remove all members deal with any inventory
         void OnTick(float dt);
         bool MergeWith(Guid newnetworkID); //
+        void OnPulse(string channel);
         
     }    
 }

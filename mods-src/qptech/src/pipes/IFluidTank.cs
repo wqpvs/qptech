@@ -21,5 +21,6 @@ namespace qptech.src
         int ReceiveFluidOffer(Item offeredItem, int offeredAmount,BlockPos offerFromPos);
         int TryTakeFluid(int requestedamount, BlockPos offerFromPos);
         BlockPos TankPos { get; }
+        void Purge();
     }
 }

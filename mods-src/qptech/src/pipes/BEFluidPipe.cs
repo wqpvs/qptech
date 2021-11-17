@@ -24,17 +24,20 @@ namespace qptech.src
         public int soaker = 0;
         public bool filler=false;
         public bool drainer=false;
+        bool locked = false;
         Guid networkID;
         public Guid NetworkID => networkID;
         public string ProductID => "FLUID";
         List<BlockEntity> inputNodes;
         List<BlockEntity> outputNodes;
+        public string fluid;
         public List<BlockEntity> InputNodes() { if (inputNodes == null) { inputNodes = new List<BlockEntity>(); } return inputNodes; }
         public List<BlockEntity> OutputNodes() { if (outputNodes == null) { outputNodes = new List<BlockEntity>(); } return outputNodes; }
         public void NetworkRemove() {
             networkID = Guid.Empty;
             MarkDirty();
         }
+
         public virtual void NetworkJoin(Guid newnetwork)
         {
             if (newnetwork == Guid.Empty) { return; }
@@ -50,7 +53,20 @@ namespace qptech.src
         }
         public virtual void OnPulse(string channel)
         {
+            if (channel == "LOCK")
+            {
+                locked = true;
+            }
+            if (channel == "UNLOCK")
+            {
+                locked = false;
+            }
 
+        }
+        public void SetFluid(string newfluid)
+        {
+            fluid = newfluid;
+            MarkDirty();
         }
         int fluidrate =1;
         public int FluidRate => fluidrate;
@@ -343,7 +359,8 @@ namespace qptech.src
             
                 
             dsc.AppendLine("NetworkID " + networkID.ToString());
-            
+            if (locked) { dsc.AppendLine("Fluid Network Locked ("+fluid+")"); }
+            else { dsc.AppendLine("Fluid Network Open (" + fluid + ")"); }
         }
 
         public override void ToTreeAttributes(ITreeAttribute tree)
@@ -368,6 +385,8 @@ namespace qptech.src
             }
             tree.SetBool("filler", filler);
             tree.SetBool("drainer", drainer);
+            tree.SetBool("locked", locked);
+            tree.SetString("fluid", fluid);
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
@@ -385,6 +404,8 @@ namespace qptech.src
             var asString = tree.GetString("disabledfaces");
             filler = tree.GetBool("filler");
             drainer = tree.GetBool("drainer");
+            locked = tree.GetBool("locked");
+            fluid = tree.GetString("fluid");
             List<string> dfstring = new List<string>();
             if (asString != "")
             {

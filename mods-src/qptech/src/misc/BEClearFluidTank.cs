@@ -61,7 +61,11 @@ namespace qptech.src
         internal InventoryGeneric inventory;
         public override InventoryBase Inventory => inventory;
         public override string InventoryClassName => "tank";
-
+        public void Purge()
+        {
+            inventory.DropAll(Pos.ToVec3d());
+            MarkDirty();
+        }
         MeshData currentMesh;
         BlockTank ownBlock;
 

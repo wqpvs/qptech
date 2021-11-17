@@ -21,6 +21,13 @@ namespace qptech.src.networks
         public string ProductID => productid;
         PowerNetworkInfo networkstatus;
         public PowerNetworkInfo NetworkStatus=>networkstatus;
+        public void OnPulse(string channel)
+        {
+            foreach (IPowerNetworkMember ipn in GetMembers().ToArray())
+            {
+                if (ipn != null) { ipn.OnPulse(channel); }
+            }
+        }
         public PowerNetwork(Guid g)
         {
             networkid = g;

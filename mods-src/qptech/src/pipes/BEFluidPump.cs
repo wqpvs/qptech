@@ -27,6 +27,10 @@ namespace qptech.src
         {
             inventory = new InventoryGeneric(1, null, null);
         }
+        public void Purge()
+        {
+
+        }
         public BlockPos TankPos => Pos;
         BlockFacing inputFace = BlockFacing.DOWN;
         BlockFacing outputFace = BlockFacing.UP;

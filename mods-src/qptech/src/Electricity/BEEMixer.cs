@@ -62,7 +62,10 @@ namespace qptech.src.Electricity
             MarkDirty(true);
             return used;
         }
+        public void Purge()
+        {
 
+        }
         public int TryTakeFluid(int requestedamount, BlockPos offerFromPos)
         {
             return 0;
