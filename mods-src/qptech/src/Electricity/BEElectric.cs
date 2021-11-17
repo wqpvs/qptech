@@ -413,7 +413,8 @@ namespace qptech.src
             gid = tree.GetString("networkID");
             if (gid != "")
             {
-                networkID = Guid.Parse(gid);
+                if (!Guid.TryParse(gid,out networkID)) { networkID = Guid.Empty; }
+                
             }
             else { networkID = Guid.Empty; }
             //if (type == null) type = defaultType; // No idea why. Somewhere something has no type. Probably some worldgen ruins
