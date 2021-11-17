@@ -79,7 +79,20 @@ namespace qptech.src.networks
                 foreach (BlockEntity inputnode in fnm.InputNodes().ToArray())
                 {
                     if (inputnode == null) { continue; }
-
+                    //handle fluidnetworkusers
+                    IFluidNetworkUser fnu = inputnode as IFluidNetworkUser;
+                    if (fnu != null)
+                    {
+                        if (fluiditem == null) { fluiditem = fnu.QueryFluid(); }
+                        if (fluiditem == null) { continue; } //if both are null no point in continuing
+                        int avail = fnu.QueryFluid(fluiditem);
+                        if (avail > 0 && !validinputs.Contains(inputnode))
+                        {
+                            networkLevel += Math.Min(avail,maxflow);
+                            validinputs.Add(inputnode);
+                        }
+                        continue;
+                    }
                     //handle tanks
                     IFluidTank inputtank = inputnode as IFluidTank;
                     if (inputtank != null)
@@ -94,7 +107,7 @@ namespace qptech.src.networks
                         {
 
                             validinputs.Add(inputnode);
-                            networkLevel += inputtank.CurrentLevel;
+                            networkLevel += Math.Min(inputtank.CurrentLevel,maxflow);
                         }
                         continue;
                     }
@@ -135,6 +148,8 @@ namespace qptech.src.networks
             foreach (IFlexNetworkMember nm in GetMembers().ToArray())
             {
                 if (networkLevel <= 0) { break; }
+                
+
                 IFluidNetworkMember fnm = nm as IFluidNetworkMember;
                 if (fnm == null) { continue; }
                 
@@ -146,7 +161,18 @@ namespace qptech.src.networks
                     if (outnode == null) { continue; }
                     if (validinputs.Contains(outnode)) { continue; }
                     
-                    
+                    //handle fluid network users
+                    IFluidNetworkUser fnu = outnode as IFluidNetworkUser;
+                    if (fnu != null )
+                    {
+                        if (validinputs.Contains(outnode)) { continue; }
+                        int used = fnu.OfferFluid(fluiditem, Math.Min(networkLevel,maxflow));
+                        networkLevel -= used;
+                        totalfluidused += used;
+                        validinputs.Add(outnode);
+                        continue;
+                    }
+
                     //handle tanks
                     IFluidTank outputtank = outnode as IFluidTank;
                     if (outputtank != null)
@@ -207,6 +233,13 @@ namespace qptech.src.networks
                 
                 if (srcn == null) { continue; }
                 if (totalfluidused <= 0) { break; }
+                IFluidNetworkUser fnu = srcn as IFluidNetworkUser;
+                if (fnu != null)
+                {
+                    int taken = fnu.TakeFluid(fluiditem,Math.Min(totalfluidused,maxflow));
+                    totalfluidused -= taken;
+                    continue;
+                }
                 IFluidTank ift = srcn as IFluidTank;
                 if (ift != null)
                 {

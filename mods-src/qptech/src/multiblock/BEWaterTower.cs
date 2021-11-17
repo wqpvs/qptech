@@ -15,11 +15,12 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Util;
 using Vintagestory.ServerMods;
+using qptech.src.networks;
 
 
 namespace qptech.src
 {
-    class BEWaterTower:BlockEntity
+    class BEWaterTower:BlockEntity,IFluidNetworkUser
     {
         int tick = 7*5000;
         int waterPerTick = 1;
@@ -29,11 +30,31 @@ namespace qptech.src
         bool structurecomplete = false;
         bool opentosky = false;
         MultiblockStructure ms;
+        Item fluiditem;
         public BlockPos mboffset;
-        
+        public int OfferFluid(Item item,int quantity) { return 0; }
+        public Item QueryFluid() { return fluiditem; }
+        public int QueryFluid(Item item)
+        {
+            if (item != fluiditem||!structurecomplete) { return 0; }
+            return waterStored;
+        }
+        public int TakeFluid(Item item,int amt)
+        {
+            if (item != fluiditem || !structurecomplete) { return 0; }
+            int used = Math.Min(amt, waterStored);
+            if (used > 0)
+            {
+                waterStored -= used;
+                MarkDirty();
+            }
+            return used;
+        }
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
+            fluiditem = api.World.GetItem(new AssetLocation("game:waterportion"));
+
             tick = Block.Attributes["tick"].AsInt(tick);
             waterPerTick = Block.Attributes["waterPerTick"].AsInt(waterPerTick);
             bonusRainWaterPerTick = Block.Attributes["bonusRainWaterPerTick"].AsInt(bonusRainWaterPerTick);

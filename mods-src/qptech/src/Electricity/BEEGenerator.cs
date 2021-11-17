@@ -7,10 +7,12 @@ using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Client;
+using Vintagestory.API.Datastructures;
+using qptech.src.networks;
 
 namespace qptech.src
 {
-    class BEEGenerator:BEElectric
+    class BEEGenerator:BEElectric,IFluidNetworkUser
     {
         //how many power packets we can generate - will see if every more than one
         protected List<string> fuelCodes;   //Valid item & block codes usable as fuel
@@ -33,9 +35,32 @@ namespace qptech.src
         bool overloadIfNoWater = false;  //will it explode if it can't find water (assuming it uses water)
         double lastwaterused = 0;
         bool generating = false;
-        bool haswater = true;
+        bool haswater = false;
         bool heated = false;
+        int internalwater = 0;
         
+        Item fluiditem;
+        public Item QueryFluid()
+        {
+            if (waterUsage <= 0) { return null; }
+            return fluiditem;
+        }
+        public int OfferFluid(Item item, int amt)
+        {
+            if (waterUsage <= 0) { return 0; }
+            if (internalwater >= waterUsage) { return 0; }
+            int used = Math.Min(waterUsage - internalwater, amt);
+            if (used > 0)
+            {
+                internalwater += used;
+                MarkDirty();
+            }
+            return used;
+
+        }
+        public int QueryFluid(Item item) { return 0; }
+        public int TakeFluid(Item item, int amt) { return 0; }
+
         public virtual float SoundLevel
         {
             get { return 0.1f; }
@@ -49,6 +74,7 @@ namespace qptech.src
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
+            fluiditem = api.World.GetItem(new AssetLocation("game:waterportion"));
             animInit = false;
             if (Block.Attributes != null)
             {
@@ -78,9 +104,13 @@ namespace qptech.src
         {
             
             base.OnTick(par);
-            if (isOn) {
+            if (isOn&& !(Api is ICoreClientAPI)) {
                 GeneratePower(); //Create power packets if possible, base.Ontick will handle distribution attempts
                 if (requiresHeat && requiresWater && heated && !haswater && overloadIfNoWater) { DoOverload(); }
+            }
+            if (Api is ICoreAPI)
+            {
+                ToggleAmbientSounds(generating);
             }
             
         }
@@ -107,7 +137,7 @@ namespace qptech.src
             }
 
             
-            ToggleAmbientSounds(trypower);
+            
             return;
         }
 
@@ -170,6 +200,7 @@ namespace qptech.src
         //will check and see if there's enough water, and will use water if necessary
         bool CheckWater()
         {
+            
             //find a block with water
             //if there is water check and see if it's time to use up some water
 
@@ -177,12 +208,20 @@ namespace qptech.src
             //TODO - need to add haswater, lastwaterused to treeattributes
             double nextwater = lastwaterused + waterUsePeriod;
             double currenttime = Api.World.Calendar.TotalHours;
+            
             if (currenttime < nextwater && haswater) { return true; }
             haswater = false;
             lastwaterused = currenttime;
             BlockPos bp = Pos.Copy().Offset(waterFace);
             BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
-            if (checkblock == null) { haswater = false; return false; }
+            if (internalwater >= waterUsage)
+            {
+                internalwater -= waterUsage;
+                haswater = true;
+                MarkDirty();
+            }
+            
+            if (checkblock == null&&!haswater) { return false; }
             
             var checkcontainer = checkblock as BlockEntityContainer;
             if (checkcontainer != null)
@@ -198,8 +237,12 @@ namespace qptech.src
                     
                     if (match && checkslot.StackSize > 0)
                     {
-
-                        checkslot.TakeOut(1);
+                        int needs = waterUsage - internalwater;
+                        if (needs <= 0) { return true; }
+                        internalwater += waterUsage;
+                        ItemStack takestack=checkslot.TakeOut(needs);
+                        internalwater += takestack.StackSize;
+                        MarkDirty();
                         if (checkslot.StackSize < 5)
                         {
                             Api.World.PlaySoundAt(new AssetLocation("sounds/waterslosh"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
@@ -209,7 +252,7 @@ namespace qptech.src
                             Api.World.PlaySoundAt(new AssetLocation("sounds/steamburst"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
                         }
                         checkslot.MarkDirty();
-                        haswater = true;
+                        
                         break;
                     }
                 }
@@ -298,7 +341,22 @@ namespace qptech.src
             if (IsOn && !heated) { dsc.AppendLine(" (NO HEAT)"); }
             else if (IsOn) { dsc.AppendLine(" (ON)"); }
             else { dsc.AppendLine(" (OFF)"); }
+            if (waterUsage > 0) { dsc.AppendLine("WATER:"+internalwater + "/" + waterUsage); }
+            if (generating) { dsc.AppendLine("Generating Power"); }
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
+        }
+
+        public override void ToTreeAttributes(ITreeAttribute tree)
+        {
+            base.ToTreeAttributes(tree);
+            tree.SetInt("internalwater",internalwater);
+            tree.SetBool("generating", generating);
+        }
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
+        {
+            internalwater = tree.GetInt("internalwater");
+            generating = tree.GetBool("generating");
+            base.FromTreeAttributes(tree, worldAccessForResolve);
         }
     }
 }

@@ -273,7 +273,8 @@ namespace qptech.src
                 if (finde == null) { continue; }              //is it a container?
                 IFluidTank bt = finde as IFluidTank;
                 BlockEntityBarrel beb = finde as BlockEntityBarrel;
-                if (bt==null && beb == null) { continue; }
+                IFluidNetworkUser fnu = finde as IFluidNetworkUser;
+                if (bt==null && beb == null&&fnu==null) { continue; }
                 if (beb!=null && bf != BlockFacing.DOWN && bf != BlockFacing.UP) { continue; } //barrels only connect up/down
                 if (beb != null)
                 {
