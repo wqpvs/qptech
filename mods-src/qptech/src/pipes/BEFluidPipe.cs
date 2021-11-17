@@ -27,10 +27,10 @@ namespace qptech.src
         Guid networkID;
         public Guid NetworkID => networkID;
         public string ProductID => "FLUID";
-        List<BlockEntityContainer> inputNodes;
-        List<BlockEntityContainer> outputNodes;
-        public List<BlockEntityContainer> InputNodes() { if (inputNodes == null) { inputNodes = new List<BlockEntityContainer>(); } return inputNodes; }
-        public List<BlockEntityContainer> OutputNodes() { if (outputNodes == null) { outputNodes = new List<BlockEntityContainer>(); } return outputNodes; }
+        List<BlockEntity> inputNodes;
+        List<BlockEntity> outputNodes;
+        public List<BlockEntity> InputNodes() { if (inputNodes == null) { inputNodes = new List<BlockEntity>(); } return inputNodes; }
+        public List<BlockEntity> OutputNodes() { if (outputNodes == null) { outputNodes = new List<BlockEntity>(); } return outputNodes; }
         public void NetworkRemove() {
             networkID = Guid.Empty;
             MarkDirty();
@@ -46,7 +46,7 @@ namespace qptech.src
             {
                 networkID = newnetwork;
             }
-            MarkDirty(true);
+            MarkDirty();
         }
         public virtual void OnPulse(string channel)
         {
@@ -95,11 +95,12 @@ namespace qptech.src
 
         BlockFacing[] facechecker = new BlockFacing[] { BlockFacing.DOWN, BlockFacing.NORTH, BlockFacing.EAST, BlockFacing.SOUTH, BlockFacing.WEST };
 
-        
+        bool firsttick = false;
         protected void OnFastTick(float dt)
         {
             if (Api is ICoreServerAPI)
             {
+                Guid og = networkID;
                 DoConnections();
                 if (NetworkID == Guid.Empty)
                 {
@@ -107,8 +108,7 @@ namespace qptech.src
                     
                 }
                 FlexNetworkManager.JoinNetworkWithID(networkID, this);
-                
-                MarkDirty(true);
+                if (networkID != og||!firsttick) { MarkDirty(true);firsttick = true; }
 
             }
             HandleFluidNetwork();
@@ -252,8 +252,8 @@ namespace qptech.src
         public virtual void DoConnections()
         {
 
-            inputNodes = new List<BlockEntityContainer>();
-            outputNodes = new List<BlockEntityContainer>();
+            inputNodes = new List<BlockEntity>();
+            outputNodes = new List<BlockEntity>();
             //Check for tanks below and beside and fill appropriately
             foreach (BlockFacing bf in BlockFacing.ALLFACES) //used facechecker to make sure down is processed first
             {
@@ -267,18 +267,20 @@ namespace qptech.src
                 }
 
                 ///HERE IS WHERE WE'LL PUT CODE TO FILL IN OUTPUT NODE INFO
-                BlockEntityContainer findContainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BlockEntityContainer;
-                if (findContainer == null) { continue; }              //is it a container?
-                IFluidTank bt = findContainer as IFluidTank;
-                BlockEntityBarrel beb = findContainer as BlockEntityBarrel;
+                ///
+                BlockEntity finde = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BlockEntity;
+                
+                if (finde == null) { continue; }              //is it a container?
+                IFluidTank bt = finde as IFluidTank;
+                BlockEntityBarrel beb = finde as BlockEntityBarrel;
                 if (bt==null && beb == null) { continue; }
                 if (bf == BlockFacing.DOWN)
                 {
-                    outputNodes.Add(findContainer);
+                    outputNodes.Add(finde);
                 }
                 else 
                 {
-                    inputNodes.Add(findContainer);
+                    inputNodes.Add(finde);
                 }
 
             }    
@@ -301,11 +303,11 @@ namespace qptech.src
                 if (othernet == null) { continue; }
                 
                 IFlexNetwork mynet = FlexNetworkManager.GetNetworkWithID(NetworkID);
-                if (mynet == null) { NetworkJoin(fnid);MarkDirty(); break; }
+                if (mynet == null) { NetworkJoin(fnid); break; }
                 if (mynet.GetMembers().Count > othernet.GetMembers().Count) { continue; }
                 if (fnid != Guid.Empty && (networkID == Guid.Empty || fnid != networkID))
                 {
-                    MarkDirty();
+                    
                     NetworkJoin(fnid);
                     break;
                 }

@@ -66,8 +66,8 @@ namespace qptech.src.networks
             networkLevel = 0;
             int maxflow = 500;
             if (GetMembers().Count == 0) { FlexNetworkManager.DeleteNetwork(NetworkID); return; }
-            List<BlockEntityContainer> validoutputs = new List<BlockEntityContainer>();
-            List<BlockEntityContainer> validinputs = new List<BlockEntityContainer>();
+            List<BlockEntity> validoutputs = new List<BlockEntity>();
+            List<BlockEntity> validinputs = new List<BlockEntity>();
             Item fluiditem = null;
             //Do inventory of available fluids, set fluid type
             foreach (IFlexNetworkMember nm in GetMembers().ToArray())
@@ -76,30 +76,57 @@ namespace qptech.src.networks
                 if (fnm == null) { continue; }
                 //Do an inventory of available fluid
                 maxflow = Math.Min(maxflow, fnm.FluidRate);
-                foreach (BlockEntityContainer inputnode in fnm.InputNodes().ToArray())
+                foreach (BlockEntity inputnode in fnm.InputNodes().ToArray())
                 {
                     if (inputnode == null) { continue; }
-                    if (inputnode.Inventory == null) { continue; }
-                    if (inputnode.Inventory.Empty) { continue; }
+
                     //handle tanks
                     IFluidTank inputtank = inputnode as IFluidTank;
                     if (inputtank != null)
                     {
+
                         //assign fluid for this cycle if available
-                        if (inputtank.CurrentLevel>0&& inputtank.CurrentItem!=null && fluiditem == null)
+                        if (inputtank.CurrentLevel > 0 && inputtank.CurrentItem != null && fluiditem == null)
                         {
                             fluiditem = inputtank.CurrentItem;
                         }
-                        if (!validinputs.Contains(inputnode)&& inputtank.CurrentLevel > 0 && inputtank.CurrentItem == fluiditem)
+                        if (!validinputs.Contains(inputnode) && inputtank.CurrentLevel > 0 && inputtank.CurrentItem == fluiditem)
                         {
-                            
+
                             validinputs.Add(inputnode);
                             networkLevel += inputtank.CurrentLevel;
                         }
+                        continue;
                     }
+                    BlockEntityBarrel inputbarrel = inputnode as BlockEntityBarrel;
+                    if (inputbarrel != null)
+                    {
+                        if (inputbarrel.CanSeal) { continue; }
+                        if (inputbarrel.Inventory[1].Empty) { continue; }
+                        /*
+                        Offtopic found this id thing, very interesting for future inventory projects (for doing inventory[x])
+                        inventory = new InventoryGeneric(2, null, null, (id, self) =>
+                        {
+                            if (id == 0) return new ItemSlotBarrelInput(self);
+                            else return new ItemSlotLiquidOnly(self, 50);
+                        });
+                        */
+                        if (inputbarrel.Inventory[1].Itemstack == null) { continue; }
+
+                        if (inputbarrel.Inventory[1].StackSize > 0 && inputbarrel.Inventory[1].Itemstack.Item != null && fluiditem == null)
+                        {
+                            fluiditem = inputbarrel.Inventory[1].Itemstack.Item;
+                        }
+                        if (inputbarrel.Inventory[1].Itemstack.Item == fluiditem && !validinputs.Contains(inputnode))
+                        {
+                            validinputs.Add(inputnode);
+                            networkLevel += inputbarrel.Inventory[1].StackSize;
+                            continue;
+                        }
+                    }
+
+
                 }
-                
-                
             }
             //if no fluid is available we won't bother  checking outputs
             if (fluiditem == null || networkLevel == 0) { return; }
@@ -111,40 +138,59 @@ namespace qptech.src.networks
                 if (fnm == null) { continue; }
                 
                 //Do an inventory of available fluid
-                foreach (BlockEntityContainer outputnode in fnm.OutputNodes().ToArray())
+                foreach (BlockEntity outnode in fnm.OutputNodes().ToArray())
                 {
+                    
                     if (networkLevel <= 0) { break; }
-                    if (outputnode == null) { continue; }
-                    if (validinputs.Contains(outputnode)) { continue; }
-                    if (outputnode.Inventory == null) { continue; }
+                    if (outnode == null) { continue; }
+                    if (validinputs.Contains(outnode)) { continue; }
+                    
                     
                     //handle tanks
-                    IFluidTank outputtank = outputnode as IFluidTank;
+                    IFluidTank outputtank = outnode as IFluidTank;
                     if (outputtank != null)
                     {
                        if (outputtank.IsFull) { continue; }
                        if (outputtank.CurrentItem != null && outputtank.CurrentItem != fluiditem) { continue; }
-                       if (validoutputs.Contains(outputnode)) { continue; }
+                       if (validoutputs.Contains(outnode)) { continue; }
                         //this all lines up so we could now do inventory transfer
                         //** Need to add a check for tankpos==itself to the fluid tank class!!**
                         int used = outputtank.ReceiveFluidOffer(fluiditem, Math.Min(maxflow,networkLevel), outputtank.TankPos);
                         networkLevel -= used;
                         totalfluidused += used;
-                        validoutputs.Add(outputnode);
+                        validoutputs.Add(outnode);
                     }
                 }
 
 
             }
             //Finally we need to go through fluid that was used and take from source containers
-            foreach (BlockEntityContainer srccont in validinputs)
+            foreach (BlockEntity srcn in validinputs)
             {
+                
+                if (srcn == null) { continue; }
                 if (totalfluidused <= 0) { break; }
-                IFluidTank ift = srccont as IFluidTank;
-                if (ift == null) { continue; }
-                if (ift.CurrentLevel <= 0){ continue; }
-                int taken = ift.TryTakeFluid(totalfluidused, ift.TankPos);
-                totalfluidused -= taken;
+                IFluidTank ift = srcn as IFluidTank;
+                if (ift != null)
+                {
+                    if (ift.CurrentLevel <= 0) { continue; }
+                    int taken = ift.TryTakeFluid(totalfluidused, ift.TankPos);
+                    totalfluidused -= taken;
+                    continue;
+                }
+                BlockEntityBarrel srcbarrel = srcn as BlockEntityBarrel;
+                if (srcbarrel != null)
+                {
+                    int taken = Math.Min(srcbarrel.Inventory[1].StackSize, totalfluidused);
+                    if (taken <= 0) { continue; }
+                    totalfluidused -= taken;
+                    srcbarrel.Inventory[1].Itemstack.StackSize -= taken;
+                    if (srcbarrel.Inventory[1].Itemstack.StackSize <= 0)
+                    {
+                        srcbarrel.Inventory[1].Itemstack = null;
+                    }
+                    srcbarrel.MarkDirty(true);
+                }
             }
         }
 
@@ -161,8 +207,8 @@ namespace qptech.src.networks
     interface IFluidNetworkMember : IFlexNetworkMember
     {
         
-        List<BlockEntityContainer> OutputNodes();
-        List<BlockEntityContainer> InputNodes();
+        List<BlockEntity> OutputNodes();
+        List<BlockEntity> InputNodes();
         int FluidRate { get; }
 
     }
