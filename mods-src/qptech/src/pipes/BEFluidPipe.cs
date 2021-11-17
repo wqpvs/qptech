@@ -274,6 +274,14 @@ namespace qptech.src
                 IFluidTank bt = finde as IFluidTank;
                 BlockEntityBarrel beb = finde as BlockEntityBarrel;
                 if (bt==null && beb == null) { continue; }
+                if (beb!=null && bf != BlockFacing.DOWN && bf != BlockFacing.UP) { continue; } //barrels only connect up/down
+                if (beb != null)
+                {
+                    bool ogdrainer = drainer;drainer = false;
+                    bool ogfiller = filler;filler = false;
+                    if (bf == BlockFacing.DOWN) { filler = true;  }
+                    else if (bf == BlockFacing.UP) { drainer = true;  }
+                    if (ogdrainer != drainer || ogfiller != filler) { MarkDirty(true); }                }
                 if (bf == BlockFacing.DOWN)
                 {
                     outputNodes.Add(finde);
@@ -357,7 +365,8 @@ namespace qptech.src
             {
                 tree.SetString("networkID", "");
             }
-            
+            tree.SetBool("filler", filler);
+            tree.SetBool("drainer", drainer);
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
@@ -373,6 +382,8 @@ namespace qptech.src
             }
             else { networkID = Guid.Empty; }
             var asString = tree.GetString("disabledfaces");
+            filler = tree.GetBool("filler");
+            drainer = tree.GetBool("drainer");
             List<string> dfstring = new List<string>();
             if (asString != "")
             {

@@ -116,6 +116,7 @@ namespace qptech.src.networks
                         if (inputbarrel.Inventory[1].StackSize > 0 && inputbarrel.Inventory[1].Itemstack.Item != null && fluiditem == null)
                         {
                             fluiditem = inputbarrel.Inventory[1].Itemstack.Item;
+                            if (1 == 1) { }
                         }
                         if (inputbarrel.Inventory[1].Itemstack.Item == fluiditem && !validinputs.Contains(inputnode))
                         {
@@ -151,7 +152,11 @@ namespace qptech.src.networks
                     if (outputtank != null)
                     {
                        if (outputtank.IsFull) { continue; }
-                       if (outputtank.CurrentItem != null && outputtank.CurrentItem != fluiditem) { continue; }
+                        if (outputtank.CurrentLevel > 0 && outputtank.CurrentItem != null && fluiditem == null)
+                        {
+                            fluiditem = outputtank.CurrentItem;
+                        }
+                        if (outputtank.CurrentItem != null && outputtank.CurrentItem != fluiditem) { continue; }
                        if (validoutputs.Contains(outnode)) { continue; }
                         //this all lines up so we could now do inventory transfer
                         //** Need to add a check for tankpos==itself to the fluid tank class!!**
@@ -159,6 +164,38 @@ namespace qptech.src.networks
                         networkLevel -= used;
                         totalfluidused += used;
                         validoutputs.Add(outnode);
+                        continue;
+                    }
+                    BlockEntityBarrel outbarrel = outnode as BlockEntityBarrel;
+                    if (outbarrel != null)
+                    {
+                        if (outbarrel.Sealed ) { continue; }
+                        if (outbarrel.CanSeal && !outbarrel.Inventory[0].Empty) { continue; }
+                        bool canreceive = false;
+                        if (outbarrel.Inventory == null) { continue; }
+                        if (outbarrel.Inventory.Empty || outbarrel.Inventory[1].Itemstack == null||outbarrel.Inventory[1].Itemstack.Item==null) { canreceive = true; }
+                        
+                        else if (outbarrel.Inventory[1].StackSize == 0) { canreceive = true; }
+                        if (outbarrel.Inventory[1].StackSize > 0 && outbarrel.Inventory[1].Itemstack.Item != null && fluiditem == null)
+                        {
+                            fluiditem = outbarrel.Inventory[1].Itemstack.Item;
+                            if (1 == 1) { }
+                        }
+                        else if (outbarrel.Inventory!=null&&outbarrel.Inventory[1]!=null&&outbarrel.Inventory[1].Itemstack!=null&& outbarrel.Inventory[1].Itemstack.Item == fluiditem) { canreceive = true; }
+                        if (canreceive && outbarrel.Inventory[1].StackSize >= outbarrel.CapacityLitres) { canreceive = false; }
+                        if (canreceive&&!validoutputs.Contains(outnode)) {
+                            int used = Math.Min(maxflow, networkLevel);
+                            used = Math.Min(used, outbarrel.CapacityLitres - outbarrel.Inventory[1].StackSize);
+                            if (used > 0)
+                            {
+                                networkLevel -= used;
+                                totalfluidused += used;
+                                ItemStack newstack = new ItemStack(fluiditem, used + outbarrel.Inventory[1].StackSize);
+                                outbarrel.Inventory[1].Itemstack = newstack;
+                                outbarrel.MarkDirty();
+                                validoutputs.Add(outnode);
+                            }
+                        }
                     }
                 }
 
