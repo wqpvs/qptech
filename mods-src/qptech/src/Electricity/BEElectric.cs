@@ -219,7 +219,9 @@ namespace qptech.src
                 }
             }
 
-            if (!Block.Attributes.KeyExists("distributionFaces")) { distributionFaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
+            if (!Block.Attributes.KeyExists("distributionFaces")) {
+                distributionFaces = BlockFacing.ALLFACES.ToList<BlockFacing>();
+            }
             else
             {
                 cfaces = Block.Attributes["distributionFaces"].AsArray<string>(cfaces);

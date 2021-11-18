@@ -110,6 +110,8 @@
 	"blockdesc-metalpress-lvsoftmetalplate-*": "Takes heated ingots from input container on left and stamps into metal plates, outputting them on container to the right.",
 	"block-metalpress-lvsoftrod-*": "Soft Metal Press [Rods] (LV)",
 	"blockdesc-metalpress-lvsoftrod-*": "Takes heated plates from the container on the left, and outputs rods into a container on the right. Much more efficient at making rods than hammering them yourself! (5:1) (Will eventually be changed to a lathe)",
+	"block-metalpress-lvpunch-*": "Soft Metal Punch (LV)",
+	"blockdesc-metalpress-lvpunch-*": "Turns plates into drilled plates. (Saves you some time at the smithy!)",
 	"block-metalpress-lvbender-*": "Pipe Bender [Copper] (LV)",
 	"blockdesc-metalpress-lvbender-*": "Create copper chute sections, takes one heated copper plate from the left and outputs 3 copper chutes on the right",
 	"item-heavymold-screw": "Heavy Mold - Screws",
@@ -151,5 +153,5 @@
 	"block-wiremill-*": "Wire Mill",
 	"blockdesc-wiremill-*": "At last, efficient and easy wiremaking!",
 	"*liquidrubberportion*": "Liquid Rubber"
-  
+
 }

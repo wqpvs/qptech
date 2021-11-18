@@ -29,12 +29,21 @@ namespace qptech.src
             BEEForge bea = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BEEForge;
             if (bea != null)
             {
-                return bea.OnPlayerInteract(world, byPlayer, blockSel);
+                bea.OnPlayerInteract(world, byPlayer, blockSel);
+                return true;
             }
 
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
+        public override void OnNeighbourBlockChange(IWorldAccessor world, BlockPos pos, BlockPos neibpos)
+        {
+            BEElectric bee = world.BlockAccessor.GetBlockEntity(pos) as BEElectric;
+            if (bee != null)
+            {
+                bee.FindConnections();
+            }
+            base.OnNeighbourBlockChange(world, pos, neibpos);
+        }
 
-        
     }
 }

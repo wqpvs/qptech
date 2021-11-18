@@ -119,6 +119,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\fluidpumpconvert.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\fluidhorpump.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\fluidpump.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\metalpress-lvpunch.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\pipe-core-soaker-bluesteel.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\tank-bluesteel.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\tank-bronze.json" />

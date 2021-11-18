@@ -60,7 +60,7 @@ namespace qptech.src
                 processingTicks = Block.Attributes["processingTicks"].AsInt(processingTicks);
                 animationName = Block.Attributes["animationName"].AsString(animationName);
             }
-            distributionFaces = new List<BlockFacing>(); //no distribution for us!
+            //distributionFaces = new List<BlockFacing>(); //no distribution for us!
         }
 
         protected virtual void DoRunningParticles()

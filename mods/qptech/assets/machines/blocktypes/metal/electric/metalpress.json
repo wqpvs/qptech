@@ -10,7 +10,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "lvsoftmetalplate", "lvsoftscrew", "lvsoftrod", "lvbender" ]
+			"states": [ "lvsoftmetalplate", "lvsoftscrew", "lvsoftrod", "lvbender","lvpunch" ]
 		},
 		{
 			"code": "side",
@@ -39,6 +39,22 @@
 			"animationSpeed": 0.45,
 			"heatRequirement": 800,
 			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze" ]
+
+		},
+		"*-lvpunch-*": {
+			"genFlux": 0,
+			"useFlux": 4,
+			"inputFace": "west",
+			"outputFace": "east",
+			"acceptFromFaces": [ "west" ],
+			"inputQuantity": 1,
+			"outputQuantity": 1,
+			"recipe": "machines:drilledplate",
+			"ingredient": "metalplate",
+			"processingTime": 0.045,
+			"animationSpeed": 0.45,
+			"heatRequirement": 800,
+			"materials": [ "tinbronze", "bismuthbronze", "blackbronze" ]
 
 		},
 		"*-lvsoftscrew-*": {
