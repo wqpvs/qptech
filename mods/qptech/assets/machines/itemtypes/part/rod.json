@@ -9,7 +9,7 @@
 	maxstacksize: 64,
 	
 	variantgroups: [
-		{ code: "material", states: ["copper","brass","tin","iron" ] },
+		{ code: "material", states: ["copper","brass","tin","iron","steel" ] },
 	],
 		
 	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },

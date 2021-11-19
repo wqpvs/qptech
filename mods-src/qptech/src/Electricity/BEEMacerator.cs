@@ -199,6 +199,7 @@ namespace qptech.src
         public float odds=1;
         public string suffix="";
         public enTypes type = enTypes.SWAP;
+        public bool stripingredientheader = false;
         /// <summary>
         /// enTypes
         /// DIRECT - change one specific item into another specific item
@@ -222,6 +223,7 @@ namespace qptech.src
             outputquantity = quantityout;
             inputquantity = 1;
             odds = oddsout;
+            
         }
         public MacerationRecipe(string materialout, int quantityout, float oddsout,int inputquantityout,string machinenameout)
         {
@@ -230,6 +232,7 @@ namespace qptech.src
             inputquantity = inputquantityout;
             machinename = machinenameout;
             odds = oddsout;
+
         }
         public static bool CanMacerate(CollectibleObject co,ICoreAPI api,string machinename)
         {
@@ -315,7 +318,12 @@ namespace qptech.src
                     string al = fullcode;
                     if (mr.type == enTypes.SWAP)
                     {
+                        
                         al = al.Replace(fcp, mr.outputmaterial);
+                        if (mr.stripingredientheader)
+                        {
+                            al=al.Replace("game:", "machines:");
+                        }
                     }
                     else if (mr.type == enTypes.ORESWAP)
                     {

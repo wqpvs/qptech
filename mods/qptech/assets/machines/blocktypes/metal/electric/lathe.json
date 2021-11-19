@@ -1,0 +1,89 @@
+{
+	"code": "lathe",
+	"class": "BlockMetalPress",
+	"entityclass": "BEEMacerator",
+	"creativeinventory": {
+		"general": [ "*-east" ],
+		"qptech": [ "*-east" ]
+	},
+	"entityBehaviors": [ { "name": "Animatable" } ],
+	"behaviors": [
+
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "east" }
+		}
+	],
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "mv" ]
+		},
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+
+	"attributesByType": {
+
+		"*-mv-*": {
+			"genFlux": 0,
+			"useFlux": 24,
+			"processingTicks": 25,
+			"machinename": "lathe",
+			"inputFace": "west",
+			"outputFace": "east"
+		}
+	},
+
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+	
+	"textures": {
+		"all": { "base": "block/tempblocks/lathe" }
+	},
+	"shape": { "base": "block/metal/electric/wiremill" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/metal/electric/wiremill",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/metal/electric/wiremill",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "block/metal/electric/wiremill",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "block/metal/electric/wiremill",
+			"rotateY": 180
+		}
+	},
+	"lightAbsorption": 0,
+	"resistance": 1,
+	"sideAo": { "all": false },
+	"sidesolid": {
+		"all": false,
+		"up": true
+	},
+	"sideopaque": {
+		"all": false
+	},
+	"fpHandTransform": {
+		"rotation": {
+			"x": 53,
+			"y": 46,
+			"z": 0
+		},
+		"scale": 1.28
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+
+
+}

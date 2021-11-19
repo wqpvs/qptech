@@ -30,6 +30,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\Door\slidingdoor.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidhorpump.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidpump.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\lathe.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wiremill.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\sheetroller.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-drainer.json" />

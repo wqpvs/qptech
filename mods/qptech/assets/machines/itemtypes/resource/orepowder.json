@@ -3,7 +3,7 @@
   "variantgroups": [
     {
       "code": "material",
-      "states": [ "copper", "brass" ]
+      "states": [ "copper", "brass","iron","steel" ]
     }
   ],
   "texture": { "base": "item/resource/orepowder/orepowder-{material}" },

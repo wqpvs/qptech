@@ -279,6 +279,24 @@
 			"machinename": "sheetroller",
 			"suffix": "-down"
 		}
+	],
+	"ingot": [
+		{
+			"outputmaterial": "rod",
+			"outputquantity": 5,
+			"odds": 100,
+			"type": "SWAP",
+			"machinename": "lathe",
+				"stripingredientheader": true
+		},
+		{
+			"outputmaterial": "orepowder",
+			"outputquantity": 1,
+			"odds": 100,
+			"type": "SWAP",
+			"machinename": "lathe",
+			"stripingredientheader": true
+		}
 	]
 
 }
