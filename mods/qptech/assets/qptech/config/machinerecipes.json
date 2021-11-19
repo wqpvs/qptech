@@ -1,8 +1,8 @@
-{
-  "bloomery": [
+
+  [
     
     {
-      "recipename": "iron",
+      "name": "iron",
       "temperature": 1482,
       "processingticks": 100,
       "ingredients": [
@@ -17,11 +17,11 @@
       ],
       "output": [
         {
-          "item": "game:iron-ingot",
+          "validitems": [ "game:iron-ingot" ],
           "quantity": 1
         }
       ]
 
     }
   ]
-}
+

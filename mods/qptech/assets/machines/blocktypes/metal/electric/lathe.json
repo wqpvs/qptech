@@ -43,22 +43,22 @@
 	"textures": {
 		"all": { "base": "block/tempblocks/lathe" }
 	},
-	"shape": { "base": "block/metal/electric/wiremill" },
+	"shape": { "base": "block/metal/electric/tempmachine" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/wiremill",
+			"base": "block/metal/electric/tempmachine",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/wiremill",
+			"base": "block/metal/electric/tempmachine",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/wiremill",
+			"base": "block/metal/electric/tempmachine",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/wiremill",
+			"base": "block/metal/electric/tempmachine",
 			"rotateY": 180
 		}
 	},

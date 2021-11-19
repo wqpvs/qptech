@@ -1,7 +1,7 @@
 {
-	"code": "wiremill",
+	"code": "bloomery",
 	"class": "BlockMetalPress",
-	"entityclass": "BEEAssembler",
+	"entityclass": "BEERecipeProcessor",
 	"creativeinventory": {
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
@@ -29,28 +29,19 @@
 
 		"*-mv-*": {
 			"genFlux": 0,
-			"useFlux": 16,
+			"useFlux": 32,
+			"processingTicks": 25,
+			"recipegroups": ["bloomery"],
 			"inputFace": "west",
-			"outputFace": "east",
-			"acceptFromFaces": [ "west" ],
-			"inputQuantity": 1,
-			"outputQuantity": 10,
-			"recipe": "machines:wire",
-
-			"ingredient": "game:metalsheet",
-			"ingredientSuffix": "down",
-			"processingTime": 0.045,
-			"animationSpeed": 0.45,
-			"heatRequirement": 0,
-			"materials": [ "copper", "tin" ]
-
+			"outputFace": "east"
 		}
 	},
 
 	"blockmaterial": "Metal",
 	"drawtype": "json",
+	
 	"textures": {
-		"all": { "base": "block/tempblocks/wiremill" }
+		"all": { "base": "block/tempblocks/bloomery" }
 	},
 	"shape": { "base": "block/metal/electric/tempmachine" },
 	"shapeByType": {

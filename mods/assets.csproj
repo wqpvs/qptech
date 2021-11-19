@@ -30,9 +30,10 @@
     <None Include="qptech\assets\machines\blocktypes\metal\Door\slidingdoor.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidhorpump.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidpump.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\bloomery.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\lathe.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\electric\wiremill.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\sheetroller.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\wiremill.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-drainer.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-sprinkler.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-soaker-bluesteel.json" />
@@ -203,6 +204,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\roundgauge0.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\sheetroller.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\tank.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\tempmachine.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\washplant2.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wires\socketedwire.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\stairs\girder.json" />
@@ -262,7 +264,6 @@
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\shapes\item\worn\jetpack.json" />
     <None Include="qptech\assets\machines\shapes\tempmachine.json" />
-    <None Include="qptech\assets\machines\shapes\block\metal\electric\wiremill.json" />
     <None Include="qptech\assets\machines\textures\block\copperspool.psd" />
     <None Include="qptech\assets\machines\textures\block\glass\glass-colour.aseprite" />
     <None Include="qptech\assets\machines\textures\block\metal\generator\machinery-glass.aseprite" />
