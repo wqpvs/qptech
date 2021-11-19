@@ -1,0 +1,27 @@
+{
+  "bloomery": [
+    
+    {
+      "recipename": "iron",
+      "temperature": 1482,
+      "processingticks": 100,
+      "ingredients": [
+        {
+          "validitems": [ "game:nugget-hematite", "game:nugget-magnetite", "game:nugget-limonite" ],
+          "quantity": 20
+        },
+        {
+          "validitems": [ "game:charcoal" ],
+          "quantity":  1
+        }
+      ],
+      "output": [
+        {
+          "item": "game:iron-ingot",
+          "quantity": 1
+        }
+      ]
+
+    }
+  ]
+}

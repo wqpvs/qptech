@@ -272,6 +272,7 @@
     <None Include="qptech\assets\machines\textures\block\metal\tank\glass.aseprite" />
     <None Include="qptech\assets\machines\textures\block\metal\wires\wires-1.aseprite" />
     <None Include="qptech\assets\qptech\config\clayformerswaps.json" />
+    <None Include="qptech\assets\qptech\config\machinerecipes.json" />
     <None Include="qptech\assets\qptech\config\macerationrecipes.json" />
     <None Include="qptech\assets\qptech\config\metalpressswaps.json" />
     <None Include="qptech\assets\qptech\config\orelookups.json" />
