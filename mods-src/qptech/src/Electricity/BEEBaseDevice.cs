@@ -18,7 +18,7 @@ namespace qptech.src
     public class BEEBaseDevice:BEElectric,IConduit
     {
         
-        public enum enDeviceState { IDLE, RUNNING, WARMUP, MATERIALHOLD, ERROR, POWERHOLD }
+        public enum enDeviceState { IDLE, RUNNING, WARMUP, MATERIALHOLD, ERROR, POWERHOLD,PROCESSHOLD }
         
         protected int requiredFlux = 1;     //how much TF to run
         protected int processingTicks = 30; //how many ticks for process to run
@@ -74,7 +74,7 @@ namespace qptech.src
             if (!IsPowered && DeviceState == enDeviceState.RUNNING)
             {
                 deviceState = enDeviceState.POWERHOLD;
-                MarkDirty();
+                
             }
             if (IsPowered && DeviceState == enDeviceState.POWERHOLD)
             {

@@ -24,6 +24,7 @@ namespace qptech.src
         BlockFacing matInputFace = BlockFacing.WEST;
         BlockFacing matOutputFace = BlockFacing.EAST;
         List<MachineRecipe> recipes;
+        string statusmessage;
         
         public static void LoadRecipes(ICoreAPI api)
         {
@@ -59,6 +60,7 @@ namespace qptech.src
         }
         protected override void UsePower()
         {
+            statusmessage = "";
             if (!IsPowered || !isOn) {
                 if (makingrecipe != "") {
                     recipefinishedat = Api.World.Calendar.TotalHours + 0.1;MarkDirty();
@@ -81,7 +83,7 @@ namespace qptech.src
             {
                 if (!CheckProcessing()){
                     recipefinishedat = Api.World.Calendar.TotalHours + 0.1; MarkDirty();
-                    deviceState = enDeviceState.MATERIALHOLD;
+                    deviceState = enDeviceState.PROCESSHOLD;
                 }
                 else
                 {
@@ -89,7 +91,7 @@ namespace qptech.src
                 }
             }
             else { deviceState = enDeviceState.IDLE; }
-            if (deviceState != ogdevicestate) { MarkDirty(); }
+            MarkDirty();
         }
         bool CheckProcessing()
         {
@@ -110,6 +112,12 @@ namespace qptech.src
                 }
             }
             if (todo.Count == 0) { return true; }
+            statusmessage = "MISSING PROCESSORS [";
+            foreach (string missing in todo)
+            {
+                statusmessage += missing + "(" + mr.processingsteps[missing] + "), ";
+            }
+            statusmessage += "]";
             return false;
         }
         protected override void DoDeviceStart()
@@ -136,9 +144,9 @@ namespace qptech.src
                 ItemStack checkstack = checkslot.Itemstack;
                 if (checkstack == null | checkstack.StackSize == 0 || (checkstack.Item == null&&checkstack.Block==null)) { continue; }
                 string checkcode = "";
-                bool isblock = false;
-                if (checkstack.Item != null) { checkcode = checkstack.Item.ToString(); }
-                else { checkcode = checkstack.Block.ToString(); isblock = true; }
+                
+                if (checkstack.Item != null) { checkcode = checkstack.Item.Code.ToString(); }
+                else { checkcode = checkstack.Block.Code.ToString();  }
                 if (!availableingredients.ContainsKey(checkcode)) { availableingredients[checkcode] = checkstack.StackSize; }
                 else { availableingredients[checkcode] += checkstack.StackSize; }
             }
@@ -155,16 +163,39 @@ namespace qptech.src
                         if (availableingredients.ContainsKey(checking))
                         {
                             foundcount += availableingredients[checking];
-                            if (foundcount > mi.quantity) { break; }
+                            if (foundcount >= mi.quantity) { break; }
                         }
                     }
-                    if (foundcount >= mi.quantity) { break; }
+                    if (foundcount < mi.quantity) { ok = false; break; }
                 }
                 if (!ok) { continue; }
                 else { canmake = mr;break; }
             }
             if (canmake == null) { return; }
-            //Check for heat etc
+            //Draw inventory
+            foreach (MachineRecipeItems mi in canmake.ingredients)
+            {
+                int countdown = mi.quantity;
+                foreach (ItemSlot checkslot in checkinv)
+                {
+                    if (checkslot.Empty) { continue; }
+                    
+                    string checkcode = "";
+                    ItemStack checkstack = checkslot.Itemstack;
+
+                    bool isblock = false;
+                    if (checkstack.Item != null) { checkcode = checkstack.Item.Code.ToString(); }
+                    else { checkcode = checkstack.Block.Code.ToString(); isblock = true; }
+                    if (!mi.validitems.Contains(checkcode)) { continue; }
+                    int maxtake = Math.Min(countdown, checkstack.StackSize);
+                    checkstack.StackSize -= maxtake;
+                    countdown -= maxtake;
+                    if (checkstack.StackSize <= 0) { checkslot.Itemstack = null; }
+                    checkslot.MarkDirty();
+                    if (countdown <= 0) { break; }
+                }
+            }
+
 
             //Start Processing if all is good, set state
             makingrecipe = canmake.name;
@@ -177,9 +208,12 @@ namespace qptech.src
             //create items in attached inventories or in world
             DummyInventory di = new DummyInventory(Api,1);
             MachineRecipe mr = recipes.Find(x => x.name == makingrecipe);
+            BlockEntityContainer outcont = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(matOutputFace)) as BlockEntityContainer;
+
             if (mr == null) { deviceState = enDeviceState.ERROR;return; }
             foreach (MachineRecipeItems outitem in mr.output)
             {
+                
                 AssetLocation al = new AssetLocation(outitem.validitems[0]);
                 Item makeitem = Api.World.GetItem(al);
                 Block makeblock = Api.World.GetBlock(al);
@@ -188,7 +222,20 @@ namespace qptech.src
                 if (makeitem != null) { newstack = new ItemStack(makeitem, outitem.quantity); }
                 else { newstack = new ItemStack(makeblock, outitem.quantity); }
                 di[0].Itemstack = newstack;
-                
+                if (outcont != null)
+                {
+                    
+                    foreach (ItemSlot tryslot in outcont.Inventory)
+                    {
+                        
+                        if (di.Empty) { break; }
+
+
+                        int rem=di[0].TryPutInto(Api.World, tryslot);
+                        MarkDirty();
+                        di.MarkSlotDirty(0);
+                    }
+                }              
                 //di[0].Itemstack.Collectible.SetTemperature(Api.World, di[0].Itemstack, mr.temperature);
                 
                 di.DropAll(Pos.Copy().Offset(matOutputFace).ToVec3d());
@@ -202,23 +249,27 @@ namespace qptech.src
             base.ToTreeAttributes(tree);
             tree.SetString("makingrecipe", makingrecipe);
             tree.SetDouble("recipefinishedat", recipefinishedat);
+            tree.SetString("statusmessage", statusmessage);
         }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
             makingrecipe = tree.GetString("makingrecipe");
             recipefinishedat = tree.GetDouble("recipefinishedat");
+            statusmessage = tree.GetString("statusmessage");
         }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             
             base.GetBlockInfo(forPlayer, dsc);
             dsc.AppendLine("recipe: " + makingrecipe);
-            if (makingrecipe != null)
+            if (makingrecipe != null && makingrecipe != "") ;
             {
                 double countdown = recipefinishedat - Api.World.Calendar.TotalHours;
+                countdown = Math.Floor(countdown);
                 dsc.AppendLine(countdown.ToString());
             }
+            dsc.AppendLine(statusmessage);
         }
 
     }
