@@ -70,18 +70,18 @@ namespace qptech.src
         }
         protected virtual void UsePower()
         {
-            if (!isOn) { return; }
-            if (!IsPowered && DeviceState == enDeviceState.RUNNING)
+            if (!IsOn) { return; }
+            else if (lastPower<usePower && DeviceState == enDeviceState.RUNNING)
             {
                 deviceState = enDeviceState.POWERHOLD;
-                
+                MarkDirty();
             }
-            if (IsPowered && DeviceState == enDeviceState.POWERHOLD)
+            else if (lastPower>=usePower && DeviceState == enDeviceState.POWERHOLD)
             {
                 deviceState = enDeviceState.RUNNING;
                 MarkDirty();
             }
-            if (DeviceState == enDeviceState.IDLE||DeviceState==enDeviceState.MATERIALHOLD)
+            else if (DeviceState == enDeviceState.IDLE||DeviceState==enDeviceState.MATERIALHOLD)
             {
                 DoDeviceStart();
                 

@@ -261,7 +261,12 @@ namespace qptech.src
                 Guid othernetwork = pnw.GetNetworkID(Pos,ProductID);
                 if (othernetwork == Guid.Empty) { continue; }
                 if (othernetwork==NetworkID) { continue; }
-                NetworkJoin(pnw.NetworkID);break;
+                IFlexNetwork othernet = FlexNetworkManager.GetNetworkWithID(othernetwork);
+                IFlexNetwork mynet = FlexNetworkManager.GetNetworkWithID(NetworkID);
+                if (othernet!=null&&mynet!=null&& othernet.GetMembers().Count >= mynet.GetMembers().Count)
+                {
+                    NetworkJoin(pnw.NetworkID); break;
+                }
                 
             }
         }

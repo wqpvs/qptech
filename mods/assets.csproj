@@ -28,6 +28,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\Door\slidingdoor.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\heater.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\crusher.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidhorpump.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidpump.json" />

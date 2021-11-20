@@ -221,7 +221,12 @@ namespace qptech.src
                 ItemStack newstack=null;
                 if (makeitem != null) { newstack = new ItemStack(makeitem, outitem.quantity); }
                 else { newstack = new ItemStack(makeblock, outitem.quantity); }
+                
                 di[0].Itemstack = newstack;
+                if (mr.processingsteps.ContainsKey("heating"))
+                {
+                    di[0].Itemstack.Collectible.SetTemperature(Api.World, di[0].Itemstack, (float)mr.processingsteps["heating"]);
+                }
                 if (outcont != null)
                 {
                     
