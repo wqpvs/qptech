@@ -11,6 +11,7 @@ using Vintagestory.GameContent;
 using Vintagestory.API.Client;
 using Vintagestory.API.Config;
 using Vintagestory.API.Server;
+using qptech.src.networks;
 
 namespace qptech.src
 {
@@ -59,9 +60,13 @@ namespace qptech.src
         protected override void UsePower()
         {
             if (!IsPowered || !isOn) {
-                if (makingrecipe != "") { recipefinishedat = Api.World.Calendar.TotalHours + 0.1;MarkDirty(); }
+                if (makingrecipe != "") {
+                    recipefinishedat = Api.World.Calendar.TotalHours + 0.1;MarkDirty();
+                }
+                
                 return;
             }
+
             enDeviceState ogdevicestate = deviceState;
 
             if (makingrecipe == "")
@@ -72,10 +77,41 @@ namespace qptech.src
             {
                 DoDeviceComplete();
             }
+            else if (Api.World.Calendar.TotalHours < recipefinishedat)
+            {
+                if (!CheckProcessing()){
+                    recipefinishedat = Api.World.Calendar.TotalHours + 0.1; MarkDirty();
+                    deviceState = enDeviceState.MATERIALHOLD;
+                }
+                else
+                {
+                    deviceState = enDeviceState.RUNNING;
+                }
+            }
             else { deviceState = enDeviceState.IDLE; }
             if (deviceState != ogdevicestate) { MarkDirty(); }
         }
-
+        bool CheckProcessing()
+        {
+            MachineRecipe mr = recipes.Find(m => m.name == makingrecipe);
+            if (mr == null) { return false; }
+            if (mr.processingsteps.Count == 0) { return true; }
+            
+            List<string> todo = mr.processingsteps.Keys.ToList<string>();
+            BlockFacing[] processfacings = BlockFacing.ALLFACES;
+            foreach (BlockFacing bf in processfacings)
+            {
+                if (todo.Count == 0) { return true; }
+                IProcessingSupplier ips = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as IProcessingSupplier;
+                if (ips == null) { continue; }
+                foreach (string key in mr.processingsteps.Keys)
+                {
+                    if (ips.RequestProcessing(key, mr.processingsteps[key])&&todo.Contains(key)) { todo.Remove(key); }
+                }
+            }
+            if (todo.Count == 0) { return true; }
+            return false;
+        }
         protected override void DoDeviceStart()
         {
             //Check for valid recipes

@@ -8,6 +8,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
+using qptech.src.networks;
 
 namespace Vintagestory.GameContent
 {
@@ -20,7 +21,7 @@ namespace Vintagestory.GameContent
             api.RegisterBlockEntityClass("ModdedFirepit", typeof(BlockEntityModdedFirepit));
         }
 
-        public class BlockEntityModdedFirepit : BlockEntityFirepit
+        public class BlockEntityModdedFirepit : BlockEntityFirepit,IProcessingSupplier
         {
             public float heatMod = 1f;
             public bool Blockinit { get; set; } = false;
@@ -61,7 +62,12 @@ namespace Vintagestory.GameContent
             {
                 get { return heatMod; }
             }
-        
+            public bool RequestProcessing(string process, double amount)
+            {
+                if (process != "heating") { return false; }
+                if (this.furnaceTemperature >= amount) { return true; }
+                return false;
+            }
         }
     }
 }

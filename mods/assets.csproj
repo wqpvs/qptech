@@ -28,6 +28,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\Door\slidingdoor.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\crusher.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidhorpump.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\fluidpump.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\bloomery.json" />
@@ -374,6 +375,9 @@
     <Content Include="qptech\assets\machines\textures\block\shinybrass.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\other\front-granite.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\wires\tin-wires.png" />
+    <Content Include="qptech\assets\machines\textures\block\tempblocks\bloomery.png" />
+    <Content Include="qptech\assets\machines\textures\block\tempblocks\crush.png" />
+    <Content Include="qptech\assets\machines\textures\block\tempblocks\lathe.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\standinblank.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\wiremill.png" />
     <Content Include="qptech\assets\machines\textures\item\redpaintedsteelwrench.png" />

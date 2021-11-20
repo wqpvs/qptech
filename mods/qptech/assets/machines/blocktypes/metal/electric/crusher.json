@@ -1,7 +1,7 @@
 {
-	"code": "bloomery",
+	"code": "crusher",
 	"class": "ElectricalBlock",
-	"entityclass": "BEERecipeProcessor",
+	"entityclass": "BEEProcessingSupplier",
 	"creativeinventory": {
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
@@ -29,9 +29,12 @@
 
 		"*-mv-*": {
 			"genFlux": 0,
-			"useFlux": 32,
-			
-			"recipegroups": ["bloomeryiron"],
+			"useFlux": 16,
+
+			"processes": {
+				
+				"crushing": 1000
+			},
 			"inputFace": "west",
 			"outputFace": "east"
 		}
@@ -41,7 +44,7 @@
 	"drawtype": "json",
 	
 	"textures": {
-		"all": { "base": "block/tempblocks/bloomery" }
+		"all": { "base": "block/tempblocks/crush" }
 	},
 	"shape": { "base": "block/metal/electric/tempmachine" },
 	"shapeByType": {

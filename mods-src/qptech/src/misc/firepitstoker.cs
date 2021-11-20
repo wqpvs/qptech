@@ -89,10 +89,10 @@ namespace qptech.src
                     bool dofuel = false;
                     BlockPos checkforgenerator = checkPos.UpCopy();
                     checkblock = Api.World.BlockAccessor.GetBlockEntity(checkforgenerator);
-                    var generator = checkblock as BEEGenerator;
+                    var generator = checkblock as BEElectric;
                     if (generator != null)
                     {
-                        if (generator.IsOn&&generator.RequiresHeat) { dofuel = true; }
+                        if (generator.IsOn) { dofuel = true; }
                     }
                     if (firepit.inputSlot != null&&firepit.inputSlot.StackSize>0) { dofuel=true; }
                     if (!dofuel) { continue; }
