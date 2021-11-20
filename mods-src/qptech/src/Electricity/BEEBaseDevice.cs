@@ -19,7 +19,7 @@ namespace qptech.src
     {
         
         public enum enDeviceState { IDLE, RUNNING, WARMUP, MATERIALHOLD, ERROR, POWERHOLD }
-       
+        
         protected int requiredFlux = 1;     //how much TF to run
         protected int processingTicks = 30; //how many ticks for process to run
         protected int tickCounter = 0;
@@ -59,6 +59,7 @@ namespace qptech.src
                 requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
                 processingTicks = Block.Attributes["processingTicks"].AsInt(processingTicks);
                 animationName = Block.Attributes["animationName"].AsString(animationName);
+                
             }
             //distributionFaces = new List<BlockFacing>(); //no distribution for us!
         }

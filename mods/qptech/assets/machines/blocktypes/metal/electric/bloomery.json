@@ -31,7 +31,7 @@
 			"genFlux": 0,
 			"useFlux": 32,
 			"processingTicks": 25,
-			"recipegroups": ["bloomery"],
+			"recipegroups": ["bloomeryiron"],
 			"inputFace": "west",
 			"outputFace": "east"
 		}

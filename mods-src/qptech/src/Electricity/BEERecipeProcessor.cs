@@ -16,14 +16,19 @@ namespace qptech.src
 {
     class BEERecipeProcessor:BEEBaseDevice
     {
-        protected static List<MachineRecipe> recipes;
-        public static List<MachineRecipe> Recipes => recipes;
+        protected static List<MachineRecipe> masterrecipelist;
+        public static List<MachineRecipe> MasterRecipeList => masterrecipelist;
+        double recipefinishedat;
+        string makingrecipe="";
+        BlockFacing matInputFace = BlockFacing.WEST;
+        BlockFacing matOutputFace = BlockFacing.EAST;
+        List<MachineRecipe> recipes;
         
         public static void LoadRecipes(ICoreAPI api)
         {
-            if (recipes == null)
+            if (masterrecipelist == null)
             {
-                recipes = api.Assets.TryGet("qptech:config/machinerecipes.json").ToObject<List<MachineRecipe>>();
+                masterrecipelist = api.Assets.TryGet("qptech:config/machinerecipes.json").ToObject<List<MachineRecipe>>();
             }
         }
         public override void Initialize(ICoreAPI api)
@@ -32,9 +37,155 @@ namespace qptech.src
             LoadRecipes(api);
             if (Block.Attributes != null)
             {
+                string[] recipegroups = Block.Attributes["recipegroups"].AsArray<string>();
+                recipes = new List<MachineRecipe>();
+                if (recipegroups != null)
+                {
+                    foreach (MachineRecipe mr in MasterRecipeList)
+                    {
+                        if (recipegroups.Contains(mr.name))
+                        {
+                            recipes.Add(mr);
+                        }
+                    }
 
+                }
+                matInputFace = OrientFace(Block.Code.ToString(), matInputFace);
+                matOutputFace = OrientFace(Block.Code.ToString(), matOutputFace);
+            }
+
+        
+        }
+        protected override void UsePower()
+        {
+            if (!IsPowered || !isOn) {
+                if (makingrecipe != "") { recipefinishedat = Api.World.Calendar.TotalHours + 0.1;MarkDirty(); }
+                return;
+            }
+            enDeviceState ogdevicestate = deviceState;
+
+            if (makingrecipe == "")
+            {
+                DoDeviceStart();
+            }
+            else if (Api.World.Calendar.TotalHours >= recipefinishedat)
+            {
+                DoDeviceComplete();
+            }
+            else { deviceState = enDeviceState.IDLE; }
+            if (deviceState != ogdevicestate) { MarkDirty(); }
+        }
+
+        protected override void DoDeviceStart()
+        {
+            //Check for valid recipes
+            if (recipes is null || recipes.Count == 0) { deviceState = enDeviceState.ERROR;return; }
+            //Check for ingredients
+            Dictionary<string, int> availableingredients= new Dictionary<string, int>();
+            
+            BlockFacing checkface = matInputFace;
+            BlockPos checkpos = Pos.Copy().Offset(checkface);
+
+            BlockEntity checkbe = Api.World.BlockAccessor.GetBlockEntity(checkpos);
+            if (checkbe == null) { return; }
+            BlockEntityContainer checkcont = checkbe as BlockEntityContainer;
+            if (checkcont == null) { return; }
+            InventoryBase checkinv = checkcont.Inventory;
+            if (checkinv == null || checkinv.Empty) { return; }
+
+            //add up all available ingredients
+            foreach (ItemSlot checkslot in checkinv)
+            {
+                if (checkslot == null || checkslot.Empty) { continue; }
+                ItemStack checkstack = checkslot.Itemstack;
+                if (checkstack == null | checkstack.StackSize == 0 || (checkstack.Item == null&&checkstack.Block==null)) { continue; }
+                string checkcode = "";
+                bool isblock = false;
+                if (checkstack.Item != null) { checkcode = checkstack.Item.ToString(); }
+                else { checkcode = checkstack.Block.ToString(); isblock = true; }
+                if (!availableingredients.ContainsKey(checkcode)) { availableingredients[checkcode] = checkstack.StackSize; }
+                else { availableingredients[checkcode] += checkstack.StackSize; }
+            }
+
+            MachineRecipe canmake = null;
+            foreach (MachineRecipe mr in recipes)
+            {
+                bool ok = true;
+                foreach (MachineRecipeItems mi in mr.ingredients)
+                {
+                    int foundcount = 0;
+                    foreach (string checking in mi.validitems)
+                    {
+                        if (availableingredients.ContainsKey(checking))
+                        {
+                            foundcount += availableingredients[checking];
+                            if (foundcount > mi.quantity) { break; }
+                        }
+                    }
+                    if (foundcount >= mi.quantity) { break; }
+                }
+                if (!ok) { continue; }
+                else { canmake = mr;break; }
+            }
+            if (canmake == null) { return; }
+            //Check for heat etc
+
+            //Start Processing if all is good, set state
+            makingrecipe = canmake.name;
+            recipefinishedat = Api.World.Calendar.TotalHours + canmake.processingticks;
+            deviceState = enDeviceState.RUNNING;
+        }
+
+        protected override void DoDeviceComplete()
+        {
+            //create items in attached inventories or in world
+            DummyInventory di = new DummyInventory(Api,1);
+            MachineRecipe mr = recipes.Find(x => x.name == makingrecipe);
+            if (mr == null) { deviceState = enDeviceState.ERROR;return; }
+            foreach (MachineRecipeItems outitem in mr.output)
+            {
+                AssetLocation al = new AssetLocation(outitem.validitems[0]);
+                Item makeitem = Api.World.GetItem(al);
+                Block makeblock = Api.World.GetBlock(al);
+                if (makeitem == null && makeblock == null) { deviceState = enDeviceState.ERROR;return; }
+                ItemStack newstack=null;
+                if (makeitem != null) { newstack = new ItemStack(makeitem, outitem.quantity); }
+                else { newstack = new ItemStack(makeblock, outitem.quantity); }
+                di[0].Itemstack = newstack;
+                if (mr.temperature > 0)
+                {
+                    di[0].Itemstack.Collectible.SetTemperature(Api.World, di[0].Itemstack, mr.temperature);
+                }
+                di.DropAll(Pos.Copy().Offset(matOutputFace).ToVec3d());
+            }
+            deviceState = enDeviceState.IDLE;
+            makingrecipe = "";
+        }
+
+        public override void ToTreeAttributes(ITreeAttribute tree)
+        {
+            base.ToTreeAttributes(tree);
+            tree.SetString("makingrecipe", makingrecipe);
+            tree.SetDouble("recipefinishedat", recipefinishedat);
+        }
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
+        {
+            base.FromTreeAttributes(tree, worldAccessForResolve);
+            makingrecipe = tree.GetString("makingrecipe");
+            recipefinishedat = tree.GetDouble("recipefinishedat");
+        }
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
+        {
+            
+            base.GetBlockInfo(forPlayer, dsc);
+            dsc.AppendLine("recipe: " + makingrecipe);
+            if (makingrecipe != null)
+            {
+                double countdown = recipefinishedat - Api.World.Calendar.TotalHours;
+                dsc.AppendLine(countdown.ToString());
             }
         }
+
     }
     class MachineRecipe
     {
@@ -47,8 +198,8 @@ namespace qptech.src
     }
     class MachineRecipeItems
     {
-        string[] validitems;
-        int quantity;
+        public string[] validitems;
+        public int quantity;
         public MachineRecipeItems() { }
     }
     

@@ -2,9 +2,9 @@
   [
     
     {
-      "name": "iron",
+      "name": "bloomeryiron",
       "temperature": 1482,
-      "processingticks": 100,
+      "processingticks": 0.1,
       "ingredients": [
         {
           "validitems": [ "game:nugget-hematite", "game:nugget-magnetite", "game:nugget-limonite" ],
@@ -17,7 +17,7 @@
       ],
       "output": [
         {
-          "validitems": [ "game:iron-ingot" ],
+          "validitems": [ "game:ingot-iron" ],
           "quantity": 1
         }
       ]
