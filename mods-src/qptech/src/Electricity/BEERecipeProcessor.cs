@@ -132,7 +132,7 @@ namespace qptech.src
 
             //Start Processing if all is good, set state
             makingrecipe = canmake.name;
-            recipefinishedat = Api.World.Calendar.TotalHours + canmake.processingticks;
+            recipefinishedat = Api.World.Calendar.TotalHours + canmake.processinghours;
             deviceState = enDeviceState.RUNNING;
         }
 
@@ -152,10 +152,9 @@ namespace qptech.src
                 if (makeitem != null) { newstack = new ItemStack(makeitem, outitem.quantity); }
                 else { newstack = new ItemStack(makeblock, outitem.quantity); }
                 di[0].Itemstack = newstack;
-                if (mr.temperature > 0)
-                {
-                    di[0].Itemstack.Collectible.SetTemperature(Api.World, di[0].Itemstack, mr.temperature);
-                }
+                
+                //di[0].Itemstack.Collectible.SetTemperature(Api.World, di[0].Itemstack, mr.temperature);
+                
                 di.DropAll(Pos.Copy().Offset(matOutputFace).ToVec3d());
             }
             deviceState = enDeviceState.IDLE;
@@ -190,8 +189,8 @@ namespace qptech.src
     class MachineRecipe
     {
         public string name;
-        public int temperature;
-        public double processingticks;
+        public Dictionary<string, double> processingsteps;
+        public double processinghours;
         public MachineRecipeItems[] ingredients;
         public MachineRecipeItems[] output;
         public MachineRecipe() { }

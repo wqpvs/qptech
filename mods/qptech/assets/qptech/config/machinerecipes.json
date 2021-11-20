@@ -3,8 +3,11 @@
     
     {
       "name": "bloomeryiron",
-      "temperature": 1482,
-      "processingticks": 0.1,
+      "processingsteps": {
+         "heating": 1482 ,
+         "crushing": 1000 
+      },
+      "processinghours": 0.1,
       "ingredients": [
         {
           "validitems": [ "game:nugget-hematite", "game:nugget-magnetite", "game:nugget-limonite" ],
