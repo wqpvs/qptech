@@ -7,7 +7,10 @@
 		"general": [ "*" ],
 		"qptech": [ "*" ]
 	},
-	
+	"attributes": {
+		"pumpin": "down",
+		"pumpout": "up"
+	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 	"shape": { "base": "block/metal/container/pump" },

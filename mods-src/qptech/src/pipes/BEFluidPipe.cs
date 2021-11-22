@@ -28,9 +28,10 @@ namespace qptech.src
         Guid networkID;
         public Guid NetworkID => networkID;
         public string ProductID => "FLUID";
-        List<BlockEntity> inputNodes;
-        List<BlockEntity> outputNodes;
+        protected List<BlockEntity> inputNodes;
+        protected List<BlockEntity> outputNodes;
         public string fluid;
+        protected BlockFacing[] checkfaces;
         public List<BlockEntity> InputNodes() { if (inputNodes == null) { inputNodes = new List<BlockEntity>(); } return inputNodes; }
         public List<BlockEntity> OutputNodes() { if (outputNodes == null) { outputNodes = new List<BlockEntity>(); } return outputNodes; }
         public void NetworkRemove() {
@@ -82,7 +83,7 @@ namespace qptech.src
         }
 
 
-        public Guid GetNetworkID(BlockPos requestedby, string fortype)
+        public virtual Guid GetNetworkID(BlockPos requestedby, string fortype)
         {
             
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
@@ -158,6 +159,7 @@ namespace qptech.src
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
+            checkfaces = BlockFacing.ALLFACES;
             soakerFaces = new List<BlockFacing>();
             if (Block.Attributes != null)
             {
@@ -189,7 +191,7 @@ namespace qptech.src
         }   
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
-            
+            if (this is BEFluidPump) { return base.OnTesselation(mesher, tessThreadTesselator); }
             ICoreClientAPI capi = Api as ICoreClientAPI;
             if (capi == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
             Block pipesegment = Api.World.GetBlock(new AssetLocation("machines:pipe-segment" + "-" + (metal)));
@@ -271,7 +273,7 @@ namespace qptech.src
             inputNodes = new List<BlockEntity>();
             outputNodes = new List<BlockEntity>();
             //Check for tanks below and beside and fill appropriately
-            foreach (BlockFacing bf in BlockFacing.ALLFACES) //used facechecker to make sure down is processed first
+            foreach (BlockFacing bf in checkfaces) //used facechecker to make sure down is processed first
             {
 
                 if (disabledFaces.Contains(bf)) { continue; }
@@ -311,9 +313,11 @@ namespace qptech.src
             }    
                 
         }
-        void HandleFluidNetwork()
+        protected virtual void HandleFluidNetwork()
         {
-            foreach (BlockFacing bf in BlockFacing.ALLFACES) //used facechecker to make sure down is processed first
+            
+            
+            foreach (BlockFacing bf in checkfaces) //used facechecker to make sure down is processed first
             {
 
                 if (disabledFaces!=null&&disabledFaces.Contains(bf)) { continue; }

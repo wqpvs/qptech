@@ -8,7 +8,7 @@
 		"qptech": [ "*-east" ]
 	},
 	"variantgroups": [
-		
+
 		{
 			"code": "side",
 			"loadFromProperties": "abstract/horizontalorientation"
@@ -21,7 +21,12 @@
 			"properties": { "dropBlockFace": "east" }
 		}
 	],
+	"attributes": {
+		"pumpin": "south",
+		"pumpout": "north"
+	},
 	"blockmaterial": "Metal",
+
 	"drawtype": "json",
 	"shape": { "base": "block/metal/container/pump-horizontal" },
 	"shapeByType": {
