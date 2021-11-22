@@ -1,7 +1,7 @@
 {
 	"code": "pipe-core-soaker-bluesteel",
-	"class": "BlockFluidPipe",
-	"entityclass": "BEFluidPipe",
+	
+	"entityclass": "BEIrrigator",
 	"creativeinventory": {
 		"qptech": [ "*" ]
 	},

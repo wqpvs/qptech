@@ -20,8 +20,7 @@ namespace qptech.src
     class BEFluidPipe : BlockEntity, IFluidNetworkMember
     {
         public List<BlockFacing> disabledFaces;
-        public List<BlockFacing> soakerFaces;
-        public int soaker = 0;
+        
         public bool filler=false;
         public bool drainer=false;
         bool locked = false;
@@ -160,28 +159,8 @@ namespace qptech.src
         {
             base.Initialize(api);
             checkfaces = BlockFacing.ALLFACES;
-            soakerFaces = new List<BlockFacing>();
-            if (Block.Attributes != null)
-            {
-                soaker= Block.Attributes["soaker"].AsInt(soaker);
-                string[] soakerfacename;
-                soakerfacename = Block.Attributes["soakerFaces"].AsArray<string>();
-                
-                if (soakerfacename != null && soakerfacename.Length > 0)
-                {
-                    foreach (string s in soakerfacename)
-                    {
-                        BlockFacing bf = BlockFacing.FromCode(s);
-                        if (bf == null) { continue; }
-                        soakerFaces.Add(bf);
-                        if (disabledFaces != null && !disabledFaces.Contains(bf)){ disabledFaces.Add(bf); }
-                    }
-                }
-                else
-                {
-                    soaker = 0;
-                }
-            }
+            
+            
             if (NetworkID != Guid.Empty && (api is ICoreServerAPI))
             {
                 FlexNetworkManager.RecreateNetwork(NetworkID, ProductID);
@@ -427,16 +406,7 @@ namespace qptech.src
                     disabledFaces = new List<BlockFacing>();
                 }
             }
-            if (soaker != 0)
-            {
-                if (soakerFaces!=null && soakerFaces.Count > 0)
-                {
-                    foreach (BlockFacing bf in soakerFaces)
-                    {
-                        if (!disabledFaces.Contains(bf)) { disabledFaces.Add(bf); }
-                    }
-                }
-            }
+            
             
         }
 
@@ -454,10 +424,7 @@ namespace qptech.src
                 BlockFacing subface = GetSubFace(blockSel);
                 
                 if (disabledFaces == null) { disabledFaces = new List<BlockFacing>(); }
-                if (soaker != 0 && soakerFaces != null && soakerFaces.Count > 0)
-                {
-                    if (soakerFaces.Contains(subface)) { return true; }
-                }
+                
                 if (disabledFaces.Contains(subface)) { disabledFaces.Remove(subface); }
                 else { disabledFaces.Add(subface); }
                 MarkDirty(true);

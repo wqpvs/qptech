@@ -86,6 +86,7 @@
     <Compile Include="src\networks\FluidNetwork.cs" />
     <Compile Include="src\networks\IFluidNetworkUser.cs" />
     <Compile Include="src\networks\PowerNetwork.cs" />
+    <Compile Include="src\pipes\BEIrrigator.cs" />
     <Compile Include="src\pipes\BlockFluidPipe.cs" />
     <Compile Include="src\Electricity\BEBMPGenerator.cs" />
     <Compile Include="src\Electricity\BEBMPMotor.cs" />
