@@ -50,6 +50,8 @@ namespace qptech.src
             }
             return used;
         }
+        public bool IsOnlyDestination() { return false; }
+        public bool IsOnlySource() { return true; }
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);

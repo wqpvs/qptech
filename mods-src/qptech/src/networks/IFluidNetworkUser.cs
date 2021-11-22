@@ -24,5 +24,8 @@ namespace qptech.src.networks
         int TakeFluid(Item item, int quantity);
         //returns any fluid item that might be stored
         Item QueryFluid();
+
+        bool IsOnlySource();
+        bool IsOnlyDestination();
     }
 }

@@ -69,6 +69,8 @@ namespace qptech.src.pipes
             return 0;
         }
 
+        public bool IsOnlyDestination() { return true; }
+        public bool IsOnlySource() { return false; }
         void DoIrrigation()
         {
             if (internalwater < waterUsage) { return; }

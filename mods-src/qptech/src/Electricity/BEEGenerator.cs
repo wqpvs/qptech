@@ -60,7 +60,8 @@ namespace qptech.src
         }
         public int QueryFluid(Item item) { return 0; }
         public int TakeFluid(Item item, int amt) { return 0; }
-
+        public bool IsOnlyDestination() { return true; }
+        public bool IsOnlySource() { return false; }
         public virtual float SoundLevel
         {
             get { return 0.1f; }

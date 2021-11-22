@@ -193,9 +193,10 @@ namespace qptech.src
                 if (ent == null && !isdisabled) { continue; }
                 IFluidTank t = ent as IFluidTank;
                 IFlexNetworkMember ifn = ent as IFluidNetworkMember;
+                IFluidNetworkUser ifnu = ent as IFluidNetworkUser;
                 BEEGenerator g = ent as BEEGenerator;
                 BEWaterTower w = ent as BEWaterTower;
-                if (ifn==null && t == null && g == null && w == null && !isdisabled) { continue; }
+                if (ifnu==null && ifn==null && t == null && g == null && w == null && !isdisabled) { continue; }
                 if (ifn!=null && ifn.NetworkID != NetworkID) { continue; }
                 capi.Tesselator.TesselateBlock(pipesegment, out mesh);
                 if (bf == BlockFacing.NORTH)
@@ -280,7 +281,9 @@ namespace qptech.src
                     if (bf == BlockFacing.DOWN) { filler = true;  }
                     else if (bf == BlockFacing.UP) { drainer = true;  }
                     if (ogdrainer != drainer || ogfiller != filler) { MarkDirty(true); }                }
-                if (bf == BlockFacing.DOWN)
+                if (fnu != null && fnu.IsOnlyDestination()) { outputNodes.Add(finde); }
+                else if (fnu!=null && fnu.IsOnlySource()) { inputNodes.Add(finde); }
+                else if (bf == BlockFacing.DOWN)
                 {
                     outputNodes.Add(finde);
                 }
