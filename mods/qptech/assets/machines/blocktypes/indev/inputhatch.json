@@ -30,7 +30,7 @@
 	],
 	"creativeinventory": {
 		"general": [ "" ],
-		"qptech": [ "*-north" ]
+		"qptech": [ "" ]
 	},
 	"blockmaterial": "Metal",
 	"shape": { "base": "block/metal/electric/inputhatch" },

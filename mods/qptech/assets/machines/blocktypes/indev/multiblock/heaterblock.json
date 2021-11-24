@@ -10,7 +10,7 @@
 	},
 	"creativeinventory": {
 		"general": [ "" ],
-		"qptech": [ "*" ]
+		"qptech": [ "" ]
 	},
 	"blockmaterial": "Metal",
 	"shape": { "base": "block/metal/electric/heatsink" },

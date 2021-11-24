@@ -62,7 +62,8 @@
 	"blockdesc-wireplate-*": "Power up your devices with these cables!",
 	"block-wirejunction-*": "Cable Junction (LV)",
 	"blockdesc-wirejunction-*": "Sends power in all directions, including up and down",
-	"item-drilledplate-*": "Drilled Metal Plate (Bronze)",
+	"item-drilledplate-b*": "Drilled Metal Plate (Bronze)",
+	"item-drilledplate-steel": "Drilled Metal Plate (Steel)",
 	"itemdesc-drilledplate-*": "Intermediate part smith by hand, or one day maybe make on a machine?",
 	"item-machineplate-*": "Bronze Machine Plate",
 	"itemdesc-machineplate-*": "Intermediate part used to make bigger and better things - or just for fun, who am i to judge what you find fun?",
@@ -72,8 +73,10 @@
 	"item-rod-brass": "Metal Rod (Brass)",
 	"item-rod-*bronze": "Metal Rod (Bronze)",
 	"item-rod-iron": "Metal Rod (Iron)",
+	"item-rod-steel": "Metal Rod (Steel)",
 	"itemdesc-rod-*": "Inanimate Rod, hero of the people",
 	"item-screw-brass": "Metal Screw (Brass)",
+	"item-screw-steel": "Metal Screw (Steel)",
 	"itemdesc-screw-*": "Screw this!",
 	"item-wire-tin": "Metal Wire (Tin)",
 	"item-wire-copper": "Metal Wire (Copper)",
@@ -151,7 +154,13 @@
 	"liquidrubberportion": "Liquid Rubber",
 	"item-cable-copper": "Copper Cable",
 	"block-wiremill-*": "Wire Mill",
-	"blockdesc-wiremill-*": "At last, efficient and easy wiremaking!",
-	"*liquidrubberportion*": "Liquid Rubber"
+	"blockdesc-wiremill-*": "At last, efficient and easy wiremaking! (From copper rods)",
+	"*liquidrubberportion*": "Liquid Rubber",
+	"block-crusher-*": "Crusher Module",
+	"blockdesc-crusher-*": "Provides industrial crushing force to adjacent machines",
+	"block-lathe-*": "Lathe",
+	"blockdesc-lathe-*": "Ingots go in, rods come out - you can't explain that!",
+	"block-heater-*": "Heater Module",
+	"blockdesc-heater-*": "Provides industrial heating to adjacent machiens"
 
 }

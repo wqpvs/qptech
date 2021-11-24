@@ -173,8 +173,8 @@ namespace qptech.src
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
-            dsc.AppendLine("Stat :" + DeviceState.ToString());
-            
+            dsc.Append(" "+DeviceState.ToString());
+            dsc.AppendLine("");
         }
 
         public virtual int ReceiveItemOffer(ItemSlot offerslot, BlockFacing onFace)

@@ -1,16 +1,15 @@
 {
-	code: "screw",
+	code: "drilledplate",
 	creativeinventory: {
 		"general": [ "*" ],
 		"qptech": [ "*" ]
-
 	},
 	drawtype: "json",
-	shape: { base: "item/part/screw" },
-	maxstacksize: 64,
+	shape: { base: "item/part/drilledplate" },
+	maxstacksize: 8,
 	
 	variantgroups: [
-		{ code: "material", states: ["brass" ] },
+		{ code: "material", states: ["tinbronze", "bismuthbronze", "blackbronze","steel","iron" ] },
 	],
 		
 	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },

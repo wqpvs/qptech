@@ -391,27 +391,10 @@ namespace qptech.src
         {
             base.GetBlockInfo(forPlayer, dsc);
             
-            dsc.AppendLine("RM   :" + internalQuantity.ToString() + "/" + inputQuantity.ToString());
-            dsc.AppendLine("Make :" + recipe);
-            if (deviceState == enDeviceState.RUNNING)
-            {
-                double timeleft = (processingTime + processstarted - Api.World.Calendar.TotalHours);
-                timeleft = Math.Floor(timeleft * 100);
-                
-                dsc.AppendLine("Time Rem :"+timeleft.ToString());
-            }
-            if (heatRequirement > 0)
-            {
-                dsc.AppendLine("Input Item Heat must be " + heatRequirement.ToString() + "C");
-            }
-            if (materials != null && materials.Length > 0)
-            {
-                dsc.AppendLine("Usable Materials:");
-                foreach (string ing in materials)
-                {
-                    dsc.AppendLine(ing + ",");
-                }
-            }
+            //dsc.AppendLine("RM   :" + internalQuantity.ToString() + "/" + inputQuantity.ToString());
+            
+            //dsc.AppendLine(" [MAKES :" + recipe+"]");
+            //dsc.AppendLine("______________________");
         }
         public override int ReceiveItemOffer(ItemSlot offerslot, BlockFacing onFace)
         {

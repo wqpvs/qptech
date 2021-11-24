@@ -1,29 +1,30 @@
 {
-	code: "motor",
+	code: "machineplate",
 	creativeinventory: {
 		"general": [ "*" ],
 		"qptech": [ "*" ]
 	},
-	variantgroups: [
-		{ code: "level", states: ["primitive" ] },
-	],
 	drawtype: "json",
-	shape: { base: "item/part/motor-{level}" },
-	maxstacksize: 4,
+	shape: { base: "item/part/machineplate" },
+	maxstacksize: 8,
 	
-	
+	variantgroups: [
+		{ code: "material", states: ["bismuthbronze","iron","steel"] },
+	],
 		
 	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },
-	
+	textures: {
+		metal: { base: "game:block/metal/ingot/{material}" }
+	},
 	guiTransform: {
 		translation: { x: 0, y: 0, z: 0 },
-		rotation: { x: 154, y: 108, z: 12 },
-		origin: { x: 0.2, y: 0.05, z: 0.38 },
+		rotation: { x: 9, y: 137, z: -53 },
+		origin: { x: 0.44, y: 0, z: 0.38 },
 		scale: 2.92
 	},
 	fpHandTransform: {
 		translation: { x: -0.1, y: 0.2, z: 0 },
-		rotation: { x: 8, y: 1, z: -42 },
+		rotation: { x: 90, y: 99, z: -42 },
 		origin: { x: 0.5, y: 0, z: 0.5 },
 		scale: 2.15
 	},

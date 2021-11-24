@@ -1,15 +1,16 @@
 {
-	code: "machineplate",
+	code: "screw",
 	creativeinventory: {
 		"general": [ "*" ],
 		"qptech": [ "*" ]
+
 	},
 	drawtype: "json",
-	shape: { base: "item/part/machineplate" },
-	maxstacksize: 8,
+	shape: { base: "item/part/screw" },
+	maxstacksize: 64,
 	
 	variantgroups: [
-		{ code: "material", states: ["bismuthbronze"] },
+		{ code: "material", states: ["brass","steel" ] },
 	],
 		
 	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },

@@ -350,28 +350,41 @@ namespace qptech.src
             mesher.AddMeshData(meshdata);
             return base.OnTesselation(mesher, tessThreadTesselator);
         }
+        bool showextrainfo = false;
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
-            if (IsOn) { dsc.AppendLine("Turned On (right click with screwdriver or hammer to turn on/off)"); }
-            else { dsc.AppendLine("Turned Off (right click with screwdriver or hammer to turn on/off)"); }
+            
             if (networkID == Guid.Empty) { dsc.AppendLine("not connected to any network"); }
             else { 
-                dsc.AppendLine("connected to network:" + NetworkID.ToString());
+                
                 PowerNetwork pn = FlexNetworkManager.GetNetworkWithID(NetworkID) as PowerNetwork;
                 if (pn == null) { dsc.AppendLine("INVALID POWER NETWORK"); }
-                else
+                else 
                 {
-                    dsc.AppendLine("Gen:" + pn.NetworkStatus.generated + " Use:" + pn.NetworkStatus.consumed + " Nodes:" + pn.NetworkStatus.nodes+" Stored:"+pn.NetworkStatus.stored);
+                    
+                    
+                    dsc.AppendLine("Power Network is generating " + pn.NetworkStatus.generated + ", using " + pn.NetworkStatus.consumed + ", and storing "+pn.NetworkStatus.stored+" flux.");
                 }
                 
             }
-            if (IsPowered) { dsc.AppendLine("POWERED"); }
-            dsc.AppendLine("This Device: uses:" + usePower + " gens:" + genPower + " netoffer:" + LastPower);
+
             if (IsBattery)
             {
-                dsc.AppendLine("Storing " + storedFlux + " out of " + fluxStorage);
+                dsc.Append(" Storing " + storedFlux + " out of " + fluxStorage + " flux");
             }
+            else if (genPower > 0) {
+                dsc.Append(" Generates " + genPower + " flux");
+                if (!isOn) { dsc.Append("(OFF)"); } 
+            }
+            else if (usePower > 0) {
+                dsc.Append( "Uses " + usePower + " flux" );
+                if (!IsOn) { dsc.Append(" (OFF) "); }
+                else if (!IsPowered) {dsc.Append(" (NO POWER) "); }
+                else { dsc.Append(" (OK) "); }
+            }
+            
+            
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
 
