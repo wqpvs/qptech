@@ -1,0 +1,13 @@
+{
+	ingredientPattern: "R	P",
+	ingredients: {
+		"R": { type: "item", code: "braidedwire-copper", quantity: 5 },
+		"P": { type: "item", code: "rubbercrucible", "quantity": 1 }
+		
+		
+		
+	},
+	width: 1,
+	height: 2,
+	output: { type: "item", code: "cable-copper", quantity: 5  }
+}

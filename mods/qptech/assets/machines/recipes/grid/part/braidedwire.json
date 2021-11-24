@@ -1,0 +1,13 @@
+{
+	ingredientPattern: "S	R	P",
+	ingredients: {
+		"R": { type: "item", code: "wire-copper", quantity: 4 },
+		"P": { type: "item", code: "pullplate-*", isTool: true },
+		"S": { type: "item", code: "screwdriver-*", isTool: true }
+		
+		
+	},
+	width: 1,
+	height: 3,
+	output: { type: "item", code: "braidedwire-copper", quantity: 1  }
+}

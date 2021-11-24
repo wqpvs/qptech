@@ -1,0 +1,18 @@
+{
+	ingredientPattern: "TSB",
+	ingredients: {
+		"B": {
+			"type": "item",
+			"code": "drilledplate-steel",
+			
+			"quantity": 1
+		},
+		"S": { type: "item", code: "screw-steel", quantity: 4 },
+		"T": { type: "item", code: "screwdriver-*", isTool: true }
+		
+		
+	},
+	width: 1,
+	height: 3,
+	output: { type: "item", code: "machineplate-steel", quantity: 1  }
+}

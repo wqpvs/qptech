@@ -1,0 +1,73 @@
+{
+	"code": "rubbercrucible",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"drawtype": "json",
+	"shape": { "base": "item/clay/rubbercrucible" },
+	"maxstacksize": 1,
+
+	"fpHandTransform": {
+		"translation": {
+			"x": 0.05,
+			"y": 0.25,
+			"z": 0
+		},
+		"rotation": {
+			"x": 180,
+			"y": -12,
+			"z": -180
+		},
+		"scale": 2.47
+	},
+	"guiTransform": {
+		"translation": {
+			"x": 23,
+			"y": -17,
+			"z": 0
+		},
+		"rotation": {
+			"x": -25,
+			"y": -150,
+			"z": -180
+		},
+		"scale": 2.96
+	},
+	"groundTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 90,
+			"y": 0,
+			"z": 0
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0.5,
+			"z": 0.5299
+		},
+		"scale": 3.1
+	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -0.25,
+			"y": -0.5,
+			"z": -0.5
+		},
+		"rotation": {
+			"x": 0,
+			"y": -180,
+			"z": 80
+		},
+		"origin": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"scale": 0.46
+	}
+}

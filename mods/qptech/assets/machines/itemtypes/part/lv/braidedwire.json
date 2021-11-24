@@ -1,0 +1,100 @@
+{
+	"code": "braidedwire",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"drawtype": "json",
+	"shape": { "base": "item/part/braidedwire" },
+	"maxstacksize": 128,
+
+	"variantgroups": [
+		{
+			"code": "material",
+			"states": [ "copper" ]
+		}
+	],
+
+	"creativeinventory": {
+		"general": [ "*" ],
+		"items": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"textures": {
+		"metal": { "base": "game:block/metal/ingot/{material}" }
+	},
+	"guiTransform": {
+		"translation": {
+			"x": 12,
+			"y": 9,
+			"z": 0
+		},
+		"rotation": {
+			"x": 177,
+			"y": -91,
+			"z": 33
+		},
+		"origin": {
+			"x": 0.44,
+			"y": 0,
+			"z": 0.38
+		},
+		"scale": 2.86
+	},
+	"fpHandTransform": {
+		"translation": {
+			"x": -0.1,
+			"y": 0.2,
+			"z": 0
+		},
+		"rotation": {
+			"x": 136,
+			"y": -63,
+			"z": -123
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 2.15
+	},
+	"groundTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 4.31
+	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -0.78,
+			"y": -0.09,
+			"z": -0.67
+		},
+		"rotation": {
+			"x": 9,
+			"y": -1,
+			"z": -16
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 0.76
+	}
+
+
+}
