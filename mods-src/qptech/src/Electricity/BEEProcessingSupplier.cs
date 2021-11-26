@@ -31,5 +31,12 @@ namespace qptech.src
             if (processes[process] < strength) { return false; }
             return true;
         }
+        public double RequestProcessing(string process)
+        {
+            if (processes == null) { return 0; }
+            if (!isOn || !IsPowered) { return 0; }
+            if (!processes.ContainsKey(process)) { return 0; }
+            return processes[process];
+        }
     }
 }

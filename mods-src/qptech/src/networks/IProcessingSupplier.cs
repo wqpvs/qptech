@@ -9,5 +9,6 @@ namespace qptech.src.networks
     interface IProcessingSupplier
     {
         bool RequestProcessing(string process, double amount);
+        double RequestProcessing(string process);
     }
 }

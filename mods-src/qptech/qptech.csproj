@@ -80,6 +80,7 @@
     <Compile Include="src\Electricity\BEEProcessingSupplier.cs" />
     <Compile Include="src\Electricity\BEERecipeProcessor.cs" />
     <Compile Include="src\Electricity\ElectricityAPI.cs" />
+    <Compile Include="src\networks\BEProcessToProcess.cs" />
     <Compile Include="src\networks\IProcessingSupplier.cs" />
     <Compile Include="src\networks\IFlexNetwork.cs" />
     <Compile Include="src\networks\FlexNetworkManager.cs" />
