@@ -31,7 +31,7 @@
 
 
 			"requiredProcesses": {
-				"steam": 500
+				"torque": 500
 			},
 			"genFlux": 32
 
