@@ -23,7 +23,7 @@ namespace qptech.src
             return genPower;
         }
         bool generatorready = true;
-        public void SetAvailablePower(bool onoff)
+        public virtual void SetAvailablePower(bool onoff)
         {
             generatorready = onoff;
         }

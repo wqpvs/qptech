@@ -13,12 +13,14 @@ using Vintagestory.API.Util;
 using Vintagestory.API.Client;
 using qptech.src.networks;
 
-namespace qptech.src.networks
+namespace qptech.src
 {
-    class BEProcessToProcess : BlockEntity, IProcessingSupplier
+    /// <summary>
+    /// this class will deprecate the old generator class eventually
+    /// </summary>
+    class BEEIndustrialGenerator:BEElectric
     {
-        public Dictionary<string, double> suppliedProcesses;
-        public Dictionary<string, double> requiredProcesses;
+        Dictionary<string, double> requiredProcesses;
         Dictionary<string, double> missing;
         bool missingprocesses = false;
         string missingprocesstext = "";
@@ -27,32 +29,18 @@ namespace qptech.src.networks
             base.Initialize(api);
             if (Block.Attributes != null)
             {
-                suppliedProcesses = new Dictionary<string, double>();
-                suppliedProcesses = Block.Attributes["processes"].AsObject<Dictionary<string, double>>();
                 requiredProcesses = new Dictionary<string, double>();
                 requiredProcesses = Block.Attributes["requiredProcesses"].AsObject<Dictionary<string, double>>();
-               
+                missing = new Dictionary<string, double>();
             }
         }
 
-        public virtual bool RequestProcessing(string process, double strength)
+        public override int RequestPower()
         {
-            if (suppliedProcesses == null||requiredProcesses==null) { return false; }
-            
-            if (!suppliedProcesses.ContainsKey(process)) { return false; }
-            if (!CheckRequiredProcesses()) { return false; }
-            if (suppliedProcesses[process] < strength) { return false; }
-            return true;
+            if (!CheckRequiredProcesses()) { return 0; }
+            return base.RequestPower();
         }
 
-        public virtual double RequestProcessing(string process)
-        {
-            if (suppliedProcesses == null || requiredProcesses == null) { return 0; }
-            if (!suppliedProcesses.ContainsKey(process)) { return 0; }
-            if (!CheckRequiredProcesses()) { return 0; }
-            return suppliedProcesses[process];
-        }
-        
         protected virtual bool CheckRequiredProcesses()
         {
             missing = new Dictionary<string, double>(requiredProcesses);
@@ -61,7 +49,7 @@ namespace qptech.src.networks
             BlockFacing[] checkfaces = BlockFacing.ALLFACES;
             foreach (BlockFacing bf in checkfaces)
             {
-                
+
                 IProcessingSupplier ips = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as IProcessingSupplier;
                 if (ips == null) { continue; }
                 foreach (string checkprocess in missing.Keys.ToArray<string>())
@@ -72,10 +60,11 @@ namespace qptech.src.networks
             }
             bool ok = true;
             missingprocesstext = "MISSING: ";
-            foreach (KeyValuePair<string,double>kvp in missing)
+            foreach (KeyValuePair<string, double> kvp in missing)
             {
-                if (kvp.Value > 0) {
-                    ok = false;missingprocesses = true;
+                if (kvp.Value > 0)
+                {
+                    ok = false; missingprocesses = true;
                     missingprocesstext += "[" + kvp.Key + " " + kvp.Value + "]";
                 }
             }
@@ -100,4 +89,5 @@ namespace qptech.src.networks
             if (missingprocesses) { dsc.Append(missingprocesstext); }
         }
     }
+
 }

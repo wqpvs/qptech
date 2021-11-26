@@ -7,7 +7,7 @@ using Vintagestory.API.Common;
 using qptech.src.misc;
 using qptech.src.multiblock;
 using qptech.src.pipes;
-
+using qptech.src.networks;
 
 
 namespace qptech.src
@@ -70,6 +70,11 @@ namespace qptech.src
             api.RegisterBlockEntityClass("BEERecipeProcessor", typeof(BEERecipeProcessor));
             api.RegisterBlockEntityClass("BEEProcessingSupplier", typeof(BEEProcessingSupplier));
             api.RegisterBlockEntityClass("BEIrrigator", typeof(BEIrrigator));
+
+            api.RegisterBlockEntityClass("BEProcessToProcess", typeof(BEProcessToProcess));
+            api.RegisterBlockEntityClass("BEProcessToProcessFluidUser", typeof(BEProcessToProcessFluidUser));
+
+            api.RegisterBlockEntityClass("BEEIndustrialGenerator", typeof(BEEIndustrialGenerator));
             //api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
             //api.RegisterBlockEntityClass("BEEMotor", typeof(BEEMotor));
 

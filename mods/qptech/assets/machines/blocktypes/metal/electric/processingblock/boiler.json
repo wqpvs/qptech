@@ -1,7 +1,7 @@
 {
-	"code": "industrialheater",
-	"class": "ElectricalBlock",
-	"entityclass": "BEEProcessingSupplier",
+	"code": "boiler",
+	
+	"entityclass": "BEProcessToProcessFluidUser",
 	"creativeinventory": {
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
@@ -17,7 +17,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "mv" ]
+			"states": [ "small" ]
 		},
 		{
 			"code": "side",
@@ -27,16 +27,19 @@
 
 	"attributesByType": {
 
-		"*-mv-*": {
-			"genFlux": 0,
-			"useFlux": 128,
-
+		"*-small-*": {
+			
 			"processes": {
-				
-				"heating": 2000
+
+				"steam": 500
 			},
-			"inputFace": "west",
-			"outputFace": "east"
+			"requiredProcesses": {
+				"heating": 1000
+			},
+			"fluidcode": "game:waterportion",
+			"fluidUse": 1,
+			"fluidTankSize": 10,
+			"fluidtick": 500
 		}
 	},
 
@@ -44,7 +47,7 @@
 	"drawtype": "json",
 	
 	"textures": {
-		"all": { "base": "block/tempblocks/heater" }
+		"all": { "base": "block/tempblocks/boiler" }
 	},
 	"shape": { "base": "block/metal/electric/tempmachine" },
 	"shapeByType": {

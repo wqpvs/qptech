@@ -1,7 +1,7 @@
 {
-	"code": "industrialheater",
-	"class": "ElectricalBlock",
-	"entityclass": "BEEProcessingSupplier",
+	"code": "industrialgenerator",
+	
+	"entityclass": "BEEIndustrialGenerator",
 	"creativeinventory": {
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
@@ -17,7 +17,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "mv" ]
+			"states": [ "small" ]
 		},
 		{
 			"code": "side",
@@ -27,16 +27,14 @@
 
 	"attributesByType": {
 
-		"*-mv-*": {
-			"genFlux": 0,
-			"useFlux": 128,
+		"*-small-*": {
 
-			"processes": {
-				
-				"heating": 2000
+
+			"requiredProcesses": {
+				"steam": 500
 			},
-			"inputFace": "west",
-			"outputFace": "east"
+			"genFlux": 32
+
 		}
 	},
 
@@ -44,7 +42,7 @@
 	"drawtype": "json",
 	
 	"textures": {
-		"all": { "base": "block/tempblocks/heater" }
+		"all": { "base": "block/tempblocks/mk2gen" }
 	},
 	"shape": { "base": "block/metal/electric/tempmachine" },
 	"shapeByType": {
