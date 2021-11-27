@@ -27,6 +27,7 @@ namespace qptech.src
         {
             if (processes == null) { return false; }
             if (!isOn || !IsPowered) { return false; }
+            if (deviceState == enDeviceState.POWERHOLD) { return false; }
             if (!processes.ContainsKey(process)) { return false; }
             if (processes[process] < strength) { return false; }
             return true;
@@ -35,6 +36,7 @@ namespace qptech.src
         {
             if (processes == null) { return 0; }
             if (!isOn || !IsPowered) { return 0; }
+            if (deviceState == enDeviceState.POWERHOLD) { return 0; }
             if (!processes.ContainsKey(process)) { return 0; }
             return processes[process];
         }

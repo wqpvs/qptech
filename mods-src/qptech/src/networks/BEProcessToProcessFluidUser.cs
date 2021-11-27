@@ -17,6 +17,7 @@ namespace qptech.src.networks
         int requiredFluid => fluidTankSize - fluidTankLevel;
         bool fluidok;
         int fluidtick = 75;
+        bool usingfluid = false;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -44,6 +45,7 @@ namespace qptech.src.networks
         public int OfferFluid(Item item, int quantity)
         {
             if (item != fluid) { return 0; }
+            
             int used = Math.Min(quantity, requiredFluid);
             if (used < 0) { used = 0; }
             if (used > 0)
@@ -71,8 +73,10 @@ namespace qptech.src.networks
 
         protected override bool CheckRequiredProcesses()
         {
+            usingfluid = false;
             bool ok = base.CheckRequiredProcesses();
             if (!ok) { return false; }
+            else { usingfluid = true; }
             if (!fluidok) { return false; }
             MarkDirty();
             return true;
@@ -81,8 +85,9 @@ namespace qptech.src.networks
         public void OnTick(float dt)
         {
             fluidok = true;
+            
             if (fluidTankLevel < fluidUse) { fluidok = false; }
-            else { fluidTankLevel -= fluidUse; }
+            else if (usingfluid) { fluidTankLevel -= fluidUse; }
             MarkDirty();
         }
 

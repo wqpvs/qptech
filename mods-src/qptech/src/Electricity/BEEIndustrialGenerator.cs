@@ -22,6 +22,7 @@ namespace qptech.src
     {
         Dictionary<string, double> requiredProcesses;
         Dictionary<string, double> missing;
+        List<BlockFacing> processInputFaces;
         bool missingprocesses = false;
         string missingprocesstext = "";
         public override void Initialize(ICoreAPI api)
@@ -32,13 +33,24 @@ namespace qptech.src
                 requiredProcesses = new Dictionary<string, double>();
                 requiredProcesses = Block.Attributes["requiredProcesses"].AsObject<Dictionary<string, double>>();
                 missing = new Dictionary<string, double>();
+                if (!Block.Attributes.KeyExists("processInputFaces")) { processInputFaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
+                else
+                {
+                    string[] cfaces = Block.Attributes["processInputFaces"].AsArray<string>();
+                    processInputFaces = new List<BlockFacing>();
+                    foreach (string f in cfaces)
+                    {
+                        processInputFaces.Add(BEElectric.OrientFace(Block.Code.ToString(), BlockFacing.FromCode(f)));
+                    }
+                }
             }
         }
 
-        public override int RequestPower()
+        
+        public override int AvailablePower()
         {
             if (!CheckRequiredProcesses()) { return 0; }
-            return base.RequestPower();
+            return base.AvailablePower();
         }
 
         protected virtual bool CheckRequiredProcesses()
@@ -46,7 +58,7 @@ namespace qptech.src
             missing = new Dictionary<string, double>(requiredProcesses);
             missingprocesses = false;
             if (missing.Count == 0) { MarkDirty(); return true; }
-            BlockFacing[] checkfaces = BlockFacing.ALLFACES;
+            BlockFacing[] checkfaces = processInputFaces.ToArray();
             foreach (BlockFacing bf in checkfaces)
             {
 

@@ -1,7 +1,7 @@
 {
-	"code": "industrialgenerator",
-	"class": "ElectricalBlock",
-	"entityclass": "BEEIndustrialGenerator",
+	"code": "turbine",
+	
+	"entityclass": "BEProcessToProcess",
 	"creativeinventory": {
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
@@ -28,22 +28,23 @@
 	"attributesByType": {
 
 		"*-small-*": {
+			
+			"processes": {
 
-
-			"requiredProcesses": {
 				"torque": 500
 			},
-			"processInputFaces": [ "west" ],
-			"genFlux": 32
-
+			"requiredProcesses": {
+				"steam": 500
+			},
+			"processInputFaces": ["west"]
 		}
 	},
 
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-
+	
 	"textures": {
-		"all": { "base": "block/tempblocks/mk2gen" }
+		"all": { "base": "block/tempblocks/turbine" }
 	},
 	"shape": { "base": "block/metal/electric/tempmachine" },
 	"shapeByType": {

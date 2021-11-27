@@ -42,7 +42,7 @@ namespace qptech.src
         }
         public virtual int RequestPower()
         {
-            powerpulse = true;
+            
             if (!isOn) { return 0; }
             return usePower;
         }
@@ -133,7 +133,7 @@ namespace qptech.src
         public virtual bool IsOn { get { return isOn; } }
         protected bool notfirsttick = false;
         protected bool justswitched = false; //create a delay after the player switches power
-        bool powerpulse = false;
+        
         public BlockEntity EBlock { get { return this as BlockEntity; } }
         public override void Initialize(ICoreAPI api)
         {

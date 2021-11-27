@@ -11,7 +11,8 @@ using Vintagestory.GameContent;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.API.Client;
-using qptech.src.networks;
+using qptech.src;
+
 
 namespace qptech.src.networks
 {
@@ -22,6 +23,7 @@ namespace qptech.src.networks
         Dictionary<string, double> missing;
         bool missingprocesses = false;
         string missingprocesstext = "";
+        List<BlockFacing> processInputFaces;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -31,7 +33,16 @@ namespace qptech.src.networks
                 suppliedProcesses = Block.Attributes["processes"].AsObject<Dictionary<string, double>>();
                 requiredProcesses = new Dictionary<string, double>();
                 requiredProcesses = Block.Attributes["requiredProcesses"].AsObject<Dictionary<string, double>>();
-               
+                if (!Block.Attributes.KeyExists("processInputFaces")) { processInputFaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
+                else
+                {
+                    string[] cfaces = Block.Attributes["processInputFaces"].AsArray<string>();
+                    processInputFaces = new List<BlockFacing>();
+                    foreach (string f in cfaces)
+                    {
+                        processInputFaces.Add(BEElectric.OrientFace(Block.Code.ToString(), BlockFacing.FromCode(f)));
+                    }
+                }
             }
         }
 
@@ -58,7 +69,7 @@ namespace qptech.src.networks
             missing = new Dictionary<string, double>(requiredProcesses);
             missingprocesses = false;
             if (missing.Count == 0) { MarkDirty(); return true; }
-            BlockFacing[] checkfaces = BlockFacing.ALLFACES;
+            BlockFacing[] checkfaces = processInputFaces.ToArray();
             foreach (BlockFacing bf in checkfaces)
             {
                 
