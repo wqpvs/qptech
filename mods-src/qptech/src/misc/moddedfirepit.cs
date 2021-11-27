@@ -73,6 +73,10 @@ namespace Vintagestory.GameContent
                 if (process != "heating") { return 0; }
                 return this.furnaceTemperature;
             }
+            public bool CheckProcessing(string process)
+            {
+                return process == "heating";
+            }
         }
     }
 }

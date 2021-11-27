@@ -63,7 +63,12 @@ namespace qptech.src.networks
             if (!CheckRequiredProcesses()) { return 0; }
             return suppliedProcesses[process];
         }
-        
+        public bool CheckProcessing(string process)
+        {
+            if (suppliedProcesses == null) { return false; }
+            if (suppliedProcesses.ContainsKey(process)) { return true; }
+            return false;
+        }
         protected virtual bool CheckRequiredProcesses()
         {
             missing = new Dictionary<string, double>(requiredProcesses);

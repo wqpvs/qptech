@@ -10,5 +10,6 @@ namespace qptech.src.networks
     {
         bool RequestProcessing(string process, double amount);
         double RequestProcessing(string process);
+        bool CheckProcessing(string process);
     }
 }

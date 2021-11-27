@@ -10,7 +10,7 @@
 	"attributes": {
 		"maxFlux": 4,
 		"capacitance": 20,
-		"genFlux": 10,
+		"genFlux": 8,
 		"receptionFaces": [ "north" ],
 		"requiredHeat": 800,
 		"heatFace": "down",

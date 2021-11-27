@@ -40,5 +40,11 @@ namespace qptech.src
             if (!processes.ContainsKey(process)) { return 0; }
             return processes[process];
         }
+        public bool CheckProcessing(string process)
+        {
+            if (processes == null) { return false; }
+            if (processes.ContainsKey(process)) { return true; }
+            return false;
+        }
     }
 }

@@ -14,6 +14,7 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Util;
 using Vintagestory.ServerMods;
+using qptech.src.networks;
 
 namespace qptech.src
 {
@@ -90,11 +91,10 @@ namespace qptech.src
                     BlockPos checkforgenerator = checkPos.UpCopy();
                     checkblock = Api.World.BlockAccessor.GetBlockEntity(checkforgenerator);
                     var generator = checkblock as BEElectric;
-                    if (generator != null)
-                    {
-                        if (generator.IsOn) { dofuel = true; }
-                    }
-                    if (firepit.inputSlot != null&&firepit.inputSlot.StackSize>0) { dofuel=true; }
+                    
+                    if (generator != null&& generator.IsOn) { dofuel = true; }
+                    else if (checkblock is BEProcessToProcess) { dofuel = true; }
+                    else if (firepit.inputSlot != null&&firepit.inputSlot.StackSize>0) { dofuel=true; }
                     if (!dofuel) { continue; }
                     
                     //IF fuel is in the fuelSlot don't bother

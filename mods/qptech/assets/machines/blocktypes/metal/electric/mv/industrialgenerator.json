@@ -17,7 +17,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "small" ]
+			"states": [ "mv" ]
 		},
 		{
 			"code": "side",
@@ -27,7 +27,7 @@
 
 	"attributesByType": {
 
-		"*-small-*": {
+		"*-mv-*": {
 
 
 			"requiredProcesses": {
