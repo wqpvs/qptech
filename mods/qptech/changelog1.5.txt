@@ -1,0 +1,29 @@
+﻿1.5 Changelog
+(* devices are only available in creative right now)
+- QPTECHAPI no longer used or needed (will be ignored)
+- much improved power networks, connected devices form networks share storage/generation/usage as a single network
+- fixed device powering on/off
+- disabled animations to preven major crash
+- added Fluidnetworks to more smoothly move fluids thru pipes
+    - a pipe on side or bottom will take fluid out of a network
+    - only pipe on top of fluid tank will input into tank
+- barrel filling - pipes over barrels will fill them (if possible)
+  - will stop filling if a valid sealable recipe is present
+- will also drain from bottom if barrel cannot be sealed or if it's not sealed
+- LV Punching Machine - plates->drilled plates
+- *MV Lathe - cold ingots -> rods
+- new machine types/industrial processes:
+   - *MV Heater - supplies 2000 units of heat if powered (needs electricity)
+   - *MV Crusher - supplies crushing power (needs electricity)
+   - *Boiler- provides steam (requires heat + water)
+   - *Turbine - provides torque (NOT related to the mechanical power system...yet)
+   - *MV Generator - provides power from torque (from the turbine NOT related to mechanical power system)
+- irrigation pipes tweaked to use new fluid network
+- added items:
+   - braided copper wire
+   - cable
+   - cracked rubber crucible
+   - steel screws, steel bolts, steel rings
+   - MV Stator, MV Rotor, MV Motor
+- MV Sheet Roller - metal plates-> metal sheets
+- *MV Wiremill - metal sheets-> metal wire

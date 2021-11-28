@@ -418,6 +418,7 @@
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-copper.png" />
     <Content Include="qptech\qptech.dll" />
     <Content Include="qptech\qptech.pdb" />
+    <Content Include="qptech\changelog1.5.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="qptech\assets\game\blocktypes\" />
