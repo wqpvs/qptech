@@ -169,5 +169,9 @@
 	"item-ring-steel": "Steel Ring Part",
 	"itemdesc-ring-*": "Machine part, how ring-like! A marvel of form and function",
 	"item-stator-mv": "Stator Part [MV]",
-	"itemdesc-stator-*": "Part of a motor"
+	"itemdesc-stator-*": "Part of a motor",
+	"item-bolt-*": "Metal Bolt",
+	"itemdesc-bolt-*": "You've cut a rod - now you some bolts, so yay?",
+	"item-rotor-mv": "Rotor Part [MV]",
+	"itemdesc-rotor-*": "Part of a motor"
 }

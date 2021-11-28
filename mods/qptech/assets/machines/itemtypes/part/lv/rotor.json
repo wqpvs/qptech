@@ -1,0 +1,90 @@
+{
+	"code": "rotor",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"variantgroups": [
+		{
+			"code": "level",
+			"states": [ "mv" ]
+		}
+	],
+	"drawtype": "json",
+	"shape": { "base": "item/part/rotor" },
+	"maxstacksize": 4,
+
+	"guiTransform": {
+		"translation": {
+			"x": -1,
+			"y": -17,
+			"z": 0
+		},
+		"rotation": {
+			"x": -26,
+			"y": -66,
+			"z": -16
+		},
+		"origin": {
+			"x": 0.2,
+			"y": 0.05,
+			"z": 0.38
+		},
+		"scale": 1.51
+	},
+	"fpHandTransform": {
+		"translation": {
+			"x": -0.1,
+			"y": 0.2,
+			"z": 0
+		},
+		"rotation": {
+			"x": 8,
+			"y": 1,
+			"z": -42
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 1.27
+	},
+	"groundTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 11,
+			"y": 0,
+			"z": 0
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0.3,
+			"z": 0.5
+		},
+		"scale": 1.85
+	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -2.1,
+			"y": -0.5,
+			"z": -1.5
+		},
+		"rotation": {
+			"x": -2,
+			"y": -86,
+			"z": -8
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 0.31
+	}
+
+}

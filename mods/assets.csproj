@@ -97,6 +97,7 @@
     <None Include="qptech\assets\machines\config\handbook\qptech.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\bolt.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\ring.json" />
+    <None Include="qptech\assets\machines\itemtypes\part\lv\rotor.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\stator.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\rubbercrucible.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\drilledplate.json" />
@@ -161,6 +162,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\wireplate-tin-electricjunction.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\wireplate-tin-2a.json" />
     <None Include="qptech\assets\game\recipes\grid\metalsheet.json" />
+    <None Include="qptech\assets\machines\recipes\grid\part\rotor-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\stator-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\ring-steel.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\bolt.json" />
@@ -278,6 +280,7 @@
     <None Include="qptech\assets\machines\shapes\item\part\motor-primitive.json" />
     <None Include="qptech\assets\machines\shapes\item\part\ring-steel.json" />
     <None Include="qptech\assets\machines\shapes\item\part\rod.json" />
+    <None Include="qptech\assets\machines\shapes\item\part\rotor.json" />
     <None Include="qptech\assets\machines\shapes\item\part\screw.json" />
     <None Include="qptech\assets\machines\shapes\item\part\stator.json" />
     <None Include="qptech\assets\machines\shapes\item\part\wire.json" />
