@@ -25,7 +25,7 @@
 	],
 	"attributes": {
 		"genFlux": 0,
-		"useFlux": 10,
+		"useFlux": 4,
 		"maxHeat": 1000,
 		"degreesPerHour": 1500,
 		"maxItems": 2,

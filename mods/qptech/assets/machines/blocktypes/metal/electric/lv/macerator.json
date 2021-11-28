@@ -29,7 +29,7 @@
 
 		"*-lv-*": {
 			"genFlux": 0,
-			"useFlux": 10,
+			"useFlux": 8,
 			"processingTicks": 15,
 			"receptionFaces": [ "north" ]
 		}

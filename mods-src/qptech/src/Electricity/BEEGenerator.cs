@@ -38,7 +38,7 @@ namespace qptech.src
         bool haswater = false;
         bool heated = false;
         int internalwater = 0;
-        
+        int internalstorage = 2;
         Item fluiditem;
         public Item QueryFluid()
         {
@@ -94,6 +94,7 @@ namespace qptech.src
                 heatFace = OrientFace(Block.Code.ToShortString(), heatFace);
                 waterUsage = Block.Attributes["waterUsage"].AsInt(waterUsage);
                 if (waterUsage > 0) { requiresWater = true; }
+                internalstorage = waterUsage * 3;
                 waterUsePeriod = Block.Attributes["waterUsePeriod"].AsFloat(waterUsePeriod);
                 overloadIfNoWater = Block.Attributes["overloadIfNoWater"].AsBool(overloadIfNoWater);
                 waterFace = BlockFacing.FromCode(Block.Attributes["waterFace"].AsString("up"));
@@ -215,14 +216,9 @@ namespace qptech.src
             lastwaterused = currenttime;
             BlockPos bp = Pos.Copy().Offset(waterFace);
             BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
-            if (internalwater >= waterUsage)
-            {
-                internalwater -= waterUsage;
-                haswater = true;
-                MarkDirty();
-            }
             
-            if (checkblock == null&&!haswater) { return false; }
+            
+            
             
             var checkcontainer = checkblock as BlockEntityContainer;
             if (checkcontainer != null)
@@ -238,11 +234,13 @@ namespace qptech.src
                     
                     if (match && checkslot.StackSize > 0)
                     {
-                        int needs = waterUsage - internalwater;
-                        if (needs <= 0) { return true; }
-                        internalwater += waterUsage;
-                        ItemStack takestack=checkslot.TakeOut(needs);
-                        internalwater += takestack.StackSize;
+                        int needs = internalstorage - internalwater;
+                        int watertaken = Math.Min(needs, checkslot.StackSize);
+                        
+                        ItemStack takestack=checkslot.TakeOut(watertaken);
+                        internalwater += watertaken;
+                        if (checkslot.StackSize == 0) { checkslot.Itemstack = null; }
+                        checkslot.MarkDirty();
                         MarkDirty();
                         if (checkslot.StackSize < 5)
                         {
@@ -252,12 +250,20 @@ namespace qptech.src
                         {
                             Api.World.PlaySoundAt(new AssetLocation("sounds/steamburst"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
                         }
-                        checkslot.MarkDirty();
+                        
                         
                         break;
                     }
                 }
             }
+
+            if (internalwater >= waterUsage)
+            {
+                internalwater -= waterUsage;
+                haswater = true;
+
+            }
+            MarkDirty();
 
             return haswater;
         }
@@ -342,7 +348,7 @@ namespace qptech.src
             if (IsOn && !heated) { dsc.AppendLine(" (NO HEAT)"); }
             else if (IsOn) { dsc.AppendLine(" (ON)"); }
             else { dsc.AppendLine(" (OFF)"); }
-            if (waterUsage > 0) { dsc.AppendLine("WATER:"+internalwater + "/" + waterUsage); }
+            if (waterUsage > 0) { dsc.AppendLine("WATER:"+internalwater + "/" + internalstorage); }
             if (generating) { dsc.AppendLine("Generating Power"); }
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
@@ -351,12 +357,14 @@ namespace qptech.src
         {
             base.ToTreeAttributes(tree);
             tree.SetInt("internalwater",internalwater);
+            tree.SetInt("internalstorage", internalstorage);
             tree.SetBool("generating", generating);
         }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             internalwater = tree.GetInt("internalwater");
             generating = tree.GetBool("generating");
+            internalstorage = tree.GetInt("internalstorage");
             base.FromTreeAttributes(tree, worldAccessForResolve);
         }
     }
