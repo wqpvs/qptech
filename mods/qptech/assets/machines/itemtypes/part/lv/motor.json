@@ -5,7 +5,7 @@
 		"qptech": [ "*" ]
 	},
 	variantgroups: [
-		{ code: "level", states: ["primitive","mv" ] },
+		{ code: "level", states: ["primitive" ] },
 	],
 	drawtype: "json",
 	shape: { base: "item/part/motor-{level}" },

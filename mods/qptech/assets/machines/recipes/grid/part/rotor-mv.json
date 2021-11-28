@@ -23,5 +23,5 @@
 	},
 	width: 3,
 	height: 1,
-	output: { type: "item", code: "stator-mv", quantity: 1  }
+	output: { type: "item", code: "rotor-mv", quantity: 1  }
 }

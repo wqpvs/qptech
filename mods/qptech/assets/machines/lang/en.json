@@ -173,5 +173,7 @@
 	"item-bolt-*": "Metal Bolt",
 	"itemdesc-bolt-*": "You've cut a rod - now you some bolts, so yay?",
 	"item-rotor-mv": "Rotor Part [MV]",
-	"itemdesc-rotor-*": "Part of a motor"
+	"itemdesc-rotor-*": "Part of a motor",
+	"item-motor-mv": "Electric Motor [MV]",
+	"itemdesc-motor-mv": "A muched improved motor, congrats!"
 }
