@@ -165,5 +165,9 @@
 	"item-braidedwire-*": "Braided Wire",
 	"itemdesc-braidedwire-*": "Improved wire, now if you just had some rubber!",
 	"item-rubbercrucible": "Cracked Crucible of Liquid Rubber",
-	"itemdesc-rubbercrucible": "Finally, Some rubber! hopefully there's a better way to make this..."
+	"itemdesc-rubbercrucible": "Finally, Some rubber! hopefully there's a better way to make this...",
+	"item-ring-steel": "Steel Ring Part",
+	"itemdesc-ring-*": "Machine part, how ring-like! A marvel of form and function",
+	"item-stator-mv": "Stator Part [MV]",
+	"itemdesc-stator-*": "Part of a motor"
 }

@@ -29,7 +29,7 @@
 
 		"*-mv-*": {
 			"genFlux": 0,
-			"useFlux": 32,
+			"useFlux": 16,
 			
 			"recipegroups": ["bloomeryiron"],
 			"inputFace": "west",

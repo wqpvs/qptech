@@ -1,0 +1,90 @@
+{
+	"code": "ring",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"variantgroups": [
+		{
+			"code": "material",
+			"states": [ "steel" ]
+		}
+	],
+	"drawtype": "json",
+	"shape": { "base": "item/part/ring-{material}" },
+	"maxstacksize": 4,
+
+	"guiTransform": {
+		"translation": {
+			"x": -11,
+			"y": -9,
+			"z": 0
+		},
+		"rotation": {
+			"x": -26,
+			"y": 17,
+			"z": -16
+		},
+		"origin": {
+			"x": 0.2,
+			"y": 0.05,
+			"z": 0.38
+		},
+		"scale": 1.22
+	},
+	"fpHandTransform": {
+		"translation": {
+			"x": -0.1,
+			"y": 0.2,
+			"z": 0
+		},
+		"rotation": {
+			"x": 8,
+			"y": 1,
+			"z": -42
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 1.27
+	},
+	"groundTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 1.85
+	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -2.1,
+			"y": -0.09,
+			"z": -1.5
+		},
+		"rotation": {
+			"x": -2,
+			"y": 9,
+			"z": -8
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 0.31
+	}
+
+}

@@ -1,0 +1,19 @@
+{
+	ingredientPattern: "SR",
+	ingredients: {
+		"R": {
+			"type": "item",
+			"code": "rod-*",
+			"name": "metal",
+			"allowedVariants": [ "brass", "steel" ],
+			"quantity": 1
+		},
+		
+		"S": { type: "item", code: "game:saw-*", isTool: true }
+		
+		
+	},
+	width: 2,
+	height: 1,
+	output: { type: "item", code: "bolt-{metal}", quantity: 2  }
+}

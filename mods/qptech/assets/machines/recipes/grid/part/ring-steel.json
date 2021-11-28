@@ -1,0 +1,18 @@
+{
+	ingredientPattern: "SR",
+	ingredients: {
+		"R": {
+			"type": "block",
+			"code": "game:metalsheet-steel-down",
+			
+			"quantity": 1
+		},
+		
+		"S": { type: "item", code: "screwdriver-*", isTool: true }
+		
+		
+	},
+	width: 2,
+	height: 1,
+	output: { type: "item", code: "ring-steel", quantity: 2  }
+}
