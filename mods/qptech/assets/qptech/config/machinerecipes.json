@@ -1,11 +1,11 @@
 
   [
-    
+
     {
       "name": "bloomeryiron",
       "processingsteps": {
-         "heating": 1482 ,
-         "crushing": 1000 
+        "heating": 1482,
+        "crushing": 1000
       },
       "processinghours": 0.1,
       "ingredients": [
@@ -15,7 +15,7 @@
         },
         {
           "validitems": [ "game:charcoal" ],
-          "quantity":  1
+          "quantity": 1
         }
       ],
       "output": [
@@ -25,6 +25,66 @@
         }
       ]
 
+    },
+    {
+      "name": "Braided Copper Wire",
+      "processingsteps": {
+
+      },
+      "processinghours": 0.1,
+      "ingredients": [
+        {
+          "validitems": [ "machines:wire-copper" ],
+          "quantity": 2
+        }
+
+      ],
+      "output": [
+        {
+          "validitems": [ "machines:braidedwire-copper" ],
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "name": "Copper Wire (Rods)",
+      "processingsteps": {
+
+      },
+      "processinghours": 0.1,
+      "ingredients": [
+        {
+          "validitems": [ "machines:rod-copper" ],
+          "quantity": 1
+        }
+
+      ],
+      "output": [
+        {
+          "validitems": [ "machines:wire-copper" ],
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "name": "Copper Wire (Sheets)",
+      "processingsteps": {
+
+      },
+      "processinghours": 0.1,
+      "ingredients": [
+        {
+          "validitems": [ "game:metalsheet-copper-down" ],
+          "quantity": 1
+        }
+
+      ],
+      "output": [
+        {
+          "validitems": [ "machines:wire-copper" ],
+          "quantity": 4
+        }
+      ]
     }
   ]
 

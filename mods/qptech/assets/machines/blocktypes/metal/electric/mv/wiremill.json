@@ -1,7 +1,7 @@
 {
 	"code": "wiremill",
-	"class": "BlockMetalPress",
-	"entityclass": "BEEAssembler",
+	"class": "ElectricalBlock",
+	"entityclass": "BEERecipeProcessor",
 	"creativeinventory": {
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
@@ -30,19 +30,10 @@
 		"*-mv-*": {
 			"genFlux": 0,
 			"useFlux": 16,
-			"inputFace": "west",
-			"outputFace": "east",
-			"acceptFromFaces": [ "west" ],
-			"inputQuantity": 1,
-			"outputQuantity": 10,
-			"recipe": "machines:wire",
 
-			"ingredient": "game:metalsheet",
-			"ingredientSuffix": "down",
-			"processingTime": 0.045,
-			"animationSpeed": 0.45,
-			"heatRequirement": 0,
-			"materials": [ "copper", "tin" ]
+			"recipegroups": ["Copper Wire (Sheets)", "Copper Wire (Rods)", "Braided Copper Wire" ],
+			"inputFace": "west",
+			"outputFace": "east"
 
 		}
 	},
