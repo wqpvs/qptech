@@ -20,7 +20,8 @@
 		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "north" }
-		}
+		},
+		{ "name": "Carryable" }
 	],
 	"variantgroups": [
 		{

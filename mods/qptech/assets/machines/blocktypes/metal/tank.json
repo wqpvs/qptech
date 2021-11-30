@@ -6,6 +6,10 @@
 		"capacityLitres": 100,
 		"canhold": [ "water-*" ]
 	},
+	"behaviors": [
+		
+		{ "name": "Carryable" }
+	],
 	"variantgroups": [
 		{
 			"code": "containers",

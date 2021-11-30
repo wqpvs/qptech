@@ -48,7 +48,8 @@
 			"properties": { "dropBlockFace": "east" }
 		},
 		{ "name": "Lockable" },
-		{ "name": "Container" }
+		{ "name": "Container" },
+		{ "name": "Carryable" }
 	],
 	"shape": { "base": "block/cabinet" },
 	"shapeByType": {
