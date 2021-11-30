@@ -1,4 +1,7 @@
-﻿1.5 Changelog
+﻿1.5.1 Changelog
+- added ru.json
+- added carrying capacity support
+1.5 Changelog
 (* devices are only available in creative right now)
 - QPTECHAPI no longer used or needed (will be ignored)
 - much improved power networks, connected devices form networks share storage/generation/usage as a single network
