@@ -10,7 +10,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "lvsoftmetalplate", "lvsoftscrew", "lvsoftrod", "lvbender","lvpunch" ]
+			"states": [ "lvsoftmetalplate", "lvsoftscrew", "lvsoftrod", "lvbender", "lvpunch", "lvhardmetalplate" ]
 		},
 		{
 			"code": "side",
@@ -39,6 +39,22 @@
 			"animationSpeed": 0.45,
 			"heatRequirement": 800,
 			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze" ]
+
+		},
+		"*-lvhardmetalplate-*": {
+			"genFlux": 0,
+			"useFlux": 4,
+			"inputFace": "west",
+			"outputFace": "east",
+			"acceptFromFaces": [ "west" ],
+			"inputQuantity": 2,
+			"outputQuantity": 1,
+			"recipe": "game:metalplate",
+			"ingredient": "ingot",
+			"processingTime": 0.045,
+			"animationSpeed": 0.45,
+			"heatRequirement": 1000,
+			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze","iron","meteoriciron","steel" ]
 
 		},
 		"*-lvpunch-*": {

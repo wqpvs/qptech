@@ -135,6 +135,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\fluidhorpump.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\fluidpump.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\metalpress-lvpunch.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\metalpress-lvhardmetalplate.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\sheetroller.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\pipe-core-soaker-bluesteel.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\tank-bluesteel.json" />
@@ -165,6 +166,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\wireplate-tin-electricjunction.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\wireplate-tin-2a.json" />
     <None Include="qptech\assets\game\recipes\grid\metalsheet.json" />
+    <None Include="qptech\assets\machines\recipes\grid\part\machineplate-iron.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\rotor-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\motor-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\stator-mv.json" />

@@ -1,0 +1,10 @@
+{
+	"ingredientPattern": "P	M	P",
+	"ingredients": {
+		"M": { "type": "block", "code": "metalpress-lvsoftmetalplate-east", quantity: 1},
+		"P": { "type": "item", "code":  "machineplate-iron","quantity": 1}
+	},
+	width: 1,
+	height: 3,
+	output: { type: "block", code: "metalpress-lvhardmetalplate-east", quantity: 1  }
+}

@@ -2,6 +2,8 @@
 - primitive generator won't overload
 - should fix generator "off off", and "no heat"
 - fix generator sound and "generating power" display when not running
+- adding hardmetalplate press to handle iron & steel plates
+- adding iron machineplate recipe
 
 
 1.5.1 Changelog

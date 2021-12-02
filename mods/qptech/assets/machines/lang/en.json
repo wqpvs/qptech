@@ -175,5 +175,7 @@
 	"item-rotor-mv": "Rotor Part [MV]",
 	"itemdesc-rotor-*": "Part of a motor",
 	"item-motor-mv": "Electric Motor [MV]",
-	"itemdesc-motor-mv": "A muched improved motor, congrats!"
+	"itemdesc-motor-mv": "A muched improved motor, congrats!",
+	"block-metalpress-lvhardmetalplate-*": "Hardened Metal Press [Metal Plates] (LV)",
+	"blockdesc-metalpress-lvhardmetalplate-*": "Improved version of metal press, can handle iron & steel. Takes heated ingots from input container on left and stamps into metal plates, outputting them on container to the right."
 }
