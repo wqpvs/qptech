@@ -1,6 +1,14 @@
-﻿1.5.1 Changelog
+﻿1.5.2 Changelog
+- primitive generator won't overload
+- should fix generator "off off", and "no heat"
+- fix generator sound and "generating power" display when not running
+
+
+1.5.1 Changelog
 - added ru.json
 - added carrying capacity support
+
+
 1.5 Changelog
 (* devices are only available in creative right now)
 - QPTECHAPI no longer used or needed (will be ignored)

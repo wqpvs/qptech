@@ -383,7 +383,7 @@ namespace qptech.src
                 else if (!IsPowered) {dsc.Append(" (NO POWER) "); }
                 else { dsc.Append(" (OK) "); }
             }
-            
+            dsc.AppendLine("");
             
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }

@@ -39,6 +39,7 @@ namespace qptech.src
         bool heated = false;
         int internalwater = 0;
         int internalstorage = 2;
+        bool firstwatercheck = false;
         Item fluiditem;
         public Item QueryFluid()
         {
@@ -106,15 +107,17 @@ namespace qptech.src
         {
             
             base.OnTick(par);
-            if (isOn&& !(Api is ICoreClientAPI)) {
+            if (IsOn&& !(Api is ICoreClientAPI)) {
                 GeneratePower(); //Create power packets if possible, base.Ontick will handle distribution attempts
                 if (requiresHeat && requiresWater && heated && !haswater && overloadIfNoWater) { DoOverload(); }
             }
-            if (Api is ICoreAPI)
+            else if (!(Api is ICoreClientAPI))
             {
-                ToggleAmbientSounds(generating);
+                if (!IsOn && generating) { generating = false;MarkDirty(); }
             }
-            
+            ToggleAmbientSounds(IsOn&&generating);
+
+
         }
         //Attempts to generate power
         bool trypower = false;
@@ -149,7 +152,7 @@ namespace qptech.src
             
             //if (Capacitor == Capacitance && !usesFuelWhileOn) { return false; }//not necessary to generate power
             if (requiresHeat && !CheckHeat()) { return false; } //perform a check for heat
-            if (requiresWater && (!requiresHeat || heated) && !CheckWater()) { return false; } //check if water available
+            if (requiresWater && !CheckWater()) { return false; } //check if water available
             
             if (!usesFuel) { return true; } //if we don't use fuel, we can make power
             
@@ -210,7 +213,7 @@ namespace qptech.src
             //TODO - need to add haswater, lastwaterused to treeattributes
             double nextwater = lastwaterused + waterUsePeriod;
             double currenttime = Api.World.Calendar.TotalHours;
-            
+            firstwatercheck = true;
             if (currenttime < nextwater && haswater) { return true; }
             haswater = false;
             lastwaterused = currenttime;
@@ -272,6 +275,7 @@ namespace qptech.src
         bool CheckHeat()
         {
             //find heated blocks - firepits, furnaces, burning coal piles
+
             heated = false;
             BlockPos bp = Pos.Copy().Offset(heatFace);
             BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(bp);
@@ -346,9 +350,8 @@ namespace qptech.src
             
             
             if (IsOn && !heated) { dsc.AppendLine(" (NO HEAT)"); }
-            else if (IsOn) { dsc.AppendLine(" (ON)"); }
-            else { dsc.AppendLine(" (OFF)"); }
-            if (waterUsage > 0) { dsc.AppendLine("WATER:"+internalwater + "/" + internalstorage); }
+            
+            if (waterUsage > 0 && firstwatercheck) { dsc.AppendLine("WATER:"+internalwater + "/" + internalstorage); }
             if (generating) { dsc.AppendLine("Generating Power"); }
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
@@ -359,12 +362,17 @@ namespace qptech.src
             tree.SetInt("internalwater",internalwater);
             tree.SetInt("internalstorage", internalstorage);
             tree.SetBool("generating", generating);
+            tree.SetBool("firstwatercheck", firstwatercheck);
+            tree.SetBool("heated", heated);
+            
         }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             internalwater = tree.GetInt("internalwater");
             generating = tree.GetBool("generating");
             internalstorage = tree.GetInt("internalstorage");
+            firstwatercheck = tree.GetBool("firstwatercheck");
+            heated = tree.GetBool("heated");
             base.FromTreeAttributes(tree, worldAccessForResolve);
         }
     }

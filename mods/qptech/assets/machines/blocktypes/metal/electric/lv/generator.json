@@ -18,7 +18,7 @@
 		"waterUsePeriod": 0.25,
 		"waterFace": "up",
 		"pullFaces": [ "up" ],
-		"overloadIfNoWater": "true",
+		"overloadIfNoWater": "false",
 		"showFluxDisplay": true,
 		"displayOffset": [ 10, 12, 16 ]
 	},
