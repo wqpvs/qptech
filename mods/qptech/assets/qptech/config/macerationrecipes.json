@@ -161,7 +161,7 @@
 			"outputmaterial": "game:stick",
 			"outputquantity": 10,
 			"odds": 50,
-			"type":  "PARTIAL"
+			"type": "PARTIAL"
 		}
 	],
 	"game:log-placed-pine-ud": [
@@ -174,7 +174,7 @@
 	],
 
 	"sand": [
-		
+
 		{
 			"outputmaterial": "game:clay-blue",
 			"outputquantity": 1,
@@ -232,6 +232,73 @@
 		}
 
 	],
+	"game:bonysoil": [
+
+		{
+			"outputmaterial": "game:gear-rusty",
+			"outputquantity": 1,
+			"odds": 4,
+			"type": "DIRECT",
+			"machinename": "washplant"
+		},
+		{
+			"outputmaterial": "game:candle",
+			"outputquantity": 1,
+			"odds": 2,
+			"type": "DIRECT",
+			"machinename": "washplant"
+		},
+		
+		{
+			"outputmaterial": "game:gear-temporal",
+			"outputquantity": 1,
+			"odds": 0.1,
+			"type": "DIRECT",
+			"machinename": "washplant"
+		},
+		{
+			"outputmaterial": "game:spearhead-copper",
+			"outputquantity": 1,
+			"odds": 2,
+			"type": "DIRECT",
+			"machinename": "washplant"
+		},
+		{
+			"outputmaterial": "game:flaxfibers",
+			"outputquantity": 1,
+			"odds": 20,
+			"type": "DIRECT",
+			"machinename": "washplant"
+		},
+		{
+			"outputmaterial": "game:arrowhead-flint",
+			"outputquantity": 1,
+			"odds": 15,
+			"type": "DIRECT",
+			"machinename": "washplant"
+		},
+		{
+			"outputmaterial": "game:arrowhead-copper",
+			"outputquantity": 1,
+			"odds": 8,
+			"type": "DIRECT",
+			"machinename": "washplant"
+		},
+		{
+			"outputmaterial": "game:nugget-nativegold",
+			"outputquantity": 1,
+			"odds": 1,
+			"type": "DIRECT",
+			"machinename": "washplant"
+		},
+		{
+			"outputmaterial": "game:nugget-nativesilver",
+			"outputquantity": 1,
+			"odds": 1,
+			"type": "DIRECT",
+			"machinename": "washplant"
+		}
+	],
 	"muddygravel": [
 		{
 			"outputmaterial": "game:clay-blue",
@@ -287,7 +354,7 @@
 			"odds": 100,
 			"type": "SWAP",
 			"machinename": "lathe",
-				"stripingredientheader": true
+			"stripingredientheader": true
 		},
 		{
 			"outputmaterial": "orepowder",

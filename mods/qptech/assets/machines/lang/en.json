@@ -177,5 +177,7 @@
 	"item-motor-mv": "Electric Motor [MV]",
 	"itemdesc-motor-mv": "A muched improved motor, congrats!",
 	"block-metalpress-lvhardmetalplate-*": "Hardened Metal Press [Metal Plates] (LV)",
-	"blockdesc-metalpress-lvhardmetalplate-*": "Improved version of metal press, can handle iron & steel. Takes heated ingots from input container on left and stamps into metal plates, outputting them on container to the right."
+	"blockdesc-metalpress-lvhardmetalplate-*": "Improved version of metal press, can handle iron & steel. Takes heated ingots from input container on left and stamps into metal plates, outputting them on container to the right.",
+	"block-bloomery-*": "Bloomery Machine",
+	"blockdesc-bloomery-*": "Takes iron nuggets and outputs iron ingots. Requires a heating block and a crushing block."
 }

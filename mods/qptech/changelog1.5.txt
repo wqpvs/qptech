@@ -1,4 +1,13 @@
-﻿1.5.2 Changelog
+﻿1.5.3 Changelog
+- Washplant now has partial processing of bony soil
+- added recipes:
+    - bloomery-mv
+    - crusher-mv
+    - wiremill-mv
+- added new block machineryblock-steel (core part for new mv machines)
+
+
+1.5.2 Changelog
 - primitive generator won't overload
 - should fix generator "off off", and "no heat"
 - fix generator sound and "generating power" display when not running

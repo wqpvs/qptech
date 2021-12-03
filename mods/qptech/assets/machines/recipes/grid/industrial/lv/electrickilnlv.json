@@ -1,0 +1,16 @@
+{
+	ingredientPattern: "TPB",
+	ingredients: {
+		"T": { type: "item", code: "screwdriver-*", isTool: true },
+		"P": { type: "block", code: "electricforge-lv-*", quantity: 1},
+		"B": {
+			"type": "block",
+			"code": "machineryblock",
+			"quantity": 1
+		},
+
+	},
+	width: 1,
+	height: 3,
+	output: { type: "block", code: "electrickiln-lv-east", quantity: 1  }
+}

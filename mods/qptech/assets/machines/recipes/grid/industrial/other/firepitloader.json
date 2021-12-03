@@ -1,0 +1,10 @@
+{
+	ingredientPattern: "M	C",
+	ingredients: {
+		"M": { type: "block", code: "machineryblock", quantity: 1 },
+		"C": { type: "item", code: "game:chutesection-copper", quantity: 2 }
+	},
+	width: 1,
+	height: 2,
+	output: { type: "block", code: "firepitloader", quantity: 1 }
+}

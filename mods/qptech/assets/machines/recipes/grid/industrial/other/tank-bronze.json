@@ -1,0 +1,27 @@
+{
+	"ingredientPattern": "SGS	G_G	SGS",
+	"ingredients": {
+
+		"S": {
+			"type": "block",
+			"code": "game:metalsheet-*-down",
+			"name": "metal",
+			"allowedVariants": [ "tinbronze", "bismuthbronze", "blackbronze", "brass", "copper" ],
+			"quantity": 1
+
+		},
+		"G": {
+			"type": "block",
+			"code": "game:glasspane-*",
+			"quantity": 1
+		}
+
+	},
+	"width": 3,
+	"height": 3,
+	"output": {
+		"type": "block",
+		"code": "container-tank-bronze",
+		"quantity": 1
+	}
+}

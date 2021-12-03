@@ -1,0 +1,20 @@
+{
+	ingredientPattern: "MTS	IBH	RP_",
+	ingredients: {
+		"T": { type: "item", code: "screwdriver-*", isTool: true },
+		"P": {
+			"type": "item",
+			"code": "wire-*",
+			"quantity": 2
+		},
+		"B": { type: "block", code: "machineryblock", quantity: 1},
+		"M": { type: "item", code: "motor-primitive", quantity: 1},
+		"S": { type: "item", code: "screw-brass", quantity: 4},
+		"I": { "type":  "item", "code": "game:metalplate-iron","quantity": 2},
+		"R": { "type":  "item", "code": "rod-brass","quantity": 4},
+		"H": { "type": "item", "code":  "heavymold-metalplate","quantity": 1}
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "metalpress-lvsoftmetalplate-east", quantity: 1  }
+}

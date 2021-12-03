@@ -1,0 +1,31 @@
+{
+	"ingredientPattern": "HSW",
+	"ingredients": {
+
+		"S": {
+			"type": "block",
+			"code": "game:metalsheet-steel-down",
+			"name": "metal",
+			
+			"quantity": 1
+				
+		},
+		"H": {
+			"type": "item",
+			"code": "game:hammer-*",
+			"isTool": true
+		},
+		"W": {
+			"type": "item",
+			"code": "pipewrench",
+			"isTool": true
+		}
+	},
+	"width": 3,
+	"height": 1,
+	"output": {
+		"type": "block",
+		"code": "pipe-core-bluesteel",
+		"quantity": 1
+	}
+}

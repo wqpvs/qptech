@@ -1,0 +1,15 @@
+{
+	ingredientPattern: "T	D",
+	ingredients: {
+		"T": { type: "item", code: "screwdriver-*", isTool: true },
+		"D": {
+			"type": "block",
+			"code": "mpmotor-rotor-north",
+			"quantity": 1
+		}
+		
+	},
+	width: 1,
+	height: 2,
+	output: { type: "block", code: "mpgenerator-rotor-north", quantity: 1  }
+}

@@ -1,0 +1,19 @@
+{
+	"code": "machineryblock",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"blockmaterial": "Metal",
+	"drawtype": "Cube",
+	"textures": {
+		"all": {
+			"base": "block/machinery"
+		}
+	},
+	"resistance": 1,
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+}
