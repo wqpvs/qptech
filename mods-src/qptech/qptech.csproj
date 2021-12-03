@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Electricity\BEECrucible.cs" />
     <Compile Include="src\Electricity\BEEIndustrialGenerator.cs" />
     <Compile Include="src\Electricity\BEEMixer.cs" />
     <Compile Include="src\Electricity\BEEProcessingSupplier.cs" />
@@ -91,8 +92,8 @@
     <Compile Include="src\networks\PowerNetwork.cs" />
     <Compile Include="src\pipes\BEIrrigator.cs" />
     <Compile Include="src\pipes\BlockFluidPipe.cs" />
-    <Compile Include="src\Electricity\BEBMPGenerator.cs" />
-    <Compile Include="src\Electricity\BEBMPMotor.cs" />
+    <Compile Include="src\Electricity\MechanicalPower\BEBMPGenerator.cs" />
+    <Compile Include="src\Electricity\MechanicalPower\BEBMPMotor.cs" />
     <Compile Include="src\Electricity\BEEAssembler.cs" />
     <Compile Include="src\Electricity\BEEBaseDevice.cs" />
     <Compile Include="src\Electricity\BEEBlastFurnace.cs" />
@@ -106,8 +107,8 @@
     <Compile Include="src\Electricity\BEEJunction.cs" />
     <Compile Include="src\Electricity\BEEWire.cs" />
     <Compile Include="src\pipes\BEFluidPump.cs" />
-    <Compile Include="src\Electricity\BEMPGenerator.cs" />
-    <Compile Include="src\Electricity\BEMPMotor.cs" />
+    <Compile Include="src\Electricity\MechanicalPower\BEMPGenerator.cs" />
+    <Compile Include="src\Electricity\MechanicalPower\BEMPMotor.cs" />
     <Compile Include="src\Electricity\BEPowerFlag.cs" />
     <Compile Include="src\Electricity\BlockClayformer.cs" />
     <Compile Include="src\Electricity\BlockEForge.cs" />

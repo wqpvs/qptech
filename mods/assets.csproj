@@ -201,6 +201,7 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\wiremill.json" />
     <None Include="qptech\assets\machines\shapes\item\clay\rubbercrucible.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-block.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-core.json" />
