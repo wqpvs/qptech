@@ -4,7 +4,13 @@
     - bloomery-mv
     - crusher-mv
     - wiremill-mv
+    - boiler-small
+    - heater-mv
+    - turbine-small
+    - industrialgenerator-mv (Generator MKII)
+    - lathe
 - added new block machineryblock-steel (core part for new mv machines)
+- added some creative tabs and moved things around (QPTECH, QPTECH-Parts,QPTECH-Decor)
 
 
 1.5.2 Changelog

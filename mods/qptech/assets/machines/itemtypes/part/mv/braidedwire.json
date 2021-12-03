@@ -1,8 +1,7 @@
 {
 	"code": "braidedwire",
 	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+		"qptech-parts": [ "*" ]
 	},
 	"drawtype": "json",
 	"shape": { "base": "item/part/braidedwire" },

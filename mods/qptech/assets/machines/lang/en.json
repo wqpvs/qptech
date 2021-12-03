@@ -157,11 +157,11 @@
 	"blockdesc-wiremill-*": "At last, efficient and easy wiremaking! (From copper sheets)",
 	"*liquidrubberportion*": "Liquid Rubber",
 	"block-crusher-*": "Crusher Module",
-	"blockdesc-crusher-*": "Provides industrial crushing force to adjacent machines",
+	"blockdesc-crusher-*": "Provides industrial CRUSHING force to adjacent machines",
 	"block-lathe-*": "Lathe",
 	"blockdesc-lathe-*": "Ingots go in, rods come out - you can't explain that!",
-	"block-heater-*": "Heater Module",
-	"blockdesc-heater-*": "Provides industrial heating to adjacent machines",
+	"block-industrialheater-*": "Heater Module",
+	"blockdesc-industrialheater-*": "Provides industrial heating to adjacent machines",
 	"item-braidedwire-*": "Braided Wire",
 	"itemdesc-braidedwire-*": "Improved wire, now if you just had some rubber!",
 	"item-rubbercrucible": "Cracked Crucible of Liquid Rubber",
@@ -179,5 +179,11 @@
 	"block-metalpress-lvhardmetalplate-*": "Hardened Metal Press [Metal Plates] (LV)",
 	"blockdesc-metalpress-lvhardmetalplate-*": "Improved version of metal press, can handle iron & steel. Takes heated ingots from input container on left and stamps into metal plates, outputting them on container to the right.",
 	"block-bloomery-*": "Bloomery Machine",
-	"blockdesc-bloomery-*": "Takes iron nuggets and outputs iron ingots. Requires a heating block and a crushing block."
+	"blockdesc-bloomery-*": "Takes iron nuggets and outputs iron ingots. Requires blocks for STEAM and CRUSHING.",
+	"block-boiler-*": "Boiler Block",
+	"blockdesc-boiler-*": "Requires a heat source and a water source will create the process: STEAM.",
+	"block-turbine-*": "Turbine Block",
+	"blockdesc-turbine-*": "Turns STEAM into TORQUE (not mechanical power system related right now)",
+	"block-industrialgenerator-mv-*": "Generator MK2",
+	"blockdesc-industrialgenerator-mv-*": "Turns TORQUE (from a turbine block, not vintage story mechanics) into Electricity"
 }

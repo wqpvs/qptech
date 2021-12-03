@@ -2,8 +2,7 @@
 	"code": "cabinet",
 	"entityclass": "GenericTypedContainer",
 	"creativeinventory": {
-		"qptech": [ "*-east" ],
-		"kitchen": [ "*-east" ]
+		"qptech-decor": [ "*-east" ]
 	},
 	"attributes": {
 		"partialAttachable": true,

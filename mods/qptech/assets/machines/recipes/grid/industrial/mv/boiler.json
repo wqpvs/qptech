@@ -1,0 +1,44 @@
+{
+	ingredientPattern: "XDX	SMR	X_X",
+	ingredients: {
+		"X": {
+			"type": "item",
+			"code": "screw-steel",
+
+			"quantity": 1
+		},
+
+		"D": {
+			"type": "item",
+			"code": "screwdriver-*",
+			"isTool": true
+		},
+		"M": {
+			"type": "block",
+			"code": "container-tank-bluesteel",
+			"quantity": 1
+		},
+		"S": {
+			"type": "block",
+			"code": "machineryblock-steel",
+			"quantity": 1
+		},
+		"R": {
+			"type": "block",
+			"code": "pipe-core-bluesteel",
+			"quantity": 4
+		},
+		"C": {
+			"type": "item",
+			"code": "cable-copper",
+			"quantity": 2
+		}
+	},
+	width: 3,
+	height: 3,
+	output: {
+		"type": "block",
+		"code": "boiler-small-east",
+		"quantity": 1
+	}
+}

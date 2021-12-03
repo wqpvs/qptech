@@ -6,8 +6,7 @@
 		"heatModifier": 1.1
 	},
 	"creativeinventory": {
-		"qptech": [ "*-cold-east" ],
-		"kitchen": [ "*-cold-east" ]
+		"qptech-decor": [ "*-extinct-east" ]
 	},
 	"variantgroups": [
 		{

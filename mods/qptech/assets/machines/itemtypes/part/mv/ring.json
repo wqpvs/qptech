@@ -1,8 +1,7 @@
 {
 	"code": "ring",
 	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+		"qptech-parts": [ "*" ]
 	},
 	"variantgroups": [
 		{

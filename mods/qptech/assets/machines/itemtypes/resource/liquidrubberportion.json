@@ -20,8 +20,7 @@
   "shape": { "base": "item/liquid" },
   "texture": { "base": "game:block/liquidrubber" },
   "creativeinventory": {
-    "qptech": [ "*" ]
-    
+    "qptech-parts": [ "*" ]
   },
   "maxstacksize": 16,
   "materialDensity": 200,

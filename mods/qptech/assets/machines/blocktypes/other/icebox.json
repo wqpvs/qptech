@@ -2,8 +2,7 @@
 	"code": "icebox",
 	"entityclass": "IceBoxEntity",
 	"creativeinventory": {
-		"qptech": [ "*-east" ],
-		"kitchen": [ "*-east" ]
+		"qptech-decor": [ "*-east" ]
 	},
 	"attributes": {
 		"types": [ "normal-generic" ],

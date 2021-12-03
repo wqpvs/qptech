@@ -9,7 +9,7 @@
 
 	},
 	"creativeinventory": {
-		"qptech": [ "*-lowerleft-closed-{wood}-north" ]
+		"qptech-decor": [ "*-lowerleft-closed-{wood}-north" ]
 
 	},
 	"attributesByType": {

@@ -13,10 +13,8 @@
   ],
 
   "creativeinventory": {
-    "general": [ "*" ],
-    "items": [ "*" ],
-    "tools": [ "*" ],
-    "qptech": [ "*" ]
+
+    "qptech-parts": [ "*" ]
   },
 
   "guiTransform": {

@@ -1,7 +1,6 @@
 {
 	code: "screwdriver",
 	creativeinventory: {
-		"general": ["*"],
 		"qptech": [ "*" ]
 	},
 	drawtype: "json",
@@ -30,7 +29,6 @@
 	tool: "hammer",
 	enabled: true,
 	heldTpHitAnimation: "breaktool",
-	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },
 	textures: {
 		metal: { base: "game:block/metal/ingot/{material}" }
 	},

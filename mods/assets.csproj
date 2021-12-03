@@ -27,7 +27,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\Door\slidingdoor.json" />
+    <None Include="qptech\assets\machines\blocktypes\other\door\slidingdoor.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\industrialgenerator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\turbine.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\boiler.json" />
@@ -132,6 +132,11 @@
     <None Include="qptech\assets\machines\recipes\grid\decor\castironovenlarge.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\icebox.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\sink.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\mv\lathe-mv.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\mv\industrialgenerator-mv.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\mv\turbine-small.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\mv\heater-mv.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\mv\boiler.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\bloomery-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\crusher-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\wiremill.json" />

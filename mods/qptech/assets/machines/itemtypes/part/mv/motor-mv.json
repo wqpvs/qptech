@@ -1,8 +1,7 @@
 {
 	"code": "motor",
 	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+		"qptech-parts": [ "*" ]
 	},
 	"variantgroups": [
 		{

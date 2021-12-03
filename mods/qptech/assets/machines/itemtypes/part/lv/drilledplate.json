@@ -1,8 +1,8 @@
 {
 	code: "drilledplate",
 	creativeinventory: {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+		
+		"qptech-parts": [ "*" ]
 	},
 	drawtype: "json",
 	shape: { base: "item/part/drilledplate" },
@@ -11,8 +11,7 @@
 	variantgroups: [
 		{ code: "material", states: ["tinbronze", "bismuthbronze", "blackbronze","steel","iron" ] },
 	],
-		
-	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },
+
 	textures: {
 		metal: { base: "game:block/metal/ingot/{material}" }
 	},

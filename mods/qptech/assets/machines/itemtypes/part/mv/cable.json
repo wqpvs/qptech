@@ -1,8 +1,7 @@
 {
 	"code": "cable",
 	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+		"qptech-parts": [ "*" ]
 	},
 	"drawtype": "json",
 	"shape": { "base": "item/part/cable" },

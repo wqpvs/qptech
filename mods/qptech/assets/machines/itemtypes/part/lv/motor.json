@@ -1,43 +1,89 @@
 {
-	code: "motor",
-	creativeinventory: {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+	"code": "motor",
+	"creativeinventory": {
+		"qptech-parts": [ "*" ]
 	},
-	variantgroups: [
-		{ code: "level", states: ["primitive" ] },
+	"variantgroups": [
+		{
+			"code": "level",
+			"states": [ "primitive" ]
+		}
 	],
-	drawtype: "json",
-	shape: { base: "item/part/motor-{level}" },
-	maxstacksize: 4,
-	
-	
-		
-	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },
-	
-	guiTransform: {
-		translation: { x: 0, y: 0, z: 0 },
-		rotation: { x: 154, y: 108, z: 12 },
-		origin: { x: 0.2, y: 0.05, z: 0.38 },
-		scale: 2.92
+	"drawtype": "json",
+	"shape": { "base": "item/part/motor-{level}" },
+	"maxstacksize": 4,
+
+	"guiTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 154,
+			"y": 108,
+			"z": 12
+		},
+		"origin": {
+			"x": 0.2,
+			"y": 0.05,
+			"z": 0.38
+		},
+		"scale": 2.92
 	},
-	fpHandTransform: {
-		translation: { x: -0.1, y: 0.2, z: 0 },
-		rotation: { x: 8, y: 1, z: -42 },
-		origin: { x: 0.5, y: 0, z: 0.5 },
-		scale: 2.15
+	"fpHandTransform": {
+		"translation": {
+			"x": -0.1,
+			"y": 0.2,
+			"z": 0
+		},
+		"rotation": {
+			"x": 8,
+			"y": 1,
+			"z": -42
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 2.15
 	},
-	groundTransform: {
-		translation: { x: 0, y: 0, z: 0 },
-		rotation: { x: 0, y: 0, z: 0 },
-		origin: { x: 0.5, y: 0, z: 0.5 },
-		scale: 4.31
+	"groundTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 4.31
 	},
-	tpHandTransform: {
-		translation: { x: -0.78, y: -0.09, z: -0.67 },
-		rotation: { x: 9, y: -1, z: -16 },
-		origin: { x: 0.5, y: 0, z: 0.5 },
-		scale: 0.76
-	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -0.78,
+			"y": -0.09,
+			"z": -0.67
+		},
+		"rotation": {
+			"x": 9,
+			"y": -1,
+			"z": -16
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 0.76
+	}
 
 }

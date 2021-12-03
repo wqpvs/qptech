@@ -2,9 +2,7 @@
 	"code": "blocklantern",
 
 	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ],
-		"kitchen": [ "*" ]
+		"qptech-decor": [ "*" ],
 	},
 	"blockmaterial": "Metal",
 	"textures": {

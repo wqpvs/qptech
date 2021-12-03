@@ -1,7 +1,6 @@
 {
 	"code": "pipewrench",
 	"creativeinventory": {
-		"general": [ "*" ],
 		"qptech": [ "*" ]
 	},
 	"drawtype": "json",
@@ -28,11 +27,7 @@
 	"tool": "hammer",
 	"enabled": true,
 	"heldTpHitAnimation": "breaktool",
-	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ],
-		"tools": [ "*" ]
-	},
+
 
 	"guiTransform": {
 		"translation": {
