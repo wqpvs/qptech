@@ -11,6 +11,8 @@
     - lathe
 - added new block machineryblock-steel (core part for new mv machines)
 - added some creative tabs and moved things around (QPTECH, QPTECH-Parts,QPTECH-Decor)
+- fixed pipewrench recipe
+
 
 
 1.5.2 Changelog
