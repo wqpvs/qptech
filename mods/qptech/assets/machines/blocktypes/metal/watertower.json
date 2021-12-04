@@ -10,6 +10,7 @@
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 	"shape": { "base": "block/wood/watertower" },
+	"snowcoverage": false,
 	"attributes": {
 		"tick": 10000,
 		"waterPerTick": 1,

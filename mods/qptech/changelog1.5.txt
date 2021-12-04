@@ -1,4 +1,9 @@
-﻿1.5.3 Changelog
+﻿1.5.4 Changelog
+- watertower snowcoverage set to false
+- fixed "INVALID POWER NETWORK" messages
+- fixed Macerator not making powderedsulfur
+
+1.5.3 Changelog
 - Washplant now has partial processing of bony soil
 - added recipes:
     - bloomery-mv

@@ -1,5 +1,13 @@
 ﻿{
+	"sulfur": [
+		{
+			"outputmaterial": "game:powderedsulfur",
+			"outputquantity": 1,
+			"odds": 100,
+			"type": "PARTIAL"
+		}
 
+	],
 	"rock": [
 		{
 			"outputmaterial": "gravel",

@@ -73,6 +73,7 @@ namespace qptech.src
         Guid networkID = Guid.Empty;
         public Guid NetworkID => networkID;
         public string ProductID => "power";
+        string networkstatus = "";
         public virtual void NetworkRemove()
         {
             networkID = Guid.Empty;
@@ -242,7 +243,7 @@ namespace qptech.src
             if (NetworkID == Guid.Empty)
             {
                 networkID = FlexNetworkManager.RequestNewNetwork(ProductID);
-                
+                if (networkID != Guid.Empty) { MarkDirty(); }
             }
             NetworkJoin(networkID);
             
@@ -358,14 +359,7 @@ namespace qptech.src
             if (networkID == Guid.Empty) { dsc.AppendLine("not connected to any network"); }
             else { 
                 
-                PowerNetwork pn = FlexNetworkManager.GetNetworkWithID(NetworkID) as PowerNetwork;
-                if (pn == null) { dsc.AppendLine("INVALID POWER NETWORK"); }
-                else 
-                {
-                    
-                    
-                    dsc.AppendLine("Power Network is generating " + pn.NetworkStatus.generated + ", using " + pn.NetworkStatus.consumed + ", and storing "+pn.NetworkStatus.stored+" flux.");
-                }
+                dsc.AppendLine(networkstatus);
                 
             }
 
@@ -431,12 +425,13 @@ namespace qptech.src
             storedFlux = tree.GetInt("storedFlux");
             string gid = "";
             gid = tree.GetString("networkID");
+            networkstatus = tree.GetString("networkstatus");
             if (gid != "")
             {
                 if (!Guid.TryParse(gid,out networkID)) { networkID = Guid.Empty; }
                 
             }
-            else { networkID = Guid.Empty; }
+            //else { networkID = Guid.Empty; }
             //if (type == null) type = defaultType; // No idea why. Somewhere something has no type. Probably some worldgen ruins
             
             isOn = tree.GetBool("isOn");
@@ -446,6 +441,10 @@ namespace qptech.src
             base.ToTreeAttributes(tree);
             tree.SetInt("lastPower", lastPower);
             tree.SetInt("storedFlux", storedFlux);
+            PowerNetwork pn = FlexNetworkManager.GetNetworkWithID(NetworkID) as PowerNetwork;
+            if (pn == null) { networkstatus = "INVALID NETWORK"; }
+            else { networkstatus = "Power: " + pn.NetworkStatus.nodes + " nodes. Load:" + pn.NetworkStatus.consumed + " Gen:" + pn.NetworkStatus.generated + " Stored:" + pn.NetworkStatus.stored; }
+            tree.SetString("networkstatus", networkstatus);
             if (networkID != Guid.Empty) {
                 tree.SetString("networkID", networkID.ToString());
             }

@@ -272,13 +272,20 @@ namespace qptech.src
                 ItemStack itmstk = new ItemStack(outputItem, 16);
                 outputstack.Add(itmstk);
             }*/
-            if (fcp == "ore")
+            if (fcp == "ore" )
             {
                 ItemOre oreitem = co as ItemOre;
-                if (oreitem != null)
+                if (fullcode.ToString().Contains("ore-sulfur"))
+                {
+                    AssetLocation sulfural = new AssetLocation("game:powderedsulfur");
+                    Item special = api.World.GetItem(sulfural);
+                    outputstack.Add(new ItemStack(special,rand.Next(1,3)));
+                }
+                else if (oreitem != null)
                 {
                     string outitemcode = "game:nugget-";
                     bool metalfound = false;
+                    
                     foreach (string outmetal in orelookups.Keys)
                     {
                         if (fullcode.Contains(outmetal))
