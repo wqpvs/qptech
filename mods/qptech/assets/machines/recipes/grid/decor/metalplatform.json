@@ -1,0 +1,13 @@
+{
+	ingredientPattern: "TB	CC",
+	ingredients: {
+		"C": { type: "item", code: "metalchannel-iron", quantity: 1 },
+		"B": { type: "item", code: "bolt-iron", quantity: 2 },
+		"T": { type: "item", code: "game:hammer-*", isTool: true }
+		
+		
+	},
+	width: 2,
+	height: 2,
+	output: { type: "block", code: "metalplatform", quantity: 1  }
+}

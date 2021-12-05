@@ -49,13 +49,13 @@
     <None Include="qptech\assets\machines\blocktypes\pipe-segment-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\tank.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\itemhatch.json" />
-    <None Include="qptech\assets\machines\blocktypes\indev\stairs\girder.json" />
-    <None Include="qptech\assets\machines\blocktypes\indev\stairs\metalplatform.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\stairs\girder.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\stairs\metalplatform.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\structureblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\oldwireplatelarge.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\oldwireplate.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\multiblocktest.json" />
-    <None Include="qptech\assets\machines\blocktypes\indev\stairs\metalstairs.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\stairs\metalstairs.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\watertower.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\creativegenerator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\battery.json" />
@@ -96,6 +96,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate.json" />
     <None Include="qptech\assets\machines\config\handbook\qptech.json" />
+    <None Include="qptech\assets\machines\itemtypes\part\mv\metalchannel.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\bolt.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\ring.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\rotor.json" />
@@ -176,6 +177,10 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\wireplate-tin-electricjunction.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\wireplate-tin-2a.json" />
     <None Include="qptech\assets\game\recipes\grid\metalsheet.json" />
+    <None Include="qptech\assets\machines\recipes\grid\decor\metalplatform.json" />
+    <None Include="qptech\assets\machines\recipes\grid\decor\metalstairs.json" />
+    <None Include="qptech\assets\machines\recipes\grid\decor\girder.json" />
+    <None Include="qptech\assets\machines\recipes\grid\part\metalchannel.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\machineplate-iron.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\rotor-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\motor-mv.json" />
@@ -290,6 +295,7 @@
     <None Include="qptech\assets\machines\shapes\item\part\cable.json" />
     <None Include="qptech\assets\machines\shapes\item\part\drilledplate.json" />
     <None Include="qptech\assets\machines\shapes\item\part\machineplate.json" />
+    <None Include="qptech\assets\machines\shapes\item\part\metalchannel.json" />
     <None Include="qptech\assets\machines\shapes\item\part\mold-metalplate.json" />
     <None Include="qptech\assets\machines\shapes\item\part\mold-rod.json" />
     <None Include="qptech\assets\machines\shapes\item\part\mold-screw.json" />

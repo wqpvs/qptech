@@ -5,7 +5,7 @@
 			"type": "item",
 			"code": "rod-*",
 			"name": "metal",
-			"allowedVariants": [ "brass", "steel" ],
+			"allowedVariants": [ "brass", "steel","iron" ],
 			"quantity": 1
 		},
 		

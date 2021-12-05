@@ -185,5 +185,9 @@
 	"block-turbine-*": "Turbine Block",
 	"blockdesc-turbine-*": "Turns STEAM into TORQUE (not mechanical power system related right now)",
 	"block-industrialgenerator-mv-*": "Generator MK2",
-	"blockdesc-industrialgenerator-mv-*": "Turns TORQUE (from a turbine block, not vintage story mechanics) into Electricity"
+	"blockdesc-industrialgenerator-mv-*": "Turns TORQUE (from a turbine block, not vintage story mechanics) into Electricity",
+	"block-girder": "Iron Frame",
+	"block-metalstairs-*": "Iron Steps",
+	"block-metalplatform": "Iron Platform",
+	"item-metalchannel-*": "Metal Channel"
 }

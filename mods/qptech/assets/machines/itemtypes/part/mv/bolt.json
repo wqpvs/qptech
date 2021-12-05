@@ -10,7 +10,7 @@
 	"variantgroups": [
 		{
 			"code": "material",
-			"states": [ "brass", "steel" ]
+			"states": [ "brass", "steel","iron" ]
 		}
 	],
 
