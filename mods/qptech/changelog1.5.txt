@@ -4,6 +4,7 @@
 - fixed Macerator not making powderedsulfur
 - added metal channel part
 - added recipes for Iron Frame, Iron Platform, Iron Stairs
+- added lathe model
 
 1.5.3 Changelog
 - Washplant now has partial processing of bony soil
