@@ -34,7 +34,7 @@ namespace qptech.src
         DummyInventory inventory;
         public override void Initialize(ICoreAPI api)
         {
-            List<AlloyRecipe> alloys = api.World.Alloys;
+            List<AlloyRecipe> alloys = api.GetMetalAlloys();
 
             base.Initialize(api);
         }

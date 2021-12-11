@@ -113,7 +113,7 @@ namespace qptech.src
                 capi.ObjectCache["tankMeshRefs"] = meshrefs = new Dictionary<string, MeshRef>();
             }
 
-            ItemStack contentStack = GetContent(capi.World, itemstack);
+            ItemStack contentStack = GetContent(itemstack);
             if (contentStack == null) return;
 
             MeshRef meshRef = null;
@@ -278,11 +278,11 @@ namespace qptech.src
 
             if (obj is ILiquidSource && !singleTake)
             {
-                int moved = TryPutContent(world, blockSel.Position, (obj as ILiquidSource).GetContent(world, hotbarSlot.Itemstack), singlePut ? 1 : 9999);
+                int moved = TryPutLiquid(blockSel.Position, (obj as ILiquidSource).GetContent(hotbarSlot.Itemstack), singlePut ? 1 : 9999);
 
                 if (moved > 0)
                 {
-                    (obj as ILiquidSource).TryTakeContent(world, hotbarSlot.Itemstack, moved);
+                    (obj as ILiquidSource).TryTakeContent(hotbarSlot.Itemstack, moved);
                     (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.HeldItemInteract);
 
                     return true;
@@ -291,18 +291,18 @@ namespace qptech.src
 
             if (obj is ILiquidSink && !singlePut)
             {
-                ItemStack owncontentStack = GetContent(world, blockSel.Position);
+                ItemStack owncontentStack = GetContent(blockSel.Position);
                 int moved = 0;
 
                 if (hotbarSlot.Itemstack.StackSize == 1)
                 {
-                    moved = (obj as ILiquidSink).TryPutContent(world, hotbarSlot.Itemstack, owncontentStack, singleTake ? 1 : 9999);
+                    moved = (obj as ILiquidSink).TryPutLiquid(hotbarSlot.Itemstack, owncontentStack, singleTake ? 1 : 9999);
                 }
                 else
                 {
                     ItemStack containerStack = hotbarSlot.Itemstack.Clone();
                     containerStack.StackSize = 1;
-                    moved = (obj as ILiquidSink).TryPutContent(world, containerStack, owncontentStack, singleTake ? 1 : 9999);
+                    moved = (obj as ILiquidSink).TryPutLiquid(containerStack, owncontentStack, singleTake ? 1 : 9999);
 
                     if (moved > 0)
                     {
@@ -316,7 +316,7 @@ namespace qptech.src
 
                 if (moved > 0)
                 {
-                    TryTakeContent(world, blockSel.Position, moved);
+                    TryTakeContent(blockSel.Position, moved);
                     (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.HeldItemInteract);
                     return true;
                 }
@@ -351,7 +351,7 @@ namespace qptech.src
 
         #endregion
 
-        public static string PerishableInfoCompact(ICoreAPI Api, ItemSlot contentSlot, float ripenRate, bool withStackName = true)
+        public static new string PerishableInfoCompact(ICoreAPI Api, ItemSlot contentSlot, float ripenRate, bool withStackName = true) // need a fix
         {
             return null;
         }

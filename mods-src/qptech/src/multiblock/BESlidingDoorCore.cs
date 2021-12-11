@@ -44,7 +44,7 @@ namespace qptech.src.multiblock
             
 
         }
-        public override void OnBlockBroken()
+        public void OnBlockBroken()
         {
 
             ClearBlocks();

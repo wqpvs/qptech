@@ -275,7 +275,7 @@ namespace qptech.src
 
 
 
-        public override void OnBlockBroken()
+        public virtual void OnBlockBroken()
         {
             base.OnBlockBroken();
             if (Api is ICoreServerAPI)

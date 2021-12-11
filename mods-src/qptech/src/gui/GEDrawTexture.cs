@@ -11,7 +11,7 @@ namespace qptech.src
 {
     class GEDrawTexture : GuiElementTextBase
     {
-        ICoreClientAPI api;
+
         string texturename;
         public static double scalefactor = 1.15;
         public GEDrawTexture(ICoreClientAPI capi, ElementBounds bounds, string texturename) : base(capi, "", CairoFont.WhiteDetailText(), bounds)
@@ -40,7 +40,7 @@ namespace qptech.src
                 AssetLocation loc = tex.Base.Clone().WithPathAppendixOnce(".png");
 
                 //GuiElement.fillWithPattern(api, ctx, loc.Path, true, false);
-                GuiElement.fillWithPattern(api, ctx, loc.Path, true, false);
+                GuiElement.fillWithPattern(api, ctx, loc, true, false);
 
                 ctx.Restore();
             }

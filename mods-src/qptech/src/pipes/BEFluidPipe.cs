@@ -444,7 +444,7 @@ namespace qptech.src
         {
             looky = blockSel;
         }
-        public override void OnBlockBroken()
+        public void OnBlockBroken()
         {
             base.OnBlockBroken();
             if (Api is ICoreServerAPI)

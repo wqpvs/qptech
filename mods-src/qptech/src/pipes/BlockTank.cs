@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Vintagestory.API;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
@@ -72,7 +75,7 @@ namespace qptech.src
         #region Render
         public override void OnBeforeRender(ICoreClientAPI capi, ItemStack itemstack, EnumItemRenderTarget target, ref ItemRenderInfo renderinfo)
         {
-            Dictionary<int, MeshRef> meshrefs = null;
+            Dictionary<int, MeshRef> meshrefs;
             
             object obj;
             if (capi.ObjectCache.TryGetValue("tankMeshRefs" + Variant["metal"], out obj))
@@ -84,12 +87,11 @@ namespace qptech.src
                 capi.ObjectCache["tankMeshRefs" + Variant["metal"]] = meshrefs = new Dictionary<int, MeshRef>();
             }
 
-            ItemStack contentStack = GetContent(capi.World, itemstack);
+            ItemStack contentStack = GetContent(itemstack);
             if (contentStack == null) return;
 
-   
             int hashcode = GetBucketHashCode(capi.World, contentStack);
-         
+
             MeshRef meshRef = null;
 
 
@@ -97,7 +99,6 @@ namespace qptech.src
             {
                 MeshData meshdata = GenMesh(capi, contentStack);
                 //meshdata.Rgba2 = null;
-
                 meshrefs[hashcode] = meshRef = capi.Render.UploadMesh(meshdata);
 
             }
@@ -144,9 +145,11 @@ namespace qptech.src
 
             if (contentStack != null)
             {
-                
                 WaterTightContainableProps props = GetInContainerProps(contentStack);
+
                 ContainerTextureSource contentSource = new ContainerTextureSource(capi, contentStack, props.Texture);
+
+                if (props.Texture == null) return null;
 
                 float level = contentStack.StackSize / props.ItemsPerLitre;
 
@@ -221,6 +224,20 @@ namespace qptech.src
 
         #endregion
 
+        public static WaterTightContainableProps GetInContainerProps(ItemStack stack)
+        {
+            try
+            {
+                JsonObject obj = stack?.ItemAttributes?["waterTightContainerProps"];
+                if (obj != null && obj.Exists) return obj.AsObject<WaterTightContainableProps>(null, stack.Collectible.Code.Domain);
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         #region Block interact
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
@@ -253,11 +270,11 @@ namespace qptech.src
 
             if (obj is ILiquidSource && !singleTake)
             {
-                int moved = TryPutContent(world, blockSel.Position, (obj as ILiquidSource).GetContent(world, hotbarSlot.Itemstack), singlePut ? 1 : 9999);
+                int moved = TryPutLiquid(blockSel.Position, (obj as ILiquidSource).GetContent(hotbarSlot.Itemstack), singlePut ? 1 : 9999);
 
                 if (moved > 0)
                 {
-                    (obj as ILiquidSource).TryTakeContent(world, hotbarSlot.Itemstack, moved);
+                    (obj as ILiquidSource).TryTakeContent(hotbarSlot.Itemstack, moved);
                     (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.HeldItemInteract);
 
                     return true;
@@ -266,18 +283,18 @@ namespace qptech.src
 
             if (obj is ILiquidSink && !singlePut)
             {
-                ItemStack owncontentStack = GetContent(world, blockSel.Position);
+                ItemStack owncontentStack = GetContent(blockSel.Position);
                 int moved = 0;
 
                 if (hotbarSlot.Itemstack.StackSize == 1)
                 {
-                    moved = (obj as ILiquidSink).TryPutContent(world, hotbarSlot.Itemstack, owncontentStack, singleTake ? 1 : 9999);
+                    moved = (obj as ILiquidSink).TryPutLiquid(hotbarSlot.Itemstack, owncontentStack, singleTake ? 1 : 9999);
                 }
                 else
                 {
                     ItemStack containerStack = hotbarSlot.Itemstack.Clone();
                     containerStack.StackSize = 1;
-                    moved = (obj as ILiquidSink).TryPutContent(world, containerStack, owncontentStack, singleTake ? 1 : 9999);
+                    moved = (obj as ILiquidSink).TryPutLiquid(containerStack, owncontentStack, singleTake ? 1 : 9999);
 
                     if (moved > 0)
                     {
@@ -291,7 +308,7 @@ namespace qptech.src
 
                 if (moved > 0)
                 {
-                    TryTakeContent(world, blockSel.Position, moved);
+                    TryTakeContent(blockSel.Position, moved);
                     (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.HeldItemInteract);
                     return true;
                 }
@@ -326,7 +343,7 @@ namespace qptech.src
 
         #endregion
 
-        public static string PerishableInfoCompact(ICoreAPI Api, ItemSlot contentSlot, float ripenRate, bool withStackName = true)
+        public static new string PerishableInfoCompact(ICoreAPI Api, ItemSlot contentSlot, float ripenRate, bool withStackName = true) // need a fix
         {
             return null;
         }

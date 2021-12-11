@@ -193,7 +193,7 @@ namespace qptech.src
             m.Scale(GuiElement.scaled(GEDrawTexture.scalefactor), GuiElement.scaled(GEDrawTexture.scalefactor));
             ctx.Matrix = m;
             AssetLocation loc = tex.Base.Clone().WithPathAppendixOnce(".png");
-            GuiElement.fillWithPattern(capi, ctx, loc.Path, true, false);
+            GuiElement.fillWithPattern(capi, ctx, loc, true, false);
             ctx.Restore();
             ctx.Save();
         }
@@ -213,7 +213,7 @@ namespace qptech.src
                 m.Scale(GuiElement.scaled(GEDrawTexture.scalefactor), GuiElement.scaled(GEDrawTexture.scalefactor));
                 ctx.Matrix = m;
                 AssetLocation loc = tex.Base.Clone().WithPathAppendixOnce(".png");
-                GuiElement.fillWithPattern(capi, ctx, loc.Path, true, false);
+                GuiElement.fillWithPattern(capi, ctx, loc, true, false);
                 ctx.Restore();
             }
         }

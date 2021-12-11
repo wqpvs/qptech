@@ -73,7 +73,7 @@ namespace qptech.src.Electricity
 
         protected override void DoDeviceStart()
         {
-            foreach (BarrelRecipe br in Api.World.BarrelRecipes)
+            foreach (BarrelRecipe br in Api.GetBarrelRecipes())
             {
                 
                 foreach (BarrelRecipeIngredient ing in br.Ingredients)

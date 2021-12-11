@@ -66,7 +66,7 @@ namespace qptech.src
             
             this.MarkDirty();
         }
-        public override void OnBlockBroken()
+        public void OnBlockBroken()
         {
             Cleanup();
             base.OnBlockBroken();

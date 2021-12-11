@@ -37,7 +37,7 @@ namespace qptech.src
         double nextproductionat = 0;
         enProductionMode mode = enProductionMode.ONE;
         public enProductionMode Mode => mode;
-        Vintagestory.API.Common.Action<Block, BlockPos> OnInitializeMember => InitializeBlock;
+        System.Action<Block, BlockPos> OnInitializeMember => InitializeBlock; // not sure what to do.. :D
         public float internalTempPercent => (internalHeat - minHeat) / (maxHeat - minHeat);
         public Dictionary<string, int> Recipes => recipes;
 
@@ -307,7 +307,7 @@ namespace qptech.src
 
             //next see if there's an alloy recipe matching what we're trying to make
             AlloyRecipe ar=null;
-            foreach (AlloyRecipe arc in Api.World.Alloys)
+            foreach (AlloyRecipe arc in Api.GetMetalAlloys())
             {
                 if (arc.Output.Code.ToString() == makeitem.Code.ToString()) { ar = arc; break; }
             }
@@ -508,7 +508,7 @@ namespace qptech.src
             {
                 storage.Remove(key);
             }
-            foreach (AlloyRecipe ar in Api.World.Alloys)
+            foreach (AlloyRecipe ar in Api.GetMetalAlloys())
             {
                 float hasenoughfor = 0;
                 foreach (MetalAlloyIngredient i in ar.Ingredients)

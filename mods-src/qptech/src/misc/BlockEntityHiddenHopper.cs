@@ -491,7 +491,7 @@ namespace qptech.src
                 }
             }
 
-            public override void OnBlockBroken()
+            public void OnBlockBroken()
             {
                 if (Api.World is IServerWorldAccessor)
                 {
