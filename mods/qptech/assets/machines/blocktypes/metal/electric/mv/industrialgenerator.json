@@ -42,25 +42,23 @@
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 
-	"textures": {
-		"all": { "base": "block/tempblocks/mk2gen" }
-	},
-	"shape": { "base": "block/metal/electric/tempmachine" },
+
+	"shape": { "base": "block/metal/electric/generator-mk2" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/electric/generator-mk2",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/electric/generator-mk2",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/electric/generator-mk2",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/electric/generator-mk2",
 			"rotateY": 180
 		}
 	},

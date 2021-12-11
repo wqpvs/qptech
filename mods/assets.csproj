@@ -206,8 +206,11 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\boiler.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\generator-mk2.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\lathe.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wiremill.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\turbine.json" />
     <None Include="qptech\assets\machines\shapes\item\clay\rubbercrucible.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-block.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\pipes\pipe-core.json" />
@@ -363,6 +366,8 @@
     <Content Include="qptech\assets\machines\textures\block\machinery-largefan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\bluepaintedwornsteelplate.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\conveyor\machinery-border-small.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\darkmetalgradient.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\darksteelplate.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\directionalpipe_bluesteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\firebox\machinery-border-small.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\fan.png" />
@@ -404,6 +409,7 @@
     <Content Include="qptech\assets\machines\textures\block\metal\tank\bluesteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\tank\bronze.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\tank\glass.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\turbine.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\wornsteelplate.png" />
     <Content Include="qptech\assets\machines\textures\block\notchedbrass.png" />
     <Content Include="qptech\assets\machines\textures\block\oak1.png" />

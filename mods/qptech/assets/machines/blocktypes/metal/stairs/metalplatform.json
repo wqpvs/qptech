@@ -4,6 +4,7 @@
 		"qptech-decor": [ "*" ]
 
 	},
+	"climbable": true,
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 	"shape": { "base": "block/metal/stairs/metalplatform" },

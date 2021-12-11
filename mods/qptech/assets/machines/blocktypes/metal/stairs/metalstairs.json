@@ -15,6 +15,7 @@
 	"creativeinventory": {
 		"qptech-decor": [ "*-north" ]
 	},
+	"climbable": true,
 	"sidesolidByType": {
 		"*-north": {
 			"all": false,

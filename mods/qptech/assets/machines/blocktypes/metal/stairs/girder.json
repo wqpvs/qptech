@@ -12,6 +12,7 @@
 	"sideopaque": {
 		"all": false
 	},
+	"climbable":  true,
 	"sounds": {
 		"place": "game:block/anvil",
 		"walk": "game:walk/stone"

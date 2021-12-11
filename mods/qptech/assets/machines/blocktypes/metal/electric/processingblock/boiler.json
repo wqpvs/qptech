@@ -46,25 +46,23 @@
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 	
-	"textures": {
-		"all": { "base": "block/tempblocks/boiler" }
-	},
-	"shape": { "base": "block/metal/electric/tempmachine" },
+	
+	"shape": { "base": "block/metal/boiler" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/boiler",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/boiler",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/boiler",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/boiler",
 			"rotateY": 180
 		}
 	},
