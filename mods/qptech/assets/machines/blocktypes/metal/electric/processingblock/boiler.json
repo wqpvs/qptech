@@ -38,7 +38,7 @@
 			},
 			"fluidcode": "game:waterportion",
 			"fluidUse": 1,
-			"fluidTankSize": 10,
+			"fluidTankSize": 1000,
 			"fluidtick": 5000
 		}
 	},

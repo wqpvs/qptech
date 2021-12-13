@@ -65,7 +65,7 @@ namespace qptech.src.networks
             //if fluid level is zero then set all fluid to ""
             networkCapacity = 0;
             networkLevel = 0;
-            int maxflow = 500;
+            int maxflow = 50000;
             if (GetMembers().Count == 0) { FlexNetworkManager.DeleteNetwork(NetworkID); return; }
             List<BlockEntity> validoutputs = new List<BlockEntity>();
             List<BlockEntity> validinputs = new List<BlockEntity>();
@@ -123,6 +123,7 @@ namespace qptech.src.networks
                     BlockEntityBarrel inputbarrel = inputnode as BlockEntityBarrel;
                     if (inputbarrel != null)
                     {
+                        
                         if (inputbarrel.CanSeal) { continue; }
                         if (inputbarrel.Inventory[1].Empty) { continue; }
                         /*
@@ -221,13 +222,13 @@ namespace qptech.src.networks
                         if (outbarrel.Inventory[1].StackSize > 0 && outbarrel.Inventory[1].Itemstack.Item != null && fluiditem == null)
                         {
                             fluiditem = outbarrel.Inventory[1].Itemstack.Item;
-                            if (1 == 1) { }
+                            
                         }
                         else if (outbarrel.Inventory!=null&&outbarrel.Inventory[1]!=null&&outbarrel.Inventory[1].Itemstack!=null&& outbarrel.Inventory[1].Itemstack.Item == fluiditem) { canreceive = true; }
-                        if (canreceive && outbarrel.Inventory[1].StackSize >= outbarrel.CapacityLitres) { canreceive = false; }
+                        if (canreceive && outbarrel.Inventory[1].StackSize >= outbarrel.CapacityLitres*100) { canreceive = false; }
                         if (canreceive&&!validoutputs.Contains(outnode)) {
                             int used = Math.Min(maxflow, networkLevel);
-                            used = Math.Min(used, outbarrel.CapacityLitres - outbarrel.Inventory[1].StackSize);
+                            used = Math.Min(used, outbarrel.CapacityLitres*100 - outbarrel.Inventory[1].StackSize);
                             if (used > 0)
                             {
                                 networkLevel -= used;

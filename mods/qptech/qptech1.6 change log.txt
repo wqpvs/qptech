@@ -1,0 +1,7 @@
+﻿QPTECH 1.6.0 Change Log
+- VS 1.16
+- fixed Tanks to use new water portion units
+- fixed pipe network to use new water portion units
+- fixed boiler water usage
+- fixed prim generator water usage
+- fixed water tower water generation and storage

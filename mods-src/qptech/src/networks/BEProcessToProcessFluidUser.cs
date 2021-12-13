@@ -111,7 +111,7 @@ namespace qptech.src.networks
             if (fluid == null) { dsc.Append("ERROR NO FLUID SET"); }
             else
             {
-                dsc.Append("Storing " + fluidTankLevel + "/" + fluidTankSize + "L of " + fluid.ToString());
+                dsc.Append("Storing " + fluidTankLevel/100 + "/" + fluidTankSize/100 + "L of " + fluid.ToString());
             }
         }
     }

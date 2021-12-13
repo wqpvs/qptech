@@ -23,8 +23,8 @@ namespace qptech.src
     class BEWaterTower:BlockEntity,IFluidNetworkUser
     {
         int tick = 7*5000;
-        int waterPerTick = 1;
-        int internalStorageCapacity = 32;
+        int waterPerTick = 100;
+        int internalStorageCapacity = 3200;
         int waterStored = 0;
         int bonusRainWaterPerTick = 1; //this is in liters, not a multiplier
         bool structurecomplete = false;
@@ -159,7 +159,7 @@ namespace qptech.src
                 dsc.AppendLine("WATER TOWER SKY ACCESS IS BLOCKED!");
             }
 
-            dsc.AppendLine("Stored Water " + waterStored +"/"+internalStorageCapacity+"L");
+            dsc.AppendLine("Stored Water " + waterStored/100 +"/"+internalStorageCapacity/100+"L");
             
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }

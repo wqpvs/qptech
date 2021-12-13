@@ -68,7 +68,7 @@ namespace qptech.src
             fluid = newfluid;
             MarkDirty();
         }
-        int fluidrate =1;
+        int fluidrate =100;
         public int FluidRate => fluidrate;
         
         public int GetHeight()

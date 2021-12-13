@@ -351,7 +351,7 @@ namespace qptech.src
             
             if (IsOn && !heated) { dsc.AppendLine(" (NO HEAT)"); }
             
-            if (waterUsage > 0 && firstwatercheck) { dsc.AppendLine("WATER:"+internalwater + "/" + internalstorage); }
+            if (waterUsage > 0 && firstwatercheck) { dsc.AppendLine("WATER:"+internalwater/100 + "/" + internalstorage/100); }
             if (generating) { dsc.AppendLine("Generating Power"); }
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }

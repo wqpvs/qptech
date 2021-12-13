@@ -57,7 +57,7 @@ namespace qptech.src
             }
         }
         public BlockPos TankPos { get { return Pos; } }
-        public bool IsFull { get { return CapacityLitres == CurrentLevel; } }
+        public bool IsFull { get { return CapacityLitres*100 == CurrentLevel; } }
         internal InventoryGeneric inventory;
         public override InventoryBase Inventory => inventory;
         public override string InventoryClassName => "tank";
@@ -139,7 +139,7 @@ namespace qptech.src
         {
             if (inventory[0].Itemstack!=null&&inventory[0].Itemstack.Item!=null&&offeredItem != inventory[0].Itemstack.Item) { return 0; }
             int useamount = offeredAmount;
-            useamount = Math.Min(CapacityLitres - CurrentLevel, useamount);
+            useamount = Math.Min(CapacityLitres*100 - CurrentLevel, useamount);
             if (useamount <= 0) { useamount=0; }
             else if (inventory[0].Itemstack == null || inventory[0].Itemstack.Item == null)
             {

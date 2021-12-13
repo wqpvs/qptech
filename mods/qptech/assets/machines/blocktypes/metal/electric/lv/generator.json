@@ -14,7 +14,7 @@
 		"receptionFaces": [ "north" ],
 		"requiredHeat": 800,
 		"heatFace": "down",
-		"waterUsage": 1,
+		"waterUsage": 100,
 		"waterUsePeriod": 0.25,
 		"waterFace": "up",
 		"pullFaces": [ "up" ],

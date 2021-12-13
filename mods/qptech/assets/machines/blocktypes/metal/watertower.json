@@ -13,9 +13,9 @@
 	"snowcoverage": false,
 	"attributes": {
 		"tick": 10000,
-		"waterPerTick": 1,
-		"bonusRainWaterPerTick": 2,
-		"internalStorageCapacity": 512,
+		"waterPerTick": 100,
+		"bonusRainWaterPerTick": 200,
+		"internalStorageCapacity": 51200,
 		"pushFaces": [ "down" ],
 		"mboffset": [ 1, 1, 0 ],
 		"multiblockStructure": {

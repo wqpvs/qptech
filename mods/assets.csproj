@@ -446,6 +446,7 @@
     <Content Include="qptech\qptech.dll" />
     <Content Include="qptech\qptech.pdb" />
     <Content Include="qptech\changelog1.5.txt" />
+    <Content Include="qptech\qptech1.6 change log.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="qptech\assets\game\blocktypes\" />
