@@ -23,8 +23,16 @@ namespace qptech.src
         Dictionary<string, double> requiredProcesses;
         Dictionary<string, double> missing;
         List<BlockFacing> processInputFaces;
+        ILoadedSound ambientSound;
+        string runsound = "sounds/electricloop";
         bool missingprocesses = false;
         string missingprocesstext = "";
+        float soundlevel = 0.5f;
+        public virtual float SoundLevel
+        {
+            get { return soundlevel; }
+        }
+        public bool Generating => IsOn && !missingprocesses;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -32,6 +40,8 @@ namespace qptech.src
             {
                 requiredProcesses = new Dictionary<string, double>();
                 requiredProcesses = Block.Attributes["requiredProcesses"].AsObject<Dictionary<string, double>>();
+                runsound = Block.Attributes["runsound"].AsString(runsound);
+                soundlevel = Block.Attributes["soundlevel"].AsFloat(soundlevel);
                 missing = new Dictionary<string, double>();
                 if (!Block.Attributes.KeyExists("processInputFaces")) { processInputFaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
                 else
@@ -46,7 +56,12 @@ namespace qptech.src
             }
         }
 
-        
+        public override void OnTick(float par)
+        {
+            base.OnTick(par);
+            ToggleAmbientSounds(Generating);
+            
+        }
         public override int AvailablePower()
         {
             if (!CheckRequiredProcesses()) { return 0; }
@@ -99,6 +114,57 @@ namespace qptech.src
         {
             base.GetBlockInfo(forPlayer, dsc);
             if (missingprocesses) { dsc.Append(missingprocesstext); }
+        }
+        
+        public override void OnBlockBroken()
+        {
+            ambientSound?.Stop();
+            ambientSound?.Dispose();
+            ambientSound = null;
+            base.OnBlockBroken();
+        }
+        public override void OnBlockRemoved()
+        {
+            ambientSound?.Stop();
+            ambientSound?.Dispose();
+            ambientSound = null;
+            base.OnBlockRemoved();
+        }
+        public override void OnBlockUnloaded()
+        {
+            ambientSound?.Stop();
+            ambientSound?.Dispose();
+            ambientSound = null;
+            base.OnBlockUnloaded();
+        }
+        public void ToggleAmbientSounds(bool on)
+        {
+            if (Api.Side != EnumAppSide.Client) return;
+
+            if (on)
+            {
+                if (ambientSound == null || !ambientSound.IsPlaying)
+                {
+                    ambientSound = ((IClientWorldAccessor)Api.World).LoadSound(new SoundParams()
+                    {
+                        Location = new AssetLocation(runsound),
+                        ShouldLoop = true,
+                        Position = Pos.ToVec3f().Add(0.5f, 0.25f, 0.5f),
+                        DisposeOnFinish = false,
+                        Volume = SoundLevel,
+                        Range = 10
+                    }) ;
+
+                    ambientSound.Start();
+                }
+            }
+            else
+            {
+                ambientSound?.Stop();
+                ambientSound?.Dispose();
+                ambientSound = null;
+            }
+
         }
     }
 

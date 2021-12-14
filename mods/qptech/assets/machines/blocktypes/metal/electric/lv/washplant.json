@@ -31,6 +31,9 @@
 			"genFlux": 0,
 			"useFlux": 8,
 			"processingTicks": 5,
+			"soundlevel": 1,
+			"runsound": "sounds/washplant",
+			"loopsound": true,
 			"machinename": "washplant",
 			"outputFace": "down"
 		}

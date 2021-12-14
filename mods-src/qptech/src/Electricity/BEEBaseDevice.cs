@@ -19,14 +19,23 @@ namespace qptech.src
     {
         
         public enum enDeviceState { IDLE, RUNNING, WARMUP, MATERIALHOLD, ERROR, POWERHOLD,PROCESSHOLD }
-        
+        ILoadedSound ambientSound;
+        string runsound = "";
         protected int requiredFlux = 1;     //how much TF to run
         protected int processingTicks = 30; //how many ticks for process to run
         protected int tickCounter = 0;
         protected string animationName = "process";
         public int RequiredFlux { get { return requiredFlux; } }
         //public bool IsPowered { get { return capacitor >= requiredFlux; } }
-
+        float soundlevel = 0f;
+        bool alreadyPlayedSound = false;
+        bool loopsound = false;
+        int soundoffdelaycounter = 0;
+        
+        public virtual float SoundLevel
+        {
+            get { return soundlevel; }
+        }
         protected enDeviceState deviceState = enDeviceState.WARMUP;
         public enDeviceState DeviceState { get { return deviceState; } }
         public override int RequestPower()
@@ -44,7 +53,11 @@ namespace qptech.src
         public override void OnTick(float par)
         {
             base.OnTick(par);
-            if (deviceState == enDeviceState.RUNNING) { DoRunningParticles(); }
+            if (deviceState == enDeviceState.RUNNING) {
+                DoRunningParticles();
+                
+            }
+            ToggleAmbientSounds(deviceState==enDeviceState.RUNNING);
             if (Api is ICoreClientAPI) { return; }
             UsePower();
             
@@ -59,7 +72,9 @@ namespace qptech.src
                 requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
                 processingTicks = Block.Attributes["processingTicks"].AsInt(processingTicks);
                 animationName = Block.Attributes["animationName"].AsString(animationName);
-                
+                runsound = Block.Attributes["runsound"].AsString(runsound);
+                soundlevel = Block.Attributes["soundlevel"].AsFloat(soundlevel);
+                loopsound = Block.Attributes["loopsound"].AsBool(loopsound);
             }
             //distributionFaces = new List<BlockFacing>(); //no distribution for us!
         }
@@ -175,11 +190,69 @@ namespace qptech.src
             base.GetBlockInfo(forPlayer, dsc);
             dsc.Append(" "+DeviceState.ToString());
             dsc.AppendLine("");
+            
         }
 
         public virtual int ReceiveItemOffer(ItemSlot offerslot, BlockFacing onFace)
         {
             return 0;
+        }
+        public override void OnBlockBroken()
+        {
+            ambientSound?.Stop();
+            ambientSound?.Dispose();
+            ambientSound = null;
+            base.OnBlockBroken();
+        }
+        public override void OnBlockRemoved()
+        {
+            ambientSound?.Stop();
+            ambientSound?.Dispose();
+            ambientSound = null;
+            base.OnBlockRemoved();
+        }
+        public override void OnBlockUnloaded()
+        {
+            ambientSound?.Stop();
+            ambientSound?.Dispose();
+            ambientSound = null;
+            base.OnBlockUnloaded();
+        }
+        public void ToggleAmbientSounds(bool on)
+        {
+            if (Api.Side != EnumAppSide.Client) return;
+            if (runsound == "" || SoundLevel == 0) { return; }
+            if (on)
+            {
+                
+                if (ambientSound == null || !ambientSound.IsPlaying && (!alreadyPlayedSound||loopsound))
+                {
+                    ambientSound = ((IClientWorldAccessor)Api.World).LoadSound(new SoundParams()
+                    {
+                        Location = new AssetLocation(runsound),
+                        ShouldLoop = loopsound,
+                        Position = Pos.ToVec3f().Add(0.5f, 0.25f, 0.5f),
+                        DisposeOnFinish = false,
+                        Volume = SoundLevel,
+                        Range = 10
+                    });
+                    soundoffdelaycounter = 0;
+                    ambientSound.Start();
+                    alreadyPlayedSound = true;
+                }
+            }
+            else if (loopsound && soundoffdelaycounter<10)
+            {
+                soundoffdelaycounter++;
+            }
+            else 
+            {
+                ambientSound?.Stop();
+                ambientSound?.Dispose();
+                ambientSound = null;
+                alreadyPlayedSound = false;
+            }
+
         }
     }
 

@@ -335,12 +335,15 @@
   <ItemGroup>
     <Content Include="qptech\assets\game\sounds\deepmetalknock.ogg" />
     <Content Include="qptech\assets\game\sounds\doorslide.ogg" />
+    <Content Include="qptech\assets\game\sounds\electricloop.ogg" />
     <Content Include="qptech\assets\game\sounds\electriczap.ogg" />
     <Content Include="qptech\assets\game\sounds\genloop.ogg" />
+    <Content Include="qptech\assets\game\sounds\industrialinjector.ogg" />
     <Content Include="qptech\assets\game\sounds\industrial01.ogg" />
     <Content Include="qptech\assets\game\sounds\quarrytemp.ogg" />
     <Content Include="qptech\assets\game\sounds\steamburst.ogg" />
     <Content Include="qptech\assets\game\sounds\valve.ogg" />
+    <Content Include="qptech\assets\game\sounds\washplant.ogg" />
     <Content Include="qptech\assets\game\sounds\waterslosh.ogg" />
     <Content Include="qptech\assets\game\textures\block\big status panel.png" />
     <Content Include="qptech\assets\game\textures\block\blankpanel.png" />

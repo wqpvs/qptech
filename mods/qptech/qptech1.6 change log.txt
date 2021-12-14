@@ -5,3 +5,7 @@
 - fixed boiler water usage
 - fixed prim generator water usage
 - fixed water tower water generation and storage
+- adding sound to industrial generator
+- adding sound set up to BEEBaseDevice
+- added wiremill sound (more as a test)
+- added washplant sound
