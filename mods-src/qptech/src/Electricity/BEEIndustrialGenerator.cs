@@ -27,7 +27,7 @@ namespace qptech.src
         string runsound = "sounds/electricloop";
         bool missingprocesses = false;
         string missingprocesstext = "";
-        float soundlevel = 0.5f;
+        float soundlevel = 1f;
         public virtual float SoundLevel
         {
             get { return soundlevel; }

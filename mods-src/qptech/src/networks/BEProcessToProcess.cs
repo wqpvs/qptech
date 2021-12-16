@@ -24,6 +24,16 @@ namespace qptech.src.networks
         bool missingprocesses = false;
         string missingprocesstext = "";
         List<BlockFacing> processInputFaces;
+        ILoadedSound ambientSound;
+        string runsound = "";
+        float soundlevel = 0.5f;
+        bool loopsound;
+        bool alreadyPlayedSound;
+        int soundoffdelaycounter = 0;
+        public virtual float SoundLevel
+        {
+            get { return soundlevel; }
+        }
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -33,6 +43,9 @@ namespace qptech.src.networks
                 suppliedProcesses = Block.Attributes["processes"].AsObject<Dictionary<string, double>>();
                 requiredProcesses = new Dictionary<string, double>();
                 requiredProcesses = Block.Attributes["requiredProcesses"].AsObject<Dictionary<string, double>>();
+                runsound = Block.Attributes["runsound"].AsString(runsound);
+                soundlevel = Block.Attributes["soundlevel"].AsFloat(soundlevel);
+                loopsound = Block.Attributes["loopsound"].AsBool(loopsound);
                 if (!Block.Attributes.KeyExists("processInputFaces")) { processInputFaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
                 else
                 {
@@ -43,6 +56,43 @@ namespace qptech.src.networks
                         processInputFaces.Add(BEElectric.OrientFace(Block.Code.ToString(), BlockFacing.FromCode(f)));
                     }
                 }
+                RegisterGameTickListener(OnTick, 100);
+            }
+        }
+        private SimpleParticleProperties smokeParticles;
+        public virtual void OnTick(float df)
+        {
+            if (Api is ICoreServerAPI) { CheckRequiredProcesses(); }
+            if (!missingprocesses)
+            {
+                DoRunningParticles();
+            }
+            ToggleAmbientSounds(!missingprocesses);
+        }
+        public virtual void DoRunningParticles()
+        {
+            //Temp code for steam particles, def needs to be moved to json
+            if (suppliedProcesses.ContainsKey("steam")){
+
+                smokeParticles = new SimpleParticleProperties(
+                      0, 2,
+                      ColorUtil.ToRgba(64, 255, 255, 255),
+                      new Vec3d(0, 28, 0),
+                      new Vec3d(0.75, 32, 0.75),
+                      new Vec3f(-1 / 32f, 0.2f, -1 / 32f),
+                      new Vec3f(1 / 32f, 1f, 1 / 32f),
+                      1.5f,
+                      -0.025f / 4,
+                      0.2f,
+                      0.6f,
+                      EnumParticleModel.Quad
+                  );
+
+                smokeParticles.SizeEvolve = new EvolvingNatFloat(EnumTransformFunction.LINEAR, -0.25f);
+                smokeParticles.SelfPropelled = true;
+                smokeParticles.AddPos.Set(8 / 16.0, 0, 8 / 16.0);
+                smokeParticles.MinPos.Set(Pos.X + 4 / 16f, Pos.Y + 3 / 16f, Pos.Z + 4 / 16f);
+                Api.World.SpawnParticles(smokeParticles);
             }
         }
 
@@ -98,6 +148,38 @@ namespace qptech.src.networks
             MarkDirty();
             return ok;
         }
+        public void ToggleAmbientSounds(bool on)
+        {
+            if (Api.Side != EnumAppSide.Client) return;
+            if (runsound == "" || SoundLevel == 0) { return; }
+            if (on)
+            {
+
+                if (ambientSound == null || !ambientSound.IsPlaying && (!alreadyPlayedSound || loopsound))
+                {
+                    ambientSound = ((IClientWorldAccessor)Api.World).LoadSound(new SoundParams()
+                    {
+                        Location = new AssetLocation(runsound),
+                        ShouldLoop = loopsound,
+                        Position = Pos.ToVec3f().Add(0.5f, 0.25f, 0.5f),
+                        DisposeOnFinish = false,
+                        Volume = SoundLevel,
+                        Range = 10
+                    });
+                    soundoffdelaycounter = 0;
+                    ambientSound.Start();
+                    alreadyPlayedSound = true;
+                }
+            }
+           
+            else
+            {
+                ambientSound?.Stop();
+                ambientSound?.Dispose();
+                ambientSound = null;
+                alreadyPlayedSound = false;
+            }
+        }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
@@ -114,6 +196,21 @@ namespace qptech.src.networks
         {
             base.GetBlockInfo(forPlayer, dsc);
             if (missingprocesses) { dsc.Append(missingprocesstext); }
+        }
+        
+        public override void OnBlockRemoved()
+        {
+            ambientSound?.Stop();
+            ambientSound?.Dispose();
+            ambientSound = null;
+            base.OnBlockRemoved();
+        }
+        public override void OnBlockUnloaded()
+        {
+            ambientSound?.Stop();
+            ambientSound?.Dispose();
+            ambientSound = null;
+            base.OnBlockUnloaded();
         }
     }
 }

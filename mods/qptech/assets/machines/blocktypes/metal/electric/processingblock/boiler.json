@@ -28,16 +28,19 @@
 	"attributesByType": {
 
 		"*-small-*": {
-			
+
 			"processes": {
 
 				"steam": 500
 			},
+			"soundlevel": 0.5,
+			"runsound": "sounds/steam",
+			"loopsound": true,
 			"requiredProcesses": {
 				"heating": 1000
 			},
 			"fluidcode": "game:waterportion",
-			"fluidUse": 1,
+			"fluidUse": 50,
 			"fluidTankSize": 1000,
 			"fluidtick": 5000
 		}

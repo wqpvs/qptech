@@ -9,3 +9,8 @@
 - adding sound set up to BEEBaseDevice
 - added wiremill sound (more as a test)
 - added washplant sound
+
+- roughed in steam particles and sound for boiler block
+- added sound for BEProcessToProcess
+- increase boiler water usage
+
