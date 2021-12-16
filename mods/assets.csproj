@@ -22,6 +22,7 @@
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\enderchest.json" />
+    <None Include="qptech\assets\machines\blocktypes\indev\anitest.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\blastfurnace.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\electriccrucible.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
