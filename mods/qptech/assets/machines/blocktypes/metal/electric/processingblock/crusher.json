@@ -32,9 +32,11 @@
 			"useFlux": 16,
 
 			"processes": {
-				
+
 				"crushing": 1000
 			},
+			"runAnimation": "run",
+			"runAnimationSpeed": 1,
 			"inputFace": "west",
 			"outputFace": "east"
 		}

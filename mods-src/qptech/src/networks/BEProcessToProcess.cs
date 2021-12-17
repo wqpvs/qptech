@@ -66,7 +66,7 @@ namespace qptech.src.networks
                 if (api.World.Side == EnumAppSide.Client && runAnimation!="")
                 {
                     float rotY = Block.Shape.rotateY;
-                    animUtil.InitializeAnimator("anitest", new Vec3f(0, rotY, 0));
+                    animUtil.InitializeAnimator("BEProcessToProcess", new Vec3f(0, rotY, 0));
 
 
                 }

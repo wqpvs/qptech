@@ -23,4 +23,6 @@ NOTETOSELF: Api.World.ElapsedMilliseconds
 
 - added crusher model
 
+- added crusher animation
+
 

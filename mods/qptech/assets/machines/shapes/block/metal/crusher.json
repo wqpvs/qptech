@@ -1990,4 +1990,71 @@
 				}
 			]
 		}
-	]}
+	],
+	"animations": [
+		{
+			"name": "Run",
+			"code": "run",
+			"quantityframes": 30,
+			"onActivityStopped": "Rewind",
+			"onAnimationEnd": "Repeat",
+			"keyframes": [
+				{
+					"frame": 0,
+					"elements": {
+						"baseplate": {  },
+						"CrusherShaft01": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 },
+						"CrusherShaft02": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 },
+						"CrusherShaft03": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 },
+						"CrusherShaft04": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 }
+					}
+				},
+				{
+					"frame": 5,
+					"elements": {
+						"baseplate": {  },
+						"CrusherShaft02": { "offsetX": 0.0, "offsetY": -4.0, "offsetZ": 0.0 }
+					}
+				},
+				{
+					"frame": 9,
+					"elements": {
+						"baseplate": {  },
+						"CrusherShaft03": { "offsetX": 0.0, "offsetY": 4.0, "offsetZ": 0.0 }
+					}
+				},
+				{
+					"frame": 15,
+					"elements": {
+						"baseplate": {  },
+						"CrusherShaft01": { "offsetX": 0.0, "offsetY": 12.0, "offsetZ": 0.0 },
+						"CrusherShaft04": { "offsetX": 0.0, "offsetY": -12.0, "offsetZ": 0.0 }
+					}
+				},
+				{
+					"frame": 21,
+					"elements": {
+						"baseplate": {  },
+						"CrusherShaft02": { "offsetX": 0.0, "offsetY": 8.0, "offsetZ": 0.0 }
+					}
+				},
+				{
+					"frame": 23,
+					"elements": {
+						"baseplate": {  },
+						"CrusherShaft03": { "offsetX": 0.0, "offsetY": -8.0, "offsetZ": 0.0 }
+					}
+				},
+				{
+					"frame": 29,
+					"elements": {
+						"baseplate": {  },
+						"CrusherShaft01": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 },
+						"CrusherShaft02": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 },
+						"CrusherShaft04": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 }
+					}
+				}
+			]
+		}
+	]
+}
