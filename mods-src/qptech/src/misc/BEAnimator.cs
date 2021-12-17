@@ -30,7 +30,10 @@ namespace qptech.src.misc
     {
         BlockEntityAnimationUtil animUtil
         {
-            get { return GetBehavior<BEBehaviorAnimatable>().animUtil; }
+            get {
+                if (GetBehavior<BEBehaviorAnimatable>() == null) { return null; }
+                return GetBehavior<BEBehaviorAnimatable>().animUtil;
+            }
         }
         public override void Initialize(ICoreAPI api)
         {

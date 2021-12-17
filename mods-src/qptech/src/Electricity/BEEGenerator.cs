@@ -18,7 +18,7 @@ namespace qptech.src
         protected List<string> fuelCodes;   //Valid item & block codes usable as fuel
         protected int fuelTicks = 0;  //how many OnTicks a piece of fuel will last for
         int fuelCounter = 0; //counts down to use fuel
-        protected bool animInit = false;
+        
         bool usesFuel = false;          //Whether item uses fuel
         bool fueled = false;            //whether device is currently fueld
         bool usesFuelWhileOn = false;  //always use fuel, even if no load (unless turned off)
@@ -77,7 +77,7 @@ namespace qptech.src
         {
             base.Initialize(api);
             fluiditem = api.World.GetItem(new AssetLocation("game:waterportion"));
-            animInit = false;
+            
             if (Block.Attributes != null)
             {
 
@@ -101,7 +101,14 @@ namespace qptech.src
                 waterFace = BlockFacing.FromCode(Block.Attributes["waterFace"].AsString("up"));
                 fuelCounter = 0;
                 if (lastwaterused == 0) { lastwaterused = Api.World.Calendar.TotalHours; }
-            }     
+            }
+            if (api.World.Side == EnumAppSide.Client)
+            {
+                float rotY = Block.Shape.rotateY;
+                animUtil.InitializeAnimator("anitest", new Vec3f(0, rotY, 0));
+                
+
+            }
         }
         public override void OnTick(float par)
         {
@@ -115,6 +122,10 @@ namespace qptech.src
             {
                 if (!IsOn && generating) { generating = false;MarkDirty(); }
             }
+            else if (Api is ICoreClientAPI && animUtil != null)
+            {
+                DoAnimations();
+            }
             ToggleAmbientSounds(IsOn&&generating);
 
 
@@ -125,24 +136,6 @@ namespace qptech.src
         {
             trypower = DoGeneratePower();
             generating = trypower;
-
-            if (!disableAnimations&&Api.World.Side == EnumAppSide.Client && animUtil != null)
-            {
-                if (!animInit)
-                {
-                    float rotY = Block.Shape.rotateY;
-                    animUtil.InitializeAnimator(Pos.ToString() + "run", new Vec3f(0, rotY, 0));
-                    animInit = true;
-                }
-                if (trypower)
-                    animUtil.StartAnimation(new AnimationMetaData() 
-                    { 
-                        Animation = "run", Code = "run", AnimationSpeed = 0.7f, EaseInSpeed = 2, EaseOutSpeed = 8, Weight = 1, BlendMode = EnumAnimationBlendMode.Average 
-                    });
-            }
-
-            
-            
             return;
         }
 
@@ -190,17 +183,17 @@ namespace qptech.src
             return fueled;
         }
         //generators don't receive power
-        
+
         BlockEntityAnimationUtil animUtil
         {
-            get {
-                BEBehaviorAnimatable bea = GetBehavior<BEBehaviorAnimatable>();
-                if (bea == null) { return null; }
+            get
+            {
+                if (GetBehavior<BEBehaviorAnimatable>() == null) { return null; }
                 return GetBehavior<BEBehaviorAnimatable>().animUtil;
             }
         }
 
-        
+
 
         //will check and see if there's enough water, and will use water if necessary
         bool CheckWater()
@@ -294,6 +287,28 @@ namespace qptech.src
             }
             return false;
         }
+        bool animationIsRunning = false;
+        protected virtual void DoAnimations()
+        {
+            string anicode = "run";
+            string animation = "Run";
+            if (generating && !animationIsRunning)
+            {
+                
+                    var meta = new AnimationMetaData() { Animation = animation, Code = anicode, AnimationSpeed = 1, EaseInSpeed = 1, EaseOutSpeed = 2, Weight = 1, BlendMode = EnumAnimationBlendMode.Add };
+                    animUtil.StartAnimation(meta);
+                    animUtil.StartAnimation(new AnimationMetaData() { Animation = animation, Code = anicode, AnimationSpeed = 1, EaseInSpeed = 1, EaseOutSpeed = 1, Weight = 1, BlendMode = EnumAnimationBlendMode.Average });
+                animationIsRunning = true;
+            }
+            else if (!generating && animationIsRunning)
+            {
+                animationIsRunning = false; 
+                
+                animUtil.StopAnimation(anicode);
+            }
+        
+        }
+
         public void ToggleAmbientSounds(bool on)
         {
             if (Api.Side != EnumAppSide.Client) return;
@@ -375,5 +390,6 @@ namespace qptech.src
             heated = tree.GetBool("heated");
             base.FromTreeAttributes(tree, worldAccessForResolve);
         }
+       
     }
 }
