@@ -168,11 +168,27 @@
 							"faces": {
 								"north": { "texture": "#turbine", "uv": [ 0.0, 0.0, 7.0, 7.0 ], "enabled": false },
 								"east": { "texture": "#turbine", "uv": [ 0.0, 0.0, 1.0, 7.0 ], "enabled": false },
-								"south": { "texture": "#turbine", "uv": [ 1.5, 1.5, 14.5, 14.5 ], "autoUv": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 1.5, 1.5, 14.5, 14.5 ], "autoUv": false },
 								"west": { "texture": "#turbine", "uv": [ 0.0, 0.0, 1.0, 7.0 ], "enabled": false },
 								"up": { "texture": "#turbine", "uv": [ 0.0, 0.0, 7.0, 1.0 ], "enabled": false },
 								"down": { "texture": "#turbine", "uv": [ 0.0, 0.0, 7.0, 1.0 ], "enabled": false }
-							}
+							},
+							"children": [
+								{
+									"name": "TurbineFace",
+									"from": [ -0.2, 0.0, 0.01 ], 
+									"to": [ 6.8, 7.0, 1.01 ], 
+									"rotationOrigin": [ 3.5, 3.5, 0.0 ],
+									"faces": {
+										"north": { "texture": "#turbine", "uv": [ 0.0, 0.0, 7.0, 7.0 ], "enabled": false },
+										"east": { "texture": "#turbine", "uv": [ 0.0, 0.0, 1.0, 7.0 ], "enabled": false },
+										"south": { "texture": "#turbine", "uv": [ 1.5, 1.5, 14.5, 14.5 ], "autoUv": false },
+										"west": { "texture": "#turbine", "uv": [ 0.0, 0.0, 1.0, 7.0 ], "enabled": false },
+										"up": { "texture": "#turbine", "uv": [ 0.0, 0.0, 7.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#turbine", "uv": [ 0.0, 0.0, 7.0, 1.0 ], "enabled": false }
+									}
+								}
+							]
 						}
 					]
 				},
@@ -337,4 +353,30 @@
 				}
 			]
 		}
-	]}
+	],
+	"animations": [
+		{
+			"name": "Run",
+			"code": "run",
+			"quantityframes": 30,
+			"onActivityStopped": "Rewind",
+			"onAnimationEnd": "Repeat",
+			"keyframes": [
+				{
+					"frame": 0,
+					"elements": {
+						"Turbine": {  },
+						"TurbineFace": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -180.0 }
+					}
+				},
+				{
+					"frame": 29,
+					"elements": {
+						"Turbine": {  },
+						"TurbineFace": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 180.0 }
+					}
+				}
+			]
+		}
+	]
+}

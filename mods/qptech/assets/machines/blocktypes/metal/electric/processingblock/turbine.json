@@ -36,7 +36,12 @@
 			"requiredProcesses": {
 				"steam": 500
 			},
-			"processInputFaces": ["west"]
+			"processInputFaces": [ "west" ],
+			"runAnimation": "run",
+			"runAnimationSpeed": 2,
+			"runsound": "sounds/turbine",
+			"soundlevel": 0.5,
+			"loopsound":  true
 		}
 	},
 

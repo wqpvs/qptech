@@ -34,8 +34,10 @@
 				"torque": 500
 			},
 			"processInputFaces": [ "west" ],
-			"genFlux": 32
-
+			"genFlux": 32,
+			"soundlevel": 1,
+			"runsound": "sounds/electricloop",
+			"loopsound": true
 		}
 	},
 

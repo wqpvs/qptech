@@ -30,6 +30,8 @@ namespace qptech.src.networks
         bool loopsound;
         bool alreadyPlayedSound;
         int soundoffdelaycounter = 0;
+        protected string runAnimation = "";
+        protected float runAnimationSpeed = 1;
         public virtual bool Running => !missingprocesses;
         
         public virtual float SoundLevel
@@ -48,6 +50,8 @@ namespace qptech.src.networks
                 runsound = Block.Attributes["runsound"].AsString(runsound);
                 soundlevel = Block.Attributes["soundlevel"].AsFloat(soundlevel);
                 loopsound = Block.Attributes["loopsound"].AsBool(loopsound);
+                runAnimation = Block.Attributes["runAnimation"].AsString(runAnimation);
+                runAnimationSpeed = Block.Attributes["runAnimationSpeed"].AsFloat(runAnimationSpeed);
                 if (!Block.Attributes.KeyExists("processInputFaces")) { processInputFaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
                 else
                 {
@@ -59,6 +63,13 @@ namespace qptech.src.networks
                     }
                 }
                 RegisterGameTickListener(OnTick, 100);
+                if (api.World.Side == EnumAppSide.Client && runAnimation!="")
+                {
+                    float rotY = Block.Shape.rotateY;
+                    animUtil.InitializeAnimator("anitest", new Vec3f(0, rotY, 0));
+
+
+                }
             }
         }
         private SimpleParticleProperties smokeParticles;
@@ -69,7 +80,8 @@ namespace qptech.src.networks
             {
                 DoRunningParticles();
             }
-            ToggleAmbientSounds(!missingprocesses);
+            ToggleAmbientSounds(Running);
+            if (Api is ICoreClientAPI && animUtil!=null && runAnimation != "") { DoAnimations(); }
         }
         public virtual void DoRunningParticles()
         {
@@ -213,6 +225,35 @@ namespace qptech.src.networks
             ambientSound?.Dispose();
             ambientSound = null;
             base.OnBlockUnloaded();
+        }
+        protected BlockEntityAnimationUtil animUtil
+        {
+            get
+            {
+                if (GetBehavior<BEBehaviorAnimatable>() == null) { return null; }
+                return GetBehavior<BEBehaviorAnimatable>().animUtil;
+            }
+        }
+        bool animationIsRunning = false;
+        protected virtual void DoAnimations()
+        {
+            string anicode = runAnimation;
+            string animation = "Run";
+            if (Running && !animationIsRunning)
+            {
+
+                var meta = new AnimationMetaData() { Animation = animation, Code = anicode, AnimationSpeed = runAnimationSpeed, EaseInSpeed = 1, EaseOutSpeed = 2, Weight = 1, BlendMode = EnumAnimationBlendMode.Add };
+                animUtil.StartAnimation(meta);
+                animUtil.StartAnimation(new AnimationMetaData() { Animation = animation, Code = anicode, AnimationSpeed = 1, EaseInSpeed = 1, EaseOutSpeed = 1, Weight = 1, BlendMode = EnumAnimationBlendMode.Average });
+                animationIsRunning = true;
+            }
+            else if (!Running && animationIsRunning)
+            {
+                animationIsRunning = false;
+
+                animUtil.StopAnimation(anicode);
+            }
+
         }
     }
 }

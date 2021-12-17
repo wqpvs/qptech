@@ -18,5 +18,7 @@ NOTETOSELF: Api.World.ElapsedMilliseconds
 [dev]Added BEAnimator test class and anitest object
 - added "Running" to BEProcessToProcess and BEProcessToProcess Fluid fixes particles always running on boiler
 - primitive/creative generator animations running again \o/
+- added simple turbine Animation and sound
+[dev]Implemented animations for BEProcessToProcess, needs attribute runAnimation
 
 
