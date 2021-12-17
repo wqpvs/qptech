@@ -21,4 +21,6 @@ NOTETOSELF: Api.World.ElapsedMilliseconds
 - added simple turbine Animation and sound
 [dev]Implemented animations for BEProcessToProcess, needs attribute runAnimation
 
+- added crusher model
+
 

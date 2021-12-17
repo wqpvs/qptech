@@ -43,25 +43,23 @@
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 	
-	"textures": {
-		"all": { "base": "block/tempblocks/crush" }
-	},
-	"shape": { "base": "block/metal/electric/tempmachine" },
+	
+	"shape": { "base": "block/metal/crusher" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/crusher",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/crusher",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/crusher",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/crusher",
 			"rotateY": 180
 		}
 	},

@@ -208,6 +208,7 @@
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\boiler.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\crusher.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\generator-mk2.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\lathe.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wiremill.json" />
