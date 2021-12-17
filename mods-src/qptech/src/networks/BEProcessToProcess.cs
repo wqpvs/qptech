@@ -30,6 +30,8 @@ namespace qptech.src.networks
         bool loopsound;
         bool alreadyPlayedSound;
         int soundoffdelaycounter = 0;
+        public virtual bool Running => !missingprocesses;
+        
         public virtual float SoundLevel
         {
             get { return soundlevel; }
@@ -63,7 +65,7 @@ namespace qptech.src.networks
         public virtual void OnTick(float df)
         {
             if (Api is ICoreServerAPI) { CheckRequiredProcesses(); }
-            if (!missingprocesses)
+            if (Running)
             {
                 DoRunningParticles();
             }

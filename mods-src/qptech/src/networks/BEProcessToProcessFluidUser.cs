@@ -18,6 +18,7 @@ namespace qptech.src.networks
         bool fluidok;
         int fluidtick = 75;
         bool usingfluid = false;
+        public override bool Running => base.Running && fluidok;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
