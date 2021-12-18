@@ -27,4 +27,5 @@ NOTETOSELF: Api.World.ElapsedMilliseconds
 [dev] implemented animations for BEEBaseDevice
 [bug] found a bug - clientside not always noticing that a flex network is gone
 - added bloomery model
+- Added crusher sound
 

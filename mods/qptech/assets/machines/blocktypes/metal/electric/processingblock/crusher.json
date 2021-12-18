@@ -38,7 +38,9 @@
 			"animationCode": "run",
 			"animation": "Run",
 			"runAnimationSpeed": 1,
-			
+			"runsound": "sounds/crusher",
+			"soundlevel": 0.5,
+			"loopsound": true
 		}
 	},
 
