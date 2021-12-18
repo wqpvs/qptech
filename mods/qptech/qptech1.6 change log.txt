@@ -24,5 +24,7 @@ NOTETOSELF: Api.World.ElapsedMilliseconds
 - added crusher model
 
 - added crusher animation
+[dev] implemented animations for BEEBaseDevice
+[bug] found a bug - clientside not always noticing that a flex network is gone
 
 

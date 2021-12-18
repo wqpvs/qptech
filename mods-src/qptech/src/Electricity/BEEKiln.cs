@@ -177,11 +177,7 @@ namespace qptech.src
                 dummy.DropAll(pos);
             }
             Api.World.PlaySoundAt(new AssetLocation("sounds/doorslide"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
-            if (Api.World.Side == EnumAppSide.Client && animUtil != null)
-            {
-
-                animUtil.StopAnimation(Pos.ToString() + animationName);
-            }
+            
         }
 
         void TryStart()

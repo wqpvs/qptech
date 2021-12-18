@@ -24,7 +24,9 @@ namespace qptech.src
         protected int requiredFlux = 1;     //how much TF to run
         protected int processingTicks = 30; //how many ticks for process to run
         protected int tickCounter = 0;
-        protected string animationName = "process";
+        protected string animationCode = "";
+        protected string animation = "";
+        protected float runAnimationSpeed = 1;
         public int RequiredFlux { get { return requiredFlux; } }
         //public bool IsPowered { get { return capacitor >= requiredFlux; } }
         float soundlevel = 0f;
@@ -58,25 +60,35 @@ namespace qptech.src
                 
             }
             ToggleAmbientSounds(deviceState==enDeviceState.RUNNING);
-            if (Api is ICoreClientAPI) { return; }
+            if (Api is ICoreClientAPI) {
+                DoAnimations();
+                return;
+            }
             UsePower();
             
         }
-        protected bool animInit = false;
+        
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            animInit = false;
-            //if (Block == null || Block.Attributes == null) { return; }
+            
+            
             if (Block.Attributes != null) {
                 requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
                 processingTicks = Block.Attributes["processingTicks"].AsInt(processingTicks);
-                animationName = Block.Attributes["animationName"].AsString(animationName);
+                animationCode = Block.Attributes["animationCode"].AsString(animationCode);
+                animation = Block.Attributes["animation"].AsString(animation);
+                runAnimationSpeed = Block.Attributes["runAnimationSpeed"].AsFloat(runAnimationSpeed);
                 runsound = Block.Attributes["runsound"].AsString(runsound);
                 soundlevel = Block.Attributes["soundlevel"].AsFloat(soundlevel);
                 loopsound = Block.Attributes["loopsound"].AsBool(loopsound);
             }
-            //distributionFaces = new List<BlockFacing>(); //no distribution for us!
+            if (api.World.Side == EnumAppSide.Client && animationCode != "")
+            {
+                float rotY = Block.Shape.rotateY;
+                animUtil.InitializeAnimator("BEEBaseDevice", new Vec3f(0, rotY, 0));
+            }
+            
         }
 
         protected virtual void DoRunningParticles()
@@ -101,11 +113,7 @@ namespace qptech.src
                 DoDeviceStart();
                 
             }
-            /*else if (deviceState == enDeviceState.WARMUP)
-            {
-                tickCounter++;
-                if (tickCounter == 10) { tickCounter = 0;deviceState = enDeviceState.IDLE; }
-            }*/
+            
             else { if (DeviceState == enDeviceState.RUNNING) { DoDeviceProcessing(); } }
             if (DeviceState == enDeviceState.WARMUP) { deviceState = enDeviceState.IDLE; }
         }
@@ -179,12 +187,31 @@ namespace qptech.src
         {
             get
             {
-                BEBehaviorAnimatable bea = GetBehavior<BEBehaviorAnimatable>();
-                if (bea == null) { return null; }
+                if (GetBehavior<BEBehaviorAnimatable>() == null) { return null; }
                 return GetBehavior<BEBehaviorAnimatable>().animUtil;
             }
         }
-        
+        bool animationIsRunning = false;
+        protected virtual void DoAnimations()
+        {
+            bool shouldAnimate=(deviceState == enDeviceState.RUNNING);
+            if (shouldAnimate && !animationIsRunning)
+            {
+
+                var meta = new AnimationMetaData() { Animation = animation, Code = animationCode, AnimationSpeed = runAnimationSpeed, EaseInSpeed = 1, EaseOutSpeed = 2, Weight = 1, BlendMode = EnumAnimationBlendMode.Add };
+                animUtil.StartAnimation(meta);
+                animUtil.StartAnimation(new AnimationMetaData() { Animation = animation, Code = animationCode, AnimationSpeed = 1, EaseInSpeed = 1, EaseOutSpeed = 1, Weight = 1, BlendMode = EnumAnimationBlendMode.Average });
+                animationIsRunning = true;
+            }
+            else if (!shouldAnimate && animationIsRunning)
+            {
+                animationIsRunning = false;
+
+                animUtil.StopAnimation(animationCode);
+            }
+
+        }
+
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);

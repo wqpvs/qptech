@@ -37,7 +37,8 @@
 				"steam": 500
 			},
 			"processInputFaces": [ "west" ],
-			"runAnimation": "run",
+			"animationCode": "run",
+			"animation": "Run",
 			"runAnimationSpeed": 2,
 			"runsound": "sounds/turbine",
 			"soundlevel": 0.5,

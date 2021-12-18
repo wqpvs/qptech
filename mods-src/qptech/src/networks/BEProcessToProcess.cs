@@ -29,8 +29,9 @@ namespace qptech.src.networks
         float soundlevel = 0.5f;
         bool loopsound;
         bool alreadyPlayedSound;
-        int soundoffdelaycounter = 0;
-        protected string runAnimation = "";
+        
+        protected string animationCode = "";
+        protected string animation = "";
         protected float runAnimationSpeed = 1;
         public virtual bool Running => !missingprocesses;
         
@@ -50,7 +51,8 @@ namespace qptech.src.networks
                 runsound = Block.Attributes["runsound"].AsString(runsound);
                 soundlevel = Block.Attributes["soundlevel"].AsFloat(soundlevel);
                 loopsound = Block.Attributes["loopsound"].AsBool(loopsound);
-                runAnimation = Block.Attributes["runAnimation"].AsString(runAnimation);
+                animationCode = Block.Attributes["animationCode"].AsString(animationCode);
+                animation = Block.Attributes["animation"].AsString(animation);
                 runAnimationSpeed = Block.Attributes["runAnimationSpeed"].AsFloat(runAnimationSpeed);
                 if (!Block.Attributes.KeyExists("processInputFaces")) { processInputFaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
                 else
@@ -63,7 +65,7 @@ namespace qptech.src.networks
                     }
                 }
                 RegisterGameTickListener(OnTick, 100);
-                if (api.World.Side == EnumAppSide.Client && runAnimation!="")
+                if (api.World.Side == EnumAppSide.Client && animationCode!="")
                 {
                     float rotY = Block.Shape.rotateY;
                     animUtil.InitializeAnimator("BEProcessToProcess", new Vec3f(0, rotY, 0));
@@ -81,7 +83,7 @@ namespace qptech.src.networks
                 DoRunningParticles();
             }
             ToggleAmbientSounds(Running);
-            if (Api is ICoreClientAPI && animUtil!=null && runAnimation != "") { DoAnimations(); }
+            if (Api is ICoreClientAPI && animUtil!=null && animationCode != "") { DoAnimations(); }
         }
         public virtual void DoRunningParticles()
         {
@@ -180,7 +182,7 @@ namespace qptech.src.networks
                         Volume = SoundLevel,
                         Range = 10
                     });
-                    soundoffdelaycounter = 0;
+                    
                     ambientSound.Start();
                     alreadyPlayedSound = true;
                 }
@@ -237,21 +239,20 @@ namespace qptech.src.networks
         bool animationIsRunning = false;
         protected virtual void DoAnimations()
         {
-            string anicode = runAnimation;
-            string animation = "Run";
+            
             if (Running && !animationIsRunning)
             {
 
-                var meta = new AnimationMetaData() { Animation = animation, Code = anicode, AnimationSpeed = runAnimationSpeed, EaseInSpeed = 1, EaseOutSpeed = 2, Weight = 1, BlendMode = EnumAnimationBlendMode.Add };
+                var meta = new AnimationMetaData() { Animation = animation, Code = animationCode, AnimationSpeed = runAnimationSpeed, EaseInSpeed = 1, EaseOutSpeed = 2, Weight = 1, BlendMode = EnumAnimationBlendMode.Add };
                 animUtil.StartAnimation(meta);
-                animUtil.StartAnimation(new AnimationMetaData() { Animation = animation, Code = anicode, AnimationSpeed = 1, EaseInSpeed = 1, EaseOutSpeed = 1, Weight = 1, BlendMode = EnumAnimationBlendMode.Average });
+                animUtil.StartAnimation(new AnimationMetaData() { Animation = animation, Code = animationCode, AnimationSpeed = 1, EaseInSpeed = 1, EaseOutSpeed = 1, Weight = 1, BlendMode = EnumAnimationBlendMode.Average });
                 animationIsRunning = true;
             }
             else if (!Running && animationIsRunning)
             {
                 animationIsRunning = false;
 
-                animUtil.StopAnimation(anicode);
+                animUtil.StopAnimation(animationCode);
             }
 
         }

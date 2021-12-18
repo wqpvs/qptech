@@ -158,26 +158,7 @@ namespace qptech.src
                 tickCounter = 0;
                 deviceState = enDeviceState.RUNNING;
                 
-                if (!disableAnimations&& Api.World.Side == EnumAppSide.Client && animUtil != null)
-                {
-                    if (!animInit)
-                    {
-                        float rotY = Block.Shape.rotateY;
-                        animUtil.InitializeAnimator(Pos.ToString() + "process", new Vec3f(0, rotY, 0));
-                        animInit = true;
-                    }
-                    animUtil.StartAnimation(new AnimationMetaData()
-                    {
-                        Animation = animationName,
-                        Code = animationName,
-                        AnimationSpeed = animationSpeed,
-                        EaseInSpeed = 2,
-                        EaseOutSpeed = 4,
-                        Weight = 1,
-                        BlendMode = EnumAnimationBlendMode.Average
-                    });
-                    
-                }
+               
 
                 //sounds/blocks/doorslide.ogg
                 DoDeviceProcessing();
@@ -265,11 +246,7 @@ namespace qptech.src
                 dummy.DropAll(pos);
             }
             Api.World.PlaySoundAt(new AssetLocation("sounds/doorslide"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
-            if (!disableAnimations&& Api.World.Side == EnumAppSide.Client && animUtil != null)
-            {
-                
-                animUtil.StopAnimation(Pos.ToString() + animationName);
-            }
+           
         }
 
         protected void FetchMaterial()

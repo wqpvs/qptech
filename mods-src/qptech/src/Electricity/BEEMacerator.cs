@@ -50,7 +50,7 @@ namespace qptech.src
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            animInit = false;
+            
             if (Block.Attributes != null)
             {
                 
@@ -163,27 +163,7 @@ namespace qptech.src
         void Start()
         {
 
-            if (!disableAnimations && Api.World.Side == EnumAppSide.Client && animUtil != null)
-            {
-                if (!animInit)
-                {
-                    float rotY = Block.Shape.rotateY;
-                    animUtil.InitializeAnimator(Pos.ToString() + "process", new Vec3f(0, rotY, 0));
-                    animInit = true;
-                }
-                if (IsPowered)
-                    animUtil.StartAnimation(new AnimationMetaData()
-                    {
-                        Animation = "process",
-                        Code = "process",
-                        AnimationSpeed = 1,
-                        EaseInSpeed = 1,
-                        EaseOutSpeed = 2,
-                        Weight = 1,
-                        BlendMode = EnumAnimationBlendMode.Average
-                    });
-                else { animUtil.StopAnimation("process"); }
-            }
+            
         }
 
         

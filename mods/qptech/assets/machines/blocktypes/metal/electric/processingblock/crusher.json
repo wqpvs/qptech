@@ -35,7 +35,8 @@
 
 				"crushing": 1000
 			},
-			"runAnimation": "run",
+			"animationCode": "run",
+			"animation": "Run",
 			"runAnimationSpeed": 1,
 			"inputFace": "west",
 			"outputFace": "east"
