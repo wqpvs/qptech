@@ -40,25 +40,23 @@
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 	
-	"textures": {
-		"all": { "base": "block/tempblocks/bloomery" }
-	},
-	"shape": { "base": "block/metal/electric/tempmachine" },
+	
+	"shape": { "base": "block/metal/bloomery" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/bloomery",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/bloomery",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/bloomery",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/bloomery",
 			"rotateY": 180
 		}
 	},

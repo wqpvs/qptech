@@ -207,6 +207,7 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\bloomery.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\boiler.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\crusher.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\generator-mk2.json" />
@@ -376,6 +377,8 @@
     <Content Include="qptech\assets\machines\textures\block\metal\darkmetalgradient.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\darksteelplate.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\directionalpipe_bluesteel.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\dirtysteel plate.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\dirtysteel with track.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\firebox\machinery-border-small.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\fan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\generator\machinery-back.png" />

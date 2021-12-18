@@ -38,8 +38,7 @@
 			"animationCode": "run",
 			"animation": "Run",
 			"runAnimationSpeed": 1,
-			"inputFace": "west",
-			"outputFace": "east"
+			
 		}
 	},
 
