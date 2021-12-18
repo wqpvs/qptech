@@ -37,7 +37,20 @@ namespace qptech.src
             networkID = Guid.Empty;
             MarkDirty();
         }
+        Guid memberID = Guid.Empty;
+        public Guid MemberID
+        {
+            get
+            {
+                if (Api is ICoreServerAPI && memberID == Guid.Empty)
+                {
+                    memberID =Guid.NewGuid();
+                    MarkDirty();
+                }
+                return memberID;
+            }
 
+        }
         public virtual void NetworkJoin(Guid newnetwork)
         {
             if (newnetwork == Guid.Empty) { return; }
@@ -369,6 +382,15 @@ namespace qptech.src
             {
                 tree.SetString("networkID", "");
             }
+            if (memberID != Guid.Empty)
+            {
+                tree.SetString("memberID", networkID.ToString());
+            }
+            else
+            {
+                memberID = new Guid();
+                tree.SetString("memberID", "");
+            }
             tree.SetBool("filler", filler);
             tree.SetBool("drainer", drainer);
             tree.SetBool("locked", locked);
@@ -387,6 +409,14 @@ namespace qptech.src
                 networkID = Guid.Parse(gid);
             }
             else { networkID = Guid.Empty; }
+            string mid = "";
+            mid = tree.GetString("memberID");
+
+            if (mid != "" && mid != null)
+            {
+                memberID = Guid.Parse(mid);
+            }
+            else { memberID = Guid.Empty; }
             var asString = tree.GetString("disabledfaces");
             filler = tree.GetBool("filler");
             drainer = tree.GetBool("drainer");

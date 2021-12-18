@@ -71,6 +71,15 @@ namespace qptech.src
             return storeamt;
         }
         Guid networkID = Guid.Empty;
+        Guid memberID = Guid.Empty;
+        public Guid MemberID
+        {
+            get {
+               
+                return memberID;
+            }
+            
+        }
         public Guid NetworkID => networkID;
         public string ProductID => "power";
         string networkstatus = "";
@@ -190,11 +199,18 @@ namespace qptech.src
                 displayTextures = displayTextures.ToList<string>();
             }
             showFluxDisplay = Block.Attributes["showFluxDisplay"].AsBool(showFluxDisplay);
+            bool dirty = false;
+            if (memberID == Guid.Empty && (api is ICoreServerAPI))
+            {
+                memberID = Guid.NewGuid();
+                dirty = true;
+            }
             if (NetworkID != Guid.Empty&&(api is ICoreServerAPI))
             {
                 FlexNetworkManager.RecreateNetwork(NetworkID,ProductID);
-                MarkDirty(true);
+                dirty = true;
             }
+            if (dirty) { MarkDirty(true); }
         }
 
         //attempt to load power distribution and reception faces from attributes, and orient them to this blocks face if necessary
@@ -351,7 +367,7 @@ namespace qptech.src
             mesher.AddMeshData(meshdata);
             return base.OnTesselation(mesher, tessThreadTesselator);
         }
-        bool showextrainfo = false;
+        bool showextrainfo =true;
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
@@ -378,7 +394,11 @@ namespace qptech.src
                 else { dsc.Append(" (OK) "); }
             }
             dsc.AppendLine("");
-            
+            if (showextrainfo)
+            {
+                dsc.AppendLine("MemberID  " + memberID);
+                dsc.AppendLine("NetworkID " + networkID);
+            }
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
 
@@ -431,9 +451,17 @@ namespace qptech.src
                 if (!Guid.TryParse(gid,out networkID)) { networkID = Guid.Empty; }
                 
             }
+            string mID = "";
+            mID = tree.GetString("memberID");
+
+            if (mID != "" && mID != null)
+            {
+                memberID = Guid.Parse(mID);
+            }
+            
             //else { networkID = Guid.Empty; }
             //if (type == null) type = defaultType; // No idea why. Somewhere something has no type. Probably some worldgen ruins
-            
+
             isOn = tree.GetBool("isOn");
         }
         public override void ToTreeAttributes(ITreeAttribute tree)
@@ -451,6 +479,15 @@ namespace qptech.src
             else
             {
                 tree.SetString("networkID", "");
+            }
+            if (memberID != Guid.Empty)
+            {
+                tree.SetString("memberID", memberID.ToString());
+            }
+            else
+            {
+                memberID = Guid.NewGuid();
+                tree.SetString("memberID", "");
             }
             tree.SetBool("isOn", isOn);
         }
