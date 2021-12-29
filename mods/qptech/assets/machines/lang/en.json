@@ -49,7 +49,7 @@
 	"block-blocklantern": "Encased Lantern",
 	"blockdesc-blocklantern": "Full Block lantern to add options to your builds",
 
-	"blockdesc-battery-*": "Batteries store power, they have a single input and one or more outputs.",
+	"blockdesc-battery-*": "Batteries store power they can be connected on all sides",
 	"block-battery-lv-*": "Electric Battery (LV)",
 	"block-electricforge-lv-*": "Primitive Electric Forge (LV)",
 	"blockdesc-electricforge-*": "When supplied with electricity electric forges will heat up one or more ingots or workpieces.",

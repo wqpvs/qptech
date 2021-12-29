@@ -28,8 +28,8 @@
 			
 			"fluxStorage": 10000,
 			
-			"receptionFaces": [ "south" ],
-			"distributionFaces": [ "north", "east", "west", "down" ],
+			
+			
 			"showFluxDisplay": true,
 			"displayOffset": [ 10, 12, 11.5 ]
 		}

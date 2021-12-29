@@ -25,9 +25,8 @@ NOTETOSELF: Api.World.ElapsedMilliseconds
 
 - added crusher animation
 [dev] implemented animations for BEEBaseDevice
-[bug] Power Networks - as long as two nodes are connected the network will never be destroyed and all old connections will remain
-
 - added bloomery model
 - Added crusher sound
 [bug] boiler will eventually drain and not take any water
+- batteries now power from all directions (updated graphic)
 
