@@ -291,14 +291,27 @@ namespace qptech.src
 
 
 
-        public virtual void OnBlockBroken()
+        public virtual void CleanBlock()
         {
-            base.OnBlockBroken();
+            
             if (Api is ICoreServerAPI)
             {
                 FlexNetworkManager.DeleteNetwork(NetworkID);
             }
         }
+
+        public override void OnBlockRemoved()
+        {
+            base.OnBlockRemoved();
+            CleanBlock();
+        }
+        public override void OnBlockUnloaded()
+        {
+            base.OnBlockUnloaded();
+            CleanBlock();
+        }
+
+
         public virtual void OnTick(float par)
         {
             if (Api is ICoreServerAPI&&isOn)

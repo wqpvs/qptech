@@ -224,12 +224,12 @@ namespace qptech.src
         {
             return 0;
         }
-        public override void OnBlockBroken()
+        public override void CleanBlock()
         {
             ambientSound?.Stop();
             ambientSound?.Dispose();
             ambientSound = null;
-            base.OnBlockBroken();
+            base.CleanBlock();
         }
         public override void OnBlockRemoved()
         {

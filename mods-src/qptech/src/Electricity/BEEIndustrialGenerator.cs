@@ -116,12 +116,12 @@ namespace qptech.src
             if (missingprocesses) { dsc.Append(missingprocesstext); }
         }
         
-        public override void OnBlockBroken()
+        public override void CleanBlock()
         {
             ambientSound?.Stop();
             ambientSound?.Dispose();
             ambientSound = null;
-            base.OnBlockBroken();
+            base.CleanBlock();
         }
         public override void OnBlockRemoved()
         {

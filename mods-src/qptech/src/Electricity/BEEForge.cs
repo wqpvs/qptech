@@ -375,9 +375,9 @@ namespace qptech.src
                 return false;
             }
         }
-        public override void OnBlockBroken()
+        public override void CleanBlock()
         {
-            base.OnBlockBroken();
+            base.CleanBlock();
 
             if (contents != null)
             {
