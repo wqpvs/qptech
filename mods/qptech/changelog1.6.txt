@@ -30,3 +30,7 @@ NOTETOSELF: Api.World.ElapsedMilliseconds
 [bug] boiler will eventually drain and not take any water
 - batteries now power from all directions (updated graphic)
 
+[TODO]
+- maybe turn off process device usage when not actively being used?
+
+
