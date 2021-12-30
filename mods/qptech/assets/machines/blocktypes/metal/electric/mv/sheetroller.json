@@ -38,13 +38,13 @@
 			"recipe": "game:metalsheet",
 			"recipeSuffix": "down",
 			"ingredient": "metalplate",
-			"processingTicks": 100,
+			"processingTime": 2000,
 
 			"heatRequirement": 0,
 			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel" ],
 			"animationCode": "run",
 			"animation": "run",
-			"runAnimationSpeed": 0.1
+			"runAnimationSpeed": 1
 		}
 	},
 

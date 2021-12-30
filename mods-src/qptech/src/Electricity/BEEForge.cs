@@ -161,7 +161,7 @@ namespace qptech.src
             if (IsPowered && IsOn && contents.StackSize > 0)
             {
 
-                tickCounter = 0;
+                ResetTimers();
                 deviceState = enDeviceState.RUNNING;
                 
                 //sounds/blocks/doorslide.ogg
@@ -479,8 +479,7 @@ namespace qptech.src
             }
             else if (deviceState == enDeviceState.WARMUP)
             {
-                tickCounter++;
-                if (tickCounter == 10) { tickCounter = 0; deviceState = enDeviceState.IDLE; }
+               deviceState = enDeviceState.IDLE; 
             }
             else { DoDeviceProcessing(); }
         }

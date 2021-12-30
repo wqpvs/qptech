@@ -149,13 +149,13 @@ namespace qptech.src
             
             if (!IsPowered) { return; }//not enough power
             FetchMaterial();
-            processstarted = Api.World.Calendar.TotalHours;      
+            ResetTimers();
             if (internalQuantity<inputQuantity) {  deviceState = enDeviceState.MATERIALHOLD; return; }//check for and extract the required RM
             //TODO - do we make sure there's an output container?
             if (IsPowered)
             {
                 internalQuantity = 0;
-                tickCounter = 0;
+                
                 deviceState = enDeviceState.RUNNING;
                 
                
@@ -169,7 +169,7 @@ namespace qptech.src
         protected override void DoDeviceProcessing()
         {
             
-            if (Api.World.Calendar.TotalHours>= processingTime + processstarted)
+            if (Api.World.ElapsedMilliseconds>completetime)
             {
                 DoDeviceComplete();
                 return;
@@ -179,7 +179,7 @@ namespace qptech.src
                 DoFailedProcessing();
                 return;
             }
-            tickCounter++;
+            
             
 
         }

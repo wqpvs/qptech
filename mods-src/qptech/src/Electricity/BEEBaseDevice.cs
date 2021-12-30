@@ -22,11 +22,13 @@ namespace qptech.src
         ILoadedSound ambientSound;
         string runsound = "";
         protected int requiredFlux = 1;     //how much TF to run
-        protected int processingTicks = 30; //how many ticks for process to run
-        protected int tickCounter = 0;
+        protected int processingTime = 1000; //how many ticks for process to run
+        
         protected string animationCode = "";
         protected string animation = "";
         protected float runAnimationSpeed = 1;
+        protected double completetime;
+        protected double starttime;
         public int RequiredFlux { get { return requiredFlux; } }
         //public bool IsPowered { get { return capacitor >= requiredFlux; } }
         float soundlevel = 0f;
@@ -75,7 +77,7 @@ namespace qptech.src
             
             if (Block.Attributes != null) {
                 requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
-                processingTicks = Block.Attributes["processingTicks"].AsInt(processingTicks);
+                processingTime = Block.Attributes["processingTime"].AsInt(processingTime);
                 animationCode = Block.Attributes["animationCode"].AsString(animationCode);
                 animation = Block.Attributes["animation"].AsString(animation);
                 runAnimationSpeed = Block.Attributes["runAnimationSpeed"].AsFloat(runAnimationSpeed);
@@ -117,13 +119,18 @@ namespace qptech.src
             else { if (DeviceState == enDeviceState.RUNNING) { DoDeviceProcessing(); } }
             if (DeviceState == enDeviceState.WARMUP) { deviceState = enDeviceState.IDLE; }
         }
-
+        protected virtual void ResetTimers()
+        {
+            completetime = Api.World.ElapsedMilliseconds + processingTime;
+            starttime = Api.World.ElapsedMilliseconds;
+        }
         protected virtual void DoDeviceStart()
         {
 
             if (Api.World.Side is EnumAppSide.Client) { return; }
             if (!IsPowered) { DoFailedStart(); return; }
-            tickCounter = 0;
+            ResetTimers();
+            
             if (deviceState == enDeviceState.IDLE)
             {
                 
@@ -140,7 +147,7 @@ namespace qptech.src
 
         protected virtual void DoDeviceProcessing()
         {
-            if (tickCounter >= processingTicks)
+            if (Api.World.ElapsedMilliseconds>=completetime)
             {
                 DoDeviceComplete();
                 return;
@@ -150,7 +157,7 @@ namespace qptech.src
                 DoFailedProcessing();
                 return;
             }
-            tickCounter++;
+            
             
             
         }
@@ -162,7 +169,7 @@ namespace qptech.src
         //feedback if device cannot process
         protected virtual void DoFailedProcessing()
         {
-
+            
         }
         //Do whatever needs doing on a successful cycle
         protected virtual void DoDeviceComplete()
@@ -174,13 +181,13 @@ namespace qptech.src
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
-            tickCounter = tree.GetInt("tickCounter");
+            
             deviceState = (enDeviceState)tree.GetInt("deviceState");
         }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
-            tree.SetInt("tickCounter", tickCounter);
+            
             tree.SetInt("deviceState", (int)deviceState);
         }
         protected BlockEntityAnimationUtil animUtil

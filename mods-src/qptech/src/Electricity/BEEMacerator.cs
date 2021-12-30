@@ -65,7 +65,7 @@ namespace qptech.src
         protected override void DoDeviceStart()
         {
             if (!IsPowered) { DoFailedStart(); }
-            tickCounter = 0;
+            ResetTimers();
             if (IsPowered) { TryStart(); }
             Start();
         }

@@ -67,7 +67,7 @@ namespace qptech.src
         {
             if (Api.World.Side is EnumAppSide.Client) { return; }
             if (!IsPowered) { DoFailedStart(); }
-            tickCounter = 0;
+            
             if (deviceState == enDeviceState.IDLE)
             {
                 
@@ -223,6 +223,7 @@ namespace qptech.src
                             blockoritem = "ITEM";
                         }
                         deviceState = enDeviceState.RUNNING;
+                        ResetTimers();
                         checkslot.TakeOut(1);
                         checkblock.MarkDirty(true);
                         this.MarkDirty(true);
@@ -254,6 +255,7 @@ namespace qptech.src
                             blockoritem = "ITEM";
                         }
                         deviceState = enDeviceState.RUNNING;
+                        ResetTimers();
                         checkslot.TakeOut(1);
                         checkblock.MarkDirty(true);
                         this.MarkDirty(true);
