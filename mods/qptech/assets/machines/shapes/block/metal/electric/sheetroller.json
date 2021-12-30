@@ -31,20 +31,6 @@
 			},
 			"children": [
 				{
-					"name": "Front Hatch36",
-					"from": [ -7.0, 12.0, 6.0 ], 
-					"to": [ 7.0, 15.0, 7.0 ], 
-					"rotationOrigin": [ -7.0, 12.0, 7.0 ],
-					"faces": {
-						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 3.0, 14.0 ], "rotation": 90 },
-						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 3.0 ] },
-						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 3.0, 14.0 ], "rotation": 90 },
-						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 3.0 ] },
-						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 14.0 ], "rotation": 90 },
-						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 14.0 ], "rotation": 90 }
-					}
-				},
-				{
 					"name": "midframe35",
 					"from": [ -7.0, 15.0, -8.0 ], 
 					"to": [ 7.0, 16.0, -5.0 ], 
@@ -98,6 +84,20 @@
 								"west": { "texture": "#castiron", "uv": [ 0.0, 0.0, 1.0, 2.0 ] },
 								"up": { "texture": "#castiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
 								"down": { "texture": "#castiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+							}
+						},
+						{
+							"name": "hatchtrim",
+							"from": [ 0.0, 5.0, -0.5 ], 
+							"to": [ 12.0, 6.0, 0.0 ], 
+							"rotationOrigin": [ 0.0, 5.0, -0.5 ],
+							"faces": {
+								"north": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 12.0 ], "rotation": 90 },
+								"east": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 0.5, 1.0 ] },
+								"south": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 12.0 ], "rotation": 90 },
+								"west": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 0.5, 1.0 ] },
+								"up": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 0.5, 12.0 ], "rotation": 90 },
+								"down": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 0.5, 12.0 ], "rotation": 90 }
 							}
 						}
 					]
@@ -245,7 +245,7 @@
 					},
 					"children": [
 						{
-							"name": "Cube21",
+							"name": "Roller2",
 							"from": [ 2.0, -1.0, -1.0 ], 
 							"to": [ 12.0, 2.0, 2.0 ], 
 							"rotationOrigin": [ 2.0, 0.5, 0.5 ],
@@ -276,7 +276,7 @@
 					},
 					"children": [
 						{
-							"name": "Cube19",
+							"name": "Roller3",
 							"from": [ 2.0, -1.0, -1.0 ], 
 							"to": [ 12.0, 2.0, 2.0 ], 
 							"rotationOrigin": [ 2.0, 0.5, 0.5 ],
@@ -292,7 +292,7 @@
 					]
 				},
 				{
-					"name": "Cube17",
+					"name": "roller1",
 					"from": [ -5.0, 11.0, -5.0 ], 
 					"to": [ 5.0, 14.0, -2.0 ], 
 					"rotationOrigin": [ -5.0, 12.5, -3.5 ],
@@ -549,20 +549,6 @@
 					]
 				},
 				{
-					"name": "midframe38",
-					"from": [ -6.0, 13.0, -8.0 ], 
-					"to": [ 6.0, 14.0, -7.5 ], 
-					"rotationOrigin": [ -6.0, 13.0, -8.0 ],
-					"faces": {
-						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 12.0 ], "rotation": 90 },
-						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 0.5, 1.0 ] },
-						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 12.0 ], "rotation": 90 },
-						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 0.5, 1.0 ] },
-						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 0.5, 12.0 ], "rotation": 90 },
-						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 0.5, 12.0 ], "rotation": 90 }
-					}
-				},
-				{
 					"name": "midframe39",
 					"from": [ -7.0, 10.0, 6.0 ], 
 					"to": [ 7.0, 11.0, 7.0 ], 
@@ -577,5 +563,79 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "FrontDoorCutter",
+			"from": [ 15.0017, 12.0, 14.0024 ], 
+			"to": [ 29.0017, 15.0, 15.0024 ], 
+			"rotationOrigin": [ 15.0, 12.0, 15.0 ],
+			"rotationY": 89.9802127184967,
+			"faces": {
+				"north": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 3.0, 14.0 ], "rotation": 90 },
+				"east": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 3.0 ] },
+				"south": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 3.0, 14.0 ], "rotation": 90 },
+				"west": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 3.0 ] },
+				"up": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 14.0 ], "rotation": 90 },
+				"down": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 14.0 ], "rotation": 90 }
+			},
+			"children": [
+				{
+					"name": "Cube40",
+					"from": [ 1.0, 3.0, 0.0 ], 
+					"to": [ 13.0, 5.0, 1.0 ], 
+					"rotationOrigin": [ 1.0, 3.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 4.5, 2.5, 6.5, 14.5 ], "rotation": 90 },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 2.0 ] },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 2.0, 12.0 ], "rotation": 90 },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 2.0 ] },
+						"up": { "texture": "#redpaintedsteelwrench", "uv": [ 6.0, 3.0, 7.0, 15.0 ], "rotation": 90 },
+						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 11.0, 1.0, 12.0, 13.0 ], "rotation": 90, "enabled": false }
+					}
+				}
+			]
 		}
-	]}
+	],
+	"animations": [
+		{
+			"name": "run",
+			"code": "run",
+			"quantityframes": 60,
+			"onActivityStopped": "Stop",
+			"onAnimationEnd": "Repeat",
+			"keyframes": [
+				{
+					"frame": 0,
+					"elements": {
+						"ModelRoot": {  },
+						"roller1": { "rotationX": -180.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"roller20": {  },
+						"Roller2": { "rotationX": 720.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"roller18": {  },
+						"Roller3": { "rotationX": -180.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"FrontDoorCutter": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 }
+					}
+				},
+				{
+					"frame": 51,
+					"elements": {
+						"ModelRoot": {  },
+						"FrontDoorCutter": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 }
+					}
+				},
+				{
+					"frame": 59,
+					"elements": {
+						"ModelRoot": {  },
+						"roller1": { "rotationX": 720.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"roller20": {  },
+						"Roller2": { "rotationX": -180.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"roller18": {  },
+						"Roller3": { "rotationX": 720.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"FrontDoorCutter": { "offsetX": 0.0, "offsetY": -1.0, "offsetZ": 0.0 }
+					}
+				}
+			]
+		}
+	]
+}
