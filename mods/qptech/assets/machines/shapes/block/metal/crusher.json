@@ -9,8 +9,8 @@
 	},
 	"textures": {
 		"dirtysteel with track": "block/metal/dirtysteel with track",
-		"bluepaintedwornsteelplate": "block/metal/bluepaintedwornsteelplate",
 		"metal": "block/metal/stairs/metal",
+		"bluepaintedwornsteelplate": "block/metal/bluepaintedwornsteelplate",
 		"darksteelplate": "block/metal/darksteelplate"
 	},
 	"elements": [
@@ -27,1714 +27,6 @@
 				"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "enabled": false }
 			},
 			"children": [
-				{
-					"name": "CrusherShaft02",
-					"from": [ 3.0, 0.0, 3.0 ], 
-					"to": [ 6.0, 17.0, 6.0 ], 
-					"rotationOrigin": [ 3.0, 0.0, 3.0 ],
-					"faces": {
-						"north": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"east": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"south": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"west": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"up": { "texture": "#dirtysteel with track", "uv": [ 7.5, 1.5, 10.5, 4.5 ] },
-						"down": { "texture": "#dirtysteel with track", "uv": [ 8.0, 2.0, 11.0, 5.0 ] }
-					},
-					"children": [
-						{
-							"name": "CrusherTrim",
-							"from": [ -1.0, -0.5, -1.0 ], 
-							"to": [ 4.0, 1.5, 4.0 ], 
-							"faces": {
-								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
-								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] }
-							},
-							"children": [
-								{
-									"name": "BladeParent",
-									"from": [ 3.5, 0.15, 0.5 ], 
-									"to": [ 4.5, 1.15, 1.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 0.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent5",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade6",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent7",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade8",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent9",
-									"from": [ 3.5, 0.15, 1.5 ], 
-									"to": [ 4.5, 1.15, 2.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 1.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade10",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent11",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade12",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent13",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade14",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent15",
-									"from": [ 3.5, 0.15, 2.5 ], 
-									"to": [ 4.5, 1.15, 3.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 2.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade16",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent17",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade18",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent19",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade20",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent21",
-									"from": [ 3.5, 0.15, 3.5 ], 
-									"to": [ 4.5, 1.15, 4.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 3.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade22",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent23",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade24",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent25",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade26",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "CrusherShaft01",
-					"from": [ 10.0, -4.0, 3.0 ], 
-					"to": [ 13.0, 13.0, 6.0 ], 
-					"rotationOrigin": [ 10.0, -4.0, 3.0 ],
-					"faces": {
-						"north": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"east": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"south": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"west": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"up": { "texture": "#dirtysteel with track", "uv": [ 10.5, 2.5, 13.5, 5.5 ] },
-						"down": { "texture": "#dirtysteel with track", "uv": [ 9.5, 1.0, 12.5, 4.0 ] }
-					},
-					"children": [
-						{
-							"name": "CrusherTrim30",
-							"from": [ -1.0, -0.5, -1.0 ], 
-							"to": [ 4.0, 1.5, 4.0 ], 
-							"faces": {
-								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
-								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] }
-							},
-							"children": [
-								{
-									"name": "BladeParent31",
-									"from": [ 3.5, 0.15, 0.5 ], 
-									"to": [ 4.5, 1.15, 1.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 0.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade32",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent33",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade34",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent35",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade36",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent37",
-									"from": [ 3.5, 0.15, 1.5 ], 
-									"to": [ 4.5, 1.15, 2.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 1.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade38",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent39",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade40",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent41",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade42",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent43",
-									"from": [ 3.5, 0.15, 2.5 ], 
-									"to": [ 4.5, 1.15, 3.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 2.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade44",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent45",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade46",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent47",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade48",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent49",
-									"from": [ 3.5, 0.15, 3.5 ], 
-									"to": [ 4.5, 1.15, 4.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 3.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade50",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent51",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade52",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent53",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade54",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "CrusherShaft03",
-					"from": [ 3.0, 4.0, 10.0 ], 
-					"to": [ 6.0, 21.0, 13.0 ], 
-					"rotationOrigin": [ 3.0, 4.0, 10.0 ],
-					"faces": {
-						"north": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"east": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"south": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"west": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"up": { "texture": "#dirtysteel with track", "uv": [ 6.0, 0.0, 9.0, 3.0 ] },
-						"down": { "texture": "#dirtysteel with track", "uv": [ 6.5, 1.0, 9.5, 4.0 ] }
-					},
-					"children": [
-						{
-							"name": "CrusherTrim56",
-							"from": [ -1.0, -0.5, -1.0 ], 
-							"to": [ 4.0, 1.5, 4.0 ], 
-							"faces": {
-								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
-								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] }
-							},
-							"children": [
-								{
-									"name": "BladeParent57",
-									"from": [ 3.5, 0.15, 0.5 ], 
-									"to": [ 4.5, 1.15, 1.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 0.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade58",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent59",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade60",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent61",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade62",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent63",
-									"from": [ 3.5, 0.15, 1.5 ], 
-									"to": [ 4.5, 1.15, 2.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 1.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade64",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent65",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade66",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent67",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade68",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent69",
-									"from": [ 3.5, 0.15, 2.5 ], 
-									"to": [ 4.5, 1.15, 3.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 2.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade70",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent71",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade72",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent73",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade74",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent75",
-									"from": [ 3.5, 0.15, 3.5 ], 
-									"to": [ 4.5, 1.15, 4.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 3.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade76",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent77",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade78",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent79",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade80",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "CrusherShaft04",
-					"from": [ 10.0, 8.0, 10.0 ], 
-					"to": [ 13.0, 25.0, 13.0 ], 
-					"rotationOrigin": [ 10.0, 8.0, 10.0 ],
-					"faces": {
-						"north": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"east": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"south": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"west": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
-						"up": { "texture": "#dirtysteel with track", "uv": [ 7.5, 1.0, 10.5, 4.0 ] },
-						"down": { "texture": "#dirtysteel with track", "uv": [ 9.5, 0.0, 12.5, 3.0 ] }
-					},
-					"children": [
-						{
-							"name": "CrusherTrim82",
-							"from": [ -1.0, -0.5, -1.0 ], 
-							"to": [ 4.0, 1.5, 4.0 ], 
-							"faces": {
-								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
-								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
-								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] }
-							},
-							"children": [
-								{
-									"name": "BladeParent83",
-									"from": [ 3.5, 0.15, 0.5 ], 
-									"to": [ 4.5, 1.15, 1.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 0.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade84",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent85",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade86",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent87",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade88",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent89",
-									"from": [ 3.5, 0.15, 1.5 ], 
-									"to": [ 4.5, 1.15, 2.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 1.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade90",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent91",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade92",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent93",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade94",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent95",
-									"from": [ 3.5, 0.15, 2.5 ], 
-									"to": [ 4.5, 1.15, 3.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 2.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade96",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent97",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade98",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent99",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade100",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "BladeParent101",
-									"from": [ 3.5, 0.15, 3.5 ], 
-									"to": [ 4.5, 1.15, 4.5 ], 
-									"rotationOrigin": [ 3.0, 0.0, 3.0 ],
-									"faces": {
-										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-									},
-									"children": [
-										{
-											"name": "Blade102",
-											"from": [ -1.0, 0.0, 1.0 ], 
-											"to": [ 0.0, 1.0, 2.0 ], 
-											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-											"rotationX": 44.99999240657885,
-											"rotationY": 44.99999171897202,
-											"rotationZ": 1.2074181223173004E-6,
-											"faces": {
-												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-											}
-										},
-										{
-											"name": "BladeParent103",
-											"from": [ -1.25, 0.0, 0.0 ], 
-											"to": [ -0.25, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade104",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										},
-										{
-											"name": "BladeParent105",
-											"from": [ -2.5, 0.0, 0.0 ], 
-											"to": [ -1.5, 1.0, 1.0 ], 
-											"rotationOrigin": [ -1.0, -0.15, -0.5 ],
-											"faces": {
-												"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-												"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-											},
-											"children": [
-												{
-													"name": "Blade106",
-													"from": [ -1.0, 0.0, 1.0 ], 
-													"to": [ 0.0, 1.0, 2.0 ], 
-													"rotationOrigin": [ -1.75, 0.0, 0.0 ],
-													"rotationX": 44.99999240657885,
-													"rotationY": 44.99999171897202,
-													"rotationZ": 1.2074181223173004E-6,
-													"faces": {
-														"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
-														"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
-													}
-												}
-											]
-										}
-									]
-								}
-							]
-						}
-					]
-				},
 				{
 					"name": "topframe",
 					"from": [ 0.0, 13.0, 0.0 ], 
@@ -2137,6 +429,1714 @@
 										"up": { "texture": "#metal", "uv": [ 0.0, 0.0, 0.5, 1.0 ] },
 										"down": { "texture": "#metal", "uv": [ 0.0, 0.0, 0.5, 1.0 ] }
 									}
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CrusherShaft02",
+			"from": [ 3.0, 0.0, 3.0 ], 
+			"to": [ 6.0, 17.0, 6.0 ], 
+			"rotationOrigin": [ 3.0, 0.0, 3.0 ],
+			"faces": {
+				"north": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"east": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"south": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"west": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"up": { "texture": "#dirtysteel with track", "uv": [ 7.5, 1.5, 10.5, 4.5 ] },
+				"down": { "texture": "#dirtysteel with track", "uv": [ 8.0, 2.0, 11.0, 5.0 ] }
+			},
+			"children": [
+				{
+					"name": "CrusherTrim",
+					"from": [ -1.0, -0.5, -1.0 ], 
+					"to": [ 4.0, 1.5, 4.0 ], 
+					"faces": {
+						"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
+						"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] }
+					},
+					"children": [
+						{
+							"name": "BladeParent",
+							"from": [ 3.5, 0.15, 0.5 ], 
+							"to": [ 4.5, 1.15, 1.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 0.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent5",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade6",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent7",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade8",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent9",
+							"from": [ 3.5, 0.15, 1.5 ], 
+							"to": [ 4.5, 1.15, 2.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 1.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade10",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent11",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade12",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent13",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade14",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent15",
+							"from": [ 3.5, 0.15, 2.5 ], 
+							"to": [ 4.5, 1.15, 3.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 2.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade16",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent17",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade18",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent19",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade20",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent21",
+							"from": [ 3.5, 0.15, 3.5 ], 
+							"to": [ 4.5, 1.15, 4.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 3.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade22",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent23",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade24",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent25",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade26",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CrusherShaft01",
+			"from": [ 10.0, -4.0, 3.0 ], 
+			"to": [ 13.0, 13.0, 6.0 ], 
+			"rotationOrigin": [ 10.0, -4.0, 3.0 ],
+			"faces": {
+				"north": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"east": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"south": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"west": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"up": { "texture": "#dirtysteel with track", "uv": [ 10.5, 2.5, 13.5, 5.5 ] },
+				"down": { "texture": "#dirtysteel with track", "uv": [ 9.5, 1.0, 12.5, 4.0 ] }
+			},
+			"children": [
+				{
+					"name": "CrusherTrim30",
+					"from": [ -1.0, -0.5, -1.0 ], 
+					"to": [ 4.0, 1.5, 4.0 ], 
+					"faces": {
+						"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
+						"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] }
+					},
+					"children": [
+						{
+							"name": "BladeParent31",
+							"from": [ 3.5, 0.15, 0.5 ], 
+							"to": [ 4.5, 1.15, 1.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 0.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade32",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent33",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade34",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent35",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade36",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent37",
+							"from": [ 3.5, 0.15, 1.5 ], 
+							"to": [ 4.5, 1.15, 2.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 1.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade38",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent39",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade40",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent41",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade42",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent43",
+							"from": [ 3.5, 0.15, 2.5 ], 
+							"to": [ 4.5, 1.15, 3.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 2.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade44",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent45",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade46",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent47",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade48",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent49",
+							"from": [ 3.5, 0.15, 3.5 ], 
+							"to": [ 4.5, 1.15, 4.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 3.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade50",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent51",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade52",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent53",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade54",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CrusherShaft03",
+			"from": [ 3.0, 4.0, 10.0 ], 
+			"to": [ 6.0, 21.0, 13.0 ], 
+			"rotationOrigin": [ 3.0, 4.0, 10.0 ],
+			"faces": {
+				"north": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"east": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"south": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"west": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"up": { "texture": "#dirtysteel with track", "uv": [ 6.0, 0.0, 9.0, 3.0 ] },
+				"down": { "texture": "#dirtysteel with track", "uv": [ 6.5, 1.0, 9.5, 4.0 ] }
+			},
+			"children": [
+				{
+					"name": "CrusherTrim56",
+					"from": [ -1.0, -0.5, -1.0 ], 
+					"to": [ 4.0, 1.5, 4.0 ], 
+					"faces": {
+						"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
+						"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] }
+					},
+					"children": [
+						{
+							"name": "BladeParent57",
+							"from": [ 3.5, 0.15, 0.5 ], 
+							"to": [ 4.5, 1.15, 1.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 0.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade58",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent59",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade60",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent61",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade62",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent63",
+							"from": [ 3.5, 0.15, 1.5 ], 
+							"to": [ 4.5, 1.15, 2.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 1.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade64",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent65",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade66",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent67",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade68",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent69",
+							"from": [ 3.5, 0.15, 2.5 ], 
+							"to": [ 4.5, 1.15, 3.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 2.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade70",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent71",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade72",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent73",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade74",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent75",
+							"from": [ 3.5, 0.15, 3.5 ], 
+							"to": [ 4.5, 1.15, 4.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 3.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade76",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent77",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade78",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent79",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade80",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CrusherShaft04",
+			"from": [ 10.0, 8.0, 10.0 ], 
+			"to": [ 13.0, 25.0, 13.0 ], 
+			"rotationOrigin": [ 10.0, 8.0, 10.0 ],
+			"faces": {
+				"north": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"east": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"south": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"west": { "texture": "#dirtysteel with track", "uv": [ 2.0, 0.0, 5.0, 17.0 ] },
+				"up": { "texture": "#dirtysteel with track", "uv": [ 7.5, 1.0, 10.5, 4.0 ] },
+				"down": { "texture": "#dirtysteel with track", "uv": [ 9.5, 0.0, 12.5, 3.0 ] }
+			},
+			"children": [
+				{
+					"name": "CrusherTrim82",
+					"from": [ -1.0, -0.5, -1.0 ], 
+					"to": [ 4.0, 1.5, 4.0 ], 
+					"faces": {
+						"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
+						"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 5.0, 5.0 ] }
+					},
+					"children": [
+						{
+							"name": "BladeParent83",
+							"from": [ 3.5, 0.15, 0.5 ], 
+							"to": [ 4.5, 1.15, 1.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 0.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade84",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent85",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade86",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent87",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade88",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent89",
+							"from": [ 3.5, 0.15, 1.5 ], 
+							"to": [ 4.5, 1.15, 2.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 1.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade90",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent91",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade92",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent93",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade94",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent95",
+							"from": [ 3.5, 0.15, 2.5 ], 
+							"to": [ 4.5, 1.15, 3.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 2.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade96",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent97",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade98",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent99",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade100",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "BladeParent101",
+							"from": [ 3.5, 0.15, 3.5 ], 
+							"to": [ 4.5, 1.15, 4.5 ], 
+							"rotationOrigin": [ 3.0, 0.0, 3.0 ],
+							"faces": {
+								"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+								"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "Blade102",
+									"from": [ -1.0, 0.0, 1.0 ], 
+									"to": [ 0.0, 1.0, 2.0 ], 
+									"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+									"rotationX": 44.99999240657885,
+									"rotationY": 44.99999171897202,
+									"rotationZ": 1.2074181223173004E-6,
+									"faces": {
+										"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								},
+								{
+									"name": "BladeParent103",
+									"from": [ -1.25, 0.0, 0.0 ], 
+									"to": [ -0.25, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade104",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
+								},
+								{
+									"name": "BladeParent105",
+									"from": [ -2.5, 0.0, 0.0 ], 
+									"to": [ -1.5, 1.0, 1.0 ], 
+									"rotationOrigin": [ -1.0, -0.15, -0.5 ],
+									"faces": {
+										"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
+										"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
+									},
+									"children": [
+										{
+											"name": "Blade106",
+											"from": [ -1.0, 0.0, 1.0 ], 
+											"to": [ 0.0, 1.0, 2.0 ], 
+											"rotationOrigin": [ -1.75, 0.0, 0.0 ],
+											"rotationX": 44.99999240657885,
+											"rotationY": 44.99999171897202,
+											"rotationZ": 1.2074181223173004E-6,
+											"faces": {
+												"north": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"east": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"south": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"west": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"up": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+												"down": { "texture": "#bluepaintedwornsteelplate", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+											}
+										}
+									]
 								}
 							]
 						}

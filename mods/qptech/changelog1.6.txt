@@ -30,7 +30,8 @@ NOTETOSELF: Api.World.ElapsedMilliseconds
 [bug] boiler will eventually drain and not take any water
 - batteries now power from all directions (updated graphic)
 - added sheet roller animation
-- changing BEEBaseDevice to run off of milliseconds instead of ticks
+- changing BEEBaseDevice to run off of milliseconds instead of ticks (easier to setup and sync with animations)
+- changing BEERecipeProcessor to run off of milliseconds
 
 [TODO]
 - maybe turn off process device usage when not actively being used?

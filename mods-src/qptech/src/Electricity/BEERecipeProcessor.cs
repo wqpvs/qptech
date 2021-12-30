@@ -63,7 +63,7 @@ namespace qptech.src
             statusmessage = "";
             if (!IsPowered || !isOn) {
                 if (makingrecipe != "") {
-                    recipefinishedat = Api.World.Calendar.TotalHours + 0.1;MarkDirty();
+                    recipefinishedat = Api.World.ElapsedMilliseconds + 100;MarkDirty();
                 }
                 
                 return;
@@ -75,14 +75,14 @@ namespace qptech.src
             {
                 DoDeviceStart();
             }
-            else if (Api.World.Calendar.TotalHours >= recipefinishedat)
+            else if (Api.World.ElapsedMilliseconds >= recipefinishedat)
             {
                 DoDeviceComplete();
             }
-            else if (Api.World.Calendar.TotalHours < recipefinishedat)
+            else if (Api.World.ElapsedMilliseconds < recipefinishedat)
             {
                 if (!CheckProcessing()){
-                    recipefinishedat = Api.World.Calendar.TotalHours + 0.1; MarkDirty();
+                    recipefinishedat = Api.World.ElapsedMilliseconds + 100; MarkDirty();
                     deviceState = enDeviceState.PROCESSHOLD;
                 }
                 else
@@ -199,7 +199,7 @@ namespace qptech.src
 
             //Start Processing if all is good, set state
             makingrecipe = canmake.name;
-            recipefinishedat = Api.World.Calendar.TotalHours + canmake.processinghours;
+            recipefinishedat = Api.World.ElapsedMilliseconds + canmake.processingTime;
             deviceState = enDeviceState.RUNNING;
         }
 
@@ -268,12 +268,7 @@ namespace qptech.src
             
             base.GetBlockInfo(forPlayer, dsc);
             dsc.AppendLine("recipe: " + makingrecipe);
-            if (makingrecipe != null && makingrecipe != "") ;
-            {
-                double countdown = recipefinishedat - Api.World.Calendar.TotalHours;
-                countdown = Math.Floor(countdown);
-                dsc.AppendLine(countdown.ToString());
-            }
+            
             dsc.AppendLine(statusmessage);
         }
 
@@ -282,7 +277,7 @@ namespace qptech.src
     {
         public string name;
         public Dictionary<string, double> processingsteps;
-        public double processinghours;
+        public double processingTime;
         public MachineRecipeItems[] ingredients;
         public MachineRecipeItems[] output;
         public MachineRecipe() { }

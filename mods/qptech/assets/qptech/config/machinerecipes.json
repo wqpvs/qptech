@@ -7,7 +7,7 @@
         "heating": 1482,
         "crushing": 1000
       },
-      "processinghours": 0.1,
+      "processingTime": 2000,
       "ingredients": [
         {
           "validitems": [ "game:nugget-hematite", "game:nugget-magnetite", "game:nugget-limonite" ],
@@ -31,7 +31,7 @@
       "processingsteps": {
 
       },
-      "processinghours": 0.1,
+      "processingTime": 1000,
       "ingredients": [
         {
           "validitems": [ "machines:wire-copper" ],
@@ -51,7 +51,7 @@
       "processingsteps": {
 
       },
-      "processinghours": 0.1,
+      "processingTime": 1000,
       "ingredients": [
         {
           "validitems": [ "machines:rod-copper" ],
@@ -71,7 +71,7 @@
       "processingsteps": {
 
       },
-      "processinghours": 0.1,
+      "processingTime": 1000,
       "ingredients": [
         {
           "validitems": [ "game:metalsheet-copper-down" ],
