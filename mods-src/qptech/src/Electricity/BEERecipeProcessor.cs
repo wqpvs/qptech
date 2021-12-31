@@ -95,6 +95,8 @@ namespace qptech.src
         }
         bool CheckProcessing()
         {
+            if (makingrecipe == "") { return false; }
+            if (deviceState == enDeviceState.IDLE||deviceState==enDeviceState.WARMUP||deviceState==enDeviceState.MATERIALHOLD) { return false; }
             MachineRecipe mr = recipes.Find(m => m.name == makingrecipe);
             if (mr == null) { return false; }
             if (mr.processingsteps.Count == 0) { return true; }
@@ -123,6 +125,7 @@ namespace qptech.src
         protected override void DoDeviceStart()
         {
             //Check for valid recipes
+            
             if (recipes is null || recipes.Count == 0) { deviceState = enDeviceState.ERROR;return; }
             //Check for ingredients
             Dictionary<string, int> availableingredients= new Dictionary<string, int>();

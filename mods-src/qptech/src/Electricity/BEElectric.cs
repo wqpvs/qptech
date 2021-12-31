@@ -17,6 +17,7 @@ namespace qptech.src
     public class BEElectric : BlockEntity, IPowerNetworkMember, ITexPositionSource
     {
         /*base class to handle electrical devices*/
+        bool showextrainfo = false; //if true will show NetworkID and MemberID in block info
         public virtual bool disableAnimations => true;
         public virtual int AvailablePower() {
             if (!isOn||!generatorready) { return 0; }
@@ -380,7 +381,7 @@ namespace qptech.src
             mesher.AddMeshData(meshdata);
             return base.OnTesselation(mesher, tessThreadTesselator);
         }
-        bool showextrainfo =true;
+        
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);

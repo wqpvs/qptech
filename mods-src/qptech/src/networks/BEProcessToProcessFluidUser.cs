@@ -83,12 +83,13 @@ namespace qptech.src.networks
             return true;
         }
 
-        public void OnTick(float dt)
+        public override void OnTick(float dt)
         {
-            fluidok = true;
             
+            fluidok = true;
             if (fluidTankLevel < fluidUse) { fluidok = false; }
             else if (usingfluid) { fluidTankLevel -= fluidUse; }
+            base.OnTick(dt);
             MarkDirty();
         }
 

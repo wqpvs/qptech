@@ -198,10 +198,11 @@ namespace qptech.src
                 return GetBehavior<BEBehaviorAnimatable>().animUtil;
             }
         }
-        bool animationIsRunning = false;
+        protected bool animationIsRunning = false;
+        protected virtual bool shouldAnimate => (deviceState == enDeviceState.RUNNING) && animation != "";
         protected virtual void DoAnimations()
         {
-            bool shouldAnimate=(deviceState == enDeviceState.RUNNING)&&animation!="";
+            
             if (shouldAnimate && !animationIsRunning)
             {
 

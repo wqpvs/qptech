@@ -29,7 +29,13 @@ namespace qptech.src.networks
         float soundlevel = 0.5f;
         bool loopsound;
         bool alreadyPlayedSound;
-        
+        bool inUse = false;
+        bool onlyAnimateIfInUse = true;
+        bool ShouldAnimate => Running && (inUse||!onlyAnimateIfInUse);
+        bool CanAnimate => animationCode != "";
+        double suspendCoolDown = 1000; //how many ms after last use until stopping animations
+        double lastUseAt = 0; //last time it was used
+        double stopAnimatingAt => lastUseAt + suspendCoolDown;
         protected string animationCode = "";
         protected string animation = "";
         protected float runAnimationSpeed = 1;
@@ -54,6 +60,8 @@ namespace qptech.src.networks
                 animationCode = Block.Attributes["animationCode"].AsString(animationCode);
                 animation = Block.Attributes["animation"].AsString(animation);
                 runAnimationSpeed = Block.Attributes["runAnimationSpeed"].AsFloat(runAnimationSpeed);
+                onlyAnimateIfInUse = Block.Attributes["onlyAnimateIfInUse"].AsBool(onlyAnimateIfInUse);
+                suspendCoolDown = Block.Attributes["suspendCoolDown"].AsDouble(suspendCoolDown);
                 if (!Block.Attributes.KeyExists("processInputFaces")) { processInputFaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
                 else
                 {
@@ -77,13 +85,17 @@ namespace qptech.src.networks
         private SimpleParticleProperties smokeParticles;
         public virtual void OnTick(float df)
         {
-            if (Api is ICoreServerAPI) { CheckRequiredProcesses(); }
-            if (Running)
+            if (Api is ICoreServerAPI) {
+                CheckRequiredProcesses(); 
+                if (Running && Api.World.ElapsedMilliseconds > stopAnimatingAt) { inUse = false; MarkDirty(); }
+            }
+            if (CanAnimate)
             {
                 DoRunningParticles();
             }
             ToggleAmbientSounds(Running);
-            if (Api is ICoreClientAPI && animUtil!=null && animationCode != "") { DoAnimations(); }
+            
+            if (Api is ICoreClientAPI && CanAnimate) { DoAnimations(); }
         }
         public virtual void DoRunningParticles()
         {
@@ -119,6 +131,9 @@ namespace qptech.src.networks
             if (!suppliedProcesses.ContainsKey(process)) { return false; }
             if (!CheckRequiredProcesses()) { return false; }
             if (suppliedProcesses[process] < strength) { return false; }
+            lastUseAt = Api.World.ElapsedMilliseconds;
+            inUse = true;
+            MarkDirty();
             return true;
         }
 
@@ -127,6 +142,9 @@ namespace qptech.src.networks
             if (suppliedProcesses == null || requiredProcesses == null) { return 0; }
             if (!suppliedProcesses.ContainsKey(process)) { return 0; }
             if (!CheckRequiredProcesses()) { return 0; }
+            lastUseAt = Api.World.ElapsedMilliseconds;
+            inUse = true;
+            MarkDirty();
             return suppliedProcesses[process];
         }
         public bool CheckProcessing(string process)
@@ -201,17 +219,20 @@ namespace qptech.src.networks
             base.ToTreeAttributes(tree);
             tree.SetBool("missingprocesses", missingprocesses);
             tree.SetString("missingprocesstext", missingprocesstext);
+            tree.SetBool("inUse", inUse);
         }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
             missingprocesstext = tree.GetString("missingprocesstext");
             missingprocesses = tree.GetBool("missingprocesses");
+            inUse = tree.GetBool("inUse");
         }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
             if (missingprocesses) { dsc.Append(missingprocesstext); }
+            if (inUse) { dsc.Append("In Use"); }
         }
         
         public override void OnBlockRemoved()
@@ -240,7 +261,7 @@ namespace qptech.src.networks
         protected virtual void DoAnimations()
         {
             
-            if (Running && !animationIsRunning)
+            if (ShouldAnimate && !animationIsRunning)
             {
 
                 var meta = new AnimationMetaData() { Animation = animation, Code = animationCode, AnimationSpeed = runAnimationSpeed, EaseInSpeed = 1, EaseOutSpeed = 2, Weight = 1, BlendMode = EnumAnimationBlendMode.Add };
@@ -248,7 +269,7 @@ namespace qptech.src.networks
                 animUtil.StartAnimation(new AnimationMetaData() { Animation = animation, Code = animationCode, AnimationSpeed = 1, EaseInSpeed = 1, EaseOutSpeed = 1, Weight = 1, BlendMode = EnumAnimationBlendMode.Average });
                 animationIsRunning = true;
             }
-            else if (!Running && animationIsRunning)
+            else if (!ShouldAnimate && animationIsRunning)
             {
                 animationIsRunning = false;
 

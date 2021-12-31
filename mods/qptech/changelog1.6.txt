@@ -13,8 +13,6 @@
 - roughed in steam particles and sound for boiler block
 - added sound for BEProcessToProcess
 - increase boiler water usage
-
-NOTETOSELF: Api.World.ElapsedMilliseconds
 [dev]Added BEAnimator test class and anitest object
 - added "Running" to BEProcessToProcess and BEProcessToProcess Fluid fixes particles always running on boiler
 - primitive/creative generator animations running again \o/
@@ -32,8 +30,7 @@ NOTETOSELF: Api.World.ElapsedMilliseconds
 - added sheet roller animation
 - changing BEEBaseDevice to run off of milliseconds instead of ticks (easier to setup and sync with animations)
 - changing BEERecipeProcessor to run off of milliseconds
-
-[TODO]
-- maybe turn off process device usage when not actively being used?
+- most devices will stop animation/doing particles etc if not in use
+[bug]Can't seem to track down where BEERecipeProcessor is triggering BEProcessToProcess when not actually in use
 
 
