@@ -32,5 +32,7 @@
 - changing BEERecipeProcessor to run off of milliseconds
 - most devices will stop animation/doing particles etc if not in use
 [bug]Can't seem to track down where BEERecipeProcessor is triggering BEProcessToProcess when not actually in use
+- added lathe animation
+
 
 

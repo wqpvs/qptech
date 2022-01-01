@@ -33,7 +33,11 @@
 			"processingTicks": 25,
 			"machinename": "lathe",
 			"inputFace": "west",
-			"outputFace": "east"
+			"outputFace": "east",
+			"animationCode": "run",
+			"animation": "run",
+			"runAnimationSpeed": 1,
+			"processingTime": 2000
 		}
 	},
 
