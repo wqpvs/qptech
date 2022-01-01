@@ -73,8 +73,9 @@ namespace qptech.src
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            
-            
+
+            starttime = 0;
+            completetime = 0;
             if (Block.Attributes != null) {
                 requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
                 processingTime = Block.Attributes["processingTime"].AsInt(processingTime);
@@ -88,7 +89,7 @@ namespace qptech.src
             if (api.World.Side == EnumAppSide.Client && animationCode != "")
             {
                 float rotY = Block.Shape.rotateY;
-                animUtil.InitializeAnimator("BEEBaseDevice", new Vec3f(0, rotY, 0));
+                animUtil.InitializeAnimator(this.ToString(), new Vec3f(0, rotY, 0));
             }
             
         }

@@ -30,13 +30,15 @@
 		"*-mv-*": {
 			"genFlux": 0,
 			"useFlux": 16,
-			"soundlevel": 1,
-			"runsound": "sounds/industrialinjector",
-			"loopsound":  false,
+			
+			
 			"recipegroups": [ "Copper Wire (Sheets)", "Copper Wire (Rods)", "Braided Copper Wire" ],
 			"inputFace": "west",
-			"outputFace": "east"
-
+			"outputFace": "east",
+			"animationCode": "run",
+			"animation": "run",
+			"runAnimationSpeed": 1,
+			"processingTime": 2000
 		}
 	},
 

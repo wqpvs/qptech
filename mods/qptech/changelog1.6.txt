@@ -25,7 +25,7 @@
 [dev] implemented animations for BEEBaseDevice
 - added bloomery model
 - Added crusher sound
-[bug] boiler will eventually drain and not take any water
+*[bug] boiler will eventually drain and not take any water
 - batteries now power from all directions (updated graphic)
 - added sheet roller animation
 - changing BEEBaseDevice to run off of milliseconds instead of ticks (easier to setup and sync with animations)
@@ -33,6 +33,9 @@
 - most devices will stop animation/doing particles etc if not in use
 [bug]Can't seem to track down where BEERecipeProcessor is triggering BEProcessToProcess when not actually in use
 - added lathe animation
+- added wiremill animation
+[bug]Need to make sure sounds don't run if devices aren't active
+
 
 
 
