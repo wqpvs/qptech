@@ -31,7 +31,14 @@
 			"genFlux": 0,
 			"useFlux": 8,
 			"processingTicks": 15,
-			"receptionFaces": [ "north" ]
+			"receptionFaces": [ "north" ],
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 1000,
+			"runsound": "sounds/washplant",
+			"soundlevel": 1,
+			"loopsound": true
 		}
 	},
 

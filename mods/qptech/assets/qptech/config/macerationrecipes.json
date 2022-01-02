@@ -1,4 +1,21 @@
 ﻿{
+	"game:ore-quartz": [
+		{
+			"outputmaterial": "game:crushed-quartz",
+			"outputquantity": 1,
+			"odds": 100,
+			"type": "DIRECT"
+		}
+	],
+	"game:stone-bauxite": [
+		{
+			"outputmaterial": "game:crushed-bauxite",
+			"outputquantity": 1,
+			"odds": 100,
+			"type": "DIRECT"
+		}
+	],
+
 	"sulfur": [
 		{
 			"outputmaterial": "game:powderedsulfur",
@@ -8,7 +25,7 @@
 		}
 
 	],
-	"rock": [
+	"rock":	[
 		{
 			"outputmaterial": "gravel",
 			"outputquantity": 1,
@@ -49,7 +66,7 @@
 			"odds": 1
 		}
 	],
-	"gravel": [
+	"gravel":	[
 		{
 			"outputmaterial": "sand",
 			"outputquantity": 1,
@@ -99,7 +116,7 @@
 			"machinename": "washplant"
 		}
 	],
-	"stone": [
+	"stone":	[
 		{
 			"outputmaterial": "game:nugget-nativecopper",
 			"outputquantity": 1,
@@ -131,7 +148,7 @@
 			"type": "PARTIAL"
 		}
 	],
-	"grain": [
+	"grain":	[
 		{
 			"outputmaterial": "flour",
 			"outputquantity": 1,
@@ -143,7 +160,7 @@
 			"odds": 25
 		}
 	],
-	"game:stone-halite": [
+	"game:stone-halite":	[
 		{
 			"outputmaterial": "game:salt",
 			"outputquantity": 2,
@@ -157,7 +174,7 @@
 			"type": 0
 		}
 	],
-	"log": [
+	"log":	[
 		{
 			"outputmaterial": "game:firewood",
 			"outputquantity": 5,
@@ -172,7 +189,7 @@
 			"type": "PARTIAL"
 		}
 	],
-	"game:log-placed-pine-ud": [
+	"game:log-placed-pine-ud":	[
 		{
 			"outputmaterial": "game:resin",
 			"outputquantity": 2,
@@ -181,7 +198,7 @@
 		}
 	],
 
-	"sand": [
+	"sand":	[
 
 		{
 			"outputmaterial": "game:clay-blue",
@@ -240,7 +257,7 @@
 		}
 
 	],
-	"game:bonysoil": [
+	"game:bonysoil":[
 
 		{
 			"outputmaterial": "game:gear-rusty",
@@ -256,7 +273,7 @@
 			"type": "DIRECT",
 			"machinename": "washplant"
 		},
-		
+
 		{
 			"outputmaterial": "game:gear-temporal",
 			"outputquantity": 1,
@@ -307,7 +324,7 @@
 			"machinename": "washplant"
 		}
 	],
-	"muddygravel": [
+	"muddygravel":[
 		{
 			"outputmaterial": "game:clay-blue",
 			"outputquantity": 4,
@@ -337,7 +354,7 @@
 			"machinename": "washplant"
 		}
 	],
-	"game:metal-scraps": [
+	"game:metal-scraps":[
 		{
 			"outputmaterial": "game:ingot-iron",
 			"outputquantity": 1,
@@ -345,7 +362,7 @@
 			"type": "DIRECT"
 		}
 	],
-	"metalplate": [
+	"metalplate":[
 		{
 			"outputmaterial": "metalsheet",
 			"outputquantity": 1,
@@ -355,7 +372,7 @@
 			"suffix": "-down"
 		}
 	],
-	"ingot": [
+	"ingot":[
 		{
 			"outputmaterial": "rod",
 			"outputquantity": 5,

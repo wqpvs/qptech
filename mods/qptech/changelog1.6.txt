@@ -36,6 +36,9 @@
 - sounds won't run if Processing supplier (ie crusher) isn't active
 - fixed: boiler using water way to fast
 - readded animations for metal press based machines and clayforming based machines (produciton time now 3 sec)
+- readded animations to washplant and macerator
 
+1.6.1
+- macerator: added ore-quartz -> crushed-quartz and stone-bauxite->crushed-bauxite
 
-
+todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
