@@ -35,8 +35,10 @@
 			"outputQuantity": 1,
 			"recipe": "game:metalplate",
 			"ingredient": "ingot",
-			"processingTime": 0.045,
-			"animationSpeed": 0.45,
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000,
 			"heatRequirement": 800,
 			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze" ]
 
@@ -51,10 +53,12 @@
 			"outputQuantity": 1,
 			"recipe": "game:metalplate",
 			"ingredient": "ingot",
-			"processingTime": 0.045,
-			"animationSpeed": 0.45,
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000,
 			"heatRequirement": 1000,
-			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze","iron","meteoriciron","steel" ]
+			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel" ]
 
 		},
 		"*-lvpunch-*": {
@@ -67,8 +71,10 @@
 			"outputQuantity": 1,
 			"recipe": "machines:drilledplate",
 			"ingredient": "metalplate",
-			"processingTime": 0.045,
-			"animationSpeed": 0.45,
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000,
 			"heatRequirement": 800,
 			"materials": [ "tinbronze", "bismuthbronze", "blackbronze" ]
 
@@ -83,8 +89,10 @@
 			"outputQuantity": 12,
 			"recipe": "machines:screw",
 			"ingredient": "rod",
-			"processingTime": 0.045,
-			"animationSpeed": 0.45,
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000,
 			"heatRequirement": -1,
 			"materials": [ "brass" ]
 
@@ -99,8 +107,10 @@
 			"outputQuantity": 5,
 			"recipe": "machines:rod",
 			"ingredient": "metalplate",
-			"processingTime": 0.045,
-			"animationSpeed": 0.45,
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000,
 			"heatRequirement": 800,
 			"materials": [ "brass", "copper" ]
 		},
@@ -114,8 +124,10 @@
 			"outputQuantity": 3,
 			"recipe": "game:chutesection",
 			"ingredient": "metalplate",
-			"processingTime": 0.045,
-			"animationSpeed": 0.45,
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000,
 			"heatRequirement": 800,
 			"materials": [ "copper" ]
 		}

@@ -26,7 +26,7 @@
 	],
 	"attributesbytype": {
 		"*-bowl-*": {
-			
+
 			"genFlux": 0,
 			"useFlux": 4,
 			"inputFace": "west",
@@ -35,8 +35,10 @@
 			"outputQuantity": 1,
 			"recipe": "game:bowl-raw",
 			"ingredient": "clay",
-			"processingTime": 0.17,
-			"animationSpeed": 0.05
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000
 
 		},
 		"*-clayplanter-*": {
@@ -48,8 +50,10 @@
 			"outputQuantity": 1,
 			"recipe": "game:clayplanter-raw",
 			"ingredient": "clay",
-			"processingTime": 0.25,
-			"animationSpeed": 0.04
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000
 		},
 		"*-flowerpot-*": {
 			"genFlux": 0,
@@ -60,8 +64,10 @@
 			"outputQuantity": 1,
 			"recipe": "game:flowerpot-raw",
 			"ingredient": "clay",
-			"processingTime": 0.25,
-			"animationSpeed": 0.04
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000
 		},
 		"*-ingotmold-*": {
 			"genFlux": 0,
@@ -72,8 +78,10 @@
 			"outputQuantity": 1,
 			"recipe": "game:ingotmold-raw",
 			"ingredient": "clay",
-			"processingTime": 0.17,
-			"animationSpeed": 0.05
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000
 		},
 		"*-blueshingle-*": {
 			"genFlux": 0,
@@ -84,8 +92,10 @@
 			"outputQuantity": 1,
 			"recipe": "game:shingle-raw-blue",
 			"ingredient": "game:clay-blue",
-			"processingTime": 0.17,
-			"animationSpeed": 0.05
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000
 		},
 		"*-fireshingle-*": {
 			"genFlux": 0,
@@ -96,8 +106,10 @@
 			"outputQuantity": 1,
 			"recipe": "game:shingle-raw-fire",
 			"ingredient": "game:clay-fire",
-			"processingTime": 0.17,
-			"animationSpeed": 0.05
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 3000
 		}
 
 	},

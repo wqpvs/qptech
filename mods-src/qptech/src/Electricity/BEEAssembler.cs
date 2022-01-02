@@ -94,7 +94,7 @@ namespace qptech.src
         {
             base.Initialize(api);
             myElectricalBlock = Block as ElectricalBlock;
-            
+            processstarted = 0;
             if (Block.Attributes != null) {
                 //requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
                 rmInputFace = BlockFacing.FromCode(Block.Attributes["inputFace"].AsString("up"));
@@ -149,19 +149,19 @@ namespace qptech.src
             
             if (!IsPowered) { return; }//not enough power
             FetchMaterial();
-            ResetTimers();
+            
             if (internalQuantity<inputQuantity) {  deviceState = enDeviceState.MATERIALHOLD; return; }//check for and extract the required RM
             //TODO - do we make sure there's an output container?
             if (IsPowered)
             {
                 internalQuantity = 0;
-                
+                ResetTimers();
                 deviceState = enDeviceState.RUNNING;
                 
                
 
                 //sounds/blocks/doorslide.ogg
-                DoDeviceProcessing();
+                //DoDeviceProcessing();
             }
             else { DoFailedStart(); }
         }

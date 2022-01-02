@@ -31,11 +31,11 @@
 - changing BEEBaseDevice to run off of milliseconds instead of ticks (easier to setup and sync with animations)
 - changing BEERecipeProcessor to run off of milliseconds
 - most devices will stop animation/doing particles etc if not in use
-[bug]Can't seem to track down where BEERecipeProcessor is triggering BEProcessToProcess when not actually in use
 - added lathe animation
 - added wiremill animation
 - sounds won't run if Processing supplier (ie crusher) isn't active
 - fixed: boiler using water way to fast
+- readded animations for metal press based machines and clayforming based machines (produciton time now 3 sec)
 
 
 

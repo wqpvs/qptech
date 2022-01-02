@@ -117,7 +117,7 @@ namespace qptech.src
                 
             }
             
-            else { if (DeviceState == enDeviceState.RUNNING) { DoDeviceProcessing(); } }
+            else if (DeviceState == enDeviceState.RUNNING) { DoDeviceProcessing(); } 
             if (DeviceState == enDeviceState.WARMUP) { deviceState = enDeviceState.IDLE; }
         }
         protected virtual void ResetTimers()
