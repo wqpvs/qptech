@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
+using Vintagestory.API.Server;
+using Vintagestory.API.Client;
 
 namespace qptech.src.networks
 {
@@ -16,8 +18,10 @@ namespace qptech.src.networks
         int fluidTankLevel;
         int requiredFluid => fluidTankSize - fluidTankLevel;
         bool fluidok;
-        int fluidtick = 75;
+        int fluidtick = 1000;
         bool usingfluid = false;
+        double lastfluiduse = 0;
+        double nextfluiduse => lastfluiduse + fluidtick;
         public override bool Running => base.Running && fluidok;
         public override void Initialize(ICoreAPI api)
         {
@@ -30,7 +34,7 @@ namespace qptech.src.networks
                 fluidTankSize = Block.Attributes["fluidTankSize"].AsInt(fluidUse * 2);
                 fluidtick = Block.Attributes["fluidtick"].AsInt(fluidtick);
             }
-            RegisterGameTickListener(OnTick, fluidtick);
+            RegisterGameTickListener(OnTick, 75);
         }
 
         public bool IsOnlyDestination()
@@ -85,11 +89,14 @@ namespace qptech.src.networks
 
         public override void OnTick(float dt)
         {
-            
+
+            base.OnTick(dt);
+            if (Api is ICoreClientAPI) { return; }
+            if (Api.World.ElapsedMilliseconds < nextfluiduse && lastfluiduse!=0) { return; }
             fluidok = true;
             if (fluidTankLevel < fluidUse) { fluidok = false; }
             else if (usingfluid) { fluidTankLevel -= fluidUse; }
-            base.OnTick(dt);
+            lastfluiduse = Api.World.ElapsedMilliseconds;
             MarkDirty();
         }
 

@@ -61,7 +61,7 @@ namespace qptech.src
                 DoRunningParticles();
                 
             }
-            ToggleAmbientSounds(deviceState==enDeviceState.RUNNING);
+            ToggleAmbientSounds(shouldAnimate);
             if (Api is ICoreClientAPI) {
                 DoAnimations();
                 return;
