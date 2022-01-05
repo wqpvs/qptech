@@ -30,8 +30,10 @@
 		"*-lv-*": {
 			"genFlux": 0,
 			"useFlux": 8,
-			
-			
+			"runsound": "sounds/mechhammer",
+			"soundlevel": 1,
+			"loopsound": true,
+
 			"recipegroups": [ "bloomworker" ],
 			"inputFace": "west",
 			"outputFace": "east",

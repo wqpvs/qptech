@@ -44,4 +44,4 @@
 todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
 [dev]Making a test block seeker class
 - added bloomworker - iron bloom to ingot machine makeable at iron age
-
+- bugfix weird empty electric forge contents

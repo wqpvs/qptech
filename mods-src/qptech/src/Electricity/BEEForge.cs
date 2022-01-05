@@ -91,13 +91,17 @@ namespace qptech.src
             //if (deviceState!=enDeviceState.RUNNING) { DoDeviceStart(); }
             if (contents != null && deviceState == enDeviceState.RUNNING)
             {
-                double hoursPassed = Api.World.Calendar.TotalHours - lastTickTotalHours;
-                float temp = contents.Collectible.GetTemperature(Api.World, contents);
-                if (temp < maxHeat)
+                if (contents.StackSize <= 0) { contents = null; MarkDirty(true); }
+                else
                 {
-                    float tempGain = (float)(hoursPassed * DegreesPerHour);
+                    double hoursPassed = Api.World.Calendar.TotalHours - lastTickTotalHours;
+                    float temp = contents.Collectible.GetTemperature(Api.World, contents);
+                    if (temp < maxHeat)
+                    {
+                        float tempGain = (float)(hoursPassed * DegreesPerHour);
 
-                    contents.Collectible.SetTemperature(Api.World, contents, Math.Min(MaxHeat, temp + tempGain));
+                        contents.Collectible.SetTemperature(Api.World, contents, Math.Min(MaxHeat, temp + tempGain));
+                    }
                 }
             }
             lastTickTotalHours = Api.World.Calendar.TotalHours;
@@ -143,6 +147,7 @@ namespace qptech.src
                         int used = checkconduit.ReceiveItemOffer(di[0], bf.Opposite);
                         if (used != 0)
                         {
+                            if (contents.StackSize <= 0) { contents = null; }
                             renderer?.SetContents(contents, stackRenderHeight, burning, true);
                             MarkDirty(true);
                         }
