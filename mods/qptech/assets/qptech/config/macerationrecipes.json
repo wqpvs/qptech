@@ -25,7 +25,7 @@
 		}
 
 	],
-	"rock":	[
+	"rock": [
 		{
 			"outputmaterial": "gravel",
 			"outputquantity": 1,
@@ -66,7 +66,7 @@
 			"odds": 1
 		}
 	],
-	"gravel":	[
+	"gravel": [
 		{
 			"outputmaterial": "sand",
 			"outputquantity": 1,
@@ -116,7 +116,7 @@
 			"machinename": "washplant"
 		}
 	],
-	"stone":	[
+	"stone": [
 		{
 			"outputmaterial": "game:nugget-nativecopper",
 			"outputquantity": 1,
@@ -148,7 +148,7 @@
 			"type": "PARTIAL"
 		}
 	],
-	"grain":	[
+	"grain": [
 		{
 			"outputmaterial": "flour",
 			"outputquantity": 1,
@@ -160,7 +160,7 @@
 			"odds": 25
 		}
 	],
-	"game:stone-halite":	[
+	"game:stone-halite": [
 		{
 			"outputmaterial": "game:salt",
 			"outputquantity": 2,
@@ -174,7 +174,7 @@
 			"type": 0
 		}
 	],
-	"log":	[
+	"log": [
 		{
 			"outputmaterial": "game:firewood",
 			"outputquantity": 5,
@@ -189,7 +189,22 @@
 			"type": "PARTIAL"
 		}
 	],
-	"game:log-placed-pine-ud":	[
+	"logsection": [
+		{
+			"outputmaterial": "game:firewood",
+			"outputquantity": 5,
+			"odds": 100,
+			"type": "PARTIAL",
+			"machinename": "logsplitter"
+		},
+		{
+			"outputmaterial": "game:stick",
+			"outputquantity": 10,
+			"odds": 50,
+			"type": "PARTIAL"
+		}
+	],
+	"game:log-placed-pine-ud": [
 		{
 			"outputmaterial": "game:resin",
 			"outputquantity": 2,
@@ -198,7 +213,7 @@
 		}
 	],
 
-	"sand":	[
+	"sand": [
 
 		{
 			"outputmaterial": "game:clay-blue",
@@ -257,7 +272,7 @@
 		}
 
 	],
-	"game:bonysoil":[
+	"game:bonysoil": [
 
 		{
 			"outputmaterial": "game:gear-rusty",
@@ -324,7 +339,7 @@
 			"machinename": "washplant"
 		}
 	],
-	"muddygravel":[
+	"muddygravel": [
 		{
 			"outputmaterial": "game:clay-blue",
 			"outputquantity": 4,
@@ -354,7 +369,7 @@
 			"machinename": "washplant"
 		}
 	],
-	"game:metal-scraps":[
+	"game:metal-scraps": [
 		{
 			"outputmaterial": "game:ingot-iron",
 			"outputquantity": 1,
@@ -362,7 +377,7 @@
 			"type": "DIRECT"
 		}
 	],
-	"metalplate":[
+	"metalplate": [
 		{
 			"outputmaterial": "metalsheet",
 			"outputquantity": 1,
@@ -372,7 +387,7 @@
 			"suffix": "-down"
 		}
 	],
-	"ingot":[
+	"ingot": [
 		{
 			"outputmaterial": "rod",
 			"outputquantity": 5,
