@@ -1,90 +1,110 @@
+[
 
-  [
-
-    {
-      "name": "bloomeryiron",
-      "processingsteps": {
-        "heating": 1482,
-        "crushing": 1000
+  {
+    "name": "bloomeryiron",
+    "processingsteps": {
+      "heating": 1482,
+      "crushing": 1000
+    },
+    "processingTime": 2000,
+    "ingredients": [
+      {
+        "validitems": [ "game:nugget-hematite", "game:nugget-magnetite", "game:nugget-limonite" ],
+        "quantity": 20
       },
-      "processingTime": 2000,
-      "ingredients": [
-        {
-          "validitems": [ "game:nugget-hematite", "game:nugget-magnetite", "game:nugget-limonite" ],
-          "quantity": 20
-        },
-        {
-          "validitems": [ "game:charcoal" ],
-          "quantity": 1
-        }
-      ],
-      "output": [
-        {
-          "validitems": [ "game:ingot-iron" ],
-          "quantity": 1
-        }
-      ]
+      {
+        "validitems": [ "game:charcoal" ],
+        "quantity": 1
+      }
+    ],
+    "output": [
+      {
+        "validitems": [ "game:ingot-iron" ],
+        "quantity": 1
+      }
+    ]
+
+  },
+  {
+    "name": "Braided Copper Wire",
+    "processingsteps": {
 
     },
-    {
-      "name": "Braided Copper Wire",
-      "processingsteps": {
+    "processingTime": 1000,
+    "ingredients": [
+      {
+        "validitems": [ "machines:wire-copper" ],
+        "quantity": 2
+      }
 
-      },
-      "processingTime": 1000,
-      "ingredients": [
-        {
-          "validitems": [ "machines:wire-copper" ],
-          "quantity": 2
-        }
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:braidedwire-copper" ],
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "name": "Copper Wire (Rods)",
+    "processingsteps": {
 
-      ],
-      "output": [
-        {
-          "validitems": [ "machines:braidedwire-copper" ],
-          "quantity": 1
-        }
-      ]
     },
-    {
-      "name": "Copper Wire (Rods)",
-      "processingsteps": {
+    "processingTime": 1000,
+    "ingredients": [
+      {
+        "validitems": [ "machines:rod-copper" ],
+        "quantity": 1
+      }
 
-      },
-      "processingTime": 1000,
-      "ingredients": [
-        {
-          "validitems": [ "machines:rod-copper" ],
-          "quantity": 1
-        }
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:wire-copper" ],
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "name": "Copper Wire (Sheets)",
+    "processingsteps": {
 
-      ],
-      "output": [
-        {
-          "validitems": [ "machines:wire-copper" ],
-          "quantity": 4
-        }
-      ]
     },
-    {
-      "name": "Copper Wire (Sheets)",
-      "processingsteps": {
+    "processingTime": 1000,
+    "ingredients": [
+      {
+        "validitems": [ "game:metalsheet-copper-down" ],
+        "quantity": 1
+      }
 
-      },
-      "processingTime": 1000,
-      "ingredients": [
-        {
-          "validitems": [ "game:metalsheet-copper-down" ],
-          "quantity": 1
-        }
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:wire-copper" ],
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "name": "bloomworker",
+    "processingsteps": {
+      "heating": 1000
+    },
+    "processingTime": 10000,
+    "ingredients": [
+      {
+        "validitems": [ "game:ironbloom" ],
+        "quantity": 1
+      }
+      
+    ],
+    "output": [
+      {
+        "validitems": [ "game:ingot-iron" ],
+        "quantity": 1
+      }
+    ]
 
-      ],
-      "output": [
-        {
-          "validitems": [ "machines:wire-copper" ],
-          "quantity": 4
-        }
-      ]
-    }
-  ]
+  }
+]
 
