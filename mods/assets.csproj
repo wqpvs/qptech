@@ -21,6 +21,7 @@
     <None Include="qptech\assets\game\shapes\block\can-full.json" />
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
+    <None Include="qptech\assets\machines\blocktypes\deco\concrete.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\enderchest.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\anitest.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\blastfurnace.json" />
@@ -445,8 +446,10 @@
     <Content Include="qptech\assets\machines\textures\block\rubber\cable.png" />
     <Content Include="qptech\assets\game\textures\block\liquidrubber.png" />
     <Content Include="qptech\assets\machines\textures\block\shinybrass.png" />
+    <Content Include="qptech\assets\machines\textures\block\stone\concrete-internal.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\other\front-granite.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\wires\tin-wires.png" />
+    <Content Include="qptech\assets\machines\textures\block\stone\concrete-white.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\bloomery.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\boiler.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\crush.png" />

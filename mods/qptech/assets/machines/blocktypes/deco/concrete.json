@@ -1,0 +1,51 @@
+{
+	"code": "concrete",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech-decor": [ "*" ]
+	},
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "white","black","yellow" ]
+		}
+
+	],
+	"blockmaterial": "Stone",
+	"drawtype": "Cube",
+	"texturesByType": {
+		"*": {
+			"all": { "base": "block/stone/concrete-{type}" },
+			"inside-north": {
+				"base": "block/stone/concrete-internal",
+				"rotation": 90
+			},
+			"inside-east": {
+				"base": "block/stone/concrete-internal",
+				"rotation": 180
+			},
+			"inside-south": {
+				"base": "block/stone/concrete-internal",
+				"rotation": 0
+			},
+			"inside-west": {
+				"base": "block/stone/concrete-internal",
+				"rotation": 270
+			},
+			"inside-up": {
+				"base": "block/stone/concrete-internal",
+				"rotation": 270
+			},
+			"inside-down": {
+				"base": "block/stone/concrete-internal",
+				"rotation": 270
+			}
+
+		}
+	},
+		"resistance": 1,
+		"sounds": {
+			"place": "game:block/anvil",
+			"walk": "game:walk/stone"
+		}
+	}

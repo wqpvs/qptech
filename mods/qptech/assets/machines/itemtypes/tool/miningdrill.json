@@ -26,9 +26,9 @@
 			"states": [ "iron", "meteoriciron", "steel" ]
 		}
 	],
-
+	
 	"enabled": true,
-	"heldTpHitAnimation": "breaktool",
+	"heldTpHitAnimation": "idle",
 	"creativeinventory": {
 		"general": [ "*" ],
 		"items": [ "*" ],
