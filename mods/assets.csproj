@@ -120,6 +120,7 @@
     <None Include="qptech\assets\machines\itemtypes\tool\jetpack.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\jetpackcontrol.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\pullplate.json" />
+    <None Include="qptech\assets\machines\itemtypes\tool\miningdrill.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\quarrytool.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\pipewrench.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\screwdriver.json" />

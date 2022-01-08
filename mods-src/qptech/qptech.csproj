@@ -84,6 +84,7 @@
     <Compile Include="src\Electricity\ElectricityAPI.cs" />
     <Compile Include="src\misc\BEAnimator.cs" />
     <Compile Include="src\misc\BEBlockSeeker.cs" />
+    <Compile Include="src\misc\ItemMiningDrill.cs" />
     <Compile Include="src\networks\BEProcessToProcess.cs" />
     <Compile Include="src\networks\BEProcessToProcessFluidUser.cs" />
     <Compile Include="src\networks\IProcessingSupplier.cs" />
