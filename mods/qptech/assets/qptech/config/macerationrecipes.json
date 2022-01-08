@@ -15,7 +15,28 @@
 			"type": "DIRECT"
 		}
 	],
-
+	"game:bone": [
+		{
+			"outputmaterial": "game:bonemeal",
+			"outputquantity": 1,
+			"odds": 100,
+			"type": "DIRECT"
+		}
+	],
+	"game:stone-limestone": [
+		{
+			"outputmaterial": "game:lime",
+			"outputquantity": 1,
+			"odds": 100,
+			"type": "DIRECT"
+		},
+		{
+			"outputmaterial": "game:lime",
+			"outputquantity": 1,
+			"odds": 25,
+			"type": "DIRECT"
+		}
+	],
 	"sulfur": [
 		{
 			"outputmaterial": "game:powderedsulfur",
@@ -113,6 +134,14 @@
 			"outputmaterial": "game:nugget-magnetite",
 			"outputquantity": 1,
 			"odds": 1.8,
+			"type": "PARTIAL",
+			"machinename": "washplant"
+		},
+		{
+			"outputmaterial": "game:stone-limestone",
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 3,
 			"machinename": "washplant"
 		}
 	],
@@ -268,6 +297,13 @@
 			"outputquantity": 1,
 			"odds": 0.5,
 			"type": "PARTIAL",
+			"machinename": "washplant"
+		},
+		{
+			"outputmaterial": "game:lime",
+			"outputquantity": 1,
+			"type": "PARTIAL",
+			"odds": 1,
 			"machinename": "washplant"
 		}
 
