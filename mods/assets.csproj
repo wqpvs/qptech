@@ -317,6 +317,7 @@
     <None Include="qptech\assets\machines\shapes\item\part\screw.json" />
     <None Include="qptech\assets\machines\shapes\item\part\stator.json" />
     <None Include="qptech\assets\machines\shapes\item\part\wire.json" />
+    <None Include="qptech\assets\machines\shapes\item\tool\miningdrill.json" />
     <None Include="qptech\assets\machines\shapes\item\tool\pipewrench.json" />
     <None Include="qptech\assets\machines\shapes\item\tool\pullplate.json" />
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriver.json" />

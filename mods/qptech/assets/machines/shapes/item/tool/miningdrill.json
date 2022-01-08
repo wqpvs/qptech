@@ -1,0 +1,167 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"darkiron": "block/metal/darkiron",
+		"machinery": "block/machinery"
+	},
+	"elements": [
+		{
+			"name": "DrillBase",
+			"from": [ 6.0, -2.0, 5.0 ], 
+			"to": [ 10.0, 2.0, 9.0 ], 
+			"rotationOrigin": [ 8.0, 0.0, 9.0 ],
+			"rotationZ": 22.5,
+			"faces": {
+				"north": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"east": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"south": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"west": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"up": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"down": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] }
+			},
+			"children": [
+				{
+					"name": "Drill2",
+					"from": [ 0.5, 0.5, -3.0 ], 
+					"to": [ 3.5, 3.5, 0.0 ], 
+					"rotationOrigin": [ 2.0, 2.0, 0.0 ],
+					"rotationZ": 22.499996661474352,
+					"faces": {
+						"north": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+						"east": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+						"south": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+						"west": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+						"up": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+						"down": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] }
+					},
+					"children": [
+						{
+							"name": "Drill3",
+							"from": [ 0.5, 0.5, -2.0 ], 
+							"to": [ 2.5, 2.5, 1.0 ], 
+							"rotationOrigin": [ 1.5, 1.5, 0.0 ],
+							"rotationZ": 22.500002047628104,
+							"faces": {
+								"north": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
+								"east": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 2.0 ] },
+								"south": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
+								"west": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 2.0 ] },
+								"up": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 2.0, 3.0 ] },
+								"down": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 2.0, 3.0 ] }
+							},
+							"children": [
+								{
+									"name": "Drill4",
+									"from": [ 0.5, 0.5, -1.0 ], 
+									"to": [ 1.5, 1.5, 0.0 ], 
+									"rotationOrigin": [ 1.0, 1.0, 0.0 ],
+									"rotationZ": -44.999992699547086,
+									"faces": {
+										"north": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cube5",
+			"from": [ 5.5, -2.5, 9.0 ], 
+			"to": [ 10.5, 2.5, 10.0 ], 
+			"rotationOrigin": [ 7.0, -3.0, 10.0 ],
+			"faces": {
+				"north": { "texture": "#machinery", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
+				"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 1.0, 5.0 ] },
+				"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
+				"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 1.0, 5.0 ] },
+				"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 5.0, 1.0 ] },
+				"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 5.0, 1.0 ] }
+			},
+			"children": [
+				{
+					"name": "Cube6",
+					"from": [ 1.5, 1.5, 1.0 ], 
+					"to": [ 4.5, 3.5, 6.0 ], 
+					"rotationOrigin": [ 2.5, 0.5, 2.0 ],
+					"faces": {
+						"north": { "texture": "#machinery", "uv": [ 0.0, 0.0, 3.0, 2.0 ] },
+						"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 3.0, 2.0 ] },
+						"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 5.0, 2.0 ] },
+						"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 3.0, 5.0 ] },
+						"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 3.0, 5.0 ] }
+					}
+				},
+				{
+					"name": "Cube7",
+					"from": [ 2.5, -0.5, 3.0 ], 
+					"to": [ 3.5, 2.5, 4.0 ], 
+					"rotationOrigin": [ 2.5, -0.5, 3.0 ],
+					"faces": {
+						"north": { "texture": "#machinery", "uv": [ 0.0, 0.0, 1.0, 3.0 ] },
+						"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 1.0, 3.0 ] },
+						"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 1.0, 3.0 ] },
+						"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 1.0, 3.0 ] },
+						"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+					}
+				},
+				{
+					"name": "Cube8",
+					"from": [ -1.5, 2.5, 1.0 ], 
+					"to": [ 1.5, 3.5, 2.0 ], 
+					"rotationOrigin": [ -1.5, 2.5, 1.0 ],
+					"faces": {
+						"north": { "texture": "#machinery", "uv": [ 0.0, 0.0, 3.0, 1.0 ] },
+						"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"south": { "texture": "#machinery", "uv": [ 0.0, 0.0, 3.0, 1.0 ] },
+						"west": { "texture": "#machinery", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"up": { "texture": "#machinery", "uv": [ 0.0, 0.0, 3.0, 1.0 ] },
+						"down": { "texture": "#machinery", "uv": [ 0.0, 0.0, 3.0, 1.0 ] }
+					}
+				}
+			]
+		}
+	],
+	"animations": [
+		{
+			"name": "idle",
+			"code": "idle",
+			"quantityframes": 30,
+			"onActivityStopped": "Stop",
+			"onAnimationEnd": "Repeat",
+			"keyframes": [
+				{
+					"frame": 0,
+					"elements": {
+						"DrillBase": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -180.0 },
+						"Drill2": {  },
+						"Drill3": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -180.0 }
+					}
+				},
+				{
+					"frame": 29,
+					"elements": {
+						"DrillBase": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 180.0 },
+						"Drill2": {  },
+						"Drill3": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 180.0 }
+					}
+				}
+			]
+		}
+	]
+}

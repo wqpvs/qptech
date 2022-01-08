@@ -53,4 +53,5 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
 - limestone added to macerator
 - washplant has chance to drop limestone from gravel
 - macerator game:bone->game:bonemeal
+[dev]Roughed in drill
 

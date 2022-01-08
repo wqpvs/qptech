@@ -1,57 +1,116 @@
 {
-	code: "quarrytool",
-	class: "ItemQuarryTool",
-	creativeinventory: {
-		"general": ["*"]
-	},
-	drawtype: "json",
-	shape: { base: "item/tool/pullplate" },
-	attributes: {
-		
-		toolrackTransform: {
-			translation: { x: 0, y: 0.61, z: 0 },
-			rotation: { x: 5, y: 180, z: -1 },
-			scale: 1.25
+	"code": "quarrytool",
+	"class": "ItemQuarryTool",
+
+	"drawtype": "json",
+	"shape": { "base": "item/tool/miningdrill" },
+	"attributes": {
+
+		"toolrackTransform": {
+			"translation": {
+				"x": 0,
+				"y": 0.61,
+				"z": 0
+			},
+			"rotation": {
+				"x": 5,
+				"y": 180,
+				"z": -1
+			},
+			"scale": 1.25
 		}
 	},
-	variantgroups: [
-		{ code: "material", states: ["iron", "meteoriciron", "steel" ] },
+	"variantgroups": [
+		{
+			"code": "material",
+			"states": [ "iron", "meteoriciron", "steel" ]
+		}
 	],
-	
-	enabled: true,
-	heldTpHitAnimation: "breaktool",
-	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },
-	textures: {
-		metal: { base: "game:block/metal/ingot/{material}" }
+
+	"enabled": true,
+	"heldTpHitAnimation": "breaktool",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"items": [ "*" ],
+		"tools": [ "*" ]
 	},
-	guiTransform: {
-		translation: { x: 0, y: 0, z: 0 },
-		rotation: { x: 9, y: 137, z: -53 },
-		origin: { x: 0.44, y: 0, z: 0.38 },
-		scale: 2.92
+
+	"guiTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 9,
+			"y": 137,
+			"z": -53
+		},
+		"origin": {
+			"x": 0.44,
+			"y": 0,
+			"z": 0.38
+		},
+		"scale": 2.92
 	},
-	fpHandTransform: {
-		translation: { x: -0.1, y: 0.2, z: 0 },
-		rotation: { x: 90, y: 99, z: -42 },
-		origin: { x: 0.5, y: 0, z: 0.5 },
-		scale: 2.15
+	"fpHandTransform": {
+		"translation": {
+			"x": -0.6,
+			"y": 0.4,
+			"z": 0
+		},
+		"rotation": {
+			"x": 180,
+			"y": 180,
+			"z": -90
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 3.25
 	},
-	groundTransform: {
-		translation: { x: 0, y: 0, z: 0 },
-		rotation: { x: 0, y: 0, z: 0 },
-		origin: { x: 0.5, y: 0, z: 0.5 },
-		scale: 4.31
+	"groundTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 4.31
 	},
-	tpHandTransform: {
-		translation: { x: -0.78, y: -0.09, z: -0.67 },
-		rotation: { x: 9, y: -1, z: -16 },
-		origin: { x: 0.5, y: 0, z: 0.5 },
-		scale: 0.76
+	"tpHandTransform": {
+		"translation": {
+			"x": -1,
+			"y": 0.25,
+			"z": -0.5
+		},
+		"rotation": {
+			"x": 16,
+			"y": -90,
+			"z": -16
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 0.93
 	},
-	durabilitybytype: {
-		
+	"durabilitybytype": {
+
 		"pullplate-iron": 2000,
 		"pullplate-meteoriciron": 2800,
-		"pullplate-steel": 5000,
+		"pullplate-steel": 5000
 	}
 }
