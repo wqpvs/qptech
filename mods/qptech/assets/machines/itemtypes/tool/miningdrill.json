@@ -23,16 +23,16 @@
 	"variantgroups": [
 		{
 			"code": "material",
-			"states": [ "iron", "meteoriciron", "steel" ]
+			"states": [ "Fueled" ]
 		}
 	],
 	
 	"enabled": true,
 	"heldTpHitAnimation": "idle",
 	"creativeinventory": {
-		"general": [ "*" ],
-		"items": [ "*" ],
-		"tools": [ "*" ]
+		
+		"qptech": [ "*" ]
+		
 	},
 
 	"guiTransform": {
@@ -106,11 +106,6 @@
 			"z": 0.5
 		},
 		"scale": 0.93
-	},
-	"durabilitybytype": {
-
-		"pullplate-iron": 2000,
-		"pullplate-meteoriciron": 2800,
-		"pullplate-steel": 5000
 	}
+	
 }

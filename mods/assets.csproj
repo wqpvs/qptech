@@ -129,6 +129,11 @@
     <None Include="qptech\assets\machines\lang\en.json" />
     <None Include="qptech\assets\machines\lang\ru.json" />
     <None Include="qptech\assets\machines\recipes\barrel\cable.json" />
+    <None Include="qptech\assets\machines\recipes\grid\decor\concrete-white.json" />
+    <None Include="qptech\assets\machines\recipes\grid\decor\concrete-gray.json" />
+    <None Include="qptech\assets\machines\recipes\grid\decor\concrete-black.json" />
+    <None Include="qptech\assets\machines\recipes\grid\decor\concrete-yellow.json" />
+    <None Include="qptech\assets\machines\recipes\grid\decor\concrete-red.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\slidingdoor.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\blocklantern.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\cabinet-lower-door.json" />

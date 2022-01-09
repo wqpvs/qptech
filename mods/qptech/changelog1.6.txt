@@ -54,5 +54,8 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
 - washplant has chance to drop limestone from gravel
 - macerator game:bone->game:bonemeal
 [dev]Roughed in drill
-- note to self: check grinding props attribute for macerator?
+- note to self: check grinding props attribute for macerator? -> add cinnabar
+- adding concrete recipes
+- adding mining drill sounds particles
+
 

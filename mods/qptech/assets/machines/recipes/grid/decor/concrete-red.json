@@ -1,0 +1,11 @@
+{
+	ingredientPattern: "CD",
+	ingredients: {
+		"C": { type: "block", code: "concrete-*", "quantity": 16 },
+		"D": { type: "item", code: "game:crushed-cinnabar", "quantity": 1 },
+		
+	},
+	width: 2,
+	height: 1,
+	output: { type: "block", code: "concrete-red", quantity: 32  }
+}

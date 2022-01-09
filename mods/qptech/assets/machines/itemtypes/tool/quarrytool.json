@@ -30,9 +30,8 @@
 	"enabled": true,
 	"heldTpHitAnimation": "breaktool",
 	"creativeinventory": {
-		"general": [ "*" ],
-		"items": [ "*" ],
-		"tools": [ "*" ]
+		"general": [ "" ],
+		
 	},
 
 	"guiTransform": {

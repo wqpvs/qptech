@@ -7,6 +7,14 @@
 			"type": "DIRECT"
 		}
 	],
+	"game:ore-cinnabar": [
+		{
+			"outputmaterial": "game:crushed-cinnabar",
+			"outputquantity": 1,
+			"odds": 100,
+			"type": "DIRECT"
+		}
+	],
 	"game:stone-bauxite": [
 		{
 			"outputmaterial": "game:crushed-bauxite",

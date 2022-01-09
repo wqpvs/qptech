@@ -1,0 +1,11 @@
+{
+	ingredientPattern: "MRS",
+	ingredients: {
+		"M": { type: "item", code: "game:mortar", "quantity": 1 },
+		"R": { type: "item", code: "game:stone-*", "quantity": 16 },
+		"S": {"type": "block", "code": "game:sand-*","quantity": 8}
+	},
+	width: 3,
+	height: 1,
+	output: { type: "block", code: "concrete-gray", quantity: 32  }
+}
