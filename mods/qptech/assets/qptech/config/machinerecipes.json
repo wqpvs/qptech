@@ -6,7 +6,7 @@
       "heating": 1482,
       "crushing": 1000
     },
-    "processingTime": 2000,
+    "processingTime": 4000,
     "ingredients": [
       {
         "validitems": [ "game:nugget-hematite", "game:nugget-magnetite", "game:nugget-limonite" ],
