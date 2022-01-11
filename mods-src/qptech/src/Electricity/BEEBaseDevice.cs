@@ -200,7 +200,7 @@ namespace qptech.src
             }
         }
         protected bool animationIsRunning = false;
-        protected virtual bool shouldAnimate => (deviceState == enDeviceState.RUNNING) && animation != "";
+        protected virtual bool shouldAnimate => (IsOn&&deviceState == enDeviceState.RUNNING) && animation != "";
         protected virtual void DoAnimations()
         {
             

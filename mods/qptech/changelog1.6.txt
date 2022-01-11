@@ -58,4 +58,11 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
 - adding concrete recipes
 - adding mining drill sounds particles
 
+1.6.3
+- electric forge slighly increased max heat so you have time to transfer to machines if heating manually
+- bugfix: macerator etc still plays sound and animates when switched off
+- added maceration recipe: stone-chalk->lime
+- added recipe list ui for Recipe Processor type machines (wiremill and bloomery)
+
+
 

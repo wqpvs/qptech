@@ -26,8 +26,8 @@
 	"attributes": {
 		"genFlux": 0,
 		"useFlux": 4,
-		"maxHeat": 1000,
-		"degreesPerHour": 1500,
+		"maxHeat": 1050,
+		"degreesPerHour": 1600,
 		"maxItems": 2,
 		"stackRenderHeight": 0.1,
 		"unloadable": true,

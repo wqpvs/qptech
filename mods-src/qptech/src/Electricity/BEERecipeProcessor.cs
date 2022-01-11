@@ -25,7 +25,12 @@ namespace qptech.src
         BlockFacing matOutputFace = BlockFacing.EAST;
         List<MachineRecipe> recipes;
         string statusmessage;
-        
+        public string StatusMessage => statusmessage;
+        public List<MachineRecipe> Recipes => recipes;
+        public string MakingRecipe => makingrecipe;
+
+
+
         public static void LoadRecipes(ICoreAPI api)
         {
             if (masterrecipelist == null)
@@ -251,7 +256,29 @@ namespace qptech.src
             deviceState = enDeviceState.IDLE;
             makingrecipe = "";
         }
+        GUIRecipeProcessorStatus gas;
+        public void OpenStatusGUI()
+        {
+            ICoreClientAPI capi = Api as ICoreClientAPI;
+            if (capi != null)
+            {
+                if (gas == null)
+                {
+                    gas = new GUIRecipeProcessorStatus("Processor Status", Pos, capi);
 
+                    gas.TryOpen();
+                    gas.SetupDialog(this);
+
+                }
+                else
+                {
+                    gas.TryClose();
+                    gas.TryOpen();
+                    gas.SetupDialog(this);
+                }
+            }
+
+        }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);

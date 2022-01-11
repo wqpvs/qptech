@@ -30,7 +30,7 @@ namespace qptech.src
             }
         }
 
-        protected override bool shouldAnimate => inUse && (deviceState == enDeviceState.RUNNING) && animation != "";
+        protected override bool shouldAnimate => inUse && IsOn&&(deviceState == enDeviceState.RUNNING) && animation != "";
         public override void OnTick(float par)
         {
             if (Api is ICoreServerAPI&&  Api.World.ElapsedMilliseconds > idleAfter) { inUse = false;MarkDirty(); }

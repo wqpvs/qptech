@@ -45,6 +45,20 @@
 			"type": "DIRECT"
 		}
 	],
+	"game:stone-chalk": [
+		{
+			"outputmaterial": "game:lime",
+			"outputquantity": 1,
+			"odds": 100,
+			"type": "DIRECT"
+		},
+		{
+			"outputmaterial": "game:lime",
+			"outputquantity": 1,
+			"odds": 25,
+			"type": "DIRECT"
+		}
+	],
 	"sulfur": [
 		{
 			"outputmaterial": "game:powderedsulfur",
