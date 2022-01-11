@@ -192,4 +192,5 @@
 	"item-metalchannel-*": "Metal Channel",
 	"block-bloomworker-*": "Iron Bloom Worker",
 	"blockdesc-bloomworker-*": "Takes iron blooms and outputs iron ingots. (Requires heat, for example from a Bronze Industrial Oven)"
+	
 }

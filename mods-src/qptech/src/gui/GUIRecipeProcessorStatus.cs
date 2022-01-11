@@ -48,7 +48,7 @@ namespace qptech.src
                     //statustext += " makes ";
                     foreach (MachineRecipeItems mri in mr.output)
                     {
-                        statustext += mri.quantity + " of ";
+                        statustext += mri.quantity + " ";
                         int vi = mri.validitems.Count();
                         if (vi > 1) { statustext += "("; }
                         int c = 1;
@@ -71,7 +71,7 @@ namespace qptech.src
                     statustext += " from</strong></font><br><font color=\"#ffffff\">";
                     foreach (MachineRecipeItems mri in mr.ingredients)
                     {
-                        statustext += "   "+mri.quantity + " of ";
+                        statustext += "   "+mri.quantity + " ";
                         int vi = mri.validitems.Count();
                         if (vi > 1) { statustext += "("; }
                         int c = 1;
@@ -89,7 +89,17 @@ namespace qptech.src
                         if (vi > 1) { statustext += ")"; }
                         statustext += "<br>";
                     }
-                   
+                   if (mr.processingsteps.Count() > 0)
+                    {
+                        statustext += "  *Requires ";
+                        int c = 1;
+                        foreach (string key in mr.processingsteps.Keys)
+                        {
+                            statustext += key + "(" + mr.processingsteps[key] + ")";
+                            if (c < mr.processingsteps.Count()) { statustext += ", "; }
+                            c++;
+                        }
+                    }
                 }
                 statustext += "</font></strong>";
 
