@@ -44,27 +44,8 @@ namespace qptech.src
                 foreach (MachineRecipe mr in bea.Recipes)
                 {
                     statustext += "<font color=\"#aaffaa\">";
-                    statustext += "<strong>"+mr.name + "</strong></font><br>Uses:<br>";
-                    statustext += "<font color=\"#ffffff\">";
-                    foreach (MachineRecipeItems mri in mr.ingredients)
-                    {
-                        statustext += mri.quantity + " of ";
-                        int vi = mri.validitems.Count();
-                        if (vi > 1) { statustext += "("; }
-                        int c = 1;
-                        foreach (string subi in mri.validitems)
-                        {
-                            
-                            
-                            statustext += subi;
-                            if (vi > 1 && c == vi - 1) { statustext += " or "; }
-                            else if (vi>1 && c!=vi) { statustext += ","; }
-                            c++;
-                        }
-                        if (vi > 1) { statustext += ")"; }
-                        statustext += "<br>";
-                    }
-                    statustext += "Makes:<br>";
+                    statustext += "<strong>";// +mr.name ;
+                    //statustext += " makes ";
                     foreach (MachineRecipeItems mri in mr.output)
                     {
                         statustext += mri.quantity + " of ";
@@ -74,15 +55,41 @@ namespace qptech.src
                         foreach (string subi in mri.validitems)
                         {
 
+                            AssetLocation al = new AssetLocation(subi);
+                            string usestring = Lang.Get(al.Path);
 
-                            statustext += subi;
+
+                            statustext += usestring;
+
                             if (vi > 1 && c == vi - 1) { statustext += " or "; }
                             else if (vi > 1 && c != vi) { statustext += ","; }
                             c++;
                         }
                         if (vi > 1) { statustext += ")"; }
+                        
+                    }
+                    statustext += " from</strong></font><br><font color=\"#ffffff\">";
+                    foreach (MachineRecipeItems mri in mr.ingredients)
+                    {
+                        statustext += "   "+mri.quantity + " of ";
+                        int vi = mri.validitems.Count();
+                        if (vi > 1) { statustext += "("; }
+                        int c = 1;
+                        foreach (string subi in mri.validitems)
+                        {
+                            AssetLocation al = new AssetLocation(subi);
+                            string usestring = Lang.Get(al.Path);
+                            
+                            
+                            statustext += usestring;
+                            if (vi > 1 && c == vi - 1) { statustext += " or "; }
+                            else if (vi>1 && c!=vi) { statustext += ","; }
+                            c++;
+                        }
+                        if (vi > 1) { statustext += ")"; }
                         statustext += "<br>";
                     }
+                   
                 }
                 statustext += "</font></strong>";
 
