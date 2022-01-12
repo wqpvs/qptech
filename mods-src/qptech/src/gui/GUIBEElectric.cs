@@ -9,14 +9,14 @@ using Vintagestory.API.Config;
 
 namespace qptech.src
 {
-    class GUIRecipeProcessorStatus:GuiDialogBlockEntity
+    class GUIBEElectric:GuiDialogBlockEntity
     {
         ICoreClientAPI api;
-        public GUIRecipeProcessorStatus(string dialogTitle, BlockPos blockEntityPos, ICoreClientAPI capi) : base(dialogTitle,blockEntityPos,capi)
+        public GUIBEElectric(string dialogTitle, BlockPos blockEntityPos, ICoreClientAPI capi) : base(dialogTitle,blockEntityPos,capi)
         {
             api = capi;
         }
-        public void SetupDialog(BEERecipeProcessor bea)
+        public void SetupDialog(BEElectric bea)
         {
             ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterMiddle);
             ElementBounds textBounds = ElementBounds.Fixed(0, 40, 600, 600);

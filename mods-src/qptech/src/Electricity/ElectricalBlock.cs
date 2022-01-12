@@ -38,11 +38,10 @@ namespace qptech.src
         {
             
             var bee = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BEElectric;
-            var brp = bee as BEERecipeProcessor;
             
-            if (brp != null && byPlayer.Entity.RightHandItemSlot.Itemstack == null)
+            if (bee != null && byPlayer.Entity.RightHandItemSlot.Itemstack == null)
             {
-                brp.OpenStatusGUI();
+                bee.OpenStatusGUI();
             }
             if (bee==null) return base.OnBlockInteractStart(world, byPlayer, blockSel); 
             if (byPlayer.Entity.RightHandItemSlot.Itemstack==null) return base.OnBlockInteractStart(world, byPlayer, blockSel);

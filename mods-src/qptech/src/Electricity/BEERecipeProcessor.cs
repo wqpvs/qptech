@@ -256,8 +256,8 @@ namespace qptech.src
             deviceState = enDeviceState.IDLE;
             makingrecipe = "";
         }
-        GUIRecipeProcessorStatus gas;
-        public void OpenStatusGUI()
+        /*GUIRecipeProcessorStatus gas;
+        public override void OpenStatusGUI()
         {
             ICoreClientAPI capi = Api as ICoreClientAPI;
             if (capi != null)
@@ -278,7 +278,7 @@ namespace qptech.src
                 }
             }
 
-        }
+        }*/
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
@@ -301,7 +301,83 @@ namespace qptech.src
             
             dsc.AppendLine(statusmessage);
         }
+        public override string GetStatusUI()
+        {
+            string statustext = "<font color=\"#ffffff\">";
+            if (MakingRecipe != "") { statustext += "<strong>CURRENT RECIPE: " + MakingRecipe + "</strong></font><br><br>"; }
+            if (StatusMessage != "")
+            {
+                statustext += StatusMessage + "<br>";
+            }
 
+            if (Recipes != null && Recipes.Count > 0)
+            {
+                statustext += "<strong>Available Recipes:</strong><br>";
+                foreach (MachineRecipe mr in Recipes)
+                {
+                    statustext += "<font color=\"#aaffaa\">";
+                    statustext += "<strong>";// +mr.name ;
+                    //statustext += " makes ";
+                    foreach (MachineRecipeItems mri in mr.output)
+                    {
+                        statustext += mri.quantity + " ";
+                        int vi = mri.validitems.Count();
+                        if (vi > 1) { statustext += "("; }
+                        int c = 1;
+                        foreach (string subi in mri.validitems)
+                        {
+
+                            AssetLocation al = new AssetLocation(subi);
+                            string usestring = Lang.Get(al.Path);
+
+
+                            statustext += usestring;
+
+                            if (vi > 1 && c == vi - 1) { statustext += " or "; }
+                            else if (vi > 1 && c != vi) { statustext += ","; }
+                            c++;
+                        }
+                        if (vi > 1) { statustext += ")"; }
+
+                    }
+                    statustext += " from</strong></font><br><font color=\"#ffffff\">";
+                    foreach (MachineRecipeItems mri in mr.ingredients)
+                    {
+                        statustext += "   " + mri.quantity + " ";
+                        int vi = mri.validitems.Count();
+                        if (vi > 1) { statustext += "("; }
+                        int c = 1;
+                        foreach (string subi in mri.validitems)
+                        {
+                            AssetLocation al = new AssetLocation(subi);
+                            string usestring = Lang.Get(al.Path);
+
+
+                            statustext += usestring;
+                            if (vi > 1 && c == vi - 1) { statustext += " or "; }
+                            else if (vi > 1 && c != vi) { statustext += ","; }
+                            c++;
+                        }
+                        if (vi > 1) { statustext += ")"; }
+                        statustext += "<br>";
+                    }
+                    if (mr.processingsteps.Count() > 0)
+                    {
+                        statustext += "  *Requires ";
+                        int c = 1;
+                        foreach (string key in mr.processingsteps.Keys)
+                        {
+                            statustext += key + "(" + mr.processingsteps[key] + ")";
+                            if (c < mr.processingsteps.Count()) { statustext += ", "; }
+                            c++;
+                        }
+                    }
+                }
+                statustext += "</font></strong>";
+
+            }
+            return base.GetStatusUI()+statustext;
+        }
     }
     class MachineRecipe
     {

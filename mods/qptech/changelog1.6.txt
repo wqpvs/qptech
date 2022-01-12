@@ -63,6 +63,7 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
 - bugfix: macerator etc still plays sound and animates when switched off
 - added maceration recipe: stone-chalk->lime
 - added recipe list ui for Recipe Processor type machines (wiremill and bloomery)
+- electrical devices have a status ui, right click on device to view
 
 
 

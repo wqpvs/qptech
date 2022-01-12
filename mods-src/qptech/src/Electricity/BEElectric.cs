@@ -451,7 +451,67 @@ namespace qptech.src
             //justswitched = true;
             Api.World.PlaySoundAt(new AssetLocation("sounds/electriczap"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
         }
+        protected string textred = "<font color=\"#ff4444\">";
+        protected string textyellow = "<font color=\"#ffff33\">";
+        protected string textgreen = "<font color=\"#66ff66\">";
+        protected string boldon = "<strong>";
+        protected string boldoff = "</strong>";
+        protected string textoff = "</font>";
+        public virtual string GetStatusUI()
+        {
+            string statustext = "Power Grid Status:<br>";
+            
+            
+            if (!IsOn) { statustext += textyellow + "Device Off!" + "</font>"; }
+            else
+            {
+                PowerNetwork pn = FlexNetworkManager.GetNetworkWithID(NetworkID) as PowerNetwork;
+                if (pn == null) { statustext += textred + boldon + "NO POWER GRID!" + boldoff + textoff; }
+                else 
+                {
+                    if (pn.NetworkStatus.consumed < pn.NetworkStatus.generated)
+                    {
+                        statustext += textgreen;
+                    }
+                    else if (pn.NetworkStatus.consumed < pn.NetworkStatus.generated + pn.NetworkStatus.stored)
+                    {
+                        statustext += textyellow;
+                    }
+                    else
+                    {
+                        statustext += textred;
+                    }
+                    statustext += networkstatus + textoff;
+                }
+            }
+            statustext += "<br>";
+            return statustext;
+        }
+        GUIBEElectric gui;
+        public virtual void OpenStatusGUI()
+        {
+            ICoreClientAPI capi = Api as ICoreClientAPI;
+            
 
+            if (capi != null)
+            {
+                if (gui == null)
+                {
+                    gui = new GUIBEElectric("Device Status", Pos, capi);
+
+                    gui.TryOpen();
+                    gui.SetupDialog(this);
+
+                }
+                else
+                {
+                    gui.TryClose();
+                    gui.TryOpen();
+                    gui.SetupDialog(this);
+                }
+            }
+
+        }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
@@ -485,7 +545,7 @@ namespace qptech.src
             tree.SetInt("storedFlux", storedFlux);
             PowerNetwork pn = FlexNetworkManager.GetNetworkWithID(NetworkID) as PowerNetwork;
             if (pn == null) { networkstatus = "INVALID NETWORK"; }
-            else { networkstatus = "Power: " + pn.NetworkStatus.nodes + " nodes. Load:" + pn.NetworkStatus.consumed + " Gen:" + pn.NetworkStatus.generated + " Stored:" + pn.NetworkStatus.stored; }
+            else { networkstatus = pn.NetworkStatus.nodes + " devices. Network using " + pn.NetworkStatus.consumed + ", generating " + pn.NetworkStatus.generated + ", and storing " + pn.NetworkStatus.stored+" temporal flux."; }
             tree.SetString("networkstatus", networkstatus);
             if (networkID != Guid.Empty) {
                 tree.SetString("networkID", networkID.ToString());
