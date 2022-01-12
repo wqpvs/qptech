@@ -598,13 +598,7 @@ namespace qptech.src
         /// <param name="onlycompleteorder">if true will only start production if order can be completed, if false will make what it can</param>
         /// <returns>Whether order can be delivered</returns>
         
-        public enum enPacketIDs
-        {
-            SetOrder=99990001,
-            TogglePower=99990002,
-            ToggleMode=99990003,
-            Halt=99990004
-        }
+       
 
         public void SetOrder(string formetal, int qty, bool onlycompleteorder)
         {

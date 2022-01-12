@@ -451,6 +451,32 @@ namespace qptech.src
             //justswitched = true;
             Api.World.PlaySoundAt(new AssetLocation("sounds/electriczap"), Pos.X, Pos.Y, Pos.Z, null, false, 8, 1);
         }
+        public enum enPacketIDs
+        {
+            SetOrder = 99990001,
+            TogglePower = 99990002,
+            ToggleMode = 99990003,
+            Halt = 99990004
+        }
+        public virtual void TogglePowerButton()
+        {
+            if (Api is ICoreClientAPI)
+            {
+                
+                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.TogglePower, null);
+            }
+            else
+            {
+                TogglePower();
+            }
+        }
+        public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
+        {
+            if (packetid == (int)enPacketIDs.TogglePower)
+            {
+                TogglePower();
+            }
+        }
         protected string textred = "<font color=\"#ff4444\">";
         protected string textyellow = "<font color=\"#ffff33\">";
         protected string textgreen = "<font color=\"#66ff66\">";
