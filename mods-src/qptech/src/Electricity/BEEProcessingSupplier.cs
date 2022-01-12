@@ -8,6 +8,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
 using Vintagestory.API.Client;
+using Vintagestory.API.MathTools;
 
 namespace qptech.src
 {
@@ -73,6 +74,38 @@ namespace qptech.src
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
             inUse = tree.GetBool("inUse");
+        }
+        
+        protected override void UsePower()
+        {
+            base.UsePower();
+            if (IsPowered&&CheckProcessing("heating"))
+            {
+                
+                foreach (BlockFacing bf in BlockFacing.ALLFACES)
+                {
+                    BlockPos checkpos = Pos.Copy().Offset(bf);
+                    IBlockEntityContainer container = Api.World.BlockAccessor.GetBlockEntity(checkpos) as IBlockEntityContainer;
+                    if (container == null) { continue; }
+                    if (container.Inventory == null) { continue; }
+                    if (container.Inventory.Empty) { continue; }
+                    foreach (ItemSlot slot in container.Inventory)
+                    {
+                        if (slot == null || slot.Empty) { continue; }
+                        if (slot.Itemstack!=null&&slot.Itemstack.StackSize>0)
+                        {
+                            float temp = slot.Itemstack.Collectible.GetTemperature(Api.World, slot.Itemstack);
+                            double maxHeat=RequestProcessing("heating");
+                            if (temp < maxHeat)
+                            {
+                                float tempGain = (float)(maxHeat-temp)/(500f*(float)slot.Itemstack.StackSize);
+                                float newtemp = Math.Min(temp + tempGain,(float)maxHeat);
+                                slot.Itemstack.Collectible.SetTemperature(Api.World, slot.Itemstack, newtemp);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

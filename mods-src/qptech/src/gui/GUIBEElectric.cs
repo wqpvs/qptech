@@ -35,7 +35,7 @@ namespace qptech.src
                 .AddShadedDialogBG(bgBounds)
                 .AddDialogTitleBar("Machine Status", OnTitleBarCloseClicked)
                 .AddRichtext(statustext, CairoFont.WhiteDetailText(), textBounds)
-                .AddButton(powerbutton, onTogglePower, buttonBounds)
+                .AddButton(powerbutton, onTogglePower, buttonBounds, CairoFont.WhiteDetailText())
                 
                 .Compose()
                 

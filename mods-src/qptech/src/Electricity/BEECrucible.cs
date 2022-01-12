@@ -20,6 +20,10 @@ namespace qptech.src
         //check if enough heat supplied (firepit, or Industiral Process?)
         //if there is enough then take the nuggets begin processing
         //output ingot when done, heated appropriately
+        protected override void UsePower()
+        {
+            base.UsePower();
 
+        }
     }
 }
