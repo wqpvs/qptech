@@ -45,7 +45,7 @@ namespace qptech.src
             if (container.Inventory == null) { return; }
             if (container.Inventory.Empty) { return; }
             List<ItemStack> stacks = new List<ItemStack>();
-            
+            List<string> materials = new List<string>();
             foreach (ItemSlot slot in container.Inventory)
             {
                 //checks for valid items
@@ -57,7 +57,7 @@ namespace qptech.src
                 AssetLocation mat = slot.Itemstack.Item.CombustibleProps.SmeltedStack.Code;
                 int qty = slot.Itemstack.StackSize;
                 float temp = slot.Itemstack.Collectible.GetTemperature(Api.World, slot.Itemstack);
-                
+                if (!materials.Contains(mat.ToString())) { materials.Add(mat.ToString()); }
                 if (temp < slot.Itemstack.Item.CombustibleProps.MeltingPoint) { continue; }
                 
                                 
@@ -103,7 +103,7 @@ namespace qptech.src
                 (container as BlockEntity).MarkDirty();
 
             }
-            else //Do direct material->ingot matching
+            else if (materials.Count==1) //Do direct material->ingot matching
             {
                 MatchedSmeltableStack mss= BlockSmeltingContainer.GetSingleSmeltableStack(stacks.ToArray());
                 if (mss == null) { return; }
