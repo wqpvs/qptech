@@ -1,7 +1,7 @@
 {
-	"code": "industrialheater",
+	"code": "industrialcrucible",
 	"class": "ElectricalBlock",
-	"entityclass": "BEEProcessingSupplier",
+	"entityclass": "BEECrucible",
 	"creativeinventory": {
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
@@ -17,7 +17,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "lv","mv" ]
+			"states": [ "small" ]
 		},
 		{
 			"code": "side",
@@ -27,27 +27,14 @@
 
 	"attributesByType": {
 
-		"*-mv-*": {
+		
+		"*-small-*": {
 			"genFlux": 0,
-			"useFlux": 128,
-
-			"processes": {
-
-				"heating": 1505
-			},
-			"inputFace": "west",
-			"outputFace": "east"
-		},
-		"*-lv-*": {
-			"genFlux": 0,
-			"useFlux": 16,
-
-			"processes": {
-
-				"heating": 1200
-			},
-			"inputFace": "west",
-			"outputFace": "east"
+			"useFlux": 8,
+			"inputFace": "up",
+			"outputFace": "down",
+			"capacityIngots": 1,
+			"processingTime":  2000
 		}
 	},
 
@@ -55,12 +42,10 @@
 	"drawtype": "json",
 	
 	"texturesByType": {
-		"*-mv-*" :{
-			"all": { "base": "block/tempblocks/heater" }
-		},
-		"*-lv-*" :{
-			"all": { "base": "block/tempblocks/heater1000" }
+		"*-small-*" :{
+			"all": { "base": "block/tempblocks/crucible" }
 		}
+		
 	},
 	"shape": { "base": "block/metal/electric/tempmachine" },
 	"shapeByType": {

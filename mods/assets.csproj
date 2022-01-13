@@ -31,6 +31,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\seeker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\lv\bloomworker.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\crucible.json" />
     <None Include="qptech\assets\machines\blocktypes\other\door\slidingdoor.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\industrialgenerator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\turbine.json" />

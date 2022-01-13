@@ -57,7 +57,7 @@
 	"blockdesc-generator-primitive-*": "Your (probably) first generator. Place a water barrel on top, and a firepit below. When heated will generate power on its output face. Gets explodey without water!",
 	"block-creativegenerator-primitive-*": "Creative LV Generator",
 	"block-itemhatch-*": "Bronze Item Hatch",
-	"blockdesc-itemhatch-*": "An expensive 24 slot storage block. Good for if you need more storage, or just want to flex your vast bronze reserves.",
+	"blockdesc-itemhatch-*": "An expensive 24 slot storage block. May be used with electrical heaters in item heating, but is quite inefficient (25% efficiency)",
 	"block-wireplate-*": "Cable (LV)",
 	"blockdesc-wireplate-*": "Power up your devices with these cables!",
 	"block-wirejunction-*": "Cable Junction (LV)",

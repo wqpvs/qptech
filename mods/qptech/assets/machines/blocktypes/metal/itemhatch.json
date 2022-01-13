@@ -11,7 +11,8 @@
 			"normal-generic": "content"
 		},
 		"typedOpenSound": { "normal-generic": "game:sounds/block/cokeovendoor-open" },
-		"typedCloseSound": { "normal-generic": "game:sounds/block/cokeovendoor-close" }
+		"typedCloseSound": { "normal-generic": "game:sounds/block/cokeovendoor-close" },
+		"heatingefficiency": 0.25
 
 	},
 	"behaviors": [

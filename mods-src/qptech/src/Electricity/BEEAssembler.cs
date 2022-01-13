@@ -98,16 +98,17 @@ namespace qptech.src
             if (Block.Attributes != null) {
                 //requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
                 rmInputFace = BlockFacing.FromCode(Block.Attributes["inputFace"].AsString("up"));
-                recipeSuffix = Block.Attributes["recipeSuffix"].AsString(recipeSuffix);
                 outputFace = BlockFacing.FromCode(Block.Attributes["outputFace"].AsString("down"));
+                rmInputFace = OrientFace(Block.Code.ToString(), rmInputFace);
+                outputFace = OrientFace(Block.Code.ToString(), outputFace);
+                recipeSuffix = Block.Attributes["recipeSuffix"].AsString(recipeSuffix);
                 animationSpeed = Block.Attributes["animationSpeed"].AsFloat(animationSpeed);
                 inputQuantity = Block.Attributes["inputQuantity"].AsInt(inputQuantity);
                 outputQuantity = Block.Attributes["outputQuantity"].AsInt(outputQuantity);
                 recipe = Block.Attributes["recipe"].AsString(recipe);
                 ingredient = Block.Attributes["ingredient"].AsString(ingredient);
                 ingredientSuffix = Block.Attributes["ingredientSuffix"].AsString(ingredientSuffix);
-                rmInputFace = OrientFace(Block.Code.ToString(), rmInputFace);
-                outputFace = OrientFace(Block.Code.ToString(), outputFace);
+                
                 processingTime = Block.Attributes["processingTime"].AsDouble(processingTime);
                 heatRequirement = Block.Attributes["heatRequirement"].AsFloat(heatRequirement);
                 blockoritem = Block.Attributes["blockoritem"].AsString(blockoritem);
@@ -120,7 +121,7 @@ namespace qptech.src
         }
 
 
-        public void OpenStatusGUI()
+        public override void OpenStatusGUI()
         {
             ICoreClientAPI capi = Api as ICoreClientAPI;
             if (capi != null)

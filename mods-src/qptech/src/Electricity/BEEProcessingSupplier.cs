@@ -86,9 +86,14 @@ namespace qptech.src
                 {
                     BlockPos checkpos = Pos.Copy().Offset(bf);
                     IBlockEntityContainer container = Api.World.BlockAccessor.GetBlockEntity(checkpos) as IBlockEntityContainer;
+                    
                     if (container == null) { continue; }
                     if (container.Inventory == null) { continue; }
                     if (container.Inventory.Empty) { continue; }
+                    Block cblock = Api.World.BlockAccessor.GetBlock(checkpos);
+                    
+                    float heatingefficiency = cblock.Attributes["heatingefficiency"].AsFloat(0);
+                    if (heatingefficiency == 0) { continue; }
                     foreach (ItemSlot slot in container.Inventory)
                     {
                         if (slot == null || slot.Empty) { continue; }
@@ -98,7 +103,7 @@ namespace qptech.src
                             double maxHeat=RequestProcessing("heating");
                             if (temp < maxHeat)
                             {
-                                float tempGain = (float)(maxHeat-temp)/(500f*(float)slot.Itemstack.StackSize);
+                                float tempGain = heatingefficiency*(float)maxHeat/(100f);
                                 float newtemp = Math.Min(temp + tempGain,(float)maxHeat);
                                 slot.Itemstack.Collectible.SetTemperature(Api.World, slot.Itemstack, newtemp);
                             }
