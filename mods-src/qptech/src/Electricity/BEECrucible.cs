@@ -45,7 +45,7 @@ namespace qptech.src
             if (container.Inventory == null) { return; }
             if (container.Inventory.Empty) { return; }
             List<ItemStack> stacks = new List<ItemStack>();
-            int totalqty = 0;
+            
             foreach (ItemSlot slot in container.Inventory)
             {
                 //checks for valid items
@@ -57,25 +57,25 @@ namespace qptech.src
                 AssetLocation mat = slot.Itemstack.Item.CombustibleProps.SmeltedStack.Code;
                 int qty = slot.Itemstack.StackSize;
                 float temp = slot.Itemstack.Collectible.GetTemperature(Api.World, slot.Itemstack);
-                //Exclude items that aren't heated enough
+                
                 if (temp < slot.Itemstack.Item.CombustibleProps.MeltingPoint) { continue; }
-                //Add up how many items
-                if (slot.Itemstack.Item.CombustibleProps.SmeltedStack.StackSize >= 1)
-                {
-                    qty = slot.Itemstack.Item.CombustibleProps.SmeltedStack.StackSize * 20*slot.Itemstack.StackSize;
-                }
-                totalqty += qty;
+                
+                                
+                
                 stacks.Add(slot.Itemstack);
             }
+            
             //If there is nothing valid, then don't do anything
             if (stacks.Count() <= 0) { return; }
             //Figure out what alloys can be made (if any)
             AlloyRecipe canmake = GetMatchingAlloy(Api.World, stacks.ToArray());
             if (canmake != null)
             {
+                int units = (int)Math.Round(canmake.GetTotalOutputQuantity(stacks.ToArray()) * 100, 0);
+
                 IBlockEntityContainer outcontainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(outputFace)) as IBlockEntityContainer;
                 DummyInventory di = new DummyInventory(Api,1);
-                di[0].Itemstack = new ItemStack(canmake.Output.ResolvedItemstack.Item,totalqty/20);
+                di[0].Itemstack = new ItemStack(canmake.Output.ResolvedItemstack.Item,units/100);
                
                
                 if (outcontainer != null)
@@ -102,6 +102,40 @@ namespace qptech.src
                 }
                 (container as BlockEntity).MarkDirty();
 
+            }
+            else //Do direct material->ingot matching
+            {
+                MatchedSmeltableStack mss= BlockSmeltingContainer.GetSingleSmeltableStack(stacks.ToArray());
+                if (mss == null) { return; }
+                IBlockEntityContainer outcontainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(outputFace)) as IBlockEntityContainer;
+                DummyInventory di = new DummyInventory(Api, 1);
+
+                di[0].Itemstack = mss.output;
+
+
+                if (outcontainer != null)
+                {
+                    foreach (ItemSlot tryslot in outcontainer.Inventory)
+                    {
+                        if (tryslot != null)
+                        {
+                            ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, di[0].StackSize);
+
+                            int used = di[0].TryPutInto(tryslot, ref op);
+
+                            if (di[0].Itemstack == null || di[0].Itemstack.StackSize <= 0) { break; }
+                            di[0].Itemstack.StackSize = used;
+                        }
+                    }
+                    (outcontainer as BlockEntity).MarkDirty();
+                }
+                if (!di.Empty) { di.DropAll(Pos.ToVec3d()); }
+
+                foreach (ItemSlot slot in container.Inventory)
+                {
+                    slot.Itemstack = null;
+                }
+                (container as BlockEntity).MarkDirty();
             }
         }
         public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)

@@ -65,7 +65,6 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
 - added recipe list ui for Recipe Processor type machines (wiremill and bloomery)
 - electrical devices have a status ui, right click on device to view - and also turn device on or off
 - heater device will heat up contents of neighboring chests (with a heatingefficiency setting)
-- note: need to prevent a heater->steam->power generator infinite loop
 - crucible device coming - need to correctly calculate output when using non-ingots
 
 
