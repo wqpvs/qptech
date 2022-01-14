@@ -110,9 +110,13 @@ namespace qptech.src
             {
                 MatchedSmeltableStack mss = BlockSmeltingContainer.GetSingleSmeltableStack(stacks.ToArray());
                 if (mss == null) { deviceState = enDeviceState.MATERIALHOLD; MarkDirty(); return; }
+                double remainder = mss.stackSize - Math.Floor(mss.stackSize);
+                if (remainder > 0.001) { return; }
                 currentbatch = mss.output;
                 currentbatch.StackSize = (int)mss.stackSize;
                 
+
+                //Find metal quantity: combustibleprops.smeltedstack.resolveditemstack.stacksize/combustibleprops.smeltedratio
                 deviceState = enDeviceState.RUNNING;
                 pourStartTime = Api.World.ElapsedMilliseconds;
                 foreach (ItemSlot slot in container.Inventory)
