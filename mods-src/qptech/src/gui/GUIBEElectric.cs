@@ -23,9 +23,10 @@ namespace qptech.src
             ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterMiddle);
             ElementBounds textBounds = ElementBounds.Fixed(0, 100, 600, 600);
             ElementBounds buttonBounds = ElementBounds.Fixed(0, 40, 100, 20);
+            ElementBounds toggleButtonBounds = ElementBounds.Fixed(100, 40, 100, 20);
             ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
             bgBounds.BothSizing = ElementSizing.FitToChildren;
-            bgBounds.WithChildren(textBounds,buttonBounds);
+            bgBounds.WithChildren(textBounds,buttonBounds,toggleButtonBounds);
             string guicomponame = bea.Pos.ToString()+"Processor";
             string statustext = bea.GetStatusUI();
             string powerbutton = "TURN OFF";
@@ -37,9 +38,14 @@ namespace qptech.src
                 .AddRichtext(statustext, CairoFont.WhiteDetailText(), textBounds)
                 .AddButton(powerbutton, onTogglePower, buttonBounds, CairoFont.WhiteDetailText())
                 
-                .Compose()
+                
                 
             ;
+            if (bea.showToggleButton)
+            {
+                SingleComposer.AddButton("MODE", onChangeMode, toggleButtonBounds, CairoFont.WhiteDetailText());
+            }
+            SingleComposer.Compose();
 
         }
         public virtual bool onTogglePower()
@@ -48,7 +54,12 @@ namespace qptech.src
             TryClose();
             return true;
         }
-
+        public virtual bool onChangeMode()
+        {
+            thisbee.ToggleMode();
+            TryClose();
+            return true;
+        }
         public override bool TryOpen()
         {
             

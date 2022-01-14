@@ -25,6 +25,14 @@ namespace qptech.src
         int capacityIngots = 1;
         protected BlockFacing rmInputFace;
         protected BlockFacing outputFace;
+        ItemStack currentbatch;
+        double pourStartTime = 0;
+        double pourEndTime => pourStartTime + processingTime;
+        public ItemStack CurrentBatch=>currentbatch;
+        public enum enMode { ALLOY,SINGLE}
+        enMode processingMode=enMode.ALLOY;
+        public enMode ProcessingMode => processingMode;
+        public override bool showToggleButton => true;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -35,6 +43,7 @@ namespace qptech.src
                 outputFace = BlockFacing.FromCode(Block.Attributes["outputFace"].AsString("down"));
                 rmInputFace = OrientFace(Block.Code.ToString(), rmInputFace);
                 outputFace = OrientFace(Block.Code.ToString(), outputFace);
+                
             }
         }
 
@@ -66,78 +75,88 @@ namespace qptech.src
             }
             
             //If there is nothing valid, then don't do anything
-            if (stacks.Count() <= 0) { return; }
+            if (stacks.Count() <= 0) { deviceState = enDeviceState.MATERIALHOLD;MarkDirty(); return; }
             //Figure out what alloys can be made (if any)
+            
             AlloyRecipe canmake = GetMatchingAlloy(Api.World, stacks.ToArray());
-            if (canmake != null)
+            if (canmake != null&&processingMode==enMode.ALLOY)
             {
                 int units = (int)Math.Round(canmake.GetTotalOutputQuantity(stacks.ToArray()) * 100, 0);
-
-                IBlockEntityContainer outcontainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(outputFace)) as IBlockEntityContainer;
-                DummyInventory di = new DummyInventory(Api,1);
-                di[0].Itemstack = new ItemStack(canmake.Output.ResolvedItemstack.Item,units/100);
-               
-               
-                if (outcontainer != null)
-                {
-                    foreach (ItemSlot tryslot in outcontainer.Inventory)
-                    {
-                        if (tryslot != null)
-                        {
-                            ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, di[0].StackSize);
-
-                            int used = di[0].TryPutInto(tryslot, ref op);
-                            
-                            if (di[0].Itemstack==null|| di[0].Itemstack.StackSize <= 0) { break; }
-                            di[0].Itemstack.StackSize = used;
-                        }
-                    }
-                    (outcontainer as BlockEntity).MarkDirty();
-                }
-                if (!di.Empty) { di.DropAll(Pos.ToVec3d()); }
-                
+                currentbatch = new ItemStack(canmake.Output.ResolvedItemstack.Item,units/100);
+                deviceState = enDeviceState.RUNNING;
+                pourStartTime = Api.World.ElapsedMilliseconds;
+               //TODO Properly clear only relevant stacks
                 foreach (ItemSlot slot in container.Inventory)
                 {
                     slot.Itemstack = null;
                 }
                 (container as BlockEntity).MarkDirty();
-
+                MarkDirty();
             }
-            else if (materials.Count==1) //Do direct material->ingot matching
-            {
-                MatchedSmeltableStack mss= BlockSmeltingContainer.GetSingleSmeltableStack(stacks.ToArray());
-                if (mss == null) { return; }
-                IBlockEntityContainer outcontainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(outputFace)) as IBlockEntityContainer;
-                DummyInventory di = new DummyInventory(Api, 1);
-
-                di[0].Itemstack = mss.output;
-
-
-                if (outcontainer != null)
-                {
-                    foreach (ItemSlot tryslot in outcontainer.Inventory)
-                    {
-                        if (tryslot != null)
-                        {
-                            ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, di[0].StackSize);
-
-                            int used = di[0].TryPutInto(tryslot, ref op);
-
-                            if (di[0].Itemstack == null || di[0].Itemstack.StackSize <= 0) { break; }
-                            di[0].Itemstack.StackSize = used;
-                        }
-                    }
-                    (outcontainer as BlockEntity).MarkDirty();
-                }
-                if (!di.Empty) { di.DropAll(Pos.ToVec3d()); }
-
-                foreach (ItemSlot slot in container.Inventory)
-                {
-                    slot.Itemstack = null;
-                }
-                (container as BlockEntity).MarkDirty();
-            }
+            deviceState = enDeviceState.MATERIALHOLD; MarkDirty(); return;
         }
+
+        
+        void FillFromBatch()
+        {
+            if (Api.World.ElapsedMilliseconds < pourEndTime) { return; }
+            IBlockEntityContainer outcontainer = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(outputFace)) as IBlockEntityContainer;
+            if (outcontainer != null)
+            {
+                foreach (ItemSlot tryslot in outcontainer.Inventory)
+                {
+                    if (tryslot != null)
+                    {
+                        if (tryslot.Itemstack == null || tryslot.Itemstack.Item == null || tryslot.Itemstack.StackSize == 0)
+                        {
+                            currentbatch.StackSize--;
+                            tryslot.Itemstack = new ItemStack(currentbatch.Item, 1);
+                            (outcontainer as BlockEntity).MarkDirty();
+                            
+                            pourStartTime = Api.World.ElapsedMilliseconds;
+                            if (currentbatch.StackSize <= 0)
+                            {
+                                currentbatch = null;
+                                deviceState = enDeviceState.IDLE;
+                            }
+                            MarkDirty();
+                            break;
+                        }
+                        else if (tryslot.Itemstack.Item == currentbatch.Item && tryslot.StackSize < tryslot.Itemstack.Item.MaxStackSize)
+                        {
+                            currentbatch.StackSize--;
+                            tryslot.Itemstack.StackSize++;
+                            (outcontainer as BlockEntity).MarkDirty();
+                            pourStartTime = Api.World.ElapsedMilliseconds;
+                            if (currentbatch.StackSize <= 0)
+                            {
+                                currentbatch = null;
+                                deviceState = enDeviceState.IDLE;
+                            }
+                            MarkDirty();
+                            break;
+                        }
+                    }
+                }
+                    
+            }
+            
+        }
+        protected override void UsePower()
+        {
+            if (currentbatch != null && currentbatch.Item != null && currentbatch.StackSize > 0)
+            {
+                FillFromBatch();
+            }
+            else
+            {
+                deviceState = enDeviceState.IDLE;
+            }
+            base.UsePower();
+        }
+
+
+
         public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
         {
             List<AlloyRecipe> alloys = Api.GetMetalAlloys();
@@ -152,6 +171,51 @@ namespace qptech.src
             }
 
             return null;
+        }
+
+        public override string GetStatusUI()
+        {
+            string status = "<strong>Crucible Status</strong><br>";
+            status += "<strong>MODE:" + processingMode.ToString() + "</strong>";
+            if (processingMode == enMode.ALLOY) { status += " (will make alloys)<br"; }
+            else if (processingMode == enMode.SINGLE) { status += " (will not process alloys)<br"; }
+            if (currentbatch != null && currentbatch.Item != null)
+            {
+                status += "Pouring " + CurrentBatch.StackSize + " ingots of " + CurrentBatch.Item.GetHeldItemName(CurrentBatch);
+            }
+            status += base.GetStatusUI();
+            
+            return status;
+        }
+
+        public override void ToTreeAttributes(ITreeAttribute tree)
+        {
+            base.ToTreeAttributes(tree);
+            tree.SetInt("processingMode", (int)processingMode);
+            tree.SetItemstack("currentbatch", currentbatch);
+
+        }
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
+        {
+            base.FromTreeAttributes(tree, worldAccessForResolve);
+            int pm = tree.GetInt("processingMode");
+            processingMode = (enMode)tree.GetInt("processingMode");
+        }
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
+        {
+            base.GetBlockInfo(forPlayer, dsc);
+            if (processingMode == enMode.ALLOY) { dsc.Append("Alloy Mode (will make alloys)"); }
+            if (processingMode == enMode.SINGLE) { dsc.Append("Single Mode (will not make alloys)"); }
+        }
+        public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
+        {
+            base.OnReceivedClientPacket(fromPlayer, packetid, data);
+            if (packetid == (int)enPacketIDs.ToggleMode)
+            {
+                if (processingMode == enMode.ALLOY) { processingMode = enMode.SINGLE; }
+                else { processingMode = enMode.ALLOY; }
+                MarkDirty();
+            }
         }
     }
 }

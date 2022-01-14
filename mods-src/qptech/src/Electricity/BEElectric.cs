@@ -18,6 +18,7 @@ namespace qptech.src
     {
         /*base class to handle electrical devices*/
         bool showextrainfo = false; //if true will show NetworkID and MemberID in block info
+        public virtual bool showToggleButton => false;
         public virtual bool disableAnimations => true;
         public virtual int AvailablePower() {
             if (!isOn||!generatorready) { return 0; }
@@ -469,6 +470,15 @@ namespace qptech.src
             {
                 TogglePower();
             }
+        }
+        public virtual void ToggleMode()
+        {
+            if (Api is ICoreClientAPI)
+            {
+
+                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.ToggleMode, null);
+            }
+            
         }
         public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
         {
