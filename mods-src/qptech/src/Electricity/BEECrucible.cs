@@ -111,6 +111,8 @@ namespace qptech.src
                 MatchedSmeltableStack mss = BlockSmeltingContainer.GetSingleSmeltableStack(stacks.ToArray());
                 if (mss == null) { deviceState = enDeviceState.MATERIALHOLD; MarkDirty(); return; }
                 currentbatch = mss.output;
+                currentbatch.StackSize = (int)mss.stackSize;
+                
                 deviceState = enDeviceState.RUNNING;
                 pourStartTime = Api.World.ElapsedMilliseconds;
                 foreach (ItemSlot slot in container.Inventory)
@@ -146,10 +148,15 @@ namespace qptech.src
                 {
                     if (tryslot != null)
                     {
-                        if (tryslot.Itemstack == null || tryslot.Itemstack.Item == null || tryslot.Itemstack.StackSize == 0)
+
+                        bool isemptyslot = true;
+                        if (tryslot.Itemstack != null && tryslot.StackSize > 0) { isemptyslot = false; }
+
+                        if (isemptyslot)
                         {
                             currentbatch.StackSize--;
-                            tryslot.Itemstack = new ItemStack(currentbatch.Item, 1);
+                            if (currentbatch.Block != null) { tryslot.Itemstack = new ItemStack(currentbatch.Block, 1); }
+                            else { tryslot.Itemstack = new ItemStack(currentbatch.Item, 1); }
                             (outcontainer as BlockEntity).MarkDirty();
                             
                             pourStartTime = Api.World.ElapsedMilliseconds;
@@ -161,7 +168,10 @@ namespace qptech.src
                             MarkDirty();
                             break;
                         }
-                        else if (tryslot.Itemstack.Item == currentbatch.Item && tryslot.StackSize < tryslot.Itemstack.Item.MaxStackSize)
+                        bool ismatchingslot = false;
+                        if (tryslot.Itemstack.Block != null && tryslot.Itemstack.Block == currentbatch.Block) { ismatchingslot = true; }
+                        else if (tryslot.Itemstack.Item!=null && tryslot.Itemstack.Item == currentbatch.Item) { ismatchingslot = true; }
+                        if (ismatchingslot)
                         {
                             currentbatch.StackSize--;
                             tryslot.Itemstack.StackSize++;
@@ -183,7 +193,9 @@ namespace qptech.src
         }
         protected override void UsePower()
         {
-            if (currentbatch != null && currentbatch.Item != null && currentbatch.StackSize > 0)
+            
+            
+            if (HasCurrentBatch())
             {
                 FillFromBatch();
             }
@@ -194,9 +206,17 @@ namespace qptech.src
             base.UsePower();
         }
 
+        bool HasCurrentBatch()
+        {
+            bool hascurrentbatch = true;
+            if (currentbatch == null) { hascurrentbatch = false; }
+            else if (currentbatch.StackSize <= 0) { hascurrentbatch = false; }
+            else if (currentbatch.Item == null && currentbatch.Block == null) { hascurrentbatch = false; }
+            return hascurrentbatch;
+        }
 
 
-        public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
+public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
         {
             List<AlloyRecipe> alloys = Api.GetMetalAlloys();
             if (alloys == null) return null;
