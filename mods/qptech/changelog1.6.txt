@@ -69,5 +69,6 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
    *will only process exact quantitites
 - todo: add sound effects for crucible pour
 - todo: add particle effects for block heating
+- todo: crucible won't store its stack to the tree - issue with set stack?
 
 

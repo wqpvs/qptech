@@ -35,6 +35,8 @@ namespace qptech.src
         enMode processingMode=enMode.ALLOY;
         public enMode ProcessingMode => processingMode;
         public override bool showToggleButton => true;
+        string currentpourname;
+        int currentpouramount;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -124,7 +126,7 @@ namespace qptech.src
                 currentbatch = mss.output;
                 currentbatch.StackSize = (int)mss.stackSize;
                 DoPourFX();
-
+                
                 //Find metal quantity: combustibleprops.smeltedstack.resolveditemstack.stacksize/combustibleprops.smeltedratio
                 deviceState = enDeviceState.RUNNING;
                 pourStartTime = Api.World.ElapsedMilliseconds;
@@ -226,7 +228,7 @@ namespace qptech.src
         }
         protected override void UsePower()
         {
-            
+            if (Api is ICoreClientAPI) { return; }
             
             if (HasCurrentBatch())
             {
@@ -241,7 +243,9 @@ namespace qptech.src
 
         bool HasCurrentBatch()
         {
+           
             bool hascurrentbatch = true;
+
             if (currentbatch == null) { hascurrentbatch = false; }
             else if (currentbatch.StackSize <= 0) { hascurrentbatch = false; }
             else if (currentbatch.Item == null && currentbatch.Block == null) { hascurrentbatch = false; }
@@ -271,14 +275,11 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
             status += "<strong>MODE:" + processingMode.ToString() + "</strong>";
             if (processingMode == enMode.ALLOY) { status += " (will make alloys)<br"; }
             else if (processingMode == enMode.SINGLE) { status += " (will not process alloys)<br"; }
-            if (currentbatch != null && currentbatch.Item != null)
+            if (currentpourname!="")
             {
-                status += "Pouring " + currentbatch.StackSize + " ingots of " + currentbatch.Item.GetHeldItemName(currentbatch);
+                status += "Pouring " + currentpouramount + " of " + currentpourname;
             }
-            else if (currentbatch != null && currentbatch.Block != null)
-            {
-                status += "Pouring " + currentbatch.StackSize + " ingots of " + currentbatch.Block.GetHeldItemName(currentbatch);
-            }
+            
                 status += base.GetStatusUI();
             
             return status;
@@ -288,6 +289,16 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
         {
             base.ToTreeAttributes(tree);
             tree.SetInt("processingMode", (int)processingMode);
+            currentpourname = "";
+            currentpouramount = 0;
+            if (currentbatch != null && !(currentbatch.Item==null&&currentbatch.Block==null))
+            {
+                currentpouramount = currentbatch.StackSize;
+                currentpourname = currentbatch.GetName();
+            }
+            tree.SetString("currentpourname", currentpourname);
+            tree.SetInt("currentpouramount", currentpouramount);
+            
             tree.SetItemstack("currentbatch", currentbatch);
 
         }
@@ -297,12 +308,18 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
             int pm = tree.GetInt("processingMode");
             processingMode = (enMode)tree.GetInt("processingMode");
             currentbatch = tree.GetItemstack("currentbatch");
+            currentpouramount = tree.GetInt("currentpouramount");
+            currentpourname = tree.GetString("currentpourname");
         }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
             if (processingMode == enMode.ALLOY) { dsc.Append("Alloy Mode (will make alloys)"); }
             if (processingMode == enMode.SINGLE) { dsc.Append("Single Mode (will not make alloys)"); }
+            if (currentpourname != "")
+            {
+                dsc.AppendLine("Pouring " + currentpouramount + " of " + currentpourname);
+            }
         }
         public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
         {

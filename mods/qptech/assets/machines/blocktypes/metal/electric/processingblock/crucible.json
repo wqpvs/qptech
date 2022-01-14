@@ -27,14 +27,17 @@
 
 	"attributesByType": {
 
-		
+
 		"*-small-*": {
 			"genFlux": 0,
 			"useFlux": 8,
 			"inputFace": "up",
 			"outputFace": "down",
 			"capacityIngots": 1,
-			"processingTime":  2000
+			"processingTime": 2000,
+			"runsound": "sounds/moltenmetal",
+			"soundlevel": 1,
+			"loopsound": true
 		}
 	},
 
