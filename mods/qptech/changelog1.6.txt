@@ -66,5 +66,6 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
 - electrical devices have a status ui, right click on device to view - and also turn device on or off
 - heater device will heat up contents of neighboring chests (with a heatingefficiency setting)
 * crucible math not quite right for single ingredient stacks
+- crucible block: can be set to alloy or single mode, will pour ingots based on available heated items in input hatch
 
 

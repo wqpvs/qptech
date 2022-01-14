@@ -85,15 +85,54 @@ namespace qptech.src
                 currentbatch = new ItemStack(canmake.Output.ResolvedItemstack.Item,units/100);
                 deviceState = enDeviceState.RUNNING;
                 pourStartTime = Api.World.ElapsedMilliseconds;
-               //TODO Properly clear only relevant stacks
+                //TODO Properly clear only relevant stacks
                 foreach (ItemSlot slot in container.Inventory)
                 {
+                    //checks for valid items
+                    if (slot == null || slot.Empty) { continue; }
+                    if (slot.Itemstack == null || slot.Itemstack.StackSize <= 0) { continue; }
+                    if (slot.Itemstack.Item == null) { continue; }
+                    if (slot.Itemstack.Item.CombustibleProps == null) { continue; }
+                    if (slot.Itemstack.Item.CombustibleProps.SmeltedStack == null) { continue; }
+                    AssetLocation mat = slot.Itemstack.Item.CombustibleProps.SmeltedStack.Code;
+                    int qty = slot.Itemstack.StackSize;
+                    float temp = slot.Itemstack.Collectible.GetTemperature(Api.World, slot.Itemstack);
+                    if (!materials.Contains(mat.ToString())) { materials.Add(mat.ToString()); }
+                    if (temp < slot.Itemstack.Item.CombustibleProps.MeltingPoint) { continue; }
                     slot.Itemstack = null;
+
                 }
                 (container as BlockEntity).MarkDirty();
                 MarkDirty();
+                return;
             }
-            deviceState = enDeviceState.MATERIALHOLD; MarkDirty(); return;
+            if (processingMode == enMode.SINGLE)
+            {
+                MatchedSmeltableStack mss = BlockSmeltingContainer.GetSingleSmeltableStack(stacks.ToArray());
+                if (mss == null) { deviceState = enDeviceState.MATERIALHOLD; MarkDirty(); return; }
+                currentbatch = mss.output;
+                deviceState = enDeviceState.RUNNING;
+                pourStartTime = Api.World.ElapsedMilliseconds;
+                foreach (ItemSlot slot in container.Inventory)
+                {
+                    //checks for valid items
+                    if (slot == null || slot.Empty) { continue; }
+                    if (slot.Itemstack == null || slot.Itemstack.StackSize <= 0) { continue; }
+                    if (slot.Itemstack.Item == null) { continue; }
+                    if (slot.Itemstack.Item.CombustibleProps == null) { continue; }
+                    if (slot.Itemstack.Item.CombustibleProps.SmeltedStack == null) { continue; }
+                    AssetLocation mat = slot.Itemstack.Item.CombustibleProps.SmeltedStack.Code;
+                    int qty = slot.Itemstack.StackSize;
+                    float temp = slot.Itemstack.Collectible.GetTemperature(Api.World, slot.Itemstack);
+                    if (!materials.Contains(mat.ToString())) { materials.Add(mat.ToString()); }
+                    if (temp < slot.Itemstack.Item.CombustibleProps.MeltingPoint) { continue; }
+                    slot.Itemstack = null;
+
+                }
+                (container as BlockEntity).MarkDirty();
+                MarkDirty(); return;
+            }
+            if (deviceState != enDeviceState.MATERIALHOLD) { deviceState = enDeviceState.MATERIALHOLD; MarkDirty(); return; }
         }
 
         
@@ -200,6 +239,7 @@ namespace qptech.src
             base.FromTreeAttributes(tree, worldAccessForResolve);
             int pm = tree.GetInt("processingMode");
             processingMode = (enMode)tree.GetInt("processingMode");
+            currentbatch = tree.GetItemstack("currentbatch");
         }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
