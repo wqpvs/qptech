@@ -8,6 +8,8 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
+using Vintagestory.API.Client;
+using Vintagestory.API.Server;
 
 namespace qptech.src
 {
@@ -91,6 +93,7 @@ namespace qptech.src
                 currentbatch = new ItemStack(canmake.Output.ResolvedItemstack.Item,units);
                 deviceState = enDeviceState.RUNNING;
                 pourStartTime = Api.World.ElapsedMilliseconds;
+                DoPourFX();
                 //TODO Properly clear only relevant stacks
                 foreach (ItemSlot slot in container.Inventory)
                 {
@@ -120,7 +123,7 @@ namespace qptech.src
                 if (remainder > 0.001) { return; }
                 currentbatch = mss.output;
                 currentbatch.StackSize = (int)mss.stackSize;
-                
+                DoPourFX();
 
                 //Find metal quantity: combustibleprops.smeltedstack.resolveditemstack.stacksize/combustibleprops.smeltedratio
                 deviceState = enDeviceState.RUNNING;
@@ -146,7 +149,27 @@ namespace qptech.src
             }
             if (deviceState != enDeviceState.MATERIALHOLD) { deviceState = enDeviceState.MATERIALHOLD; MarkDirty(); return; }
         }
+        void DoPourFX()
+        {
+            if (Api is ICoreClientAPI) { 
 
+                ILoadedSound pambientSound = ((IClientWorldAccessor)Api.World).LoadSound(new SoundParams()
+                {
+                    Location = new AssetLocation("sounds/pourmetal"),
+                    ShouldLoop = false,
+                    Position = Pos.ToVec3f().Add(0.5f, 0.25f, 0.5f),
+                    DisposeOnFinish = true,
+                    Volume = 2,
+                    Range = 15
+                });
+
+                pambientSound.Start();
+            }
+            else
+            {
+                (Api as ICoreServerAPI).Network.BroadcastBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, clientplaysound, null);
+            }
+        }
         
         void FillFromBatch()
         {
@@ -250,9 +273,13 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
             else if (processingMode == enMode.SINGLE) { status += " (will not process alloys)<br"; }
             if (currentbatch != null && currentbatch.Item != null)
             {
-                status += "Pouring " + CurrentBatch.StackSize + " ingots of " + CurrentBatch.Item.GetHeldItemName(CurrentBatch);
+                status += "Pouring " + currentbatch.StackSize + " ingots of " + currentbatch.Item.GetHeldItemName(currentbatch);
             }
-            status += base.GetStatusUI();
+            else if (currentbatch != null && currentbatch.Block != null)
+            {
+                status += "Pouring " + currentbatch.StackSize + " ingots of " + currentbatch.Block.GetHeldItemName(currentbatch);
+            }
+                status += base.GetStatusUI();
             
             return status;
         }
@@ -285,6 +312,17 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
                 if (processingMode == enMode.ALLOY) { processingMode = enMode.SINGLE; }
                 else { processingMode = enMode.ALLOY; }
                 MarkDirty();
+            }
+        }
+
+        int clientplaysound = 999900001;
+
+        public override void OnReceivedServerPacket(int packetid, byte[] data)
+        {
+            base.OnReceivedServerPacket(packetid, data);
+            if (packetid == clientplaysound)
+            {
+                DoPourFX();
             }
         }
     }
