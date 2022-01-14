@@ -81,8 +81,14 @@ namespace qptech.src
             AlloyRecipe canmake = GetMatchingAlloy(Api.World, stacks.ToArray());
             if (canmake != null&&processingMode==enMode.ALLOY)
             {
-                int units = (int)Math.Round(canmake.GetTotalOutputQuantity(stacks.ToArray()) * 100, 0);
-                currentbatch = new ItemStack(canmake.Output.ResolvedItemstack.Item,units/100);
+                double outputqty = canmake.GetTotalOutputQuantity(stacks.ToArray());
+                double remainder = Math.Abs(outputqty - Math.Round(outputqty));
+                if (remainder > 0.001)
+                {
+                    return;
+                }
+                int units = (int)Math.Round(outputqty);
+                currentbatch = new ItemStack(canmake.Output.ResolvedItemstack.Item,units);
                 deviceState = enDeviceState.RUNNING;
                 pourStartTime = Api.World.ElapsedMilliseconds;
                 //TODO Properly clear only relevant stacks
@@ -110,7 +116,7 @@ namespace qptech.src
             {
                 MatchedSmeltableStack mss = BlockSmeltingContainer.GetSingleSmeltableStack(stacks.ToArray());
                 if (mss == null) { deviceState = enDeviceState.MATERIALHOLD; MarkDirty(); return; }
-                double remainder = mss.stackSize - Math.Floor(mss.stackSize);
+                double remainder = Math.Abs(mss.stackSize - Math.Floor(mss.stackSize));
                 if (remainder > 0.001) { return; }
                 currentbatch = mss.output;
                 currentbatch.StackSize = (int)mss.stackSize;
