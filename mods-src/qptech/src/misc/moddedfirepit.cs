@@ -64,18 +64,18 @@ namespace Vintagestory.GameContent
             }
             public bool RequestProcessing(string process, double amount)
             {
-                if (process != "heating") { return false; }
+                if (process != "heating"&&process!="combustion") { return false; }
                 if (this.furnaceTemperature >= amount) { return true; }
                 return false;
             }
             public double RequestProcessing(string process)
             {
-                if (process != "heating") { return 0; }
+                if (process != "heating" && process != "combustion") { return 0; }
                 return this.furnaceTemperature;
             }
             public bool CheckProcessing(string process)
             {
-                return process == "heating";
+                return process == "heating" || process=="combustion";
             }
         }
     }

@@ -67,7 +67,9 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
 - heater device will heat up contents of neighboring chests (with a heatingefficiency setting)
 - crucible block: can be set to alloy or single mode, will pour ingots based on available heated items in input hatch
    *will only process exact quantitites
-- todo: add sound effects for crucible pour
+- changed steam boiler to require the "combustion" processing type - which right now is provided by the industrial bronze firepit
+(to prevent infinite power issues)
+
 - todo: add particle effects for block heating
 - todo: crucible won't store its stack to the tree - issue with set stack?
 

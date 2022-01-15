@@ -24,8 +24,6 @@
     <None Include="qptech\assets\machines\blocktypes\deco\concrete.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\enderchest.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\anitest.json" />
-    <None Include="qptech\assets\machines\blocktypes\indev\unused\blastfurnace.json" />
-    <None Include="qptech\assets\machines\blocktypes\indev\multiblock\electriccrucible.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />

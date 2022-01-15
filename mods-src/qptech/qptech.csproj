@@ -101,11 +101,9 @@
     <Compile Include="src\Electricity\MechanicalPower\BEBMPMotor.cs" />
     <Compile Include="src\Electricity\BEEAssembler.cs" />
     <Compile Include="src\Electricity\BEEBaseDevice.cs" />
-    <Compile Include="src\Electricity\BEEBlastFurnace.cs" />
     <Compile Include="src\Electricity\BEEHVAC.cs" />
     <Compile Include="src\Electricity\BEEForge.cs" />
     <Compile Include="src\Electricity\BEEKiln.cs" />
-    <Compile Include="src\Electricity\BEElectricCrucible.cs" />
     <Compile Include="src\Electricity\BEElectric.cs" />
     <Compile Include="src\Electricity\BEEGenerator.cs" />
     <Compile Include="src\Electricity\BEEMacerator.cs" />
@@ -117,7 +115,6 @@
     <Compile Include="src\Electricity\BEPowerFlag.cs" />
     <Compile Include="src\Electricity\BlockClayformer.cs" />
     <Compile Include="src\Electricity\BlockEForge.cs" />
-    <Compile Include="src\Electricity\BlockElectricCrucible.cs" />
     <Compile Include="src\Electricity\BlockElectricMotor.cs" />
     <Compile Include="src\Electricity\BlockFacingExt.cs" />
     <Compile Include="src\Electricity\BlockMPGenerator.cs" />
@@ -130,7 +127,6 @@
     <Compile Include="src\Electricity\EForgeContentsRenderer.cs" />
     <Compile Include="src\gui\GEDrawTexture.cs" />
     <Compile Include="src\gui\GUIAssemblerStatus.cs" />
-    <Compile Include="src\gui\GUIElectricCrucible.cs" />
     <Compile Include="src\Electricity\HVACEnvironmentUpdater.cs" />
     <Compile Include="src\misc\APIExtensions.cs" />
     <Compile Include="src\pipes\BEFluidPipe.cs" />

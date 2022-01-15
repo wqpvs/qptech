@@ -37,7 +37,7 @@
 			"runsound": "sounds/steam",
 			"loopsound": true,
 			"requiredProcesses": {
-				"heating": 1200
+				"combustion": 1300
 			},
 			"fluidcode": "game:waterportion",
 			"fluidUse": 50,
