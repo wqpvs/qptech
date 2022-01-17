@@ -1,0 +1,12 @@
+{
+	ingredientPattern: "SCS	WCW	SCS",
+	ingredients: {
+		"S": { type: "item", code: "screw-*", quantity: 1 },
+		"C": { type: "item", code: "heatingcoil-*", quantity: 1 },
+		"W": { type: "item", code: "wire-*", quantity: 2 },
+		
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "industrialheater-lv-east", quantity: 1  }
+}

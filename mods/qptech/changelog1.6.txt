@@ -75,7 +75,10 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
 - bugfix: crash when shift-right clicking clayformer with no item
 - added model for crucible
 - added (temp) models for heaters
-- added heating coil lv part
+- added heating coil lv part (made via smithing)
+- added recipes for industrial lv & mv heaters (uses heating coils, removed old heater-mv recipe)
+
+
 - todo: add particle effects for block heating
 - todo: crucible won't store its stack to the tree - issue with set stack?
 - todo: crucible and heater recipes
