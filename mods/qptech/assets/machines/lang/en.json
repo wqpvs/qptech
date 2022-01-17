@@ -160,8 +160,10 @@
 	"blockdesc-crusher-*": "Provides industrial CRUSHING force to adjacent machines",
 	"block-lathe-*": "Lathe",
 	"blockdesc-lathe-*": "Ingots go in, rods come out - you can't explain that!",
-	"block-industrialheater-*": "Heater Module",
-	"blockdesc-industrialheater-*": "Provides industrial heating to adjacent machines",
+	"block-industrialheater-lv": "LV Heater Module",
+	"block-industrialheater-mv": "MV Heater Module",
+	"blockdesc-industrialheater-lv": "Provides some industrial heating to adjacent machines",
+	"blockdesc-industrialheater-mv": "Provides improved industrial heating to adjacent machines",
 	"item-braidedwire-*": "Braided Wire",
 	"itemdesc-braidedwire-*": "Improved wire, now if you just had some rubber!",
 	"item-rubbercrucible": "Cracked Crucible of Liquid Rubber",
@@ -193,5 +195,7 @@
 	"block-bloomworker-*": "Iron Bloom Worker",
 	"blockdesc-bloomworker-*": "Takes iron blooms and outputs iron ingots. (Requires heat, for example from a Bronze Industrial Oven)",
 	"block-industrialcrucible-small": "Small Industrial Crucible",
-	"blockdesc-industrialcrucible-small": "Takes heated smeltable items above it, and output ingots below. Will produce alloys."
+	"blockdesc-industrialcrucible-small": "Takes heated smeltable items above it, and output ingots below. Will produce alloys.",
+	"item-heatingcoil-lv": "LV Heating Coil",
+	"itemdesc-heatingcoil-lv": "A coil for heating."
 }

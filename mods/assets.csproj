@@ -99,6 +99,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate.json" />
     <None Include="qptech\assets\machines\config\handbook\qptech.json" />
+    <None Include="qptech\assets\machines\itemtypes\part\lv\heatingcoil.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\metalchannel.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\bolt.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\ring.json" />

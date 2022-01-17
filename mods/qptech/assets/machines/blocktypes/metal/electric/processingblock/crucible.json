@@ -44,28 +44,23 @@
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 	
-	"texturesByType": {
-		"*-small-*" :{
-			"all": { "base": "block/tempblocks/crucible" }
-		}
-		
-	},
-	"shape": { "base": "block/metal/electric/tempmachine" },
+	
+	"shape": { "base": "block/metal/crucible" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/crucible",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/crucible",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/crucible",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/crucible",
 			"rotateY": 180
 		}
 	},

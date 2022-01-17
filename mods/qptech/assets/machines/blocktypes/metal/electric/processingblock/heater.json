@@ -56,28 +56,28 @@
 	
 	"texturesByType": {
 		"*-mv-*" :{
-			"all": { "base": "block/tempblocks/heater" }
+			"all": { "base": "block/metal/dirtysteel plate" }
 		},
 		"*-lv-*" :{
-			"all": { "base": "block/tempblocks/heater1000" }
+			"all": { "base": "block/copperspool" }
 		}
 	},
-	"shape": { "base": "block/metal/electric/tempmachine" },
+	"shape": { "base": "block/metal/electric/heatsink" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/electric/heatsink",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/electric/heatsink",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/electric/heatsink",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/tempmachine",
+			"base": "block/metal/electric/heatsink",
 			"rotateY": 180
 		}
 	},

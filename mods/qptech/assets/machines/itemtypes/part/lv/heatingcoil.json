@@ -1,0 +1,80 @@
+{
+  "code": "heatingcoil",
+
+  "drawtype": "json",
+  "shape": { "base": "block/element-unlit" },
+  "maxstacksize": 1,
+
+  "variantgroups": [
+    {
+      "code": "part",
+      "states": [ "lv" ]
+    }
+  ],
+
+  "creativeinventory": {
+
+    "qptech-parts": [ "*" ]
+  },
+
+  
+  "textures": {
+      "all": { "base": "game:block/metal/ingot/copper" }
+  },
+  "guiTransform": {
+    "translation": {
+      "x": -4,
+      "y": 21,
+      "z": 0
+    },
+    "rotation": {
+      "x": 136,
+      "y": 54,
+      "z": 1
+    },
+    "origin": {
+      "x": 0.25,
+      "y": -0.25,
+      "z": 0.6
+    },
+    "scale": 2.01
+  },
+
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "scale": 4.31
+  },
+  "fpHandTransform": {
+    "translation": {
+      "x": -0.1,
+      "y": 0.2,
+      "z": 0
+    },
+    "rotation": {
+      "x": 59,
+      "y": 99,
+      "z": -42
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "scale": 1.9
+  }
+
+}
