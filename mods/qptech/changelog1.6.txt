@@ -69,7 +69,7 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
    *will only process exact quantitites
 - changed steam boiler to require the "combustion" processing type - which right now is provided by the industrial bronze firepit
 (to prevent infinite power issues)
-
+- changed carrying capacity integration to patch based (should clear errors)
 - todo: add particle effects for block heating
 - todo: crucible won't store its stack to the tree - issue with set stack?
 

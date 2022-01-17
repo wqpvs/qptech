@@ -191,7 +191,7 @@
 	"block-metalplatform": "Iron Platform",
 	"item-metalchannel-*": "Metal Channel",
 	"block-bloomworker-*": "Iron Bloom Worker",
-	"blockdesc-bloomworker-*": "Takes iron blooms and outputs iron ingots. (Requires heat, for example from a Bronze Industrial Oven)"
+	"blockdesc-bloomworker-*": "Takes iron blooms and outputs iron ingots. (Requires heat, for example from a Bronze Industrial Oven)",
 	"block-industrialcrucible-small": "Small Industrial Crucible",
 	"blockdesc-industrialcrucible-small": "Takes heated smeltable items above it, and output ingots below. Will produce alloys."
 }
