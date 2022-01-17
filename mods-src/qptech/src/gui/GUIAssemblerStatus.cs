@@ -18,6 +18,9 @@ namespace qptech.src
         }
         public void SetupDialog(BEEAssembler bea)
         {
+            if (bea == null) { return; }
+            if (bea.Materials == null) { return; }
+            
             ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterMiddle);
 
             // Just a simple 300x100 pixel box with 40 pixels top spacing for the title bar
