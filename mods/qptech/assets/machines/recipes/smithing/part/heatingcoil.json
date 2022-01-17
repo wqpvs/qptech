@@ -1,0 +1,16 @@
+{
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["copper"] },
+	name: "plate",
+	pattern: [[
+		"#########",
+		"#_______#",
+		"#_#####_#",
+		"#_#___#_#",
+		"#_#___#_#",
+		"#_#___#_#",
+		"#_###_#_#",
+		"#___#_#_#",
+		"#####_###",
+	]],
+	output: { type: "item", code: "heatingcoil-{metal}"  }
+}

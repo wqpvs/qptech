@@ -196,6 +196,6 @@
 	"blockdesc-bloomworker-*": "Takes iron blooms and outputs iron ingots. (Requires heat, for example from a Bronze Industrial Oven)",
 	"block-industrialcrucible-small": "Small Industrial Crucible",
 	"blockdesc-industrialcrucible-small": "Takes heated smeltable items above it, and output ingots below. Will produce alloys.",
-	"item-heatingcoil-lv": "LV Heating Coil",
-	"itemdesc-heatingcoil-lv": "A coil for heating."
+	"item-heatingcoil-*": "Heating Coil",
+	"itemdesc-heatingcoil-*": "A coil for heating."
 }
