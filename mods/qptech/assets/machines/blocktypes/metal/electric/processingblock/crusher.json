@@ -8,7 +8,6 @@
 	},
 	"entityBehaviors": [ { "name": "Animatable" } ],
 	"behaviors": [
-
 		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "east" }
@@ -24,30 +23,24 @@
 			"loadFromProperties": "abstract/horizontalorientation"
 		}
 	],
-
 	"attributesByType": {
-
 		"*-mv-*": {
 			"genFlux": 0,
 			"useFlux": 16,
-
 			"processes": {
 
 				"crushing": 1000
 			},
 			"animationCode": "run",
-			"animation": "Run",
-			"runAnimationSpeed": 1,
+			"animation": "run",
+			"runAnimationSpeed": 0.3,
 			"runsound": "sounds/crusher",
 			"soundlevel": 0.5,
 			"loopsound": true
 		}
 	},
-
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	
-	
 	"shape": { "base": "block/metal/crusher" },
 	"shapeByType": {
 		"*-north": {

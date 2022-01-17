@@ -3,21 +3,23 @@
   "class": "BlockWire",
   "entityclass": "BEEWire",
   "creativeinventory": {
-    "general": [ "*-ew-uncovered" ],
-    "qptech": [ "*-ew-uncovered" ]
+    "general": [ "*-{material}-ew-uncovered" ],
+    "qptech": [ "*-{material}-ew-uncovered" ]
   },
   "variantgroups": [
     {
+      "code": "material",
+      "states": [ "copper", "tin"]
+    },
+	{
       "code": "type",
       "states": [ "empty", "n", "e", "s", "w", "ne", "ns", "nw", "es", "ew", "sw", "nes", "new", "nsw", "esw", "nesw" ]
     },
-
     {
       "code": "wirecover",
       "states": [ "uncovered", "covered" ]
     }
   ],
-
   "attributesByType": {
     "*": {
       "useFlux": 0,
@@ -102,7 +104,7 @@
 
   },
   "textures": {
-    "wires": { "base": "block/metal/wires/tin-wires" },
+    "wires": { "base": "block/metal/wires/{material}-wires" },
     "castiron": { "base": "block/castiron" }
   },
   "resistance": 1,
