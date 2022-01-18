@@ -30,7 +30,7 @@ namespace qptech.src
         ItemStack currentbatch;
         double pourStartTime = 0;
         double pourEndTime => pourStartTime + processingTime;
-        public ItemStack CurrentBatch=>currentbatch;
+        DummyInventory inventory;
         public enum enMode { ALLOY,SINGLE}
         enMode processingMode=enMode.ALLOY;
         public enMode ProcessingMode => processingMode;
@@ -40,6 +40,7 @@ namespace qptech.src
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
+            
             if (Block.Attributes != null)
             {
                 capacityIngots = Block.Attributes["capacityIngots"].AsInt(capacityIngots);
@@ -49,10 +50,18 @@ namespace qptech.src
                 outputFace = OrientFace(Block.Code.ToString(), outputFace);
                 
             }
+            
         }
 
         protected override void DoDeviceStart()
         {
+            if (currentbatch != null)
+            {
+                if (currentbatch.StackSize > 0 && (currentbatch.Item != null | currentbatch.Block != null))
+                {
+                    return;
+                }
+            }
             IBlockEntityContainer container = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(rmInputFace)) as IBlockEntityContainer;
             if (container == null) { return; }
             if (container.Inventory == null) { return; }
@@ -114,7 +123,7 @@ namespace qptech.src
 
                 }
                 (container as BlockEntity).MarkDirty();
-                MarkDirty();
+                MarkDirty(true);
                 return;
             }
             if (processingMode == enMode.SINGLE)
@@ -147,7 +156,7 @@ namespace qptech.src
 
                 }
                 (container as BlockEntity).MarkDirty();
-                MarkDirty(); return;
+                MarkDirty(true); return;
             }
             if (deviceState != enDeviceState.MATERIALHOLD) { deviceState = enDeviceState.MATERIALHOLD; MarkDirty(); return; }
         }
@@ -288,6 +297,7 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
+            tree.SetItemstack("currentbatch", currentbatch);
             tree.SetInt("processingMode", (int)processingMode);
             currentpourname = "";
             currentpouramount = 0;
@@ -299,7 +309,7 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
             tree.SetString("currentpourname", currentpourname);
             tree.SetInt("currentpouramount", currentpouramount);
             
-            tree.SetItemstack("currentbatch", currentbatch);
+            
 
         }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
@@ -308,6 +318,10 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
             int pm = tree.GetInt("processingMode");
             processingMode = (enMode)tree.GetInt("processingMode");
             currentbatch = tree.GetItemstack("currentbatch");
+            if (currentbatch != null)
+            {
+                currentbatch.ResolveBlockOrItem(worldAccessForResolve);
+            }
             currentpouramount = tree.GetInt("currentpouramount");
             currentpourname = tree.GetString("currentpourname");
         }
@@ -342,5 +356,7 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
                 DoPourFX();
             }
         }
+
+        
     }
 }
