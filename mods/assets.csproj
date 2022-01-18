@@ -30,6 +30,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\creative\seeker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\lv\bloomworker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\crucible.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />
     <None Include="qptech\assets\machines\blocktypes\other\door\slidingdoor.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\industrialgenerator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\turbine.json" />
@@ -95,7 +96,6 @@
     <None Include="qptech\assets\machines\blocktypes\other\sink.json" />
     <None Include="qptech\assets\machines\blocktypes\other\smelterfurnace.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\statusflag-up.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate.json" />
     <None Include="qptech\assets\machines\config\handbook\qptech.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\cruciblechamber.json" />
