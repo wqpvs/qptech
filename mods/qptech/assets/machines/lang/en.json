@@ -197,5 +197,7 @@
 	"block-industrialcrucible-small": "Small Industrial Crucible",
 	"blockdesc-industrialcrucible-small": "Takes heated smeltable items above it, and output ingots below. Will produce alloys.",
 	"item-heatingcoil-*": "Heating Coil",
-	"itemdesc-heatingcoil-*": "A coil for heating."
+	"itemdesc-heatingcoil-*": "A coil for heating.",
+	"item-cruciblechamber-*": "Crucible Chamber Part",
+	"itemdesc-cruciblechamber-*": "Part for the crucible, made with smithing (two metal plates should do it)"
 }

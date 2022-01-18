@@ -79,6 +79,7 @@ todo - macertaor - ore-quartz, stone-bauxite -> crushed-quartz, crushed-bauxite
 - added recipes for industrial lv & mv heaters (uses heating coils, removed old heater-mv recipe)
 - added crucible chamber part (smithed)
 - added recipe for crucible
+- new crusher & bloomery machine models from Andy
 
 
 - todo: add particle effects for block heating
