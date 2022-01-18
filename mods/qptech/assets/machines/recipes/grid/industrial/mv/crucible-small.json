@@ -1,0 +1,26 @@
+{
+	ingredientPattern: "_P_	PCP	_P_",
+	ingredients: {
+		
+		
+		
+		"P": {
+			"type": "item",
+			"code": "game:metalplate-iron",
+			"quantity": 1
+		},
+		"C": {
+			"type": "item",
+			"code": "cruciblechamber-*",
+			"quantity": 1
+		}
+		
+	},
+	width: 3,
+	height: 3,
+	output: {
+		"type": "block",
+		"code": "industrialcrucible-small-east",
+		"quantity": 1
+	}
+}

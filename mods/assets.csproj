@@ -98,6 +98,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate.json" />
     <None Include="qptech\assets\machines\config\handbook\qptech.json" />
+    <None Include="qptech\assets\machines\itemtypes\part\lv\cruciblechamber.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\heatingcoil.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\metalchannel.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\bolt.json" />
@@ -144,6 +145,7 @@
     <None Include="qptech\assets\machines\recipes\grid\decor\castironovenlarge.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\icebox.json" />
     <None Include="qptech\assets\machines\recipes\grid\decor\sink.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\mv\crucible-small.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\industrialheater-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\industrialheater-lv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\bloomworker.json" />
@@ -213,6 +215,7 @@
     <None Include="qptech\assets\machines\recipes\grid\tool\screwdriver.json" />
     <None Include="qptech\assets\machines\recipes\smithing\part\heatingcoil.json" />
     <None Include="qptech\assets\machines\recipes\smithing\part\drilledplate.json" />
+    <None Include="qptech\assets\machines\recipes\smithing\part\cruciblechamber.json" />
     <None Include="qptech\assets\machines\recipes\smithing\part\heavymold-metalplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\part\heavymold-rod.json" />
     <None Include="qptech\assets\machines\recipes\smithing\part\heavymold-screw.json" />
