@@ -35,7 +35,7 @@
 					"from": [ 0.0045, 0.0, 13.5 ], 
 					"to": [ 10.0045, 6.5, 15.5 ], 
 					"rotationOrigin": [ 0.0, 0.0, 13.0 ],
-					"rotationY": 89.9802127184967,
+					"rotationY": 89.98,
 					"faces": {
 						"north": { "texture": "#machinery", "uv": [ 2.5, 9.5, 12.5, 16.0 ] },
 						"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 2.0, 6.5 ], "enabled": false },
@@ -50,7 +50,7 @@
 					"from": [ 13.0, 0.0, 13.5 ], 
 					"to": [ 23.0, 6.5, 15.5 ], 
 					"rotationOrigin": [ 13.0, 0.0, 13.0 ],
-					"rotationY": 89.9802127184967,
+					"rotationY": 89.98,
 					"faces": {
 						"north": { "texture": "#machinery", "uv": [ 2.5, 9.5, 12.5, 16.0 ] },
 						"east": { "texture": "#machinery", "uv": [ 0.0, 0.0, 2.0, 6.5 ], "enabled": false },
@@ -65,7 +65,7 @@
 					"from": [ 0.0045, 12.5, 13.5 ], 
 					"to": [ 10.0045, 15.5, 16.5 ], 
 					"rotationOrigin": [ 0.0, 13.0, 13.0 ],
-					"rotationY": 89.9802127184967,
+					"rotationY": 89.98,
 					"faces": {
 						"north": { "texture": "#machinery-border-small", "uv": [ 2.5, 0.0, 12.5, 3.0 ] },
 						"east": { "texture": "#machinery-border-small", "uv": [ 0.0, 0.0, 3.0, 3.0 ], "enabled": false },
@@ -80,7 +80,7 @@
 					"from": [ 13.0, 12.5, 12.5 ], 
 					"to": [ 23.0, 15.5, 15.5 ], 
 					"rotationOrigin": [ 13.0, 13.0, 13.0 ],
-					"rotationY": 89.9802127184967,
+					"rotationY": 89.98,
 					"faces": {
 						"north": { "texture": "#machinery-border-small", "uv": [ 2.5, 0.0, 12.5, 3.0 ] },
 						"east": { "texture": "#machinery-border-small", "uv": [ 0.0, 0.0, 3.0, 3.0 ], "enabled": false },
@@ -541,7 +541,7 @@
 		{
 			"name": "process",
 			"code": "process",
-			"quantityframes": 39,
+			"quantityframes": 60,
 			"onActivityStopped": "Rewind",
 			"onAnimationEnd": "Repeat",
 			"keyframes": [
@@ -549,15 +549,15 @@
 					"frame": 0,
 					"elements": {
 						"Frame Master": {  },
-						"Bar N": { "rotationX": -180.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"Bar N": { "rotationX": 180.0, "rotationY": 0.0, "rotationZ": 0.0 },
 						"Bar S": { "rotationX": -180.0, "rotationY": 0.0, "rotationZ": 0.0 }
 					}
 				},
 				{
-					"frame": 38,
+					"frame": 59,
 					"elements": {
 						"Frame Master": {  },
-						"Bar N": { "rotationX": 180.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"Bar N": { "rotationX": -180.0, "rotationY": 0.0, "rotationZ": 0.0 },
 						"Bar S": { "rotationX": 180.0, "rotationY": 0.0, "rotationZ": 0.0 }
 					}
 				}

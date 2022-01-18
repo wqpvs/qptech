@@ -24,7 +24,6 @@
 			"loadFromProperties": "abstract/horizontalorientation"
 		}
 	],
-
 	"attributesByType": {
 
 		"*-mv-*": {
@@ -36,11 +35,8 @@
 			"outputFace": "east"
 		}
 	},
-
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	
-	
 	"shape": { "base": "block/metal/bloomery" },
 	"shapeByType": {
 		"*-north": {

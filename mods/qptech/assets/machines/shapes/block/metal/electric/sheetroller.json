@@ -10,8 +10,8 @@
 	"textures": {
 		"redpaintedsteelwrench": "item/redpaintedsteelwrench",
 		"shinyiron": "block/shinyiron",
-		"wornsteelplate": "block/metal/wornsteelplate",
 		"castiron": "block/castiron",
+		"wornsteelsheet": "block/metal/wornsteelsheet",
 		"wornsteel": "block/metal/wornsteel"
 	},
 	"elements": [
@@ -296,7 +296,7 @@
 					"from": [ -5.0, 11.0, -5.0 ], 
 					"to": [ 5.0, 14.0, -2.0 ], 
 					"rotationOrigin": [ -5.0, 12.5, -3.5 ],
-					"rotationX": 44.99999632180179,
+					"rotationX": 45.0,
 					"faces": {
 						"north": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 10.0, 3.0 ] },
 						"east": { "texture": "#shinyiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
@@ -454,12 +454,12 @@
 					"to": [ 7.0, 8.0, 7.0 ], 
 					"rotationOrigin": [ -7.0, 2.0, -7.0 ],
 					"faces": {
-						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 11.0, 2.0, 16.0, 16.0 ], "rotation": 90, "autoUv": false },
-						"east": { "texture": "#wornsteel", "uv": [ 0.0, 0.0, 14.0, 6.0 ] },
-						"south": { "texture": "#wornsteel", "uv": [ 0.0, 0.0, 14.0, 6.0 ] },
-						"west": { "texture": "#wornsteel", "uv": [ 0.0, 0.0, 14.0, 6.0 ] },
-						"up": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
-						"down": { "texture": "#wornsteel", "uv": [ 0.0, 0.0, 14.0, 14.0 ] }
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 11.0, 8.5, 16.0, 16.0 ], "rotation": 90, "autoUv": false },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 11.0, 0.0, 16.0, 8.0 ], "rotation": 90, "autoUv": false },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 11.0, 8.5, 16.0, 16.0 ], "rotation": 90, "autoUv": false },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 11.0, 0.0, 16.0, 8.0 ], "rotation": 270, "autoUv": false },
+						"up": { "texture": "#wornsteel", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+						"down": { "texture": "#wornsteel", "uv": [ 0.0, 0.0, 14.0, 14.0 ], "enabled": false }
 					}
 				},
 				{
@@ -468,10 +468,10 @@
 					"to": [ 7.0, 10.0, 6.0 ], 
 					"rotationOrigin": [ -7.0, 8.0, -6.0 ],
 					"faces": {
-						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 2.0, 14.0 ], "rotation": 90 },
-						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 2.0, 12.0 ], "rotation": 90 },
-						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 2.5, 1.0, 4.5, 15.0 ], "rotation": 90 },
-						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 2.5, 3.5, 4.5, 15.5 ], "rotation": 90 },
+						"north": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 1.0, 2.0, 15.0 ], "rotation": 90 },
+						"east": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 2.0, 2.0, 14.0 ], "rotation": 90 },
+						"south": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 1.0, 2.0, 15.0 ], "rotation": 90 },
+						"west": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 2.0, 2.0, 14.0 ], "rotation": 90 },
 						"up": { "texture": "#castiron", "uv": [ 1.0, 2.0, 15.0, 14.0 ] },
 						"down": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 14.0, 12.0 ], "enabled": false }
 					}
@@ -482,12 +482,12 @@
 					"to": [ 8.0, 2.0, 8.0 ], 
 					"rotationOrigin": [ -8.0, 1.0, -8.0 ],
 					"faces": {
-						"north": { "texture": "#wornsteel", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
-						"east": { "texture": "#wornsteel", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
-						"south": { "texture": "#wornsteel", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
-						"west": { "texture": "#wornsteel", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
-						"up": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
-						"down": { "texture": "#wornsteelplate", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
+						"north": { "texture": "#wornsteelsheet", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+						"east": { "texture": "#wornsteelsheet", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+						"south": { "texture": "#wornsteelsheet", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+						"west": { "texture": "#wornsteelsheet", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+						"up": { "texture": "#wornsteelsheet", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+						"down": { "texture": "#wornsteelsheet", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
 					},
 					"children": [
 						{
@@ -496,7 +496,7 @@
 							"to": [ 3.0, 0.0, 3.0 ], 
 							"rotationOrigin": [ 1.0, -1.0, 1.0 ],
 							"faces": {
-								"north": { "texture": "#castiron", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
+								"north": { "texture": "#castiron", "uv": [ 2.5, 2.0, 4.5, 3.0 ] },
 								"east": { "texture": "#castiron", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
 								"south": { "texture": "#castiron", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
 								"west": { "texture": "#castiron", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
@@ -569,7 +569,7 @@
 			"from": [ 15.0017, 12.0, 14.0024 ], 
 			"to": [ 29.0017, 15.0, 15.0024 ], 
 			"rotationOrigin": [ 15.0, 12.0, 15.0 ],
-			"rotationY": 89.9802127184967,
+			"rotationY": 89.98,
 			"faces": {
 				"north": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 3.0, 14.0 ], "rotation": 90 },
 				"east": { "texture": "#redpaintedsteelwrench", "uv": [ 0.0, 0.0, 1.0, 3.0 ] },
@@ -619,7 +619,6 @@
 				{
 					"frame": 51,
 					"elements": {
-						"ModelRoot": {  },
 						"FrontDoorCutter": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 }
 					}
 				},
