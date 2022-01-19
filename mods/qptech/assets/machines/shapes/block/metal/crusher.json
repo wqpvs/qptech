@@ -8,9 +8,8 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"redpaintedsteelwrench": "item/redpaintedsteelwrench",
 		"darksteelsheet-1": "block/metal/darksteelsheet-1",
-		"dirtysteel with track": "block/metal/dirtysteel with track",
+		"dirtysteel with track": "block/metal/dirtysteelwithtrack",
 		"castiron": "block/castiron",
 		"metal": "block/metal/stairs/metal",
 		"gate": "block/metal/gate",

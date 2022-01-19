@@ -8,7 +8,6 @@
 	},
 	"entityBehaviors": [ { "name": "Animatable" } ],
 	"behaviors": [
-
 		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "east" }
@@ -24,15 +23,11 @@
 			"loadFromProperties": "abstract/horizontalorientation"
 		}
 	],
-
 	"attributesByType": {
-
 		"*-mv-*": {
 			"genFlux": 0,
 			"useFlux": 128,
-
 			"processes": {
-
 				"heating": 1505
 			},
 			"inputFace": "west",
@@ -43,20 +38,17 @@
 			"useFlux": 16,
 
 			"processes": {
-
 				"heating": 1200
 			},
 			"inputFace": "west",
 			"outputFace": "east"
 		}
 	},
-
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	
 	"texturesByType": {
 		"*-mv-*" :{
-			"all": { "base": "block/metal/dirtysteel plate" }
+			"all": { "base": "block/metal/dirtysteelplate" }
 		},
 		"*-lv-*" :{
 			"all": { "base": "block/copperspool" }
