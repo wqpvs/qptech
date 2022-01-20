@@ -1,0 +1,35 @@
+{
+	code: "Poles",
+	variantgroups: [
+		{ code: "size", states: ["normal", "tall", "wall"] },
+		{ code: "wood", states: ["aged"], loadFromProperties: "block/wood" }
+	],
+	creativeinventory: { "general": ["Poles-{size}-*"], "decorative": ["Poles-{size}-*"] },
+	class: "Block",
+	shape: { base: "block/metal/electric/wires-poles/{size}" },
+	shapeInventory: { base: "block/metal/electric/wires-poles/{size}" },
+	textures: {
+	"wood": { base: "game:block/wood/debarked/{wood}" },
+	"wire": { base: "block/copperspool" },
+	"rock": { base: "game:block/stone/cobblestone/granite1" }
+	},
+	blockmaterial: "Wood",
+	lightAbsorption: 0,
+	faceCullMode: "NeverCull",
+	sidesolid: {
+		all: false
+	},
+	sideopaque: {
+		all: false
+	},
+	replaceable: 500,
+	resistance: 3,
+	sounds: {
+		"place": "game:block/planks",
+		"hit": "game:block/planks",
+		"break": "game:block/planks",
+		"walk": "game:walk/wood"
+	},
+	rainPermeable: true,
+	materialDensity: 600
+}
