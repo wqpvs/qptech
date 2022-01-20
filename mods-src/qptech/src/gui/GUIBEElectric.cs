@@ -21,12 +21,19 @@ namespace qptech.src
         {
             thisbee = bea;
             ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterMiddle);
-            ElementBounds textBounds = ElementBounds.Fixed(0, 100, 600, 600);
-            ElementBounds buttonBounds = ElementBounds.Fixed(0, 40, 100, 20);
-            ElementBounds toggleButtonBounds = ElementBounds.Fixed(100, 40, 100, 20);
+            ElementBounds textBounds = ElementBounds.Fixed(0, 45, 600, 600);
+            ElementBounds buttonBounds = ElementBounds.Fixed(0, 20, 100, 20);
+            ElementBounds toggleButtonBounds = ElementBounds.Fixed(100, 20, 100, 20);
             ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
             bgBounds.BothSizing = ElementSizing.FitToChildren;
-            bgBounds.WithChildren(textBounds,buttonBounds,toggleButtonBounds);
+            if (bea.showToggleButton)
+            {
+                bgBounds.WithChildren(textBounds, buttonBounds, toggleButtonBounds);
+            }
+            else
+            {
+                bgBounds.WithChildren(textBounds, buttonBounds);
+            }
             string guicomponame = bea.Pos.ToString()+"Processor";
             string statustext = bea.GetStatusUI();
             string powerbutton = "TURN OFF";

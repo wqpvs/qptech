@@ -16,6 +16,10 @@ using qptech.src;
 
 namespace qptech.src.networks
 {
+    /// <summary>
+    /// When supplied with defined industrial processes it will output different industrial processes
+    ///     good for converting one process to another to add complexity to the manufacturing production line
+    /// </summary>
     class BEProcessToProcess : BlockEntity, IProcessingSupplier
     {
         public Dictionary<string, double> suppliedProcesses;

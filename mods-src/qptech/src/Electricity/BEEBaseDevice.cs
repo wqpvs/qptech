@@ -290,8 +290,12 @@ namespace qptech.src
             }
 
         }
+        public override string GetStatusUI()
+        {
+            return base.GetStatusUI();
+        }
     }
-
+   
     public interface IConduit
     {
         int ReceiveItemOffer(ItemSlot offerslot, BlockFacing onFace);

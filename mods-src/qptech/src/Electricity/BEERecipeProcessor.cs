@@ -376,7 +376,7 @@ namespace qptech.src
                 statustext += "</font></strong>";
 
             }
-            return base.GetStatusUI()+statustext;
+            return statustext+ base.GetStatusUI();
         }
     }
     class MachineRecipe

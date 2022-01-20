@@ -12,6 +12,12 @@ using Vintagestory.API.MathTools;
 
 namespace qptech.src
 {
+    /// <summary>
+    /// The Processing Supplier takes power and outputs industrial processes
+    /// (industrial processes are basically just numeric values tied to a certain string - eg: crushing 1000
+    ///         would supply neighboring devices with "crushing". These don't really do anything themselves
+    ///         they are just a way to provide add different requirements for Machine Recipes. 
+    /// </summary>
     class BEEProcessingSupplier:BEEBaseDevice,IProcessingSupplier
     {
         public Dictionary<string, double> processes;
@@ -19,6 +25,7 @@ namespace qptech.src
         double lastUseAt = 0; //last time it was used
         double idleAfter => lastUseAt + suspendCoolDown;
         bool inUse;
+        
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -26,6 +33,7 @@ namespace qptech.src
             {
                 processes = new Dictionary<string, double>();
                 processes = Block.Attributes["processes"].AsObject<Dictionary<string,double>>();
+                
                 
 
             }
@@ -94,6 +102,7 @@ namespace qptech.src
                     
                     float heatingefficiency = cblock.Attributes["heatingefficiency"].AsFloat(0);
                     if (heatingefficiency == 0) { continue; }
+                    
                     foreach (ItemSlot slot in container.Inventory)
                     {
                         if (slot == null || slot.Empty) { continue; }
@@ -108,6 +117,7 @@ namespace qptech.src
                                 slot.Itemstack.Collectible.SetTemperature(Api.World, slot.Itemstack, newtemp);
                             }
                         }
+                        
                     }
                 }
             }

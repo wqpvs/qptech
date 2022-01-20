@@ -83,7 +83,6 @@
     <Compile Include="src\Electricity\BEERecipeProcessor.cs" />
     <Compile Include="src\Electricity\ElectricityAPI.cs" />
     <Compile Include="src\gui\GUIBEElectric.cs" />
-    <Compile Include="src\gui\GUIRecipeProcessorStatus.cs" />
     <Compile Include="src\misc\BEAnimator.cs" />
     <Compile Include="src\misc\BEBlockSeeker.cs" />
     <Compile Include="src\misc\ItemMiningDrill.cs" />

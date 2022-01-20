@@ -282,14 +282,14 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
         {
             string status = "<strong>Crucible Status</strong><br>";
             status += "<strong>MODE:" + processingMode.ToString() + "</strong>";
-            if (processingMode == enMode.ALLOY) { status += " (will make alloys)<br"; }
-            else if (processingMode == enMode.SINGLE) { status += " (will not process alloys)<br"; }
+            if (processingMode == enMode.ALLOY) { status += " (will make alloys)<br>"; }
+            else if (processingMode == enMode.SINGLE) { status += " (will not process alloys)<br>"; }
             if (currentpourname!="")
             {
                 status += "Pouring " + currentpouramount + " of " + currentpourname;
             }
             
-                status += base.GetStatusUI();
+            status += base.GetStatusUI();
             
             return status;
         }
