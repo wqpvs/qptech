@@ -1,0 +1,66 @@
+{
+	"code": "loco",
+
+
+	"behaviors": [
+		{ "name": "Lockable" },
+		{ "name": "Container" },
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "north" }
+		}
+
+	],
+	"variantgroups": [
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+	"creativeinventory": {
+
+		"qptech": [ "*-east" ]
+	},
+	"blockmaterial": "Metal",
+	"shape": { "base": "block/indev/test" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/indev/test",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/indev/test",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "block/indev/test",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "block/indev/test",
+			"rotateY": 180
+		}
+	},
+	"drawtype": "json",
+
+	"resistance": 1,
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	},
+	"guiTransform": {
+		"rotation": {
+			"x": -22.6,
+			"y": -91,
+			"z": -123
+		},
+		"scale": 1.2
+	}
+
+
+
+}
+

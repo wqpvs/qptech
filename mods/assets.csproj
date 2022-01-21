@@ -27,6 +27,8 @@
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
+    <None Include="qptech\assets\machines\blocktypes\indev\unused\loco.json" />
+    <None Include="qptech\assets\machines\blocktypes\indev\unused\rail.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\seeker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\lv\bloomworker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\crucible.json" />
@@ -480,9 +482,11 @@
     <Content Include="qptech\qptech.pdb" />
     <Content Include="qptech\changelog1.5.txt" />
     <Content Include="qptech\changelog1.6.txt" />
+    <Content Include="qptech\changelog1.7.0.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="qptech\assets\game\blocktypes\" />
+    <Folder Include="qptech\assets\machines\shapes\block\indev\" />
     <Folder Include="qptech\assets\machines\shapes\block\liquid\" />
   </ItemGroup>
 </Project>
