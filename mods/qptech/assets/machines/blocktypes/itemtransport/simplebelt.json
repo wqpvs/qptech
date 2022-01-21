@@ -1,0 +1,89 @@
+{
+	"code": "conveyor",
+
+	"entityclass": "Conveyor",
+	"creativeinventory": {
+
+		"qptech": [ "*-north" ]
+	},
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "test" ]
+		},
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+	"behaviors": [
+
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "north" }
+		}
+	],
+	"attributesbytype": {
+		"*-test-*": {
+
+			"inputface": "up",
+			"outputface": "west",
+			"transportspeed": 0.1
+		}
+	},
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+	"shape": { "base": "block/indev/arrow" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/indev/arrow",
+			"rotateY": 180
+		},
+		"*-east": {
+			"base": "block/indev/arrow",
+			"rotateY": 90
+		},
+		"*-west": {
+			"base": "block/indev/arrow",
+			"rotateY": 270
+		},
+		"*-south": {
+			"base": "block/indev/arrow",
+			"rotateY": 0
+		}
+	},
+	
+
+	"resistance": 1,
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	},
+	"guiTransform": {
+		"rotation": {
+			"x": -22.6,
+			"y": -91,
+			"z": -123
+		},
+		"scale": 1.2
+	},
+	"selectionBox": {
+		"x1": 0,
+		"y1": 0,
+		"z1": 0,
+		"x2": 1,
+		"y2": 0.125,
+		"z2": 1
+	},
+	"collisionBox": {
+		"x1": 0,
+		"y1": 0,
+		"z1": 0,
+		"x2": 1,
+		"y2": 0.125,
+		"z2": 1
+	}
+}

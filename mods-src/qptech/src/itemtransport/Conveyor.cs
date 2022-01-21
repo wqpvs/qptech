@@ -32,7 +32,7 @@ namespace qptech.src.itemtransport
 
         public BlockPos TransporterPos => Pos;
 
-        float transportspeed = 0.01f;
+        float transportspeed = 0.1f;
 
         protected virtual BlockPos CheckOutPos => Pos.Copy().Offset(outputface); //shortcut to check block at outputface
         protected virtual BlockPos CheckInPos => Pos.Copy().Offset(inputface);
@@ -45,10 +45,14 @@ namespace qptech.src.itemtransport
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            inputface = BlockFacing.FromCode(Block.Attributes["inputFace"].AsString("up"));
-            outputface = BlockFacing.FromCode(Block.Attributes["outputFace"].AsString("down"));
-            inputface = BEElectric.OrientFace(Block.Code.ToString(), inputface);
-            outputface = BEElectric.OrientFace(Block.Code.ToString(), outputface);
+            if (Block.Attributes != null)
+            {
+                inputface = BlockFacing.FromCode(Block.Attributes["inputface"].AsString("east"));
+                outputface = BlockFacing.FromCode(Block.Attributes["outputface"].AsString("west"));
+                inputface = BEElectric.OrientFace(Block.Code.ToString(), inputface);
+                outputface = BEElectric.OrientFace(Block.Code.ToString(), outputface);
+                transportspeed = Block.Attributes["transportspeed"].AsFloat(transportspeed);
+            }
             if (api is ICoreServerAPI) { RegisterGameTickListener(OnServerTick, 100); }
         }
 
@@ -75,11 +79,10 @@ namespace qptech.src.itemtransport
         {
             //if it has connections, make sure they're still there
             //if there aren't any connections, check and see if a destination can be set and connect
-            if (destination != null) { return; }
-            
+            destination = null;
             IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as IItemTransporter;
-            
-            if (trans == null) { return; }
+            BlockEntityGenericTypedContainer outcont = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as BlockEntityGenericTypedContainer;
+            if (trans == null && outcont==null) {MarkDirty(true);return; }
             destination = CheckOutPos;
             
             MarkDirty(true);
@@ -94,27 +97,28 @@ namespace qptech.src.itemtransport
                 TryTakeStack();
                 return;
             }
-            if (destination==Pos) { return; }
+            if (destination==null) { return; }
             IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as IItemTransporter;
             if (trans !=null && !trans.CanAcceptItems()) { return; } // we are connected to transporter but it's busy
+            
             //if all is well then update the progress
             progress += transportspeed;
-            progress = Math.Max(progress,1);
+            progress = Math.Min(progress,1);
             //if we've moved everything, attempt to hand off stack
-            if (progress == 1) { TransferStack(); }
+            if (progress >= 1) { TransferStack(); }
         }
 
         protected virtual void TransferStack()
         {
-            if (itemstack == null || destination == Pos) { return; }
+            if (itemstack == null) { return; }
             //attempt to transfer to another transporter
             IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as IItemTransporter;
-            if (trans.ReceiveItemStack(itemstack))
+            if (trans!=null&&trans.ReceiveItemStack(itemstack))
             {
                 ResetStack();
                 return;
             }
-            BlockEntityGenericContainer outcont = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as BlockEntityGenericContainer;
+            BlockEntityGenericTypedContainer outcont = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as BlockEntityGenericTypedContainer;
             if (outcont == null) { return; }
             if (outcont.Inventory == null) { return; }
             DummyInventory dummy = new DummyInventory(Api,1);
@@ -126,11 +130,15 @@ namespace qptech.src.itemtransport
                 int ogqty = itemstack.StackSize;
                 ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, itemstack.StackSize);
 
-                int left=dummy[0].TryPutInto(tryoutput.slot, ref op);
+                dummy[0].TryPutInto(tryoutput.slot, ref op);
+                
                 if (op.MovedQuantity > 0) {
                     outcont.MarkDirty();
-                    if (left == 0) { ResetStack(); }
-                    else { MarkDirty(true); }
+                    
+                }
+                if (op.NotMovedQuantity == 0||itemstack.StackSize==0)
+                {
+                    ResetStack();
                 }
                 
             }
@@ -147,7 +155,8 @@ namespace qptech.src.itemtransport
         protected virtual void TryTakeStack()
         {
             if (itemstack != null) { return; }
-            BlockEntityGenericContainer incont = Api.World.BlockAccessor.GetBlockEntity(CheckInPos) as BlockEntityGenericContainer;
+            BlockEntity temp = Api.World.BlockAccessor.GetBlockEntity(CheckInPos);
+            BlockEntityGenericTypedContainer incont = temp as BlockEntityGenericTypedContainer;
             if (incont == null || incont.Inventory == null || incont.Inventory.Empty) { return; }
             foreach(ItemSlot slot in incont.Inventory)
             {
@@ -180,15 +189,17 @@ namespace qptech.src.itemtransport
                 itemstack.ResolveBlockOrItem(worldAccessForResolve);
             }
             destination = tree.GetBlockPos("destination",Pos);
+           
             
         }
 
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
+            dsc.AppendLine("Item Transport");
             if (ItemStack != null) { dsc.AppendLine("Transporting " + itemstack.ToString() + " %" + progress); }
             
-            if (destination != Pos) { dsc.AppendLine("To " + destination.ToString()); }
+            if (destination!=null && destination != Pos) { dsc.AppendLine("To " + destination.ToString()); }
 
         }
 

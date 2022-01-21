@@ -29,6 +29,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\loco.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\rail.json" />
+    <None Include="qptech\assets\machines\blocktypes\itemtransport\simplebelt.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\seeker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\lv\bloomworker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\crucible.json" />

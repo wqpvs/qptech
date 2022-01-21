@@ -1,0 +1,61 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"blank": "block/tempblocks/blank"
+	},
+	"elements": [
+		{
+			"name": "Cube3",
+			"from": [ 13.5, 0.0, 8.0 ], 
+			"to": [ 14.5, 1.0, 21.0 ], 
+			"rotationOrigin": [ 14.0, 0.0, 8.0 ],
+			"rotationY": -90.0,
+			"faces": {
+				"north": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"east": { "texture": "#blank", "uv": [ 0.0, 0.0, 13.0, 1.0 ] },
+				"south": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"west": { "texture": "#blank", "uv": [ 0.0, 0.0, 13.0, 1.0 ] },
+				"up": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 13.0 ] },
+				"down": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 13.0 ] }
+			},
+			"children": [
+				{
+					"name": "Cube2",
+					"from": [ -1.0, 0.0, 0.0 ], 
+					"to": [ 0.0, 1.0, 8.0 ], 
+					"rotationOrigin": [ -1.5, 0.0, 1.0 ],
+					"rotationY": -44.999996548644546,
+					"faces": {
+						"north": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"east": { "texture": "#blank", "uv": [ 0.0, 0.0, 8.0, 1.0 ] },
+						"south": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"west": { "texture": "#blank", "uv": [ 0.0, 0.0, 8.0, 1.0 ] },
+						"up": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 8.0 ] },
+						"down": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 8.0 ] }
+					}
+				},
+				{
+					"name": "Cube1",
+					"from": [ 1.0, 0.0, 0.5 ], 
+					"to": [ 2.0, 1.0, 8.5 ], 
+					"rotationOrigin": [ 1.5, 0.0, 1.0 ],
+					"rotationY": 44.999996548644546,
+					"faces": {
+						"north": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"east": { "texture": "#blank", "uv": [ 0.0, 0.0, 8.0, 1.0 ] },
+						"south": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+						"west": { "texture": "#blank", "uv": [ 0.0, 0.0, 8.0, 1.0 ] },
+						"up": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 8.0 ] },
+						"down": { "texture": "#blank", "uv": [ 0.0, 0.0, 1.0, 8.0 ] }
+					}
+				}
+			]
+		}
+	]}

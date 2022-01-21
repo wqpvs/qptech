@@ -8,6 +8,7 @@ using qptech.src.misc;
 using qptech.src.multiblock;
 using qptech.src.pipes;
 using qptech.src.networks;
+using qptech.src.itemtransport;
 
 
 namespace qptech.src
@@ -76,6 +77,7 @@ namespace qptech.src
             api.RegisterBlockEntityClass("BEEIndustrialGenerator", typeof(BEEIndustrialGenerator));
             api.RegisterItemClass("ItemMiningDrill", typeof(ItemMiningDrill));
             api.RegisterBlockEntityClass("BEECrucible", typeof(BEECrucible));
+            api.RegisterBlockEntityClass("Conveyor", typeof(Conveyor));
             //api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
             //api.RegisterBlockEntityClass("BEEMotor", typeof(BEEMotor));
 
