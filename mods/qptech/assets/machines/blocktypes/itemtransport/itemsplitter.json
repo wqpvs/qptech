@@ -9,7 +9,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "3way" ]
+			"states": [ "3way","4way" ]
 		},
 		{
 			"code": "side",
@@ -27,30 +27,37 @@
 		"*-3way-*": {
 
 			"inputfaces": [ "west" ],
-			"outputfaces": ["north","east","south"],
-			
+			"outputfaces": [ "north", "east", "south" ],
+
+			"stacksize": 1000
+		},
+		"*-4way-*": {
+
+			"inputfaces": [ "up" ],
+			"outputfaces": [ "north", "east", "south", "west" ],
+
 			"stacksize": 1000
 		}
-		
+
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/metal/container/itemsplitter" },
+	"shape": { "base": "block/metal/container/itemsplitter-{type}" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/container/itemsplitter",
+			"base": "block/metal/container/itemsplitter-{type}",
 			"rotateY": 180
 		},
 		"*-east": {
-			"base": "block/metal/container/itemsplitter",
+			"base": "block/metal/container/itemsplitter-{type}",
 			"rotateY": 90
 		},
 		"*-west": {
-			"base": "block/metal/container/itemsplitter",
+			"base": "block/metal/container/itemsplitter-{type}",
 			"rotateY": 270
 		},
 		"*-south": {
-			"base": "block/metal/container/itemsplitter",
+			"base": "block/metal/container/itemsplitter-{type}",
 			"rotateY": 0
 		}
 	},

@@ -30,7 +30,7 @@
     <None Include="qptech\assets\machines\blocktypes\indev\unused\loco.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\rail.json" />
     <None Include="qptech\assets\machines\blocktypes\itemtransport\itemsplitter.json" />
-    <None Include="qptech\assets\machines\blocktypes\itemtransport\simplebelt.json" />
+    <None Include="qptech\assets\machines\blocktypes\itemtransport\itempipe.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\seeker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\lv\bloomworker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\crucible.json" />
@@ -230,7 +230,10 @@
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\bloomery.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\boiler.json" />
-    <None Include="qptech\assets\machines\shapes\block\metal\container\itemsplitter.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\itempipe-down.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\itempipe-horizontal.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\itemsplitter-4way.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\itemsplitter-3way.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\crusher.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\generator-mk2.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\lathe.json" />

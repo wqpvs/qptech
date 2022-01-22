@@ -1,5 +1,5 @@
 {
-	"code": "conveyor",
+	"code": "itempipe",
 
 	"entityclass": "Conveyor",
 	"creativeinventory": {
@@ -9,7 +9,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "test","dropper" ]
+			"states": [ "horizontal","down","up" ]
 		},
 		{
 			"code": "side",
@@ -24,41 +24,50 @@
 		}
 	],
 	"attributesbytype": {
-		"*-test-*": {
+		"*-horizontal-*": {
 
 			"inputface": "east",
 			"outputface": "west",
 			"transportspeed": 0.5,
 			"stacksize": 1
 		},
-		"*-dropper-*": {
+		"*-down-*": {
 
 			"inputface": "up",
 			"outputface": "down",
+			"transportspeed": 0.5,
+			"stacksize": 1
+		},
+		"*-up-*": {
+
+			"inputface": "down",
+			"outputface": "up",
 			"transportspeed": 0.5,
 			"stacksize": 1
 		}
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/indev/arrow" },
+	
 	"shapeByType": {
 		"*-north": {
-			"base": "block/indev/arrow",
+			"base": "block/metal/container/itempipe-{type}",
 			"rotateY": 180
 		},
 		"*-east": {
-			"base": "block/indev/arrow",
+			"base": "block/metal/container/itempipe-{type}",
 			"rotateY": 90
 		},
 		"*-west": {
-			"base": "block/indev/arrow",
+			"base": "block/metal/container/itempipe-{type}",
 			"rotateY": 270
 		},
 		"*-south": {
-			"base": "block/indev/arrow",
+			"base": "block/metal/container/itempipe-{type}",
 			"rotateY": 0
 		}
+
+
 	},
 	
 
