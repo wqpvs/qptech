@@ -26,9 +26,9 @@
 	"attributesbytype": {
 		"*-test-*": {
 
-			"inputface": "up",
+			"inputface": "east",
 			"outputface": "west",
-			"transportspeed": 0.1
+			"transportspeed": 0.05
 		}
 	},
 	"blockmaterial": "Metal",

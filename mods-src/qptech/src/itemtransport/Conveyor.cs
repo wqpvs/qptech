@@ -53,14 +53,7 @@ namespace qptech.src.itemtransport
                 outputface = BEElectric.OrientFace(Block.Code.ToString(), outputface);
                 transportspeed = Block.Attributes["transportspeed"].AsFloat(transportspeed);
             }
-            if (api is ICoreServerAPI) { RegisterGameTickListener(OnServerTick, 100); }
-        }
-
-        public bool ConnectSource(IItemTransporter newsource)
-        {
-            if (ItemStack != null) { return false; }
-
-            return true;
+            if (api is ICoreServerAPI) { RegisterGameTickListener(OnServerTick, 50); }
         }
 
         public bool ReceiveItemStack(ItemStack incomingstack)
@@ -168,7 +161,48 @@ namespace qptech.src.itemtransport
                 MarkDirty(true);
             }
         }
+        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
+        {
 
+            ICoreClientAPI capi = Api as ICoreClientAPI;
+            if (capi == null) { return false; }
+            if (itemstack == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
+            MeshData meshdata;
+            
+            if (itemstack.Class == EnumItemClass.Item)
+            {
+                capi.Tesselator.TesselateItem(itemstack.Item, out meshdata);
+            }
+            else
+            {
+                capi.Tesselator.TesselateBlock(itemstack.Block, out meshdata);
+            }
+            
+            Vec3f mid = new Vec3f(0.5f, 0.5f, 0.5f);
+            meshdata.Scale(mid, 0.5f, 0.5f, 0.5f);
+            BlockPos o = new BlockPos(0, 0, 0);
+
+            //Vec3f startv = o.Copy().Offset(outputface.Opposite).ToVec3f();
+            Vec3f startv = Vec3f.Zero;
+            Vec3f endv = o.Copy().Offset(outputface).ToVec3f();
+            Vec3f nowv = Lerp(startv, endv, progress);
+            meshdata.Translate(nowv);
+            mesher.AddMeshData(meshdata);
+            /*Shape displayshape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/metal/electric/roundgauge0"));
+
+
+            MeshData meshdata;
+            capi.Tesselator.TesselateShape("roundgauge0" + Pos.ToString(), displayshape, out meshdata, this);
+
+
+
+            meshdata.Translate(DisplayOffset());
+            meshdata.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD * DisplayRotation(), 0);
+
+
+            mesher.AddMeshData(meshdata);*/
+            return base.OnTesselation(mesher, tessThreadTesselator);
+        }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
@@ -192,6 +226,22 @@ namespace qptech.src.itemtransport
            
             
         }
+        public override void OnBlockRemoved()
+        {
+            if (Api is ICoreAPI && itemstack != null)
+            {
+                DumpInventory();
+            }
+            base.OnBlockRemoved();
+        }
+
+        protected virtual void DumpInventory()
+        {
+            if (itemstack == null || itemstack.StackSize == 0) { return; }
+            DummyInventory di = new DummyInventory(Api,1);
+            di[0].Itemstack = itemstack;
+            di.DropAll(Pos.Offset(BlockFacing.UP).ToVec3d());
+        }
 
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
@@ -202,6 +252,17 @@ namespace qptech.src.itemtransport
             if (destination!=null && destination != Pos) { dsc.AppendLine("To " + destination.ToString()); }
 
         }
+        //Lerp two vectors, but i'm not 100% this is mathematically correct way to do it
+        public static Vec3f Lerp(Vec3f start, Vec3f end, float percent)
+        {
+            percent = Math.Min(percent, 1);
+            percent = Math.Max(percent, 0);
+            Vec3f output = start;
+            output.X = start.X + (end.X - start.X) * percent;
+            output.Y = start.Y + (end.Y - start.Y) * percent;
+            output.Z = start.Z + (end.Z - start.Z) * percent;
 
+            return output;
+        }
     }
 }

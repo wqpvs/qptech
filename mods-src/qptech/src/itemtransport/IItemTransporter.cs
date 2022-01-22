@@ -21,7 +21,6 @@ namespace qptech.src.itemtransport
         ItemStack ItemStack { get; }
         float Progress { get; } //0-started, 1-finished
         bool ReceiveItemStack(ItemStack incomingstack);
-        bool ConnectSource(IItemTransporter newsource);
         bool CanAcceptItems();
         BlockFacing TransporterInputFace { get; }
         BlockFacing TransporterOutputFace { get; }
