@@ -34,6 +34,8 @@ namespace qptech.src.itemtransport
 
         float transportspeed = 0.1f;
 
+        int stacksize = 1;
+
         protected virtual BlockPos CheckOutPos => Pos.Copy().Offset(outputface); //shortcut to check block at outputface
         protected virtual BlockPos CheckInPos => Pos.Copy().Offset(inputface);
 
@@ -42,6 +44,7 @@ namespace qptech.src.itemtransport
             if (itemstack == null) { return true; }
             return false;
         }
+        
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -52,15 +55,25 @@ namespace qptech.src.itemtransport
                 inputface = BEElectric.OrientFace(Block.Code.ToString(), inputface);
                 outputface = BEElectric.OrientFace(Block.Code.ToString(), outputface);
                 transportspeed = Block.Attributes["transportspeed"].AsFloat(transportspeed);
+                stacksize = Block.Attributes["stacksize"].AsInt(stacksize);
             }
-            if (api is ICoreServerAPI) { RegisterGameTickListener(OnServerTick, 50); }
+            if (Api is ICoreServerAPI) { RegisterGameTickListener(OnServerTick, 100); }
+
         }
 
-        public bool ReceiveItemStack(ItemStack incomingstack)
+
+        public int ReceiveItemStack(ItemStack incomingstack, IItemTransporter fromtransporter)
         {
             //TODO - should probably filter liquids
-            if (ItemStack == null) { itemstack = incomingstack; progress = 0;  MarkDirty(true); return true; }
-            return false;
+            
+            if (ItemStack == null) {
+                itemstack = incomingstack.Clone();
+                itemstack.StackSize = Math.Min(itemstack.StackSize, stacksize);
+                progress = 0;
+                MarkDirty(true);
+                return itemstack.StackSize;
+            }
+            return 0;
         }
         public void OnServerTick(float dt)
         {
@@ -85,6 +98,8 @@ namespace qptech.src.itemtransport
         {
             //if there is a destination and an item stack, handle movement, trigger rendering if necessary
             //if movement is complete handle transfer to destination
+            Random r = new Random();
+            
             if (itemstack == null)
             {
                 TryTakeStack();
@@ -106,10 +121,16 @@ namespace qptech.src.itemtransport
             if (itemstack == null) { return; }
             //attempt to transfer to another transporter
             IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as IItemTransporter;
-            if (trans!=null&&trans.ReceiveItemStack(itemstack))
+            if (trans!=null)
             {
-                ResetStack();
-                return;
+                int giveamount = trans.ReceiveItemStack(itemstack,this);
+                if (giveamount > 0)
+                {
+                    itemstack.StackSize -= giveamount;
+                    progress = 0;
+                    if (itemstack.StackSize <= 0) { ResetStack();return; }
+                    MarkDirty(true);
+                }
             }
             BlockEntityGenericTypedContainer outcont = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as BlockEntityGenericTypedContainer;
             if (outcont == null) { return; }
@@ -155,8 +176,11 @@ namespace qptech.src.itemtransport
             {
                 if (slot == null || slot.Empty) { continue; }
                 itemstack = slot.Itemstack.Clone();
-                slot.Itemstack = null;
-                incont.MarkDirty();
+                itemstack.StackSize = Math.Min(stacksize, itemstack.StackSize);
+
+                slot.Itemstack.StackSize -= itemstack.StackSize;
+                if (slot.Itemstack.StackSize <= 0) { slot.Itemstack = null; }
+                slot.MarkDirty();
                 progress = 0;
                 MarkDirty(true);
             }

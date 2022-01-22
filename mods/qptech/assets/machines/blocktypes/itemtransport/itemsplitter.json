@@ -1,15 +1,15 @@
 {
-	"code": "conveyor",
+	"code": "itemsplitter",
 
-	"entityclass": "Conveyor",
+	"entityclass": "ItemSplitter",
 	"creativeinventory": {
 
-		"qptech": [ "*-north" ]
+		"qptech": [ "*-east" ]
 	},
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "test","dropper" ]
+			"states": [ "3way" ]
 		},
 		{
 			"code": "side",
@@ -20,43 +20,37 @@
 
 		{
 			"name": "HorizontalOrientable",
-			"properties": { "dropBlockFace": "north" }
+			"properties": { "dropBlockFace": "east" }
 		}
 	],
 	"attributesbytype": {
-		"*-test-*": {
+		"*-3way-*": {
 
-			"inputface": "east",
-			"outputface": "west",
-			"transportspeed": 0.5,
-			"stacksize": 1
-		},
-		"*-dropper-*": {
-
-			"inputface": "up",
-			"outputface": "down",
-			"transportspeed": 0.5,
-			"stacksize": 1
+			"inputfaces": [ "west" ],
+			"outputfaces": ["north","east","south"],
+			
+			"stacksize": 1000
 		}
+		
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/indev/arrow" },
+	"shape": { "base": "block/metal/container/itemsplitter" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/indev/arrow",
+			"base": "block/metal/container/itemsplitter",
 			"rotateY": 180
 		},
 		"*-east": {
-			"base": "block/indev/arrow",
+			"base": "block/metal/container/itemsplitter",
 			"rotateY": 90
 		},
 		"*-west": {
-			"base": "block/indev/arrow",
+			"base": "block/metal/container/itemsplitter",
 			"rotateY": 270
 		},
 		"*-south": {
-			"base": "block/indev/arrow",
+			"base": "block/metal/container/itemsplitter",
 			"rotateY": 0
 		}
 	},

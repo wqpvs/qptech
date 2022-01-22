@@ -16,14 +16,9 @@ namespace qptech.src.itemtransport
 {
     interface IItemTransporter
     {
-        BlockPos Destination { get; }
-        
-        ItemStack ItemStack { get; }
-        float Progress { get; } //0-started, 1-finished
-        bool ReceiveItemStack(ItemStack incomingstack);
+        int ReceiveItemStack(ItemStack incomingstack,IItemTransporter fromtransporter);
         bool CanAcceptItems();
-        BlockFacing TransporterInputFace { get; }
-        BlockFacing TransporterOutputFace { get; }
+        
         BlockPos TransporterPos { get; }
     }
 }

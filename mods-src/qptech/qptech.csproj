@@ -85,6 +85,7 @@
     <Compile Include="src\gui\GUIBEElectric.cs" />
     <Compile Include="src\itemtransport\Conveyor.cs" />
     <Compile Include="src\itemtransport\IItemTransporter.cs" />
+    <Compile Include="src\itemtransport\ItemSplitter.cs" />
     <Compile Include="src\misc\BEAnimator.cs" />
     <Compile Include="src\misc\BEBlockSeeker.cs" />
     <Compile Include="src\misc\ItemMiningDrill.cs" />
