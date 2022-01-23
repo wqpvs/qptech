@@ -251,7 +251,7 @@ namespace qptech.src.itemtransport
             if (itemfilter != null && player.Entity.RightHandItemSlot.Itemstack == null)
             {
                 (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.ClearFilter, null);
-                return false;
+                return true;
             }
             else if (player.Entity.RightHandItemSlot.Itemstack != null)
             {
@@ -260,7 +260,7 @@ namespace qptech.src.itemtransport
                 itemfilter.SetFilterToStack(pstack);
                 byte[] filterasbytes = SerializerUtil.Serialize<ItemFilter>(itemfilter);
                 (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.SetFilter, filterasbytes);
-                return false;
+                return true;
             }
 
             return true;

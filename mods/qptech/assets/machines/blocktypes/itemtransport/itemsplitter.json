@@ -29,14 +29,14 @@
 			"inputfaces": [ "west" ],
 			"outputfaces": [ "north", "east", "south" ],
 
-			"stacksize": 1000
+			"stacksize": 1
 		},
 		"*-4way-*": {
 
 			"inputfaces": [ "up" ],
 			"outputfaces": [ "north", "east", "south", "west" ],
 
-			"stacksize": 1000
+			"stacksize": 1
 		}
 
 	},
