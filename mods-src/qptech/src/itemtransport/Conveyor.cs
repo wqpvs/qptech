@@ -26,21 +26,22 @@ namespace qptech.src.itemtransport
 
         BlockFacing inputface=BlockFacing.WEST;
         public BlockFacing TransporterInputFace => inputface;
+        BlockPos inputlocation;
 
         BlockFacing outputface=BlockFacing.EAST;
         public BlockFacing TransporterOutputFace => outputface;
-
+        BlockPos outputlocation;
         public BlockPos TransporterPos => Pos;
 
         float transportspeed = 0.1f;
 
         int stacksize = 1;
 
-        protected virtual BlockPos CheckOutPos => Pos.Copy().Offset(outputface); //shortcut to check block at outputface
-        protected virtual BlockPos CheckInPos => Pos.Copy().Offset(inputface);
+        
 
-        public bool CanAcceptItems()
+        public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
+            if (fromtransporter != null && fromtransporter.TransporterPos == outputlocation) { return false; }
             if (itemstack == null) { return true; }
             return false;
         }
@@ -54,6 +55,8 @@ namespace qptech.src.itemtransport
                 outputface = BlockFacing.FromCode(Block.Attributes["outputface"].AsString("west"));
                 inputface = BEElectric.OrientFace(Block.Code.ToString(), inputface);
                 outputface = BEElectric.OrientFace(Block.Code.ToString(), outputface);
+                inputlocation = Pos.Copy().Offset(inputface);
+                outputlocation = Pos.Copy().Offset(outputface);
                 transportspeed = Block.Attributes["transportspeed"].AsFloat(transportspeed);
                 stacksize = Block.Attributes["stacksize"].AsInt(stacksize);
             }
@@ -65,7 +68,7 @@ namespace qptech.src.itemtransport
         public int ReceiveItemStack(ItemStack incomingstack, IItemTransporter fromtransporter)
         {
             //TODO - should probably filter liquids
-            
+            if (fromtransporter != null && fromtransporter.TransporterPos != inputlocation) { return 0; }
             if (ItemStack == null) {
                 itemstack = incomingstack.Clone();
                 itemstack.StackSize = Math.Min(itemstack.StackSize, stacksize);
@@ -86,10 +89,10 @@ namespace qptech.src.itemtransport
             //if it has connections, make sure they're still there
             //if there aren't any connections, check and see if a destination can be set and connect
             destination = null;
-            IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as IItemTransporter;
-            BlockEntityGenericTypedContainer outcont = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as BlockEntityGenericTypedContainer;
+            IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as IItemTransporter;
+            BlockEntityGenericTypedContainer outcont = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as BlockEntityGenericTypedContainer;
             if (trans == null && outcont==null) {MarkDirty(true);return; }
-            destination = CheckOutPos;
+            destination = outputlocation;
             
             MarkDirty(true);
         }
@@ -106,8 +109,8 @@ namespace qptech.src.itemtransport
                 return;
             }
             if (destination==null) { return; }
-            IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as IItemTransporter;
-            if (trans !=null && !trans.CanAcceptItems()) { return; } // we are connected to transporter but it's busy
+            IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as IItemTransporter;
+            if (trans !=null && !trans.CanAcceptItems(this)) { return; } // we are connected to transporter but it's busy
             
             //if all is well then update the progress
             progress += transportspeed;
@@ -120,7 +123,7 @@ namespace qptech.src.itemtransport
         {
             if (itemstack == null) { return; }
             //attempt to transfer to another transporter
-            IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as IItemTransporter;
+            IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as IItemTransporter;
             if (trans!=null)
             {
                 int giveamount = trans.ReceiveItemStack(itemstack,this);
@@ -132,7 +135,7 @@ namespace qptech.src.itemtransport
                     MarkDirty(true);
                 }
             }
-            BlockEntityGenericTypedContainer outcont = Api.World.BlockAccessor.GetBlockEntity(CheckOutPos) as BlockEntityGenericTypedContainer;
+            BlockEntityGenericTypedContainer outcont = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as BlockEntityGenericTypedContainer;
             if (outcont == null) { return; }
             if (outcont.Inventory == null) { return; }
             DummyInventory dummy = new DummyInventory(Api,1);
@@ -169,7 +172,7 @@ namespace qptech.src.itemtransport
         protected virtual void TryTakeStack()
         {
             if (itemstack != null) { return; }
-            BlockEntity temp = Api.World.BlockAccessor.GetBlockEntity(CheckInPos);
+            BlockEntity temp = Api.World.BlockAccessor.GetBlockEntity(inputlocation);
             BlockEntityGenericTypedContainer incont = temp as BlockEntityGenericTypedContainer;
             if (incont == null || incont.Inventory == null || incont.Inventory.Empty) { return; }
             foreach(ItemSlot slot in incont.Inventory)

@@ -17,7 +17,7 @@ namespace qptech.src.itemtransport
     interface IItemTransporter
     {
         int ReceiveItemStack(ItemStack incomingstack,IItemTransporter fromtransporter);
-        bool CanAcceptItems();
+        bool CanAcceptItems(IItemTransporter fromtransporter);
         
         BlockPos TransporterPos { get; }
     }

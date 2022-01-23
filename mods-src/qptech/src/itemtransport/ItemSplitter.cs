@@ -27,15 +27,17 @@ namespace qptech.src.itemtransport
         int stacksize = 1000;
         
 
-        public bool CanAcceptItems()
+        public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
+            if (fromtransporter != null && !inputlocations.Contains(fromtransporter.TransporterPos)) { return false; }
             if (itemstack == null) { return true; }
+
             return false;
         }
 
         public int ReceiveItemStack(ItemStack incomingstack, IItemTransporter fromtransporter)
         {
-            if (!CanAcceptItems()) { return 0; }
+            if (itemstack != null) { return 0; }
             if (fromtransporter != null && !inputlocations.Contains(fromtransporter.TransporterPos)) { return 0; }
             itemstack = incomingstack.Clone();
             itemstack.StackSize = Math.Min(itemstack.StackSize, stacksize);
@@ -102,7 +104,7 @@ namespace qptech.src.itemtransport
             {
                 BlockPos outpos = Pos.Copy().Offset(facing);
                 IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(outpos) as IItemTransporter;
-                if (trans==null || !trans.CanAcceptItems()) { continue; }
+                if (trans==null || !trans.CanAcceptItems(this)) { continue; }
                 availableoutputs.Add(trans);
             }
             if (availableoutputs.Count() == 0) { return; }
