@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
@@ -70,7 +72,7 @@ namespace qptech.src.itemtransport
             //TODO - should probably filter liquids
             if (fromtransporter != null && fromtransporter.TransporterPos != inputlocation) { return 0; }
             if (ItemStack == null) {
-                int acceptqty= Math.Min(itemstack.StackSize, stacksize);
+                int acceptqty= Math.Min(incomingstack.StackSize, stacksize);
                 if (itemfilter != null)
                 {
                     acceptqty = itemfilter.TestStack(incomingstack);
@@ -183,11 +185,17 @@ namespace qptech.src.itemtransport
             if (incont == null || incont.Inventory == null || incont.Inventory.Empty) { return; }
             foreach(ItemSlot slot in incont.Inventory)
             {
-                if (slot == null || slot.Empty) { continue; }
+                if (slot == null || slot.Empty||slot.Itemstack==null) { continue; }
+                int takefiltered = Math.Min(stacksize, slot.Itemstack.StackSize);
+                if (itemfilter != null)
+                {
+                    takefiltered = itemfilter.TestStack(slot.Itemstack);
+                    if (takefiltered == 0) { continue; }
+                }
                 itemstack = slot.Itemstack.Clone();
-                itemstack.StackSize = Math.Min(stacksize, itemstack.StackSize);
-
-                slot.Itemstack.StackSize -= itemstack.StackSize;
+                itemstack.StackSize = takefiltered;
+                
+                slot.Itemstack.StackSize -= takefiltered;
                 if (slot.Itemstack.StackSize <= 0) { slot.Itemstack = null; }
                 slot.MarkDirty();
                 progress = 0;
@@ -236,6 +244,49 @@ namespace qptech.src.itemtransport
             mesher.AddMeshData(meshdata);*/
             return base.OnTesselation(mesher, tessThreadTesselator);
         }
+
+        public virtual bool OnPlayerInteract(IPlayer player)
+        {
+            //if we have a filter and player clicks wiht right hand, clear the filter
+            if (itemfilter != null && player.Entity.RightHandItemSlot.Itemstack == null)
+            {
+                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.ClearFilter, null);
+                return false;
+            }
+            else if (player.Entity.RightHandItemSlot.Itemstack != null)
+            {
+                itemfilter = new ItemFilter();
+                ItemStack pstack = player.Entity.RightHandItemSlot.Itemstack;
+                itemfilter.SetFilterToStack(pstack);
+                byte[] filterasbytes = ObjectToByteArray(itemfilter);
+                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.SetFilter, filterasbytes);
+                return false;
+            }
+
+            return true;
+        }
+        public enum enPacketIDs
+        {
+            ClearFilter = 99990001,
+            SetFilter = 99990002
+        }
+        public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
+        {
+            if (packetid == (int)enPacketIDs.ClearFilter)
+            {
+                if (itemfilter != null)
+                {
+                    itemfilter.ClearFilter();
+                    MarkDirty(true);
+                }
+            }
+            else if (packetid == (int)enPacketIDs.SetFilter)
+            {
+                itemfilter = ByteArrayToObject(data) as ItemFilter;
+                MarkDirty(true);
+            }
+        }
+
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
@@ -243,8 +294,23 @@ namespace qptech.src.itemtransport
             tree.SetItemstack("itemstack", itemstack);
             if (destination == null) { destination = Pos; }
             tree.SetBlockPos("destination", destination);
+            byte[] filterasbytes = new byte[0];
+            if (itemfilter != null)
+            {
+                filterasbytes = ObjectToByteArray(itemfilter);
+            }
+            tree.SetBytes("itemfilter", filterasbytes);
+        }
+
+        public static byte[] ObjectToByteArray(Object obj)
+        {
             
-            
+            BinaryFormatter bf = new BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
@@ -257,9 +323,30 @@ namespace qptech.src.itemtransport
                 itemstack.ResolveBlockOrItem(worldAccessForResolve);
             }
             destination = tree.GetBlockPos("destination",Pos);
-           
+            itemfilter = null;
+           if (tree.HasAttribute("itemfilter"))
+            {
+                byte[] filterasbytes = tree.GetBytes("itemfilter");
+                if (filterasbytes.Length > 0)
+                {
+                    itemfilter = ByteArrayToObject(filterasbytes) as ItemFilter;
+                }
+            }
             
         }
+
+        public static Object ByteArrayToObject(byte[] arrBytes)
+        {
+            using (var memStream = new MemoryStream())
+            {
+                var binForm = new BinaryFormatter();
+                memStream.Write(arrBytes, 0, arrBytes.Length);
+                memStream.Seek(0, SeekOrigin.Begin);
+                var obj = binForm.Deserialize(memStream);
+                return obj;
+            }
+        }
+
         public override void OnBlockRemoved()
         {
             if (Api is ICoreAPI && itemstack != null)
@@ -305,14 +392,14 @@ namespace qptech.src.itemtransport
             return output;
         }
     }
+    [Serializable]
     public class ItemFilter
     {
         public int minsize = 1;
         public int maxsize = 10000; //1000 should cover all the max stacks
         static int defaultminsize =>1;
         static int defaultmaxsize => 10000;
-        public Item fixedItem;
-        public Block fixedBlock;
+        public string filtercode;
         public string matchfirstcodepart="";
         
         public bool onlysmeltable = false;
@@ -322,22 +409,26 @@ namespace qptech.src.itemtransport
             int acceptcount = Math.Min(itemstack.StackSize, maxsize);
             if (itemstack.StackSize < minsize) { return 0; }
             
-            if (fixedItem!=null && itemstack.Item != fixedItem) { return 0; }
-            if (fixedBlock!=null && itemstack.Block != fixedBlock) { return 0; }
+            if (filtercode!="" && itemstack.Item.Code.ToString() != filtercode && itemstack.Block.Code.ToString()!=filtercode) { return 0; }
+            
 
             return acceptcount;
         }
         public void ClearFilter()
         {
-            fixedBlock = null;
-            fixedItem = null;
+            filtercode = "";
+            matchfirstcodepart = "";
             minsize = defaultminsize;
             maxsize = defaultmaxsize;
         }
         public void SetFilterToStack(ItemStack itemstack)
         {
-            if (itemstack.Item != null) { fixedItem = itemstack.Item; fixedBlock = null; }
-            else if (itemstack.Block != null) { fixedBlock = itemstack.Block; fixedItem = null; }
+            if (itemstack == null)
+            {
+                return;
+            }
+            if (itemstack.Item != null) { filtercode = itemstack.Item.Code.ToString(); }
+            else if (itemstack.Block != null) { filtercode = itemstack.Block.Code.ToString(); }
         }
         public string GetFilterDescription()
         {
@@ -349,10 +440,12 @@ namespace qptech.src.itemtransport
                 if (maxsize != defaultmaxsize) { d += " maximum " + maxsize + " "; }
                 d += " items. ";
             }
-            if (fixedBlock != null) { d += " Only accepts " + fixedBlock.Code.ToString(); }
-            if (fixedItem != null) { d += " Only accepts " + fixedItem.Code.ToShortString(); }
+            if (filtercode!="") { d += " Only accepts " + filtercode; }
+            
             if (matchfirstcodepart != ""){ d += " Type " + matchfirstcodepart; }
             return d;
         }
+
+        
     }
 }
