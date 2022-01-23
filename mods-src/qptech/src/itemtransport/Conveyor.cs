@@ -37,7 +37,7 @@ namespace qptech.src.itemtransport
 
         int stacksize = 1;
 
-        
+        public ItemFilter itemfilter;
 
         public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
@@ -70,8 +70,14 @@ namespace qptech.src.itemtransport
             //TODO - should probably filter liquids
             if (fromtransporter != null && fromtransporter.TransporterPos != inputlocation) { return 0; }
             if (ItemStack == null) {
+                int acceptqty= Math.Min(itemstack.StackSize, stacksize);
+                if (itemfilter != null)
+                {
+                    acceptqty = itemfilter.TestStack(incomingstack);
+                    if (acceptqty == 0) { return 0; }
+                }
                 itemstack = incomingstack.Clone();
-                itemstack.StackSize = Math.Min(itemstack.StackSize, stacksize);
+                itemstack.StackSize = acceptqty;
                 progress = 0;
                 MarkDirty(true);
                 return itemstack.StackSize;
@@ -238,6 +244,7 @@ namespace qptech.src.itemtransport
             if (destination == null) { destination = Pos; }
             tree.SetBlockPos("destination", destination);
             
+            
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
@@ -270,6 +277,11 @@ namespace qptech.src.itemtransport
             di.DropAll(Pos.Offset(BlockFacing.UP).ToVec3d());
         }
 
+        public int CheckItemFilter(ItemStack inputstack)
+        {
+            return 0;
+        }
+
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
@@ -277,6 +289,7 @@ namespace qptech.src.itemtransport
             if (ItemStack != null) { dsc.AppendLine("Transporting " + itemstack.ToString() + " %" + progress); }
             
             if (destination!=null && destination != Pos) { dsc.AppendLine("To " + destination.ToString()); }
+            if (itemfilter != null) { dsc.AppendLine(itemfilter.GetFilterDescription()); }
 
         }
         //Lerp two vectors, but i'm not 100% this is mathematically correct way to do it
@@ -290,6 +303,56 @@ namespace qptech.src.itemtransport
             output.Z = start.Z + (end.Z - start.Z) * percent;
 
             return output;
+        }
+    }
+    public class ItemFilter
+    {
+        public int minsize = 1;
+        public int maxsize = 10000; //1000 should cover all the max stacks
+        static int defaultminsize =>1;
+        static int defaultmaxsize => 10000;
+        public Item fixedItem;
+        public Block fixedBlock;
+        public string matchfirstcodepart="";
+        
+        public bool onlysmeltable = false;
+
+        public int TestStack(ItemStack itemstack)
+        {
+            int acceptcount = Math.Min(itemstack.StackSize, maxsize);
+            if (itemstack.StackSize < minsize) { return 0; }
+            
+            if (fixedItem!=null && itemstack.Item != fixedItem) { return 0; }
+            if (fixedBlock!=null && itemstack.Block != fixedBlock) { return 0; }
+
+            return acceptcount;
+        }
+        public void ClearFilter()
+        {
+            fixedBlock = null;
+            fixedItem = null;
+            minsize = defaultminsize;
+            maxsize = defaultmaxsize;
+        }
+        public void SetFilterToStack(ItemStack itemstack)
+        {
+            if (itemstack.Item != null) { fixedItem = itemstack.Item; fixedBlock = null; }
+            else if (itemstack.Block != null) { fixedBlock = itemstack.Block; fixedItem = null; }
+        }
+        public string GetFilterDescription()
+        {
+            string d = "Filter Info: ";
+            if (minsize!=defaultminsize || maxsize != defaultmaxsize)
+            {
+                d += " Qty Limits:";
+                if (minsize != defaultminsize) { d += " at least " + minsize + " "; }
+                if (maxsize != defaultmaxsize) { d += " maximum " + maxsize + " "; }
+                d += " items. ";
+            }
+            if (fixedBlock != null) { d += " Only accepts " + fixedBlock.Code.ToString(); }
+            if (fixedItem != null) { d += " Only accepts " + fixedItem.Code.ToShortString(); }
+            if (matchfirstcodepart != ""){ d += " Type " + matchfirstcodepart; }
+            return d;
         }
     }
 }
