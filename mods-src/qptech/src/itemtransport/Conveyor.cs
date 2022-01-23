@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using ProtoBuf;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 using Vintagestory.API.Client;
 using Vintagestory.API.Server;
-
+using Vintagestory.API.Util;
+using Vintagestory.API.Config;
 namespace qptech.src.itemtransport
 {
     class Conveyor : BlockEntity, IItemTransporter
@@ -258,7 +258,7 @@ namespace qptech.src.itemtransport
                 itemfilter = new ItemFilter();
                 ItemStack pstack = player.Entity.RightHandItemSlot.Itemstack;
                 itemfilter.SetFilterToStack(pstack);
-                byte[] filterasbytes = ObjectToByteArray(itemfilter);
+                byte[] filterasbytes = SerializerUtil.Serialize<ItemFilter>(itemfilter);
                 (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.SetFilter, filterasbytes);
                 return false;
             }
@@ -282,7 +282,7 @@ namespace qptech.src.itemtransport
             }
             else if (packetid == (int)enPacketIDs.SetFilter)
             {
-                itemfilter = ByteArrayToObject(data) as ItemFilter;
+                itemfilter = SerializerUtil.Deserialize<ItemFilter>(data);
                 MarkDirty(true);
             }
         }
@@ -294,24 +294,12 @@ namespace qptech.src.itemtransport
             tree.SetItemstack("itemstack", itemstack);
             if (destination == null) { destination = Pos; }
             tree.SetBlockPos("destination", destination);
-            byte[] filterasbytes = new byte[0];
-            if (itemfilter != null)
-            {
-                filterasbytes = ObjectToByteArray(itemfilter);
-            }
+            byte[] filterasbytes= SerializerUtil.Serialize<ItemFilter>(itemfilter);
+            
             tree.SetBytes("itemfilter", filterasbytes);
         }
 
-        public static byte[] ObjectToByteArray(Object obj)
-        {
-            
-            BinaryFormatter bf = new BinaryFormatter();
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }
+      
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
@@ -326,26 +314,16 @@ namespace qptech.src.itemtransport
             itemfilter = null;
            if (tree.HasAttribute("itemfilter"))
             {
-                byte[] filterasbytes = tree.GetBytes("itemfilter");
-                if (filterasbytes.Length > 0)
+                byte[] data = tree.GetBytes("itemfilter");
+                if (data.Length > 0)
                 {
-                    itemfilter = ByteArrayToObject(filterasbytes) as ItemFilter;
+                    itemfilter = SerializerUtil.Deserialize<ItemFilter>(data);
                 }
             }
             
         }
 
-        public static Object ByteArrayToObject(byte[] arrBytes)
-        {
-            using (var memStream = new MemoryStream())
-            {
-                var binForm = new BinaryFormatter();
-                memStream.Write(arrBytes, 0, arrBytes.Length);
-                memStream.Seek(0, SeekOrigin.Begin);
-                var obj = binForm.Deserialize(memStream);
-                return obj;
-            }
-        }
+       
 
         public override void OnBlockRemoved()
         {
@@ -392,7 +370,7 @@ namespace qptech.src.itemtransport
             return output;
         }
     }
-    [Serializable]
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     public class ItemFilter
     {
         public int minsize = 1;
@@ -403,14 +381,19 @@ namespace qptech.src.itemtransport
         public string matchfirstcodepart="";
         
         public bool onlysmeltable = false;
+        public ItemFilter()
+        {
 
+        }
         public int TestStack(ItemStack itemstack)
         {
             int acceptcount = Math.Min(itemstack.StackSize, maxsize);
             if (itemstack.StackSize < minsize) { return 0; }
-            
-            if (filtercode!="" && itemstack.Item.Code.ToString() != filtercode && itemstack.Block.Code.ToString()!=filtercode) { return 0; }
-            
+            if (filtercode != "")
+            {
+                if (itemstack.Item != null && itemstack.Item.Code.ToString() != filtercode) { return 0; }
+                if (itemstack.Block != null && itemstack.Block.Code.ToString() != filtercode) { return 0; }
+            }
 
             return acceptcount;
         }
