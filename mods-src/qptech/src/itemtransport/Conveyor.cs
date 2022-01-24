@@ -192,8 +192,9 @@ namespace qptech.src.itemtransport
                     takefiltered = itemfilter.TestStack(slot.Itemstack);
                     takefiltered = Math.Min(stacksize, takefiltered);
                     
-                    if (takefiltered == 0) { continue; }
+                    
                 }
+                if (takefiltered <= 0) { continue; }
                 itemstack = slot.Itemstack.Clone();
                 itemstack.StackSize = takefiltered;
                 
@@ -202,6 +203,7 @@ namespace qptech.src.itemtransport
                 slot.MarkDirty();
                 progress = 0;
                 MarkDirty(true);
+                break;
             }
         }
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
