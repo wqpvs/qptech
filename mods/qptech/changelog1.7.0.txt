@@ -1,3 +1,4 @@
 ﻿1.7.0 - item transport update
-- added item transport pipes
-- added item transport 3 way splitter
+- added filterable item transport pipes
+- added item 3 and 4 way splitters
+- fixed assembler type machines to try harder to find open slots

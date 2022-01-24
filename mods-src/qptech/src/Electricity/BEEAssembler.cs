@@ -226,18 +226,23 @@ namespace qptech.src
             }
             
                 var outputContainer = checkblock as BlockEntityContainer;
-                if (outputContainer != null && dummy[0].Itemstack.StackSize>0)
+
+            if (outputContainer != null && dummy[0].Itemstack.StackSize > 0)
+            {
+                foreach (ItemSlot slot in outputContainer.Inventory) 
                 {
-                    WeightedSlot tryoutput = outputContainer.Inventory.GetBestSuitedSlot(dummy[0]);
+                    ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, outputQuantity);
 
-                    if (tryoutput.slot != null)
+                    dummy[0].TryPutInto(slot, ref op);
+                    if (op.NotMovedQuantity == 0)
                     {
-                        ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, outputQuantity);
-
-                        dummy[0].TryPutInto(tryoutput.slot, ref op);
-
+                        outputStack.StackSize = 0;
+                        break;
                     }
                 }
+
+
+            }
             
             if (outputStack.StackSize!=0)
             {
