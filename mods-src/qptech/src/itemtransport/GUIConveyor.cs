@@ -28,13 +28,14 @@ namespace qptech.src.itemtransport
             ElementBounds blockTextBounds = ElementBounds.Fixed(21, 223, 254, 30);
             ElementBounds blockTextInputBounds = ElementBounds.Fixed(21, 262, 551, 37);
             ElementBounds applyButtonBounds = ElementBounds.Fixed(21, 531, 151, 39);
-            
+            ElementBounds cancelButtonBounds = ElementBounds.Fixed(224, 531, 152, 39);
+            ElementBounds clearButtonBounds = ElementBounds.Fixed(410, 531, 152, 39);
             ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
 
             bgBounds.BothSizing = ElementSizing.FitToChildren;
             bgBounds.WithChildren(
                 allowTextBounds,allowTextInputBounds,mustMatchAllBoxBounds,
-                applyButtonBounds,
+                applyButtonBounds,cancelButtonBounds,clearButtonBounds,
                 blockTextBounds,blockTextInputBounds);
             string guicomponame = conveyor.Pos.ToString()+" Conveyor";
             if (conveyor.itemfilter == null)
@@ -55,8 +56,9 @@ namespace qptech.src.itemtransport
                 .AddToggleButton("Match All",CairoFont.WhiteDetailText(),OnMatchAllToggle,mustMatchAllBoxBounds,"mustmatchall")
                 .AddRichtext("Block objects with",CairoFont.WhiteDetailText(),blockTextBounds)
                 .AddTextInput(blockTextInputBounds,OnChangeBlockFilterInput,CairoFont.WhiteDetailText(),"block")
-                .AddButton("Apply", OnApplyButton, applyButtonBounds);
-
+                .AddButton("Apply", OnApplyButton, applyButtonBounds)
+                .AddButton("Cancel",TryClose,cancelButtonBounds)
+                .AddButton("Clear", OnClearButton, clearButtonBounds)
             ;
             SingleComposer.GetToggleButton("mustmatchall").SetValue(itemfilter.mustmatchall);
             SingleComposer.GetTextInput("allow").SetValue(itemfilter.allowonlymatch);
@@ -97,6 +99,11 @@ namespace qptech.src.itemtransport
             TryClose();
             return true;
         }
-
+        bool OnClearButton()
+        {
+            itemfilter = new ItemFilter();
+            OnApplyButton();
+            return true;
+        }
     }
 }
