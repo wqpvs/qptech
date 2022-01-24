@@ -190,6 +190,8 @@ namespace qptech.src.itemtransport
                 if (itemfilter != null)
                 {
                     takefiltered = itemfilter.TestStack(slot.Itemstack);
+                    takefiltered = Math.Min(stacksize, takefiltered);
+                    
                     if (takefiltered == 0) { continue; }
                 }
                 itemstack = slot.Itemstack.Clone();
