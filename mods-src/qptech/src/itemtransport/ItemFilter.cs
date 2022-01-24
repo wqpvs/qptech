@@ -27,7 +27,7 @@ namespace qptech.src.itemtransport
         public string allowonlymatch="";
         public bool mustmatchall = false;
         public string blockonlymatch="";
-
+        public Dictionary<string, string> rules;
         public bool onlysmeltable = false;
         public ItemFilter()
         {
@@ -109,6 +109,7 @@ namespace qptech.src.itemtransport
             copy.minsize = minsize;
             copy.onlysmeltable = onlysmeltable;
             copy.mustmatchall = mustmatchall;
+            if (rules != null) { copy.rules = new Dictionary<string, string>(rules); }
             return copy;
         }
 
