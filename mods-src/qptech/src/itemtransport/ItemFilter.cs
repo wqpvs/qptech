@@ -22,8 +22,10 @@ namespace qptech.src.itemtransport
         public int maxsize = 10000; //1000 should cover all the max stacks
         static int defaultminsize => 1;
         static int defaultmaxsize => 10000;
-        public string filtercode;
-        public string matchfirstcodepart = "";
+        static char[] Splitcode => ",".ToCharArray();
+        public string filtercode="";
+        public string allowonlymatch="";
+        public string blockonlymatch="";
 
         public bool onlysmeltable = false;
         public ItemFilter()
@@ -34,20 +36,40 @@ namespace qptech.src.itemtransport
         {
             int acceptcount = Math.Min(itemstack.StackSize, maxsize);
             if (itemstack.StackSize < minsize) { return 0; }
+            string code = itemstack.Collectible.Code.ToString().ToLower().Trim();
             if (filtercode != "")
             {
-                if (itemstack.Item != null && itemstack.Item.Code.ToString() != filtercode) { return 0; }
-                if (itemstack.Block != null && itemstack.Block.Code.ToString() != filtercode) { return 0; }
+                if (filtercode != code) { return 0; }
             }
+            if (allowonlymatch != "")
+            {
+                string[] matchentries = allowonlymatch.Split(Splitcode);
+                foreach (string match in matchentries)
+                {
+                    string cleanmatch=match.ToLower().Trim();
+                    if (!(code.Contains(cleanmatch))){ return 0; }
+                }
 
+            }
+            if (blockonlymatch != "")
+            {
+                string[] matchentries = blockonlymatch.Split(Splitcode);
+                foreach (string match in matchentries)
+                {
+                    string cleanmatch = match.ToLower().Trim();
+                    if ((code.Contains(cleanmatch))) { return 0; }
+                }
+            }
             return acceptcount;
         }
         public void ClearFilter()
         {
-            filtercode = "";
-            matchfirstcodepart = "";
             minsize = defaultminsize;
             maxsize = defaultmaxsize;
+            allowonlymatch = "";
+            blockonlymatch = "";
+            filtercode = "";
+            onlysmeltable = false;
         }
         public void SetFilterToStack(ItemStack itemstack)
         {
@@ -69,11 +91,21 @@ namespace qptech.src.itemtransport
                 d += " items. ";
             }
             if (filtercode != "") { d += " Only accepts " + filtercode; }
-
-            if (matchfirstcodepart != "") { d += " Type " + matchfirstcodepart; }
+            if (allowonlymatch != "") { d += "Allow items with [" + allowonlymatch + "]"; }
+            if (blockonlymatch!="") { d += "Block items with [" + blockonlymatch + "]"; }
             return d;
         }
-
+        public ItemFilter Copy()
+        {
+            ItemFilter copy = new ItemFilter();
+            copy.allowonlymatch = allowonlymatch;
+            copy.blockonlymatch = blockonlymatch;
+            copy.filtercode = filtercode;
+            copy.maxsize = maxsize;
+            copy.minsize = minsize;
+            copy.onlysmeltable = onlysmeltable;
+            return copy;
+        }
 
     }
 }

@@ -248,7 +248,7 @@ namespace qptech.src.itemtransport
         public virtual bool OnPlayerInteract(IPlayer player)
         {
             //if we have a filter and player clicks wiht right hand, clear the filter
-            if (itemfilter != null && player.Entity.RightHandItemSlot.Itemstack == null)
+            /*if (itemfilter != null && player.Entity.RightHandItemSlot.Itemstack == null)
             {
                 (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.ClearFilter, null);
                 return true;
@@ -262,14 +262,55 @@ namespace qptech.src.itemtransport
                 (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.SetFilter, filterasbytes);
                 return true;
             }
-
-            return true;
+            */
+            if (player.Entity.RightHandItemSlot.Itemstack == null)
+            {
+                OpenStatusGUI();
+                return true;
+            }
+            
+            return false;
         }
+        GUIConveyor gui;
+        public virtual void OpenStatusGUI()
+        {
+            ICoreClientAPI capi = Api as ICoreClientAPI;
+
+
+            if (capi != null)
+            {
+                if (gui == null)
+                {
+                    gui = new GUIConveyor("Conveyor Setup", Pos, capi);
+
+                    gui.TryOpen();
+                    gui.SetupDialog(this);
+
+                }
+                else
+                {
+                    gui.TryClose();
+                    gui.TryOpen();
+                    gui.SetupDialog(this);
+                }
+            }
+
+        }
+
         public enum enPacketIDs
         {
             ClearFilter = 99990001,
             SetFilter = 99990002
         }
+        
+        public void OnNewFilter(ItemFilter newfilter)
+        {
+            itemfilter = newfilter;
+            
+            byte[] filterasbytes = SerializerUtil.Serialize<ItemFilter>(itemfilter);
+            (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.SetFilter, filterasbytes);
+        }
+        
         public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
         {
             if (packetid == (int)enPacketIDs.ClearFilter)
