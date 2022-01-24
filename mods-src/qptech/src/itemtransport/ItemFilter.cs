@@ -25,6 +25,7 @@ namespace qptech.src.itemtransport
         static char[] Splitcode => ",".ToCharArray();
         public string filtercode="";
         public string allowonlymatch="";
+        public bool mustmatchall = false;
         public string blockonlymatch="";
 
         public bool onlysmeltable = false;
@@ -44,12 +45,15 @@ namespace qptech.src.itemtransport
             if (allowonlymatch != "")
             {
                 string[] matchentries = allowonlymatch.Split(Splitcode);
+                bool foundmatch = false;
                 foreach (string match in matchentries)
                 {
                     string cleanmatch=match.ToLower().Trim();
-                    if (!(code.Contains(cleanmatch))){ return 0; }
-                }
+                    if (mustmatchall && !code.Contains(cleanmatch)) { return 0; }
+                    else if ((code.Contains(cleanmatch))){ foundmatch=true; }
 
+                }
+                if (!foundmatch) { return 0; }
             }
             if (blockonlymatch != "")
             {
@@ -104,6 +108,7 @@ namespace qptech.src.itemtransport
             copy.maxsize = maxsize;
             copy.minsize = minsize;
             copy.onlysmeltable = onlysmeltable;
+            copy.mustmatchall = mustmatchall;
             return copy;
         }
 
