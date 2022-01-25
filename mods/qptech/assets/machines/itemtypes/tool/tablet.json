@@ -1,5 +1,6 @@
 {
 	"code": "tablet",
+	"class": "TabletTool",
 	"creativeinventory": {
 		"qptech": [ "*" ]
 	},

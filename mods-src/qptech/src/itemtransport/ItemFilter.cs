@@ -90,7 +90,7 @@ namespace qptech.src.itemtransport
         public string GetFilterDescription()
         {
             string d = "Filter Info: ";
-            if (!isoff) { d += "OFF! "; }
+            if (isoff) { d += "OFF! "; }
             if (minsize != defaultminsize || maxsize != defaultmaxsize)
             {
                 d += " Qty Limits:";

@@ -21,7 +21,9 @@ namespace qptech.src.itemtransport
         {
             var conveyor = world.BlockAccessor.GetBlockEntity(blockSel.Position) as Conveyor;
             if (conveyor == null) { return base.OnBlockInteractStart(world, byPlayer, blockSel); }
-            return (!conveyor.OnPlayerInteract(byPlayer));
+            bool tryconveyor = conveyor.OnPlayerInteract(byPlayer);
+            if (tryconveyor) { return false; }
+            return base.OnBlockInteractStart(world, byPlayer, blockSel);
 
             
         }
