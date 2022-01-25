@@ -2,3 +2,6 @@
 - added filterable item transport pipes
 - added item 3 and 4 way splitters
 - fixed assembler type machines to try harder to find open slots
+
+todo: Need a pipe tool or computer or something that can hold filters and copy them to other things (probably
+    need to make the GUI more abstract)

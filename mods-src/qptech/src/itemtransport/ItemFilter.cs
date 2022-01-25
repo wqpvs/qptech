@@ -29,12 +29,14 @@ namespace qptech.src.itemtransport
         public string blockonlymatch="";
         public Dictionary<string, string> rules;
         public bool onlysmeltable = false;
+        public bool isoff ;
         public ItemFilter()
         {
-
+            
         }
         public int TestStack(ItemStack itemstack)
         {
+            if (isoff) { return 0; }
             int acceptcount = Math.Min(itemstack.StackSize, maxsize);
             if (itemstack.StackSize < minsize) { return 0; }
             string code = itemstack.Collectible.Code.ToString().ToLower().Trim();
@@ -73,6 +75,7 @@ namespace qptech.src.itemtransport
             allowonlymatch = "";
             blockonlymatch = "";
             filtercode = "";
+            isoff = true;
             onlysmeltable = false;
         }
         public void SetFilterToStack(ItemStack itemstack)
@@ -87,6 +90,7 @@ namespace qptech.src.itemtransport
         public string GetFilterDescription()
         {
             string d = "Filter Info: ";
+            if (!isoff) { d += "OFF! "; }
             if (minsize != defaultminsize || maxsize != defaultmaxsize)
             {
                 d += " Qty Limits:";
@@ -109,6 +113,7 @@ namespace qptech.src.itemtransport
             copy.minsize = minsize;
             copy.onlysmeltable = onlysmeltable;
             copy.mustmatchall = mustmatchall;
+            copy.isoff = isoff;
             if (rules != null) { copy.rules = new Dictionary<string, string>(rules); }
             return copy;
         }

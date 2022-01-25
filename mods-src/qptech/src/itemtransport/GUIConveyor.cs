@@ -27,15 +27,17 @@ namespace qptech.src.itemtransport
             ElementBounds mustMatchAllBoxBounds = ElementBounds.Fixed(408,133,164,25);
             ElementBounds blockTextBounds = ElementBounds.Fixed(21, 223, 254, 30);
             ElementBounds blockTextInputBounds = ElementBounds.Fixed(21, 262, 551, 37);
-            ElementBounds applyButtonBounds = ElementBounds.Fixed(21, 531, 151, 39);
+            ElementBounds applyButtonBounds = ElementBounds.Fixed(21, 531, 152, 39);
             ElementBounds cancelButtonBounds = ElementBounds.Fixed(224, 531, 152, 39);
-            ElementBounds clearButtonBounds = ElementBounds.Fixed(410, 531, 152, 39);
+            ElementBounds clearButtonBounds = ElementBounds.Fixed(424, 68, 152, 39);
+            ElementBounds toggleOnOffButtonBounds = ElementBounds.Fixed(21,68,152,39);
+            
             ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
 
             bgBounds.BothSizing = ElementSizing.FitToChildren;
             bgBounds.WithChildren(
                 allowTextBounds,allowTextInputBounds,mustMatchAllBoxBounds,
-                applyButtonBounds,cancelButtonBounds,clearButtonBounds,
+                applyButtonBounds,cancelButtonBounds,clearButtonBounds,toggleOnOffButtonBounds,
                 blockTextBounds,blockTextInputBounds);
             string guicomponame = conveyor.Pos.ToString()+" Conveyor";
             if (conveyor.itemfilter == null)
@@ -44,10 +46,12 @@ namespace qptech.src.itemtransport
             }
             else
             {
-                itemfilter = conveyor.itemfilter.Copy();
+                itemfilter = conveyor.itemfilter;
+                
             }
 
-
+            string onofftext = "DISABLE";
+            
             SingleComposer = capi.Gui.CreateCompo(guicomponame, dialogBounds)
                 .AddShadedDialogBG(bgBounds)
                 .AddDialogTitleBar("Item Filter Setup", OnTitleBarCloseClicked)
@@ -59,7 +63,10 @@ namespace qptech.src.itemtransport
                 .AddButton("Apply", OnApplyButton, applyButtonBounds)
                 .AddButton("Cancel",TryClose,cancelButtonBounds)
                 .AddButton("Clear", OnClearButton, clearButtonBounds)
+                .AddToggleButton(onofftext, CairoFont.WhiteDetailText(),OnToggleOnOffButton,toggleOnOffButtonBounds,"onoff")
+                
             ;
+            SingleComposer.GetToggleButton("onoff").SetValue(itemfilter.isoff);
             SingleComposer.GetToggleButton("mustmatchall").SetValue(itemfilter.mustmatchall);
             SingleComposer.GetTextInput("allow").SetValue(itemfilter.allowonlymatch);
             SingleComposer.GetTextInput("block").SetValue(itemfilter.blockonlymatch);
@@ -82,6 +89,21 @@ namespace qptech.src.itemtransport
         public void OnMatchAllToggle(bool newvalue)
         {
             itemfilter.mustmatchall = newvalue;
+        }
+        public const string killtext = "noitems";
+        public void OnToggleOnOffButton(bool onoff)
+        {
+            itemfilter.isoff = onoff;
+            
+            
+        }
+
+        public bool OnGoButton()
+        {
+            itemfilter.allowonlymatch=itemfilter.allowonlymatch.Replace(killtext, "");
+            
+            OnApplyButton();
+            return true;
         }
 
         public override bool TryOpen()
