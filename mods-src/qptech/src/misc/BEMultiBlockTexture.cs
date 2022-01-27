@@ -31,7 +31,7 @@ namespace qptech.src.misc
                 return texsource[textureCode];
             }
         }
-
+        
         public Size2i AtlasSize => (Api as ICoreClientAPI).BlockTextureAtlas.Size;
         ICoreClientAPI capi;
         //string basetexturename = "block/stone/concretetile/concretetile-";
@@ -58,6 +58,7 @@ namespace qptech.src.misc
         public virtual void GenMesh(bool triggerneighbors)
         {
             if (capi == null) { return; }
+            
             meshdata = new MeshData();
             Shape shape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/tiledconcrete"));
             ShapeElement shapeelement = shape.Elements[0];
@@ -70,7 +71,7 @@ namespace qptech.src.misc
             }
             foreach (String facename in shapeelement.Faces.Keys)
             {
-                if (facename == "up"||facename=="down")
+                if (facename == "up")
                 {
                     int suffindex = 0;
                     if (!neighbors[BlockFacing.NORTH]) { suffindex += 1; }
@@ -78,6 +79,15 @@ namespace qptech.src.misc
                     if (!neighbors[BlockFacing.SOUTH]) { suffindex += 4; }
                     if (!neighbors[BlockFacing.WEST]) { suffindex += 8; }
                     shapeelement.Faces[facename].Texture = "#"+suffix[suffindex];
+                }
+                else if (facename == "down")
+                {
+                    int suffindex = 0;
+                    if (!neighbors[BlockFacing.SOUTH]) { suffindex += 1; }
+                    if (!neighbors[BlockFacing.EAST]) { suffindex += 2; }
+                    if (!neighbors[BlockFacing.NORTH]) { suffindex += 4; }
+                    if (!neighbors[BlockFacing.WEST]) { suffindex += 8; }
+                    shapeelement.Faces[facename].Texture = "#" + suffix[suffindex];
                 }
                 else if (facename == "east")
                 {
@@ -122,6 +132,7 @@ namespace qptech.src.misc
 
             }
             capi.Tesselator.TesselateShape("tileconcrete" + Pos.ToString(), shape, out meshdata, this);
+            
             //MarkDirty(true);
         }
 
@@ -129,13 +140,7 @@ namespace qptech.src.misc
 
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
-            
-            
-            ICoreClientAPI capi = Api as ICoreClientAPI;
-            
-            
-            
-            
+           
             mesher.AddMeshData(meshdata);
             
             capi.Render.UploadMesh(meshdata);
