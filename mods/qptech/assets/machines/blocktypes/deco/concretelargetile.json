@@ -1,0 +1,20 @@
+{
+	"code": "concretelargetile",
+	"class": "BlockMultiTexture",
+	"entityclass": "BEMultiBlockTexture",
+
+	"creativeinventory": {
+
+		"qptech-decor": [ "*" ]
+	},
+	"blockmaterial": "Stone",
+	"drawtype": "json",
+	"shape": { "base": "block/tiledconcrete" },
+
+
+	"resistance": 1,
+	"sounds": {
+		"place": "game:block/stone",
+		"walk": "game:walk/stone"
+	}
+}

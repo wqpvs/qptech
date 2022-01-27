@@ -1,0 +1,64 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"s": "block/stone/concretetile/concretetile-s",
+		"e": "block/stone/concretetile/concretetile-e",
+		"w": "block/stone/concretetile/concretetile-w",
+		"nesw": "block/stone/concretetile/concretetile-nesw",
+		"n": "block/stone/concretetile/concretetile-n",
+		"0": "block/stone/concretetile/concretetile-0",
+		"ne": "block/stone/concretetile/concretetile-ne",
+		"es": "block/stone/concretetile/concretetile-es",
+		"sw": "block/stone/concretetile/concretetile-sw",
+		"wn": "block/stone/concretetile/concretetile-wn",
+		"nes": "block/stone/concretetile/concretetile-nes",
+		"esw": "block/stone/concretetile/concretetile-esw",
+		"swn": "block/stone/concretetile/concretetile-swn",
+		"wne": "block/stone/concretetile/concretetile-wne",
+		"ns": "block/stone/concretetile/concretetile-ns",
+		"ew": "block/stone/concretetile/concretetile-ew"
+
+	},
+	"elements": [
+		{
+			"name": "Cube1",
+			"from": [ 0.0, 0.0, 0.0 ],
+			"to": [ 16.0, 16.0, 16.0 ],
+			"faces": {
+				"north": {
+					"texture": "#n",
+					"uv": [ 0.0, 0.0, 16.0, 16.0 ],
+					"autoUv": false
+				},
+				"east": {
+					"texture": "#e",
+					"uv": [ 0.0, 0.0, 16.0, 16.0 ]
+				},
+				"south": {
+					"texture": "#s",
+					"uv": [ 0.0, 0.0, 16.0, 16.0 ]
+				},
+				"west": {
+					"texture": "#w",
+					"uv": [ 0.0, 0.0, 16.0, 16.0 ]
+				},
+				"up": {
+					"texture": "#nesw",
+					"uv": [ 0.0, 0.0, 16.0, 16.0 ]
+				},
+				"down": {
+					"texture": "#0",
+					"uv": [ 0.0, 0.0, 16.0, 16.0 ],
+					"rotation": 180
+				}
+			}
+		}
+	]
+}
