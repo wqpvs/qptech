@@ -22,8 +22,7 @@
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
     <None Include="qptech\assets\machines\blocktypes\deco\concrete.json" />
-    <None Include="qptech\assets\machines\blocktypes\deco\concrete-lightgray.json" />
-    <None Include="qptech\assets\machines\blocktypes\deco\concretelargetile.json" />
+    <None Include="qptech\assets\machines\blocktypes\deco\industrialglass.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\enderchest.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\anitest.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
@@ -291,7 +290,6 @@
     <None Include="qptech\assets\machines\shapes\block\metal\stairs\metalstair.json" />
     <None Include="qptech\assets\machines\shapes\block\wood\basin.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\battery\primitive.json" />
-    <None Include="qptech\assets\machines\shapes\block\glass\BlockLantern.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\barrel.json" />
     <None Include="qptech\assets\machines\shapes\block\wood\cabinet-lower-door.json" />
     <None Include="qptech\assets\machines\shapes\block\wood\cabinet-mid-door.json" />
@@ -408,6 +406,7 @@
     <Content Include="qptech\assets\machines\textures\block\copperspool.png" />
     <Content Include="qptech\assets\machines\textures\block\copperspooldiagonal.png" />
     <Content Include="qptech\assets\machines\textures\block\copperspoolwrapped.png" />
+    <Content Include="qptech\assets\machines\textures\block\glass\industrialglass.png" />
     <Content Include="qptech\assets\machines\textures\block\lit.png" />
     <Content Include="qptech\assets\machines\textures\block\machinery-largefan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\bluepaintedwornsteelplate.png" />
@@ -483,22 +482,6 @@
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-internal.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-red.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-yellow.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-ew.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-ns.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-0.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-e.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-es.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-esw.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-n.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-ne.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-nes.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-nesw.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-s.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-sw.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-swn.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-w.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-wn.png" />
-    <Content Include="qptech\assets\machines\textures\block\stone\concretetile\concretetile-wne.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\other\front-granite.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\wires\tin-wires.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-white.png" />
@@ -523,6 +506,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="qptech\assets\game\blocktypes\" />
+    <Folder Include="qptech\assets\machines\shapes\block\glass\" />
     <Folder Include="qptech\assets\machines\shapes\block\indev\" />
     <Folder Include="qptech\assets\machines\shapes\block\liquid\" />
   </ItemGroup>
