@@ -35,10 +35,10 @@ namespace qptech.src.misc
         public Size2i AtlasSize => (Api as ICoreClientAPI).BlockTextureAtlas.Size;
         ICoreClientAPI capi;
         //string basetexturename = "block/stone/concretetile/concretetile-";
-        
+
         //string fulltexturename => basetexturename + suffix[directionmap];
-        
-        
+
+        MeshRef meshref;
         MeshData meshdata;
         Block gettextureblock;
         public override void Initialize(ICoreAPI api)
@@ -54,19 +54,23 @@ namespace qptech.src.misc
             
         }
 
-        
+       
+
+
         public virtual void GenMesh(bool triggerneighbors)
         {
             if (capi == null) { return; }
-            
+            meshref?.Dispose();
+            meshref = null;
             meshdata = new MeshData();
             Shape shape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/tiledconcrete"));
             ShapeElement shapeelement = shape.Elements[0];
             Dictionary<BlockFacing, bool> neighbors = new Dictionary<BlockFacing, bool>();
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
-                BEMultiBlockTexture bembt = capi.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BEMultiBlockTexture;
-                if (bembt == null) { neighbors[bf] = false; }
+                //BEMultiBlockTexture bembt = capi.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BEMultiBlockTexture;
+                Block otherblock = capi.World.BlockAccessor.GetBlock(Pos.Copy().Offset(bf));
+                if (otherblock!=Block) { neighbors[bf] = false; }
                 else { neighbors[bf] = true; }
             }
             foreach (String facename in shapeelement.Faces.Keys)
@@ -143,7 +147,7 @@ namespace qptech.src.misc
            
             mesher.AddMeshData(meshdata);
             
-            capi.Render.UploadMesh(meshdata);
+            meshref=capi.Render.UploadMesh(meshdata);
             return true;
         }
 
@@ -152,6 +156,13 @@ namespace qptech.src.misc
         {
             base.GetBlockInfo(forPlayer, dsc);
             
+        }
+
+        public override void OnBlockRemoved()
+        {
+            meshref?.Dispose();
+            meshref = null;
+            base.OnBlockRemoved();
         }
     }
 

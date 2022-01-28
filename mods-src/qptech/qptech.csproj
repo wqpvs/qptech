@@ -99,6 +99,7 @@
     <Compile Include="src\misc\BlockMultiTexture.cs" />
     <Compile Include="src\misc\ItemMiningDrill.cs" />
     <Compile Include="src\misc\BEMultiBlockTexture.cs" />
+    <Compile Include="src\misc\MultiBlockTextureRenderer.cs" />
     <Compile Include="src\networks\BEProcessToProcess.cs" />
     <Compile Include="src\networks\BEProcessToProcessFluidUser.cs" />
     <Compile Include="src\networks\IProcessingSupplier.cs" />
