@@ -96,7 +96,7 @@
         "validitems": [ "game:ironbloom" ],
         "quantity": 1
       }
-      
+
     ],
     "output": [
       {
@@ -105,6 +105,30 @@
       }
     ]
 
+  },
+  {
+    "name": "steel channel",
+    
+    "processingTime": 5000,
+    "ingredients": [
+      {
+        "validitems": [ "game:sheet-{metal}-down" ],
+        "quantity": 1
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:metalchaneel-{metal}" ],
+        "quantity": 2
+      }
+    ],
+    "wildcards": [
+      {
+        "wildcard": "{metal}",
+        "variants":  ["steel","iron"]
+      }
+    ]
   }
 ]
 

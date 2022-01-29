@@ -5,15 +5,18 @@
 - added tablet computer - useful for setting and copying filters on pipes
 - adding multiblock texture test
 - added industrial glass
+- added steel channels
 
 - todo:
 
-- make a machine for combing ingredients with heat - or maybe just mixer than can also include liquids?
+- make a machine for combining ingredients with heat - or maybe just mixer than can also include liquids?
 - make pure glass ingredient, smelts into industrial glass
     - mix lime, crushed quartz or something and sand?
 - need recipe for item pipes and sorters:
-    - steel channels
     - need some sort of circuits - figure out sub parts for that
 - need recipe for concrete - quick lime or mortar and stones and water?
 - need to figure out dyes for concrete
+- need steel processing
+- can i add wildcards to machine recipes somehow?
+
 

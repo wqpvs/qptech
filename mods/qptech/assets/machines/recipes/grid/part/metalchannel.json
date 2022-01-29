@@ -5,7 +5,7 @@
 			"type": "block",
 			"code": "game:metalsheet-*-down",
 			"name": "metal",
-			"allowedVariants": [ "iron" ],
+			"allowedVariants": [ "iron","steel" ],
 			"quantity": 1
 		},
 		

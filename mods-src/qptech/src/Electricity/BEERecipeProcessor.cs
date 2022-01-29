@@ -386,6 +386,7 @@ namespace qptech.src
         public double processingTime;
         public MachineRecipeItems[] ingredients;
         public MachineRecipeItems[] output;
+        public MachineWildCard[] wildcards;
         public MachineRecipe() { }
     }
     class MachineRecipeItems
@@ -394,5 +395,9 @@ namespace qptech.src
         public int quantity;
         public MachineRecipeItems() { }
     }
-    
+    class MachineWildCard
+    {
+        public string wildcard;
+        public string[] variants;
+    }
 }
