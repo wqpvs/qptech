@@ -114,6 +114,8 @@ namespace qptech.src
             }
             return Guid.Empty;
         }
+        
+
         public TextureAtlasPosition this[string textureCode]
         {
             get
@@ -287,6 +289,32 @@ namespace qptech.src
                     NetworkJoin(pnw.NetworkID); break;
                 }
                 
+            }
+            if (Block.HasBehavior<BlockBehaviorCanAttach>()){
+                ClothManager cm = Api.ModLoader.GetModSystem<ClothManager>();
+                ClothSystem cs = cm.GetClothSystemAttachedToBlock(Pos);
+                if (cs == null) { return; }
+                ClothPoint fp = cs.FirstPoint;
+                ClothPoint lp = cs.LastPoint;
+                BlockPos otherbp;
+                if (fp==null || lp == null || fp.PinnedToBlockPos==null || lp.PinnedToBlockPos==null) { return; }
+
+                if (fp.PinnedToBlockPos == Pos) { otherbp = lp.PinnedToBlockPos; }
+                else { otherbp = fp.PinnedToBlockPos; }
+                BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(otherbp);
+                IPowerNetworkMember pnw = checkblock as IPowerNetworkMember;
+                if (pnw == null) { return; }
+                Guid othernetwork = pnw.NetworkID;
+                
+                if (othernetwork == Guid.Empty) { return; }
+                if (othernetwork == NetworkID) { return; }
+                IFlexNetwork othernet = FlexNetworkManager.GetNetworkWithID(othernetwork);
+                IFlexNetwork mynet = FlexNetworkManager.GetNetworkWithID(NetworkID);
+                if (othernet != null && mynet != null && othernet.GetMembers().Count >= mynet.GetMembers().Count)
+                {
+                    NetworkJoin(pnw.NetworkID); return;
+                }
+
             }
         }
         

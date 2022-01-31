@@ -16,6 +16,7 @@ namespace qptech.src.networks
         void NetworkRemove();
         void NetworkJoin(Guid newnetwork);
         Guid GetNetworkID(BlockPos requestedby, string fortype);
+        
         void OnPulse(string channel);
     }
     interface IFlexNetwork
