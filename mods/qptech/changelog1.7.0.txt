@@ -9,6 +9,7 @@
 - (test)ropes and power poles for power transfer.
 - mv heater quartered power usage to 32 tf
 - doubled mv generator power output to 64 tf
+- added temporal steel ingot
 
 - todo:
 
@@ -16,7 +17,7 @@
 - make pure glass ingredient, smelts into industrial glass
     - mix lime, crushed quartz or something and sand?
 - need recipe for item pipes and sorters:
-    - need some sort of circuits - figure out sub parts for that
+    - need some sort of circuits - figure out sub parts for that -> temporal wire- braided copper wire, 
 - need recipe for concrete - quick lime or mortar and stones and water?
 - need to figure out dyes for concrete
 - need steel processing

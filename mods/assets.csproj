@@ -123,6 +123,7 @@
     <None Include="qptech\assets\machines\itemtypes\part\mv\braidedwire.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\wire.json" />
     <None Include="qptech\assets\machines\itemtypes\resource\charcoalpowder.json" />
+    <None Include="qptech\assets\machines\itemtypes\resource\ingot.json" />
     <None Include="qptech\assets\machines\itemtypes\resource\orepowder.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\jetpack.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\jetpackcontrol.json" />
@@ -444,6 +445,7 @@
     <Content Include="qptech\assets\machines\textures\block\machinery.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\hopper\machinery-border.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\hopper\tinbronze1.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\ingot\temporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\macerator\machinery-back.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\macerator\machinery-border-small.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\metalpress\castiron-back.png" />
@@ -494,10 +496,12 @@
     <Content Include="qptech\assets\machines\textures\block\tempblocks\standinblank.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\turbine.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\wiremill.png" />
+    <Content Include="qptech\assets\machines\textures\item\resource\temporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\item\rubbercrucible.png" />
     <Content Include="qptech\assets\machines\textures\item\redpaintedsteelwrench.png" />
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-brass.png" />
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-copper.png" />
+    <Content Include="qptech\assets\machines\textures\item\tablet.png" />
     <Content Include="qptech\qptech.dll" />
     <Content Include="qptech\qptech.pdb" />
     <Content Include="qptech\changelog1.5.txt" />
