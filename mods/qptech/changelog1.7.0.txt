@@ -6,6 +6,9 @@
 - adding multiblock texture test
 - added industrial glass
 - added steel channels
+- (test)ropes and power poles for power transfer.
+- mv heater quartered power usage to 32 tf
+- doubled mv generator power output to 64 tf
 
 - todo:
 
@@ -18,5 +21,7 @@
 - need to figure out dyes for concrete
 - need steel processing
 - can i add wildcards to machine recipes somehow?
+- item pipes - change directions with wrench right click
+
 
 

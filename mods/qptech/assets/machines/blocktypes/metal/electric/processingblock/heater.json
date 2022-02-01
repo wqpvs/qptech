@@ -26,7 +26,7 @@
 	"attributesByType": {
 		"*-mv-*": {
 			"genFlux": 0,
-			"useFlux": 128,
+			"useFlux": 32,
 			"processes": {
 				"heating": 1505
 			},
