@@ -6,7 +6,7 @@
 	},
 	width: 3,
 	height: 3,
-	output: { type: "block", code: "castironoven-cold-east", quantity: 1 }
+	output: { type: "block", code: "castironoven-extinct-east", quantity: 1 }
 }
 
 

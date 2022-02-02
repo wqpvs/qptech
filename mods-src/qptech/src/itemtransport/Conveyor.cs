@@ -274,7 +274,7 @@ namespace qptech.src.itemtransport
                 OpenStatusGUI();
                 return true;
             }
-            else if (player.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().Contains("wrench"))
+            else if (player.Entity.RightHandItemSlot.Itemstack.Item != null&&player.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().Contains("wrench"))
             {
                 WrenchSwap();
                 return true;

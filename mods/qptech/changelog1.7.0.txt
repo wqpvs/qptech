@@ -12,6 +12,7 @@
 - doubled mv generator power output to 64 tf
 - added temporal steel ingot, plate, and sheet - temporal steel ingots made in mixer (1 temporal gear+8 steel ingots -> 8 temporal steel ingots)
 - added mixer object
+- fixed recipes for castiron ovens
 
 
 - todo:
