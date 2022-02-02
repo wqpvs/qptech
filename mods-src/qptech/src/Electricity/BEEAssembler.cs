@@ -202,7 +202,16 @@ namespace qptech.src
             }
             Block outputBlock = Api.World.GetBlock(new AssetLocation(userecipe));
             Item outputItem = Api.World.GetItem(new AssetLocation(userecipe));
-            if (outputBlock == null&&outputItem==null) { deviceState = enDeviceState.ERROR;return; }
+            if (outputBlock == null&&outputItem==null) {
+                userecipe = userecipe.Replace("game", "machines");
+                outputBlock = Api.World.GetBlock(new AssetLocation(userecipe));
+                outputItem = Api.World.GetItem(new AssetLocation(userecipe));
+                if (outputBlock == null && outputItem == null)
+                {
+                    deviceState = enDeviceState.ERROR; return;
+                }
+            }
+
             ItemStack outputStack;
             if (outputBlock!=null)
             {

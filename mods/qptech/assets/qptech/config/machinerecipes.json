@@ -108,27 +108,48 @@
   },
   {
     "name": "steel channel",
-    
+
     "processingTime": 5000,
     "ingredients": [
       {
-        "validitems": [ "game:sheet-{metal}-down" ],
+        "validitems": [ "game:sheet-steel-down" ],
         "quantity": 1
       }
 
     ],
     "output": [
       {
-        "validitems": [ "machines:metalchaneel-{metal}" ],
+        "validitems": [ "machines:metalchaneel-steel" ],
         "quantity": 2
       }
-    ],
-    "wildcards": [
+    ]
+
+  },
+  {
+    "name": "Temporal Steel",
+
+    "processingTime": 10000,
+    "processingsteps": {
+      "heating": 1500
+    },
+    "ingredients": [
       {
-        "wildcard": "{metal}",
-        "variants":  ["steel","iron"]
+        "validitems": [ "game:ingot-steel" ],
+        "quantity": 8
+      },
+      {
+        "validitems": [ "game:gear-temporal" ],
+        "quantity": 1
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:ingot-temporalsteel" ],
+        "quantity": 8
       }
     ]
+
   }
 ]
 

@@ -34,9 +34,11 @@
     <None Include="qptech\assets\machines\blocktypes\itemtransport\itempipe.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\seeker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\lv\bloomworker.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\mixer.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\crucible.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\heater.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\sheet.json" />
     <None Include="qptech\assets\machines\blocktypes\other\door\slidingdoor.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\industrialgenerator.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\turbine.json" />
@@ -124,6 +126,7 @@
     <None Include="qptech\assets\machines\itemtypes\part\lv\wire.json" />
     <None Include="qptech\assets\machines\itemtypes\resource\charcoalpowder.json" />
     <None Include="qptech\assets\machines\itemtypes\resource\ingot.json" />
+    <None Include="qptech\assets\machines\itemtypes\resource\metalplate.json" />
     <None Include="qptech\assets\machines\itemtypes\resource\orepowder.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\jetpack.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\jetpackcontrol.json" />
@@ -455,6 +458,7 @@
     <Content Include="qptech\assets\machines\textures\block\metal\metalpress\machinery-border-small.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\pipes\bluesteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\pipes\bronze.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\sheet\temporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\stairs\metal.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\tank\bluesteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\tank\bronze.png" />
@@ -487,15 +491,8 @@
     <Content Include="qptech\assets\machines\textures\block\stone\other\front-granite.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\wires\tin-wires.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-white.png" />
-    <Content Include="qptech\assets\machines\textures\block\tempblocks\bloomery.png" />
-    <Content Include="qptech\assets\machines\textures\block\tempblocks\boiler.png" />
-    <Content Include="qptech\assets\machines\textures\block\tempblocks\crush.png" />
-    <Content Include="qptech\assets\machines\textures\block\tempblocks\heater.png" />
-    <Content Include="qptech\assets\machines\textures\block\tempblocks\lathe.png" />
-    <Content Include="qptech\assets\machines\textures\block\tempblocks\mk2gen.png" />
+    <Content Include="qptech\assets\machines\textures\block\tempblocks\mixer.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\standinblank.png" />
-    <Content Include="qptech\assets\machines\textures\block\tempblocks\turbine.png" />
-    <Content Include="qptech\assets\machines\textures\block\tempblocks\wiremill.png" />
     <Content Include="qptech\assets\machines\textures\item\resource\temporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\item\rubbercrucible.png" />
     <Content Include="qptech\assets\machines\textures\item\redpaintedsteelwrench.png" />

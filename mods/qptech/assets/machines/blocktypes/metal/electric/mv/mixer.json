@@ -1,7 +1,7 @@
 {
-	"code": "sheetroller",
-	"class": "BlockMetalPress",
-	"entityclass": "BEEAssembler",
+	"code": "mixer",
+	"class": "ElectricalBlock",
+	"entityclass": "BEERecipeProcessor",
 	"creativeinventory": {
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
@@ -29,43 +29,41 @@
 
 		"*-mv-*": {
 			"genFlux": 0,
-			"useFlux": 16,
-			"inputFace": "west",
-			"outputFace": "east",
-			"acceptFromFaces": [ "west" ],
-			"inputQuantity": 1,
-			"outputQuantity": 2,
-			"recipe": "game:metalsheet",
-			"recipeSuffix": "down",
-			"ingredient": "metalplate",
-			"processingTime": 2000,
+			"useFlux": 20,
 
-			"heatRequirement": 0,
-			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel","temporalsteel" ],
+
+			"recipegroups": [ "Temporal Steel" ],
+			"inputFace": "up",
+			"outputFace": "down",
 			"animationCode": "run",
 			"animation": "run",
-			"runAnimationSpeed": 1
+			"runAnimationSpeed": 1,
+			"processingTime": 2000
 		}
 	},
-
+	"textures": {
+		"all": { "base": "block/tempblocks/mixer" }
+		
+	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/metal/electric/sheetroller" },
+
+	"shape": { "base": "tempmachine" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/sheetroller",
+			"base": "tempmachine",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/sheetroller",
+			"base": "tempmachine",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/sheetroller",
+			"base": "tempmachine",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/sheetroller",
+			"base": "tempmachine",
 			"rotateY": 180
 		}
 	},
@@ -79,14 +77,7 @@
 	"sideopaque": {
 		"all": false
 	},
-	"fpHandTransform": {
-		"rotation": {
-			"x": 53,
-			"y": 46,
-			"z": 0
-		},
-		"scale": 1.28
-	},
+
 	"sounds": {
 		"place": "game:block/anvil",
 		"walk": "game:walk/stone"

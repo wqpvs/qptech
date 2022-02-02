@@ -9,7 +9,8 @@
 - (test)ropes and power poles for power transfer.
 - mv heater quartered power usage to 32 tf
 - doubled mv generator power output to 64 tf
-- added temporal steel ingot
+- added temporal steel ingot, plate, and sheet
+- added mixer object
 
 - todo:
 
@@ -23,6 +24,7 @@
 - need steel processing
 - can i add wildcards to machine recipes somehow?
 - item pipes - change directions with wrench right click
+- item pipes - add buttons for quantity transfer
 
 
 

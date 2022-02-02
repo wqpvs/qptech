@@ -58,7 +58,7 @@
 			"runAnimationSpeed": 1,
 			"processingTime": 3000,
 			"heatRequirement": 1000,
-			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel" ]
+			"materials": [ "copper", "brass", "gold", "silver", "tin", "lead", "bismuth", "zinc", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel","temporalsteel" ]
 
 		},
 		"*-lvpunch-*": {

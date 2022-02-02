@@ -1,0 +1,132 @@
+{
+  "code": "metalplate",
+  "class": "ItemMetalPlate",
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Stacking",
+        "placeRemoveSound": "sounds/block/plate",
+        "stackingModel": "game:block/metal/platepile",
+        "stackingTextures": {
+          "metal": "block/metal/ingot/{metal}"
+        },
+        "collisionBox": {
+          "x1": 0.125,
+          "y1": 0,
+          "z1": 0.125,
+          "x2": 0.875,
+          "y2": 0.0625,
+          "z2": 0.875
+        },
+        "cbScaleYByLayer": 1,
+        "tessQuantityElements": 1,
+        "stackingCapacity": 16,
+        "transferQuantity": 1,
+        "bulkTransferQuantity": 4
+      }
+    }
+  ],
+  "shape": { "base": "game:item/plate" },
+  "maxstacksize": 8,
+  "storageFlags": 5,
+  "attributes": {
+    "handbook": {
+      "groupBy": [ "metalplate-*" ]
+
+    }
+  },
+  "variantgroups": [
+    {
+      "code": "metal",
+      "states": [ "temporalsteel" ]
+    }
+  ],
+  "texture": { "base": "block/metal/ingot/{metal}" },
+  "creativeinventory": {
+    "general": [ "*" ],
+    "items": [ "*" ]
+  },
+  "materialDensityByType": {
+
+    "*-temporalsteel": 4000
+  },
+  "combustiblePropsByType": {
+    "metalplate-temporalsteel": {
+      "meltingPoint": 1400,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltedStack": {
+        "type": "item",
+        "code": "ingot-temporalsteel"
+      }
+    }
+  },
+  "fpHandTransform": {
+    "translation": {
+      "x": -0.35,
+      "y": -0.15,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 79
+    },
+    "scale": 1.8
+  },
+  "guiTransform": {
+    "translation": {
+      "x": 3,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": -30,
+      "y": -44,
+      "z": -180
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.0625,
+      "z": 0.5
+    },
+    "scale": 1.85
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 90,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "scale": 3.31
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": -0.7,
+      "y": 0.1,
+      "z": -0.53
+    },
+    "rotation": {
+      "x": 94,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.1,
+      "z": 0.5
+    },
+    "scale": 0.75
+  }
+}
