@@ -38,9 +38,9 @@ namespace qptech.src.itemtransport
         float transportspeed = 0.1f;
 
         int stacksize = 1;
-
+        public int StackSize => stacksize;
         public ItemFilter itemfilter;
-
+        bool lockswap = false;
         public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
             if (fromtransporter != null && fromtransporter.TransporterPos == outputlocation) { return false; }
@@ -97,6 +97,7 @@ namespace qptech.src.itemtransport
             //if it has connections, make sure they're still there
             //if there aren't any connections, check and see if a destination can be set and connect
             destination = null;
+            if (outputlocation == null) { return; }
             IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as IItemTransporter;
             BlockEntityGenericTypedContainer outcont = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as BlockEntityGenericTypedContainer;
             if (trans == null && outcont==null) {MarkDirty(true);return; }
@@ -180,6 +181,7 @@ namespace qptech.src.itemtransport
         protected virtual void TryTakeStack()
         {
             if (itemstack != null) { return; }
+            if (inputlocation == null) { return; }
             BlockEntity temp = Api.World.BlockAccessor.GetBlockEntity(inputlocation);
             BlockEntityGenericTypedContainer incont = temp as BlockEntityGenericTypedContainer;
             if (incont == null || incont.Inventory == null || incont.Inventory.Empty) { return; }
@@ -272,9 +274,61 @@ namespace qptech.src.itemtransport
                 OpenStatusGUI();
                 return true;
             }
-            
+            else if (player.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().Contains("wrench"))
+            {
+                WrenchSwap();
+                return true;
+            }
             return false;
         }
+
+        public virtual void WrenchSwap()
+        {
+            if (Api is ICoreClientAPI)
+            {
+                if (lockswap) { return; }
+                lockswap = true;
+                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.WrenchSwap, null);
+                return;
+            }
+            
+            
+            string dircode = Block.Code.ToString();
+            bool doswap = false;
+            if (dircode.Contains("-up")) { dircode = dircode.Replace("up", "down");doswap = true; }
+            else if (dircode.Contains("-down")) { dircode = dircode.Replace("down", "up"); doswap = true; }
+            else if (dircode.Contains("-north")) { dircode = dircode.Replace("north", "east"); doswap = true; }
+            else if (dircode.Contains("-east")) { dircode = dircode.Replace("east","south"); doswap = true; }
+            else if (dircode.Contains("-south")) { dircode = dircode.Replace("south", "west"); doswap = true; }
+            else if (dircode.Contains("-west")) { dircode = dircode.Replace("west", "north"); doswap = true; }
+            if (doswap)
+            {
+                Block newblock = Api.World.GetBlock(new AssetLocation(dircode));
+                if (newblock != null)
+                {
+                    ItemFilter pushfilter=null;
+                    if (itemfilter != null)
+                    {
+                        pushfilter = itemfilter.Copy();
+                    }
+                    Api.World.BlockAccessor.SetBlock(newblock.Id, Pos);
+                    if (pushfilter != null)
+                    {
+                        Conveyor newconveyor = Api.World.BlockAccessor.GetBlockEntity(Pos) as Conveyor;
+                        if (newconveyor == this)
+                        {
+                            int abc = 1;
+                        }
+                        else
+                        {
+                            newconveyor.ServerSetupNew(pushfilter);
+
+                        }
+                    }
+                }
+            }
+        }
+
         GUIConveyor gui;
         public virtual void OpenStatusGUI()
         {
@@ -300,11 +354,20 @@ namespace qptech.src.itemtransport
             }
 
         }
+        public virtual void ServerSetupNew(ItemFilter newfilter)
+        {
+            itemfilter = newfilter.Copy();
+            
+            MarkDirty();
+        }
+
+
 
         public enum enPacketIDs
         {
             ClearFilter = 99990001,
-            SetFilter = 99990002
+            SetFilter = 99990002,
+            WrenchSwap = 99990003
         }
         
         public void OnNewFilter(ItemFilter newfilter)
@@ -329,6 +392,10 @@ namespace qptech.src.itemtransport
             {
                 itemfilter = SerializerUtil.Deserialize<ItemFilter>(data);
                 MarkDirty(true);
+            }
+            else if (packetid== (int)enPacketIDs.WrenchSwap)
+            {
+                WrenchSwap();
             }
         }
 

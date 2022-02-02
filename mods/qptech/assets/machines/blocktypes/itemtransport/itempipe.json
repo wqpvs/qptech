@@ -29,21 +29,22 @@
 			"inputface": "east",
 			"outputface": "west",
 			"transportspeed": 0.5,
-			"stacksize": 1
+			"stacksize": 64
+			
 		},
 		"*-down-*": {
 
 			"inputface": "up",
 			"outputface": "down",
 			"transportspeed": 0.5,
-			"stacksize": 1
+			"stacksize": 64
 		},
 		"*-up-*": {
 
 			"inputface": "down",
 			"outputface": "up",
 			"transportspeed": 0.5,
-			"stacksize": 1
+			"stacksize": 64
 		}
 	},
 	"blockmaterial": "Metal",

@@ -1,20 +1,20 @@
 ﻿1.7.0 - item transport update
 - added filterable item transport pipes
+   - filter by: allow/block text, turn on/off, only transfer minimum quantity at a time
 - added item 3 and 4 way splitters
 - fixed assembler type machines to try harder to find open slots
 - added tablet computer - useful for setting and copying filters on pipes
 - adding multiblock texture test
 - added industrial glass
 - added steel channels
-- (test)ropes and power poles for power transfer.
+- (experimental!)ropes and power poles for power transfer.
 - mv heater quartered power usage to 32 tf
 - doubled mv generator power output to 64 tf
-- added temporal steel ingot, plate, and sheet
+- added temporal steel ingot, plate, and sheet - temporal steel ingots made in mixer (1 temporal gear+8 steel ingots -> 8 temporal steel ingots)
 - added mixer object
 
-- todo:
 
-- make a machine for combining ingredients with heat - or maybe just mixer than can also include liquids?
+- todo:
 - make pure glass ingredient, smelts into industrial glass
     - mix lime, crushed quartz or something and sand?
 - need recipe for item pipes and sorters:
@@ -22,9 +22,10 @@
 - need recipe for concrete - quick lime or mortar and stones and water?
 - need to figure out dyes for concrete
 - need steel processing
-- can i add wildcards to machine recipes somehow?
+x can i add wildcards to machine recipes somehow?
 - item pipes - change directions with wrench right click
-- item pipes - add buttons for quantity transfer
+- fluid pipes - have a fluid limiter for allowing thru certain quantity of fluid?
+
 
 
 

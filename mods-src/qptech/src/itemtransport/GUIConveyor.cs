@@ -31,14 +31,15 @@ namespace qptech.src.itemtransport
             ElementBounds cancelButtonBounds = ElementBounds.Fixed(224, 531, 152, 39);
             ElementBounds clearButtonBounds = ElementBounds.Fixed(424, 68, 152, 39);
             ElementBounds toggleOnOffButtonBounds = ElementBounds.Fixed(21,68,152,39);
-            
+            ElementBounds transferSliderTextBounds = ElementBounds.Fixed(19, 314, 388, 30);
+            ElementBounds transferSliderBounds = ElementBounds.Fixed(21, 353, 552, 34);
             ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
 
             bgBounds.BothSizing = ElementSizing.FitToChildren;
             bgBounds.WithChildren(
                 allowTextBounds,allowTextInputBounds,mustMatchAllBoxBounds,
                 applyButtonBounds,cancelButtonBounds,clearButtonBounds,toggleOnOffButtonBounds,
-                blockTextBounds,blockTextInputBounds);
+                blockTextBounds,blockTextInputBounds,transferSliderTextBounds,transferSliderBounds);
             string guicomponame = conveyor.Pos.ToString()+" Conveyor";
             if (conveyor.itemfilter == null)
             {
@@ -65,17 +66,30 @@ namespace qptech.src.itemtransport
                 .AddButton("Clear", OnClearButton, clearButtonBounds)
                 .AddToggleButton(onofftext, CairoFont.WhiteDetailText(),OnToggleOnOffButton,toggleOnOffButtonBounds,"onoff")
                 
+                
             ;
             SingleComposer.GetToggleButton("onoff").SetValue(itemfilter.isoff);
             SingleComposer.GetToggleButton("mustmatchall").SetValue(itemfilter.mustmatchall);
             SingleComposer.GetTextInput("allow").SetValue(itemfilter.allowonlymatch);
             SingleComposer.GetTextInput("block").SetValue(itemfilter.blockonlymatch);
+            if (conveyor.StackSize != 1)
+            {
+                SingleComposer.AddRichtext("Minimum Transfer Quantity", CairoFont.WhiteDetailText(), transferSliderTextBounds);
+                SingleComposer.AddSlider(OnChangeTransferSlider, transferSliderBounds, "transferslider");
+                SingleComposer.GetSlider("transferslider").SetValues(itemfilter.minsize, 0, conveyor.StackSize, 1);
+            }
             SingleComposer.Compose();
 
         }
 
         
-
+        public bool OnChangeTransferSlider(int slider)
+        {
+            itemfilter.minsize = slider;
+            itemfilter.maxsize = slider;
+            if (slider == 0) { itemfilter.maxsize = conveyor.StackSize; itemfilter.minsize = 1; }
+            return true;
+        }
         public void OnChangeItemFilterInput(string newinput)
         {
             itemfilter.allowonlymatch = newinput;
