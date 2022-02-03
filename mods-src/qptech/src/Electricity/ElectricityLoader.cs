@@ -9,6 +9,7 @@ using qptech.src.multiblock;
 using qptech.src.pipes;
 using qptech.src.networks;
 using qptech.src.itemtransport;
+using qptech.src.Electricity;
 
 
 namespace qptech.src
@@ -84,6 +85,8 @@ namespace qptech.src
 
             api.RegisterBlockEntityClass("BEDummyBlock", typeof(BEDummyBlock));
             api.RegisterBlockEntityBehaviorClass("BEBMultiDummy", typeof(BEBMultiDummy));
+            api.RegisterBlockClass("BlockDummy", typeof(BlockDummy));
+            api.RegisterBlockEntityClass("BEEMixer", typeof(BEEMixer));
             //api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
             //api.RegisterBlockEntityClass("BEEMotor", typeof(BEEMotor));
 

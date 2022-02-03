@@ -199,5 +199,6 @@
 	"item-heatingcoil-*": "Heating Coil",
 	"itemdesc-heatingcoil-*": "A coil for heating.",
 	"item-cruciblechamber-*": "Crucible Chamber Part",
-	"itemdesc-cruciblechamber-*": "Part for the crucible, made with smithing (two metal plates should do it)"
+	"itemdesc-cruciblechamber-*": "Part for the crucible, made with smithing (two metal plates should do it)",
+	"block-mixer-*": "Industrial Mixer"
 }

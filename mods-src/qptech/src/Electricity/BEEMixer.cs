@@ -15,8 +15,7 @@ using qptech.src.networks;
 
 namespace qptech.src.Electricity
 {
-    class BEEMixer : BEEBaseDevice,IFluidTank
-    {
+    class BEEMixer : BEERecipeProcessor, IFluidNetworkUser { 
         //InventoryGeneric inventory;
         //Need - dry input, dry output, liquid input, liquid output
         //   - should track time sealed if necessary, have a processing speed bonus
@@ -24,25 +23,12 @@ namespace qptech.src.Electricity
         //   - needs a purge function
         // Should I use an input tank instead of internal IFluidTank?
         
-        int capacityLitres = 1000;
-        int currentLevel = 0;
+
+        //TODO set this up with a proper liquid itemstack
+
         
-        public int CapacityLitres { get { return capacityLitres; } set { capacityLitres = value; } }
-        public int FreeSpaceLitres => CapacityLitres - CurrentLevel;
-        public bool IsFull => CurrentLevel>=CapacityLitres;
-
-        public int CurrentLevel =>currentLevel;
-        Item currentLiquid;
-        Item currentOutput;
-        int currentOutputQty;
-        double currentBatchCompletionTime;
-        Item currentDryItem;
-        bool autoRunWhenFull = false;
-        int capacityDry = 1000;
-        public int CapacityDry => capacityDry;
-
-        public Item CurrentItem => currentLiquid;
-
+        ItemStack itemstack;
+        int CapacityLiters => 1000;
         public BlockPos TankPos => Pos;
 
         public override void Initialize(ICoreAPI api)
@@ -51,36 +37,88 @@ namespace qptech.src.Electricity
             base.Initialize(api);
         }
 
-        public int ReceiveFluidOffer(Item offeredItem, int offeredAmount, BlockPos offerFromPos)
-        {
-            if (IsFull) { return 0; }
-            if (DeviceState == enDeviceState.RUNNING) { return 0; }
-            if (CurrentItem != null && offeredItem != CurrentItem) { return 0; }
-            if (CurrentItem == null) { currentLiquid = offeredItem; }
-            int used = Math.Min(offeredAmount, FreeSpaceLitres);
-            currentLevel += used;
-            MarkDirty(true);
-            return used;
-        }
-        public void Purge()
-        {
+        
 
-        }
-        public int TryTakeFluid(int requestedamount, BlockPos offerFromPos)
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
+            base.GetBlockInfo(forPlayer, dsc);
+            if (itemstack == null || itemstack.Item == null||itemstack.StackSize==0) { dsc.AppendLine("Internal Tank is Empty"); }
+            else
+            {
+                dsc.AppendLine("Internal Tank Contains " + itemstack.StackSize/100 + " L of " + itemstack.Item.GetHeldItemName(itemstack));
+            }
+        }
+
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
+        {
+            base.FromTreeAttributes(tree, worldAccessForResolve);
+            itemstack = tree.GetItemstack("itemstack");
+            if (itemstack != null)
+            {
+                itemstack.ResolveBlockOrItem(worldAccessForResolve);
+            }
+        }
+
+        public override void ToTreeAttributes(ITreeAttribute tree)
+        {
+            base.ToTreeAttributes(tree);
+            tree.SetItemstack("itemstack", itemstack);
+        }
+
+        public int TakeFluid(Item item, int amt) { return 0; }
+
+        public int QueryFluid(Item item)
+        {
+            if (itemstack == null || itemstack.Item == null)
+            {
+                
+                return item.MaxStackSize;
+            }
+            else if (itemstack.Item == item)
+            {
+                if (itemstack.StackSize < item.MaxStackSize)
+                {
+                    int used = (item.MaxStackSize - itemstack.StackSize);
+                    return used;
+                }
+            }
             return 0;
         }
 
-        protected override void DoDeviceStart()
+        public int OfferFluid(Item item, int quantity)
         {
-            foreach (BarrelRecipe br in Api.GetBarrelRecipes())
+            
+            if (itemstack == null || itemstack.Item==null)
             {
-                
-                foreach (BarrelRecipeIngredient ing in br.Ingredients)
+                itemstack = new ItemStack(item, quantity);
+                MarkDirty();
+                return quantity;
+            }
+            else if (itemstack.Item == item)
+            {
+                if (itemstack.StackSize < item.MaxStackSize)
                 {
-                   
+                    int used = Math.Min(item.MaxStackSize - itemstack.StackSize,quantity);
+                    itemstack.StackSize += used;
+                    return used;
                 }
             }
+            return 0;
+        }
+
+        public Item QueryFluid()
+        {
+            return null;
+        }
+
+        public bool IsOnlySource()
+        {
+            return false;
+        }
+
+        public bool IsOnlyDestination()
+        {
+            return true;
         }
     }
 }

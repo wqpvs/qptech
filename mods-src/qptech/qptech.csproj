@@ -99,6 +99,7 @@
     <Compile Include="src\misc\BEBMultiDummy.cs" />
     <Compile Include="src\misc\ItemMiningDrill.cs" />
     <Compile Include="src\multiblock\BEDummyBlock.cs" />
+    <Compile Include="src\multiblock\BlockDummy.cs" />
     <Compile Include="src\networks\BEProcessToProcess.cs" />
     <Compile Include="src\networks\BEProcessToProcessFluidUser.cs" />
     <Compile Include="src\networks\IProcessingSupplier.cs" />

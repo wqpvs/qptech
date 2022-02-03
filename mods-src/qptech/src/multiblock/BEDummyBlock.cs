@@ -27,7 +27,7 @@ namespace qptech.src.multiblock
         IDummyParent parentblock;
         public IDummyParent ParentBlock => parentblock;
         bool informed = false;
-        string displaytext = "no parent";
+        public string displaytext = "no parent";
         public override void OnBlockBroken(IPlayer byPlayer = null)
         {
             if (parentblock != null && !informed&&Api is ICoreServerAPI) { informed = true; parentblock.OnDummyBroken(); }
