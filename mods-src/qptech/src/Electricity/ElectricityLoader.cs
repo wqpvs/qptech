@@ -81,6 +81,9 @@ namespace qptech.src
             api.RegisterBlockEntityClass("ItemSplitter", typeof(ItemSplitter));
             api.RegisterBlockClass("BlockItemTransport", typeof(BlockItemTransport));
             api.RegisterItemClass("TabletTool", typeof(TabletTool));
+
+            api.RegisterBlockEntityClass("BEDummyBlock", typeof(BEDummyBlock));
+            api.RegisterBlockEntityBehaviorClass("BEBMultiDummy", typeof(BEBMultiDummy));
             //api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
             //api.RegisterBlockEntityClass("BEEMotor", typeof(BEEMotor));
 

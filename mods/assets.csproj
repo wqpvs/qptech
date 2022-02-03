@@ -38,6 +38,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\crucible.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\heater.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />
+    <None Include="qptech\assets\machines\blocktypes\dummy.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\sheet.json" />
     <None Include="qptech\assets\machines\blocktypes\other\door\slidingdoor.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\industrialgenerator.json" />
@@ -234,6 +235,7 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
+    <None Include="qptech\assets\machines\shapes\block\invisible.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\bloomery.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\boiler.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\itempipe-down.json" />
@@ -243,6 +245,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\crusher.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\generator-mk2.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\lathe.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\mixer.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wiremill.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\turbine.json" />
     <None Include="qptech\assets\machines\shapes\block\texturecube.json" />

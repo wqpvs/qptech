@@ -1,0 +1,19 @@
+{
+	"code": "dummy",
+	"entityclass": "BEDummyBlock",
+	"creativeinventory": {
+
+		"qptech": [ "" ]
+	},
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+	"shape": { "base": "block/invisible" },
+	"resistance": 1,
+	"sounds": {
+		"place": "game:block/anvil"
+
+	},
+	"sideopaque": {
+		"all": false
+	}
+}

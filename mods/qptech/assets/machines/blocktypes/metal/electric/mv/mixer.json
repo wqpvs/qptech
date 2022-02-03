@@ -6,7 +6,10 @@
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
 	},
-	"entityBehaviors": [ { "name": "Animatable" } ],
+	"entityBehaviors": [
+		{ "name": "Animatable" },
+		{ "name": "BEBMultiDummy" }
+	],
 	"behaviors": [
 
 		{
@@ -38,32 +41,31 @@
 			"animationCode": "run",
 			"animation": "run",
 			"runAnimationSpeed": 1,
-			"processingTime": 2000
+			"processingTime": 2000,
+
+			"dummylocations": [0,1,0]
 		}
 	},
-	"textures": {
-		"all": { "base": "block/tempblocks/mixer" }
-		
-	},
+	
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 
-	"shape": { "base": "tempmachine" },
+	"shape": { "base": "block/metal/electric/mixer" },
 	"shapeByType": {
 		"*-north": {
-			"base": "tempmachine",
+			"base": "block/metal/electric/mixer",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "tempmachine",
+			"base": "block/metal/electric/mixer",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "tempmachine",
+			"base": "block/metal/electric/mixer",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "tempmachine",
+			"base": "block/metal/electric/mixer",
 			"rotateY": 180
 		}
 	},
