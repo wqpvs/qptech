@@ -24,23 +24,51 @@ namespace qptech.src.multiblock
     /// </summary>
     class BEDummyBlock:BlockEntity
     {
-        public IDummyParent parentblock;
+        IDummyParent parentblock;
+        public IDummyParent ParentBlock => parentblock;
         bool informed = false;
-        public override void OnBlockRemoved()
+        string displaytext = "no parent";
+        public override void OnBlockBroken(IPlayer byPlayer = null)
         {
-            base.OnBlockRemoved();
-            informed = true;
-            if (parentblock != null&&!informed) { parentblock.OnDummyBroken(); }
+            if (parentblock != null && !informed&&Api is ICoreServerAPI) { informed = true; parentblock.OnDummyBroken(); }
+            base.OnBlockBroken(byPlayer);
         }
         public void ParentBroken()
         {
             informed = true;
-            Api.World.BlockAccessor.SetBlock(0, Pos);
+            Api.World.BlockAccessor.BreakBlock(Pos,null);
         }
+        public void SetParent(IDummyParent newparent)
+        {
+            parentblock = newparent;
+            MarkDirty();
+        }
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
+        {
+            base.GetBlockInfo(forPlayer, dsc);
+            if (parentblock == null) { dsc.Append(displaytext); }
+            else { dsc.Append(parentblock.ToString()); }
+        }
+        public override void ToTreeAttributes(ITreeAttribute tree)
+        {
+            base.ToTreeAttributes(tree);
+            if (parentblock != null) { tree.SetString("displaytext", parentblock.GetDisplayName()); }
+            
+        }
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
+        {
+            base.FromTreeAttributes(tree, worldAccessForResolve);
+            displaytext = tree.GetString("displaytext");
+        }
+        
     }
+
+    
 
     public interface IDummyParent
     {
+        string GetDisplayName();
         void OnDummyBroken();
+
     }
 }

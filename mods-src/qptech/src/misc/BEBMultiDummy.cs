@@ -16,50 +16,85 @@ using qptech.src.networks;
 
 namespace qptech.src.multiblock
 {
-    class BEBMultiDummy:BlockEntityBehavior,IDummyParent
+    class BEBMultiDummy : BlockEntityBehavior, IDummyParent
     {
         public string dummyblockname => "machines:dummy";
         List<BEDummyBlock> dummies;
         int[] dummylocations;
         BlockEntity be;
+        long l1;
         public override void Initialize(ICoreAPI api, JsonObject properties)
         {
             base.Initialize(api, properties);
+            if (Api is ICoreServerAPI)
+            {
+                InstantiateDummies();
+                
+            }
+            l1 = be.RegisterDelayedCallback(SetupDummies, 1);
+        }
+
+        protected virtual void InstantiateDummies()
+        {
             if (be.Block.Attributes != null)
             {
                 int[] dummylocations = be.Block.Attributes["dummylocations"].AsArray<int>();
-                if (dummylocations != null && dummylocations.Length > 0 && api is ICoreServerAPI)
+                if (dummylocations != null && dummylocations.Length > 0 && Api is ICoreServerAPI)
                 {
                     dummies = new List<BEDummyBlock>();
                     Block dummyblock = Api.World.BlockAccessor.GetBlock(new AssetLocation(dummyblockname));
 
                     for (int c = 0; c < dummylocations.Length; c += 3)
                     {
-                        BlockPos dpos = new BlockPos(dummylocations[c], dummylocations[c + 1], dummylocations[c + 2]);
-                        //adjust for facing
-                        BEDummyBlock bed = Api.World.BlockAccessor.GetBlockEntity(dpos) as BEDummyBlock;
-                        if (bed == null)
-                        {
-                            Api.World.BlockAccessor.SetBlock(dummyblock.BlockId, dpos);
-                            //Api.World.BlockAccessor.SpawnBlockEntity("BEDummyBlock", dpos);
-                            
-                            bed = Api.World.BlockAccessor.GetBlockEntity(dpos) as BEDummyBlock;
-                        }
-                        bed.parentblock = this;
-                        dummies.Add(bed);
+                        BlockPos dpos = new BlockPos(be.Pos.X + dummylocations[c], be.Pos.Y + dummylocations[c + 1], be.Pos.Z + dummylocations[c + 2]);
+                        Api.World.BlockAccessor.SetBlock(dummyblock.BlockId, dpos);
+                        
                     }
                 }
             }
         }
-        public BEBMultiDummy(BlockEntity be):base(be)
+
+        public virtual void SetupDummies(float dt)
+        {
+            if (be.Block.Attributes != null)
+            {
+                int[] dummylocations = be.Block.Attributes["dummylocations"].AsArray<int>();
+                if (dummylocations != null && dummylocations.Length > 0 && Api is ICoreServerAPI)
+                {
+                    dummies = new List<BEDummyBlock>();
+                    
+
+                    for (int c = 0; c < dummylocations.Length; c += 3)
+                    {
+                        BlockPos dpos = new BlockPos(be.Pos.X+dummylocations[c], be.Pos.Y + dummylocations[c + 1], be.Pos.Z + dummylocations[c + 2]);
+                        //adjust for facing
+                        BEDummyBlock bed = Api.World.BlockAccessor.GetBlockEntity(dpos) as BEDummyBlock;
+                        
+                        if (bed != null)
+                        {
+                            bed.SetParent(this);
+                            dummies.Add(bed);
+                        }
+                    }
+                }
+            }
+        }
+        public BEBMultiDummy(BlockEntity be) : base(be)
         {
             this.be = be;
-            
+
         }
         public void OnDummyBroken()
         {
-            Api.World.BlockAccessor.SetBlock(0, be.Pos);
+            
+            Api.World.BlockAccessor.BreakBlock(be.Pos, null);
         }
+
+        public string GetDisplayName()
+        {
+            return be.Block.GetPlacedBlockName(Api.World,be.Pos);
+        }
+
         public override void OnBlockBroken(IPlayer byPlayer = null)
         {
             base.OnBlockBroken(byPlayer);
@@ -71,5 +106,12 @@ namespace qptech.src.multiblock
                 }
             }
         }
+
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
+        {
+            base.GetBlockInfo(forPlayer, dsc);
+            
+        }
     }
+    
 }

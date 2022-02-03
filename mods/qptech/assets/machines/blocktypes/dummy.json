@@ -15,5 +15,6 @@
 	},
 	"sideopaque": {
 		"all": false
-	}
+	},
+	"drops": []
 }
