@@ -200,5 +200,11 @@
 	"itemdesc-heatingcoil-*": "A coil for heating.",
 	"item-cruciblechamber-*": "Crucible Chamber Part",
 	"itemdesc-cruciblechamber-*": "Part for the crucible, made with smithing (two metal plates should do it)",
-	"block-mixer-*": "Industrial Mixer"
+	"block-mixer-*": "Industrial Mixer",
+	"blockdesc-mixer-*": "Will run various special recipes. Dry ingredients feed from left. Pipes may be attached to bottom and sides. Use a pipe wrench to turn purge mode on or off. (In purge mode, mixer will drain its tank). Outputs finished products to the right.",
+	"block-concrete-*": "Concrete Block",
+	"blockdesc-concrete-*": "Concrete building block made in a mixer from sand, quicklime, stones, and water or the appropriate dye",
+	"block-industrialglass-*": "Industrial Glass Block",
+	"blockdesc-industrialglass-*": "Purified glass block made with water and crushed quartz in a mixer."
+
 }

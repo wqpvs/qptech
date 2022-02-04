@@ -5,14 +5,17 @@
 - fixed assembler type machines to try harder to find open slots
 - added tablet computer - useful for setting and copying filters on pipes
 - adding multiblock texture test
-- added industrial glass
+- added industrial glass, made in a mixer from water and crushed glass
 - added steel channels
 - (experimental!)ropes and power poles for power transfer.
 - mv heater quartered power usage to 32 tf
 - doubled mv generator power output to 64 tf
 - added temporal steel ingot, plate, and sheet - temporal steel ingots made in mixer (1 temporal gear+8 steel ingots -> 8 temporal steel ingots)
-- added mixer object
+- added mixer object - hit with pipe wrench to purge the internal tank of liquid. Input dry materials on left and output dry materiasl on right. Attach a pipe to back or bottom to fill or drain liquids
 - fixed recipes for castiron ovens
+- concrete now made only in mixer (needs water or dye, plus quicklime, sand, and stones)
+
+- machine recipe ingredients can now be partially matched (eg: sand- would accept any ingredient that contained sand- in its code)
 
 
 - todo:
@@ -20,11 +23,7 @@
     - mix lime, crushed quartz or something and sand?
 - need recipe for item pipes and sorters:
     - need some sort of circuits - figure out sub parts for that -> temporal wire- braided copper wire, 
-- need recipe for concrete - quick lime or mortar and stones and water?
-- need to figure out dyes for concrete
 - need steel processing
-x can i add wildcards to machine recipes somehow?
-- item pipes - change directions with wrench right click
 - fluid pipes - have a fluid limiter for allowing thru certain quantity of fluid?
 
 

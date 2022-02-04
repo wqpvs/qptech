@@ -45,7 +45,7 @@ namespace qptech.src.Electricity
                 if (ingredientlist.ContainsKey(key)) { ingredientlist[key] += itemstack.StackSize; }
                 else { ingredientlist[key] = itemstack.StackSize; }
             }
-            
+            int test = 1;
         }
 
         protected override int TryAdditionalDraw(MachineRecipeItems mi, int needqty)

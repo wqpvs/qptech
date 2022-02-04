@@ -199,7 +199,7 @@
       },
       {
         "validitems": [ "game:dye-red" ],
-        "quantity": 1
+        "quantity": 10
       },
       {
         "validitems": [ "stone-" ],
@@ -211,6 +211,158 @@
       {
         "validitems": [ "machines:concrete-red" ],
         "quantity": 8
+      }
+    ]
+
+  },
+  {
+    "name": "Blue Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-blue" ],
+        "quantity": 10
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-blue" ],
+        "quantity": 8
+      }
+    ]
+  },
+  {
+    "name": "Yellow Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-yellow" ],
+        "quantity": 10
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-yellow" ],
+        "quantity": 8
+      }
+    ]
+
+  },
+  {
+    "name": "White Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-white" ],
+        "quantity": 10
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-white" ],
+        "quantity": 8
+      }
+    ]
+
+  },
+  {
+    "name": "Black Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-black" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-black" ],
+        "quantity": 8
+      }
+    ]
+
+  },
+  {
+    "name": "Industrial Glass",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "game:waterportion" ],
+        "quantity": 10
+      },
+      {
+        "validitems": [ "game:crushed-quartz","game:crushed-clearquartz" ],
+        "quantity": 8
+      }
+      
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:industrialglass-plain" ],
+        "quantity": 1
       }
     ]
 
