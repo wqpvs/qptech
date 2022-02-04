@@ -56,6 +56,10 @@ namespace qptech.src
                // }
                 return true;
             }
+            else if (byPlayer.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().Contains("wrench"))
+            {
+                bee.Wrench();
+            }
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
 

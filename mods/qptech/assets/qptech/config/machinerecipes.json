@@ -150,6 +150,70 @@
       }
     ]
 
+  },
+  {
+    "name": "Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:waterportion" ],
+        "quantity": 10
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 8
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-internal" ],
+        "quantity": 1
+      }
+    ]
+
+  },
+  {
+    "name": "Red Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-red" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-red" ],
+        "quantity": 8
+      }
+    ]
+
   }
 ]
 

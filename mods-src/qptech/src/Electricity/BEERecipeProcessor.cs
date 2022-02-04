@@ -104,7 +104,7 @@ namespace qptech.src
             if (deviceState == enDeviceState.IDLE||deviceState==enDeviceState.WARMUP||deviceState==enDeviceState.MATERIALHOLD) { return false; }
             MachineRecipe mr = recipes.Find(m => m.name == makingrecipe);
             if (mr == null) { return false; }
-            if (mr.processingsteps.Count == 0) { return true; }
+            if (mr.processingsteps==null||mr.processingsteps.Count == 0) { return true; }
             
             List<string> todo = mr.processingsteps.Keys.ToList<string>();
             BlockFacing[] processfacings = BlockFacing.ALLFACES;
@@ -134,30 +134,8 @@ namespace qptech.src
             if (recipes is null || recipes.Count == 0) { deviceState = enDeviceState.ERROR;return; }
             //Check for ingredients
             Dictionary<string, int> availableingredients= new Dictionary<string, int>();
-            
-            BlockFacing checkface = matInputFace;
-            BlockPos checkpos = Pos.Copy().Offset(checkface);
-
-            BlockEntity checkbe = Api.World.BlockAccessor.GetBlockEntity(checkpos);
-            if (checkbe == null) { return; }
-            BlockEntityContainer checkcont = checkbe as BlockEntityContainer;
-            if (checkcont == null) { return; }
-            InventoryBase checkinv = checkcont.Inventory;
-            if (checkinv == null || checkinv.Empty) { return; }
-
-            //add up all available ingredients
-            foreach (ItemSlot checkslot in checkinv)
-            {
-                if (checkslot == null || checkslot.Empty) { continue; }
-                ItemStack checkstack = checkslot.Itemstack;
-                if (checkstack == null | checkstack.StackSize == 0 || (checkstack.Item == null&&checkstack.Block==null)) { continue; }
-                string checkcode = "";
-                
-                if (checkstack.Item != null) { checkcode = checkstack.Item.Code.ToString(); }
-                else { checkcode = checkstack.Block.Code.ToString();  }
-                if (!availableingredients.ContainsKey(checkcode)) { availableingredients[checkcode] = checkstack.StackSize; }
-                else { availableingredients[checkcode] += checkstack.StackSize; }
-            }
+            AddAdditionalIngredients(ref availableingredients);
+            InventoryBase checkinv=CheckContainer(ref availableingredients);
 
             MachineRecipe canmake = null;
             foreach (MachineRecipe mr in recipes)
@@ -166,21 +144,22 @@ namespace qptech.src
                 foreach (MachineRecipeItems mi in mr.ingredients)
                 {
                     int foundcount = 0;
-                    foreach (string checking in mi.validitems)
+                    string matched = mi.MatchAny(availableingredients.Keys.ToList<string>());
+                    if (matched!="")
                     {
-                        if (availableingredients.ContainsKey(checking))
-                        {
-                            foundcount += availableingredients[checking];
-                            if (foundcount >= mi.quantity) { break; }
-                        }
+                        foundcount += availableingredients[matched];
+                        
                     }
+                    
                     if (foundcount < mi.quantity) { ok = false; break; }
                 }
                 if (!ok) { continue; }
                 else { canmake = mr;break; }
             }
             if (canmake == null) { return; }
-            //Draw inventory
+            
+            // If we can make something extract the ingredients
+
             foreach (MachineRecipeItems mi in canmake.ingredients)
             {
                 int countdown = mi.quantity;
@@ -194,7 +173,7 @@ namespace qptech.src
                     bool isblock = false;
                     if (checkstack.Item != null) { checkcode = checkstack.Item.Code.ToString(); }
                     else { checkcode = checkstack.Block.Code.ToString(); isblock = true; }
-                    if (!mi.validitems.Contains(checkcode)) { continue; }
+                    if (!mi.Match(checkcode)) { continue; }
                     int maxtake = Math.Min(countdown, checkstack.StackSize);
                     checkstack.StackSize -= maxtake;
                     countdown -= maxtake;
@@ -202,6 +181,7 @@ namespace qptech.src
                     checkslot.MarkDirty();
                     if (countdown <= 0) { break; }
                 }
+                if (countdown > 0) { countdown -= TryAdditionalDraw(mi,countdown); }
             }
 
 
@@ -209,6 +189,43 @@ namespace qptech.src
             makingrecipe = canmake.name;
             recipefinishedat = Api.World.ElapsedMilliseconds + canmake.processingTime;
             deviceState = enDeviceState.RUNNING;
+        }
+        protected virtual int TryAdditionalDraw(MachineRecipeItems mi, int needqty)
+        {
+            return 0;
+        }
+        protected virtual void AddAdditionalIngredients(ref Dictionary<string, int> ingredientlist)
+        {
+            
+            return;
+        }
+
+        protected virtual InventoryBase CheckContainer(ref Dictionary<string, int> availableingredients)
+        {
+            BlockFacing checkface = matInputFace;
+            BlockPos checkpos = Pos.Copy().Offset(checkface);
+
+            BlockEntity checkbe = Api.World.BlockAccessor.GetBlockEntity(checkpos);
+            if (checkbe == null) { return null; }
+            BlockEntityContainer checkcont = checkbe as BlockEntityContainer;
+            if (checkcont == null) { return null; }
+            InventoryBase checkinv = checkcont.Inventory;
+            if (checkinv == null || checkinv.Empty) { return null; }
+
+            //add up all available ingredients
+            foreach (ItemSlot checkslot in checkinv)
+            {
+                if (checkslot == null || checkslot.Empty) { continue; }
+                ItemStack checkstack = checkslot.Itemstack;
+                if (checkstack == null | checkstack.StackSize == 0 || (checkstack.Item == null && checkstack.Block == null)) { continue; }
+                string checkcode = "";
+
+                if (checkstack.Item != null) { checkcode = checkstack.Item.Code.ToString(); }
+                else { checkcode = checkstack.Block.Code.ToString(); }
+                if (!availableingredients.ContainsKey(checkcode)) { availableingredients[checkcode] = checkstack.StackSize; }
+                else { availableingredients[checkcode] += checkstack.StackSize; }
+            }
+            return checkinv;
         }
 
         protected override void DoDeviceComplete()
@@ -231,7 +248,7 @@ namespace qptech.src
                 else { newstack = new ItemStack(makeblock, outitem.quantity); }
                 
                 di[0].Itemstack = newstack;
-                if (mr.processingsteps.ContainsKey("heating"))
+                if (mr.processingsteps!=null&&mr.processingsteps.ContainsKey("heating"))
                 {
                     di[0].Itemstack.Collectible.SetTemperature(Api.World, di[0].Itemstack, (float)mr.processingsteps["heating"]);
                 }
@@ -315,7 +332,7 @@ namespace qptech.src
                 statustext += "<strong>Available Recipes:</strong><br>";
                 foreach (MachineRecipe mr in Recipes)
                 {
-                    statustext += "<font color=\"#aaffaa\">";
+                    statustext += "<br><font color=\"#aaffaa\">";
                     statustext += "<strong>";// +mr.name ;
                     //statustext += " makes ";
                     foreach (MachineRecipeItems mri in mr.output)
@@ -340,36 +357,39 @@ namespace qptech.src
                         if (vi > 1) { statustext += ")"; }
 
                     }
-                    statustext += " from</strong></font><br><font color=\"#ffffff\">";
-                    foreach (MachineRecipeItems mri in mr.ingredients)
+                    if (Recipes.Count < 3)
                     {
-                        statustext += "   " + mri.quantity + " ";
-                        int vi = mri.validitems.Count();
-                        if (vi > 1) { statustext += "("; }
-                        int c = 1;
-                        foreach (string subi in mri.validitems)
+                        statustext += " from</strong></font><br><font color=\"#ffffff\">";
+                        foreach (MachineRecipeItems mri in mr.ingredients)
                         {
-                            AssetLocation al = new AssetLocation(subi);
-                            string usestring = Lang.Get(al.Path);
+                            statustext += "   " + mri.quantity + " ";
+                            int vi = mri.validitems.Count();
+                            if (vi > 1) { statustext += "("; }
+                            int c = 1;
+                            foreach (string subi in mri.validitems)
+                            {
+                                AssetLocation al = new AssetLocation(subi);
+                                string usestring = Lang.Get(al.Path);
 
 
-                            statustext += usestring;
-                            if (vi > 1 && c == vi - 1) { statustext += " or "; }
-                            else if (vi > 1 && c != vi) { statustext += ","; }
-                            c++;
+                                statustext += usestring;
+                                if (vi > 1 && c == vi - 1) { statustext += " or "; }
+                                else if (vi > 1 && c != vi) { statustext += ","; }
+                                c++;
+                            }
+                            if (vi > 1) { statustext += ")"; }
+                            statustext += "<br>";
                         }
-                        if (vi > 1) { statustext += ")"; }
-                        statustext += "<br>";
-                    }
-                    if (mr.processingsteps.Count() > 0)
-                    {
-                        statustext += "  *Requires ";
-                        int c = 1;
-                        foreach (string key in mr.processingsteps.Keys)
+                        if (mr.processingsteps != null && mr.processingsteps.Count() > 0)
                         {
-                            statustext += key + "(" + mr.processingsteps[key] + ")";
-                            if (c < mr.processingsteps.Count()) { statustext += ", "; }
-                            c++;
+                            statustext += "  *Requires ";
+                            int c = 1;
+                            foreach (string key in mr.processingsteps.Keys)
+                            {
+                                statustext += key + "(" + mr.processingsteps[key] + ")";
+                                if (c < mr.processingsteps.Count()) { statustext += ", "; }
+                                c++;
+                            }
                         }
                     }
                 }
@@ -388,12 +408,31 @@ namespace qptech.src
         public MachineRecipeItems[] output;
         public MachineWildCard[] wildcards;
         public MachineRecipe() { }
+        
     }
     class MachineRecipeItems
     {
         public string[] validitems;
         public int quantity;
         public MachineRecipeItems() { }
+        public bool Match(string tryitem)
+        {
+            if (validitems == null || validitems.Length == 0) { return false; }
+            if (validitems.Contains(tryitem)) { return true; }
+            for (int c= 0;c < validitems.Length; c++){
+                
+                if (tryitem.Contains(validitems[c])){ return true; }
+            }
+            return false;
+        }
+        public string MatchAny(List<string> tryitems)
+        {
+            foreach (string tryitem in tryitems)
+            {
+                if (Match(tryitem)) { return tryitem; }
+            }
+            return "";
+        }
     }
     class MachineWildCard
     {

@@ -35,7 +35,7 @@
 			"useFlux": 20,
 
 
-			"recipegroups": [ "Temporal Steel" ],
+			"recipegroups": [ "Temporal Steel", "Concrete", "Red Concrete" ],
 			"inputFace": "up",
 			"outputFace": "down",
 			"animationCode": "run",

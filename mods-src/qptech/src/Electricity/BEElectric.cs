@@ -485,8 +485,18 @@ namespace qptech.src
             SetOrder = 99990001,
             TogglePower = 99990002,
             ToggleMode = 99990003,
-            Halt = 99990004
+            Halt = 99990004,
+            Wrench = 99990005
         }
+        public virtual void Wrench()
+        {
+            if (Api is ICoreClientAPI)
+            {
+
+                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.Wrench, null);
+            }
+        }
+
         public virtual void TogglePowerButton()
         {
             if (Api is ICoreClientAPI)
@@ -513,6 +523,10 @@ namespace qptech.src
             if (packetid == (int)enPacketIDs.TogglePower)
             {
                 TogglePower();
+            }
+            else if (packetid == (int)enPacketIDs.Wrench)
+            {
+                Wrench();
             }
         }
         protected string textred = "<font color=\"#ff4444\">";

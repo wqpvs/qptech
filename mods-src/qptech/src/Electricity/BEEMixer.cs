@@ -24,20 +24,45 @@ namespace qptech.src.Electricity
         // Should I use an input tank instead of internal IFluidTank?
         
 
-        //TODO set this up with a proper liquid itemstack
+        //TODO add purge mode
 
         
         ItemStack itemstack;
-        int CapacityLiters => 1000;
+        
         public BlockPos TankPos => Pos;
-
+        bool purgemode = false;
         public override void Initialize(ICoreAPI api)
         {
             
             base.Initialize(api);
         }
 
-        
+        protected override void AddAdditionalIngredients(ref Dictionary<string, int> ingredientlist)
+        {
+            if (itemstack != null && itemstack.Item != null && itemstack.StackSize > 0)
+            {
+                string key = itemstack.Item.Code.ToString();
+                if (ingredientlist.ContainsKey(key)) { ingredientlist[key] += itemstack.StackSize; }
+                else { ingredientlist[key] = itemstack.StackSize; }
+            }
+            
+        }
+
+        protected override int TryAdditionalDraw(MachineRecipeItems mi, int needqty)
+        {
+            if (itemstack != null && itemstack.Item != null && itemstack.StackSize > 0)
+            {
+                string key = itemstack.Item.Code.ToString();
+                if (mi.Match(key))
+                {
+                    int drawamt = Math.Min(needqty, itemstack.StackSize);
+                    itemstack.StackSize -= drawamt;
+                    MarkDirty();
+                    return drawamt;
+                }
+            }
+            return base.TryAdditionalDraw(mi, needqty);
+        }
 
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
@@ -47,47 +72,65 @@ namespace qptech.src.Electricity
             {
                 dsc.AppendLine("Internal Tank Contains " + itemstack.StackSize/100 + " L of " + itemstack.Item.GetHeldItemName(itemstack));
             }
+            if (purgemode) { dsc.AppendLine("PURGING"); }
+            else { dsc.AppendLine("FILLING"); }
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
+            purgemode = tree.GetBool("purgemode", purgemode);
             itemstack = tree.GetItemstack("itemstack");
             if (itemstack != null)
             {
                 itemstack.ResolveBlockOrItem(worldAccessForResolve);
             }
         }
-
+        public override void Wrench()
+        {
+            base.Wrench();
+            if (Api is ICoreServerAPI)
+            {
+                purgemode = !purgemode;
+                MarkDirty();
+            }
+        }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
             tree.SetItemstack("itemstack", itemstack);
+            tree.SetBool("purgemode", purgemode);
         }
 
-        public int TakeFluid(Item item, int amt) { return 0; }
+        public int TakeFluid(Item item, int amt) {
+            if (!purgemode) { return 0; }
+            if (itemstack == null || itemstack.Item == null) { return 0; }
+            if (itemstack.Item != item) { return 0; }
+            int stackdraw = Math.Min(amt, itemstack.StackSize);
+            itemstack.StackSize -= stackdraw;
+            if (itemstack.StackSize <= 0) { itemstack = null; purgemode = false; }
+            MarkDirty();
+            return stackdraw;
+        }
 
         public int QueryFluid(Item item)
         {
+            if (!purgemode) { return 0; }
             if (itemstack == null || itemstack.Item == null)
             {
                 
-                return item.MaxStackSize;
+                return 0;
             }
             else if (itemstack.Item == item)
             {
-                if (itemstack.StackSize < item.MaxStackSize)
-                {
-                    int used = (item.MaxStackSize - itemstack.StackSize);
-                    return used;
-                }
+                return itemstack.StackSize;
             }
             return 0;
         }
 
         public int OfferFluid(Item item, int quantity)
         {
-            
+            if (purgemode) { return 0; }
             if (itemstack == null || itemstack.Item==null)
             {
                 itemstack = new ItemStack(item, quantity);
@@ -108,17 +151,19 @@ namespace qptech.src.Electricity
 
         public Item QueryFluid()
         {
-            return null;
+            if (!purgemode) { return null; }
+            if (itemstack == null) { return null; }
+            return itemstack.Item;
         }
 
         public bool IsOnlySource()
         {
-            return false;
+            return purgemode;
         }
 
         public bool IsOnlyDestination()
         {
-            return true;
+            return !purgemode;
         }
     }
 }
