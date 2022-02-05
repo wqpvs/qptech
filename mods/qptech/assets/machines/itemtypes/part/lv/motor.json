@@ -5,14 +5,13 @@
 	},
 	"variantgroups": [
 		{
-			"code": "level",
+			"code": "tier",
 			"states": [ "primitive" ]
 		}
 	],
 	"drawtype": "json",
-	"shape": { "base": "item/part/motor-{level}" },
+	"shape": { "base": "item/part/motor-{tier}" },
 	"maxstacksize": 4,
-
 	"guiTransform": {
 		"translation": {
 			"x": 0,
@@ -25,7 +24,7 @@
 			"z": 12
 		},
 		"origin": {
-			"x": 0.2,
+			"x": 0.15,
 			"y": 0.05,
 			"z": 0.38
 		},

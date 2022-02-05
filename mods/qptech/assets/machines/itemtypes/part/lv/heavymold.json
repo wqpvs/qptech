@@ -1,22 +1,17 @@
 {
   "code": "heavymold",
-
   "drawtype": "json",
   "shape": { "base": "item/part/mold-{part}" },
   "maxstacksize": 1,
-
   "variantgroups": [
     {
       "code": "part",
-      "states": [ "screw", "metalplate","rod" ]
+      "states": [ "screw", "metalplate", "rod" ]
     }
   ],
-
   "creativeinventory": {
-
     "qptech-parts": [ "*" ]
   },
-
   "guiTransform": {
     "translation": {
       "x": 0,
@@ -30,12 +25,11 @@
     },
     "origin": {
       "x": 0.25,
-      "y": -0.25,
-      "z": 0.6
+      "y": -0.1,
+      "z": 0.65
     },
-    "scale": 2.01
+    "scale": 1.75
   },
-
   "groundTransform": {
     "translation": {
       "x": 0,

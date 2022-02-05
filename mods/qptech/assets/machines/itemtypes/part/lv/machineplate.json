@@ -29,11 +29,11 @@
 			"z": -53
 		},
 		"origin": {
-			"x": 0.44,
+			"x": 0.485,
 			"y": 0,
-			"z": 0.38
+			"z": 0.45
 		},
-		"scale": 2.92
+		"scale": 2.5
 	},
 	"fpHandTransform": {
 		"translation": {

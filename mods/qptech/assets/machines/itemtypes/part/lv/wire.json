@@ -6,19 +6,12 @@
 	"drawtype": "json",
 	"shape": { "base": "item/part/wire" },
 	"maxstacksize": 128,
-
 	"variantgroups": [
 		{
 			"code": "material",
 			"states": [ "copper", "tin" ]
 		}
 	],
-
-	"creativeinventory": {
-		"general": [ "*" ],
-		"items": [ "*" ],
-		"tools": [ "*" ]
-	},
 	"textures": {
 		"metal": { "base": "game:block/metal/ingot/{material}" }
 	},
@@ -29,16 +22,16 @@
 			"z": 0
 		},
 		"rotation": {
-			"x": 9,
-			"y": 137,
+			"x": -57,
+			"y": 151,
 			"z": -53
 		},
 		"origin": {
-			"x": 0.44,
-			"y": 0,
-			"z": 0.38
+			"x": 0.7,
+			"y": -0.1,
+			"z": 0.4
 		},
-		"scale": 2.92
+		"scale": 1.52
 	},
 	"fpHandTransform": {
 		"translation": {

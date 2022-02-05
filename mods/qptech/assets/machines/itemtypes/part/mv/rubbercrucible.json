@@ -6,7 +6,6 @@
 	"drawtype": "json",
 	"shape": { "base": "item/clay/rubbercrucible" },
 	"maxstacksize": 1,
-
 	"fpHandTransform": {
 		"translation": {
 			"x": 0.05,
@@ -22,14 +21,19 @@
 	},
 	"guiTransform": {
 		"translation": {
-			"x": 23,
-			"y": -17,
+			"x": 0,
+			"y": 0,
 			"z": 0
 		},
 		"rotation": {
 			"x": -25,
 			"y": -150,
 			"z": -180
+		},
+		"origin": {
+			"x": 0.485,
+			"y": 0.2,
+			"z": 0.5
 		},
 		"scale": 2.96
 	},

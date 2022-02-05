@@ -6,14 +6,12 @@
 	"drawtype": "json",
 	"shape": { "base": "item/part/screw" },
 	"maxstacksize": 64,
-
 	"variantgroups": [
 		{
 			"code": "material",
 			"states": [ "brass", "steel" ]
 		}
 	],
-
 	"textures": {
 		"metal": { "base": "game:block/metal/ingot/{material}" }
 	},
@@ -24,16 +22,16 @@
 			"z": 0
 		},
 		"rotation": {
-			"x": 9,
-			"y": 137,
-			"z": -53
+			"x": 16,
+			"y": 128,
+			"z": -50
 		},
 		"origin": {
-			"x": 0.44,
-			"y": 0,
-			"z": 0.38
+			"x": 0.55,
+			"y": 0.05,
+			"z": 0.55
 		},
-		"scale": 2.92
+		"scale": 6
 	},
 	"fpHandTransform": {
 		"translation": {

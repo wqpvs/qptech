@@ -6,14 +6,12 @@
 	"drawtype": "json",
 	"shape": { "base": "item/part/rod" },
 	"maxstacksize": 64,
-
 	"variantgroups": [
 		{
 			"code": "material",
 			"states": [ "copper", "brass", "tin", "iron", "steel" ]
 		}
 	],
-
 	"textures": {
 		"metal": { "base": "game:block/metal/ingot/{material}" }
 	},
@@ -29,11 +27,11 @@
 			"z": -53
 		},
 		"origin": {
-			"x": 0.44,
+			"x": 0.43,
 			"y": 0,
-			"z": 0.38
+			"z": 0.44
 		},
-		"scale": 2.92
+		"scale": 2.74
 	},
 	"fpHandTransform": {
 		"translation": {

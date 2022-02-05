@@ -13,11 +13,10 @@
 			"states": [ "copper" ]
 		}
 	],
-
 	"guiTransform": {
 		"translation": {
-			"x": 4,
-			"y": 8,
+			"x": 0,
+			"y": 0,
 			"z": 0
 		},
 		"rotation": {
@@ -26,9 +25,9 @@
 			"z": -53
 		},
 		"origin": {
-			"x": 0.44,
+			"x": 0.6,
 			"y": 0,
-			"z": 0.38
+			"z": 0.48
 		},
 		"scale": 1.52
 	},

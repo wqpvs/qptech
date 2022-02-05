@@ -12,24 +12,23 @@
 	"drawtype": "json",
 	"shape": { "base": "item/part/circuitboard" },
 	"maxstacksize": 4,
-
 	"guiTransform": {
 		"translation": {
-			"x": 11,
-			"y": -9,
+			"x": 0,
+			"y": 0,
 			"z": 0
 		},
 		"rotation": {
-			"x": -66,
+			"x": -55,
 			"y": 30,
 			"z": -180
 		},
 		"origin": {
-			"x": 0.2,
-			"y": 0.05,
-			"z": 0.38
+			"x": 0.525,
+			"y": 0.1,
+			"z": 0.5
 		},
-		"scale": 1.7
+		"scale": 1.59
 	},
 	"fpHandTransform": {
 		"translation": {
