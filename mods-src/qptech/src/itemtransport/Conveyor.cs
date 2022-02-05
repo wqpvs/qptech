@@ -213,7 +213,7 @@ namespace qptech.src.itemtransport
 
             ICoreClientAPI capi = Api as ICoreClientAPI;
             if (capi == null) { return false; }
-            if (itemstack == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
+            if (itemstack == null||(itemstack.Item==null && itemstack.Block==null)) { return base.OnTesselation(mesher, tessThreadTesselator); }
             MeshData meshdata;
             
             if (itemstack.Class == EnumItemClass.Item)
