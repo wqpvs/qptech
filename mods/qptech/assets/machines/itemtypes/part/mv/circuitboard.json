@@ -6,7 +6,7 @@
 	"variantgroups": [
 		{
 			"code": "level",
-			"states": [ "mv" ]
+			"states": [ "primitive" ]
 		}
 	],
 	"drawtype": "json",

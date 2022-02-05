@@ -205,6 +205,8 @@
 	"block-concrete-*": "Concrete Block",
 	"blockdesc-concrete-*": "Concrete building block made in a mixer from sand, quicklime, stones, and water or the appropriate dye",
 	"block-industrialglass-*": "Industrial Glass Block",
-	"blockdesc-industrialglass-*": "Purified glass block made with water and crushed quartz in a mixer."
+	"blockdesc-industrialglass-*": "Purified glass block made with water and crushed quartz in a mixer.",
+	"item-circuitboard-*": "Circuit Board",
+	"itemdesc-circuitboard-*": "An integral component to many things!"
 
 }
