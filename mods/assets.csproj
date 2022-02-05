@@ -112,6 +112,7 @@
     <None Include="qptech\assets\machines\itemtypes\part\mv\metalchannel.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\bolt.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\ring.json" />
+    <None Include="qptech\assets\machines\itemtypes\part\mv\circuitboard.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\rotor.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\motor-mv.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\stator.json" />
@@ -330,6 +331,8 @@
     <None Include="qptech\assets\machines\shapes\item\part\bolt.json" />
     <None Include="qptech\assets\machines\shapes\item\part\braidedwire.json" />
     <None Include="qptech\assets\machines\shapes\item\part\cable.json" />
+    <None Include="qptech\assets\machines\shapes\item\part\circuitboard.json" />
+    <None Include="qptech\assets\machines\shapes\item\part\cruciblechamber.json" />
     <None Include="qptech\assets\machines\shapes\item\part\drilledplate.json" />
     <None Include="qptech\assets\machines\shapes\item\part\machineplate.json" />
     <None Include="qptech\assets\machines\shapes\item\part\metalchannel.json" />

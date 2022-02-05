@@ -1,0 +1,89 @@
+{
+	"code": "circuitboard",
+	"creativeinventory": {
+		"qptech-parts": [ "*" ]
+	},
+	"variantgroups": [
+		{
+			"code": "level",
+			"states": [ "mv" ]
+		}
+	],
+	"drawtype": "json",
+	"shape": { "base": "item/part/circuitboard" },
+	"maxstacksize": 4,
+
+	"guiTransform": {
+		"translation": {
+			"x": 11,
+			"y": -9,
+			"z": 0
+		},
+		"rotation": {
+			"x": -66,
+			"y": 30,
+			"z": -180
+		},
+		"origin": {
+			"x": 0.2,
+			"y": 0.05,
+			"z": 0.38
+		},
+		"scale": 1.7
+	},
+	"fpHandTransform": {
+		"translation": {
+			"x": -0.1,
+			"y": 0.2,
+			"z": 0
+		},
+		"rotation": {
+			"x": 7,
+			"y": -14,
+			"z": -32
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 1.27
+	},
+	"groundTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0.15,
+			"z": 0
+		},
+		"rotation": {
+			"x": 1,
+			"y": 6,
+			"z": 1
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0.3,
+			"z": 0.5
+		},
+		"scale": 2.32
+	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -2.25,
+			"y": 0,
+			"z": -1.8
+		},
+		"rotation": {
+			"x": -2,
+			"y": -94,
+			"z": -8
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 0.31
+	}
+
+}

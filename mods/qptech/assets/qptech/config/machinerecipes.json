@@ -167,7 +167,7 @@
       },
       {
         "validitems": [ "game:waterportion" ],
-        "quantity": 10
+        "quantity": 100
       },
       {
         "validitems": [ "stone-" ],
@@ -199,7 +199,7 @@
       },
       {
         "validitems": [ "game:dye-red" ],
-        "quantity": 10
+        "quantity": 100
       },
       {
         "validitems": [ "stone-" ],
@@ -231,7 +231,7 @@
       },
       {
         "validitems": [ "game:dye-blue" ],
-        "quantity": 10
+        "quantity": 100
       },
       {
         "validitems": [ "stone-" ],
@@ -262,7 +262,7 @@
       },
       {
         "validitems": [ "game:dye-yellow" ],
-        "quantity": 10
+        "quantity": 100
       },
       {
         "validitems": [ "stone-" ],
@@ -294,7 +294,7 @@
       },
       {
         "validitems": [ "game:dye-white" ],
-        "quantity": 10
+        "quantity": 100
       },
       {
         "validitems": [ "stone-" ],
@@ -326,7 +326,7 @@
       },
       {
         "validitems": [ "game:dye-black" ],
-        "quantity": 1
+        "quantity": 100
       },
       {
         "validitems": [ "stone-" ],
@@ -350,7 +350,7 @@
     "ingredients": [
       {
         "validitems": [ "game:waterportion" ],
-        "quantity": 10
+        "quantity": 500
       },
       {
         "validitems": [ "game:crushed-quartz","game:crushed-clearquartz" ],
