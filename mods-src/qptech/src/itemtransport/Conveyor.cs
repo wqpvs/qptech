@@ -296,11 +296,11 @@ namespace qptech.src.itemtransport
             string dircode = Block.Code.ToString();
             bool doswap = false;
             if (dircode.Contains("-up")) { dircode = dircode.Replace("up", "down");doswap = true; }
-            else if (dircode.Contains("-down")) { dircode = dircode.Replace("down", "up"); doswap = true; }
+            else if (dircode.Contains("-down")) { dircode = dircode.Replace("down", "north"); doswap = true; }
             else if (dircode.Contains("-north")) { dircode = dircode.Replace("north", "east"); doswap = true; }
             else if (dircode.Contains("-east")) { dircode = dircode.Replace("east","south"); doswap = true; }
             else if (dircode.Contains("-south")) { dircode = dircode.Replace("south", "west"); doswap = true; }
-            else if (dircode.Contains("-west")) { dircode = dircode.Replace("west", "north"); doswap = true; }
+            else if (dircode.Contains("-west")) { dircode = dircode.Replace("west", "up"); doswap = true; }
             if (doswap)
             {
                 Block newblock = Api.World.GetBlock(new AssetLocation(dircode));
@@ -467,6 +467,7 @@ namespace qptech.src.itemtransport
             
             if (destination!=null && destination != Pos) { dsc.AppendLine("To " + destination.ToString()); }
             if (itemfilter != null) { dsc.AppendLine(itemfilter.GetFilterDescription()); }
+            dsc.AppendLine(Block.LastCodePart().ToString());
 
         }
         //Lerp two vectors, but i'm not 100% this is mathematically correct way to do it

@@ -171,6 +171,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvhardmetalplate.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\machineryblock-steel.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\sheetroller.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\other\itempipe.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\pipe-core-soaker-bluesteel.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\tank-bluesteel.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\tank-bronze.json" />
@@ -236,7 +237,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\bloomery.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\boiler.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\itempipe-down.json" />
-    <None Include="qptech\assets\machines\shapes\block\metal\container\itempipe-horizontal.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\container\itempipe.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\itemsplitter-4way.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\itemsplitter-3way.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\crusher.json" />

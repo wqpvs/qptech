@@ -1,0 +1,30 @@
+{
+	"ingredientPattern": "S_S	_C_	S_S",
+	"ingredients": {
+
+		"S": {
+			"type": "item",
+			"code": "metalchannel-steel",
+			
+			"quantity": 1
+
+		},
+		"C": {
+			"type": "item",
+			"code": "circuitboard-primitive",
+			"quantity": 1
+		},
+		"W": {
+			"type": "item",
+			"code": "pipewrench",
+			"isTool": true
+		}
+	},
+	"width": 3,
+	"height": 3,
+	"output": {
+		"type": "block",
+		"code": "itempipe-north",
+		"quantity": 1
+	}
+}

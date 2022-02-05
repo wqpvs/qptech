@@ -7,13 +7,10 @@
 		"qptech": [ "*-north" ]
 	},
 	"variantgroups": [
-		{
-			"code": "type",
-			"states": [ "horizontal", "down", "up" ]
-		},
+		
 		{
 			"code": "side",
-			"loadFromProperties": "abstract/horizontalorientation"
+			"states": ["north","east","south","west","up","down"]
 		}
 	],
 	"behaviors": [
@@ -24,22 +21,46 @@
 		}
 	],
 	"attributesbytype": {
-		"*-horizontal-*": {
+		"*-north": {
 
-			"inputface": "east",
-			"outputface": "west",
+			"inputface": "south",
+			"outputface": "north",
 			"transportspeed": 0.5,
 			"stacksize": 64
-			
+
 		},
-		"*-down-*": {
+		"*-east": {
+
+			"inputface": "south",
+			"outputface": "north",
+			"transportspeed": 0.5,
+			"stacksize": 64
+
+		},
+		"*-south": {
+
+			"inputface": "south",
+			"outputface": "north",
+			"transportspeed": 0.5,
+			"stacksize": 64
+
+		},
+		"*-west": {
+
+			"inputface": "south",
+			"outputface": "north",
+			"transportspeed": 0.5,
+			"stacksize": 64
+
+		},
+		"*-down": {
 
 			"inputface": "up",
 			"outputface": "down",
 			"transportspeed": 0.5,
 			"stacksize": 64
 		},
-		"*-up-*": {
+		"*-up": {
 
 			"inputface": "down",
 			"outputface": "up",
@@ -49,25 +70,32 @@
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-
+	
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/container/itempipe-{type}",
-			"rotateY": 180
+			"base": "block/metal/container/itempipe",
+			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/container/itempipe-{type}",
-			"rotateY": 90
-		},
-		"*-west": {
-			"base": "block/metal/container/itempipe-{type}",
+			"base": "block/metal/container/itempipe",
 			"rotateY": 270
 		},
+		"*-west": {
+			"base": "block/metal/container/itempipe",
+			"rotateY": 90
+		},
 		"*-south": {
-			"base": "block/metal/container/itempipe-{type}",
-			"rotateY": 0
+			"base": "block/metal/container/itempipe",
+			"rotateY": 180
+		},
+		"*-up": {
+			"base": "block/metal/container/itempipe",
+			"rotateX": 90
+		},
+		"*-down": {
+			"base": "block/metal/container/itempipe",
+			"rotateX": 270
 		}
-
 
 	},
 

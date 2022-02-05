@@ -207,6 +207,8 @@
 	"block-industrialglass-*": "Industrial Glass Block",
 	"blockdesc-industrialglass-*": "Purified glass block made with water and crushed quartz in a mixer.",
 	"item-circuitboard-*": "Circuit Board",
-	"itemdesc-circuitboard-*": "An integral component to many things!"
+	"itemdesc-circuitboard-*": "An integral component to many things!",
+	"block-itempipe-*": "Item Transport Pipe",
+	"blockdesc-itempipe-*": "Move items into and out of containers. Setup filters by right clicking withing in your hand. Change direction by right clicking with the pipe wrench."
 
 }
