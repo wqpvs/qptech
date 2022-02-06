@@ -4,64 +4,32 @@
 	"entityclass": "ItemSplitter",
 	"creativeinventory": {
 
-		"qptech": [ "*-east" ]
+		"qptech": [ "*" ]
 	},
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "3way","4way" ]
-		},
-		{
-			"code": "side",
-			"loadFromProperties": "abstract/horizontalorientation"
+			"states": [ "junction" ]
 		}
-	],
-	"behaviors": [
 
-		{
-			"name": "HorizontalOrientable",
-			"properties": { "dropBlockFace": "east" }
-		}
 	],
+
 	"attributesbytype": {
-		"*-3way-*": {
 
-			"inputfaces": [ "west" ],
-			"outputfaces": [ "north", "east", "south" ],
+		"*-junction": {
 
-			"stacksize": 1
-		},
-		"*-4way-*": {
-
-			"inputfaces": [ "up" ],
+			"inputfaces": [ "up", "down" ],
 			"outputfaces": [ "north", "east", "south", "west" ],
 
-			"stacksize": 1
+			"stacksize": 1,
+			"inputshape": "block/metal/container/itempipeentrance",
+			"outputshape":  "block/metal/container/itempipeexit"
 		}
 
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/metal/container/itemsplitter-{type}" },
-	"shapeByType": {
-		"*-north": {
-			"base": "block/metal/container/itemsplitter-{type}",
-			"rotateY": 180
-		},
-		"*-east": {
-			"base": "block/metal/container/itemsplitter-{type}",
-			"rotateY": 90
-		},
-		"*-west": {
-			"base": "block/metal/container/itemsplitter-{type}",
-			"rotateY": 270
-		},
-		"*-south": {
-			"base": "block/metal/container/itemsplitter-{type}",
-			"rotateY": 0
-		}
-	},
-	
+	"shape": { "base": "block/metal/container/itemsplittercore" },
 
 	"resistance": 1,
 	"sideopaque": {
@@ -84,7 +52,7 @@
 		"y1": 0,
 		"z1": 0,
 		"x2": 1,
-		"y2": 0.125,
+		"y2": 1,
 		"z2": 1
 	},
 	"collisionBox": {
@@ -92,7 +60,7 @@
 		"y1": 0,
 		"z1": 0,
 		"x2": 1,
-		"y2": 0.125,
+		"y2": 1,
 		"z2": 1
 	}
 }
