@@ -33,6 +33,7 @@ namespace qptech.src.itemtransport
         string exitshape= "machines:itemfilterexit";
         Block entranceshapeblock;
         Block exitshapeblock;
+        Dictionary<BlockPos, int> outputtracker;
         public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
             if (inputlocations == null) { return false; }
@@ -82,17 +83,30 @@ namespace qptech.src.itemtransport
         protected virtual void HandleItemStack()
         {
             List<IItemTransporter> availableoutputs = new List<IItemTransporter>();
-            foreach (BlockFacing facing in outputfaces)
+            foreach (BlockPos outpos in outputlocations)
             {
-                BlockPos outpos = Pos.Copy().Offset(facing);
+                //BlockPos outpos = Pos.Copy().Offset(facing);
                 IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(outpos) as IItemTransporter;
                 if (trans==null || !trans.CanAcceptItems(this)) { continue; }
                 availableoutputs.Add(trans);
             }
             if (availableoutputs.Count() == 0) { return; }
+            int pick = 0; int pickqty = 1000000;
+            for (int c = 0; c < availableoutputs.Count; c++)
+            {
+                BlockPos checkpos = availableoutputs[c].TransporterPos;
+                if (outputtracker.ContainsKey(checkpos)) { 
+                    if (outputtracker[checkpos] < pickqty)
+                    {
+                        pickqty = outputtracker[checkpos];
+                        pick = c;
+                    }
+                }
+                
+            }
             
-            int pick = r.Next(0, availableoutputs.Count());
             int used = availableoutputs[pick].ReceiveItemStack(itemstack,this);
+            outputtracker[availableoutputs[pick].TransporterPos] += 1;
             itemstack.StackSize -= used;
             if (itemstack.StackSize <= 0) { ResetStack(); }
             else { MarkDirty(true); }
@@ -158,13 +172,15 @@ namespace qptech.src.itemtransport
             outputlocations = new List<BlockPos>();
             inputfaces = new List<BlockFacing>();
             outputfaces = new List<BlockFacing>();
+            outputtracker = new Dictionary<BlockPos, int> ();
+
             foreach (string direction in facesettings.Keys)
             {
                 BlockFacing bf = BlockFacing.FromCode(direction);
                 BlockPos usepos = Pos.Copy().Offset(bf);
                 string state = facesettings[direction];
                 if (state == faceinput) { inputlocations.Add(usepos); inputfaces.Add(bf); }
-                else if (state== faceoutput) { outputlocations.Add(usepos); outputfaces.Add(bf); }
+                else if (state== faceoutput) { outputlocations.Add(usepos); outputfaces.Add(bf);outputtracker[usepos] = 0; }
             }
         }
 
