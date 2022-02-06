@@ -9,6 +9,7 @@ using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 using Vintagestory.API.Client;
 using Vintagestory.API.Server;
+using Vintagestory.API.Util;
 
 namespace qptech.src.itemtransport
 {
@@ -18,17 +19,21 @@ namespace qptech.src.itemtransport
     /// </summary>
     class ItemSplitter : BlockEntity, IItemTransporter
     {
-        List<BlockFacing> inputfaces;
-        List<BlockFacing> outputfaces;
-        List<BlockPos> inputlocations;
-        List<BlockPos> outputlocations;
+        
+
+        Dictionary<string, string> facesettings;
         public BlockPos TransporterPos => Pos;
         ItemStack itemstack;
         int stacksize = 1000;
+        List<BlockPos> inputlocations;
+        List<BlockPos> outputlocations;
+        List<BlockFacing> inputfaces;
+        List<BlockFacing> outputfaces;
         
 
         public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
+            if (inputlocations == null) { return false; }
             if (fromtransporter != null && !inputlocations.Contains(fromtransporter.TransporterPos)) { return false; }
             if (itemstack == null) { return true; }
 
@@ -50,37 +55,7 @@ namespace qptech.src.itemtransport
             base.Initialize(api);
             if (Block.Attributes != null)
             {
-                string[] cfaces = { };
-                if (!Block.Attributes.KeyExists("inputfaces")) { inputfaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
-                else
-                {
-                    cfaces = Block.Attributes["inputfaces"].AsArray<string>(cfaces);
-                    inputfaces = new List<BlockFacing>();
-                    foreach (string f in cfaces)
-                    {
-                        inputfaces.Add(BEElectric.OrientFace(Block.Code.ToString(), BlockFacing.FromCode(f)));
-                    }
-                }
-                inputlocations = new List<BlockPos>();
-                foreach (BlockFacing bf in inputfaces)
-                {
-                    inputlocations.Add(Pos.Copy().Offset(bf));
-                }
-                if (!Block.Attributes.KeyExists("outputfaces")) { outputfaces = BlockFacing.ALLFACES.ToList<BlockFacing>(); }
-                else
-                {
-                    cfaces = Block.Attributes["outputfaces"].AsArray<string>(cfaces);
-                    outputfaces = new List<BlockFacing>();
-                    foreach (string f in cfaces)
-                    {
-                        outputfaces.Add(BEElectric.OrientFace(Block.Code.ToString(), BlockFacing.FromCode(f)));
-                    }
-                }
-                outputlocations = new List<BlockPos>();
-                foreach (BlockFacing bf in outputfaces)
-                {
-                    outputlocations.Add(Pos.Copy().Offset(bf));
-                }
+               
                 stacksize = Block.Attributes["stacksize"].AsInt(stacksize);
             }
             if (Api is ICoreServerAPI) { RegisterGameTickListener(OnServerTick, 100); }
@@ -116,11 +91,85 @@ namespace qptech.src.itemtransport
             else { MarkDirty(true); }
         }
 
+        public virtual bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
+        {
+           
+            
+            if (byPlayer.Entity.RightHandItemSlot.Itemstack.Item != null && byPlayer.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().Contains("wrench"))
+            {
+                if (Api is ICoreClientAPI)
+                {
+                    byte[] blockseldata = SerializerUtil.Serialize<BlockSelection>(blockSel);
+                    (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.WrenchSwap, blockseldata);
+                    return true;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
+        {
+            if (packetid == (int)enPacketIDs.WrenchSwap) {
+                BlockSelection bs = SerializerUtil.Deserialize<BlockSelection>(data);
+                string direction = bs.Face.ToString();
+                if (facesettings[direction] == faceoff) { facesettings[direction] = faceinput; }
+                else if (facesettings[direction] == faceinput) { facesettings[direction] = faceoutput; }
+                else if (facesettings[direction] == faceoutput) { facesettings[direction] = faceoff; }
+                SetIOLocations();
+                MarkDirty(true);
+
+            }
+        }
+
+
+        public enum enPacketIDs
+        {
+            WrenchSwap = 99990003
+        }
+        public const string faceoff = "";
+        public const string faceinput = "i";
+        public const string faceoutput = "o";
+
+        //Set all faces to "off"
+        protected virtual void ResetFaces()
+        {
+            facesettings = new Dictionary<string, string>();
+            foreach (BlockFacing bf in BlockFacing.ALLFACES)
+            {
+                facesettings[bf.ToString()] = faceoff;
+            }
+           
+        }
+
+        //build the helper lists to mactch the current face setup
+        protected virtual void SetIOLocations()
+        {
+            inputlocations = new List<BlockPos>();
+            outputlocations = new List<BlockPos>();
+            inputfaces = new List<BlockFacing>();
+            outputfaces = new List<BlockFacing>();
+            foreach (string direction in facesettings.Keys)
+            {
+                BlockFacing bf = BlockFacing.FromCode(direction);
+                BlockPos usepos = Pos.Copy().Offset(bf);
+                string state = facesettings[direction];
+                if (state == faceinput) { inputlocations.Add(usepos); inputfaces.Add(bf); }
+                else if (state== faceoutput) { outputlocations.Add(usepos); outputfaces.Add(bf); }
+            }
+        }
+
+
+
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
+           
             base.ToTreeAttributes(tree);
+           
             tree.SetItemstack("itemstack", itemstack);
-            
+            if (facesettings == null || facesettings.Count() == 0) { ResetFaces(); }
+            byte[] facesettingsdata = SerializerUtil.Serialize<Dictionary<string, string>>(facesettings);
+            tree.SetBytes("facesettings", facesettingsdata);
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
@@ -132,7 +181,10 @@ namespace qptech.src.itemtransport
             {
                 itemstack.ResolveBlockOrItem(worldAccessForResolve);
             }
-            
+            byte[] facesettingsdata = tree.GetBytes("facesettings");
+            if (facesettingsdata == null || facesettingsdata.Length == 0) { ResetFaces(); }
+            else { facesettings = SerializerUtil.Deserialize<Dictionary<string, string>>(facesettingsdata);  }
+            SetIOLocations();
         }
         public override void OnBlockRemoved()
         {

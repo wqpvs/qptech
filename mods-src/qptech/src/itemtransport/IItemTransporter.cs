@@ -18,7 +18,7 @@ namespace qptech.src.itemtransport
     {
         int ReceiveItemStack(ItemStack incomingstack,IItemTransporter fromtransporter);
         bool CanAcceptItems(IItemTransporter fromtransporter);
-        
+        bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel);
         BlockPos TransporterPos { get; }
     }
 }

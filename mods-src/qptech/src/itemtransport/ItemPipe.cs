@@ -14,7 +14,7 @@ using Vintagestory.API.Util;
 using Vintagestory.API.Config;
 namespace qptech.src.itemtransport
 {
-    class Conveyor : BlockEntity, IItemTransporter
+    class ItemPipe : BlockEntity, IItemTransporter
     {
         BlockPos destination;
         public BlockPos Destination => destination;
@@ -251,7 +251,7 @@ namespace qptech.src.itemtransport
             return base.OnTesselation(mesher, tessThreadTesselator);
         }
 
-        public virtual bool OnPlayerInteract(IPlayer player)
+        public virtual bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
             //if we have a filter and player clicks wiht right hand, clear the filter
             /*if (itemfilter != null && player.Entity.RightHandItemSlot.Itemstack == null)
@@ -269,12 +269,12 @@ namespace qptech.src.itemtransport
                 return true;
             }
             */
-            if (player.Entity.RightHandItemSlot.Itemstack == null)
+            if (byPlayer.Entity.RightHandItemSlot.Itemstack == null)
             {
                 OpenStatusGUI();
                 return true;
             }
-            else if (player.Entity.RightHandItemSlot.Itemstack.Item != null&&player.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().Contains("wrench"))
+            else if (byPlayer.Entity.RightHandItemSlot.Itemstack.Item != null&&byPlayer.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().Contains("wrench"))
             {
                 WrenchSwap();
                 return true;
@@ -314,7 +314,7 @@ namespace qptech.src.itemtransport
                     Api.World.BlockAccessor.SetBlock(newblock.Id, Pos);
                     if (pushfilter != null)
                     {
-                        Conveyor newconveyor = Api.World.BlockAccessor.GetBlockEntity(Pos) as Conveyor;
+                        ItemPipe newconveyor = Api.World.BlockAccessor.GetBlockEntity(Pos) as ItemPipe;
                         if (newconveyor == this)
                         {
                             int abc = 1;

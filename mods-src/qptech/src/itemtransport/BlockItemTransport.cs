@@ -19,9 +19,9 @@ namespace qptech.src.itemtransport
     {
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
-            var conveyor = world.BlockAccessor.GetBlockEntity(blockSel.Position) as Conveyor;
-            if (conveyor == null) { return base.OnBlockInteractStart(world, byPlayer, blockSel); }
-            bool tryconveyor = conveyor.OnPlayerInteract(byPlayer);
+            var itemtransporter = world.BlockAccessor.GetBlockEntity(blockSel.Position) as IItemTransporter;
+            if (itemtransporter == null) { return base.OnBlockInteractStart(world, byPlayer, blockSel); }
+            bool tryconveyor = itemtransporter.OnBlockInteractStart(world, byPlayer, blockSel);
             if (tryconveyor) { return false; }
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
 

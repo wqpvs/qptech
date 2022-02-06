@@ -42,7 +42,7 @@ namespace qptech.src.itemtransport
                 return;
             }
             
-            Conveyor conveyor = capi.World.BlockAccessor.GetBlockEntity(blockSel.Position) as Conveyor;
+            ItemPipe conveyor = capi.World.BlockAccessor.GetBlockEntity(blockSel.Position) as ItemPipe;
             if (conveyor == null) {
                 OpenGUIItemFilter();
                 return;

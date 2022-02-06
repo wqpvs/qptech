@@ -12,13 +12,13 @@ namespace qptech.src.itemtransport
     class GUIConveyor:GuiDialogBlockEntity
     {
         ICoreClientAPI api;
-        Conveyor conveyor;
+        ItemPipe conveyor;
         ItemFilter itemfilter;
         public GUIConveyor(string dialogTitle, BlockPos blockEntityPos, ICoreClientAPI capi) : base(dialogTitle,blockEntityPos,capi)
         {
             api = capi;
         }
-        public void SetupDialog(Conveyor conveyor)
+        public void SetupDialog(ItemPipe conveyor)
         {
             this.conveyor = conveyor;
             ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterMiddle);

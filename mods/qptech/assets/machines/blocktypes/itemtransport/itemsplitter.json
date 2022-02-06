@@ -1,6 +1,6 @@
 {
 	"code": "itemsplitter",
-
+	"class": "BlockItemTransport",
 	"entityclass": "ItemSplitter",
 	"creativeinventory": {
 
@@ -23,7 +23,7 @@
 
 			"stacksize": 1,
 			"inputshape": "block/metal/container/itempipeentrance",
-			"outputshape":  "block/metal/container/itempipeexit"
+			"outputshape": "block/metal/container/itempipeexit"
 		}
 
 	},

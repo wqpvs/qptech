@@ -1,7 +1,7 @@
 {
 	"code": "itempipe",
 	"class": "BlockItemTransport",
-	"entityclass": "Conveyor",
+	"entityclass": "ItemPipe",
 	"creativeinventory": {
 
 		"qptech": [ "*-north" ]
@@ -121,7 +121,7 @@
 	},
 
 	"selectionBoxByType": {
-		"*-horizontal-east": {
+		"*-north": {
 			"x1": 0.1875,
 			"y1": 0.1875,
 			"z1": 0,
@@ -129,7 +129,7 @@
 			"y2": 0.8125,
 			"z2": 1
 		},
-		"*-horizontal-west": {
+		"*-south": {
 			"x1": 0.1875,
 			"y1": 0.1875,
 			"z1": 0,
@@ -137,7 +137,7 @@
 			"y2": 0.8125,
 			"z2": 1
 		},
-		"*-horizontal-north": {
+		"*-east": {
 			"z1": 0.1875,
 			"y1": 0.1875,
 			"x1": 0,
@@ -145,7 +145,7 @@
 			"y2": 0.8125,
 			"x2": 1
 		},
-		"*-horizontal-south": {
+		"*-west": {
 			"z1": 0.1875,
 			"y1": 0.1875,
 			"x1": 0,
@@ -153,7 +153,7 @@
 			"y2": 0.8125,
 			"x2": 1
 		},
-		"*-up-*": {
+		"*-up": {
 			"z1": 0.1875,
 			"x1": 0.1875,
 			"y1": 0,
@@ -161,7 +161,7 @@
 			"x2": 0.8125,
 			"y2": 1
 		},
-		"*-down-*": {
+		"*-down": {
 			"z1": 0.1875,
 			"x1": 0.1875,
 			"y1": 0,
