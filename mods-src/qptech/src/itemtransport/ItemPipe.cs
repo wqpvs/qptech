@@ -317,7 +317,7 @@ namespace qptech.src.itemtransport
                         ItemPipe newconveyor = Api.World.BlockAccessor.GetBlockEntity(Pos) as ItemPipe;
                         if (newconveyor == this)
                         {
-                            int abc = 1;
+                           
                         }
                         else
                         {

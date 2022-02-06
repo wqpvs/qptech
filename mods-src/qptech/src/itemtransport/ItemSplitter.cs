@@ -29,8 +29,10 @@ namespace qptech.src.itemtransport
         List<BlockPos> outputlocations;
         List<BlockFacing> inputfaces;
         List<BlockFacing> outputfaces;
-        
-
+        string entranceshape= "machines:itemfilterentrance";
+        string exitshape= "machines:itemfilterexit";
+        Block entranceshapeblock;
+        Block exitshapeblock;
         public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
             if (inputlocations == null) { return false; }
@@ -57,8 +59,13 @@ namespace qptech.src.itemtransport
             {
                
                 stacksize = Block.Attributes["stacksize"].AsInt(stacksize);
+                entranceshape = Block.Attributes["entranceshape"].AsString(entranceshape);
+                exitshape = Block.Attributes["exitshape"].AsString(exitshape);
+                entranceshapeblock = api.World.BlockAccessor.GetBlock(new AssetLocation(entranceshape));
+                exitshapeblock = api.World.BlockAccessor.GetBlock(new AssetLocation(exitshape));
             }
             if (Api is ICoreServerAPI) { RegisterGameTickListener(OnServerTick, 100); }
+
             r = new Random();
         }
         Random r;
@@ -99,7 +106,7 @@ namespace qptech.src.itemtransport
             {
                 if (Api is ICoreClientAPI)
                 {
-                    byte[] blockseldata = SerializerUtil.Serialize<BlockSelection>(blockSel);
+                    byte[] blockseldata = SerializerUtil.Serialize<string>(blockSel.Face.ToString());
                     (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.WrenchSwap, blockseldata);
                     return true;
                 }
@@ -111,8 +118,8 @@ namespace qptech.src.itemtransport
         public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
         {
             if (packetid == (int)enPacketIDs.WrenchSwap) {
-                BlockSelection bs = SerializerUtil.Deserialize<BlockSelection>(data);
-                string direction = bs.Face.ToString();
+                string direction = SerializerUtil.Deserialize<string>(data);
+                
                 if (facesettings[direction] == faceoff) { facesettings[direction] = faceinput; }
                 else if (facesettings[direction] == faceinput) { facesettings[direction] = faceoutput; }
                 else if (facesettings[direction] == faceoutput) { facesettings[direction] = faceoff; }
@@ -159,7 +166,67 @@ namespace qptech.src.itemtransport
             }
         }
 
+        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
+        {
 
+            ICoreClientAPI capi = Api as ICoreClientAPI;
+            if (capi == null) { return false; }
+            
+            MeshData mesh= new MeshData();
+            if (facesettings == null) { ResetFaces();SetIOLocations(); }
+            foreach (string direction in facesettings.Keys)
+            {
+                if (facesettings[direction] == faceoff) { continue; }
+                Block useblock = entranceshapeblock;
+                if (facesettings[direction] == faceoutput) { useblock = exitshapeblock; }
+                capi.Tesselator.TesselateBlock(useblock,out mesh);
+                if (direction == "north")
+                {
+                    mesher.AddMeshData(mesh);
+
+                    //do nothing, the block is setup how we want it
+                }
+                else if (direction == "east")
+                {
+                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD * 270, 0));
+
+                }
+                else if (direction == "south")
+                {
+                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD * 180, 0));
+                }
+                else if (direction == "west")
+                {
+                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD * 90, 0));
+                }
+                else if (direction == "up")
+                {
+
+                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), GameMath.DEG2RAD * 90, 0, 0));
+
+                }
+                else if (direction == "down")
+                {
+                    mesher.AddMeshData(mesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), -GameMath.DEG2RAD * 90, 0, 0));
+
+                }
+                
+            }
+            /*Shape displayshape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/metal/electric/roundgauge0"));
+
+
+            MeshData meshdata;
+            capi.Tesselator.TesselateShape("roundgauge0" + Pos.ToString(), displayshape, out meshdata, this);
+
+
+
+            meshdata.Translate(DisplayOffset());
+            meshdata.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD * DisplayRotation(), 0);
+
+
+            mesher.AddMeshData(meshdata);*/
+            return base.OnTesselation(mesher, tessThreadTesselator);
+        }
 
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
@@ -207,7 +274,15 @@ namespace qptech.src.itemtransport
             base.GetBlockInfo(forPlayer, dsc);
             dsc.AppendLine("Item Splitter");
             if (itemstack != null) { dsc.AppendLine("Transporting " + itemstack.ToString() ); }
-
+            if (facesettings == null) { dsc.AppendLine("No Face Settings"); }
+            else
+            {
+                dsc.AppendLine("Face settings:");
+                foreach (string dir in facesettings.Keys)
+                {
+                    dsc.Append(dir + " " + facesettings[dir]+",");
+                }
+            }
             
 
         }

@@ -1,0 +1,33 @@
+{
+	"code": "itemfilterentrance",
+	
+	"creativeinventory": {
+		"qptech": [ "" ]
+	},
+	"blockmaterial": "Metal",
+	"shape": { "base": "block/metal/container/itempipeentrance" },
+	
+	"resistance": 1,
+	"sidesolid": {
+		"all": true
+	},
+	"sideAo": { "all": true },
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	},
+	"collisionselectionboxes": [
+		{
+			"x1": 0.4375,
+			"y1": 0.38,
+			"z1": 0.27,
+			"x2": 0.6875,
+			"y2": 0.645,
+			"z2": 0.34
+		}
+	],
+	"lightabsorption": "8"
+}

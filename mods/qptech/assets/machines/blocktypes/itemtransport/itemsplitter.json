@@ -21,9 +21,8 @@
 			"inputfaces": [ "up", "down" ],
 			"outputfaces": [ "north", "east", "south", "west" ],
 
-			"stacksize": 1,
-			"inputshape": "block/metal/container/itempipeentrance",
-			"outputshape": "block/metal/container/itempipeexit"
+			"stacksize": 128
+
 		}
 
 	},
