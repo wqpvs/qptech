@@ -1,0 +1,26 @@
+{
+	"ingredientPattern": "SCS",
+	"ingredients": {
+
+		"S": {
+			"type": "block",
+			"code": "itempipe-north",
+			
+			"quantity": 1
+
+		},
+		"C": {
+			"type": "item",
+			"code": "circuitboard-primitive",
+			"quantity": 1
+		}
+		
+	},
+	"width": 3,
+	"height": 1,
+	"output": {
+		"type": "block",
+		"code": "itemsplitter-junction",
+		"quantity": 1
+	}
+}

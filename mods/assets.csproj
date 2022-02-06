@@ -173,6 +173,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvhardmetalplate.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\machineryblock-steel.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\sheetroller.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\other\itemsplitter.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\itempipe.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\pipe-core-soaker-bluesteel.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\tank-bluesteel.json" />

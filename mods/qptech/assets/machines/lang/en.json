@@ -209,6 +209,8 @@
 	"item-circuitboard-*": "Circuit Board",
 	"itemdesc-circuitboard-*": "An integral component to many things!",
 	"block-itempipe-*": "Item Transport Pipe",
-	"blockdesc-itempipe-*": "Move items into and out of containers. Setup filters by right clicking withing in your hand. Change direction by right clicking with the pipe wrench."
+	"blockdesc-itempipe-*": "Move items into and out of containers. Setup filters by right clicking withing in your hand. Change direction by right clicking with the pipe wrench.",
+	"block-itemsplitter-*": "Item Pipe Splitter",
+	"blockdesc-itemsplitter-*":  "Send item piped items in different directions. Will try to split incoming items evenly (note: sorts by stack not by individual item count!) Using a wrench at each edge you can cycle each face between off/input/output modes."
 
 }

@@ -1,4 +1,8 @@
-﻿1.7.0 - item transport update
+﻿1.7.0.pre2
+- need to add recipe for computer
+- fix: some machines stuck on warmpup
+
+1.7.0.pre1 - item transport update
 - added filterable item transport pipes
    - filter by: allow/block text, turn on/off, only transfer minimum quantity at a time
 - added item 3 and 4 way splitters
@@ -15,13 +19,10 @@
 - added mixer object - hit with pipe wrench to purge the internal tank of liquid. Input dry materials on left and output dry materiasl on right. Attach a pipe to back or bottom to fill or drain liquids
 - fixed recipes for castiron ovens
 - concrete now made only in mixer (needs water or dye, plus quicklime, sand, and stones)
-
 - machine recipe ingredients can now be partially matched (eg: sand- would accept any ingredient that contained sand- in its code)
 
 
-- todo:
-- make pure glass ingredient, smelts into industrial glass
-    - mix lime, crushed quartz or something and sand?
+- future todo:
 - need recipe for item pipes and sorters:
     - need some sort of circuits - figure out sub parts for that -> temporal wire- braided copper wire, 
 - need steel processing
