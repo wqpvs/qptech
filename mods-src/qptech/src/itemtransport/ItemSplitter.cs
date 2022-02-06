@@ -106,7 +106,9 @@ namespace qptech.src.itemtransport
             {
                 if (Api is ICoreClientAPI)
                 {
-                    byte[] blockseldata = SerializerUtil.Serialize<string>(blockSel.Face.ToString());
+                    BlockFacing bf = BEFluidPipe.GetSubFace(blockSel);
+                    
+                    byte[] blockseldata = SerializerUtil.Serialize<string>(bf.ToString());
                     (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.WrenchSwap, blockseldata);
                     return true;
                 }

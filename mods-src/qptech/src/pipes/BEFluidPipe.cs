@@ -483,7 +483,7 @@ namespace qptech.src
             }
         }
         const float selectionzone = 0.4f;
-       public BlockFacing GetSubFace(BlockSelection blockSelection)
+       public static BlockFacing GetSubFace(BlockSelection blockSelection)
         {
             if (BlockFacing.HORIZONTALS.Contains(blockSelection.Face))
             {
