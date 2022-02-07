@@ -202,7 +202,18 @@
 	"itemdesc-cruciblechamber-*": "Part for the crucible, made with smithing (two metal plates should do it)",
 	"block-mixer-*": "Industrial Mixer",
 	"blockdesc-mixer-*": "Will run various special recipes. Dry ingredients feed from left. Pipes may be attached to bottom and sides. Use a pipe wrench to turn purge mode on or off. (In purge mode, mixer will drain its tank). Outputs finished products to the right.",
-	"block-concrete-*": "Concrete Block",
+	"block-concrete-blue": "Concrete Block (Blue)",
+	"block-concrete-red": "Concrete Block (Red)",
+	"block-concrete-yellow": "Concrete Block (Yellow)",
+	"block-concrete-purple": "Concrete Block (Purple)",
+	"block-concrete-brown": "Concrete Block (Brown)",
+	"block-concrete-green": "Concrete Block (Green)",
+	"block-concrete-orange": "Concrete Block (Orange)",
+	"block-concrete-black": "Concrete Block (Black)",
+	"block-concrete-gray": "Concrete Block (Gray)",
+	"block-concrete-pink": "Concrete Block (Pink)",
+	"block-concrete-white": "Concrete Block (White)",
+	"block-concrete-internal": "Concrete Block (Raw)",
 	"blockdesc-concrete-*": "Concrete building block made in a mixer from sand, quicklime, stones, and water or the appropriate dye",
 	"block-industrialglass-*": "Industrial Glass Block",
 	"blockdesc-industrialglass-*": "Purified glass block made with water and crushed quartz in a mixer.",
@@ -211,6 +222,6 @@
 	"block-itempipe-*": "Item Transport Pipe",
 	"blockdesc-itempipe-*": "Move items into and out of containers. Setup filters by right clicking withing in your hand. Change direction by right clicking with the pipe wrench.",
 	"block-itemsplitter-*": "Item Pipe Splitter",
-	"blockdesc-itemsplitter-*":  "Send item piped items in different directions. Will try to split incoming items evenly (note: sorts by stack not by individual item count!) Using a wrench at each edge you can cycle each face between off/input/output modes."
+	"blockdesc-itemsplitter-*": "Send item piped items in different directions. Will try to split incoming items evenly (note: sorts by stack not by individual item count!) Using a wrench at each edge you can cycle each face between off/input/output modes."
 
 }

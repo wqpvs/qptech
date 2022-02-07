@@ -490,8 +490,11 @@
     <Content Include="qptech\assets\game\textures\block\liquidrubber.png" />
     <Content Include="qptech\assets\machines\textures\block\shinybrass.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-black.png" />
+    <Content Include="qptech\assets\machines\textures\block\stone\concrete-blue.png" />
+    <Content Include="qptech\assets\machines\textures\block\stone\concrete-chevrons.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-dirty-open.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-gray.png" />
+    <Content Include="qptech\assets\machines\textures\block\stone\concrete-green.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-internal.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-red.png" />
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-yellow.png" />

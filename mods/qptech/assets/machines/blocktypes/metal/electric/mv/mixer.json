@@ -31,18 +31,11 @@
 	"attributesByType": {
 
 		"*-mv-*": {
-			"genFlux": 0,
-			"useFlux": 20,
-
-
-			"recipegroups": [ "Temporal Steel", "Concrete", "Red Concrete","Blue Concrete","White Concrete", "Black Concrete","Industrial Glass" ],
-			"inputFace": "up",
-			"outputFace": "down",
-			"animationCode": "run",
-			"animation": "run",
-			"runAnimationSpeed": 1,
+			"genFlux": 0,"useFlux": 20,
+			"recipegroups": [ "Temporal Steel", "Concrete","Industrial Glass" ],
+			"inputFace": "up","outputFace": "down",
+			"animationCode": "run","animation": "run","runAnimationSpeed": 1,
 			"processingTime": 2000,
-
 			"dummylocations": [0,1,0]
 		}
 	},

@@ -1,6 +1,11 @@
 ﻿1.7.0.pre2
 - need to add recipe for computer
-- fix: some machines stuck on warmpup
+- fixed: some machines stuck on warmpup
+- found a potential crash with itemsplitter
+- Recipe processor recipe lists can be partially matched
+- added all concrete colors and mixer recipes
+- mixer stays in purge mode until manually disabled
+- fixed bug: mixer won't change liquid types even when empty
 
 1.7.0.pre1 - item transport update
 - added filterable item transport pipes
@@ -23,10 +28,10 @@
 
 
 - future todo:
-- need recipe for item pipes and sorters:
-    - need some sort of circuits - figure out sub parts for that -> temporal wire- braided copper wire, 
+
 - need steel processing
 - fluid pipes - have a fluid limiter for allowing thru certain quantity of fluid?
+- fix bloom worker bug
 
 
 

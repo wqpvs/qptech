@@ -116,7 +116,7 @@ namespace qptech.src.itemtransport
         {
            
             
-            if (byPlayer.Entity.RightHandItemSlot.Itemstack.Item != null && byPlayer.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().Contains("wrench"))
+            if (byPlayer.Entity.RightHandItemSlot.Itemstack!=null&&byPlayer.Entity.RightHandItemSlot.Itemstack.Item != null && byPlayer.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().Contains("wrench"))
             {
                 if (Api is ICoreClientAPI)
                 {

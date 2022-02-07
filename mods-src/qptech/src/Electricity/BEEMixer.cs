@@ -108,7 +108,7 @@ namespace qptech.src.Electricity
             if (itemstack.Item != item) { return 0; }
             int stackdraw = Math.Min(amt, itemstack.StackSize);
             itemstack.StackSize -= stackdraw;
-            if (itemstack.StackSize <= 0) { itemstack = null; purgemode = false; }
+            if (itemstack.StackSize <= 0) { itemstack = null;  }
             MarkDirty();
             return stackdraw;
         }
@@ -131,7 +131,7 @@ namespace qptech.src.Electricity
         public int OfferFluid(Item item, int quantity)
         {
             if (purgemode) { return 0; }
-            if (itemstack == null || itemstack.Item==null)
+            if (itemstack == null || itemstack.Item==null||itemstack.StackSize==0)
             {
                 itemstack = new ItemStack(item, quantity);
                 MarkDirty();

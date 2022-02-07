@@ -343,6 +343,198 @@
 
   },
   {
+    "name": "Purple Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-purple" ],
+        "quantity": 100
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-purple" ],
+        "quantity": 8
+      }
+    ]
+
+  },
+  {
+    "name": "Brown Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-brown" ],
+        "quantity": 100
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-brown" ],
+        "quantity": 8
+      }
+    ]
+
+  },
+  {
+    "name": "Green Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-green" ],
+        "quantity": 100
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-green" ],
+        "quantity": 8
+      }
+    ]
+
+  },
+  {
+    "name": "Orange Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-orange" ],
+        "quantity": 100
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-orange" ],
+        "quantity": 8
+      }
+    ]
+
+  },
+  {
+    "name": "Gray Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-gray" ],
+        "quantity": 100
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-gray" ],
+        "quantity": 8
+      }
+    ]
+
+  },
+  {
+    "name": "Pink Concrete",
+
+    "processingTime": 2000,
+
+    "ingredients": [
+      {
+        "validitems": [ "sand-" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:quicklime" ],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:dye-pink" ],
+        "quantity": 100
+      },
+      {
+        "validitems": [ "stone-" ],
+        "quantity": 16
+      }
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:concrete-pink" ],
+        "quantity": 8
+      }
+    ]
+
+  },
+  {
     "name": "Industrial Glass",
 
     "processingTime": 2000,
@@ -353,10 +545,10 @@
         "quantity": 500
       },
       {
-        "validitems": [ "game:crushed-quartz","game:crushed-clearquartz" ],
+        "validitems": [ "game:crushed-quartz", "game:crushed-clearquartz" ],
         "quantity": 8
       }
-      
+
 
     ],
     "output": [

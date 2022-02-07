@@ -50,10 +50,14 @@ namespace qptech.src
                 {
                     foreach (MachineRecipe mr in MasterRecipeList)
                     {
-                        if (recipegroups.Contains(mr.name))
+                        foreach (string re in recipegroups)
                         {
-                            recipes.Add(mr);
+                            if (mr.name.Contains(re))
+                            {
+                                recipes.Add(mr);break;
+                            }
                         }
+                       
                     }
 
                 }

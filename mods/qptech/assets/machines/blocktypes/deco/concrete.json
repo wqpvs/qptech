@@ -7,7 +7,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "white", "black", "yellow", "red", "gray", "internal","blue","green" ]
+			"states": [ "blue","red","yellow","purple","brown","green","orange","black","gray","pink","white","internal" ]
 		}
 
 	],
