@@ -34,6 +34,8 @@ namespace qptech.src.itemtransport
         Block entranceshapeblock;
         Block exitshapeblock;
         Dictionary<BlockPos, int> outputtracker;
+        
+
         public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
             if (inputlocations == null) { return false; }
@@ -64,6 +66,7 @@ namespace qptech.src.itemtransport
                 exitshape = Block.Attributes["exitshape"].AsString(exitshape);
                 entranceshapeblock = api.World.BlockAccessor.GetBlock(new AssetLocation(entranceshape));
                 exitshapeblock = api.World.BlockAccessor.GetBlock(new AssetLocation(exitshape));
+                
             }
             if (Api is ICoreServerAPI) { RegisterGameTickListener(OnServerTick, 100); }
 
@@ -186,7 +189,7 @@ namespace qptech.src.itemtransport
 
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
-
+            
             ICoreClientAPI capi = Api as ICoreClientAPI;
             if (capi == null) { return false; }
             

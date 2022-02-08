@@ -41,6 +41,9 @@ namespace qptech.src.itemtransport
         public int StackSize => stacksize;
         public ItemFilter itemfilter;
         bool lockswap = false;
+        bool showitems = true;
+        bool optionshowitems = true;
+        bool ShowItems => showitems&&optionshowitems;
         public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
             if (fromtransporter != null && fromtransporter.TransporterPos == outputlocation) { return false; }
@@ -61,6 +64,7 @@ namespace qptech.src.itemtransport
                 outputlocation = Pos.Copy().Offset(outputface);
                 transportspeed = Block.Attributes["transportspeed"].AsFloat(transportspeed);
                 stacksize = Block.Attributes["stacksize"].AsInt(stacksize);
+                showitems = Block.Attributes["showitems"].AsBool(showitems);
             }
             if (Api is ICoreServerAPI) { RegisterGameTickListener(OnServerTick, 100); }
 
@@ -210,7 +214,7 @@ namespace qptech.src.itemtransport
         }
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
-
+            if (!showitems) { return base.OnTesselation(mesher, tessThreadTesselator); }
             ICoreClientAPI capi = Api as ICoreClientAPI;
             if (capi == null) { return false; }
             if (itemstack == null||(itemstack.Item==null && itemstack.Block==null)) { return base.OnTesselation(mesher, tessThreadTesselator); }
@@ -224,9 +228,19 @@ namespace qptech.src.itemtransport
             {
                 capi.Tesselator.TesselateBlock(itemstack.Block, out meshdata);
             }
+
+            float[] meshsize = GetMeshSize(meshdata);
             
-            Vec3f mid = new Vec3f(0.5f, 0.5f, 0.5f);
-            meshdata.Scale(mid, 0.5f, 0.5f, 0.5f);
+            float scalefactor = Math.Max(Math.Max(meshsize[0],meshsize[1]),meshsize[2]);
+            float targetscale = 0.5f;
+            if (scalefactor <= 0) { scalefactor = targetscale; }
+            else
+            {
+                scalefactor = targetscale / scalefactor; /// 0.5/1
+            }
+            Vec3f mid = new Vec3f(0.5f,0.5f,0.5f);
+            scalefactor = Math.Min(scalefactor, 1);
+            meshdata.Scale(mid, scalefactor,scalefactor,scalefactor);
             BlockPos o = new BlockPos(0, 0, 0);
 
             //Vec3f startv = o.Copy().Offset(outputface.Opposite).ToVec3f();
@@ -365,9 +379,10 @@ namespace qptech.src.itemtransport
 
         public enum enPacketIDs
         {
-            ClearFilter = 99990001,
-            SetFilter = 99990002,
-            WrenchSwap = 99990003
+            ClearFilter = 99991001,
+            SetFilter = 99991002,
+            WrenchSwap = 99991003,
+            ShowItemToggle = 99991004
         }
         
         public void OnNewFilter(ItemFilter newfilter)
@@ -409,6 +424,7 @@ namespace qptech.src.itemtransport
             byte[] filterasbytes= SerializerUtil.Serialize<ItemFilter>(itemfilter);
             
             tree.SetBytes("itemfilter", filterasbytes);
+            tree.SetBool("optionshowitems", optionshowitems);
         }
 
       
@@ -432,6 +448,7 @@ namespace qptech.src.itemtransport
                     itemfilter = SerializerUtil.Deserialize<ItemFilter>(data);
                 }
             }
+            optionshowitems = tree.GetBool("optionshowitems");
             
         }
 
@@ -481,6 +498,28 @@ namespace qptech.src.itemtransport
             output.Z = start.Z + (end.Z - start.Z) * percent;
 
             return output;
+        }
+
+        public static float[] GetMeshSize(MeshData mesh)
+        {
+            float[] result = { 0, 0, 0 };
+            if (mesh == null || mesh.xyz==null|| mesh.VerticesCount < 3) { return result; }
+            float[] min = { 1000, 1000, 1000 };
+            float[] max = { -1000, -1000, -1000 };
+            for (int c = 0; c < mesh.VerticesCount; c++)
+            {
+                int xref = c * 3;int yref = xref + 1;int zref = yref + 1;
+                min[0] = Math.Min(mesh.xyz[xref], min[0]);
+                min[1] = Math.Min(mesh.xyz[yref], min[1]);
+                min[2] = Math.Min(mesh.xyz[zref], min[2]);
+                max[0] = Math.Max(mesh.xyz[xref], max[0]);
+                max[1] = Math.Max(mesh.xyz[yref], max[1]);
+                max[2] = Math.Max(mesh.xyz[zref], max[2]);
+            }
+            result[0] = max[0] - min[0];
+            result[1] = max[1] - min[1];
+            result[2] = max[2] - min[2];
+            return result;
         }
     }
    

@@ -1,4 +1,7 @@
-﻿1.7.0.pre2
+﻿1.7.0.pre3
+- belts will adjust scale of items a little better, tiny items won't get scaled down as much or at all as larger items
+
+1.7.0.pre2
 - need to add recipe for computer
 - fixed: some machines stuck on warmpup
 - found a potential crash with itemsplitter
