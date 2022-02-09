@@ -29,8 +29,8 @@
 		"*-mv-*": {
 			"genFlux": 0,
 			"useFlux": 16,
-			
-			"recipegroups": ["bloomeryiron"],
+
+			"recipegroups": [ "bloomeryiron", "Steel from Blistersteel" ],
 			"inputFace": "west",
 			"outputFace": "east"
 		}

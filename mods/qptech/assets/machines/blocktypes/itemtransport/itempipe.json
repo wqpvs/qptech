@@ -25,7 +25,7 @@
 
 			"inputface": "south",
 			"outputface": "north",
-			"transportspeed": 0.5,
+			
 			"stacksize": 64
 
 		},
@@ -33,7 +33,7 @@
 
 			"inputface": "south",
 			"outputface": "north",
-			"transportspeed": 0.5,
+			
 			"stacksize": 64
 
 		},
@@ -41,7 +41,7 @@
 
 			"inputface": "south",
 			"outputface": "north",
-			"transportspeed": 0.5,
+			
 			"stacksize": 64
 
 		},
@@ -49,7 +49,7 @@
 
 			"inputface": "south",
 			"outputface": "north",
-			"transportspeed": 0.5,
+			
 			"stacksize": 64
 
 		},
@@ -57,14 +57,14 @@
 
 			"inputface": "up",
 			"outputface": "down",
-			"transportspeed": 0.5,
+			
 			"stacksize": 64
 		},
 		"*-up": {
 
 			"inputface": "down",
 			"outputface": "up",
-			"transportspeed": 0.5,
+			
 			"stacksize": 64
 		}
 	},

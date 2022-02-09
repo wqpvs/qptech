@@ -26,6 +26,17 @@
 
   },
   {
+    "name": "Steel from Blistersteel",
+    "processingsteps": {
+      "heating": 1482,
+      "crushing": 1000
+    },
+    "processingTime": 4000,
+    "ingredients": [{"validitems": [ "game:ingot-blistersteel" ],"quantity": 1}],
+    "output": [{"validitems": [ "game:ingot-steel" ],"quantity": 1}]
+
+  },
+  {
     "name": "Braided Copper Wire",
     "processingsteps": {
 

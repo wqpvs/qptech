@@ -1,5 +1,8 @@
 ﻿1.7.0.pre3
-- belts will adjust scale of items a little better, tiny items won't get scaled down as much or at all as larger items
+- itempipes will adjust scale of items a little better, tiny items won't get scaled down as much or at all as larger items
+- itempipe mesh generation moved outside of OnTesselation to improve performance
+- Bloomery machine can now work blister steel ingots, now called Advanced Bloomery Machine
+- started adding some helpful links and such in item descriptions
 
 1.7.0.pre2
 - need to add recipe for computer
@@ -35,6 +38,8 @@
 - need steel processing
 - fluid pipes - have a fluid limiter for allowing thru certain quantity of fluid?
 - fix bloom worker bug
+
+- itempipes will eventually have option to turn off item rendering - but how to turn on/off?
 
 
 
