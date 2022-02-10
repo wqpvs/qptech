@@ -1,5 +1,5 @@
 {
-	"code": "machineryblock-steel",
+	"code": "machineryblock",
 	"creativeinventory": {
 		"general": [ "*" ],
 		"qptech": [ "*" ]
@@ -8,7 +8,7 @@
 	"drawtype": "Cube",
 	"textures": {
 		"all": {
-			"base": "block/metal/wornsteelplate"
+			"base": "block/machinery"
 		}
 	},
 	"resistance": 1,

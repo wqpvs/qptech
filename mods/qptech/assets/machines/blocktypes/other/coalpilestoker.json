@@ -8,7 +8,7 @@
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/metal/firepit/stoker" },
+	"shape": { "base": "block/metal/coalpilestoker" },
 	"resistance": 1,
 	"sidesolid": {
 		"horizontals": false,

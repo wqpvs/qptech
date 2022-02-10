@@ -52,7 +52,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\lathe.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\sheetroller.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\wiremill.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-steel.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\itemfilterentrance.json" />
     <None Include="qptech\assets\machines\blocktypes\other\coalpilestoker.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-drainer.json" />
@@ -101,7 +101,7 @@
     <None Include="qptech\assets\machines\blocktypes\other\firepitstoker.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitunloader.json" />
     <None Include="qptech\assets\machines\blocktypes\other\icebox.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\machineryblock.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-steel.json" />
     <None Include="qptech\assets\machines\blocktypes\other\oven-castiron.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\powerflag.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\powersink.json" />
@@ -167,6 +167,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\bloomery-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\crusher-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\wiremill.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\other\coalpilestoker.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidpumpconvert.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidhorpump.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidpump.json" />
@@ -240,6 +241,7 @@
     <None Include="qptech\assets\machines\shapes\block\invisible.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\bloomery.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\boiler.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\coalpilestoker.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\itempipe-down.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\itempipe.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\itempipeentrance.json" />

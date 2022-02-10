@@ -1,0 +1,12 @@
+{
+	ingredientPattern: "_L_	LCL	_L_",
+	ingredients: {
+		"C": { type: "block", code: "machineryblock-steel", quantity: 1 },
+		"L": { type: "block", code: "itempipe-north", quantity: 1 }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "coalpilestoker", quantity: 1 }
+}
+
+

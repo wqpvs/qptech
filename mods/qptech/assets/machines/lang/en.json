@@ -222,6 +222,9 @@
 	"block-itemsplitter-*": "Item Pipe Splitter",
 	"blockdesc-itemsplitter-*": "Send item piped items in different directions. Will try to split incoming items evenly (note: sorts by stack not by individual item count!) Using a wrench at each edge you can cycle each face between off/input/output modes.",
 	"block-industrialcrucible-small-*": "Small Industrial Crucible",
-	"blockdesc-industrialcrucible-small-*": "Will smelt metals and make ingots. Right click to swtich between single and alloy mode. In single mode it will only make pure metals, in alloy mode it will only make alloys. Inputs from the top and outputs to the bottom. Requires ingredients to be heated. Requires exact quantites."
+	"blockdesc-industrialcrucible-small-*": "Will smelt metals and make ingots. Right click to swtich between single and alloy mode. In single mode it will only make pure metals, in alloy mode it will only make alloys. Inputs from the top and outputs to the bottom. Requires ingredients to be heated. Requires exact quantites.",
+	"block-coalpilestoker": "Coal Pile Stoker",
+	"blockdesc-coalpilestoker": "Accepts coal & coke from item pipes. Will maintain a pile above it and automatically ignite if it find a prepared cementation furnance."
+
 
 }
