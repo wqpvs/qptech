@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
@@ -30,8 +31,11 @@ namespace qptech.src.misc
         int fuelincrement = 2; //how much fuel to insert at once
         bool switchOn = true; //only run if on
         public bool IsOn => switchOn;
+        bool autoIgnite = true;
+        bool coffinReady = false;
+        bool ShouldIgnite => autoIgnite&&coffinReady;
         string[] fuelcodes = { "game:coke", "game:charcoal" };
-        
+        BlockEntityStoneCoffin coffin; //find an active coffin for the cementation furnace
         List<Item> fuelitems;
         public BlockPos TransporterPos => throw new NotImplementedException();
         public override void Initialize(ICoreAPI api)
@@ -107,6 +111,7 @@ namespace qptech.src.misc
         public void OnServerTick(float dt)
         {
             if (!IsOn|| fuel <= 0) { return; }
+            DoFurnaceChecks();
             BlockPos usepos = Pos.Copy().Offset(BlockFacing.UP);
             BlockCoalPile pile=Api.World.BlockAccessor.GetBlock(usepos) as BlockCoalPile;
             if (pile == null) {
@@ -114,29 +119,43 @@ namespace qptech.src.misc
                 Api.World.BlockAccessor.SetBlock(piletype.Id, usepos);
                 return;
             }
-            BlockEntityCoalPile bcp = Api.World.BlockAccessor.GetBlockEntity(usepos) as BlockEntityCoalPile;
-            if (bcp == null) { return; }
-            if (bcp.inventory == null) { return; }
-            if (bcp.inventory[0].Itemstack == null || bcp.inventory[0].StackSize == 0)
+            BlockEntityCoalPile becp = Api.World.BlockAccessor.GetBlockEntity(usepos) as BlockEntityCoalPile;
+            if (becp == null) { return; }
+            if (becp.inventory == null) { return; }
+            if (becp.inventory[0].Itemstack == null || becp.inventory[0].StackSize == 0)
             {
                 ItemStack newstack = new ItemStack(fuelitems[0], 1);
                 fuel--;
-                bcp.inventory[0].Itemstack = newstack;
-                bcp.MarkDirty();
+                becp.inventory[0].Itemstack = newstack;
+                becp.MarkDirty();
                 MarkDirty();
                 return;
             }
-            ItemStack stack = bcp.inventory[0].Itemstack;
-            if (stack.Item==null|| stack.StackSize  >8) { return; }
-            stack.StackSize += 1;
-            fuel--;
-            if (bcp.CanIgnite)
+            ItemStack stack = becp.inventory[0].Itemstack;
+            if (stack.Item == null || stack.StackSize < 8)
             {
-               
+                stack.StackSize += 1;
+                fuel--;
+                becp.MarkDirty();
             }
-            bcp.MarkDirty();
+            if (ShouldIgnite&& !becp.IsBurning&& becp.CanIgnite)
+            {
+                MethodInfo tryignite = becp.GetMethod("TryIgnite");
+                tryignite.Invoke(becp,null);
+            }
+            
             MarkDirty();
         }
+        void DoFurnaceChecks()
+        {
+            coffinReady = false;
+            BlockPos checkpoint = new BlockPos(Pos.X, Pos.Y + 3, Pos.Z);
+            coffin = Api.World.BlockAccessor.GetBlockEntity(checkpoint) as BlockEntityStoneCoffin;
+            if (coffin == null) { coffinReady = false; return; }
+            if (coffin.IsFull) { coffinReady = true; }
+        }
+
+
         #region savingandinfo
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
