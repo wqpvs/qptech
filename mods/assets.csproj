@@ -54,6 +54,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\wiremill.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-steel.json" />
     <None Include="qptech\assets\machines\blocktypes\itemfilterentrance.json" />
+    <None Include="qptech\assets\machines\blocktypes\other\coalpilestoker.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-drainer.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-sprinkler.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-soaker-bluesteel.json" />

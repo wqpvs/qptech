@@ -3,6 +3,7 @@
 - itempipe mesh generation moved outside of OnTesselation to improve performance
 - Bloomery machine can now work blister steel ingots, now called Advanced Bloomery Machine
 - started adding some helpful links and such in item descriptions
+- added coal pile stoker - will keep coke/coal piles fed (loaded via item pipes)
 
 1.7.0.pre2
 - need to add recipe for computer
@@ -40,6 +41,9 @@
 - fix bloom worker bug
 
 - itempipes will eventually have option to turn off item rendering - but how to turn on/off?
+
+- coal pile loader/cementation furnace machine - find coffin with inventory - can check if it's full and if it is keep pit lit and loaded, otherwise let it burn out
+		- 
 
 
 

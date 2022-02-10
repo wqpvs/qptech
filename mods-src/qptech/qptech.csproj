@@ -97,6 +97,7 @@
     <Compile Include="src\misc\BEAnimator.cs" />
     <Compile Include="src\misc\BEBlockSeeker.cs" />
     <Compile Include="src\misc\BEBMultiDummy.cs" />
+    <Compile Include="src\misc\BECoalPileStoker.cs" />
     <Compile Include="src\misc\ItemMiningDrill.cs" />
     <Compile Include="src\multiblock\BEDummyBlock.cs" />
     <Compile Include="src\multiblock\BlockDummy.cs" />
@@ -150,7 +151,7 @@
     <Compile Include="src\multiblock\BEWaterTower.cs" />
     <Compile Include="src\misc\BlockCannedMeal.cs" />
     <Compile Include="src\Electricity\ElectricalBlock.cs" />
-    <Compile Include="src\Electricity\ElectricityLoader.cs" />
+    <Compile Include="src\QPTECHLoader.cs" />
     <Compile Include="src\misc\BlockEntityHiddenHopper.cs" />
     <Compile Include="src\misc\BlockTemporalPocket.cs" />
     <Compile Include="src\misc\HackMan.cs" />

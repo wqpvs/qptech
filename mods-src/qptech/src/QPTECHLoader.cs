@@ -14,7 +14,7 @@ using qptech.src.Electricity;
 
 namespace qptech.src
 {
-    class ElectricityLoader:ModSystem
+    class QPTECHLoader:ModSystem
     {
         
         public override void Start(ICoreAPI api)
@@ -87,6 +87,7 @@ namespace qptech.src
             api.RegisterBlockEntityBehaviorClass("BEBMultiDummy", typeof(BEBMultiDummy));
             api.RegisterBlockClass("BlockDummy", typeof(BlockDummy));
             api.RegisterBlockEntityClass("BEEMixer", typeof(BEEMixer));
+            api.RegisterBlockEntityClass("BECoalPileStoker", typeof(BECoalPileStoker));
             //api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
             //api.RegisterBlockEntityClass("BEEMotor", typeof(BEEMotor));
 

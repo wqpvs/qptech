@@ -1,0 +1,28 @@
+{
+	"code": "coalpilestoker",
+	"class": "BlockItemTransport",
+	"entityClass": "BECoalPileStoker",
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+	"shape": { "base": "block/metal/firepit/stoker" },
+	"resistance": 1,
+	"sidesolid": {
+		"horizontals": false,
+		"down": false,
+		"up": true
+	},
+	"sideAo": { "all": false },
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+
+
+}
