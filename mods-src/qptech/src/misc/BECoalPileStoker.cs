@@ -107,16 +107,33 @@ namespace qptech.src.misc
         public void OnServerTick(float dt)
         {
             if (!IsOn|| fuel <= 0) { return; }
-
-            BlockCoalPile pile=Api.World.BlockAccessor.GetBlock(Pos.Copy().Offset(BlockFacing.UP)) as BlockCoalPile;
-            if (pile == null) { return; }
-            BlockEntityCoalPile bcp = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(BlockFacing.UP)) as BlockEntityCoalPile;
+            BlockPos usepos = Pos.Copy().Offset(BlockFacing.UP);
+            BlockCoalPile pile=Api.World.BlockAccessor.GetBlock(usepos) as BlockCoalPile;
+            if (pile == null) {
+                Block piletype = Api.World.BlockAccessor.GetBlock(new AssetLocation("game:coalpile"));
+                Api.World.BlockAccessor.SetBlock(piletype.Id, usepos);
+                return;
+            }
+            BlockEntityCoalPile bcp = Api.World.BlockAccessor.GetBlockEntity(usepos) as BlockEntityCoalPile;
             if (bcp == null) { return; }
-            if (bcp.inventory == null || bcp.inventory.Count() == 0) { return; }
+            if (bcp.inventory == null) { return; }
+            if (bcp.inventory[0].Itemstack == null || bcp.inventory[0].StackSize == 0)
+            {
+                ItemStack newstack = new ItemStack(fuelitems[0], 1);
+                fuel--;
+                bcp.inventory[0].Itemstack = newstack;
+                bcp.MarkDirty();
+                MarkDirty();
+                return;
+            }
             ItemStack stack = bcp.inventory[0].Itemstack;
             if (stack.Item==null|| stack.StackSize  >8) { return; }
             stack.StackSize += 1;
             fuel--;
+            if (bcp.CanIgnite)
+            {
+               
+            }
             bcp.MarkDirty();
             MarkDirty();
         }
