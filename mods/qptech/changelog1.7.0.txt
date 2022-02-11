@@ -4,6 +4,9 @@
 - Bloomery machine can now work blister steel ingots, now called Advanced Bloomery Machine
 - started adding some helpful links and such in item descriptions
 - added coal pile stoker - will keep coke/coal piles fed (loaded via item pipes)
+- tweak from pre2 - item pipes are slower but don't require circuit boards (this will be left for an advanced version)
+	- item splitters don't require circuit boards
+	- coal stoker requires a chip
 
 1.7.0.pre2
 - need to add recipe for computer

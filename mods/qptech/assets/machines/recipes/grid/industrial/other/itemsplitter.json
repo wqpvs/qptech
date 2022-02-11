@@ -1,20 +1,23 @@
 {
-	"ingredientPattern": "SCS",
+	"ingredientPattern": "SWS",
 	"ingredients": {
 
 		"S": {
 			"type": "block",
 			"code": "itempipe-north",
-			
 			"quantity": 1
-
 		},
 		"C": {
 			"type": "item",
 			"code": "circuitboard-primitive",
 			"quantity": 1
+		},
+		"W": {
+			"type": "item",
+			"code": "pipewrench",
+			"isTool": true
 		}
-		
+
 	},
 	"width": 3,
 	"height": 1,

@@ -1,8 +1,21 @@
 {
-	ingredientPattern: "_L_	LCL	_L_",
+	ingredientPattern: "TL_	LCL	_L_",
 	ingredients: {
-		"C": { type: "block", code: "machineryblock-steel", quantity: 1 },
-		"L": { type: "block", code: "itempipe-north", quantity: 1 }
+		"C": {
+			"type": "block",
+			"code": "machineryblock-steel",
+			"quantity": 1
+		},
+		"L": {
+			"type": "block",
+			"code": "itempipe-north",
+			"quantity": 1
+		},
+		"T": {
+			"type": "item",
+			"code": "circuitboard-primitive",
+			"quantity": 1
+		}
 	},
 	width: 3,
 	height: 3,
