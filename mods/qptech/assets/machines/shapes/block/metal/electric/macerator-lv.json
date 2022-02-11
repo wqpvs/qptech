@@ -562,6 +562,17 @@
 					}
 				}
 			]
+		},
+
+		{
+			"name": "idle",
+			"code": "idle",
+			"quantityframes": 30,
+			"onActivityStopped": "Rewind",
+			"onAnimationEnd": "Repeat",
+			"keyframes": [
+
+			]
 		}
 	]
 }

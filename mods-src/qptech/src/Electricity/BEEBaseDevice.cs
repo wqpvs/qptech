@@ -201,6 +201,7 @@ namespace qptech.src
         }
         protected bool animationIsRunning = false;
         protected virtual bool shouldAnimate => (IsOn&&deviceState == enDeviceState.RUNNING) && animation != "";
+        int idlecount = 0;
         protected virtual void DoAnimations()
         {
             
@@ -211,11 +212,16 @@ namespace qptech.src
                 animUtil.StartAnimation(meta);
                 animUtil.StartAnimation(new AnimationMetaData() { Animation = animation, Code = animationCode, AnimationSpeed = runAnimationSpeed, EaseInSpeed = 1, EaseOutSpeed = 1, Weight = 1, BlendMode = EnumAnimationBlendMode.Average });
                 animationIsRunning = true;
+                idlecount = 0;
+            }
+            else if (!shouldAnimate && animationIsRunning && idlecount<5)
+            {
+                idlecount++;
             }
             else if (!shouldAnimate && animationIsRunning)
             {
                 animationIsRunning = false;
-
+                idlecount = 0;
                 animUtil.StopAnimation(animationCode);
             }
 
