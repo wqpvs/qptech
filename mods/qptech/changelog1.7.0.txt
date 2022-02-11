@@ -8,6 +8,7 @@
 	- item splitters don't require circuit boards
 	- coal stoker requires a chip
 - bugfixes - hopefully stabilized some of the devices erroring out and doing weird stuff
+- adjusted height of display items running thru pipes
 
 1.7.0.pre2
 - need to add recipe for computer

@@ -241,12 +241,14 @@ namespace qptech.src.itemtransport
             Vec3f mid = new Vec3f(0.5f,0.5f,0.5f);
             scalefactor = Math.Min(scalefactor, 1);
             meshdata.Scale(mid, scalefactor,scalefactor,scalefactor);
-            BlockPos o = new BlockPos(0, 0, 0);
+            BlockPos o = new BlockPos(0,0, 0);
 
             //Vec3f startv = o.Copy().Offset(outputface.Opposite).ToVec3f();
             Vec3f startv = Vec3f.Zero;
             Vec3f endv = o.Copy().Offset(outputface).ToVec3f();
+
             Vec3f nowv = Lerp(startv, endv, progress);
+            nowv.Y += 0.3f;
             meshdata.Translate(nowv);
             mesher.AddMeshData(meshdata);
             /*Shape displayshape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/metal/electric/roundgauge0"));
