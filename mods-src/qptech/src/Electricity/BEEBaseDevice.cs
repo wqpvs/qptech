@@ -22,12 +22,12 @@ namespace qptech.src
         ILoadedSound ambientSound;
         string runsound = "";
         protected int requiredFlux = 1;     //how much TF to run
-        protected int processingTime = 1000; //how many ticks for process to run
+        protected double processingTime = 1000; //how many ticks for process to run
         
         protected string animationCode = "";
         protected string animation = "";
         protected float runAnimationSpeed = 1;
-        protected double completetime;
+        protected double completetime=>processingTime+starttime;
         protected double starttime;
         public int RequiredFlux { get { return requiredFlux; } }
         //public bool IsPowered { get { return capacitor >= requiredFlux; } }
@@ -75,10 +75,10 @@ namespace qptech.src
             base.Initialize(api);
 
             starttime = 0;
-            completetime = 0;
+            
             if (Block.Attributes != null) {
                 requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
-                processingTime = Block.Attributes["processingTime"].AsInt(processingTime);
+                processingTime = Block.Attributes["processingTime"].AsDouble(processingTime);
                 animationCode = Block.Attributes["animationCode"].AsString(animationCode);
                 animation = Block.Attributes["animation"].AsString(animation);
                 runAnimationSpeed = Block.Attributes["runAnimationSpeed"].AsFloat(runAnimationSpeed);
@@ -122,7 +122,7 @@ namespace qptech.src
         }
         protected virtual void ResetTimers()
         {
-            completetime = Api.World.ElapsedMilliseconds + processingTime;
+            
             starttime = Api.World.ElapsedMilliseconds;
         }
         protected virtual void DoDeviceStart()
@@ -166,17 +166,18 @@ namespace qptech.src
         protected virtual void DoFailedStart()
         {
             deviceState = enDeviceState.IDLE;
+            ResetTimers();
         }
         //feedback if device cannot process
         protected virtual void DoFailedProcessing()
         {
-            
+            ResetTimers();
         }
         //Do whatever needs doing on a successful cycle
         protected virtual void DoDeviceComplete()
         {
             deviceState = enDeviceState.IDLE;
-            
+            ResetTimers();
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
@@ -184,12 +185,16 @@ namespace qptech.src
             base.FromTreeAttributes(tree, worldAccessForResolve);
             
             deviceState = (enDeviceState)tree.GetInt("deviceState");
+            starttime = tree.GetDouble("starttime");
+            
+            if (Api!=null&&  starttime > Api.World.ElapsedMilliseconds) { starttime = Api.World.ElapsedMilliseconds; }
         }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
             
             tree.SetInt("deviceState", (int)deviceState);
+            tree.SetDouble("starttime", starttime);
         }
         protected BlockEntityAnimationUtil animUtil
         {

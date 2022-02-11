@@ -79,8 +79,11 @@ namespace qptech.src
             }
 
             enDeviceState ogdevicestate = deviceState;
-
-            if (makingrecipe == "")
+            if (deviceState == enDeviceState.ERROR)
+            {
+                deviceState = enDeviceState.IDLE;
+            }
+            else if (makingrecipe == "")
             {
                 DoDeviceStart();
             }
@@ -91,8 +94,9 @@ namespace qptech.src
             else if (Api.World.ElapsedMilliseconds < recipefinishedat)
             {
                 if (!CheckProcessing()){
-                    recipefinishedat = Api.World.ElapsedMilliseconds + 100; MarkDirty();
+                    recipefinishedat = Api.World.ElapsedMilliseconds + 250; 
                     deviceState = enDeviceState.PROCESSHOLD;
+                    MarkDirty();
                 }
                 else
                 {
@@ -135,7 +139,7 @@ namespace qptech.src
         {
             //Check for valid recipes
             
-            if (recipes is null || recipes.Count == 0) { deviceState = enDeviceState.ERROR;return; }
+            if (recipes is null || recipes.Count == 0) { deviceState = enDeviceState.ERROR; return; }
             //Check for ingredients
             Dictionary<string, int> availableingredients= new Dictionary<string, int>();
             AddAdditionalIngredients(ref availableingredients);
@@ -275,6 +279,7 @@ namespace qptech.src
                 di.DropAll(Pos.Copy().Offset(matOutputFace).ToVec3d());
             }
             deviceState = enDeviceState.IDLE;
+            ResetTimers();
             makingrecipe = "";
         }
         /*GUIRecipeProcessorStatus gas;

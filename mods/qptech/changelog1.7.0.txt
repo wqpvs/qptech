@@ -7,6 +7,7 @@
 - tweak from pre2 - item pipes are slower but don't require circuit boards (this will be left for an advanced version)
 	- item splitters don't require circuit boards
 	- coal stoker requires a chip
+- bugfixes - hopefully stabilized some of the devices erroring out and doing weird stuff
 
 1.7.0.pre2
 - need to add recipe for computer

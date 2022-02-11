@@ -35,7 +35,7 @@ namespace qptech.src
         protected int inputQuantity = 4;
         protected int internalQuantity = 0; //will store ingredients virtually
         protected float animationSpeed = 0.5f;
-        protected double processingTime = 10;
+        
         protected float heatRequirement = 0;
         string readablerecipe="";
        
@@ -86,7 +86,7 @@ namespace qptech.src
         protected BlockFacing outputFace; //what faces will be checked for output containers
         //protected BlockFacing recipeFace; //what face will be used to look for a container with the model object
          DummyInventory dummy;
-        double processstarted;
+        
         float lastheatreading = 0;
         ElectricalBlock myElectricalBlock;
         /// </summary>
@@ -94,7 +94,7 @@ namespace qptech.src
         {
             base.Initialize(api);
             myElectricalBlock = Block as ElectricalBlock;
-            processstarted = 0;
+            
             if (Block.Attributes != null) {
                 //requiredFlux = Block.Attributes["requiredFlux"].AsInt(requiredFlux);
                 rmInputFace = BlockFacing.FromCode(Block.Attributes["inputFace"].AsString("up"));
@@ -370,14 +370,14 @@ namespace qptech.src
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
             internalQuantity = tree.GetInt("internalQuantity");
-            processstarted = tree.GetDouble("processstarted");
+            
             
         }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
             tree.SetInt("internalQuantity", internalQuantity);
-            tree.SetDouble("processstarted", processstarted);
+            
         }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {

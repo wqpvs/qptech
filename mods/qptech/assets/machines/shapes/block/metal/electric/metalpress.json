@@ -8,12 +8,6 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"machinery-back": "C:/Users/andy-/Documents/GitHub/qptech/mods/qptech/assets/machines/textures/block/metal/generator/machinery-back",
-		"wires": "C:/Users/andy-/Documents/GitHub/qptech/mods/qptech/assets/machines/textures/block/metal/wires/tin-wires",
-		"castiron-top": "C:/Users/andy-/Documents/GitHub/qptech/mods/qptech/assets/machines/textures/block/metal/metalpress/castiron-top",
-		"castiron-bar": "C:/Users/andy-/Documents/GitHub/qptech/mods/qptech/assets/machines/textures/block/metal/metalpress/castiron-bar",
-		"machinery-border-small": "C:/Users/andy-/Documents/GitHub/qptech/mods/qptech/assets/machines/textures/block/metal/metalpress/machinery-border-small",
-		"castiron-back": "C:/Users/andy-/Documents/GitHub/qptech/mods/qptech/assets/machines/textures/block/metal/metalpress/castiron-back"
 	},
 	"elements": [
 		{
@@ -1017,7 +1011,7 @@
 			"code": "process",
 			"quantityframes": 130,
 			"onActivityStopped": "Rewind",
-			"onAnimationEnd": "Stop",
+			"onAnimationEnd": "Repeat",
 			"keyframes": [
 				{
 					"frame": 0,
