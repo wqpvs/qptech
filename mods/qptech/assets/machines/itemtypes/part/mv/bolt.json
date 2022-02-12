@@ -12,7 +12,36 @@
 			"states": [ "brass", "steel", "iron" ]
 		}
 	],
-
+	"attributes": {
+		"groundStorageTransform": {
+			"translation": {
+				"x": 0.08,
+				"y": 0,
+				"z": -0.08
+			},
+			"rotation": {
+				"x": 0,
+				"y": 45,
+				"z": 0
+			}
+		}
+	},
+		"behaviors": [
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "Quadrants",
+				"collisionBox": {
+					"x1": 0,
+					"y1": 0,
+					"z1": 0,
+					"x2": 1,
+					"y2": 0.0625,
+					"z2": 1
+				}
+			}
+		}
+	],
 	"textures": {
 		"metal": { "base": "game:block/metal/ingot/{material}" }
 	},
