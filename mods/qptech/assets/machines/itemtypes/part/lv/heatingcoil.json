@@ -2,7 +2,7 @@
   "code": "heatingcoil",
   "drawtype": "json",
   "shape": { "base": "block/element-unlit" },
-  "maxstacksize": 1,
+  "maxstacksize": 4,
   "variantgroups": [
     {
       "code": "metal",
