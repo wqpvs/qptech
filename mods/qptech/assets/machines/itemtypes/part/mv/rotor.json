@@ -9,6 +9,42 @@
 			"states": [ "mv" ]
 		}
 	],
+	"attributes": {
+		"groundStorageTransform": {
+			"translation": {
+				"x": -0.02,
+				"y": -0.1,
+				"z": -0.01
+			},
+			"rotation": {
+				"x": 15,
+				"y": 45,
+				"z": -13
+			},
+			"origin": {
+				"x": 0.5,
+				"y": 0,
+				"z": 0.5
+			},
+			"scale": 0.75
+		}
+	},
+		"behaviors": [
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "Quadrants",
+				"collisionBox": {
+					"x1": 0,
+					"y1": 0,
+					"z1": 0,
+					"x2": 1,
+					"y2": 0.219,
+					"z2": 1
+				}
+			}
+		}
+	],
 	"drawtype": "json",
 	"shape": { "base": "item/part/rotor" },
 	"maxstacksize": 4,
