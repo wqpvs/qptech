@@ -9,6 +9,32 @@
 			"states": [ "primitive" ]
 		}
 	],
+	"attributes": {
+		"groundStorageTransform": {
+			"origin": {
+				"x": 0.5,
+				"y": 0,
+				"z": 0.5
+			},
+			"scale": 0.8
+		}
+	},
+		"behaviors": [
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "Quadrants",
+				"collisionBox": {
+					"x1": 0,
+					"y1": 0,
+					"z1": 0,
+					"x2": 1,
+					"y2": 0.0625,
+					"z2": 1
+				}
+			}
+		}
+	],
 	"drawtype": "json",
 	"shape": { "base": "item/part/circuitboard" },
 	"maxstacksize": 4,

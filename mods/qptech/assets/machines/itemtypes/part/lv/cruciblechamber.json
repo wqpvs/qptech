@@ -14,7 +14,36 @@
 			"states": [ "iron" ]
 		}
 	],
-
+	"attributes": {
+		"groundStorageTransform": {
+			"rotation": {
+				"x": 0,
+				"y": 12,
+				"z": 180
+			},
+			"origin": {
+				"x": 0.5,
+				"y": 0.485,
+				"z": 0.5
+			}
+		}
+	},
+	"behaviors": [
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "SingleCenter",
+				"collisionBox": {
+					"x1": 0.1875,
+					"y1": 0,
+					"z1": 0.1875,
+					"x2": 0.8125,
+					"y2": 1,
+					"z2": 0.8125
+				}
+			}
+		}
+	],
 	"textures": {
 		"metal": { "base": "game:block/metal/ingot/{material}" }
 	},

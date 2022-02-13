@@ -8,8 +8,31 @@
 				"dropsPickupMode": true,
 				"sound": "sounds/block/loosestone"
 			}
+		},
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "Quadrants",
+				"collisionBox": {
+					"x1": 0,
+					"y1": 0,
+					"z1": 0,
+					"x2": 1,
+					"y2": 0.25,
+					"z2": 1
+				}
+			}
 		}
 	],
+	"attributes": {
+		"groundStorageTransform": {
+			"rotation": {
+				"x": 0,
+				"y": 8,
+				"z": 0
+			}
+		}
+	},	
 	"maxstacksize": 32,
 	"creativeinventory": {
 		"general": [ "*" ],
