@@ -1,4 +1,7 @@
-﻿1.7.0.pre3
+﻿1.7.1
+- moving item pipe mesh generation outside of OnTesselation
+
+1.7.0.pre3
 - itempipes will adjust scale of items a little better, tiny items won't get scaled down as much or at all as larger items
 - itempipe mesh generation moved outside of OnTesselation to improve performance
 - Bloomery machine can now work blister steel ingots, now called Advanced Bloomery Machine

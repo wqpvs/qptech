@@ -67,7 +67,7 @@ namespace qptech.src.itemtransport
                 showitems = Block.Attributes["showitems"].AsBool(showitems);
             }
             if (Api is ICoreServerAPI) { RegisterGameTickListener(OnServerTick, 100); }
-
+            else { RegisterGameTickListener(OnClientTick, 100); }
         }
 
 
@@ -85,6 +85,7 @@ namespace qptech.src.itemtransport
                 itemstack = incomingstack.Clone();
                 itemstack.StackSize = acceptqty;
                 progress = 0;
+                
                 MarkDirty(true);
                 return itemstack.StackSize;
             }
@@ -96,6 +97,11 @@ namespace qptech.src.itemtransport
             HandleStack();
         }
         
+        public void OnClientTick(float dt)
+        {
+            GenMesh();
+        }
+
         protected virtual void VerifyConnections()
         {
             //if it has connections, make sure they're still there
@@ -208,18 +214,26 @@ namespace qptech.src.itemtransport
                 if (slot.Itemstack.StackSize <= 0) { slot.Itemstack = null; }
                 slot.MarkDirty();
                 progress = 0;
+                
+                
                 MarkDirty(true);
                 break;
             }
         }
-        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
+        MeshData meshdata;
+        public virtual void GenMesh()
         {
-            if (!showitems) { return base.OnTesselation(mesher, tessThreadTesselator); }
+            ICoreServerAPI sapi = Api as ICoreServerAPI;
+            if (sapi != null)
+            {
+                sapi.Network.BroadcastBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.GenMesh,null );
+            }
+            meshdata = null;
             ICoreClientAPI capi = Api as ICoreClientAPI;
-            if (capi == null) { return false; }
-            if (itemstack == null||(itemstack.Item==null && itemstack.Block==null)) { return base.OnTesselation(mesher, tessThreadTesselator); }
-            MeshData meshdata;
-            
+            if (capi == null) { return; }
+            if (itemstack == null || (itemstack.Item == null && itemstack.Block == null)) { return; }
+
+
             if (itemstack.Class == EnumItemClass.Item)
             {
                 capi.Tesselator.TesselateItem(itemstack.Item, out meshdata);
@@ -230,26 +244,32 @@ namespace qptech.src.itemtransport
             }
 
             float[] meshsize = GetMeshSize(meshdata);
-            
-            float scalefactor = Math.Max(Math.Max(meshsize[0],meshsize[1]),meshsize[2]);
+
+            float scalefactor = Math.Max(Math.Max(meshsize[0], meshsize[1]), meshsize[2]);
             float targetscale = 0.5f;
             if (scalefactor <= 0) { scalefactor = targetscale; }
             else
             {
                 scalefactor = targetscale / scalefactor; /// 0.5/1
             }
-            Vec3f mid = new Vec3f(0.5f,0.5f,0.5f);
+            Vec3f mid = new Vec3f(0.5f, 0.5f, 0.5f);
             scalefactor = Math.Min(scalefactor, 1);
-            meshdata.Scale(mid, scalefactor,scalefactor,scalefactor);
-            BlockPos o = new BlockPos(0,0, 0);
+            meshdata.Scale(mid, scalefactor, scalefactor, scalefactor);
+            BlockPos o = new BlockPos(0, 0, 0);
 
             //Vec3f startv = o.Copy().Offset(outputface.Opposite).ToVec3f();
             Vec3f startv = Vec3f.Zero;
             Vec3f endv = o.Copy().Offset(outputface).ToVec3f();
 
             Vec3f nowv = Lerp(startv, endv, progress);
-            nowv.Y += 0.3f;
+            nowv.Y += 0.15f;
             meshdata.Translate(nowv);
+        }
+
+        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
+        {
+            if (!showitems||meshdata==null) { return base.OnTesselation(mesher, tessThreadTesselator); }
+            
             mesher.AddMeshData(meshdata);
             /*Shape displayshape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/metal/electric/roundgauge0"));
 
@@ -384,7 +404,8 @@ namespace qptech.src.itemtransport
             ClearFilter = 99991001,
             SetFilter = 99991002,
             WrenchSwap = 99991003,
-            ShowItemToggle = 99991004
+            ShowItemToggle = 99991004,
+            GenMesh= 99991005
         }
         
         public void OnNewFilter(ItemFilter newfilter)
@@ -414,6 +435,12 @@ namespace qptech.src.itemtransport
             {
                 WrenchSwap();
             }
+        }
+
+        public override void OnReceivedServerPacket(int packetid, byte[] data)
+        {
+            base.OnReceivedServerPacket(packetid, data);
+            if (packetid == (int)enPacketIDs.GenMesh) { GenMesh(); }
         }
 
         public override void ToTreeAttributes(ITreeAttribute tree)
