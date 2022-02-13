@@ -294,8 +294,8 @@ namespace qptech.src
                     if (bf == BlockFacing.DOWN) { filler = true;  }
                     else if (bf == BlockFacing.UP) { drainer = true;  }
                     if (ogdrainer != drainer || ogfiller != filler) { MarkDirty(true); }                }
-                if (fnu != null && fnu.IsOnlyDestination()) { outputNodes.Add(finde); }
-                else if (fnu!=null && fnu.IsOnlySource()) { inputNodes.Add(finde); }
+                if (fnu != null && fnu.IsOnlyDestination()) { outputNodes.Add(finde);if (inputNodes.Contains(finde)){ inputNodes.Remove(finde); } }
+                else if (fnu!=null && fnu.IsOnlySource()) { inputNodes.Add(finde);if (outputNodes.Contains(finde)) { outputNodes.Remove(finde); } }
                 else if (bf == BlockFacing.DOWN)
                 {
                     outputNodes.Add(finde);

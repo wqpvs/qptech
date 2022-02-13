@@ -69,6 +69,7 @@ namespace qptech.src
         }
         protected override void UsePower()
         {
+            if (deviceState == enDeviceState.WARMUP) { deviceState = enDeviceState.IDLE;MarkDirty();return; }
             statusmessage = "";
             if (!IsPowered || !isOn) {
                 if (makingrecipe != "") {

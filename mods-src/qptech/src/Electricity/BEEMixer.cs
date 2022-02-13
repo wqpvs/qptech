@@ -89,21 +89,36 @@ namespace qptech.src.Electricity
         public override void Wrench()
         {
             base.Wrench();
-            if (Api is ICoreServerAPI)
+            purgemode = !purgemode;
+            if (Api is ICoreServerAPI&&purgemode)
             {
-                purgemode = !purgemode;
-                MarkDirty();
+                TryPurge();
             }
+            MarkDirty();
         }
+
+        public virtual void TryPurge()
+        {
+            if (itemstack == null || itemstack.StackSize == 0 || itemstack.Item == null) { return; }
+            BlockPos purgepos = Pos.Copy().Offset(BlockFacing.DOWN);
+            IFluidTank purgetank = Api.World.BlockAccessor.GetBlockEntity(purgepos) as IFluidTank;
+            if (purgetank != null) { purgetank.ReceiveFluidOffer(itemstack.Item, itemstack.StackSize, Pos); }
+            itemstack = null;          
+            
+            MarkDirty();
+        }
+
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
             tree.SetItemstack("itemstack", itemstack);
             tree.SetBool("purgemode", purgemode);
         }
-
+        bool fluidmoveablestate => deviceState == enDeviceState.MATERIALHOLD || deviceState == enDeviceState.IDLE;
+        bool shouldgivefluid => purgemode && IsOn && fluidmoveablestate;
+        bool shouldtakefluid => !purgemode && fluidmoveablestate;
         public int TakeFluid(Item item, int amt) {
-            if (!purgemode) { return 0; }
+            if (!shouldgivefluid) { return 0; }
             if (itemstack == null || itemstack.Item == null) { return 0; }
             if (itemstack.Item != item) { return 0; }
             int stackdraw = Math.Min(amt, itemstack.StackSize);
@@ -115,7 +130,7 @@ namespace qptech.src.Electricity
 
         public int QueryFluid(Item item)
         {
-            if (!purgemode) { return 0; }
+            if (!shouldgivefluid) { return 0; }
             if (itemstack == null || itemstack.Item == null)
             {
                 
@@ -130,7 +145,7 @@ namespace qptech.src.Electricity
 
         public int OfferFluid(Item item, int quantity)
         {
-            if (purgemode) { return 0; }
+            if (!shouldtakefluid) { return 0; }
             if (itemstack == null || itemstack.Item==null||itemstack.StackSize==0)
             {
                 itemstack = new ItemStack(item, quantity);
@@ -151,19 +166,21 @@ namespace qptech.src.Electricity
 
         public Item QueryFluid()
         {
-            if (!purgemode) { return null; }
+            if (!shouldtakefluid) { return null; }
             if (itemstack == null) { return null; }
             return itemstack.Item;
         }
 
         public bool IsOnlySource()
         {
-            return purgemode;
+            //return false;
+            return false;
         }
 
         public bool IsOnlyDestination()
         {
-            return !purgemode;
+            //return false;
+            return true;
         }
     }
 }
