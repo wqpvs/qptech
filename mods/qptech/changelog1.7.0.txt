@@ -1,6 +1,7 @@
-﻿1.7.1
+﻿1.7.0
 - moving item pipe mesh generation outside of OnTesselation
 - Mixer purges to below fluid tank directly
+- several blocks made ground storable, thanks Craluminium!
 
 1.7.0.pre3
 - itempipes will adjust scale of items a little better, tiny items won't get scaled down as much or at all as larger items
@@ -48,10 +49,7 @@
 
 - need steel processing
 - fluid pipes - have a fluid limiter for allowing thru certain quantity of fluid?
-- fix bloom worker bug
-
 - itempipes will eventually have option to turn off item rendering - but how to turn on/off?
-
 - coal pile loader/cementation furnace machine - find coffin with inventory - can check if it's full and if it is keep pit lit and loaded, otherwise let it burn out
 		- 
 

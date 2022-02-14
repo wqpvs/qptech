@@ -44,6 +44,9 @@ namespace qptech.src.itemtransport
         bool showitems = true;
         bool optionshowitems = true;
         bool ShowItems => showitems&&optionshowitems;
+        bool autofiltertocrate = true;
+        protected virtual bool itemstackempty => itemstack == null || itemstack.StackSize == 0 || (itemstack.Item == null && itemstack.Block == null);
+
         public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
             if (fromtransporter != null && fromtransporter.TransporterPos == outputlocation) { return false; }
@@ -109,8 +112,16 @@ namespace qptech.src.itemtransport
             destination = null;
             if (outputlocation == null) { return; }
             IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as IItemTransporter;
-            BlockEntityGenericTypedContainer outcont = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as BlockEntityGenericTypedContainer;
+            BlockEntityContainer outcont = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as BlockEntityContainer;
+            
             if (trans == null && outcont==null) {MarkDirty(true);return; }
+            BlockEntityCrate crate = outcont as BlockEntityCrate;
+            if (crate != null && autofiltertocrate && !crate.Inventory.Empty)
+            {
+                itemfilter = new ItemFilter();
+                itemfilter.filtercode = crate.Inventory[0].Itemstack.Collectible.Code.ToString();
+                MarkDirty();
+            }
             destination = outputlocation;
             
             MarkDirty(true);
@@ -137,7 +148,7 @@ namespace qptech.src.itemtransport
             //if we've moved everything, attempt to hand off stack
             if (progress >= 1) { TransferStack(); }
         }
-
+        //interesting code: return Lang.GetMatching(Code?.Domain + AssetLocation.LocationSeparator + "block-" + type + "-" + Code?.Path, Lang.Get("cratelidstate-" + lidState, "closed"));
         protected virtual void TransferStack()
         {
             if (itemstack == null) { return; }
@@ -154,7 +165,13 @@ namespace qptech.src.itemtransport
                     MarkDirty(true);
                 }
             }
-            BlockEntityGenericTypedContainer outcont = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as BlockEntityGenericTypedContainer;
+            BlockEntityContainer outcont = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as BlockEntityContainer;
+            BlockEntityBarrel beb = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as BlockEntityBarrel;
+            if (beb != null) {
+
+                TryBarrel(beb);
+                return;
+            }
             if (outcont == null) { return; }
             if (outcont.Inventory == null) { return; }
             DummyInventory dummy = new DummyInventory(Api,1);
@@ -179,6 +196,26 @@ namespace qptech.src.itemtransport
                 
             }
 
+        }
+
+        protected virtual void TryBarrel(BlockEntityBarrel barrel)
+        {
+            if (barrel == null||itemstackempty) { return; }
+            if (barrel.Sealed||barrel.CanSeal) { return; } //if there is a valid barrel recipe then don't put anything in
+            if (barrel.Inventory == null || barrel.Inventory.Count == 0) { return; }
+            if (barrel.Inventory[0] == null || barrel.Inventory[0].Empty || barrel.Inventory[0].Itemstack.Item == null)
+            {
+                ItemStackMoveOperation op = new ItemStackMoveOperation(Api.World, EnumMouseButton.Left, 0, EnumMergePriority.DirectMerge, itemstack.StackSize);
+                DummyInventory dummy = new DummyInventory(Api,1);
+                dummy[0].Itemstack = itemstack;
+                dummy[0].TryPutInto(barrel.Inventory[0], ref op);
+                if (op.MovedQuantity == 0) { return; }
+                barrel.Inventory.MarkSlotDirty(0);
+                if (op.NotMovedQuantity == 0) { itemstack = null;MarkDirty(true);return; }
+                itemstack.StackSize = op.NotMovedQuantity;
+                MarkDirty(true);
+                return;
+            }
         }
 
         protected virtual void ResetStack()
