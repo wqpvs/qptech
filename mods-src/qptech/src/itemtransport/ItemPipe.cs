@@ -53,6 +53,11 @@ namespace qptech.src.itemtransport
             if (itemstack == null) { return true; }
             return false;
         }
+
+        public virtual ItemFilter GetItemFilter()
+        {
+            return itemfilter;
+        }
         
         public override void Initialize(ICoreAPI api)
         {

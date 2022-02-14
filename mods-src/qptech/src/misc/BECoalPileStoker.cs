@@ -35,6 +35,10 @@ namespace qptech.src.misc
         bool coffinReady = false;
         bool ShouldIgnite => autoIgnite&&coffinReady;
         string[] fuelcodes = { "game:coke", "game:charcoal" };
+        public virtual ItemFilter GetItemFilter()
+        {
+            return null;
+        }
         BlockEntityStoneCoffin coffin; //find an active coffin for the cementation furnace
         List<Item> fuelitems;
         public BlockPos TransporterPos => throw new NotImplementedException();

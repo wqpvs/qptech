@@ -35,6 +35,7 @@ namespace qptech.src.itemtransport
         Block exitshapeblock;
         Dictionary<BlockPos, int> outputtracker;
         
+        public virtual ItemFilter GetItemFilter() { return null; }
 
         public bool CanAcceptItems(IItemTransporter fromtransporter)
         {
@@ -90,7 +91,23 @@ namespace qptech.src.itemtransport
             {
                 //BlockPos outpos = Pos.Copy().Offset(facing);
                 IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(outpos) as IItemTransporter;
+                
                 if (trans==null || !trans.CanAcceptItems(this)) { continue; }
+                if (trans.GetItemFilter() != null)
+                {
+                    //special case exact item filter match
+                    if (trans.GetItemFilter().filtercode == itemstack.Collectible.Code.ToString())
+                    {
+                        int specialused = trans.ReceiveItemStack(itemstack, this);
+                        if (specialused > 0)
+                        {
+                            itemstack.StackSize -= specialused;
+                            if (itemstack.StackSize <= 0) { ResetStack(); }
+                            MarkDirty();
+                            return;
+                        }
+                    }
+                }
                 availableoutputs.Add(trans);
             }
             if (availableoutputs.Count() == 0) { return; }
@@ -103,6 +120,8 @@ namespace qptech.src.itemtransport
                     {
                         pickqty = outputtracker[checkpos];
                         pick = c;
+                        
+
                     }
                 }
                 
