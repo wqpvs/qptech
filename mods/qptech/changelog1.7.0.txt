@@ -1,59 +1,50 @@
 ﻿1.7.0
-- moving item pipe mesh generation outside of OnTesselation
-- Mixer purges to below fluid tank directly
-- several blocks made ground storable, thanks Craluminium!
-- item pipes are crate and barrel aware (so should they also be Bed Bath & Beyond aware? heeheehee)
+New Stuff
+- Item Transport system!
+	- Item Pipes - move items between containers! 
+		- powerful filter system: allow/block matching by item codes,
+				- can be set to transfer only a certain amount of items at a time
+				- crate and barrel aware (but not Pottery Barn aware) Will stop loading when a barrel can be sealed. Will auto filter itself to an attached crate.
+		- change direction with a wrench (it will keep its filter, but drop its item)
+		- faster versions to be added in the future
+	- Item Splitters
+		- configurable with wrench to set each side to input or output
+		- will try and even out which directions stacks are sent
+			- gives priority to an attached item pipe with a matching code
+		- will only send items to another splitter or to an item pipe, can't extract or push items into containers itself
+	- Computer tool (Currently creative only)
+		- copy, paste, and clear item filters from item pipes
+- New Machine - Mixer - used to make specific qptech recipes right now, takes in liquid and items
+	- has a purge function which will either vent any liquids or dump them into a fluid tank underneath the mixer
+	- change between fill and purge modes with the wrench
+- New Machine - Coal Stoker - keep your steel cooking!
+	- loaded with item pipes - either charcoal or coke
+	- auto builds a charcoal pile on top of itself and will try to keep the charcoal pile at around 8 units
+	- will auto-ignite if it detects a filled coffin above it (as part of a cementation furnace)
+		- careful! you don't want to end up being the source of extra carbon in your steel!
+- New Decorative Blocks
+	- Concrete - made in a mixer with dye, sand, stones, and quicklime
+		- variants available in each dye color
+		- (a rough variant also available made with just water
+	- Industrial Glass - frameless glass blocks made in a mixer from Crushed Quartz and water
+- New Parts and materials:
+	- steel channels, circuit boards, temporal steel (made in mixer)
+- (experimental!)ropes and power poles (creative only) for power transfer.
 
-1.7.0.pre3
-- itempipes will adjust scale of items a little better, tiny items won't get scaled down as much or at all as larger items
-- itempipe mesh generation moved outside of OnTesselation to improve performance
-- Bloomery machine can now work blister steel ingots, now called Advanced Bloomery Machine
-- started adding some helpful links and such in item descriptions
-- added coal pile stoker - will keep coke/coal piles fed (loaded via item pipes)
-- tweak from pre2 - item pipes are slower but don't require circuit boards (this will be left for an advanced version)
-	- item splitters don't require circuit boards
-	- coal stoker requires a chip
-- bugfixes - hopefully stabilized some of the devices erroring out and doing weird stuff
-- adjusted height of display items running thru pipes
-- heating coils now stack so mv heater can actually be made!
-
-1.7.0.pre2
-- need to add recipe for computer
-- fixed: some machines stuck on warmpup
-- found a potential crash with itemsplitter
-- Recipe processor recipe lists can be partially matched
-- added all concrete colors and mixer recipes
-- mixer stays in purge mode until manually disabled
-- fixed bug: mixer won't change liquid types even when empty
-
-1.7.0.pre1 - item transport update
-- added filterable item transport pipes
-   - filter by: allow/block text, turn on/off, only transfer minimum quantity at a time
-- added item 3 and 4 way splitters
-- fixed assembler type machines to try harder to find open slots
-- added tablet computer - useful for setting and copying filters on pipes
-- adding multiblock texture test
-- added industrial glass, made in a mixer from water and crushed glass
-- added steel channels
-- added circuit board part
-- (experimental!)ropes and power poles for power transfer.
-- mv heater quartered power usage to 32 tf
-- doubled mv generator power output to 64 tf
-- added temporal steel ingot, plate, and sheet - temporal steel ingots made in mixer (1 temporal gear+8 steel ingots -> 8 temporal steel ingots)
-- added mixer object - hit with pipe wrench to purge the internal tank of liquid. Input dry materials on left and output dry materiasl on right. Attach a pipe to back or bottom to fill or drain liquids
+Fixes & Tweaks
 - fixed recipes for castiron ovens
-- concrete now made only in mixer (needs water or dye, plus quicklime, sand, and stones)
-- machine recipe ingredients can now be partially matched (eg: sand- would accept any ingredient that contained sand- in its code)
-
-
-- future todo:
-
-- need steel processing
-- fluid pipes - have a fluid limiter for allowing thru certain quantity of fluid?
-- itempipes will eventually have option to turn off item rendering - but how to turn on/off?
-- coal pile loader/cementation furnace machine - find coffin with inventory - can check if it's full and if it is keep pit lit and loaded, otherwise let it burn out
-		- 
-
+- doubled mv generator power output to 64 tf
+- mv heater quartered power usage to 32 tf
+- fixed assembler type machines to try harder to find open slots
+- several blocks made ground storable, thanks Craluminium!
+- bugfixes - hopefully stabilized some of the devices erroring out and doing weird stuff
+- fixed recipes for castiron ovens
+- fixed bug: mixer won't change liquid types even when empty
+- fixed: some machines stuck on warmpup
+- Recipe processor recipe lists can be partially matched
+- started adding some helpful links and such in item descriptions
+- Bloomery machine can now work blister steel ingots, now called Advanced Bloomery Machine
+- heating coils now stack so mv heater can actually be made!
 
 
 
