@@ -6,7 +6,10 @@
 			"states": [ "plain" ]
 		}
 	],
-	
+	"attributes": {
+		canChisel: true
+		
+	},
 	"drawtype": "Cube",
 	"creativeinventory": {
 		"qptech-decor": [ "*" ]
@@ -22,7 +25,7 @@
 		"shiny": true
 	},
 	"textures": {
-		"all": { "base": "block/glass/industrialglass" }
+		"all": { "base": "block/glass/industrialglass-plain" }
 	},
 	"resistance": 0.25,
 	"sideopaque": {

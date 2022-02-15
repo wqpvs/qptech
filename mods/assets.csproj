@@ -420,7 +420,7 @@
     <Content Include="qptech\assets\machines\textures\block\copperspool.png" />
     <Content Include="qptech\assets\machines\textures\block\copperspooldiagonal.png" />
     <Content Include="qptech\assets\machines\textures\block\copperspoolwrapped.png" />
-    <Content Include="qptech\assets\machines\textures\block\glass\industrialglass.png" />
+    <Content Include="qptech\assets\machines\textures\block\glass\industrialglass-plain.png" />
     <Content Include="qptech\assets\machines\textures\block\lit.png" />
     <Content Include="qptech\assets\machines\textures\block\machinery-largefan.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\bluepaintedwornsteelplate.png" />
