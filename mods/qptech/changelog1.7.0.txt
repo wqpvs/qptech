@@ -1,4 +1,7 @@
-﻿1.7.0
+﻿1.7.1
+- industrial glass can now be chiseled!
+
+1.7.0
 New Stuff
 - Item Transport system!
 	- Item Pipes - move items between containers! 
