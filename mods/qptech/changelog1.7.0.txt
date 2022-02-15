@@ -1,5 +1,6 @@
 ﻿1.7.1
 - industrial glass can now be chiseled!
+- added recipes for Industrial mixer (sowee) and language entries for temporal steel
 
 1.7.0
 New Stuff

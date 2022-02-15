@@ -224,7 +224,13 @@
 	"block-industrialcrucible-small-*": "Small Industrial Crucible",
 	"blockdesc-industrialcrucible-small-*": "Will smelt metals and make ingots. Right click to swtich between single and alloy mode. In single mode it will only make pure metals, in alloy mode it will only make alloys. Inputs from the top and outputs to the bottom. Requires ingredients to be heated. Requires exact quantites.",
 	"block-coalpilestoker": "Coal Pile Stoker",
-	"blockdesc-coalpilestoker": "Accepts coal & coke from item pipes. Will maintain a pile above it and automatically ignite if it find a prepared cementation furnance."
+	"blockdesc-coalpilestoker": "Accepts coal & coke from item pipes. Will maintain a pile above it and automatically ignite if it find a prepared cementation furnance.",
+	"item-ingot-temporalsteel": "Temporal Steel Ingot",
+	"itemdesc-ingot-temporalsteel": "Temporal steel made in the industrial mixer from 1 Temporal Gear, 8 steel ingots (and some heat)",
+	"block-metalsheet-temporalsteel-*": "Temporal Steel Sheet",
+	"blockdesc-metalsheet-temporalsteel-*": "Made in a sheet roller from temporal steel plates.",
+	"item-metalplate-temporalsteel": "Temporal Steel Metal Plate",
+	"itemdesc-metalplate-temporalsteel": "Temporal steel plate, made in a plate stamping machine"
 
 
 }

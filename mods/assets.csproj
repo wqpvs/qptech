@@ -160,6 +160,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\industrialheater-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\industrialheater-lv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\bloomworker.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\mv\mixer-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\lathe-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\industrialgenerator-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\turbine-small.json" />
