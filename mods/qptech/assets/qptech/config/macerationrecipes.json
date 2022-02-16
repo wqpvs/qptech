@@ -1,73 +1,6 @@
 ﻿{
-	"game:ore-quartz": [
-		{
-			"outputmaterial": "game:crushed-quartz",
-			"outputquantity": 1,
-			"odds": 100,
-			"type": "DIRECT"
-		}
-	],
-	"game:ore-cinnabar": [
-		{
-			"outputmaterial": "game:crushed-cinnabar",
-			"outputquantity": 1,
-			"odds": 100,
-			"type": "DIRECT"
-		}
-	],
-	"game:stone-bauxite": [
-		{
-			"outputmaterial": "game:crushed-bauxite",
-			"outputquantity": 1,
-			"odds": 100,
-			"type": "DIRECT"
-		}
-	],
-	"game:bone": [
-		{
-			"outputmaterial": "game:bonemeal",
-			"outputquantity": 1,
-			"odds": 100,
-			"type": "DIRECT"
-		}
-	],
-	"game:stone-limestone": [
-		{
-			"outputmaterial": "game:lime",
-			"outputquantity": 1,
-			"odds": 100,
-			"type": "DIRECT"
-		},
-		{
-			"outputmaterial": "game:lime",
-			"outputquantity": 1,
-			"odds": 25,
-			"type": "DIRECT"
-		}
-	],
-	"game:stone-chalk": [
-		{
-			"outputmaterial": "game:lime",
-			"outputquantity": 1,
-			"odds": 100,
-			"type": "DIRECT"
-		},
-		{
-			"outputmaterial": "game:lime",
-			"outputquantity": 1,
-			"odds": 25,
-			"type": "DIRECT"
-		}
-	],
-	"sulfur": [
-		{
-			"outputmaterial": "game:powderedsulfur",
-			"outputquantity": 1,
-			"odds": 100,
-			"type": "PARTIAL"
-		}
-
-	],
+	
+	
 	"rock": [
 		{
 			"outputmaterial": "gravel",
@@ -199,32 +132,7 @@
 			"type": "PARTIAL"
 		}
 	],
-	"grain": [
-		{
-			"outputmaterial": "flour",
-			"outputquantity": 1,
-			"odds": 100
-		},
-		{
-			"outputmaterial": "flour",
-			"outputquantity": 1,
-			"odds": 25
-		}
-	],
-	"game:stone-halite": [
-		{
-			"outputmaterial": "game:salt",
-			"outputquantity": 2,
-			"odds": 100,
-			"type": 0
-		},
-		{
-			"outputmaterial": "game:salt",
-			"outputquantity": 2,
-			"odds": 15,
-			"type": 0
-		}
-	],
+
 	"log": [
 		{
 			"outputmaterial": "game:firewood",

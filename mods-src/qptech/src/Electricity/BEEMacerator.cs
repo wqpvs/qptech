@@ -219,9 +219,11 @@ namespace qptech.src
             //TODO: change this to "CanMacerate", add a FindMacerate that returns items:
             //   - from the maceratelist directly - adding extra output based on RNG
             //   - generically where possible - eg stone block to stone gravel etc
-
-    
+            if (machinename == "") { machinename = "macerator"; }
+            
             if (maceratelist == null) { LoadMacerateLists(api); }
+            if (co.CrushingProps != null && machinename == "macerator") { return true; }
+            if (co.GrindingProps != null && machinename == "macerator") { return true; }
             if (co == null) { return false; }
             if (co.FirstCodePart() == "ore") { return true; }
             if (co.ToString().Contains("log") && machinename=="logsplitter") { return true; }
@@ -245,6 +247,18 @@ namespace qptech.src
             if (!CanMacerate(co, api,machinename)) { return outputstack; }
             string fcp = co.FirstCodePart();
             string fullcode = co.Code.ToString();
+            CrushingProperties crp = co.CrushingProps;
+            if (crp != null && machinename == "macerator")
+            {
+                outputstack.Add( crp.CrushedStack.ResolvedItemstack);
+                
+            }
+            GrindingProperties grp = co.GrindingProps;
+            if (grp != null && machinename == "macerator")
+            {
+                outputstack.Add(grp.GroundStack.ResolvedItemstack);
+            }
+
             Random rand = new Random();
             /*if (fullcode.Contains("log")&&machinename=="logsplitter")
             {
@@ -294,7 +308,7 @@ namespace qptech.src
 
                 }
             }
-            if (maceratelist.ContainsKey(fcp)) {
+            if (maceratelist !=null && maceratelist.ContainsKey(fcp)) {
                 foreach (MacerationRecipe mr in maceratelist[fcp])
                 {
 
