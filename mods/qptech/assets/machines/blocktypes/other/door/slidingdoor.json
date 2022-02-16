@@ -14,6 +14,7 @@
 	},
 	"attributesByType": {
 		"sliding_door-lowerleft-closed-*": {
+			"handbook": { "groupBy": ["sliding_door-*"] },
 			"blocksHigh": 2,
 			"blocksWide": 2,
 			"blocks": [

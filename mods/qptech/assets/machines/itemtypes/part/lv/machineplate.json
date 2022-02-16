@@ -14,6 +14,7 @@
 		}
 	],
 	"attributes": {
+		"handbook": { "groupBy": ["machineplate-*"]},
     "groundStorageTransform": {
       "origin": {
         "x": 0.5,

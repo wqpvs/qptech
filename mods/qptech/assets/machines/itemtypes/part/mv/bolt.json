@@ -13,6 +13,7 @@
 		}
 	],
 	"attributes": {
+		"handbook": { "groupBy": ["bolt-*"]},
 		"groundStorageTransform": {
 			"translation": {
 				"x": 0.08,

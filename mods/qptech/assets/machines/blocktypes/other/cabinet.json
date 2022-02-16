@@ -5,6 +5,7 @@
 		"qptech-decor": [ "*-east" ]
 	},
 	"attributes": {
+		"handbook":{ "groupBy": ["cabinet-{position}-*"] },
 		"partialAttachable": true,
 
 		"inventoryClassName": "chest",
