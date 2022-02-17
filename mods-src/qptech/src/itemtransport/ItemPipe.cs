@@ -29,10 +29,12 @@ namespace qptech.src.itemtransport
         BlockFacing inputface=BlockFacing.WEST;
         public BlockFacing TransporterInputFace => inputface;
         BlockPos inputlocation;
+        public BlockPos InputLocation => inputlocation;
 
         BlockFacing outputface=BlockFacing.EAST;
         public BlockFacing TransporterOutputFace => outputface;
         BlockPos outputlocation;
+        public BlockPos OutputLocation => outputlocation;
         public BlockPos TransporterPos => Pos;
 
         float transportspeed = 0.1f;

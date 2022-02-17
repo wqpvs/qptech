@@ -26,7 +26,9 @@ namespace qptech.src.itemtransport
         ItemStack itemstack;
         int stacksize = 1000;
         List<BlockPos> inputlocations;
+        public List<BlockPos> InputLocations => inputlocations;
         List<BlockPos> outputlocations;
+        public List<BlockPos> OutputLocations => outputlocations;
         List<BlockFacing> inputfaces;
         List<BlockFacing> outputfaces;
         string entranceshape= "machines:itemfilterentrance";
@@ -76,6 +78,7 @@ namespace qptech.src.itemtransport
         Random r;
         public virtual void OnServerTick(float dt)
         {
+            if (doautoconnect) { AutoConnect(); }
             if (itemstack == null) { return; }
             HandleItemStack();
         }
@@ -185,6 +188,40 @@ namespace qptech.src.itemtransport
                 facesettings[bf.ToString()] = faceoff;
             }
            
+        }
+
+        bool doautoconnect = false;
+        public override void OnBlockPlaced(ItemStack byItemStack = null)
+        {
+            base.OnBlockPlaced(byItemStack);
+            if (Api is ICoreServerAPI) { doautoconnect = true; }
+        }
+        
+        public virtual void AutoConnect()
+        {
+            doautoconnect = false;
+            if (facesettings == null) { SetIOLocations(); }
+            bool anychanges = false;
+            foreach (BlockFacing bf in BlockFacing.ALLFACES)
+            {
+                BlockPos bp = Pos.Copy().Offset(bf);
+                BlockEntity be = Api.World.BlockAccessor.GetBlockEntity(bp);
+                if (be == null) { continue; }
+                ItemPipe ipipe = be as ItemPipe;
+                if (ipipe != null)
+                {
+                    if (ipipe.InputLocation == Pos) { facesettings[bf.ToString()] = faceoutput; anychanges = true; }
+                    else if (ipipe.OutputLocation == Pos) { facesettings[bf.ToString()] = faceinput;anychanges = true; }
+                    continue;
+                }
+                ItemSplitter isplit = be as ItemSplitter;
+                if (isplit != null)
+                {
+                    if (isplit.OutputLocations != null && isplit.OutputLocations.Contains(Pos)) { facesettings[bf.ToString()] = faceinput; anychanges = true; }
+                    else if (isplit.InputLocations != null && isplit.InputLocations.Contains(Pos)) { facesettings[bf.ToString()] = faceoutput; anychanges = true; }
+                }
+            }
+            if (anychanges) { SetIOLocations(); MarkDirty(true); }
         }
 
         //build the helper lists to mactch the current face setup

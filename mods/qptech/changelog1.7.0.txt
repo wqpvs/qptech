@@ -1,4 +1,9 @@
-﻿1.7.2
+﻿1.7.3
+- ground storage settings from Craluminum thanks!
+- itemsplitters will automatcially set i/o faces to match item pipes on placement, as well as match up with any setup itemsplitters
+
+
+1.7.2
 - crucible block overflows?
 - macerator - should now process all items with CrushingProperties and all GrindingProperties
 - lathe - outputs 5 rods plus 5 metal bits per ingot
