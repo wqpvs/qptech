@@ -6,6 +6,7 @@
 	drawtype: "json",
 	shape: { base: "item/tool/screwdriver" },
 	attributes: {
+		"handbook": { "groupBy": ["screwdriver-*"]},
 
 		
 			"toolrackTransform": {
