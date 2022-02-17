@@ -1,6 +1,7 @@
 ﻿1.7.2
 - crucible block overflows?
 - macerator - should now process all items with CrushingProperties and all GrindingProperties
+- lathe - outputs 5 rods plus 5 metal bits per ingot
 
 1.7.1
 - industrial glass can now be chiseled!

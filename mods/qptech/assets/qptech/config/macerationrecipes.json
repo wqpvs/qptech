@@ -363,12 +363,12 @@
 			"stripingredientheader": true
 		},
 		{
-			"outputmaterial": "orepowder",
-			"outputquantity": 1,
+			"outputmaterial": "metalbit",
+			"outputquantity": 5,
 			"odds": 100,
 			"type": "SWAP",
 			"machinename": "lathe",
-			"stripingredientheader": true
+			
 		}
 	]
 
