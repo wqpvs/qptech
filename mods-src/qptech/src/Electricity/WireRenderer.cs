@@ -27,6 +27,7 @@ namespace qptech.src
         BlockPos pos;
         ICoreClientAPI api;
         MeshRef quadModelRef;
+        public float wirethickness = 0.05f;
         Matrixf ModelMat = new Matrixf();
         public BEElectric bee;
         public double RenderOrder
@@ -73,14 +74,14 @@ namespace qptech.src
             MeshData m = new MeshData();
             
             BlockPos d = bee.DirectLinks[0]-bee.Pos;
-
-            int[] quadVertices = {
+            
+            float[] quadVertices = {
             // Front face
 
             0,0,0,
-            0,-1,0,
-            d.X,d.Y-1,d.Z,
-            d.X,d.Y,d.Z
+            0,wirethickness,0,
+            d.X,d.Y,d.Z,
+            d.X,d.Y+wirethickness,d.Z
             };
             float[] xyz = new float[3 * 4];
             for (int i = 0; i < 3 * 4; i++)
