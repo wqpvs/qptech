@@ -18,6 +18,8 @@ namespace qptech.src
     {
         /*base class to handle electrical devices*/
         bool showextrainfo = false; //if true will show NetworkID and MemberID in block info
+        bool acceptsdirectpower = true;
+        public virtual bool AcceptsDirectPower => acceptsdirectpower;
         public virtual bool showToggleButton => false;
         public virtual bool disableAnimations => true;
         List<BlockPos> directlinks;
@@ -163,6 +165,7 @@ namespace qptech.src
             usePower = Block.Attributes["useFlux"].AsInt(usePower);
             genPower = Block.Attributes["genFlux"].AsInt(genPower);
             fluxStorage = Block.Attributes["fluxStorage"].AsInt(fluxStorage);
+            acceptsdirectpower = Block.Attributes["acceptsdirectpower"].AsBool(acceptsdirectpower);
             RegisterGameTickListener(OnTick, 75);
             notfirsttick = false;
             if (api is ICoreClientAPI)
@@ -352,7 +355,9 @@ namespace qptech.src
         
         public virtual bool OnPowerLink(BlockPos connecttopos)
         {
+            if (!AcceptsDirectPower) { return false; }
             if (DirectLinks == null) { directlinks = new List<BlockPos>(); }
+            if (connecttopos == Pos) { directlinks = new List<BlockPos>(); return true; }
             if (directlinks.Contains(connecttopos)) { return false; }
             directlinks.Add(connecttopos);
             return true;
@@ -362,6 +367,7 @@ namespace qptech.src
         public virtual bool OnWireClick(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
             if (Api is ICoreServerAPI) { return false; }
+            if (!AcceptsDirectPower) { return false; }
             if (startlink == null) { startlink = blockSel.Position; }
             else 
             {
