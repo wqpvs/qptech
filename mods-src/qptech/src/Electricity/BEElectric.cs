@@ -18,7 +18,8 @@ namespace qptech.src
     {
         /*base class to handle electrical devices*/
         bool showextrainfo = false; //if true will show NetworkID and MemberID in block info
-        bool acceptsdirectpower = true;
+        bool acceptsdirectpower = false;
+        WireRenderer wirerenderer;
         public virtual bool AcceptsDirectPower => acceptsdirectpower;
         public virtual bool showToggleButton => false;
         public virtual bool disableAnimations => true;
@@ -166,8 +167,17 @@ namespace qptech.src
             genPower = Block.Attributes["genFlux"].AsInt(genPower);
             fluxStorage = Block.Attributes["fluxStorage"].AsInt(fluxStorage);
             acceptsdirectpower = Block.Attributes["acceptsdirectpower"].AsBool(acceptsdirectpower);
+            if (api is ICoreClientAPI && acceptsdirectpower)
+            {
+
+                capi = api as ICoreClientAPI;
+                capi.Event.RegisterRenderer(wirerenderer = new WireRenderer(Pos, capi), EnumRenderStage.Opaque, "wire");
+                wirerenderer.TextureName= new AssetLocation("machines:block/rubber/cable.png");
+                wirerenderer.bee = this;
+            }
             RegisterGameTickListener(OnTick, 75);
             notfirsttick = false;
+
             if (api is ICoreClientAPI)
             {
                 capi = api as ICoreClientAPI;
@@ -297,7 +307,7 @@ namespace qptech.src
                 }
                 
             }
-            if (Block.HasBehavior<BlockBehaviorCanAttach>()){
+            /*if (Block.HasBehavior<BlockBehaviorCanAttach>()){
                 ClothManager cm = Api.ModLoader.GetModSystem<ClothManager>();
                 ClothSystem cs = cm.GetClothSystemAttachedToBlock(Pos);
                 if (cs == null) { return; }
@@ -322,7 +332,7 @@ namespace qptech.src
                     NetworkJoin(pnw.NetworkID); return;
                 }
 
-            }
+            }*/
             //special links for wireless power, rendered power lines etc
             
             if (DirectLinks != null && DirectLinks.Count > 0)
@@ -360,6 +370,7 @@ namespace qptech.src
             if (connecttopos == Pos) { directlinks = new List<BlockPos>(); return true; }
             if (directlinks.Contains(connecttopos)) { return false; }
             directlinks.Add(connecttopos);
+            MarkDirty();
             return true;
         }
 
@@ -377,6 +388,7 @@ namespace qptech.src
                 
                 startlink = null;
             }
+            
             return true;
         }
 
@@ -392,11 +404,15 @@ namespace qptech.src
         public override void OnBlockRemoved()
         {
             base.OnBlockRemoved();
+            wirerenderer?.Dispose();
+            wirerenderer = null;
             CleanBlock();
         }
         public override void OnBlockUnloaded()
         {
             base.OnBlockUnloaded();
+            wirerenderer?.Dispose();
+            wirerenderer = null;
             CleanBlock();
         }
 
@@ -409,9 +425,12 @@ namespace qptech.src
                 notfirsttick = true;
             }
 
-            if (Api is ICoreClientAPI && showFluxDisplay)
+            if (Api is ICoreClientAPI )
             {
-                UpdateFluxDisplay();
+                if (wirerenderer != null)
+                {
+                    wirerenderer.GenModel();
+                }
             }
         }
         protected virtual void UpdateFluxDisplay()
@@ -453,20 +472,6 @@ namespace qptech.src
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
 
-            if (!showFluxDisplay) { return base.OnTesselation(mesher, tessThreadTesselator); }
-            Shape displayshape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/metal/electric/roundgauge0"));
-
-
-            MeshData meshdata;
-            capi.Tesselator.TesselateShape("roundgauge0" + Pos.ToString(), displayshape, out meshdata, this);
-
-
-
-            meshdata.Translate(DisplayOffset());
-            meshdata.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD * DisplayRotation(), 0);
-
-
-            mesher.AddMeshData(meshdata);
             return base.OnTesselation(mesher, tessThreadTesselator);
         }
         
