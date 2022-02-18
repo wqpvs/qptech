@@ -20,6 +20,8 @@ namespace qptech.src
         bool showextrainfo = false; //if true will show NetworkID and MemberID in block info
         public virtual bool showToggleButton => false;
         public virtual bool disableAnimations => true;
+        List<BlockPos> directlinks;
+        public List<BlockPos> DirectLinks => directlinks;
         public virtual int AvailablePower() {
             if (!isOn||!generatorready) { return 0; }
             return genPower;
@@ -271,6 +273,8 @@ namespace qptech.src
             
             
         }
+
+
         protected virtual void GrowPowerNetwork()
         {
             foreach (BlockFacing f in distributionFaces)//ALL FACES IS A TEMPORARY MEASURE!
@@ -316,10 +320,59 @@ namespace qptech.src
                 }
 
             }
+            //special links for wireless power, rendered power lines etc
+            
+            if (DirectLinks != null && DirectLinks.Count > 0)
+            {
+                List<BlockPos> removestaleconnections = new List<BlockPos>();
+                bool anychange = false;
+                foreach (BlockPos otherbp in DirectLinks)
+                {
+                    BlockEntity checkblock = Api.World.BlockAccessor.GetBlockEntity(otherbp);
+                    IPowerNetworkMember pnw = checkblock as IPowerNetworkMember;
+                    if (pnw == null) { removestaleconnections.Add(otherbp); anychange = true; continue; }
+                    Guid othernetwork = pnw.NetworkID;
+
+                    if (othernetwork == Guid.Empty) { continue; }
+                    if (othernetwork == NetworkID) { continue; }
+                    IFlexNetwork othernet = FlexNetworkManager.GetNetworkWithID(othernetwork);
+                    IFlexNetwork mynet = FlexNetworkManager.GetNetworkWithID(NetworkID);
+                    if (othernet != null && mynet != null && othernet.GetMembers().Count >= mynet.GetMembers().Count)
+                    {
+                        NetworkJoin(pnw.NetworkID); anychange = true;
+                    }
+                }
+                foreach (BlockPos remove in removestaleconnections)
+                {
+                    DirectLinks.Remove(remove);
+                }
+                if (anychange) { MarkDirty(true); }
+            }
         }
         
+        public virtual bool OnPowerLink(BlockPos connecttopos)
+        {
+            if (DirectLinks == null) { directlinks = new List<BlockPos>(); }
+            if (directlinks.Contains(connecttopos)) { return false; }
+            directlinks.Add(connecttopos);
+            return true;
+        }
 
-
+        public static BlockPos startlink;
+        public virtual bool OnWireClick(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
+        {
+            if (Api is ICoreServerAPI) { return false; }
+            if (startlink == null) { startlink = blockSel.Position; }
+            else 
+            {
+                byte[] data;
+                data = SerializerUtil.Serialize<BlockPos>(startlink);
+                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.Wire, data);
+                
+                startlink = null;
+            }
+            return true;
+        }
 
         public virtual void CleanBlock()
         {
@@ -437,11 +490,24 @@ namespace qptech.src
                 else { dsc.Append(" (OK) "); }
             }
             dsc.AppendLine("");
+            if (DirectLinks != null && directlinks.Count > 0)
+            {
+                dsc.AppendLine("Direct Power links to");
+                foreach (BlockPos bp in DirectLinks)
+                {
+                    dsc.AppendLine(bp.ToString());
+                }
+            }
+            if (startlink != null)
+            {
+                dsc.AppendLine("Wire click will link to " + startlink.ToString());
+            }
             if (showextrainfo)
             {
                 dsc.AppendLine("MemberID  " + memberID);
                 dsc.AppendLine("NetworkID " + networkID);
             }
+            
             //dsc.AppendLine("IN:" + inputConnections.Count.ToString() + " OUT:" + outputConnections.Count.ToString());
         }
 
@@ -486,7 +552,8 @@ namespace qptech.src
             TogglePower = 99990002,
             ToggleMode = 99990003,
             Halt = 99990004,
-            Wrench = 99990005
+            Wrench = 99990005,
+            Wire = 99990006
         }
         public virtual void Wrench()
         {
@@ -527,6 +594,17 @@ namespace qptech.src
             else if (packetid == (int)enPacketIDs.Wrench)
             {
                 Wrench();
+            }
+            else if (packetid == (int)enPacketIDs.Wire)
+            {
+                if (data != null)
+                {
+                    BlockPos tolink = SerializerUtil.Deserialize<BlockPos>(data);
+                    if (tolink != null)
+                    {
+                        OnPowerLink(tolink);
+                    }
+                }
             }
         }
         protected string textred = "<font color=\"#ff4444\">";
@@ -615,6 +693,22 @@ namespace qptech.src
             //if (type == null) type = defaultType; // No idea why. Somewhere something has no type. Probably some worldgen ruins
 
             isOn = tree.GetBool("isOn");
+            
+            if (tree.HasAttribute("directlinks"))
+            {
+                
+                byte[] data = tree.GetBytes("directlinks");
+                if (data.Length > 0)
+                {
+                    directlinks = SerializerUtil.Deserialize<List<BlockPos>>(data);
+                }
+            }
+            else
+            {
+                directlinks = new List<BlockPos>();
+            }
+
+
         }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
@@ -641,6 +735,8 @@ namespace qptech.src
                 memberID = Guid.NewGuid();
                 tree.SetString("memberID", "");
             }
+            byte[] directdata = SerializerUtil.Serialize<List<BlockPos>>(DirectLinks);
+            tree.SetBytes("directlinks", directdata);
             tree.SetBool("isOn", isOn);
         }
        

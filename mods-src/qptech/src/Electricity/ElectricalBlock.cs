@@ -60,6 +60,10 @@ namespace qptech.src
             {
                 bee.Wrench();
             }
+            else if (byPlayer.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().StartsWith("machines:cable-"))
+            {
+                return bee.OnWireClick(world, byPlayer, blockSel);
+            }
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
 
