@@ -139,7 +139,7 @@ namespace qptech.src
         protected float translatefactor => 16;
         protected virtual string UseTexture => displayTextures[texno];
         public virtual float DisplayPercentage => 0;
-        
+        public Vec3f wireoffset;
         protected bool isOn = true;        //if it's not on it won't do any power processing
         protected List<BlockFacing> distributionFaces; //what faces are valid for distributing power
         protected List<BlockFacing> receptionFaces; //what faces are valid for receiving power
@@ -167,6 +167,16 @@ namespace qptech.src
             genPower = Block.Attributes["genFlux"].AsInt(genPower);
             fluxStorage = Block.Attributes["fluxStorage"].AsInt(fluxStorage);
             acceptsdirectpower = Block.Attributes["acceptsdirectpower"].AsBool(acceptsdirectpower);
+
+            float[] wireoffseta = Block.Attributes["wireoffset"].AsArray<float>();
+            if (wireoffseta != null )
+            {
+                wireoffset = new Vec3f(wireoffseta[0], wireoffseta[1], wireoffseta[2]);
+            }
+            else
+            {
+                wireoffset = new Vec3f(0.5f, 0.5f, 0.5f);
+            }
             if (api is ICoreClientAPI && acceptsdirectpower)
             {
 
@@ -174,6 +184,7 @@ namespace qptech.src
                 capi.Event.RegisterRenderer(wirerenderer = new WireRenderer(Pos, capi), EnumRenderStage.Opaque, "wire");
                 wirerenderer.TextureName= new AssetLocation("machines:block/rubber/cable.png");
                 wirerenderer.bee = this;
+                wirerenderer.wireoffset = wireoffset;
             }
             RegisterGameTickListener(OnTick, 75);
             notfirsttick = false;
@@ -187,37 +198,8 @@ namespace qptech.src
             displaytextureatlasblockname = Block.Attributes["atlasBlock"].AsString(displaytextureatlasblockname);
             atlasBlock = api.World.GetBlock(new AssetLocation(displaytextureatlasblockname));
             float[] displayoffset = Block.Attributes["displayOffset"].AsArray<float>();
-            if (displayoffset == null||displayoffset.Length!=3)
-            {
-                displayOffset = new Vec3f(4, 10, 3);
-                displayOffset = displayOffset / translatefactor;
-            }
-            else
-            {
-                displayOffset = new Vec3f(displayoffset);
-                displayOffset = displayOffset / translatefactor;
-            }
-            string[] displaytexturelist = Block.Attributes["displayTextures"].AsArray<string>();
-            if (displaytexturelist == null || displaytexturelist.Length==0)
-            {
-                displayTextures = new List<string>();
-                displayTextures.Add("roundgauge-0");
-                displayTextures.Add("roundgauge-10");
-                displayTextures.Add("roundgauge-20");
-                displayTextures.Add("roundgauge-30");
-                displayTextures.Add("roundgauge-40");
-                displayTextures.Add("roundgauge-50");
-                displayTextures.Add("roundgauge-60");
-                displayTextures.Add("roundgauge-70");
-                displayTextures.Add("roundgauge-80");
-                displayTextures.Add("roundgauge-90");
-                displayTextures.Add("roundgauge-100");
-            }
-            else
-            {
-                displayTextures = displayTextures.ToList<string>();
-            }
-            showFluxDisplay = Block.Attributes["showFluxDisplay"].AsBool(showFluxDisplay);
+
+            showFluxDisplay = false;
             bool dirty = false;
             if (memberID == Guid.Empty && (api is ICoreServerAPI))
             {
@@ -355,10 +337,11 @@ namespace qptech.src
                         NetworkJoin(pnw.NetworkID); anychange = true;
                     }
                 }
-                foreach (BlockPos remove in removestaleconnections)
+                //Torn on this - if I don't remove them the wires render and look odd, but then there's no chance of relinking
+                /*foreach (BlockPos remove in removestaleconnections)
                 {
                     DirectLinks.Remove(remove);
-                }
+                }*/
                 if (anychange) { MarkDirty(true); }
             }
         }

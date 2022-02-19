@@ -28,6 +28,7 @@ namespace qptech.src
         ICoreClientAPI api;
         MeshRef quadModelRef;
         public float wirethickness = 0.05f;
+        public Vec3f wireoffset;
         Matrixf ModelMat = new Matrixf();
         public BEElectric bee;
         public double RenderOrder
@@ -159,8 +160,8 @@ namespace qptech.src
             prog.ModelMatrix = ModelMat
                 .Identity()
                 .Translate(pos.X - camPos.X, pos.Y - camPos.Y, pos.Z - camPos.Z)
+                .Translate(wireoffset.X, wireoffset.Y, wireoffset.Z)
                 
-                .Translate(0.5, 1.4, 0.5)
                 //.Scale(1, 0.025f, 1)
                     //.Translate(xzOffset / 16f, 1 / 16f , 8.5f / 16)
                     //.RotateX(90 * GameMath.DEG2RAD)

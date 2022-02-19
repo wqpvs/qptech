@@ -32,8 +32,8 @@
 				"up",				
 				"down"
 			],
-			"acceptsdirectpower": true
-
+			"acceptsdirectpower": true,
+			"wireoffset":[0.5, 1.4, 0.5]
 		}
 	},
 	

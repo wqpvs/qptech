@@ -38,7 +38,8 @@
 				"west",
 				"up",
 				"down"
-			]
+			],
+			"acceptsdirectpower": true
 		}
 	},
 	"blockmaterial": "Metal",
