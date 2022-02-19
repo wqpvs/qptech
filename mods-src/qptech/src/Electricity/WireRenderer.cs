@@ -75,14 +75,19 @@ namespace qptech.src
             MeshData m = new MeshData();
             
             BlockPos d = bee.DirectLinks[0]-bee.Pos;
-            
-            float[] quadVertices = {
-            // Front face
+            Vec3f doffset = wireoffset;
+            BEElectric dest = api.World.BlockAccessor.GetBlockEntity(bee.DirectLinks[0]) as BEElectric;
+            if (dest != null)
+            {
+                doffset = dest.wireoffset;
+            }
 
-            0,0,0,
-            0,wirethickness,0,
-            d.X,d.Y,d.Z,
-            d.X,d.Y+wirethickness,d.Z
+            float[] quadVertices = {
+            
+            wireoffset.X,wireoffset.Y,wireoffset.Z,
+            wireoffset.X,wireoffset.Y+wirethickness,wireoffset.Z,
+            doffset.X+d.X,doffset.Y+d.Y,doffset.Z + d.Z,
+            doffset.X + d.X,doffset.Y+d.Y+wirethickness,doffset.Z + d.Z
             };
             float[] xyz = new float[3 * 4];
             for (int i = 0; i < 3 * 4; i++)
@@ -160,7 +165,7 @@ namespace qptech.src
             prog.ModelMatrix = ModelMat
                 .Identity()
                 .Translate(pos.X - camPos.X, pos.Y - camPos.Y, pos.Z - camPos.Z)
-                .Translate(wireoffset.X, wireoffset.Y, wireoffset.Z)
+                //.Translate(wireoffset.X, wireoffset.Y, wireoffset.Z)
                 
                 //.Scale(1, 0.025f, 1)
                     //.Translate(xzOffset / 16f, 1 / 16f , 8.5f / 16)
