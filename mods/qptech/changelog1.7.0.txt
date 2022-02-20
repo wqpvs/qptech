@@ -1,8 +1,11 @@
 ﻿1.7.3
 - ground storage settings from Craluminum thanks!
 - itemsplitters will automatcially set i/o faces to match item pipes on placement, as well as match up with any setup itemsplitters
+- fixed macerator(and some related machiens) not outputing proper items issue
+- fixed incorrect description on bloomery
 - [internal] added ability to direct link BEElectric with power - will allow for power nodes and wireless power etc
 	- connecting devices with wires
+
 
 1.7.2
 - crucible block overflows?

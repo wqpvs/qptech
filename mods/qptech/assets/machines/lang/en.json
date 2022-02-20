@@ -181,7 +181,7 @@
 	"block-metalpress-lvhardmetalplate-*": "Hardened Metal Press [Metal Plates] (LV)",
 	"blockdesc-metalpress-lvhardmetalplate-*": "Improved version of metal press, can handle iron & steel. Takes heated ingots from input container on left and stamps into metal plates, outputting them on container to the right.",
 	"block-bloomery-*": "Advanced Bloomery Machine",
-	"blockdesc-bloomery-*": "Processes iron bearing nuggets & charcoal into steel. Also processes blister steel ingots into steel ingots. Requires a <a href=\"handbook://block-machines:crusher-mv-east\">Crusher</a> block on top and a powerful heat source on one side (for example try the <a href=\"handbook://block-machines:industrialheater-mv-east\">MV Heater</a>)",
+	"blockdesc-bloomery-*": "Processes iron bearing nuggets & charcoal into iron. Also processes blister steel ingots into steel ingots. Requires a <a href=\"handbook://block-machines:crusher-mv-east\">Crusher</a> block on top and a powerful heat source on one side (for example try the <a href=\"handbook://block-machines:industrialheater-mv-east\">MV Heater</a>)",
 	"block-boiler-*": "Boiler Block",
 	"blockdesc-boiler-*": "Requires a heat source and a water source will create the process: STEAM.",
 	"block-turbine-*": "Turbine Block",

@@ -219,6 +219,7 @@ namespace qptech.src
             //TODO: change this to "CanMacerate", add a FindMacerate that returns items:
             //   - from the maceratelist directly - adding extra output based on RNG
             //   - generically where possible - eg stone block to stone gravel etc
+            if (co == null) { return false; }
             if (machinename == "") { machinename = "macerator"; }
             
             if (maceratelist == null) { LoadMacerateLists(api); }
@@ -250,13 +251,17 @@ namespace qptech.src
             CrushingProperties crp = co.CrushingProps;
             if (crp != null && machinename == "macerator")
             {
-                outputstack.Add( crp.CrushedStack.ResolvedItemstack);
+                ItemStack usestack = crp.CrushedStack.ResolvedItemstack;
+                usestack.StackSize = 1;
+                outputstack.Add( usestack);
                 
             }
             GrindingProperties grp = co.GrindingProps;
             if (grp != null && machinename == "macerator")
             {
-                outputstack.Add(grp.GroundStack.ResolvedItemstack);
+                ItemStack usestack = grp.GroundStack.ResolvedItemstack;
+                usestack.StackSize = 1;
+                outputstack.Add(usestack);
             }
 
             Random rand = new Random();
