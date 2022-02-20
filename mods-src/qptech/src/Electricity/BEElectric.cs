@@ -353,7 +353,7 @@ namespace qptech.src
             if (DirectLinks == null) { directlinks = new List<BlockPos>(); }
             if (connecttopos == Pos) { directlinks = new List<BlockPos>(); return true; }
             if (directlinks.Contains(connecttopos)) { return false; }
-            directlinks.Clear();
+            DropWires();
             directlinks.Add(connecttopos);
             MarkDirty();
             return true;
@@ -377,6 +377,17 @@ namespace qptech.src
             return true;
         }
 
+        public virtual void DropWires()
+        {
+            if (Api is ICoreClientAPI) { return; }
+            if (directlinks == null || directlinks.Count <= 0) { return; }
+            DummyInventory di = new DummyInventory(Api, 1);
+            di[0].Itemstack = new ItemStack(Api.World.GetItem( new AssetLocation("machines:cable-copper")), directlinks.Count());
+            di.DropAll(Pos.Copy().Offset(BlockFacing.UP).ToVec3d());
+            directlinks.Clear();
+            MarkDirty();
+        }
+
         public virtual void CleanBlock()
         {
             
@@ -389,6 +400,7 @@ namespace qptech.src
         public override void OnBlockRemoved()
         {
             base.OnBlockRemoved();
+            DropWires();
             wirerenderer?.Dispose();
             wirerenderer = null;
             CleanBlock();
