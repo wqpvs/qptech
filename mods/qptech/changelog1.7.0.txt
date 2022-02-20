@@ -5,6 +5,7 @@
 - fixed incorrect description on bloomery
 - [internal] added ability to direct link BEElectric with power - will allow for power nodes and wireless power etc
 	- connecting devices with wires
+- added power nodes for long distance power transmission (uses cables)
 
 
 1.7.2

@@ -18,7 +18,7 @@ namespace qptech.src
     {
         /*base class to handle electrical devices*/
         bool showextrainfo = false; //if true will show NetworkID and MemberID in block info
-        bool acceptsdirectpower = false;
+        bool acceptsdirectpower = true;
         WireRenderer wirerenderer;
         public virtual bool AcceptsDirectPower => acceptsdirectpower;
         public virtual bool showToggleButton => false;
@@ -332,10 +332,11 @@ namespace qptech.src
                     if (othernetwork == NetworkID) { continue; }
                     IFlexNetwork othernet = FlexNetworkManager.GetNetworkWithID(othernetwork);
                     IFlexNetwork mynet = FlexNetworkManager.GetNetworkWithID(NetworkID);
-                    if (othernet != null && mynet != null && othernet.GetMembers().Count >= mynet.GetMembers().Count)
-                    {
-                        NetworkJoin(pnw.NetworkID); anychange = true;
-                    }
+                    //if (othernet != null && mynet != null && othernet.GetMembers().Count >= mynet.GetMembers().Count)
+                    //{
+                    //    NetworkJoin(pnw.NetworkID); anychange = true;
+                    //}
+                    if (othernet != null) { NetworkJoin(pnw.NetworkID); anychange = true; }
                 }
                 //Torn on this - if I don't remove them the wires render and look odd, but then there's no chance of relinking
                 /*foreach (BlockPos remove in removestaleconnections)
@@ -399,6 +400,7 @@ namespace qptech.src
             wirerenderer = null;
             CleanBlock();
         }
+
 
 
         public virtual void OnTick(float par)
