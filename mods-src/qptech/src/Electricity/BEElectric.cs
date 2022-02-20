@@ -352,6 +352,7 @@ namespace qptech.src
             if (DirectLinks == null) { directlinks = new List<BlockPos>(); }
             if (connecttopos == Pos) { directlinks = new List<BlockPos>(); return true; }
             if (directlinks.Contains(connecttopos)) { return false; }
+            directlinks.Clear();
             directlinks.Add(connecttopos);
             MarkDirty();
             return true;
@@ -596,7 +597,20 @@ namespace qptech.src
                     BlockPos tolink = SerializerUtil.Deserialize<BlockPos>(data);
                     if (tolink != null)
                     {
-                        OnPowerLink(tolink);
+                        bool trylink=OnPowerLink(tolink);
+                        if (trylink&&fromPlayer!=null&&fromPlayer.Entity!=null&&fromPlayer.Entity.RightHandItemSlot!=null)
+                        {
+                            
+                            ItemStack phand = fromPlayer.Entity.RightHandItemSlot.Itemstack;
+                            if (fromPlayer.Entity.RightHandItemSlot.Itemstack == null || fromPlayer.Entity.RightHandItemSlot.Itemstack.StackSize == 0) { return; }
+                            if (fromPlayer.Entity.RightHandItemSlot.Itemstack.Item == null || !fromPlayer.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().StartsWith("machines:cable")) { return; }
+                            fromPlayer.Entity.RightHandItemSlot.Itemstack.StackSize--;
+                            if (fromPlayer.Entity.RightHandItemSlot.Itemstack.StackSize == 0)
+                            {
+                                fromPlayer.Entity.RightHandItemSlot.Itemstack = null;
+                            }
+                            fromPlayer.Entity.RightHandItemSlot.MarkDirty();
+                        }
                     }
                 }
             }
