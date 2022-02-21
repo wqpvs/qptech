@@ -1,4 +1,13 @@
-﻿1.7.3
+﻿1.7.4
+- can make item transport pipes with iron or steel channels
+- todo:
+	- Macerator set to pulverize or grind modes?
+	- Rubber recipe
+	- Steel making
+	- power node recipe
+
+
+1.7.3
 - ground storage settings from Craluminum thanks!
 - itemsplitters will automatcially set i/o faces to match item pipes on placement, as well as match up with any setup itemsplitters
 - fixed macerator(and some related machiens) not outputing proper items issue

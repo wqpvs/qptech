@@ -4,7 +4,7 @@
 
 		"S": {
 			"type": "item",
-			"code": "metalchannel-steel",
+			"code": "metalchannel-*","allowedVariants": ["steel","iron"],
 			
 			"quantity": 1
 
