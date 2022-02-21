@@ -249,7 +249,9 @@
     <None Include="qptech\assets\machines\shapes\block\metal\container\itempipeentrance.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\itempipeexit.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\container\itemsplittercore.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\crucible.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\crusher.json" />
+    <None Include="qptech\assets\machines\shapes\block\metal\electric\bloomworker.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\generator-mk2.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\lathe.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\mixer.json" />

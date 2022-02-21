@@ -17,7 +17,9 @@
       "states": [ "uncovered", "covered" ]
     }
   ],
-
+  "attributes": {
+    "acceptsdirectpower": false
+  },
   "attributesByType": {
     "*": {
       "useFlux": 0,

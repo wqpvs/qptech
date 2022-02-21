@@ -3,9 +3,9 @@
 - itemsplitters will automatcially set i/o faces to match item pipes on placement, as well as match up with any setup itemsplitters
 - fixed macerator(and some related machiens) not outputing proper items issue
 - fixed incorrect description on bloomery
-- [internal] added ability to direct link BEElectric with power - will allow for power nodes and wireless power etc
-	- connecting devices with wires
-- added power nodes for long distance power transmission (uses cables)
+- [experimental]you can now connect most electrical devices with cables
+	- [creative]added power nodes for long distance power transmission (uses cables)
+
 
 
 1.7.2
