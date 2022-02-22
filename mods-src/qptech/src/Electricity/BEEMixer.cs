@@ -28,6 +28,7 @@ namespace qptech.src.Electricity
 
         
         ItemStack itemstack;
+        public float CapacityLiters => 50;
         
         public BlockPos TankPos => Pos;
         bool purgemode = false;
@@ -107,14 +108,72 @@ namespace qptech.src.Electricity
             
             MarkDirty();
         }
+        protected override void DoDeviceComplete()
+        {
+            //create items in attached inventories or in world
+            DummyInventory di = new DummyInventory(Api, 1);
+            MachineRecipe mr = recipes.Find(x => x.name == makingrecipe);
+            BlockEntityContainer outcont = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(matOutputFace)) as BlockEntityContainer;
+            
+            if (mr == null) { deviceState = enDeviceState.ERROR; return; }
+            foreach (MachineRecipeItems outitem in mr.output)
+            {
 
+                AssetLocation al = new AssetLocation(outitem.validitems[0]);
+                Item makeitem = Api.World.GetItem(al);
+                Block makeblock = Api.World.GetBlock(al);
+                if (makeitem == null && makeblock == null) { deviceState = enDeviceState.ERROR; return; }
+                ItemStack newstack = null;
+                if (makeitem != null) { newstack = new ItemStack(makeitem, outitem.quantity); }
+                else { newstack = new ItemStack(makeblock, outitem.quantity); }
+                if (newstack.Item.Attributes.KeyExists("waterTightContainerProps"))
+                {
+                    WaterTightContainableProps liquidpros = newstack.Item.Attributes["waterTightContainerProps"].AsObject<WaterTightContainableProps>();
+                    newstack.StackSize *= (int)liquidpros.ItemsPerLitre;
+                    overridestate = true;
+                    int used = this.OfferFluid(newstack.Item, newstack.StackSize);
+                    overridestate = false;
+                    if (used == 0) { return; }
+                    MarkDirty();
+                    deviceState = enDeviceState.IDLE;
+                    ResetTimers();
+                    makingrecipe = "";
+                    return;
+                }
+                di[0].Itemstack = newstack;
+                if (mr.processingsteps != null && mr.processingsteps.ContainsKey("heating"))
+                {
+                    di[0].Itemstack.Collectible.SetTemperature(Api.World, di[0].Itemstack, (float)mr.processingsteps["heating"]);
+                }
+                if (outcont != null)
+                {
+
+                    foreach (ItemSlot tryslot in outcont.Inventory)
+                    {
+
+                        if (di.Empty) { break; }
+
+
+                        int rem = di[0].TryPutInto(Api.World, tryslot);
+                        MarkDirty();
+                        di.MarkSlotDirty(0);
+                    }
+                }
+                //di[0].Itemstack.Collectible.SetTemperature(Api.World, di[0].Itemstack, mr.temperature);
+
+                di.DropAll(Pos.Copy().Offset(matOutputFace).ToVec3d());
+            }
+            deviceState = enDeviceState.IDLE;
+            ResetTimers();
+            makingrecipe = "";
+        }
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
             tree.SetItemstack("itemstack", itemstack);
             tree.SetBool("purgemode", purgemode);
         }
-        bool fluidmoveablestate => deviceState == enDeviceState.MATERIALHOLD || deviceState == enDeviceState.IDLE;
+        
         bool shouldgivefluid => purgemode && IsOn && fluidmoveablestate;
         bool shouldtakefluid => !purgemode && fluidmoveablestate;
         public int TakeFluid(Item item, int amt) {
@@ -146,6 +205,10 @@ namespace qptech.src.Electricity
         public int OfferFluid(Item item, int quantity)
         {
             if (!shouldtakefluid) { return 0; }
+            if (item == null) { return 0; }
+            WaterTightContainableProps waterprops = item.Attributes["waterTightContainerProps"].AsObject<WaterTightContainableProps>();
+            if (waterprops == null) { return 0; }
+
             if (itemstack == null || itemstack.Item==null||itemstack.StackSize==0)
             {
                 itemstack = new ItemStack(item, quantity);
@@ -154,9 +217,11 @@ namespace qptech.src.Electricity
             }
             else if (itemstack.Item == item)
             {
-                if (itemstack.StackSize < item.MaxStackSize)
+                float maxfit = (CapacityLiters *waterprops.ItemsPerLitre)-itemstack.StackSize;
+                if (maxfit>0)
                 {
-                    int used = Math.Min(item.MaxStackSize - itemstack.StackSize,quantity);
+                    
+                    int used = Math.Min((int)maxfit, quantity);
                     itemstack.StackSize += used;
                     return used;
                 }

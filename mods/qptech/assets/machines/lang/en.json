@@ -230,7 +230,12 @@
 	"block-metalsheet-temporalsteel-*": "Temporal Steel Sheet",
 	"blockdesc-metalsheet-temporalsteel-*": "Made in a sheet roller from temporal steel plates.",
 	"item-metalplate-temporalsteel": "Temporal Steel Metal Plate",
-	"itemdesc-metalplate-temporalsteel": "Temporal steel plate, made in a plate stamping machine"
+	"itemdesc-metalplate-temporalsteel": "Temporal steel plate, made in a plate stamping machine",
+	"item-drilledplate-tinbronze": "Drilled Metal Plate (Bronze)",
+	"item-drilledplate-iron": "Drilled Metal Plate (Iron)",
+	"item-pipewrench": "Pipewrench",
+	"block-clayformer-blueshingle*": "Clayformer-Blue Shingles (LV)",
+	"block-machineryblock-steel": "Steel Machine Hull"
 
 
 }

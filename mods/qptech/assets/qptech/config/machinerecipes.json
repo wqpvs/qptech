@@ -569,6 +569,33 @@
       }
     ]
 
+  },
+  {
+    "name": "Rubber",
+
+    "processingTime": 3000,
+    "processingsteps": {
+      "heating": 500
+    },
+    "ingredients": [
+      {
+        "validitems": [ "game:powderedsulfur"],
+        "quantity": 1
+      },
+      {
+        "validitems": [ "game:resin" ],
+        "quantity": 1
+      }
+
+
+    ],
+    "output": [
+      {
+        "validitems": [ "machines:liquidrubberportion" ],
+        "quantity": 4
+      }
+    ]
+
   }
 ]
 

@@ -1,10 +1,16 @@
 ﻿1.7.4
 - can make item transport pipes with iron or steel channels
+- Mixer added:
+	- liquid rubber recipe
+	- [enabled output to liquid tank]
+
 - todo:
 	- Macerator set to pulverize or grind modes?
-	- Rubber recipe
+		- add an ignore setting?
+	- fluid pipe system needs to check waterTightContainerProps
 	- Steel making
 	- power node recipe
+	
 
 
 1.7.3

@@ -32,7 +32,7 @@
 
 		"*-mv-*": {
 			"genFlux": 0,"useFlux": 20,
-			"recipegroups": [ "Temporal Steel", "Concrete","Industrial Glass" ],
+			"recipegroups": [ "Temporal Steel", "Concrete","Industrial Glass","Rubber" ],
 			"inputFace": "up","outputFace": "down",
 			"animationCode": "run","animation": "run","runAnimationSpeed": 1,
 			"processingTime": 2000,

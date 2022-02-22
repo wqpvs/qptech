@@ -20,15 +20,16 @@ namespace qptech.src
         protected static List<MachineRecipe> masterrecipelist;
         public static List<MachineRecipe> MasterRecipeList => masterrecipelist;
         double recipefinishedat;
-        string makingrecipe="";
-        BlockFacing matInputFace = BlockFacing.WEST;
-        BlockFacing matOutputFace = BlockFacing.EAST;
-        List<MachineRecipe> recipes;
+        protected string makingrecipe="";
+        protected BlockFacing matInputFace = BlockFacing.WEST;
+        protected BlockFacing matOutputFace = BlockFacing.EAST;
+        protected List<MachineRecipe> recipes;
         string statusmessage;
         public string StatusMessage => statusmessage;
         public List<MachineRecipe> Recipes => recipes;
         public string MakingRecipe => makingrecipe;
-
+        protected bool overridestate=false;
+        protected bool fluidmoveablestate => overridestate||deviceState == enDeviceState.MATERIALHOLD || deviceState == enDeviceState.IDLE;
 
 
         public static void LoadRecipes(ICoreAPI api)
@@ -283,29 +284,8 @@ namespace qptech.src
             ResetTimers();
             makingrecipe = "";
         }
-        /*GUIRecipeProcessorStatus gas;
-        public override void OpenStatusGUI()
-        {
-            ICoreClientAPI capi = Api as ICoreClientAPI;
-            if (capi != null)
-            {
-                if (gas == null)
-                {
-                    gas = new GUIRecipeProcessorStatus("Processor Status", Pos, capi);
 
-                    gas.TryOpen();
-                    gas.SetupDialog(this);
 
-                }
-                else
-                {
-                    gas.TryClose();
-                    gas.TryOpen();
-                    gas.SetupDialog(this);
-                }
-            }
-
-        }*/
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
@@ -403,7 +383,7 @@ namespace qptech.src
                         }
                     }
                 }
-                statustext += "</font></strong>";
+                statustext += "</font></strong><br>";
 
             }
             return statustext+ base.GetStatusUI();
