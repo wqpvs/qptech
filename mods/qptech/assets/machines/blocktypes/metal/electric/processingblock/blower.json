@@ -1,14 +1,13 @@
 {
-	"code": "bloomery",
+	"code": "industrialblower",
 	"class": "ElectricalBlock",
-	"entityclass": "BEERecipeProcessor",
+	"entityclass": "BEEProcessingSupplier",
 	"creativeinventory": {
 		"general": [ "*-east" ],
 		"qptech": [ "*-east" ]
 	},
 	"entityBehaviors": [ { "name": "Animatable" } ],
 	"behaviors": [
-
 		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "east" }
@@ -17,7 +16,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "mv" ]
+			"states": [ "highpressure" ]
 		},
 		{
 			"code": "side",
@@ -25,34 +24,36 @@
 		}
 	],
 	"attributesByType": {
-
-		"*-mv-*": {
+		"*-highpressure-*": {
 			"genFlux": 0,
-			"useFlux": 16,
-
-			"recipegroups": [ "bloomeryiron", "Steel from Blistersteel", "Blister Steel" ],
-			"inputFace": "west",
-			"outputFace": "east"
+			"useFlux": 32,
+			"processes": {
+				"airflow": 5000
+			},
+			"inputFace": "south",
+			"outputFace": "north"
 		}
+		
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/metal/bloomery" },
+	
+	"shape": { "base": "block/metal/electric/electricfan" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/bloomery",
+			"base": "block/metal/electric/electricfan",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/bloomery",
+			"base": "block/metal/electric/electricfan",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/bloomery",
+			"base": "block/metal/electric/electricfan",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/bloomery",
+			"base": "block/metal/electric/electricfan",
 			"rotateY": 180
 		}
 	},

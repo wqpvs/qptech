@@ -237,7 +237,9 @@
 	"block-clayformer-blueshingle*": "Clayformer-Blue Shingles (LV)",
 	"block-machineryblock-steel": "Steel Machine Hull",
 	"block-cableextruder-*": "Cable Extruder",
-	"blockdesc-cableextruder-*": "Feed in liquid rubber, and braided wires, and add some heat and it will make cables."
+	"blockdesc-cableextruder-*": "Feed in liquid rubber, and braided wires, and add some heat and it will make cables.",
+	"block-industrialblower-highpressure-*": "Industrial High Pressure Blower",
+	"blockdesc-industrialblower-highpressure-*": "Supplies the Air Flow process (5000 units)(units are currently generic, not related to any real world measurements)"
 
 
 }

@@ -38,6 +38,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\mixer.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\cableextruder.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\crucible.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\blower.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\heater.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\powernode.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />

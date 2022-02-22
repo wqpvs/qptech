@@ -605,6 +605,15 @@
       { "validitems": [ "machines:braidedwire-copper" ],"quantity": 1}
     ],
     "output": [{"validitems": [ "machines:cable-copper" ],"quantity": 1}]
+  },
+  {
+    "name": "Blister Steel",
+    "processingTime": 15000,"processingsteps": {"heating": 1500,"airflow":5000},
+    "ingredients": [
+      { "validitems": [ "game:ingot-iron"],"quantity": 1},
+      
+    ],
+    "output": [{"validitems": [ "game:ingot-blistersteel" ],"quantity": 1}]
   }
 ]
 

@@ -4,14 +4,13 @@
 	- liquid rubber recipe
 	- [enabled output to liquid tank]
 - cable extruder added - makes cables from liquid rubber, sulfur, and resin
+- added industrial blower block - added blister steel recipe to the advanced bloomery
 - todo:
 	- Macerator set to pulverize or grind modes?
 		- add an ignore setting?
-	- fluid pipe system needs to check waterTightContainerProps
-	- Steel making
-		- forced air as process?
-	- power node recipe
-	- something to make cables
+	
+	- power node recipe - maybe use a glass mould and add a glass machien?
+	- recipe for industrial blower
 	
 
 
