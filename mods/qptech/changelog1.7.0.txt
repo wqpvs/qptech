@@ -3,13 +3,15 @@
 - Mixer added:
 	- liquid rubber recipe
 	- [enabled output to liquid tank]
-
+- cable extruder added - makes cables from liquid rubber, sulfur, and resin
 - todo:
 	- Macerator set to pulverize or grind modes?
 		- add an ignore setting?
 	- fluid pipe system needs to check waterTightContainerProps
 	- Steel making
+		- forced air as process?
 	- power node recipe
+	- something to make cables
 	
 
 

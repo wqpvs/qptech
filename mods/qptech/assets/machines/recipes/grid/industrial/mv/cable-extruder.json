@@ -1,0 +1,10 @@
+{
+	"ingredientPattern": "_W_	_C_	_T_",
+	"ingredients": {
+		"W": {"type": "block","code": "wiremill-*","quantity": 1},
+		"C": {"type": "item","code": "circuitboard-*","quantity": 1},
+		"T": {"type": "block","code": "container-tank-*","quantity": 1}
+	},
+	"width": 3,"height": 3,
+	"output": { "type": "block","code": "cableextruder-mv-east", "quantity": 1  }
+}

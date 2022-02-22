@@ -9,7 +9,7 @@
 		},
 		"C": {
 			"type": "item",
-			"code": "circuitboard-primitive",
+			"code": "circuitboard-*",
 			"quantity": 1
 		},
 		"W": {

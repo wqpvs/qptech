@@ -235,7 +235,9 @@
 	"item-drilledplate-iron": "Drilled Metal Plate (Iron)",
 	"item-pipewrench": "Pipewrench",
 	"block-clayformer-blueshingle*": "Clayformer-Blue Shingles (LV)",
-	"block-machineryblock-steel": "Steel Machine Hull"
+	"block-machineryblock-steel": "Steel Machine Hull",
+	"block-cableextruder-*": "Cable Extruder",
+	"blockdesc-cableextruder-*": "Feed in liquid rubber, and braided wires, and add some heat and it will make cables."
 
 
 }

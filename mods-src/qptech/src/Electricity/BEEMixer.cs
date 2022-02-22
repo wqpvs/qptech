@@ -28,7 +28,8 @@ namespace qptech.src.Electricity
 
         
         ItemStack itemstack;
-        public float CapacityLiters => 50;
+        public float capacityliters = 50;
+        public float CapacityLiters => capacityliters;
         
         public BlockPos TankPos => Pos;
         bool purgemode = false;
@@ -36,6 +37,10 @@ namespace qptech.src.Electricity
         {
             
             base.Initialize(api);
+            if (Block.Attributes != null)
+            {
+                capacityliters = Block.Attributes["CapacityLiters"].AsFloat(capacityliters);
+            }
         }
 
         protected override void AddAdditionalIngredients(ref Dictionary<string, int> ingredientlist)

@@ -1,0 +1,91 @@
+{
+	"code": "cableextruder",
+	"class": "ElectricalBlock",
+	"entityclass": "BEEMixer",
+	"creativeinventory": {
+		"general": [ "*-east" ],
+		"qptech": [ "*-east" ]
+	},
+	"entityBehaviors": [ { "name": "Animatable" } ],
+	"behaviors": [
+
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "east" }
+		}
+	],
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "mv" ]
+		},
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+
+	"attributesByType": {
+
+		"*-mv-*": {
+			"genFlux": 0,
+			"useFlux": 16,
+			"CapacityLiters": 2,
+			
+			"recipegroups": [ "Copper Cable" ],
+			"inputFace": "west",
+			"outputFace": "east",
+			"animationCode": "run",
+			"animation": "run",
+			"runAnimationSpeed": 1,
+			"processingTime": 2000
+		}
+	},
+
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+
+	"shape": { "base": "block/metal/electric/cableextruder" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/metal/electric/cableextruder",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/metal/electric/cableextruder",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "block/metal/electric/cableextruder",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "block/metal/electric/cableextruder",
+			"rotateY": 180
+		}
+	},
+	"lightAbsorption": 0,
+	"resistance": 1,
+	"sideAo": { "all": false },
+	"sidesolid": {
+		"all": false,
+		"up": true
+	},
+	"sideopaque": {
+		"all": false
+	},
+	"fpHandTransform": {
+		"rotation": {
+			"x": 53,
+			"y": 46,
+			"z": 0
+		},
+		"scale": 1.28
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+
+
+}
