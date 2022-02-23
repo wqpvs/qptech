@@ -126,12 +126,12 @@ namespace qptech.src
         private void CmdShowItemPipe(int groupId, CmdArgs args)
         {
             if (capi == null) { return; }
-            if (args == null || args.Length == 0) { clientconfig.showPipeItems = false; }
+            if (args == null ||args.Length==0 ) { capi.ShowChatMessage("Item Pipes show items currently set to " + clientconfig.showPipeItems); return; }
             else if (args[0] == "true" || args[0] == "1" || args[0] == "on") { clientconfig.showPipeItems = true; }
             else if (args[0] == "false" || args[0] == "0" || args[0] == "off") { clientconfig.showPipeItems = false; }
             
             capi.StoreModConfig<QPTechClientConfig>(clientconfig, clientconfigfile);
-            capi.ShowChatMessage("Item Pipes show items set to "+clientconfig.showPipeItems);
+            capi.ShowChatMessage("Item Pipes show items has been set to "+clientconfig.showPipeItems);
         }
     }
 }

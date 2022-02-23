@@ -267,6 +267,7 @@ namespace qptech.src.itemtransport
         MeshData meshdata;
         public virtual void GenMesh()
         {
+            if (!QPTECHLoader.clientconfig.showPipeItems) { return; }
             ICoreServerAPI sapi = Api as ICoreServerAPI;
             if (sapi != null)
             {
@@ -275,6 +276,7 @@ namespace qptech.src.itemtransport
             meshdata = null;
             ICoreClientAPI capi = Api as ICoreClientAPI;
             if (capi == null) { return; }
+            
             if (itemstack == null || (itemstack.Item == null && itemstack.Block == null)) { return; }
 
 
