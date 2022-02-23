@@ -5,11 +5,15 @@
 	- [enabled output to liquid tank]
 - cable extruder added - makes cables from liquid rubber, sulfur, and resin
 - added industrial blower block - added blister steel recipe to the advanced bloomery
+- adding client side config file and way to turn off item pipe items
+	- command .showitempipecontents true|false
+		- if set to false it will not render the items going thru pipes which should help performance in some cases
+
 - todo:
 	- Macerator set to pulverize or grind modes?
 		- add an ignore setting?
 	
-	- power node recipe - maybe use a glass mould and add a glass machien?
+	- power node recipe - maybe use a glass mould and add a glass machine?
 	- recipe for industrial blower
 	
 

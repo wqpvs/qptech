@@ -152,6 +152,7 @@
     <Compile Include="src\multiblock\BEWaterTower.cs" />
     <Compile Include="src\misc\BlockCannedMeal.cs" />
     <Compile Include="src\Electricity\ElectricalBlock.cs" />
+    <Compile Include="src\QPTechClientConfig.cs" />
     <Compile Include="src\QPTECHLoader.cs" />
     <Compile Include="src\misc\BlockEntityHiddenHopper.cs" />
     <Compile Include="src\misc\BlockTemporalPocket.cs" />

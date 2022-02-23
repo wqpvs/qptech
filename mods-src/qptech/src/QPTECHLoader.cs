@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vintagestory.API.Common;
+using Vintagestory.API.Client;
+using Vintagestory.API.Config;
+using Vintagestory.API.Server;
 using qptech.src.misc;
 using qptech.src.multiblock;
 using qptech.src.pipes;
@@ -16,11 +19,35 @@ namespace qptech.src
 {
     class QPTECHLoader:ModSystem
     {
-        
+        public static QPTechClientConfig clientconfig;
+        string clientconfigfile = "qptechclientconfig.json";
+        ICoreClientAPI capi;
+        public override void StartPre(ICoreAPI api)
+        {
+            base.StartPre(api);
+            if (api is ICoreClientAPI )
+            {
+                capi = api as ICoreClientAPI;
+                try
+                {
+                    clientconfig = api.LoadModConfig<QPTechClientConfig>(clientconfigfile);
+                }
+                catch
+                {
+                    
+
+                }
+                if (clientconfig == null)
+                {
+                    clientconfig = new QPTechClientConfig();
+                    api.StoreModConfig<QPTechClientConfig>(clientconfig, clientconfigfile);
+                }
+            }
+        }
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
-           
+            
             api.RegisterBlockEntityClass("BEEWire", typeof(BEEWire));
             api.RegisterBlockEntityClass("BEEAssembler", typeof(BEEAssembler));
             api.RegisterBlockEntityClass("BEEGenerator", typeof(BEEGenerator));
@@ -90,7 +117,21 @@ namespace qptech.src
             api.RegisterBlockEntityClass("BECoalPileStoker", typeof(BECoalPileStoker));
             //api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
             //api.RegisterBlockEntityClass("BEEMotor", typeof(BEEMotor));
-
+            if (api is ICoreClientAPI)
+            {
+                capi = api as ICoreClientAPI;
+                capi.RegisterCommand("showitempipecontents", "If false Item Pipes won't render their contents (for performance reasons).", "", CmdShowItemPipe);
+            }
+        }
+        private void CmdShowItemPipe(int groupId, CmdArgs args)
+        {
+            if (capi == null) { return; }
+            if (args == null || args.Length == 0) { clientconfig.showPipeItems = false; }
+            else if (args[0] == "true" || args[0] == "1" || args[0] == "on") { clientconfig.showPipeItems = true; }
+            else if (args[0] == "false" || args[0] == "0" || args[0] == "off") { clientconfig.showPipeItems = false; }
+            
+            capi.StoreModConfig<QPTechClientConfig>(clientconfig, clientconfigfile);
+            capi.ShowChatMessage("Item Pipes show items set to "+clientconfig.showPipeItems);
         }
     }
 }

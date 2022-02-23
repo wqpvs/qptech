@@ -146,7 +146,6 @@
     <None Include="qptech\assets\machines\itemtypes\tool\screwdriver.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\lang\en.json" />
-    <None Include="qptech\assets\machines\lang\ru.json" />
     <None Include="qptech\assets\machines\patches\itemhatch.json" />
     <None Include="qptech\assets\machines\patches\cabinet.json" />
     <None Include="qptech\assets\machines\recipes\barrel\cable.json" />

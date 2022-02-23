@@ -312,43 +312,18 @@ namespace qptech.src.itemtransport
 
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
+            if (!QPTECHLoader.clientconfig.showPipeItems) { return base.OnTesselation(mesher, tessThreadTesselator); }
             if (!showitems||meshdata==null) { return base.OnTesselation(mesher, tessThreadTesselator); }
+
+            try { mesher.AddMeshData(meshdata); }
+            catch { return base.OnTesselation(mesher, tessThreadTesselator); }
             
-            mesher.AddMeshData(meshdata);
-            /*Shape displayshape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/metal/electric/roundgauge0"));
-
-
-            MeshData meshdata;
-            capi.Tesselator.TesselateShape("roundgauge0" + Pos.ToString(), displayshape, out meshdata, this);
-
-
-
-            meshdata.Translate(DisplayOffset());
-            meshdata.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.DEG2RAD * DisplayRotation(), 0);
-
-
-            mesher.AddMeshData(meshdata);*/
             return base.OnTesselation(mesher, tessThreadTesselator);
         }
 
         public virtual bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
-            //if we have a filter and player clicks wiht right hand, clear the filter
-            /*if (itemfilter != null && player.Entity.RightHandItemSlot.Itemstack == null)
-            {
-                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.ClearFilter, null);
-                return true;
-            }
-            else if (player.Entity.RightHandItemSlot.Itemstack != null)
-            {
-                itemfilter = new ItemFilter();
-                ItemStack pstack = player.Entity.RightHandItemSlot.Itemstack;
-                itemfilter.SetFilterToStack(pstack);
-                byte[] filterasbytes = SerializerUtil.Serialize<ItemFilter>(itemfilter);
-                (Api as ICoreClientAPI).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.SetFilter, filterasbytes);
-                return true;
-            }
-            */
+            
             if (byPlayer.Entity.RightHandItemSlot.Itemstack == null)
             {
                 OpenStatusGUI();
