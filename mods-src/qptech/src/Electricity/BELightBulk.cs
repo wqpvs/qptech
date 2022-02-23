@@ -27,10 +27,9 @@ namespace qptech.src
             this.Block = block;
 
         }
-
-        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
+        public override void OnTick(float par)
         {
-
+            base.OnTick(par);
             if (IsPowered)
             {
                 setBlockState("on");
@@ -39,6 +38,11 @@ namespace qptech.src
             {
                 setBlockState("off");
             }
+        }
+        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
+        {
+
+
 
             mesher.AddMeshData(getOrCreateMesh("powerstate"));
 
@@ -66,6 +70,10 @@ namespace qptech.src
 
             return meshdata;
         }
-
+        public override void OnBlockRemoved()
+        {
+            Api.World.BlockAccessor.RemoveBlockLight(Block.LightHsv,Pos);
+            base.OnBlockRemoved();
+        }
     }
 }

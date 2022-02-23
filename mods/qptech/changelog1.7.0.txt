@@ -15,7 +15,7 @@
 
 - todo:
 	- Macerator set to pulverize or grind modes?
-		- add an ignore setting?
+		- (for now added a single output server option)
 	
 	- power node recipe - maybe use a glass mould and add a glass machine?
 	
