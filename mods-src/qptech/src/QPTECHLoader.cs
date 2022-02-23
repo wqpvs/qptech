@@ -20,8 +20,11 @@ namespace qptech.src
     class QPTECHLoader:ModSystem
     {
         public static QPTechClientConfig clientconfig;
+        public static QPTechServerConfig serverconfig;
         string clientconfigfile = "qptechclientconfig.json";
+        string serverconfigfile = "qptechserverconfig.json";
         ICoreClientAPI capi;
+        ICoreServerAPI sapi;
         public override void StartPre(ICoreAPI api)
         {
             base.StartPre(api);
@@ -41,6 +44,24 @@ namespace qptech.src
                 {
                     clientconfig = new QPTechClientConfig();
                     api.StoreModConfig<QPTechClientConfig>(clientconfig, clientconfigfile);
+                }
+            }
+            else
+            {
+                sapi = api as ICoreServerAPI;
+                try
+                {
+                    serverconfig = api.LoadModConfig<QPTechServerConfig>(serverconfigfile);
+                }
+                catch
+                {
+
+
+                }
+                if (serverconfig == null)
+                {
+                    serverconfig = new QPTechServerConfig();
+                    api.StoreModConfig<QPTechServerConfig>(serverconfig, serverconfigfile);
                 }
             }
         }

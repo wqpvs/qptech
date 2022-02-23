@@ -180,6 +180,7 @@ namespace qptech.src
         public string suffix="";
         public enTypes type = enTypes.SWAP;
         public bool stripingredientheader = false;
+        public static Random rand = new Random();
         /// <summary>
         /// enTypes
         /// DIRECT - change one specific item into another specific item
@@ -264,7 +265,7 @@ namespace qptech.src
                 outputstack.Add(usestack);
             }
 
-            Random rand = new Random();
+            
             /*if (fullcode.Contains("log")&&machinename=="logsplitter")
             {
                 Item outputItem = api.World.GetItem(new AssetLocation("game:firewood"));
@@ -389,7 +390,12 @@ namespace qptech.src
                 }
             }
             }
-           
+            if (QPTECHLoader.serverconfig.maceratorsinglemode&&outputstack!=null&&outputstack.Count>1&&machinename=="macerator")
+            {
+                List<ItemStack> singleoutputstack = new List<ItemStack>();
+                singleoutputstack.Add(outputstack[rand.Next(0, outputstack.Count)]);
+                return singleoutputstack;
+            }
             return outputstack;
         }
         static void LoadMacerateLists(ICoreAPI api)

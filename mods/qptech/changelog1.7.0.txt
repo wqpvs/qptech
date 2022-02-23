@@ -8,13 +8,17 @@
 - adding client side config file and way to turn off item pipe items
 	- command .showitempipecontents true|false
 		- if set to false it will not render the items going thru pipes which should help performance in some cases
+- added serverside config (qptechserverconfig.json)
+	- maceratorsinglemode - if set to true macerators will only output a single itemstack (Helpful in cases were items might have a crushing recipe and a maceration recipe)
+		- item will randomly be selected
+
 
 - todo:
 	- Macerator set to pulverize or grind modes?
 		- add an ignore setting?
 	
 	- power node recipe - maybe use a glass mould and add a glass machine?
-	- recipe for industrial blower
+	
 	
 
 
