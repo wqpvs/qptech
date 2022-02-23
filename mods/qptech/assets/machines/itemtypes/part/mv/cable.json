@@ -1,16 +1,13 @@
 {
 	"code": "cable",
+	"class": "ItemWire",
 	"creativeinventory": {
 		"qptech-parts": [ "*" ]
 	},
-	"drawtype": "json",
-	"shape": { "base": "item/part/cable" },
-	"maxstacksize": 64,
-
 	"variantgroups": [
 		{
 			"code": "material",
-			"states": [ "copper" ]
+			"states": [ "copper", "tin" ]
 		}
 	],
 	"attributes": {
@@ -33,7 +30,7 @@
 			"scale": 0.65
 		}
 	},
-		"behaviors": [
+	"behaviors": [
 		{
 			"name": "GroundStorable",
 			"properties": {
@@ -49,6 +46,14 @@
 			}
 		}
 	],
+	"maxstacksize": 32,
+	"drawtype": "json",
+	"shape": { "base": "item/part/cable" },
+	"textures": {
+		"cable": { "base": "block/metal/cables/{material}" },
+		"wire": { "base": "block/metal/wires/{material}" },
+		"wood": { "base": "game:block/wood/debarked/oak" }
+	},
 	"guiTransform": {
 		"translation": {
 			"x": 0,
@@ -56,16 +61,16 @@
 			"z": 0
 		},
 		"rotation": {
-			"x": -57,
-			"y": 151,
-			"z": -53
+			"x": -17,
+			"y": -26,
+			"z": -25
 		},
 		"origin": {
-			"x": 0.6,
-			"y": 0,
-			"z": 0.48
+			"x": 0.5,
+			"y": 0.3,
+			"z": 0.5
 		},
-		"scale": 1.52
+		"scale": 1.75
 	},
 	"fpHandTransform": {
 		"translation": {
@@ -85,6 +90,24 @@
 		},
 		"scale": 2.15
 	},
+	"tpHandTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 0,
+			"y": 0,
+			"z": -90
+		},
+		"origin": {
+			"x": 0.1,
+			"y": 0.07,
+			"z": 0.15
+		},
+		"scale": 0.45
+	},
 	"groundTransform": {
 		"translation": {
 			"x": 0,
@@ -101,25 +124,6 @@
 			"y": 0,
 			"z": 0.5
 		},
-		"scale": 4.31
-	},
-	"tpHandTransform": {
-		"translation": {
-			"x": -0.78,
-			"y": -0.09,
-			"z": -0.67
-		},
-		"rotation": {
-			"x": 9,
-			"y": -1,
-			"z": -16
-		},
-		"origin": {
-			"x": 0.5,
-			"y": 0,
-			"z": 0.5
-		},
-		"scale": 0.76
+		"scale": 2.15
 	}
-
 }
