@@ -34,6 +34,7 @@
     <None Include="qptech\assets\machines\blocktypes\itemtransport\itemsplitter.json" />
     <None Include="qptech\assets\machines\blocktypes\itemtransport\itempipe.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\seeker.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\light\lightbulk.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\lv\bloomworker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\mixer.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\mv\cableextruder.json" />
@@ -41,6 +42,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\blower.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\processingblock\heater.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\powernode.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\powerrod.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />
     <None Include="qptech\assets\machines\blocktypes\dummy.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\sheet.json" />
@@ -92,7 +94,6 @@
     <None Include="qptech\assets\machines\blocktypes\indev\unused\heatsink.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\gauge.json" />
     <None Include="qptech\assets\machines\blocktypes\other\blocklantern.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\electric\light\light-bulb.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\barrel.json" />
     <None Include="qptech\assets\machines\blocktypes\other\cabinet.json" />
     <None Include="qptech\assets\machines\blocktypes\other\castironovenlarge.json" />

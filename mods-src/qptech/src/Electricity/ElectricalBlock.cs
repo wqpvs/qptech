@@ -11,7 +11,7 @@ using Vintagestory.API.Client;
 
 namespace qptech.src
 {
-    class ElectricalBlock : BlockMPBase,IBlockItemFlow
+    class ElectricalBlock : BlockMPBase, IBlockItemFlow
     {
         public virtual string[] PullFaces => Attributes["pullFaces"].AsArray<string>(new string[0]);
         public virtual string[] PushFaces => Attributes["pushFaces"].AsArray<string>(new string[0]);
@@ -36,35 +36,60 @@ namespace qptech.src
         //Toggle power if player is holding a screwdriver or club
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
-            
+
             var bee = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BEElectric;
-            
+
             if (bee != null && byPlayer.Entity.RightHandItemSlot.Itemstack == null)
             {
                 bee.OpenStatusGUI();
             }
-            if (bee==null) return base.OnBlockInteractStart(world, byPlayer, blockSel); 
-            if (byPlayer.Entity.RightHandItemSlot.Itemstack==null) return base.OnBlockInteractStart(world, byPlayer, blockSel);
+            if (bee == null) return base.OnBlockInteractStart(world, byPlayer, blockSel);
+            if (byPlayer.Entity.RightHandItemSlot.Itemstack == null) return base.OnBlockInteractStart(world, byPlayer, blockSel);
             if (byPlayer.Entity.RightHandItemSlot.Itemstack.Item == null) return base.OnBlockInteractStart(world, byPlayer, blockSel);
             string fcp = byPlayer.Entity.RightHandItemSlot.Itemstack.Item.CodeWithoutParts(1);
-            if ((fcp.Contains("screwdriver")&&!fcp.Contains("head"))||fcp.Contains("woodenclub"))
+            if ((fcp.Contains("screwdriver") && !fcp.Contains("head")) || fcp.Contains("woodenclub"))
             {
-               // if (world.ElapsedMilliseconds > nextpowertoggleat)
-               // {
-                    bee.TogglePower();
-                   // nextpowertoggleat = world.ElapsedMilliseconds + powertogglecooldown;
-               // }
+                // if (world.ElapsedMilliseconds > nextpowertoggleat)
+                // {
+                bee.TogglePower();
+                // nextpowertoggleat = world.ElapsedMilliseconds + powertogglecooldown;
+                // }
                 return true;
             }
             else if (byPlayer.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().Contains("wrench"))
             {
                 bee.Wrench();
             }
-            else if (byPlayer.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().StartsWith("machines:cable-"))
+            else if (byPlayer.Entity.RightHandItemSlot.Itemstack.Item is ItemWire)
             {
                 return bee.OnWireClick(world, byPlayer, blockSel);
             }
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
+        }
+
+        public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer)
+        {
+            List<ItemStack> wireStacklist = new List<ItemStack>();
+            foreach (Item item in api.World.Items)
+            {
+                if (item is ItemWire)
+                {
+                    wireStacklist?.Add(new ItemStack(item));
+                }
+            }
+            return new WorldInteraction[]
+                    {
+                        new WorldInteraction()
+                        {
+                        ActionLangCode = "machines:blockhelp-cable",
+                        MouseButton = EnumMouseButton.Right,
+                        Itemstacks = wireStacklist.ToArray(),
+                        GetMatchingStacks = (wi, bs, es) => {
+                        BEElectric bea = api.World.BlockAccessor.GetBlockEntity(bs.Position) as BEElectric;
+                        return bea?.AcceptsDirectPower == false ? null : wi.Itemstacks;
+                        }
+                    }
+            };
         }
 
         public override void OnNeighbourBlockChange(IWorldAccessor world, BlockPos pos, BlockPos neibpos)

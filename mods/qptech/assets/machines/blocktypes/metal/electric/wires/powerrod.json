@@ -1,0 +1,303 @@
+{
+	"code": "powerrod",
+	"class": "BlockPowerRod",
+	"entityclass": "BEEWire",
+	"attackRange": 2,
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "copper", "tin" ]
+		},
+		{
+			"code": "orientation",
+			"states": [ "up", "down" ],
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+	"allowedVariants": [ "powerrod-*" ],
+	"heldRightTpIdleAnimationbyType": {
+		"*": "holdinglanternrighthand"
+	},
+	"heldLeftTpIdleAnimationbyType": {
+		"*": "holdinglanternlefthand"
+	},
+	"heldTpUseAnimationbyType": {
+		"*": "interactstatic"
+	},
+	"attributesByType": {
+		"*-up": {
+			"useFlux": 0,
+			"genFlux": 0,
+			"receptionFaces": [],
+			"distributionFaces": [],
+			"acceptsdirectpower": true,
+			"wireoffset": [ 0.5, 0.75, 0.5 ]
+		},
+		"*-down": {
+			"useFlux": 0,
+			"genFlux": 0,
+			"receptionFaces": [],
+			"distributionFaces": [],
+			"acceptsdirectpower": true,
+			"wireoffset": [ 0.5, 0.3, 0.5 ]
+		},
+		"*-south": {
+			"useFlux": 0,
+			"genFlux": 0,
+			"receptionFaces": [],
+			"distributionFaces": [],
+			"acceptsdirectpower": true,
+			"wireoffset": [ 0.5, 0.6, 0.4 ]
+		},
+		"*-north": {
+			"useFlux": 0,
+			"genFlux": 0,
+			"receptionFaces": [],
+			"distributionFaces": [],
+			"acceptsdirectpower": true,
+			"wireoffset": [ 0.5, 0.6, 0.6 ]
+		},
+		"*-west": {
+			"useFlux": 0,
+			"genFlux": 0,
+			"receptionFaces": [],
+			"distributionFaces": [],
+			"acceptsdirectpower": true,
+			"wireoffset": [ 0.6, 0.6, 0.5 ]
+		},
+		"*-east": {
+			"useFlux": 0,
+			"genFlux": 0,
+			"receptionFaces": [],
+			"distributionFaces": [],
+			"acceptsdirectpower": true,
+			"wireoffset": [ 0.4, 0.6, 0.5 ]
+		},
+		"attachmentAreas": {
+			"up": {
+				"x1": 7,
+				"y1": 15,
+				"z1": 7,
+				"x2": 8,
+				"y2": 16,
+				"z2": 8
+			},
+			"down": {
+				"x1": 7,
+				"y1": 15,
+				"z1": 7,
+				"x2": 8,
+				"y2": 16,
+				"z2": 8
+			},
+			"north": {
+				"x1": 6,
+				"y1": 0,
+				"z1": 15,
+				"x2": 10,
+				"y2": 5,
+				"z2": 15,
+				"rotateY": 180
+			},
+			"east": {
+				"x1": 6,
+				"y1": 0,
+				"z1": 15,
+				"x2": 10,
+				"y2": 5,
+				"z2": 15,
+				"rotateY": 270
+			},
+			"south": {
+				"x1": 6,
+				"y1": 0,
+				"z1": 15,
+				"x2": 10,
+				"y2": 5,
+				"z2": 15,
+				"rotateY": 0
+			},
+			"west": {
+				"x1": 6,
+				"y1": 0,
+				"z1": 15,
+				"x2": 10,
+				"y2": 5,
+				"z2": 15,
+				"rotateY": 90
+			}
+		},
+		"handbook": {
+			"groupBy": [ "powerrod-*" ]
+		}
+	},
+	"shapebytype": {
+		"*-up": {
+			"base": "block/metal/electric/rods/basic-ground"
+		},
+		"*-down": {
+			"base": "block/metal/electric/rods/basic-ground",
+			"rotateZ": 180
+		},
+		"*-north": {
+			"base": "block/metal/electric/rods/basic-wall",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/metal/electric/rods/basic-wall",
+			"rotateY": 270
+		},
+		"*-south": {
+			"base": "block/metal/electric/rods/basic-wall",
+			"rotateY": 180
+		},
+		"*-west": {
+			"base": "block/metal/electric/rods/basic-wall",
+			"rotateY": 90
+		}
+	},
+	"textures": {
+		"wood": { "base": "game:block/wood/torch/wood" },
+		"wire": { "base": "block/metal/wires/{type}" }
+	},
+	"doNotRenderAtLod2": true,
+	"sidesolid": {
+		"all": false
+	},
+	"sideopaque": {
+		"all": false
+	},
+	"creativeinventory": {
+		"general": [ "*-up" ],
+		"decorative": [ "*-up" ]
+	},
+	"replaceable": 5001,
+	"resistance": 0,
+	"lightAbsorption": 0,
+	"collisionbox": null,
+	"selectionboxbytype": {
+		"*-down": {
+			"x1": 0.375,
+			"y1": 0,
+			"z1": 0.375,
+			"x2": 0.625,
+			"y2": 0.8875,
+			"z2": 0.625,
+			"rotateZ": 180
+		},
+		"*-up": {
+			"x1": 0.375,
+			"y1": 0,
+			"z1": 0.375,
+			"x2": 0.625,
+			"y2": 0.8875,
+			"z2": 0.625
+		},
+		"*-east": {
+			"x1": 0.4,
+			"y1": 0.1875,
+			"z1": 0.5625,
+			"x2": 0.6125,
+			"y2": 0.9,
+			"z2": 1,
+			"rotateY": 270
+		},
+		"*-south": {
+			"x1": 0.4,
+			"y1": 0.1875,
+			"z1": 0.5625,
+			"x2": 0.6125,
+			"y2": 0.9,
+			"z2": 1,
+			"rotateY": 180
+		},
+		"*-west": {
+			"x1": 0.4,
+			"y1": 0.1875,
+			"z1": 0.5625,
+			"x2": 0.6125,
+			"y2": 0.9,
+			"z2": 1,
+			"rotateY": 90
+		},
+		"*-north": {
+			"x1": 0.4,
+			"y1": 0.1875,
+			"z1": 0.5625,
+			"x2": 0.6125,
+			"y2": 0.9,
+			"z2": 1,
+			"rotateY": 0
+		}
+	},
+	"blockmaterial": "Metal",
+	"fpHandTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 17,
+			"y": 38,
+			"z": -33
+		},
+		"scale": 1.5
+	},
+	"guiTransform": {
+		"rotation": {
+			"x": -47,
+			"y": 30,
+			"z": 15
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0.46,
+			"z": 0.5
+		},
+		"scale": 2.02
+	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -0.73,
+			"y": 0.05,
+			"z": -0.85
+		},
+		"rotation": {
+			"x": 0,
+			"y": 179,
+			"z": 86
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 0.55
+	},
+	"groundTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 0,
+			"y": -1,
+			"z": 90
+		},
+		"origin": {
+			"x": 0.44,
+			"y": 0.25,
+			"z": 0.5
+		},
+		"scale": 2.8
+	},
+	"sounds": {
+		"place": "game:block/planks",
+		"break": "game:block/planks",
+		"hit": "game:block/planks"
+	},
+	"rainPermeable": true,
+	"materialDensity": 600
+}

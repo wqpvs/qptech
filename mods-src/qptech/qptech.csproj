@@ -42,7 +42,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\Vintagestory\Lib\protobuf-net.dll</HintPath>
+      <HintPath>$(AppData)\Vintagestory\Lib\protobuf-net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -85,6 +86,7 @@
     <Compile Include="src\Electricity\BEEProcessingSupplier.cs" />
     <Compile Include="src\Electricity\BEERecipeProcessor.cs" />
     <Compile Include="src\Electricity\ElectricityAPI.cs" />
+    <Compile Include="src\Electricity\BELightBulk.cs" />
     <Compile Include="src\Electricity\WireRenderer.cs" />
     <Compile Include="src\itemtransport\GUITabletItemFilter.cs" />
     <Compile Include="src\itemtransport\GUIConveyor.cs" />
@@ -97,8 +99,10 @@
     <Compile Include="src\itemtransport\TabletTool.cs" />
     <Compile Include="src\misc\BEAnimator.cs" />
     <Compile Include="src\misc\BEBlockSeeker.cs" />
+    <Compile Include="src\misc\BlockPowerRod.cs" />
     <Compile Include="src\misc\BEBMultiDummy.cs" />
     <Compile Include="src\misc\BECoalPileStoker.cs" />
+    <Compile Include="src\misc\ItemWire.cs" />
     <Compile Include="src\misc\ItemMiningDrill.cs" />
     <Compile Include="src\multiblock\BEDummyBlock.cs" />
     <Compile Include="src\multiblock\BlockDummy.cs" />

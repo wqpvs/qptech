@@ -77,9 +77,13 @@ namespace qptech.src
             api.RegisterBlockClass("BlockCannedMeal", typeof(BlockCannedMeal));
             api.RegisterItemClass("ItemQuarryTool", typeof(ItemQuarryTool));
             api.RegisterItemClass("ItemJetPack", typeof(ItemJetPack));
+            api.RegisterItemClass("ItemWire", typeof(ItemWire));
             api.RegisterBlockEntityClass("BEEForge", typeof(BEEForge));
             api.RegisterBlockClass("BlockEForge", typeof(BlockEForge));
             api.RegisterBlockEntityClass("BEPowerFlag", typeof(BEPowerFlag));
+
+            api.RegisterBlockEntityClass("BELightBulk", typeof(BELightBulk));
+
             api.RegisterBlockClass("BlockClayformer",typeof(BlockClayformer));
             api.RegisterBlockClass("BlockMetalPress",typeof(BlockMetalPress));
             api.RegisterBlockClass("BlockTemporalPocket", typeof(BlockTemporalPocket));
@@ -90,6 +94,7 @@ namespace qptech.src
             api.RegisterBlockEntityClass("BEEKiln", typeof(BEEKiln));
             api.RegisterBlockEntityClass("BEClearFluidTank", typeof(BEClearFluidTank));
 
+            api.RegisterBlockClass("BlockPowerRod", typeof(BlockPowerRod));
             api.RegisterBlockClass("BlockTank", typeof(BlockTank));
             api.RegisterBlockClass("BlockJunction", typeof(BlockJunction));
             api.RegisterBlockEntityClass("BEEJunction", typeof(BEEJunction));
