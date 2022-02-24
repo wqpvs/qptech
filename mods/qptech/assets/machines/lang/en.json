@@ -58,7 +58,7 @@
 	"block-creativegenerator-primitive-*": "Creative LV Generator",
 	"block-itemhatch-*": "Bronze Item Hatch",
 	"blockdesc-itemhatch-*": "An expensive 24 slot storage block. May be used with <a href=\"handbook://block-machines:industrialheater-lv-east\">Electrical Heaters</a> in item heating, but is quite inefficient (25% efficiency)",
-	"block-wireplate-*": "Cable (LV)",
+	"block-wireplate-*": "Ground Cable (LV)",
 	"blockdesc-wireplate-*": "Power up your devices with these cables!",
 	"block-wirejunction-*": "Cable Junction (LV)",
 	"blockdesc-wirejunction-*": "Sends power in all directions, including up and down",
@@ -78,7 +78,7 @@
 	"item-screw-brass": "Metal Screw (Brass)",
 	"item-screw-steel": "Metal Screw (Steel)",
 	"itemdesc-screw-*": "Screw this!",
-	"item-wire-tin": "Metal Wire (Tin)",
+	"item-wire-tin": "Metal Wire (Tin-Deprecated please craft into coppper!)",
 	"item-wire-copper": "Metal Wire (Copper)",
 	"itemdesc-wire-*": "Wires for making electrical things (to hook up things use wireplates, batteries, and junctions)",
 	"item-pullplate-iron": "Wire Pulling Plate (Iron)",
@@ -153,6 +153,7 @@
 	"blockdesc-fluidhorpump-*": "Pumps fluid in a single direction. (Power not currently required)",
 	"liquidrubberportion": "Liquid Rubber",
 	"item-cable-copper": "Copper Cable",
+	"itemdesc-cable-copper": "Used in some recipes and to connect electrical devices! (Right click on the first item with cable, then on the second to connect them)",
 	"block-wiremill-*": "Wire Mill",
 	"blockdesc-wiremill-*": "At last, efficient and easy wiremaking! (From copper sheets)",
 	"*liquidrubberportion*": "Liquid Rubber",
@@ -240,6 +241,6 @@
 	"blockdesc-cableextruder-*": "Feed in liquid rubber, and braided wires, and add some heat and it will make cables.",
 	"block-industrialblower-highpressure-*": "Industrial High Pressure Blower",
 	"blockdesc-industrialblower-highpressure-*": "Supplies the Air Flow process (5000 units)(units are currently generic, not related to any real world measurements)"
-
+	
 
 }

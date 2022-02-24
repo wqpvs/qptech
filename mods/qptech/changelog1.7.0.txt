@@ -1,6 +1,7 @@
 ﻿1.7.4
+- BUGFIX: Macerator corrupting vanilla crushing and grinding recipes
 - can make item transport pipes with iron or steel channels
-- Mixer added:
+- Mixer update:
 	- liquid rubber recipe
 	- [enabled output to liquid tank]
 - cable extruder added - makes cables from liquid rubber, sulfur, and resin
@@ -11,6 +12,10 @@
 - added serverside config (qptechserverconfig.json)
 	- maceratorsinglemode - if set to true macerators will only output a single itemstack (Helpful in cases were items might have a crushing recipe and a maceration recipe)
 		- item will randomly be selected
+		- I will hopefully find a better solution to double macerator output
+- changed cable graphics to a spool and moved to main qptech tab in creative screen
+- changed wire graphics to a spool
+- deprecating tin wire, now craftable directly into copper wire so you can get something back for it
 
 
 - todo:

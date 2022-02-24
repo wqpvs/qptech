@@ -1,7 +1,8 @@
 {
 	"code": "wire",
 	"creativeinventory": {
-		"qptech-parts": [ "*" ]
+		"qptech-parts": [ "*-copper" ]
+		
 	},
 	"variantgroups": [
 		{

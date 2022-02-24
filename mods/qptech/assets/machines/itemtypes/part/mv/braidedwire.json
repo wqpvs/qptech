@@ -43,11 +43,7 @@
 			}
 		}
 	],
-	"creativeinventory": {
-		"general": [ "*" ],
-		"items": [ "*" ],
-		"qptech": [ "*" ]
-	},
+
 	"textures": {
 		"metal": { "base": "game:block/metal/ingot/{material}" }
 	},

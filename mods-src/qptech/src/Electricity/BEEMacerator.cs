@@ -252,7 +252,7 @@ namespace qptech.src
             CrushingProperties crp = co.CrushingProps;
             if (crp != null && machinename == "macerator")
             {
-                ItemStack usestack = crp.CrushedStack.ResolvedItemstack;
+                ItemStack usestack = new ItemStack(crp.CrushedStack.ResolvedItemstack.Item,crp.CrushedStack.ResolvedItemstack.StackSize);
                 usestack.StackSize = 1;
                 outputstack.Add( usestack);
                 
@@ -260,8 +260,7 @@ namespace qptech.src
             GrindingProperties grp = co.GrindingProps;
             if (grp != null && machinename == "macerator")
             {
-                ItemStack usestack = grp.GroundStack.ResolvedItemstack;
-                usestack.StackSize = 1;
+                ItemStack usestack = new ItemStack(grp.GroundStack.ResolvedItemstack.Item,grp.GroundStack.ResolvedItemstack.StackSize);
                 outputstack.Add(usestack);
             }
 

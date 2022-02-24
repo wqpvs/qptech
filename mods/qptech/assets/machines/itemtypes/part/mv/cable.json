@@ -2,7 +2,7 @@
 	"code": "cable",
 	"class": "ItemWire",
 	"creativeinventory": {
-		"qptech-parts": [ "*" ]
+		"qptech": [ "*-copper" ]
 	},
 	"variantgroups": [
 		{

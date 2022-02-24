@@ -2,7 +2,7 @@
 	ingredientPattern: "STS	PB_	S_S",
 	ingredients: {
 		"T": { type: "item", code: "screwdriver-*", isTool: true },
-		"P": { type: "item", code: "wire-*", quantity: 4},
+		"P": { type: "item", code: "wire-copper", quantity: 4},
 		"B": { type: "item", code: "machineplate-*bronze", quantity: 2},
 		"M": { type: "item", code: "motor-primitive", quantity: 1},
 		"S": { type: "item", code: "screw-brass", quantity: 2}

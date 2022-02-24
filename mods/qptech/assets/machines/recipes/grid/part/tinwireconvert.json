@@ -1,0 +1,18 @@
+{
+	ingredientPattern: "R",
+	ingredients: {
+		"R": {
+			"type": "item",
+			"code": "wire-tin",
+			
+			"quantity": 1
+		},
+		
+		
+		
+		
+	},
+	width: 1,
+	height: 1,
+	output: { type: "item", code: "bolt-copper", quantity: 1  }
+}
