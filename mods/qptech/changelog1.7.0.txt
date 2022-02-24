@@ -1,4 +1,8 @@
-﻿1.7.4
+﻿1.7.5
+- BUGFIX: potential crash with wirerender
+- BUGFIX: fixed tin wire -> copper wire recipe
+
+1.7.4
 - BUGFIX: Macerator corrupting vanilla crushing and grinding recipes
 - can make item transport pipes with iron or steel channels
 - Mixer update:

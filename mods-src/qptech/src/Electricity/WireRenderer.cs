@@ -75,13 +75,15 @@ namespace qptech.src
             MeshData m = new MeshData();
             
             BlockPos d = bee.DirectLinks[0]-bee.Pos;
+            if (wireoffset == null) { wireoffset = new Vec3f(0.5f, 0.5f, 0.5f); }
             Vec3f doffset = wireoffset;
             BEElectric dest = api.World.BlockAccessor.GetBlockEntity(bee.DirectLinks[0]) as BEElectric;
-            if (dest != null)
+            
+            if (dest != null&&dest.wireoffset!=null)
             {
                 doffset = dest.wireoffset;
             }
-
+            
             float[] quadVertices = {
             
             wireoffset.X,wireoffset.Y,wireoffset.Z,
