@@ -12,6 +12,8 @@ using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.API.Client;
 using qptech.src.networks;
+using System.Collections;
+
 namespace qptech.src
 {
     public class BEElectric : BlockEntity, IPowerNetworkMember, ITexPositionSource
@@ -148,7 +150,7 @@ namespace qptech.src
         protected int usePower = 0;
         protected int fluxStorage = 0;
         protected int storedFlux = 0;
-        public virtual bool IsPowered { get { return IsOn && lastPower>0; } }
+        public virtual bool IsPowered { get { return IsOn && lastPower > 0; } }
         public virtual bool IsOn { get { return isOn; } }
         protected bool notfirsttick = false;
         protected bool justswitched = false; //create a delay after the player switches power
@@ -161,7 +163,6 @@ namespace qptech.src
             //TODO need to load list of valid faces from the JSON for this stuff
             SetupIOFaces();
 
-            
             if (Block.Attributes == null) { api.World.Logger.Error("ERROR BEE INITIALIZE HAS NO BLOCK"); return; }
             usePower = Block.Attributes["useFlux"].AsInt(usePower);
             genPower = Block.Attributes["genFlux"].AsInt(genPower);
@@ -417,7 +418,7 @@ namespace qptech.src
 
         public virtual void OnTick(float par)
         {
-            if (Api is ICoreServerAPI&&isOn)
+            if (Api is ICoreServerAPI && isOn)
             {
                 FindConnections();
                 notfirsttick = true;

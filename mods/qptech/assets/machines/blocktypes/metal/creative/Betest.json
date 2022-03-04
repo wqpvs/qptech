@@ -1,0 +1,42 @@
+{
+	"code": "testtest",
+	"class": "ElectricalBlock",
+	"entityClass": "Beetest",
+	"variantgroups": [
+		{
+			"code": "timestate",
+			"states": [ "morning", "midday", "evening", "night" ]
+		}
+	],
+	"creativeinventory": {
+		"general": [ "*" ],
+		"qptech": [ "*" ]
+	},
+	"attributes": {
+		"capacitance": 5,
+		"maxFlux": 5,
+		"distributionFaces": [ "north", "east", "west", "south" ]
+	},
+	"shape": {
+		"base": "block/metal/solarplane/{timestate}"
+	},
+	"blockmaterial": "Metal",
+	"drawtype": "Json",
+	"resistance": 1,
+	"sidesolid": {
+		"all": false
+	},
+	"sideopaque": {
+		"all": false
+	},
+	"faceCullMode": "NeverCull",
+	"renderpass": "OpaqueNoCull",
+	"emitSideAo": { "all": false },
+	"sideAo": { "all": false },
+	"ambientocclusion": false,
+	"lightAbsorption": 1,
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+}

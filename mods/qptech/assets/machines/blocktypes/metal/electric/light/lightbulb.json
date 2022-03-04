@@ -1,7 +1,7 @@
 {
-	"code": "lightbulk",
+	"code": "lightbulb",
 	"class": "BlockPowerRod",
-	"entityclass": "BELightBulk",
+	"entityclass": "BEELightBulb",
 	"attackRange": 2,
 	"variantgroups": [
 		{
@@ -9,16 +9,12 @@
 			"states": [ "off", "on" ]
 		},
 		{
-			"code": "type",
-			"states": [ "copper", "tin" ]
-		},
-		{
 			"code": "orientation",
 			"states": [ "up", "down" ],
 			"loadFromProperties": "abstract/horizontalorientation"
 		}
 	],
-	"allowedVariants": [ "lightbulk-*" ],
+	"allowedVariants": [ "lightbulb-*" ],
 	"heldRightTpIdleAnimationbyType": {
 		"*": "holdinglanternrighthand"
 	},
@@ -30,48 +26,54 @@
 	},
 	"attributesByType": {
 		"*-up": {
-			"useFlux": 10,
+			"useFlux": 1,
 			"genFlux": 0,
+			"capacitance": 5,
 			"receptionFaces": [],
 			"distributionFaces": [],
 			"acceptsdirectpower": true,
-			"wireoffset": [ 0.5, 0.75, 0.5 ]
+			"wireoffset": [ 0.5, 0, 0.5 ]
 		},
 		"*-down": {
-			"useFlux": 10,
+			"useFlux": 1,
 			"genFlux": 0,
+			"capacitance": 5,
 			"receptionFaces": [],
 			"distributionFaces": [],
 			"acceptsdirectpower": true,
-			"wireoffset": [ 0.5, 0.3, 0.5 ]
+			"wireoffset": [ 0.5, 1, 0.5 ]
 		},
 		"*-south": {
-			"useFlux": 10,
+			"useFlux": 1,
 			"genFlux": 0,
+			"capacitance": 5,
 			"receptionFaces": [],
 			"distributionFaces": [],
 			"acceptsdirectpower": true,
 			"wireoffset": [ 0.5, 0.6, 0.4 ]
 		},
 		"*-north": {
-			"useFlux": 10,
+			"useFlux": 1,
 			"genFlux": 0,
+			"capacitance": 5,
 			"receptionFaces": [],
 			"distributionFaces": [],
 			"acceptsdirectpower": true,
 			"wireoffset": [ 0.5, 0.6, 0.6 ]
 		},
 		"*-west": {
-			"useFlux": 10,
+			"useFlux": 1,
 			"genFlux": 0,
+			"capacitance": 5,
 			"receptionFaces": [],
 			"distributionFaces": [],
 			"acceptsdirectpower": true,
 			"wireoffset": [ 0.6, 0.6, 0.5 ]
 		},
 		"*-east": {
-			"useFlux": 10,
+			"useFlux": 1,
 			"genFlux": 0,
+			"capacitance": 5,
 			"receptionFaces": [],
 			"distributionFaces": [],
 			"acceptsdirectpower": true,
@@ -160,10 +162,6 @@
 			"rotateY": 90
 		}
 	},
-	"textures": {
-		"wood": { "base": "game:block/wood/torch/wood" },
-		"wire": { "base": "block/metal/wires/{type}" }
-	},
 	"doNotRenderAtLod2": true,
 	"sidesolid": {
 		"all": false
@@ -171,70 +169,74 @@
 	"sideopaque": {
 		"all": false
 	},
-	"lightHsvbyType": {
-		"*-on-*": [ 4, 2, 14 ]
-	},
 	"creativeinventory": {
 		"general": [ "*-up" ],
 		"decorative": [ "*-up" ]
 	},
-	"replaceable": 5001,
+	"lightHsvByType": {
+		"*-off-*": [ 0, 0, 0 ],
+		"*-on-*": [ 7, 7, 8 ]
+	},
+	"faceCullMode": "NeverCull",
+	"renderpass": "OpaqueNoCull",
+	"emitSideAo": { "all": false },
+	"sideAo": { "all": false },
+	"ambientocclusion": false,
 	"resistance": 0,
 	"lightAbsorption": 0,
-	"collisionbox": null,
-	"selectionboxbytype": {
+	"collisionSelectionBoxByType": {
 		"*-down": {
-			"x1": 0.375,
-			"y1": 0,
-			"z1": 0.375,
-			"x2": 0.625,
-			"y2": 0.8875,
-			"z2": 0.625,
+			"x1": 0.25,
+			"y1": 0.1125,
+			"z1": 0.25,
+			"x2": 0.75,
+			"y2": 0,
+			"z2": 0.75,
 			"rotateZ": 180
 		},
 		"*-up": {
-			"x1": 0.375,
-			"y1": 0,
-			"z1": 0.375,
-			"x2": 0.625,
-			"y2": 0.8875,
-			"z2": 0.625
+			"x1": 0.25,
+			"y1": 0.1125,
+			"z1": 0.25,
+			"x2": 0.75,
+			"y2": 0,
+			"z2": 0.75
 		},
 		"*-east": {
-			"x1": 0.4,
-			"y1": 0.1875,
-			"z1": 0.5625,
-			"x2": 0.6125,
-			"y2": 0.9,
-			"z2": 1,
-			"rotateY": 270
-		},
-		"*-south": {
-			"x1": 0.4,
-			"y1": 0.1875,
-			"z1": 0.5625,
-			"x2": 0.6125,
-			"y2": 0.9,
-			"z2": 1,
+			"x1": 0.875,
+			"y1": 0.25,
+			"z1": 0.25,
+			"x2": 1,
+			"y2": 0.75,
+			"z2": 0.75,
 			"rotateY": 180
 		},
+		"*-south": {
+			"x1": 0.75,
+			"y1": 0.25,
+			"z1": 0.125,
+			"x2": 0.25,
+			"y2": 0.75,
+			"z2": 0,
+			"rotateY": 0
+		},
 		"*-west": {
-			"x1": 0.4,
-			"y1": 0.1875,
-			"z1": 0.5625,
-			"x2": 0.6125,
-			"y2": 0.9,
-			"z2": 1,
-			"rotateY": 90
+			"x1": 0.875,
+			"y1": 0.25,
+			"z1": 0.25,
+			"x2": 1,
+			"y2": 0.75,
+			"z2": 0.75,
+			"rotateY": 0
 		},
 		"*-north": {
-			"x1": 0.4,
-			"y1": 0.1875,
-			"z1": 0.5625,
-			"x2": 0.6125,
-			"y2": 0.9,
-			"z2": 1,
-			"rotateY": 0
+			"x1": 0.75,
+			"y1": 0.25,
+			"z1": 0.125,
+			"x2": 0.25,
+			"y2": 0.75,
+			"z2": 0,
+			"rotateY": 180
 		}
 	},
 	"blockmaterial": "Metal",
@@ -259,7 +261,7 @@
 		},
 		"origin": {
 			"x": 0.5,
-			"y": 0.46,
+			"y": 0.1,
 			"z": 0.5
 		},
 		"scale": 2.02
