@@ -1,0 +1,4 @@
+﻿1.8.0
+- added QPTECHServerData class (currently hiding in QPTECHLoader)
+   - temporay command /addpower will add one flux to the global power storage as a test
+   - global power storage will be like a giant meta battery using special tech to create a global power pool

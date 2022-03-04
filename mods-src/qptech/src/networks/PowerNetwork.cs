@@ -127,7 +127,7 @@ namespace qptech.src.networks
         int RequestPower();
         int ReceivePowerOffer(int amt);//if sent 0 or less device will no it is unpowered
     }
-
+    
     public class PowerNetworkInfo
     {
         public int generated;

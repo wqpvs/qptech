@@ -13,6 +13,9 @@ using qptech.src.pipes;
 using qptech.src.networks;
 using qptech.src.itemtransport;
 using qptech.src.Electricity;
+using Vintagestory.API.Util;
+using Vintagestory.API.Datastructures;
+using ProtoBuf;
 
 
 namespace qptech.src
@@ -25,9 +28,13 @@ namespace qptech.src
         string serverconfigfile = "qptechserverconfig.json";
         ICoreClientAPI capi;
         ICoreServerAPI sapi;
+        QPTECHServerData maindata;
+        public int GlobalFluxStorage => maindata==null?0:maindata.storedpower;
+        public static QPTECHLoader qptechmain;
         public override void StartPre(ICoreAPI api)
         {
             base.StartPre(api);
+            qptechmain = this;
             if (api is ICoreClientAPI )
             {
                 capi = api as ICoreClientAPI;
@@ -148,7 +155,37 @@ namespace qptech.src
                 capi = api as ICoreClientAPI;
                 capi.RegisterCommand("showitempipecontents", "If false Item Pipes won't render their contents (for performance reasons).", "", CmdShowItemPipe);
             }
+            else
+            {
+                sapi = api as ICoreServerAPI;
+                sapi.RegisterCommand("poweradd", "Add power to the global power storage", "", CmdAddAndShowPower);
+            }
         }
+        
+        public override void StartServerSide(ICoreServerAPI api)
+        {
+            sapi = api;
+
+            api.Event.SaveGameLoaded += OnSaveGameLoading;
+            api.Event.GameWorldSave += OnSaveGameSaving;
+
+            
+        }
+
+        const string maindataname = "maindata";
+
+        private void OnSaveGameLoading()
+        {
+            byte[] data = sapi.WorldManager.SaveGame.GetData(maindataname);
+
+            maindata = data == null ? new QPTECHServerData() : SerializerUtil.Deserialize<QPTECHServerData>(data);
+        }
+
+        private void OnSaveGameSaving()
+        {
+            sapi.WorldManager.SaveGame.StoreData(maindataname, SerializerUtil.Serialize(maindata));
+        }
+
         private void CmdShowItemPipe(int groupId, CmdArgs args)
         {
             if (capi == null) { return; }
@@ -159,5 +196,20 @@ namespace qptech.src
             capi.StoreModConfig<QPTechClientConfig>(clientconfig, clientconfigfile);
             capi.ShowChatMessage("Item Pipes show items has been set to "+clientconfig.showPipeItems);
         }
+
+        private void CmdAddAndShowPower(IPlayer player, int groupId, CmdArgs args)
+        {
+            if (sapi == null) { return; }
+            if (maindata == null) { sapi.BroadcastMessageToAllGroups("No maindata exists",EnumChatType.Notification);return; }
+            maindata.storedpower++;
+            sapi.BroadcastMessageToAllGroups("Stored Power is now " + maindata.storedpower + " temporal flux", EnumChatType.Notification);
+        }
+
+
+    }
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class QPTECHServerData
+    {
+        public int storedpower = 0;
     }
 }
