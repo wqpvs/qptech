@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,6 +74,7 @@
       <HintPath>$(AppData)\Vintagestory\Mods\VSSurvivalMod.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="modinfo.json" />
@@ -82,11 +84,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Electricity\BEECrucible.cs" />
     <Compile Include="src\Electricity\BEEIndustrialGenerator.cs" />
+    <Compile Include="src\Electricity\BEETEST.cs" />
     <Compile Include="src\Electricity\BEEMixer.cs" />
     <Compile Include="src\Electricity\BEEProcessingSupplier.cs" />
     <Compile Include="src\Electricity\BEERecipeProcessor.cs" />
     <Compile Include="src\Electricity\ElectricityAPI.cs" />
-    <Compile Include="src\Electricity\BELightBulk.cs" />
+    <Compile Include="src\Electricity\BEELightBulb.cs" />
     <Compile Include="src\Electricity\WireRenderer.cs" />
     <Compile Include="src\itemtransport\GUITabletItemFilter.cs" />
     <Compile Include="src\itemtransport\GUIConveyor.cs" />

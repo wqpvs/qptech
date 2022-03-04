@@ -15,6 +15,9 @@ namespace qptech.src
     class BlockPowerRod : BlockGroundAndSideAttachable
     {
         Dictionary<string, Cuboidi> attachmentAreas;
+
+        Block Eblock;
+
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
@@ -92,6 +95,7 @@ namespace qptech.src
 
         public override void OnNeighbourBlockChange(IWorldAccessor world, BlockPos pos, BlockPos neibpos)
         {
+
             if (HasBehavior<BlockBehaviorUnstableFalling>())
             {
                 base.OnNeighbourBlockChange(world, pos, neibpos);
