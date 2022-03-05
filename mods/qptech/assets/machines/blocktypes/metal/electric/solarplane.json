@@ -1,8 +1,12 @@
 {
-	"code": "testtest",
+	"code": "solarplane",
 	"class": "ElectricalBlock",
-	"entityClass": "Beetest",
+	"entityClass": "BEESolarPlane",
 	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "primitive", "creative" ]
+		},
 		{
 			"code": "timestate",
 			"states": [ "morning", "midday", "evening", "night" ]
@@ -12,10 +16,19 @@
 		"general": [ "*" ],
 		"qptech": [ "*" ]
 	},
-	"attributes": {
-		"capacitance": 5,
-		"maxFlux": 5,
-		"distributionFaces": [ "north", "east", "west", "south" ]
+	"attributesByType": {
+		"*-creative-*": {
+			"capacitance": 128,
+			"maxFlux": 128,
+			"fluxBonus": 254,
+			"distributionFaces": [ "north", "east", "west", "south" ]
+		},
+		"*-primitive-*": {
+			"capacitance": 2,
+			"maxFlux": 2,
+			"fluxBonus": 2,
+			"distributionFaces": [ "north", "east", "west", "south" ]
+		}
 	},
 	"shape": {
 		"base": "block/metal/solarplane/{timestate}"

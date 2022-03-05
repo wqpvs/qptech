@@ -14,7 +14,7 @@ using Vintagestory.GameContent;
 
 namespace qptech.src
 {
-    class BEETEST : BEElectric
+    class BEESolarPlane : BEElectric
     {
 
         protected BlockPos upPos;
@@ -26,6 +26,8 @@ namespace qptech.src
         protected int timeOfDay;
 
         public bool light = false;
+
+        public int fluxBonus { get; set; }
 
         public new virtual int AvailablePower()
         {
@@ -40,6 +42,12 @@ namespace qptech.src
             upPos = base.Pos.UpCopy();
 
             setBlockState("morning");
+
+
+            if (Block.Attributes.Exists == true)
+            {
+                fluxBonus = Block.Attributes["fluxBonus"].AsInt(fluxBonus);
+            }
 
             if (api.Side is EnumAppSide.Server) 
             { 
@@ -76,17 +84,17 @@ namespace qptech.src
             if (timeOfDay >= 8 & timeOfDay <= 10) 
             {
                 setBlockState("morning");
-                genPower = 1; 
+                genPower = 1 + fluxBonus; 
             }
             else if (timeOfDay >= 10 & timeOfDay <= 15) 
             {
                 setBlockState("midday");
-                genPower = 2; 
+                genPower = 2 + fluxBonus; 
             }
             else if (timeOfDay >= 15 & timeOfDay <= 18) 
             {
                 setBlockState("evening");
-                genPower = 1; 
+                genPower = 1 + fluxBonus; 
             }
             else {
                 setBlockState("night");

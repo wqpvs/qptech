@@ -133,10 +133,11 @@ namespace qptech.src
         {
 
 
-            api.RegisterBlockEntityClass("Beetest", typeof(BEETEST));
+
+
 
             #region BEElectrical
-
+            api.RegisterBlockEntityClass("BEESolarPlane", typeof(BEESolarPlane));
             api.RegisterBlockEntityClass("BEEJunction", typeof(BEEJunction));
             api.RegisterBlockEntityClass("BEEForge", typeof(BEEForge));
             api.RegisterBlockEntityClass("BEEWire", typeof(BEEWire));
