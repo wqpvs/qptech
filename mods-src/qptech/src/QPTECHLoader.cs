@@ -137,7 +137,7 @@ namespace qptech.src
 
 
             #region BEElectrical
-            api.RegisterBlockEntityClass("BEESolarPlane", typeof(BEESolarPlane));
+            
             api.RegisterBlockEntityClass("BEEJunction", typeof(BEEJunction));
             api.RegisterBlockEntityClass("BEEForge", typeof(BEEForge));
             api.RegisterBlockEntityClass("BEEWire", typeof(BEEWire));
@@ -200,6 +200,7 @@ namespace qptech.src
             api.RegisterItemClass("ItemQuarryTool", typeof(ItemQuarryTool));
             api.RegisterItemClass("ItemJetPack", typeof(ItemJetPack));
             api.RegisterItemClass("ItemWire", typeof(ItemWire));
+            api.RegisterItemClass("ItemHandPlaner", typeof(ItemHandPlaner));
         }
 
         private void RegisterDefaultBehavior() 

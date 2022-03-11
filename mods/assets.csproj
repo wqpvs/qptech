@@ -140,6 +140,7 @@
     <None Include="qptech\assets\machines\itemtypes\resource\orepowder.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\jetpack.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\jetpackcontrol.json" />
+    <None Include="qptech\assets\machines\itemtypes\tool\handplaner.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\tablet.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\pullplate.json" />
     <None Include="qptech\assets\machines\itemtypes\tool\miningdrill.json" />
