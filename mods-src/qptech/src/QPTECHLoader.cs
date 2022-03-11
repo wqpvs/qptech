@@ -200,7 +200,7 @@ namespace qptech.src
             api.RegisterItemClass("ItemQuarryTool", typeof(ItemQuarryTool));
             api.RegisterItemClass("ItemJetPack", typeof(ItemJetPack));
             api.RegisterItemClass("ItemWire", typeof(ItemWire));
-            api.RegisterItemClass("ItemHandPlaner", typeof(ItemHandPlaner));
+            
         }
 
         private void RegisterDefaultBehavior() 
