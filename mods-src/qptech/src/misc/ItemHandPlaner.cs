@@ -17,7 +17,7 @@ namespace qptech.src.misc
 {
     class ItemHandPlaner:Item
     {
-        int cutsize = 2;
+        int cutsize = 1;
         int cutcounter = 0;
         BlockPos lastpos;
         BlockFacing lastfacing=BlockFacing.DOWN;
@@ -36,6 +36,8 @@ namespace qptech.src.misc
             }
             //base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+            
+            
             if (bmb == null) { lastpos = null; handling = EnumHandHandling.NotHandled;return; }
             IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
             for (int xc = 0; xc < 16 / cutsize; xc++)
@@ -44,34 +46,41 @@ namespace qptech.src.misc
                 {
                     if (lastfacing == BlockFacing.NORTH)
                     {
+                        cutcounter = (int)(blockSel.HitPosition.Z * 16);
+                        //bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutcounter * cutsize), false, null, 0, cutsize);
                         bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutcounter * cutsize), false, null, 0, cutsize);
                     }
                     else if (lastfacing == BlockFacing.SOUTH)
                     {
-                        
-                        bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, (16-cutsize)-cutcounter * cutsize), false, null, 0, cutsize);
+                        cutcounter = (int)(blockSel.HitPosition.Z * 16)-cutsize;
+                        //bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, (16-cutsize)-cutcounter * cutsize), false, null, 0, cutsize);
+                        bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutcounter * cutsize), false, null, 0, cutsize);
                     }
                     else if (lastfacing == BlockFacing.WEST)
                     {
+                        cutcounter = (int)(blockSel.HitPosition.X * 16);
                         bmb.SetVoxel(new Vec3i(cutcounter * cutsize, yc * cutsize, xc * cutsize), false, null, 0, cutsize);
                     }
                     else if (lastfacing == BlockFacing.EAST)
                     {
-                        bmb.SetVoxel(new Vec3i((16 - cutsize) - cutcounter * cutsize, yc * cutsize, xc * cutsize), false, null, 0, cutsize);
+                        cutcounter = (int)(blockSel.HitPosition.X * 16)-cutsize;
+                        bmb.SetVoxel(new Vec3i(cutcounter * cutsize, yc * cutsize, xc * cutsize), false, null, 0, cutsize);
                     }
                     else if (lastfacing == BlockFacing.DOWN)
                     {
+                        cutcounter = (int)(blockSel.HitPosition.Y * 16);
                         bmb.SetVoxel(new Vec3i( yc * cutsize, cutcounter * cutsize, xc * cutsize), false, null, 0, cutsize);
                     }
                     else if (lastfacing == BlockFacing.UP)
                     {
-                        bmb.SetVoxel(new Vec3i(yc * cutsize, (16 - cutsize) - cutcounter * cutsize, xc * cutsize), false, null, 0, cutsize);
+                        cutcounter = (int)(blockSel.HitPosition.Y * 16)-cutsize;
+                        bmb.SetVoxel(new Vec3i(yc * cutsize, cutcounter * cutsize, xc * cutsize), false, null, 0, cutsize);
                     }
                 }
             }
             bmb.MarkDirty(true);
             cutcounter++;
-            if (cutcounter * cutsize >= 15-cutsize) { cutcounter = 0; }
+            if (cutcounter * cutsize >= 16-cutsize) { cutcounter = 0; }
             handling = EnumHandHandling.Handled;
 
         }
