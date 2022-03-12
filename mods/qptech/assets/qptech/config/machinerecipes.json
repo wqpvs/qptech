@@ -182,14 +182,14 @@
       },
       {
         "validitems": [ "stone-" ],
-        "quantity": 8
+        "quantity": 16
       }
 
     ],
     "output": [
       {
         "validitems": [ "machines:concrete-internal" ],
-        "quantity": 1
+        "quantity": 2
       }
     ]
 
@@ -210,7 +210,7 @@
       },
       {
         "validitems": [ "game:dye-red" ],
-        "quantity": 100
+        "quantity": 25
       },
       {
         "validitems": [ "stone-" ],
@@ -221,7 +221,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-red" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
 
@@ -242,7 +242,7 @@
       },
       {
         "validitems": [ "game:dye-blue" ],
-        "quantity": 100
+        "quantity": 25
       },
       {
         "validitems": [ "stone-" ],
@@ -253,7 +253,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-blue" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
   },
@@ -273,7 +273,7 @@
       },
       {
         "validitems": [ "game:dye-yellow" ],
-        "quantity": 100
+        "quantity": 25
       },
       {
         "validitems": [ "stone-" ],
@@ -284,7 +284,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-yellow" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
 
@@ -305,7 +305,7 @@
       },
       {
         "validitems": [ "game:dye-white" ],
-        "quantity": 100
+        "quantity": 25
       },
       {
         "validitems": [ "stone-" ],
@@ -316,7 +316,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-white" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
 
@@ -337,7 +337,7 @@
       },
       {
         "validitems": [ "game:dye-black" ],
-        "quantity": 100
+        "quantity": 25
       },
       {
         "validitems": [ "stone-" ],
@@ -348,7 +348,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-black" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
 
@@ -369,7 +369,7 @@
       },
       {
         "validitems": [ "game:dye-purple" ],
-        "quantity": 100
+        "quantity": 25
       },
       {
         "validitems": [ "stone-" ],
@@ -380,7 +380,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-purple" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
 
@@ -401,7 +401,7 @@
       },
       {
         "validitems": [ "game:dye-brown" ],
-        "quantity": 100
+        "quantity": 24
       },
       {
         "validitems": [ "stone-" ],
@@ -412,7 +412,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-brown" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
 
@@ -433,7 +433,7 @@
       },
       {
         "validitems": [ "game:dye-green" ],
-        "quantity": 100
+        "quantity": 24
       },
       {
         "validitems": [ "stone-" ],
@@ -444,7 +444,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-green" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
 
@@ -465,7 +465,7 @@
       },
       {
         "validitems": [ "game:dye-orange" ],
-        "quantity": 100
+        "quantity": 25
       },
       {
         "validitems": [ "stone-" ],
@@ -476,7 +476,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-orange" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
 
@@ -497,7 +497,7 @@
       },
       {
         "validitems": [ "game:dye-gray" ],
-        "quantity": 100
+        "quantity": 25
       },
       {
         "validitems": [ "stone-" ],
@@ -508,7 +508,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-gray" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
 
@@ -529,7 +529,7 @@
       },
       {
         "validitems": [ "game:dye-pink" ],
-        "quantity": 100
+        "quantity": 25
       },
       {
         "validitems": [ "stone-" ],
@@ -540,7 +540,7 @@
     "output": [
       {
         "validitems": [ "machines:concrete-pink" ],
-        "quantity": 8
+        "quantity": 2
       }
     ]
 

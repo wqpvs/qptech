@@ -1,4 +1,8 @@
-﻿1.7.5
+﻿1.7.6
+- BUGFIX: Mixer crashing server
+- tweak: only 2 concrete instead of 8 in mixer (to match with cobblestone recipes) (uses only 250ml of dye now)
+
+1.7.5
 - BUGFIX: potential crash with wirerender
 - BUGFIX: fixed tin wire -> copper wire recipe
 
