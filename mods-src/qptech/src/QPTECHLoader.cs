@@ -132,10 +132,6 @@ namespace qptech.src
         private void RegisterDefaultBlockEntitys()
         {
 
-
-
-
-
             #region BEElectrical
             
             api.RegisterBlockEntityClass("BEEJunction", typeof(BEEJunction));

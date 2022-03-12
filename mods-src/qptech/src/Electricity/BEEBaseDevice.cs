@@ -219,7 +219,7 @@ namespace qptech.src
                 animationIsRunning = true;
                 idlecount = 0;
             }
-            else if (!shouldAnimate && animationIsRunning && idlecount<5)
+            else if (!shouldAnimate && animationIsRunning && idlecount < 5)
             {
                 idlecount++;
             }

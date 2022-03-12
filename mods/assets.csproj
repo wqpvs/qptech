@@ -17,6 +17,7 @@
     <OutputPath>.\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="chisel\modinfo.json" />
     <None Include="qptech\assets\game\lang\en.json" />
     <None Include="qptech\assets\game\shapes\block\can-full.json" />
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
@@ -33,7 +34,7 @@
     <None Include="qptech\assets\machines\blocktypes\itemfilterexit.json" />
     <None Include="qptech\assets\machines\blocktypes\itemtransport\itemsplitter.json" />
     <None Include="qptech\assets\machines\blocktypes\itemtransport\itempipe.json" />
-    <None Include="qptech\assets\machines\blocktypes\metal\creative\Betest.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\electric\solarplane.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\creative\seeker.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\light\lightbulb.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\lv\bloomworker.json" />

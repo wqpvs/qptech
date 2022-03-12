@@ -33,6 +33,12 @@
 	"shape": {
 		"base": "block/metal/solarplane/{timestate}"
 	},
+	"textures": {
+		"main": 
+		{
+			"base": "block/metal/solarplane/main"
+		}
+		},
 	"blockmaterial": "Metal",
 	"drawtype": "Json",
 	"resistance": 1,

@@ -1,0 +1,12 @@
+{
+  "type": "code",
+  "modid": "chisel",
+  "name": "chisel",
+  "description": "chisel",
+  "author": "WQP",
+  "version": "1.0.0",
+  "dependency": {
+    "game": ""
+    
+  }
+}

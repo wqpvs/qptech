@@ -25,6 +25,7 @@ namespace qptech.src
         public virtual bool AcceptsDirectPower => acceptsdirectpower;
         public virtual bool showToggleButton => false;
         public virtual bool disableAnimations => true;
+
         List<BlockPos> directlinks;
         public List<BlockPos> DirectLinks => directlinks;
         public virtual int AvailablePower() {
