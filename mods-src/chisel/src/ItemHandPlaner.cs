@@ -36,6 +36,7 @@ namespace chiseltools
 
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
+            if (blockSel == null) { return; }
             IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
             if (!byEntity.World.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.BuildOrBreak))
             {
@@ -48,6 +49,7 @@ namespace chiseltools
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
+            if (blockSel == null) { return; }
             IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
             if (!byEntity.World.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.BuildOrBreak))
             {
@@ -55,8 +57,14 @@ namespace chiseltools
                 return;
             }
 
-            PlaneAdd(blockSel);
-
+            if (byPlayer.Entity.Controls.Sneak)
+            {
+                ExtrudeAdd(blockSel);
+            }
+            else
+            {
+                PlaneAdd(blockSel);
+            }
             handling = EnumHandHandling.PreventDefaultAction;
         }
         public virtual void PlaneCut(BlockSelection blockSel)
@@ -72,7 +80,16 @@ namespace chiseltools
                 
             }
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+
             if (bmb == null) { lastpos = null;  return; }
+            CuboidWithMaterial cwm = new CuboidWithMaterial();
+            if (bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0)
+            {
+                if (!(api is ICoreClientAPI)) { api.World.BlockAccessor.SetBlock(0, blockSel.Position);return; }
+                else { return; }
+            }
+            
+
             for (int xc = 0; xc < 16 / cutsize; xc++)
             {
                 for (int yc = 0; yc < 16 / cutsize; yc++)
@@ -132,6 +149,19 @@ namespace chiseltools
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
             if (bmb == null) { lastpos = null; return; }
             byte useindex = 0;
+            CuboidWithMaterial cwm = new CuboidWithMaterial();
+
+            Vec3i s = new Vec3i((int)(blockSel.HitPosition.X * 16f), (int)(blockSel.HitPosition.Y * 16f), (int)(blockSel.HitPosition.Z * 16f));
+            if (blockSel.Face == BlockFacing.SOUTH) { s.Z--; }
+            if (blockSel.Face == BlockFacing.UP) { s.Y--; }
+            if (blockSel.Face == BlockFacing.EAST) { s.X--; }
+            foreach (uint voxint in bmb.VoxelCuboids)
+            {
+                BlockEntityMicroBlock.FromUint(voxint, cwm);
+                if (!cwm.Contains(s.X, s.Y, s.Z)) { continue; }
+                useindex = cwm.Material;
+                break;
+            }
             bool state = true;
             for (int xc = 0; xc < 16 / cutsize; xc++)
             {
@@ -183,5 +213,38 @@ namespace chiseltools
 
 
         }
+        public virtual void ExtrudeAdd(BlockSelection blockSel)
+        {
+            if (blockSel == null)
+            {
+                lastpos = null; return;
+            }
+            if (lastpos == null || lastpos != blockSel.Position || lastfacing != blockSel.Face)
+            {
+                lastpos = blockSel.Position;
+                lastfacing = blockSel.Face;
+
+            }
+            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+            if (bmb == null) { lastpos = null; return; }
+            if (bmb.VoxelCuboids == null | bmb.VoxelCuboids.Count == 0) { return; }
+            CuboidWithMaterial cwm = new CuboidWithMaterial();
+            Vec3i s = new Vec3i((int)(blockSel.HitPosition.X * 16f), (int)(blockSel.HitPosition.Y * 16f), (int)(blockSel.HitPosition.Z * 16f));
+            byte useindex = 0;
+            foreach (uint voxint in bmb.VoxelCuboids)
+            {
+                BlockEntityMicroBlock.FromUint(voxint, cwm);
+                if (!cwm.ContainsOrTouches(s.X,s.Y,s.Z)) { continue; }
+                useindex = cwm.Material;
+                break;
+            }
+                       
+            bool state = true;
+            bmb.MarkDirty(true);
+            
+
+
+        }
+
     }
 }

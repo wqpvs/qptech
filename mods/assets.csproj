@@ -19,6 +19,7 @@
   <ItemGroup>
     <None Include="chisel\assets\chiseltools\lang\en.json" />
     <None Include="chisel\assets\chiseltools\recipes\smithing\handplaner.json" />
+    <None Include="chisel\assets\chiseltools\shapes\handplaner.json" />
     <None Include="chisel\assets\game\lang\en.json" />
     <None Include="chisel\modinfo.json" />
     <None Include="qptech\assets\game\lang\en.json" />
@@ -536,7 +537,6 @@
     <Content Include="qptech\changelog1.7.0.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="chisel\assets\chiseltools\shapes\" />
     <Folder Include="qptech\assets\game\blocktypes\" />
     <Folder Include="qptech\assets\machines\shapes\block\glass\" />
     <Folder Include="qptech\assets\machines\shapes\block\indev\" />
