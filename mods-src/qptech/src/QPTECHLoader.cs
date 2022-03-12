@@ -23,6 +23,7 @@ namespace qptech.src
         public static QPTechServerConfig serverconfig;
         string clientconfigfile = "qptechclientconfig.json";
         string serverconfigfile = "qptechserverconfig.json";
+        ICoreAPI api;
         ICoreClientAPI capi;
         ICoreServerAPI sapi;
         public override void StartPre(ICoreAPI api)
@@ -67,88 +68,134 @@ namespace qptech.src
         }
         public override void Start(ICoreAPI api)
         {
-            base.Start(api);
-            
-            api.RegisterBlockEntityClass("BEEWire", typeof(BEEWire));
-            api.RegisterBlockEntityClass("BEEAssembler", typeof(BEEAssembler));
-            api.RegisterBlockEntityClass("BEEGenerator", typeof(BEEGenerator));
-            api.RegisterBlockClass("ElectricalBlock", typeof(ElectricalBlock));
-            api.RegisterBlockClass("BlockWire", typeof(BlockWire));
-            api.RegisterBlockClass("BlockCannedMeal", typeof(BlockCannedMeal));
-            api.RegisterItemClass("ItemQuarryTool", typeof(ItemQuarryTool));
-            api.RegisterItemClass("ItemJetPack", typeof(ItemJetPack));
-            api.RegisterItemClass("ItemWire", typeof(ItemWire));
-            api.RegisterBlockEntityClass("BEEForge", typeof(BEEForge));
-            api.RegisterBlockClass("BlockEForge", typeof(BlockEForge));
-            api.RegisterBlockEntityClass("BEPowerFlag", typeof(BEPowerFlag));
+            this.api = api;
 
-            api.RegisterBlockEntityClass("BELightBulk", typeof(BELightBulk));
-
-            api.RegisterBlockClass("BlockClayformer",typeof(BlockClayformer));
-            api.RegisterBlockClass("BlockMetalPress",typeof(BlockMetalPress));
-            api.RegisterBlockClass("BlockTemporalPocket", typeof(BlockTemporalPocket));
-            api.RegisterBlockEntityClass("BETemporalPocket", typeof(BETemporalPocket));
-            api.RegisterBlockEntityClass("BEEMacerator", typeof(BEEMacerator));
-            
-            api.RegisterBlockEntityClass("BEEHVAC",typeof(BEEHVAC));
-            api.RegisterBlockEntityClass("BEEKiln", typeof(BEEKiln));
-            api.RegisterBlockEntityClass("BEClearFluidTank", typeof(BEClearFluidTank));
-
-            api.RegisterBlockClass("BlockPowerRod", typeof(BlockPowerRod));
-            api.RegisterBlockClass("BlockTank", typeof(BlockTank));
-            api.RegisterBlockClass("BlockJunction", typeof(BlockJunction));
-            api.RegisterBlockEntityClass("BEEJunction", typeof(BEEJunction));
-
-            api.RegisterBlockEntityClass("ElectricMotor", typeof(BEMPMotor));
-            api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
-            api.RegisterBlockEntityBehaviorClass("MPMotor", typeof(BEBMPMotor));
-            
-            api.RegisterBlockEntityClass("ElectricGenerator", typeof(BEMPGenerator));
-            api.RegisterBlockClass("BlockElectricGenerator", typeof(BlockMPGenerator));
-            api.RegisterBlockEntityBehaviorClass("MPGenerator", typeof(BEBMPGenerator));
-
-            api.RegisterBlockEntityClass("BEWaterTower", typeof(BEWaterTower));
-            
-
-            api.RegisterBlockEntityClass("BEEPowerHatch", typeof(BEEPowerHatch));
-            api.RegisterBlockEntityClass("MBItemHatch", typeof(MBItemHatch));
-            api.RegisterBlockEntityClass("BEEMBHeater", typeof(BEEMBHeater));
-
-            api.RegisterBlockEntityClass("BEFluidPump", typeof(BEFluidPump));
-            api.RegisterBlockClass("BlockPump", typeof(BlockPump));
-            api.RegisterBlockEntityClass("BEFluidPipe", typeof(BEFluidPipe));
-            api.RegisterBlockClass("BlockFluidPipe", typeof(BlockFluidPipe));
-            api.RegisterBlockEntityClass("BESlidingDoorCore", typeof(BESlidingDoorCore));
-            api.RegisterBlockEntityClass("BEReportsClicks", typeof(BEReportsClicks));
-            api.RegisterBlockClass("BlockDoorPart", typeof(BlockDoorPart));
-            api.RegisterBlockEntityClass("BEERecipeProcessor", typeof(BEERecipeProcessor));
-            api.RegisterBlockEntityClass("BEEProcessingSupplier", typeof(BEEProcessingSupplier));
-            api.RegisterBlockEntityClass("BEIrrigator", typeof(BEIrrigator));
-
-            api.RegisterBlockEntityClass("BEProcessToProcess", typeof(BEProcessToProcess));
-            api.RegisterBlockEntityClass("BEProcessToProcessFluidUser", typeof(BEProcessToProcessFluidUser));
-
-            api.RegisterBlockEntityClass("BEEIndustrialGenerator", typeof(BEEIndustrialGenerator));
-            api.RegisterItemClass("ItemMiningDrill", typeof(ItemMiningDrill));
-            api.RegisterBlockEntityClass("BEECrucible", typeof(BEECrucible));
-            api.RegisterBlockEntityClass("ItemPipe", typeof(ItemPipe));
-            api.RegisterBlockEntityClass("ItemSplitter", typeof(ItemSplitter));
-            api.RegisterBlockClass("BlockItemTransport", typeof(BlockItemTransport));
-            api.RegisterItemClass("TabletTool", typeof(TabletTool));
-
-            api.RegisterBlockEntityClass("BEDummyBlock", typeof(BEDummyBlock));
-            api.RegisterBlockEntityBehaviorClass("BEBMultiDummy", typeof(BEBMultiDummy));
-            api.RegisterBlockClass("BlockDummy", typeof(BlockDummy));
-            api.RegisterBlockEntityClass("BEEMixer", typeof(BEEMixer));
-            api.RegisterBlockEntityClass("BECoalPileStoker", typeof(BECoalPileStoker));
-            //api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
-            //api.RegisterBlockEntityClass("BEEMotor", typeof(BEEMotor));
+            RegisterDefaultBlocks();
+            RegisterDefaultBlockEntitys();
+            RegisterDefaultItems();
+            RegisterDefaultBehavior();
+    
             if (api is ICoreClientAPI)
             {
                 capi = api as ICoreClientAPI;
                 capi.RegisterCommand("showitempipecontents", "If false Item Pipes won't render their contents (for performance reasons).", "", CmdShowItemPipe);
             }
         }
+
+        private void RegisterDefaultBlocks() 
+        {
+
+
+            #region BlockElectrical
+
+            api.RegisterBlockClass("BlockEForge", typeof(BlockEForge));
+            api.RegisterBlockClass("ElectricalBlock", typeof(ElectricalBlock));
+            api.RegisterBlockClass("BlockClayformer", typeof(BlockClayformer));
+            api.RegisterBlockClass("BlockMetalPress", typeof(BlockMetalPress));
+            api.RegisterBlockClass("BlockWire", typeof(BlockWire));
+            api.RegisterBlockClass("BlockJunction", typeof(BlockJunction));
+            api.RegisterBlockClass("BlockPowerRod", typeof(BlockPowerRod));
+
+            #endregion BlockElectrical
+            #region Liquid
+
+            api.RegisterBlockClass("BlockPump", typeof(BlockPump));
+            api.RegisterBlockClass("BlockTank", typeof(BlockTank));
+            api.RegisterBlockClass("BlockFluidPipe", typeof(BlockFluidPipe));
+
+            #endregion Liquid
+
+            api.RegisterBlockClass("BlockElectricGenerator", typeof(BlockMPGenerator));
+            api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
+
+
+            api.RegisterBlockClass("BlockItemTransport", typeof(BlockItemTransport));
+
+            api.RegisterBlockClass("BlockDoorPart", typeof(BlockDoorPart));
+            api.RegisterBlockClass("BlockTemporalPocket", typeof(BlockTemporalPocket));
+            api.RegisterBlockClass("BlockCannedMeal", typeof(BlockCannedMeal));
+            api.RegisterBlockClass("BlockDummy", typeof(BlockDummy));
+        }
+
+        private void RegisterDefaultBlockEntitys()
+        {
+
+
+            api.RegisterBlockEntityClass("Beetest", typeof(BEETEST));
+
+            #region BEElectrical
+
+            api.RegisterBlockEntityClass("BEEJunction", typeof(BEEJunction));
+            api.RegisterBlockEntityClass("BEEForge", typeof(BEEForge));
+            api.RegisterBlockEntityClass("BEEWire", typeof(BEEWire));
+            api.RegisterBlockEntityClass("BEEAssembler", typeof(BEEAssembler));
+            api.RegisterBlockEntityClass("BEEGenerator", typeof(BEEGenerator));
+            api.RegisterBlockEntityClass("BEEMixer", typeof(BEEMixer));
+            api.RegisterBlockEntityClass("BECoalPileStoker", typeof(BECoalPileStoker));
+            api.RegisterBlockEntityClass("BEECrucible", typeof(BEECrucible));
+            api.RegisterBlockEntityClass("BEEIndustrialGenerator", typeof(BEEIndustrialGenerator));
+            api.RegisterBlockEntityClass("BEEPowerHatch", typeof(BEEPowerHatch));
+            api.RegisterBlockEntityClass("BEEMBHeater", typeof(BEEMBHeater));
+            api.RegisterBlockEntityClass("BEEMacerator", typeof(BEEMacerator));
+            api.RegisterBlockEntityClass("BEEHVAC", typeof(BEEHVAC));
+            api.RegisterBlockEntityClass("BEEKiln", typeof(BEEKiln));
+            api.RegisterBlockEntityClass("BEELightBulb", typeof(BEELightBulb));
+
+            #endregion BEElectrical
+            #region Item Pipes
+
+            api.RegisterBlockEntityClass("ItemPipe", typeof(ItemPipe));
+            api.RegisterBlockEntityClass("ItemSplitter", typeof(ItemSplitter));
+
+            #endregion Item Pipes
+            #region Liquid 
+
+            api.RegisterBlockEntityClass("BEWaterTower", typeof(BEWaterTower));
+            api.RegisterBlockEntityClass("BEFluidPipe", typeof(BEFluidPipe));
+            api.RegisterBlockEntityClass("BEIrrigator", typeof(BEIrrigator));
+            api.RegisterBlockEntityClass("BEFluidPump", typeof(BEFluidPump));
+            api.RegisterBlockEntityClass("BEClearFluidTank", typeof(BEClearFluidTank));
+
+            #endregion Liquid 
+            #region Process
+
+            api.RegisterBlockEntityClass("BEProcessToProcess", typeof(BEProcessToProcess));
+            api.RegisterBlockEntityClass("BEProcessToProcessFluidUser", typeof(BEProcessToProcessFluidUser));
+            api.RegisterBlockEntityClass("BEERecipeProcessor", typeof(BEERecipeProcessor));
+            api.RegisterBlockEntityClass("BEEProcessingSupplier", typeof(BEEProcessingSupplier));
+
+            #endregion  Process
+            #region BEMP
+
+            api.RegisterBlockEntityClass("ElectricGenerator", typeof(BEMPGenerator));
+            api.RegisterBlockEntityClass("ElectricMotor", typeof(BEMPMotor));
+
+            #endregion BEMP
+
+            api.RegisterBlockEntityClass("BEPowerFlag", typeof(BEPowerFlag));
+            api.RegisterBlockEntityClass("BETemporalPocket", typeof(BETemporalPocket));
+            api.RegisterBlockEntityClass("MBItemHatch", typeof(MBItemHatch));
+            api.RegisterBlockEntityClass("BESlidingDoorCore", typeof(BESlidingDoorCore));
+            api.RegisterBlockEntityClass("BEReportsClicks", typeof(BEReportsClicks));
+            api.RegisterBlockEntityClass("BEDummyBlock", typeof(BEDummyBlock));
+        }
+
+        private void RegisterDefaultItems()
+        {
+            api.RegisterItemClass("ItemMiningDrill", typeof(ItemMiningDrill));
+            api.RegisterItemClass("TabletTool", typeof(TabletTool));
+            api.RegisterItemClass("ItemQuarryTool", typeof(ItemQuarryTool));
+            api.RegisterItemClass("ItemJetPack", typeof(ItemJetPack));
+            api.RegisterItemClass("ItemWire", typeof(ItemWire));
+        }
+
+        private void RegisterDefaultBehavior() 
+        {
+            api.RegisterBlockEntityBehaviorClass("MPMotor", typeof(BEBMPMotor));
+            api.RegisterBlockEntityBehaviorClass("MPGenerator", typeof(BEBMPGenerator));
+            api.RegisterBlockEntityBehaviorClass("BEBMultiDummy", typeof(BEBMultiDummy));
+        }
+
         private void CmdShowItemPipe(int groupId, CmdArgs args)
         {
             if (capi == null) { return; }
