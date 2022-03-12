@@ -23,17 +23,18 @@ namespace chiseltools
             api.RegisterItemClass("ItemHandPlaner", typeof(ItemHandPlaner));
         }
     }
+    /// <summary>
+    /// The HandPlaner will add or remove 1 voxel deep planes to chiseled objects (adding or shaving off a full sheet of voxels)
+    /// </summary>
     class ItemHandPlaner:Item
     {
-        int cutsize = 1;
-        int cutdepth = 0;
+        int cutsize = 1; //for now we'll just leave it at 1x1 voxels, might change in future
+        int cutdepth = 0; //this was meant to be a counter, but right now is just used locally in each function
        
-        
+        //These will track the last thing the planer clicked on
         BlockPos lastpos;
         BlockFacing lastfacing=BlockFacing.DOWN;
-        //maybe store a list of previous worked faces? Hmmm
-
-
+        
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
             if (blockSel == null) { return; }
@@ -129,8 +130,7 @@ namespace chiseltools
                 }
             }
             bmb.MarkDirty(true);
-            cutdepth++;
-            if (cutdepth * cutsize >= 16 - cutsize) { cutdepth = 0; }
+            
             
 
         }
@@ -150,19 +150,25 @@ namespace chiseltools
             if (bmb == null) { lastpos = null; return; }
             byte useindex = 0;
             CuboidWithMaterial cwm = new CuboidWithMaterial();
-
+            //convert the hit point into voxel coordinates
             Vec3i s = new Vec3i((int)(blockSel.HitPosition.X * 16f), (int)(blockSel.HitPosition.Y * 16f), (int)(blockSel.HitPosition.Z * 16f));
             if (blockSel.Face == BlockFacing.SOUTH) { s.Z--; }
             if (blockSel.Face == BlockFacing.UP) { s.Y--; }
             if (blockSel.Face == BlockFacing.EAST) { s.X--; }
+
             foreach (uint voxint in bmb.VoxelCuboids)
             {
+                //this static method converts the uint into a CubioidWithMaterial
                 BlockEntityMicroBlock.FromUint(voxint, cwm);
+                //check if the voxel we are looking at is part of the cubiod
                 if (!cwm.Contains(s.X, s.Y, s.Z)) { continue; }
+                //if it's part of the cuboid grab its material to use
                 useindex = cwm.Material;
                 break;
             }
             bool state = true;
+            //loop thru 16 x 16 voxel plane (xc/yc will be swapped with other coordinates depending on the direction we are facing)
+            //tell the microblock to add each voxel
             for (int xc = 0; xc < 16 / cutsize; xc++)
             {
                 for (int yc = 0; yc < 16 / cutsize; yc++)
@@ -171,14 +177,12 @@ namespace chiseltools
                     {
                         cutdepth = (int)(blockSel.HitPosition.Z * 16)-1;
                         if (cutdepth > 15||cutdepth<0) { return; }
-                        //bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutcounter * cutsize), false, null, 0, cutsize);
                         bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutdepth * cutsize), state, null, useindex, cutsize);
                     }
                     else if (lastfacing == BlockFacing.SOUTH)
                     {
                         cutdepth = (int)(blockSel.HitPosition.Z * 16) - cutsize+1;
                         if (cutdepth > 15) { return; }
-                        //bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, (16-cutsize)-cutcounter * cutsize), false, null, 0, cutsize);
                         bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutdepth * cutsize), state, null, useindex, cutsize);
                     }
                     else if (lastfacing == BlockFacing.WEST)
@@ -208,11 +212,12 @@ namespace chiseltools
                 }
             }
             bmb.MarkDirty(true);
-            cutdepth++;
-            if (cutdepth * cutsize >= 16 - cutsize) { cutdepth = 0; }
+            
 
 
         }
+
+        //this function will ultimately (hopefully) extrude only relevant faces eg: instead of adding an entire plane, if you had 2x2 voxels sticking out it would extrude only those
         public virtual void ExtrudeAdd(BlockSelection blockSel)
         {
             if (blockSel == null)
