@@ -128,10 +128,12 @@ namespace qptech.src.Electricity
                 Item makeitem = Api.World.GetItem(al);
                 Block makeblock = Api.World.GetBlock(al);
                 if (makeitem == null && makeblock == null) { deviceState = enDeviceState.ERROR; return; }
+                
                 ItemStack newstack = null;
                 if (makeitem != null) { newstack = new ItemStack(makeitem, outitem.quantity); }
                 else { newstack = new ItemStack(makeblock, outitem.quantity); }
-                if (newstack.Item.Attributes.KeyExists("waterTightContainerProps"))
+                if (newstack == null) { deviceState = enDeviceState.ERROR; return; }
+                if (newstack.Item!=null&&newstack.Item.Attributes.KeyExists("waterTightContainerProps"))
                 {
                     WaterTightContainableProps liquidpros = newstack.Item.Attributes["waterTightContainerProps"].AsObject<WaterTightContainableProps>();
                     newstack.StackSize *= (int)liquidpros.ItemsPerLitre;
