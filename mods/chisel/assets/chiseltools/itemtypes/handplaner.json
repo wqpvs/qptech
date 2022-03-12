@@ -3,7 +3,13 @@
 	"class": "ItemHandPlaner",
 
 	"drawtype": "json",
-	"shape": { "base": "item/tool/miningdrill" },
+	"shape": { "base": "game:item/tool/chisel" },
+	variantgroups: [
+		{ code: "material", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel" ] },
+	],
+	textures: {
+		metal: { base: "game:block/metal/ingot/{material}" }
+	},
 	"attributes": {
 
 		"toolrackTransform": {
@@ -26,7 +32,7 @@
 	"heldTpHitAnimation": "idle",
 	"creativeinventory": {
 		
-		"qptech": [ "*" ]
+		"chiseltools": [ "*" ]
 		
 	},
 
@@ -101,6 +107,15 @@
 			"z": 0.5
 		},
 		"scale": 0.93
+	},
+		"durabilitybytype": {
+		"handplaner-copper": 600,
+		"handplaner-tinbronze": 1000,
+		"handplaner-bismuthbronze": 1200,
+		"handplaner-blackbronze": 1400,
+		"handplaner-iron": 2000,
+		"handplaner-meteoriciron": 2800,
+		"handplaner-steel": 5000
 	}
 	
 }

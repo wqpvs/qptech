@@ -1,8 +1,8 @@
 {
   "type": "code",
-  "modid": "chisel",
-  "name": "chisel",
-  "description": "chisel",
+  "modid": "chiseltools",
+  "name": "chiseltools",
+  "description": "Quentin's Chiseling Tools'",
   "author": "WQP",
   "version": "1.0.0",
   "dependency": {

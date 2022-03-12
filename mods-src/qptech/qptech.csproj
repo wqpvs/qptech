@@ -105,7 +105,6 @@
     <Compile Include="src\misc\BlockPowerRod.cs" />
     <Compile Include="src\misc\BEBMultiDummy.cs" />
     <Compile Include="src\misc\BECoalPileStoker.cs" />
-    <Compile Include="src\misc\ItemHandPlaner.cs" />
     <Compile Include="src\misc\ItemWire.cs" />
     <Compile Include="src\misc\ItemMiningDrill.cs" />
     <Compile Include="src\multiblock\BEDummyBlock.cs" />

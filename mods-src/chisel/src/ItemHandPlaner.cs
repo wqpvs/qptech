@@ -13,7 +13,7 @@ using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
 
-namespace qptech.src.misc
+namespace chiseltools
 {
     class ChiselToolLoader : ModSystem
     {
@@ -165,8 +165,8 @@ namespace qptech.src.misc
                     }
                     else if (lastfacing == BlockFacing.DOWN)
                     {
-                        cutdepth = (int)(blockSel.HitPosition.Y * 16)+1;
-                        if (cutdepth > 15) { return; }
+                        cutdepth = (int)(blockSel.HitPosition.Y * 16)-1;
+                        if (cutdepth > 15 || cutdepth < 0) { return; }
                         bmb.SetVoxel(new Vec3i(yc * cutsize, cutdepth * cutsize, xc * cutsize), state, null, useindex, cutsize);
                     }
                     else if (lastfacing == BlockFacing.UP)
