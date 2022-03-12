@@ -3,7 +3,7 @@
 	"class": "ItemHandPlaner",
 
 	"drawtype": "json",
-	"shape": { "base": "game:item/tool/chisel" },
+	"shape": { "base": "handplaner" },
 	variantgroups: [
 		{ code: "material", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel" ] },
 	],
@@ -36,77 +36,29 @@
 		
 	},
 
-	"guiTransform": {
-		"translation": {
-			"x": 0,
-			"y": 0,
-			"z": 0
-		},
-		"rotation": {
-			"x": 9,
-			"y": 137,
-			"z": -53
-		},
-		"origin": {
-			"x": 0.44,
-			"y": 0,
-			"z": 0.38
-		},
-		"scale": 2.92
+	guiTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 9, y: 137, z: -53 },
+		origin: { x: 0.44, y: 0, z: 0.38 },
+		scale: 2.92
 	},
-	"fpHandTransform": {
-		"translation": {
-			"x": -0.6,
-			"y": 0.4,
-			"z": 0
-		},
-		"rotation": {
-			"x": 180,
-			"y": 180,
-			"z": -90
-		},
-		"origin": {
-			"x": 0.5,
-			"y": 0,
-			"z": 0.5
-		},
-		"scale": 3.25
+	fpHandTransform: {
+		translation: { x: -0.1, y: 0.2, z: 0 },
+		rotation: { x: 90, y: 99, z: -42 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 2.15
 	},
-	"groundTransform": {
-		"translation": {
-			"x": 0,
-			"y": 0,
-			"z": 0
-		},
-		"rotation": {
-			"x": 0,
-			"y": 0,
-			"z": 0
-		},
-		"origin": {
-			"x": 0.5,
-			"y": 0,
-			"z": 0.5
-		},
-		"scale": 4.31
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 4.31
 	},
-	"tpHandTransform": {
-		"translation": {
-			"x": -1,
-			"y": 0.25,
-			"z": -0.5
-		},
-		"rotation": {
-			"x": 16,
-			"y": -90,
-			"z": -16
-		},
-		"origin": {
-			"x": 0.5,
-			"y": 0,
-			"z": 0.5
-		},
-		"scale": 0.93
+	tpHandTransform: {
+		translation: { x: -0.78, y: -0.09, z: -0.67 },
+		rotation: { x: 9, y: -1, z: -16 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 0.76
 	},
 		"durabilitybytype": {
 		"handplaner-copper": 600,
