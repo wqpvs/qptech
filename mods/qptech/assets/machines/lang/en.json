@@ -1,4 +1,6 @@
 {
+	"block-solarplane-primitive-*": "Solar Plane (Primitive)",
+	"block-solarplane-creative-*": "Solar Plane (Creative)",
 	"block-lightbulb-on-up": "Box Light",
 	"block-lightbulb-off-up": "Box Light",
 	"block-machineryblock": "Bronze Machine Hull",
@@ -243,6 +245,6 @@
 	"blockdesc-cableextruder-*": "Feed in liquid rubber, and braided wires, and add some heat and it will make cables.",
 	"block-industrialblower-highpressure-*": "Industrial High Pressure Blower",
 	"blockdesc-industrialblower-highpressure-*": "Supplies the Air Flow process (5000 units)(units are currently generic, not related to any real world measurements)"
-	
+
 
 }

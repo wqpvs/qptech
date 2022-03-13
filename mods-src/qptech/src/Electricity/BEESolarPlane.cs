@@ -23,7 +23,7 @@ namespace qptech.src
 
         MeshData meshdata;
 
-        protected float sunLightStrength;
+        protected int sunLightStrength;
 
         protected int timeOfDay;
 
@@ -62,14 +62,17 @@ namespace qptech.src
 
         public void OnSunTick(float tick)
         {
+            
+            tick = 60 * tick;
             sunLightStrength = Api.World.BlockAccessor.GetLightLevel(Pos, EnumLightLevelType.MaxTimeOfDayLight);
             if (Api.Side is EnumAppSide.Server)
             {
                 if (IsOn)
                 {
-                    if (sunLightStrength < 8)
+                    if (sunLightStrength > 9)
                     {
                         NightOrDay(false);
+
                     }
                     else
                     {
@@ -82,31 +85,30 @@ namespace qptech.src
         public bool NightOrDay(bool light)
         {
             timeOfDay = Api.World.Calendar.FullHourOfDay;
-
             if (isOn)
             {
                 if (sunLightStrength > 9 & timeofday.Length < 10)
                 {
-            
+
                     setBlockState("morning");
                     genPower = 1 + fluxBonus;
 
                 }
                 else if (sunLightStrength > 9 & timeofday.Length <= 14)
                 {
-              
+
                     setBlockState("midday");
                     genPower = 2 + fluxBonus;
                 }
                 else if (sunLightStrength > 9 & timeofday.Length < 21)
                 {
-         
+
                     setBlockState("evening");
                     genPower = 1 + fluxBonus;
                 }
                 else
                 {
- 
+
                     setBlockState("night");
                     genPower = 0;
                 }

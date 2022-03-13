@@ -13,8 +13,8 @@
 		}
 	],
 	"creativeinventory": {
-		"general": [ "*" ],
-		"qptech": [ "*" ]
+		"general": [ "*-morning" ],
+		"qptech": [ "*-morning" ]
 	},
 	"attributesByType": {
 		"*-creative-*": {
