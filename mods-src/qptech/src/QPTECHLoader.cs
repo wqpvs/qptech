@@ -149,6 +149,7 @@ namespace qptech.src
             api.RegisterBlockEntityClass("BEEHVAC", typeof(BEEHVAC));
             api.RegisterBlockEntityClass("BEEKiln", typeof(BEEKiln));
             api.RegisterBlockEntityClass("BEELightBulb", typeof(BEELightBulb));
+            api.RegisterBlockEntityClass("BEESolarPlane", typeof(BEESolarPlane));
 
             #endregion BEElectrical
             #region Item Pipes

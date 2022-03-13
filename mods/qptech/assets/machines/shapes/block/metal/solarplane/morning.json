@@ -41,7 +41,7 @@
 						"east": { "texture": "#main", "uv": [ 18.5, 23.0, 29.5, 23.5 ], "windMode": [-1,-1,-1,-1] },
 						"south": { "texture": "#main", "uv": [ 18.5, 22.0, 32.0, 22.5 ], "windMode": [-1,-1,-1,-1] },
 						"west": { "texture": "#main", "uv": [ 18.5, 23.5, 29.5, 24.0 ], "windMode": [-1,-1,-1,-1] },
-						"up": { "texture": "#main", "uv": [ 18.5, 0.0, 32.0, 11.0 ], "windMode": [-1,-1,-1,-1] },
+						"up": { "texture": "#main", "uv": [ 18.5, 0.0, 32.0, 11.0 ], "glow": 20, "windMode": [-1,-1,-1,-1] },
 						"down": { "texture": "#main", "uv": [ 18.5, 11.0, 32.0, 22.0 ], "windMode": [-1,-1,-1,-1] }
 					},
 					"children": [

@@ -33,6 +33,9 @@ namespace qptech.src
 
         public int[] timeofday => new int[timeOfDay];
 
+        RoomRegistry roomreg;
+        public int roomness;
+
 
         public new virtual int AvailablePower()
         {
@@ -59,13 +62,12 @@ namespace qptech.src
 
         public void OnSunTick(float tick)
         {
-            sunLightStrength = Api.World.Calendar.GetDayLightStrength(Pos.X, Pos.Z);
-
+            sunLightStrength = Api.World.BlockAccessor.GetLightLevel(Pos, EnumLightLevelType.MaxTimeOfDayLight);
             if (Api.Side is EnumAppSide.Server)
             {
                 if (IsOn)
                 {
-                    if (sunLightStrength < 1f)
+                    if (sunLightStrength < 8)
                     {
                         NightOrDay(false);
                     }
@@ -83,24 +85,28 @@ namespace qptech.src
 
             if (isOn)
             {
-                if (timeofday.Length >= 8 & timeofday.Length < 10)
+                if (sunLightStrength > 9 & timeofday.Length < 10)
                 {
+            
                     setBlockState("morning");
                     genPower = 1 + fluxBonus;
 
                 }
-                else if (timeofday.Length >= 10 & timeofday.Length <= 14)
+                else if (sunLightStrength > 9 & timeofday.Length <= 14)
                 {
+              
                     setBlockState("midday");
                     genPower = 2 + fluxBonus;
                 }
-                else if (timeofday.Length >= 14 & timeofday.Length < 17)
+                else if (sunLightStrength > 9 & timeofday.Length < 21)
                 {
+         
                     setBlockState("evening");
                     genPower = 1 + fluxBonus;
                 }
                 else
                 {
+ 
                     setBlockState("night");
                     genPower = 0;
                 }

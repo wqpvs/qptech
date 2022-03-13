@@ -34,14 +34,13 @@
 		"base": "block/metal/solarplane/{timestate}"
 	},
 	"textures": {
-		"main": 
-		{
+		"main": {
 			"base": "block/metal/solarplane/main"
 		}
-		},
+	},
 	"blockmaterial": "Metal",
 	"drawtype": "Json",
-	"resistance": 1,
+	"resistance": 50,
 	"sidesolid": {
 		"all": false
 	},
@@ -50,12 +49,36 @@
 	},
 	"faceCullMode": "NeverCull",
 	"renderpass": "OpaqueNoCull",
-	"emitSideAo": { "all": false },
-	"sideAo": { "all": false },
-	"ambientocclusion": false,
+	"emitSideAo": {
+		"all": false,
+		"up": true
+	},
+	"sideAo": {
+		"all": false,
+		"up": true
+	},
+	"vertexFlags": {
+		"reflective": true
+	},
 	"lightAbsorption": 1,
 	"sounds": {
 		"place": "game:block/anvil",
 		"walk": "game:walk/stone"
+	},
+	"selectionBox": {
+		"x1": 0.17,
+		"y1": 0,
+		"z1": 0.0625,
+		"x2": 0.82,
+		"y2": 0.3125,
+		"z2": 0.9375
+	},
+	"collisionBox": {
+		"x1": 0.17,
+		"y1": 0,
+		"z1": 0.0625,
+		"x2": 0.82,
+		"y2": 0.3125,
+		"z2": 0.9375
 	}
 }
