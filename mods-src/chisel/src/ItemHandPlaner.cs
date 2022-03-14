@@ -44,7 +44,14 @@ namespace chiseltools
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
-            PlaneCut(blockSel);
+            if (byPlayer.Entity.Controls.Sneak)
+            {
+                ExtrudeAdd(blockSel,false);
+            }
+            else
+            {
+                PlaneCut(blockSel);
+            }
             handling = EnumHandHandling.PreventDefaultAction;
         }
 
@@ -60,7 +67,7 @@ namespace chiseltools
 
             if (byPlayer.Entity.Controls.Sneak)
             {
-                ExtrudeAdd(blockSel);
+                ExtrudeAdd(blockSel,true);
             }
             else
             {
@@ -139,8 +146,10 @@ namespace chiseltools
         /// (plane will be added in front of the targetd voxel)
         /// </summary>
         /// <param name="blockSel">Block Selection</param>
+        
         public virtual void PlaneAdd(BlockSelection blockSel)
         {
+            bool state = true;
             if (blockSel == null)
             {
                 lastpos = null; return;
@@ -171,7 +180,7 @@ namespace chiseltools
                 useindex = cwm.Material;
                 break;
             }
-            bool state = true;
+            
             //loop thru 16 x 16 voxel plane (xc/yc will be swapped with other coordinates depending on the direction we are facing)
             //tell the microblock to add each voxel
             for (int xc = 0; xc < 16 / cutsize; xc++)
@@ -222,8 +231,13 @@ namespace chiseltools
 
         }
 
-        //this function will ultimately (hopefully) extrude only relevant faces eg: instead of adding an entire plane, if you had 2x2 voxels sticking out it would extrude only those
-        public virtual void ExtrudeAdd(BlockSelection blockSel)
+        
+        /// <summary>
+        /// Add or remove faces only matching a certain material
+        /// </summary>
+        /// <param name="blockSel">BlockSel from player</param>
+        /// <param name="addmode">true - add, false - remove blocks</param>
+        public virtual void ExtrudeAdd(BlockSelection blockSel,bool addmode)
         {
             if (blockSel == null)
             {
@@ -250,30 +264,41 @@ namespace chiseltools
             Vec3i startco = new Vec3i(s.X,s.Y,s.Z); //start coordinates of our build plane
             Vec3i endco = new Vec3i(s.X, s.Y, s.Z); //end coordinates of our build plane
             Vec3i writeoffset = new Vec3i(0,0,0);
+
+            
             //adjust the plane based on facing
             if (blockSel.Face == BlockFacing.NORTH||blockSel.Face==BlockFacing.SOUTH)
             {
                 startco.X = 0;startco.Y = 0;
                 endco.X = 16;endco.Y = 16;
                 endco.Z += 1;
-                if (blockSel.Face == BlockFacing.SOUTH) { writeoffset.Z=1; }
-                else { writeoffset.Z = -1; }
+                if (addmode)
+                {
+                    if (blockSel.Face == BlockFacing.SOUTH) { writeoffset.Z = 1; }
+                    else { writeoffset.Z = -1; }
+                }
             }
             else if (blockSel.Face == BlockFacing.EAST || blockSel.Face == BlockFacing.WEST)
             {
                 startco.Z = 0; startco.Y = 0;
                 endco.Z = 16;endco.Y = 16;
                 endco.X += 1;
-                if (blockSel.Face == BlockFacing.EAST) { writeoffset.X =1; }
-                else { writeoffset.X = -1; }
+                if (addmode)
+                {
+                    if (blockSel.Face == BlockFacing.EAST) { writeoffset.X = 1; }
+                    else { writeoffset.X = -1; }
+                }
             }
             else if (blockSel.Face == BlockFacing.DOWN || blockSel.Face == BlockFacing.UP)
             {
                 startco.X = 0;startco.Z = 0;
                 endco.X = 16;endco.Z = 16;
                 endco.Y += 1;
-                if (blockSel.Face == BlockFacing.UP) { writeoffset.Y =1; }
-                else { writeoffset.Y = -1; }
+                if (addmode)
+                {
+                    if (blockSel.Face == BlockFacing.UP) { writeoffset.Y = 1; }
+                    else { writeoffset.Y = -1; }
+                }
             }
             checkplane.Set(startco, endco);
 
@@ -296,7 +321,7 @@ namespace chiseltools
                 if (checkcuboid.Intersects(checkplane)) { cuboidsInPlane.Add(checkcuboid); }//if it's in the check plane then add it
             }
             if (cuboidsInPlane.Count == 0) { return; } //I don't think this is necessary, but maybe if there's a race condition?
-            bool state = true; //(true= add voxel, false= remove voxel)
+            
             //loop thru 16 x 16 voxel plane (xc/yc will be swapped with other coordinates depending on the direction we are facing)
             //tell the microblock to add each voxel
             //adjust the start and end coordinates to work with the for loop:
@@ -319,7 +344,7 @@ namespace chiseltools
                         {
                             if (!cube.Contains(v)) { continue; }
                             
-                            bmb.SetVoxel(new Vec3i(v.X+writeoffset.X,v.Y+writeoffset.Y,v.Z+writeoffset.Z), state, null, useindex, 1);
+                            bmb.SetVoxel(new Vec3i(v.X+writeoffset.X,v.Y+writeoffset.Y,v.Z+writeoffset.Z), addmode, null, useindex, 1);
                             break;
                         }
                     }
