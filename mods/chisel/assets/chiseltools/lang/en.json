@@ -1,3 +1,7 @@
 {
 	"item-handplaner-*": "Hand Planer",
-	"itemdesc-handplaner-*": "Left click on a chiseled block to add a 1 voxel plane, right click to delete a 1 voxel plane"
+	"itemdesc-handplaner-*": "Use on chiseled blocks to quickly add and remove material.<br><a href=\"handbook://chiseltools:chiseltools-guide\">QPs Chisel Tools Guide</a>",
+	"chiseltools-guide": "Chisel Tools Guide",
+	"chiseltools-guide-title": "QPs Chisel Tools Guide",
+	"chiseltools-guide-text":"<strong>Welcome to QP's Chisel Tools!</strong><br><br><strong><a href=\"handbook://item-chiseltools:handplaner-copper\">Hand Planer Tool</a></strong><br>Use on chiseled blocks to quickly add and remove material.<br><i>Left Click:</i> Remove a 1 voxel plane<br><i>Crouch+Left Click:</i>Remove a 1 voxel plane of the targeted material<br><i>Right Click:</i>  Add a 1 pixel plane of the selected material<br><i>Crouch+Right Click:</i>Extrude the selected material by one voxel'"
+}
