@@ -27,7 +27,7 @@
 		}
 	},
 
-	
+	damagedby: ["blockbreaking", "attacking"],
 	"enabled": true,
 	"heldTpHitAnimation": "idle",
 	"creativeinventory": {

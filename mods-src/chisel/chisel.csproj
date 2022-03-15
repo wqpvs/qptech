@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="src\ChiselToolLoader.cs" />
     <Compile Include="src\ItemHandPlaner.cs" />
   </ItemGroup>
   <Target Name="CopyToBin" AfterTargets="AfterBuild">
