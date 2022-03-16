@@ -49,7 +49,14 @@ namespace chiseltools
             }
             if (api is ICoreServerAPI)
             {
-                this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, CalcDamage(cutvoxels));
+                if (byPlayer?.WorldData.CurrentGameMode == EnumGameMode.Creative)
+                {
+                    handling = EnumHandHandling.PreventDefaultAction;
+                }
+                else
+                {
+                    this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, CalcDamage(cutvoxels));
+                }
             }
             handling = EnumHandHandling.PreventDefaultAction;
         }
