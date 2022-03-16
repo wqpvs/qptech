@@ -2,4 +2,6 @@
 - can only make hand planer with iron and better (previously made tools will still exist)
 - implemented tool durability
 - implemented tool durability server config
-TODO - add server commands to adjust handplaner damage
+- implemented server command to change hand planer tool usage:
+	/qpchisel-handplaner-toolusage (Set how fast hand planer gets damaged when used. Default is 0.125)
+

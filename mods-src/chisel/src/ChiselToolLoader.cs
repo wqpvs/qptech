@@ -37,6 +37,7 @@ namespace chiseltools
 
         void ServerPreStart()
         {
+            sapi.RegisterCommand("qpchisel-handplaner-toolusage", "Set how fast hand planer gets damaged when used. Default is 0.125. ", "", CmdSetHandPlanerMultiplier);
             try
             {
                 serverconfig = sapi.LoadModConfig<ChiselToolServerData>(serverconfigfile);
@@ -57,6 +58,21 @@ namespace chiseltools
         {
             base.Start(api);
             api.RegisterItemClass("ItemHandPlaner", typeof(ItemHandPlaner));
+        }
+
+        private void CmdSetHandPlanerMultiplier(IPlayer player, int groupId, CmdArgs args)
+        {
+            if (sapi == null) { return; }
+            if (serverconfig == null) { sapi.BroadcastMessageToAllGroups("QP Chisel Server Config doesn't exist.", EnumChatType.Notification); return; }
+            if (args == null || args.Length == 0)
+            {
+                sapi.SendMessage(player, groupId, "Hand Planer tool usage rate is " + serverconfig.handPlanerBaseDurabilityMultiplier + "(Default is 0.125)", EnumChatType.CommandSuccess);
+                return;
+            }
+            float newvalue = args[0].ToFloat(0.125f);
+            serverconfig.handPlanerBaseDurabilityMultiplier = newvalue;
+            sapi.StoreModConfig<ChiselToolServerData>(serverconfig, serverconfigfile);
+            sapi.SendMessage(player, groupId, "Hand Planer tool usage rate SET to " + serverconfig.handPlanerBaseDurabilityMultiplier + "(Default is 0.125)", EnumChatType.CommandSuccess);
         }
 
         [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
