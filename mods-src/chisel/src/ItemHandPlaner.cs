@@ -11,6 +11,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
+using Vintagestory.API.Server;
 
 
 namespace chiseltools
@@ -46,7 +47,10 @@ namespace chiseltools
             {
                 cutvoxels=PlaneCut(blockSel);
             }
-            this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot,CalcDamage(cutvoxels));
+            if (api is ICoreServerAPI)
+            {
+                this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, CalcDamage(cutvoxels));
+            }
             handling = EnumHandHandling.PreventDefaultAction;
         }
 
@@ -76,7 +80,11 @@ namespace chiseltools
             {
                 cutvoxels = PlaneAdd(blockSel);
             }
-            this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, CalcDamage(cutvoxels));
+            if (api is ICoreServerAPI)
+            {
+                this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, CalcDamage(cutvoxels));
+            }
+            
             handling = EnumHandHandling.PreventDefaultAction;
         }
         public virtual int PlaneCut(BlockSelection blockSel)
