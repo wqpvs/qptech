@@ -47,6 +47,10 @@ namespace chiseltools
             {
                 cutvoxels=PlaneCut(blockSel);
             }
+            if (cutvoxels > 0)
+            {
+                api.World.PlaySoundAt(new AssetLocation("chiseltools:sounds/stone_move") , blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
+            }
             if (api is ICoreServerAPI)
             {
                 if (byPlayer?.WorldData.CurrentGameMode == EnumGameMode.Creative)
@@ -57,6 +61,7 @@ namespace chiseltools
                 {
                     this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, CalcDamage(cutvoxels));
                 }
+                
             }
             handling = EnumHandHandling.PreventDefaultAction;
         }
@@ -86,6 +91,10 @@ namespace chiseltools
             else
             {
                 cutvoxels = PlaneAdd(blockSel);
+            }
+            if (cutvoxels > 0)
+            {
+                api.World.PlaySoundAt(new AssetLocation("chiseltools:sounds/stone_move"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
             }
             if (api is ICoreServerAPI)
             {
@@ -361,13 +370,13 @@ namespace chiseltools
                 if (checkcuboid.Intersects(checkplane)) { cuboidsInPlane.Add(checkcuboid); }//if it's in the check plane then add it
             }
             if (cuboidsInPlane.Count == 0) { return 0; } //I don't think this is necessary, but maybe if there's a race condition?
-            
+
             //loop thru 16 x 16 voxel plane (xc/yc will be swapped with other coordinates depending on the direction we are facing)
             //tell the microblock to add each voxel
             //adjust the start and end coordinates to work with the for loop:
-            endco.X++;
-            endco.Y++;
-            endco.Z++;
+            if (endco.X == startco.X) { endco.X++; }
+            if (endco.Y == startco.Y) { endco.Y++; }
+            if (endco.Z == startco.Z) { endco.Z++; }
             int cutvoxels = 0;
             //Loop thru all the dimensions of our plane (one dimension should be 0 size)
             for (int xc = startco.X; xc < endco.X; xc++)

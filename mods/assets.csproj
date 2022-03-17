@@ -539,6 +539,7 @@
     <Content Include="qptech\changelog1.7.0.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="chisel\assets\chiseltools\sounds\" />
     <Folder Include="qptech\assets\game\blocktypes\" />
     <Folder Include="qptech\assets\machines\shapes\block\glass\" />
     <Folder Include="qptech\assets\machines\shapes\block\indev\" />

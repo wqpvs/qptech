@@ -37,7 +37,7 @@ namespace chiseltools
 
         void ServerPreStart()
         {
-            sapi.RegisterCommand("qpchisel-handplaner-toolusage", "Set how fast hand planer gets damaged when used. Default is 0.125. ", "", CmdSetHandPlanerMultiplier);
+            sapi.RegisterCommand("qpchisel-handplaner-toolusage", "Set how fast hand planer gets damaged when used. Default is 0.125. ", "", CmdSetHandPlanerMultiplier,Privilege.controlserver);
             try
             {
                 serverconfig = sapi.LoadModConfig<ChiselToolServerData>(serverconfigfile);
