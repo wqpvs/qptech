@@ -1,5 +1,11 @@
 {
-	"item-handplaner-*": "Hand Planer",
+	"item-handplaner-copper": "Copper Hand Planer",
+	"item-handplaner-tinbronze": "Tin Bronze Hand Planer",
+	"item-handplaner-bismuthbronze": "Bismuth Bronze Hand Planer",
+	"item-handplaner-blackbronze": "Black Bronze Hand Planer",
+	"item-handplaner-iron": "Iron Hand Planer",
+	"item-handplaner-meteoriciron": "Meteoric Iron Hand Planer",
+	"item-handplaner-steel": "Steel Hand Planer",
 	"itemdesc-handplaner-*": "Use on chiseled blocks to quickly add and remove material.<br><a href=\"handbook://chiseltools:chiseltools-guide\">QPs Chisel Tools Guide</a>",
 	"chiseltools-guide": "Chisel Tools Guide",
 	"chiseltools-guide-title": "QPs Chisel Tools Guide",
