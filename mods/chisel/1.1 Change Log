@@ -5,5 +5,6 @@
 - implemented server command to change hand planer tool usage:
 	/qpchisel-handplaner-toolusage (Set how fast hand planer gets damaged when used. Default is 0.125)
 - added a sound
+- new hand planer model from Andy!
 - bugfix: west and north face shift+left click doubles sometimes
 
