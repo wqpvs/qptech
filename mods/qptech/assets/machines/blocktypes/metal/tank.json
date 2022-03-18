@@ -7,8 +7,7 @@
 		"canhold": [ "water-*" ]
 	},
 	"behaviors": [
-		
-
+		{ "name": "RightClickPickup" }
 	],
 	"variantgroups": [
 		{
@@ -26,7 +25,6 @@
 		"qptech": [ "container-*" ]
 	},
 	"drawtype": "json",
-	"shapeinventory": { "base": "block/metal/container/tank" },
 	"shape": { "base": "block/metal/container/tank" },
 	"textures": {
 		"machinery": { "base": "block/metal/tank/{metal}" },
@@ -56,18 +54,28 @@
 	"heldTpUseAnimation": "twohandplaceblock",
 	"tpHandTransform": {
 		"translation": {
-			"x": -1.45,
-			"y": -0.82,
-			"z": -0.54
+			"x": 0,
+			"y": 0,
+			"z": 0
 		},
 		"rotation": {
 			"x": 12,
 			"y": 14,
 			"z": -73
 		},
-		"scale": 0.38
+		"origin": {
+			"x": 0.1,
+			"y": 0.15,
+			"z": 0.3
+		},
+		"scale": 0.4
 	},
 	"fpHandTransform": {
+		"translation": {
+			"x": 0,
+			"y": -0.1,
+			"z": 0.25
+		},
 		"scale": 1.5
 	},
 	"groundTransform": {
