@@ -28,7 +28,7 @@ namespace chiseltools
         //These will track the last thing the planer clicked on
         BlockPos lastpos;
         BlockFacing lastfacing=BlockFacing.DOWN;
-
+        
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
             if (blockSel == null) { return; }
@@ -41,11 +41,11 @@ namespace chiseltools
             int cutvoxels = 0;
             if (byPlayer.Entity.Controls.Sneak)
             {
-                cutvoxels=ExtrudeAdd(blockSel, false);
+                cutvoxels=ModifyChiseledBlock(blockSel, "sneakleft");
             }
             else
             {
-                cutvoxels=PlaneCut(blockSel);
+                cutvoxels=ModifyChiseledBlock(blockSel,"left");
             }
             if (cutvoxels > 0)
             {
@@ -86,11 +86,11 @@ namespace chiseltools
             int cutvoxels = 0;
             if (byPlayer.Entity.Controls.Sneak)
             {
-                cutvoxels=ExtrudeAdd(blockSel,true);
+                cutvoxels=ModifyChiseledBlock(blockSel, "sneakright");
             }
             else
             {
-                cutvoxels = PlaneAdd(blockSel);
+                cutvoxels = ModifyChiseledBlock(blockSel,"right");
             }
             if (cutvoxels > 0)
             {
@@ -110,184 +110,32 @@ namespace chiseltools
 
             handling = EnumHandHandling.PreventDefaultAction;
         }
-        public virtual int PlaneCut(BlockSelection blockSel)
-        {
-            if (blockSel == null)
-            {
-                lastpos = null; return 0;
-            }
-            if (lastpos == null || lastpos != blockSel.Position || lastfacing != blockSel.Face)
-            {
-                lastpos = blockSel.Position;
-                lastfacing = blockSel.Face;
-                
-            }
-            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
-
-            if (bmb == null) { lastpos = null;  return 0; }
-            CuboidWithMaterial cwm = new CuboidWithMaterial();
-            if (bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0)
-            {
-                if (!(api is ICoreClientAPI)) { api.World.BlockAccessor.SetBlock(0, blockSel.Position);return 0; }
-                else { return 0; }
-            }
-
-            int cutvoxels = 0;
-            for (int xc = 0; xc < 16 / cutsize; xc++)
-            {
-                for (int yc = 0; yc < 16 / cutsize; yc++)
-                {
-                    if (lastfacing == BlockFacing.NORTH)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.Z * 16);
-                        //bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutcounter * cutsize), false, null, 0, cutsize);
-                        bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutdepth * cutsize), false, null, 0, cutsize);
-                        cutvoxels++;
-                    }
-                    else if (lastfacing == BlockFacing.SOUTH)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.Z * 16) - cutsize;
-                        //bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, (16-cutsize)-cutcounter * cutsize), false, null, 0, cutsize);
-                        bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutdepth * cutsize), false, null, 0, cutsize);
-                        cutvoxels++;
-                    }
-                    else if (lastfacing == BlockFacing.WEST)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.X * 16);
-                        bmb.SetVoxel(new Vec3i(cutdepth * cutsize, yc * cutsize, xc * cutsize), false, null, 0, cutsize);
-                        cutvoxels++;
-                    }
-                    else if (lastfacing == BlockFacing.EAST)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.X * 16) - cutsize;
-                        bmb.SetVoxel(new Vec3i(cutdepth * cutsize, yc * cutsize, xc * cutsize), false, null, 0, cutsize);
-                        cutvoxels++;
-                    }
-                    else if (lastfacing == BlockFacing.DOWN)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.Y * 16);
-                        bmb.SetVoxel(new Vec3i(yc * cutsize, cutdepth * cutsize, xc * cutsize), false, null, 0, cutsize);
-                        cutvoxels++;
-                    }
-                    else if (lastfacing == BlockFacing.UP)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.Y * 16) - cutsize;
-                        bmb.SetVoxel(new Vec3i(yc * cutsize, cutdepth * cutsize, xc * cutsize), false, null, 0, cutsize);
-                        cutvoxels++;
-                    }
-                }
-            }
-            bmb.MarkDirty(true);
-            return cutvoxels;
-            
-
-        }
-        /// <summary>
-        /// This will try and find the targeted voxel and make a 16x16 plane of that voxel's material type
-        /// (plane will be added in front of the targetd voxel)
-        /// Returns number of voxels cut
-        /// </summary>
-        /// <param name="blockSel">Block Selection</param>
-        
-        public virtual int PlaneAdd(BlockSelection blockSel)
-        {
-            bool state = true;
-            if (blockSel == null)
-            {
-                lastpos = null; return 0;
-            }
-            if (lastpos == null || lastpos != blockSel.Position || lastfacing != blockSel.Face)
-            {
-                lastpos = blockSel.Position;
-                lastfacing = blockSel.Face;
-
-            }
-            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
-            if (bmb == null) { lastpos = null; return 0; }
-            byte useindex = 0;
-            CuboidWithMaterial cwm = new CuboidWithMaterial();
-            //convert the hit point into voxel coordinates
-            Vec3i s = new Vec3i((int)(blockSel.HitPosition.X * 16f), (int)(blockSel.HitPosition.Y * 16f), (int)(blockSel.HitPosition.Z * 16f));
-            if (blockSel.Face == BlockFacing.SOUTH) { s.Z--; }
-            if (blockSel.Face == BlockFacing.UP) { s.Y--; }
-            if (blockSel.Face == BlockFacing.EAST) { s.X--; }
-
-            foreach (uint voxint in bmb.VoxelCuboids)
-            {
-                //this static method converts the uint into a CubioidWithMaterial
-                BlockEntityMicroBlock.FromUint(voxint, cwm);
-                //check if the voxel we are looking at is part of the cubiod
-                if (!cwm.Contains(s.X, s.Y, s.Z)) { continue; }
-                //if it's part of the cuboid grab its material to use
-                useindex = cwm.Material;
-                break;
-            }
-            int cutvoxels = 0;
-            //loop thru 16 x 16 voxel plane (xc/yc will be swapped with other coordinates depending on the direction we are facing)
-            //tell the microblock to add each voxel
-            for (int xc = 0; xc < 16 / cutsize; xc++)
-            {
-                for (int yc = 0; yc < 16 / cutsize; yc++)
-                {
-                    if (lastfacing == BlockFacing.NORTH)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.Z * 16)-1;
-                        if (cutdepth > 15||cutdepth<0) { return 0; }
-                        bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutdepth * cutsize), state, null, useindex, cutsize);
-                        cutvoxels++;
-                    }
-                    else if (lastfacing == BlockFacing.SOUTH)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.Z * 16) ;
-                        if (cutdepth > 15) { return 0; }
-                        bmb.SetVoxel(new Vec3i(xc * cutsize, yc * cutsize, cutdepth * cutsize), state, null, useindex, cutsize);
-                        cutvoxels++;
-                    }
-                    else if (lastfacing == BlockFacing.WEST)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.X * 16)-1;
-                        if (cutdepth > 15 || cutdepth < 0) { return 0; }
-                        bmb.SetVoxel(new Vec3i(cutdepth * cutsize, yc * cutsize, xc * cutsize), state, null, useindex, cutsize);
-                        cutvoxels++;
-                    }
-                    else if (lastfacing == BlockFacing.EAST)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.X * 16) ;
-                            if (cutdepth > 15) { return 0; };
-                        bmb.SetVoxel(new Vec3i(cutdepth * cutsize, yc * cutsize, xc * cutsize), state, null, useindex, cutsize);
-                        cutvoxels++;
-                    }
-                    else if (lastfacing == BlockFacing.DOWN)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.Y * 16)-1;
-                        if (cutdepth > 15 || cutdepth < 0) { return 0; }
-                        bmb.SetVoxel(new Vec3i(yc * cutsize, cutdepth * cutsize, xc * cutsize), state, null, useindex, cutsize);
-                        cutvoxels++;
-                    }
-                    else if (lastfacing == BlockFacing.UP)
-                    {
-                        cutdepth = (int)(blockSel.HitPosition.Y * 16) ;
-                        if (cutdepth > 15) { return 0; }
-                        bmb.SetVoxel(new Vec3i(yc * cutsize, cutdepth * cutsize, xc * cutsize), state, null, useindex, cutsize);
-                        cutvoxels++;
-                    }
-                }
-            }
-            bmb.MarkDirty(true);
-            return cutvoxels;
-
-
-        }
-
         
         /// <summary>
         /// Add or remove faces only matching a certain material
         /// Returns voxels cut
         /// </summary>
-        /// <param name="blockSel">BlockSel from player</param>
-        /// <param name="addmode">true - add, false - remove blocks</param>
-        public virtual int ExtrudeAdd(BlockSelection blockSel,bool addmode)
+        /// <param name="mode">Mode selector for the function</param>
+        
+        public virtual int ModifyChiseledBlock(BlockSelection blockSel,string mode)
         {
+            bool addmode = false;
+            bool onlymatching = false;
+            if (mode == "sneakleft")
+            {
+                addmode = false;
+                onlymatching = true;
+            }
+            else if (mode == "sneakright")
+            {
+                addmode = true;
+                onlymatching = true;
+            }
+            else if (mode == "right")
+            {
+                addmode = true;
+                onlymatching = false;
+            }
             if (blockSel == null)
             {
                 lastpos = null; return 0;
@@ -366,10 +214,10 @@ namespace chiseltools
                 
                 CuboidWithMaterial checkcuboid = new CuboidWithMaterial();
                 BlockEntityMicroBlock.FromUint(voxint, checkcuboid);//convert raw data into a cuboid we can read
-                if (checkcuboid.Material != useindex) { continue; }//reject cuboids that don't share our material
+                if (onlymatching&& checkcuboid.Material != useindex) { continue; }//reject cuboids that don't share our material
                 if (checkcuboid.Intersects(checkplane)) { cuboidsInPlane.Add(checkcuboid); }//if it's in the check plane then add it
             }
-            if (cuboidsInPlane.Count == 0) { return 0; } //I don't think this is necessary, but maybe if there's a race condition?
+            if (onlymatching&&cuboidsInPlane.Count == 0) { return 0; } //I don't think this is necessary, but maybe if there's a race condition?
 
             //loop thru 16 x 16 voxel plane (xc/yc will be swapped with other coordinates depending on the direction we are facing)
             //tell the microblock to add each voxel
@@ -389,13 +237,26 @@ namespace chiseltools
                         if (v.X + writeoffset.X > 15 || v.X + writeoffset.X < 0) { continue; }
                         if (v.Y + writeoffset.Y > 15 || v.Y + writeoffset.Y < 0) { continue; }
                         if (v.Z + writeoffset.Z > 15 || v.Z + writeoffset.Z < 0) { continue; }
-                        foreach (CuboidWithMaterial cube in cuboidsInPlane)
+
+                        if (onlymatching)
                         {
-                            if (!cube.Contains(v)) { continue; }
-                            
-                            bmb.SetVoxel(new Vec3i(v.X+writeoffset.X,v.Y+writeoffset.Y,v.Z+writeoffset.Z), addmode, null, useindex, 1);
+                            foreach (CuboidWithMaterial cube in cuboidsInPlane)
+                            {
+                                if (!cube.Contains(v)) { continue; }
+
+                                bmb.SetVoxel(new Vec3i(v.X + writeoffset.X, v.Y + writeoffset.Y, v.Z + writeoffset.Z), addmode, null, useindex, 1);
+                                cutvoxels++;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (addmode)
+                            {
+                                bmb.SetVoxel(new Vec3i(v.X + writeoffset.X, v.Y + writeoffset.Y, v.Z + writeoffset.Z), false, null, useindex, 1);
+                            }
+                            bmb.SetVoxel(new Vec3i(v.X + writeoffset.X, v.Y + writeoffset.Y, v.Z + writeoffset.Z), addmode, null, useindex, 1);
                             cutvoxels++;
-                            break;
                         }
                     }
                 }
