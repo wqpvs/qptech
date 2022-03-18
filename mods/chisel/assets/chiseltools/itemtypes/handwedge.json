@@ -1,0 +1,117 @@
+{
+	"code": "handwedge",
+	"class": "ItemWedge",
+	"tool": "Chisel",
+	"drawtype": "json",
+	"shape": { "base": "item/tool/handplaner" },
+	"variantgroups": [
+		{
+			"code": "material",
+			"states": [ "iron", "meteoriciron", "steel" ]
+		}
+	],
+	"textures": {
+		"metal": { "base": "game:block/metal/ingot/{material}" },
+		"wood": { "base": "game:item/tool/material/handle" },
+		"linen": { "base": "game:item/tool/material/linen" }
+	},
+	"attributes": {
+		"toolrackTransform": {
+			"translation": {
+				"x": 0,
+				"y": 0.61,
+				"z": 0
+			},
+			"rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 2
+			},
+			"scale": 1.25
+		}
+	},
+	"damagedby": [ "blockbreaking", "attacking" ],
+	"enabled": true,
+	"heldTpHitAnimation": "idle",
+	"creativeinventory": {
+		"chiseltools": [ "*" ]
+	},
+	"guiTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 5,
+			"y": 132,
+			"z": -55
+		},
+		"origin": {
+			"x": 0.53,
+			"y": 0,
+			"z": 0.4
+		},
+		"scale": 2.65
+	},
+	"fpHandTransform": {
+		"translation": {
+			"x": 0.1,
+			"y": 0.3,
+			"z": 0
+		},
+		"rotation": {
+			"x": 90,
+			"y": 99,
+			"z": -42
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 2.15
+	},
+	"groundTransform": {
+		"translation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 4.31
+	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -0.78,
+			"y": -0.09,
+			"z": -0.67
+		},
+		"rotation": {
+			"x": 9,
+			"y": -1,
+			"z": -16
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 0,
+			"z": 0.5
+		},
+		"scale": 0.76
+	},
+	"durabilitybytype": {
+		
+		"handwedge-iron": 2000,
+		"handwedge-meteoriciron": 2800,
+		"handwedge-steel": 5000
+	}
+}

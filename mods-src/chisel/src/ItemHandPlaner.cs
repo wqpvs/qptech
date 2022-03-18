@@ -26,8 +26,8 @@ namespace chisel.src
         int cutdepth = 0; //this was meant to be a counter, but right now is just used locally in each function
        
         //These will track the last thing the planer clicked on
-        BlockPos lastpos;
-        BlockFacing lastfacing=BlockFacing.DOWN;
+        protected BlockPos lastpos;
+        protected BlockFacing lastfacing=BlockFacing.DOWN;
         
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
