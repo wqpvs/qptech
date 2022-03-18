@@ -15,7 +15,7 @@ using Vintagestory.API.Server;
 
 namespace chisel.src
 {
-    class ItemWedge
+    class ItemWedge:ItemHandPlaner
     {
     }
 }

@@ -14,7 +14,7 @@ using Vintagestory.GameContent;
 using Vintagestory.API.Server;
 
 
-namespace chiseltools
+namespace chisel.src
 {
     
     /// <summary>

@@ -11,7 +11,7 @@ using Vintagestory.API.Util;
 using Vintagestory.API.Datastructures;
 using ProtoBuf;
 
-namespace chiseltools
+namespace chisel.src
 {
     class ChiselToolLoader : ModSystem
     {
@@ -58,6 +58,7 @@ namespace chiseltools
         {
             base.Start(api);
             api.RegisterItemClass("ItemHandPlaner", typeof(ItemHandPlaner));
+            api.RegisterItemClass("ItemWedge", typeof(ItemWedge));
         }
 
         private void CmdSetHandPlanerMultiplier(IPlayer player, int groupId, CmdArgs args)
