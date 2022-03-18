@@ -3,7 +3,7 @@
 	"class": "ItemWedge",
 	"tool": "Chisel",
 	"drawtype": "json",
-	"shape": { "base": "item/tool/handplaner" },
+	"shape": { "base": "item/tool/handwedge" },
 	"variantgroups": [
 		{
 			"code": "material",

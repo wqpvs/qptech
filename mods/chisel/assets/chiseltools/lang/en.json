@@ -9,5 +9,9 @@
 	"itemdesc-handplaner-*": "Use on chiseled blocks to quickly add and remove material.<br><a href=\"handbook://chiseltools:chiseltools-guide\">QPs Chisel Tools Guide</a>",
 	"chiseltools-guide": "Chisel Tools Guide",
 	"chiseltools-guide-title": "QPs Chisel Tools Guide",
-	"chiseltools-guide-text":"<strong>Welcome to QP's Chisel Tools!</strong><br><br><strong><a href=\"handbook://item-chiseltools:handplaner-copper\">Hand Planer Tool</a></strong><br>Use on chiseled blocks to quickly add and remove material.<br><i>Left Click:</i> Remove a 1 voxel plane<br><i>Crouch+Left Click:</i>Remove a 1 voxel plane of the targeted material<br><i>Right Click:</i>  Add a 1 pixel plane of the selected material<br><i>Crouch+Right Click:</i>Extrude the selected material by one voxel'"
+	"chiseltools-guide-text":"<strong>Welcome to QP's Chisel Tools!</strong><br><br><strong><a href=\"handbook://item-chiseltools:handplaner-iron\">Hand Planer Tool</a></strong><br>Use on chiseled blocks to quickly add and remove material.<br><i>Left Click:</i> Remove a 1 voxel plane<br><i>Crouch+Left Click:</i>Remove a 1 voxel plane of the targeted material<br><i>Right Click:</i>  Add a 1 pixel plane of the selected material<br><i>Crouch+Right Click:</i>Extrude the selected material by one voxel'<br><br><strong><a href=\"handbook://item-chiseltools:handwedge-iron\">Hand Wedge Tool</a></strong><br>Shifts chiseled blocks by one voxel - voxels that won't fit in the block are deleted.'",
+	"item-handwedge-steel": "Steel Hand Wedge",
+	"item-handwedge-iron": "Iron Hand Wedge",
+	"item-handwedge-meteoriciron": "Meteoric Iron Hand Wedge",
+	"itemdesc-handwedge-*": "Pushes chiseled items by one voxel. (Within the cube of the chiseled block) <br><a href=\"handbook://chiseltools:chiseltools-guide\">QPs Chisel Tools Guide</a>"
 }

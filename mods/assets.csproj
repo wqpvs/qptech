@@ -21,8 +21,11 @@
     <None Include="chisel\assets\chiseltools\config\handbook\chiseltools.json" />
     <None Include="chisel\assets\chiseltools\itemtypes\handwedge.json" />
     <None Include="chisel\assets\chiseltools\lang\en.json" />
+    <None Include="chisel\assets\chiseltools\recipes\smithing\handwedge.json" />
     <None Include="chisel\assets\chiseltools\recipes\smithing\handplaner.json" />
     <None Include="chisel\assets\chiseltools\shapes\handplaner.json" />
+    <None Include="chisel\assets\chiseltools\shapes\item\tool\handplaner.json" />
+    <None Include="chisel\assets\chiseltools\shapes\item\tool\handwedge.json" />
     <None Include="chisel\assets\game\lang\en.json" />
     <None Include="chisel\modinfo.json" />
     <None Include="qptech\assets\game\lang\en.json" />
