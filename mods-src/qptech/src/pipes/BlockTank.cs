@@ -17,6 +17,8 @@ namespace qptech.src
     public class BlockTank : BlockLiquidContainerBase, IBlockItemFlow
     {
 
+        protected virtual string meshRefsCacheKey => Code.ToShortString() + "meshRefs";
+
         public override bool DoPlaceBlock(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ItemStack byItemStack)
         {
 
@@ -73,47 +75,83 @@ namespace qptech.src
         #endregion
 
         #region Render
+        //public override void OnBeforeRender(ICoreClientAPI capi, ItemStack itemstack, EnumItemRenderTarget target, ref ItemRenderInfo renderinfo)
+        //{
+        //    Dictionary<int, MeshRef> meshrefs;
+ 
+        //    object obj;
+        //    if (capi.ObjectCache.TryGetValue("tankMeshRefs" + Variant["metal"], out obj))
+        //    {
+        //        meshrefs = obj as Dictionary<int, MeshRef>;
+        //        renderinfo.CullFaces = true;
+        //        renderinfo.NormalShaded = true;
+        //        renderinfo.AlphaTest = 0.4f;
+        //    }
+        //    else
+        //    {
+        //        capi.ObjectCache["tankMeshRefs" + Variant["metal"]] = meshrefs = new Dictionary<int, MeshRef>();
+        //        renderinfo.CullFaces = true;
+        //        renderinfo.NormalShaded = true;
+        //        renderinfo.AlphaTest = 0.4f;
+        //    }
+
+        //    ItemStack contentStack = GetContent(itemstack);
+        //    if (contentStack == null) return;
+            
+        //    int hashcode = GetBucketHashCode(capi.World, contentStack);
+
+        //    MeshRef meshRef = null;
+
+        //    if (!meshrefs.TryGetValue(hashcode, out meshRef))
+        //    {
+        //        MeshData meshdata = GenMesh(capi, contentStack);
+        //        //meshdata.Rgba2 = null;
+        //        meshrefs[hashcode] = meshRef = capi.Render.UploadMesh(meshdata);
+
+        //    }
+
+
+        //    renderinfo.ModelRef = meshRef;
+        //}
+
         public override void OnBeforeRender(ICoreClientAPI capi, ItemStack itemstack, EnumItemRenderTarget target, ref ItemRenderInfo renderinfo)
         {
             Dictionary<int, MeshRef> meshrefs;
-            
+
             object obj;
-            if (capi.ObjectCache.TryGetValue("tankMeshRefs" + Variant["metal"], out obj))
+            if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out obj))
             {
                 meshrefs = obj as Dictionary<int, MeshRef>;
             }
             else
             {
-                capi.ObjectCache["tankMeshRefs" + Variant["metal"]] = meshrefs = new Dictionary<int, MeshRef>();
+                capi.ObjectCache[meshRefsCacheKey] = meshrefs = new Dictionary<int, MeshRef>();
             }
 
             ItemStack contentStack = GetContent(itemstack);
             if (contentStack == null) return;
 
-            int hashcode = GetBucketHashCode(capi.World, contentStack);
+            int hashcode = GetStackCacheHashCode(contentStack);
 
-            MeshRef meshRef = null;
-
-
-            if (!meshrefs.TryGetValue(hashcode, out meshRef))
+            if (!meshrefs.TryGetValue(hashcode, out MeshRef meshRef))
             {
                 MeshData meshdata = GenMesh(capi, contentStack);
-                //meshdata.Rgba2 = null;
                 meshrefs[hashcode] = meshRef = capi.Render.UploadMesh(meshdata);
-
             }
 
+            RenderAlphaTest = 0.4f;
+            RenderPass = EnumChunkRenderPass.OpaqueNoCull;
+            //RenderPass = EnumChunkRenderPass.BlendNoCull;
             renderinfo.ModelRef = meshRef;
         }
 
 
 
-        public int GetBucketHashCode(IClientWorldAccessor world, ItemStack contentStack)
+        public int GetStackCacheHashCode(ItemStack contentStack)
         {
             string s = contentStack.StackSize + "x" + contentStack.Collectible.Code.ToShortString();
             return s.GetHashCode();
         }
-
 
 
         public override void OnUnloaded(ICoreAPI api)
@@ -122,7 +160,7 @@ namespace qptech.src
             if (capi == null) return;
 
             object obj;
-            if (capi.ObjectCache.TryGetValue("tankMeshRefs" + Variant["metal"], out obj))
+            if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out obj))
             {
                 Dictionary<int, MeshRef> meshrefs = obj as Dictionary<int, MeshRef>;
 
@@ -131,7 +169,7 @@ namespace qptech.src
                     val.Value.Dispose();
                 }
 
-                capi.ObjectCache.Remove("tankMeshRefs" + Variant["metal"]);
+                capi.ObjectCache.Remove(meshRefsCacheKey);
             }
         }
 
