@@ -23,16 +23,12 @@ namespace chisel.src
             if (bmb == null) { lastpos = null; return 0; }
             
             //convert the hit point into voxel coordinates
-            Vec3i s = new Vec3i((int)(blockSel.HitPosition.X * 16f), (int)(blockSel.HitPosition.Y * 16f), (int)(blockSel.HitPosition.Z * 16f));
-            if (blockSel.Face == BlockFacing.SOUTH) { s.Z--; }
-            if (blockSel.Face == BlockFacing.UP) { s.Y--; }
-            if (blockSel.Face == BlockFacing.EAST) { s.X--; }
-
-            
-            
+            //Vec3i s = new Vec3i((int)(blockSel.HitPosition.X * 16f), (int)(blockSel.HitPosition.Y * 16f), (int)(blockSel.HitPosition.Z * 16f));
+            //if (blockSel.Face == BlockFacing.SOUTH) { s.Z--; }
+            //if (blockSel.Face == BlockFacing.UP) { s.Y--; }
+            //if (blockSel.Face == BlockFacing.EAST) { s.X--; }
             Vec3i writeoffset = new Vec3i(0, 0, 0);
-            bool addmode = true;
-
+            
             //adjust the plane based on facing
             if (blockSel.Face == BlockFacing.SOUTH) { writeoffset.Z = -1; }
             else if (blockSel.Face==BlockFacing.NORTH) { writeoffset.Z = 1; }
@@ -49,15 +45,15 @@ namespace chisel.src
                 //this static method converts the uint into a CubioidWithMaterial
                 BlockEntityMicroBlock.FromUint(voxint, cwm);
                 //Shift coordinates of every cuboid - possible issue - voxels stacking up at outside of object
-                cwm.X1 += writeoffset.X;cwm.X1 = GameMath.Clamp(cwm.X1, 0, 15);
-                cwm.X2 += writeoffset.X;cwm.X2 = GameMath.Clamp(cwm.X2, 0, 15);
-                if (cwm.X2 < cwm.X1) { continue; }
-                cwm.Y1 += writeoffset.Y; cwm.Y1 = GameMath.Clamp(cwm.Y1, 0, 15);
-                cwm.Y2 += writeoffset.Y; cwm.Y2 = GameMath.Clamp(cwm.Y2, 0, 15);
-                if (cwm.Y2 < cwm.Y1) { continue; }
-                cwm.Z1 += writeoffset.Z; cwm.Z1 = GameMath.Clamp(cwm.Z1, 0, 15);
-                cwm.Z2 += writeoffset.Z; cwm.Z2 = GameMath.Clamp(cwm.Z2, 0, 15);
-                if (cwm.Z2 < cwm.Z1) { continue; }
+                cwm.X1 += writeoffset.X;cwm.X1 = GameMath.Clamp(cwm.X1, 0, 16);
+                cwm.X2 += writeoffset.X;cwm.X2 = GameMath.Clamp(cwm.X2, 0, 16);
+                if (cwm.X2 <= cwm.X1) { continue; }
+                cwm.Y1 += writeoffset.Y; cwm.Y1 = GameMath.Clamp(cwm.Y1, 0, 16);
+                cwm.Y2 += writeoffset.Y; cwm.Y2 = GameMath.Clamp(cwm.Y2, 0, 16);
+                if (cwm.Y2 <= cwm.Y1) { continue; }
+                cwm.Z1 += writeoffset.Z; cwm.Z1 = GameMath.Clamp(cwm.Z1, 0, 16);
+                cwm.Z2 += writeoffset.Z; cwm.Z2 = GameMath.Clamp(cwm.Z2, 0, 16);
+                if (cwm.Z2 <= cwm.Z1) { continue; }
                 uint voxelint = BlockEntityMicroBlock.ToUint(cwm.X1, cwm.Y1, cwm.Z1, cwm.X2, cwm.Y2, cwm.Z2, cwm.Material);
                 cuboids.Add(voxelint);
             }
