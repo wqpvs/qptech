@@ -60,7 +60,7 @@ namespace chisel.src
             if (cuboids == null || cuboids.Count == 0) { return 0; }
             bmb.VoxelCuboids = cuboids;
             bmb.MarkDirty(true);
-            return 32; //todo calculate actual voxels based on the bounds of the cuboids
+            return 16*16; //todo calculate actual voxels based on the bounds of the cuboids
         }
     }
 }
