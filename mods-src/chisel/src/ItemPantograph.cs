@@ -62,18 +62,66 @@ namespace chisel.src
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
             if (copiedblockvoxels==null|| bmb == null || bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling); return; }
                         
-            if (bmb.MaterialIds.Length < copiedblockmaterials.Count) //if we have a material mismatch just use material 0 for everything
-            {
+            //normal copy
+            if (!(byPlayer.Entity.Controls.Sneak)){
+                if (bmb.MaterialIds.Length < copiedblockmaterials.Count) //if we have a material mismatch just use material 0 for everything
+                {
 
-                CuboidWithMaterial cwm = new CuboidWithMaterial();
-                BlockEntityMicroBlock.FromUint(bmb.VoxelCuboids[0], cwm);
-                byte useindex = cwm.Material;
-                   
-                bmb.VoxelCuboids = CuboidStripMaterials(copiedblockvoxels,0);
+                    CuboidWithMaterial cwm = new CuboidWithMaterial();
+                    BlockEntityMicroBlock.FromUint(bmb.VoxelCuboids[0], cwm);
+                    byte useindex = cwm.Material;
+
+                    bmb.VoxelCuboids = CuboidStripMaterials(copiedblockvoxels, 0);
+                }
+                else { bmb.VoxelCuboids = new List<uint>(copiedblockvoxels); }
             }
-            else { bmb.VoxelCuboids = new List<uint>(copiedblockvoxels); }
-            
-            bmb.BlockName = "Copy of " + copiedname;
+            //boolean merge
+            else
+            {
+                byte maxindex = (byte)bmb.MaterialIds.Length;
+                //cycle thru source cuboids - turn into individual voxels, add to destination object
+               foreach (uint su in copiedblockvoxels)
+                {
+                    CuboidWithMaterial cwm = new CuboidWithMaterial();
+                    BlockEntityMicroBlock.FromUint(su, cwm);
+                    if (cwm.Material >= maxindex) { cwm.Material = 0; } //make sure source materials aren't out of range
+                    bool setthisvoxel = true;
+                    //cycle through each voxel of the source cuboid and see if it's safe to write to the destination block
+                    
+
+                    for (int xc = cwm.X1; xc < cwm.X2; xc++)
+                    {
+                        for (int yc = cwm.Y1; yc < cwm.Y2; yc++)
+                        {
+                            for (int zc = cwm.Z1; zc < cwm.Z2; zc++)
+                            {
+                                //this is a lot of recursion but should be ok - could do a check of intersecting cuboids first but probably doesn't save much
+                                setthisvoxel = true;
+                                foreach (uint du in bmb.VoxelCuboids)
+                                {
+                                    CuboidWithMaterial dcwm = new CuboidWithMaterial();
+                                    BlockEntityMicroBlock.FromUint(du, dcwm);
+                                    if (dcwm.Contains(xc, yc, zc))
+                                    {
+                                        setthisvoxel = false;
+                                        break;
+                                    }
+                                }
+                                if (setthisvoxel)
+                                {
+                                    bmb.SetVoxel(new Vec3i(xc, yc, zc), true, null, cwm.Material, 1);
+                                }
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                bmb.MarkDirty(true);
+                
+            }
+            bmb.BlockName = "Copy of " + copiedname.Replace("Copy of ","");
             bmb.MarkDirty(true);
             handling = EnumHandHandling.PreventDefaultAction;
         }
@@ -96,5 +144,7 @@ namespace chisel.src
             }
             return newcuboid;
         }
+
+       
     }
 }
