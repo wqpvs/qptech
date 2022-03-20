@@ -59,6 +59,7 @@ namespace chisel.src
             base.Start(api);
             api.RegisterItemClass("ItemHandPlaner", typeof(ItemHandPlaner));
             api.RegisterItemClass("ItemWedge", typeof(ItemWedge));
+            api.RegisterItemClass("ItemPantograph", typeof(ItemPantograph));
         }
 
         private void CmdSetHandPlanerMultiplier(IPlayer player, int groupId, CmdArgs args)

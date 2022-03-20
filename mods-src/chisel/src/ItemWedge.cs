@@ -22,11 +22,7 @@ namespace chisel.src
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
             if (bmb == null) { lastpos = null; return 0; }
             
-            //convert the hit point into voxel coordinates
-            //Vec3i s = new Vec3i((int)(blockSel.HitPosition.X * 16f), (int)(blockSel.HitPosition.Y * 16f), (int)(blockSel.HitPosition.Z * 16f));
-            //if (blockSel.Face == BlockFacing.SOUTH) { s.Z--; }
-            //if (blockSel.Face == BlockFacing.UP) { s.Y--; }
-            //if (blockSel.Face == BlockFacing.EAST) { s.X--; }
+
             Vec3i writeoffset = new Vec3i(0, 0, 0);
             
             //adjust the plane based on facing

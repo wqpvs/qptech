@@ -1,4 +1,7 @@
-﻿1.2
+﻿1.3
+- added Pantograph
+
+1.2
 - added Hand Wedge tool - shift the voxels of chiseled blocks 1 voxel at a time!
 - (internal) Refactor code to use a single routine for modifying blocks (preparing for other tools)
 

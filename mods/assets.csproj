@@ -17,8 +17,9 @@
     <OutputPath>.\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="chisel\1.1 Change Log" />
+    <Content Include="chisel\Change Log.txt" />
     <None Include="chisel\assets\chiseltools\config\handbook\chiseltools.json" />
+    <None Include="chisel\assets\chiseltools\itemtypes\pantograph.json" />
     <None Include="chisel\assets\chiseltools\itemtypes\handwedge.json" />
     <None Include="chisel\assets\chiseltools\lang\en.json" />
     <None Include="chisel\assets\chiseltools\recipes\smithing\handwedge.json" />
