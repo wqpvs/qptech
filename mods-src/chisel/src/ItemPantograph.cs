@@ -227,7 +227,11 @@ namespace chisel.src
             if (toolMode == (int)enModes.UNDO)
             {
                 Undo();
-                SetToolMode(slot, byPlayer, blockSel, (int)enModes.FULLPASTE);
+                SetToolMode(slot, byPlayer, blockSel, slot.Itemstack.Attributes.GetInt("lastToolMode",0));
+            }
+            else
+            {
+                slot.Itemstack.Attributes.SetInt("lastToolMode", toolMode);
             }
         }
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
