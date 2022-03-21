@@ -3,7 +3,7 @@
 	"class": "ItemPantograph",
 	"tool": "Chisel",
 	"drawtype": "json",
-	"shape": { "base": "item/tool/handwedge" },
+	"shape": { "base": "item/tool/pantograph" },
 	"variantgroups": [
 		{
 			"code": "material",
