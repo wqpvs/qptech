@@ -17,6 +17,8 @@
     <OutputPath>.\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="chisel\assets\chiseltools\sounds\stone_move.ogg" />
+    <Content Include="chisel\assets\game\textures\icons\undo.svg" />
     <Content Include="chisel\Change Log.txt" />
     <None Include="chisel\assets\chiseltools\config\handbook\chiseltools.json" />
     <None Include="chisel\assets\chiseltools\itemtypes\pantograph.json" />
@@ -543,7 +545,7 @@
     <Content Include="qptech\changelog1.7.0.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="chisel\assets\chiseltools\sounds\" />
+    <Folder Include="chisel\assets\chiseltools\textures\icons\" />
     <Folder Include="qptech\assets\game\blocktypes\" />
     <Folder Include="qptech\assets\machines\shapes\block\glass\" />
     <Folder Include="qptech\assets\machines\shapes\block\indev\" />

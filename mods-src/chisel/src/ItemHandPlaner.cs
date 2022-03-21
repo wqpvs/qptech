@@ -28,7 +28,8 @@ namespace chisel.src
         //These will track the last thing the planer clicked on
         protected BlockPos lastpos;
         protected BlockFacing lastfacing=BlockFacing.DOWN;
-        
+        List<uint> undovoxels;
+        BlockPos undoposition;
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
             if (blockSel == null) { return; }

@@ -24,7 +24,36 @@ namespace chisel.src
     {
         List<uint> copiedblockvoxels;
         List<int> copiedblockmaterials;
+        List<uint> undovoxels;
+        BlockPos undoposition;
         string copiedname;
+        SkillItem[] toolModes;
+        ICoreClientAPI capi;
+        public override void OnLoaded(ICoreAPI api)
+        {
+            base.OnLoaded(api);
+            if (api is ICoreClientAPI) { capi = api as ICoreClientAPI; }
+            toolModes = ObjectCacheUtil.GetOrCreate(api, "pantographToolModes", () =>
+            {
+                SkillItem[] modes;
+                
+                    modes = new SkillItem[2];
+                    modes[0] = new SkillItem() { Code = new AssetLocation("copy"), Name = Lang.Get("Close") };
+                    modes[1] = new SkillItem() { Code = new AssetLocation("undo"), Name = Lang.Get("Undo Last Block Change") };
+
+                if (capi != null)
+                {
+                    modes[0].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/copy.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[0].TexturePremultipliedAlpha = false;
+                    modes[1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/undo.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[1].TexturePremultipliedAlpha = false;
+                }
+
+
+                return modes;
+            });
+        }
+
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
             if (blockSel == null) { return; }
@@ -36,7 +65,7 @@ namespace chisel.src
             }
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
             if (bmb == null|| bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling); return; }
-
+            undovoxels = null;
             handling = EnumHandHandling.PreventDefaultAction;
             copiedname = bmb.BlockName;
             copiedblockvoxels = new List<uint>();
@@ -61,7 +90,8 @@ namespace chisel.src
             }
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
             if (copiedblockvoxels==null|| bmb == null || bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling); return; }
-                        
+            undovoxels = new List<uint>(bmb.VoxelCuboids);
+            undoposition = blockSel.Position;
             //normal copy
             if (!(byPlayer.Entity.Controls.Sneak)){
                 if (bmb.MaterialIds.Length < copiedblockmaterials.Count) //if we have a material mismatch just use material 0 for everything
@@ -126,6 +156,18 @@ namespace chisel.src
             handling = EnumHandHandling.PreventDefaultAction;
         }
 
+        public virtual void Undo()
+        {
+            if (undovoxels != null)
+            {
+                BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(undoposition) as BlockEntityMicroBlock;
+                if (bmb == null) { undovoxels = null; }
+                bmb.VoxelCuboids = new List<uint>(undovoxels);
+                bmb.MarkDirty(true);
+                undovoxels = null;
+            }
+        }
+
         /// <summary>
         /// Returns a list of compressed cuboids all using the supplied material index
         /// </summary>
@@ -144,7 +186,25 @@ namespace chisel.src
             }
             return newcuboid;
         }
+        public override SkillItem[] GetToolModes(ItemSlot slot, IClientPlayer forPlayer, BlockSelection blockSel)
+        {
+            return toolModes;
+        }
 
-       
+        public override int GetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel)
+        {
+            return Math.Min(toolModes.Length - 1, slot.Itemstack.Attributes.GetInt("toolMode"));
+        }
+
+        public override void SetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel, int toolMode)
+        {
+            slot.Itemstack.Attributes.SetInt("toolMode", toolMode);
+            if (toolMode == 1)
+            {
+                Undo();
+                SetToolMode(slot, byPlayer, blockSel, 0);
+            }
+        }
+
     }
 }

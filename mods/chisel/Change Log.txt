@@ -1,5 +1,6 @@
 ﻿1.3
 - added Pantograph
+- adding undo function
 
 1.2
 - added Hand Wedge tool - shift the voxels of chiseled blocks 1 voxel at a time!
