@@ -28,6 +28,7 @@ namespace chisel.src
         BlockPos undoposition;
         string copiedname;
         SkillItem[] toolModes;
+        WorldInteraction[] interactions;
         ICoreClientAPI capi;
         public override void OnLoaded(ICoreAPI api)
         {
@@ -51,6 +52,25 @@ namespace chisel.src
 
 
                 return modes;
+            });
+            interactions = ObjectCacheUtil.GetOrCreate(api, "PantographInteractions", () =>
+            {
+               
+                return new WorldInteraction[]
+                {
+                    new WorldInteraction()
+                    {
+                        ActionLangCode = "Paste Shape",
+                        MouseButton = EnumMouseButton.Right,
+                        
+                    },
+                    new WorldInteraction()
+                    {
+                        ActionLangCode = "Copy Shape",
+                        MouseButton = EnumMouseButton.Left,
+
+                    }
+                };
             });
         }
 
@@ -205,6 +225,17 @@ namespace chisel.src
                 SetToolMode(slot, byPlayer, blockSel, 0);
             }
         }
+        public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
+        {
+            base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
 
+            dsc.AppendLine("Left Click to Copy, Right Click to Paste");
+            if (copiedblockvoxels != null) { dsc.AppendLine("Copying " + copiedname); }
+            if (undovoxels != null) { dsc.AppendLine("Undo is currently available"); }
+        }
+        public override WorldInteraction[] GetHeldInteractionHelp(ItemSlot inSlot)
+        {
+            return interactions.Append(base.GetHeldInteractionHelp(inSlot));
+        }
     }
 }

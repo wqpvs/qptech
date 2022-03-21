@@ -13,5 +13,11 @@
 	"item-handwedge-steel": "Steel Hand Wedge",
 	"item-handwedge-iron": "Iron Hand Wedge",
 	"item-handwedge-meteoriciron": "Meteoric Iron Hand Wedge",
-	"itemdesc-handwedge-*": "Pushes chiseled items by one voxel. (Within the cube of the chiseled block) <br><a href=\"handbook://chiseltools:chiseltools-guide\">QPs Chisel Tools Guide</a>"
+	"itemdesc-handwedge-*": "Pushes chiseled items by one voxel. (Within the cube of the chiseled block) <br><a href=\"handbook://chiseltools:chiseltools-guide\">QPs Chisel Tools Guide</a>",
+	"item-pantograph-steel": "Steel Pantograph",
+	"item-pantograph-iron": "Iron Pantograph",
+	"item-pantograph-meteoriciron": "Meteoric Iron Pantograph",
+	"itemdesc-pantograph-*": "Allows for copying of another chiseled blocks shape. Press F for options!",
+	"helphelp-pasteblock": "Paste Block Shape",
+	"helphelp-copyblock": "Copy Block Shape"
 }
