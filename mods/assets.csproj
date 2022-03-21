@@ -18,6 +18,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="chisel\assets\chiseltools\sounds\stone_move.ogg" />
+    <Content Include="chisel\assets\game\textures\icons\add.svg" />
+    <Content Include="chisel\assets\game\textures\icons\copy.svg" />
     <Content Include="chisel\assets\game\textures\icons\undo.svg" />
     <Content Include="chisel\Change Log.txt" />
     <None Include="chisel\assets\chiseltools\config\handbook\chiseltools.json" />

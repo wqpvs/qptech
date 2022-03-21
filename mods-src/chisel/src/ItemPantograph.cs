@@ -30,6 +30,7 @@ namespace chisel.src
         SkillItem[] toolModes;
         WorldInteraction[] interactions;
         ICoreClientAPI capi;
+        public enum enModes {FULLPASTE,ADDPASTE,UNDO}
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
@@ -38,16 +39,19 @@ namespace chisel.src
             {
                 SkillItem[] modes;
                 
-                    modes = new SkillItem[2];
-                    modes[0] = new SkillItem() { Code = new AssetLocation("copy"), Name = Lang.Get("Close") };
-                    modes[1] = new SkillItem() { Code = new AssetLocation("undo"), Name = Lang.Get("Undo Last Block Change") };
+                modes = new SkillItem[3];
+                modes[(int)enModes.FULLPASTE] = new SkillItem() { Code = new AssetLocation(enModes.FULLPASTE.ToString()), Name = Lang.Get("Replace with Copied Shape Mode") };
+                modes[(int)enModes.ADDPASTE] = new SkillItem() { Code = new AssetLocation(enModes.ADDPASTE.ToString()), Name = Lang.Get("Add Copied Shape Mode") };
+                modes[(int)enModes.UNDO] = new SkillItem() { Code = new AssetLocation(enModes.UNDO.ToString()), Name = Lang.Get("Undo Last Block Change") };
 
                 if (capi != null)
                 {
-                    modes[0].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/copy.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
-                    modes[0].TexturePremultipliedAlpha = false;
-                    modes[1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/undo.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
-                    modes[1].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.FULLPASTE].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/copy.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.FULLPASTE].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.ADDPASTE].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/add.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.ADDPASTE].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.UNDO].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/undo.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.UNDO].TexturePremultipliedAlpha = false;
                 }
 
 
@@ -113,7 +117,8 @@ namespace chisel.src
             undovoxels = new List<uint>(bmb.VoxelCuboids);
             undoposition = blockSel.Position;
             //normal copy
-            if (!(byPlayer.Entity.Controls.Sneak)){
+            if (slot.Itemstack.Attributes.GetInt("toolMode", (int)enModes.FULLPASTE)==(int)enModes.FULLPASTE)
+            {
                 if (bmb.MaterialIds.Length < copiedblockmaterials.Count) //if we have a material mismatch just use material 0 for everything
                 {
 
@@ -219,10 +224,10 @@ namespace chisel.src
         public override void SetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel, int toolMode)
         {
             slot.Itemstack.Attributes.SetInt("toolMode", toolMode);
-            if (toolMode == 1)
+            if (toolMode == (int)enModes.UNDO)
             {
                 Undo();
-                SetToolMode(slot, byPlayer, blockSel, 0);
+                SetToolMode(slot, byPlayer, blockSel, (int)enModes.FULLPASTE);
             }
         }
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
@@ -232,6 +237,7 @@ namespace chisel.src
             dsc.AppendLine("Left Click to Copy, Right Click to Paste");
             if (copiedblockvoxels != null) { dsc.AppendLine("Copying " + copiedname); }
             if (undovoxels != null) { dsc.AppendLine("Undo is currently available"); }
+           
         }
         public override WorldInteraction[] GetHeldInteractionHelp(ItemSlot inSlot)
         {
