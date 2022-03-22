@@ -10,8 +10,14 @@
 	- access undo with F (undoes the very last paste operation if possible)
 	- command to set tool usage: /qpchisel-pantograph-toolusage 0.25
 	- can only be made with steel
-	
-
+- new for Hand Planer & Hand Wedge:
+	- add mode select and undo, press F to bring up menu
+	- crouch click no longer does anything different, you can change modes with the "F" menu
+		- modes:
+			Add/Remove Any (will delete or add an entire plane of voxels)
+			Add/Remove Material (will delete/add only the targeted material)
+			Undo - not really a mode, but clicking this will attempt to undo the last operation
+			*The Hand Wedge ignores modes (but undo will still work)
 
 1.2
 - added Hand Wedge tool - shift the voxels of chiseled blocks 1 voxel at a time!

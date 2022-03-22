@@ -36,7 +36,7 @@ namespace chisel.src
         {
             base.OnLoaded(api);
             if (api is ICoreClientAPI) { capi = api as ICoreClientAPI; }
-            toolModes = ObjectCacheUtil.GetOrCreate(api, "pantographToolModes", () =>
+            toolModes = ObjectCacheUtil.GetOrCreate(api, "handplanerToolModes", () =>
             {
                 SkillItem[] modes;
                 
@@ -58,20 +58,20 @@ namespace chisel.src
 
                 return modes;
             });
-            interactions = ObjectCacheUtil.GetOrCreate(api, "PantographInteractions", () =>
+            interactions = ObjectCacheUtil.GetOrCreate(api, "HandPlanerInteractions", () =>
             {
                
                 return new WorldInteraction[]
                 {
                     new WorldInteraction()
                     {
-                        ActionLangCode = "Paste Shape",
+                        ActionLangCode = "Add Plane",
                         MouseButton = EnumMouseButton.Right,
                         
                     },
                     new WorldInteraction()
                     {
-                        ActionLangCode = "Copy Shape",
+                        ActionLangCode = "Remove Plane",
                         MouseButton = EnumMouseButton.Left,
 
                     }

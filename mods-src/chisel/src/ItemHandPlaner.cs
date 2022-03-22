@@ -30,6 +30,79 @@ namespace chisel.src
         protected BlockFacing lastfacing=BlockFacing.DOWN;
         List<uint> undovoxels;
         BlockPos undoposition;
+        SkillItem[] toolModes;
+        WorldInteraction[] interactions;
+        ICoreClientAPI capi;
+        public enum enModes { PLANE, MATERIAL, UNDO }
+        public override void OnLoaded(ICoreAPI api)
+        {
+            base.OnLoaded(api);
+            if (api is ICoreClientAPI) { capi = api as ICoreClientAPI; }
+            toolModes = ObjectCacheUtil.GetOrCreate(api, "pantographToolModes", () =>
+            {
+                SkillItem[] modes;
+
+                modes = new SkillItem[3];
+                modes[(int)enModes.PLANE] = new SkillItem() { Code = new AssetLocation(enModes.PLANE.ToString()), Name = Lang.Get("Add/Remove any material") };
+                modes[(int)enModes.MATERIAL] = new SkillItem() { Code = new AssetLocation(enModes.MATERIAL.ToString()), Name = Lang.Get("Add/Remove matching material") };
+                modes[(int)enModes.UNDO] = new SkillItem() { Code = new AssetLocation(enModes.UNDO.ToString()), Name = Lang.Get("Undo Last Block Change") };
+
+                if (capi != null)
+                {
+                    modes[(int)enModes.PLANE].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/plane.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.PLANE].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.MATERIAL].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/material.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.MATERIAL].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.UNDO].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/undo.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.UNDO].TexturePremultipliedAlpha = false;
+                }
+
+
+                return modes;
+            });
+            interactions = ObjectCacheUtil.GetOrCreate(api, "PantographInteractions", () =>
+            {
+
+                return new WorldInteraction[]
+                {
+                    new WorldInteraction()
+                    {
+                        ActionLangCode = "Paste Shape",
+                        MouseButton = EnumMouseButton.Right,
+
+                    },
+                    new WorldInteraction()
+                    {
+                        ActionLangCode = "Copy Shape",
+                        MouseButton = EnumMouseButton.Left,
+
+                    }
+                };
+            });
+        }
+        public override SkillItem[] GetToolModes(ItemSlot slot, IClientPlayer forPlayer, BlockSelection blockSel)
+        {
+            return toolModes;
+        }
+
+        public override int GetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel)
+        {
+            return Math.Min(toolModes.Length - 1, slot.Itemstack.Attributes.GetInt("toolMode"));
+        }
+
+        public override void SetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel, int toolMode)
+        {
+            slot.Itemstack.Attributes.SetInt("toolMode", toolMode);
+            if (toolMode == (int)enModes.UNDO)
+            {
+                Undo();
+                SetToolMode(slot, byPlayer, blockSel, slot.Itemstack.Attributes.GetInt("lastToolMode", 0));
+            }
+            else
+            {
+                slot.Itemstack.Attributes.SetInt("lastToolMode", toolMode);
+            }
+        }
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
             if (blockSel == null) { return; }
@@ -40,7 +113,8 @@ namespace chisel.src
                 return;
             }
             int cutvoxels = 0;
-            if (byPlayer.Entity.Controls.Sneak)
+            Backup(blockSel.Position);
+            if (slot.Itemstack.Attributes.GetInt("lastToolMode",(int) enModes.MATERIAL)==(int)enModes.MATERIAL)
             {
                 cutvoxels=ModifyChiseledBlock(blockSel, "sneakleft");
             }
@@ -74,6 +148,26 @@ namespace chisel.src
             if (basedamage < 0) { basedamage = 0; }
             return basedamage;
         }
+        public virtual void Undo()
+        {
+            if (undovoxels != null)
+            {
+                BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(undoposition) as BlockEntityMicroBlock;
+                if (bmb == null) { undovoxels = null; }
+                bmb.VoxelCuboids = new List<uint>(undovoxels);
+                bmb.MarkDirty(true);
+                undovoxels = null;
+            }
+        }
+
+        public virtual void Backup(BlockPos pos)
+        {
+            undovoxels = null;
+            undoposition = pos;
+            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(pos) as BlockEntityMicroBlock;
+            if (bmb == null) { return; }
+            undovoxels = new List<uint>(bmb.VoxelCuboids);
+        }
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
@@ -85,7 +179,8 @@ namespace chisel.src
                 return;
             }
             int cutvoxels = 0;
-            if (byPlayer.Entity.Controls.Sneak)
+            Backup(blockSel.Position);
+            if (slot.Itemstack.Attributes.GetInt("lastToolMode", (int)enModes.MATERIAL) == (int)enModes.MATERIAL)
             {
                 cutvoxels=ModifyChiseledBlock(blockSel, "sneakright");
             }
