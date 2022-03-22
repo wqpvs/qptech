@@ -1,5 +1,6 @@
 ﻿1.3
 - bugfix - tools counted as chisels when broken (and vice versa)
+- add command /qpchisel-resetdefaults - resets tool usage settings to their defaults
 - added Pantograph
 	- Pantograph basic operaitons - left click a chiseld block to copy its shape, then right click on other chiseld blocks to apply that shape
 		- it keeps the destination shapes materials (if the origin has more materials than the destination then the first material is used)

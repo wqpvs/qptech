@@ -191,9 +191,9 @@ namespace chisel.src
             bmb.MarkDirty(true);
             if (api is ICoreServerAPI && byPlayer?.WorldData.CurrentGameMode != EnumGameMode.Creative)
             {
-
-                this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, CalcDamage(changedvoxels));
-
+                int dmg = CalcDamage(changedvoxels);
+                this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, dmg);
+                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
             }
             handling = EnumHandHandling.PreventDefaultAction;
         }
@@ -201,7 +201,7 @@ namespace chisel.src
         {
 
             int basedamage = (int)(ChiselToolLoader.serverconfig.pantographBaseDurabilityMultiplier * (float)numvoxels);
-            if (basedamage < 0) { basedamage = 0; }
+            basedamage = Math.Max(ChiselToolLoader.serverconfig.pantographMinimumDamagePerOp, basedamage);
             return basedamage;
         }
         public virtual void Undo()
