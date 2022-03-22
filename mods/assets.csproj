@@ -26,6 +26,7 @@
     <None Include="chisel\assets\chiseltools\itemtypes\pantograph.json" />
     <None Include="chisel\assets\chiseltools\itemtypes\handwedge.json" />
     <None Include="chisel\assets\chiseltools\lang\en.json" />
+    <None Include="chisel\assets\chiseltools\recipes\smithing\pantograph.json" />
     <None Include="chisel\assets\chiseltools\recipes\smithing\handwedge.json" />
     <None Include="chisel\assets\chiseltools\recipes\smithing\handplaner.json" />
     <None Include="chisel\assets\chiseltools\shapes\item\tool\handplaner.json" />

@@ -24,6 +24,7 @@ namespace chisel.src
     {
         List<uint> copiedblockvoxels;
         List<int> copiedblockmaterials;
+        int copiedvolume;
         List<uint> undovoxels;
         BlockPos undoposition;
         string copiedname;
@@ -87,6 +88,7 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
+            
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
             if (bmb == null|| bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling); return; }
             undovoxels = null;
@@ -94,14 +96,18 @@ namespace chisel.src
             copiedname = bmb.BlockName;
             copiedblockvoxels = new List<uint>();
             copiedblockmaterials = new List<int>();
+            copiedvolume = (int)(bmb.VolumeRel * 16f * 16f * 16f);
             foreach (uint u in bmb.VoxelCuboids)
             {
                 copiedblockvoxels.Add(u);
+                
             }
             foreach (int m in bmb.MaterialIds)
             {
                 copiedblockmaterials.Add(m);
             }
+            api.World.PlaySoundAt(new AssetLocation("sounds/player/chalkdraw1"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
+            //TODO add a special sound?
         }
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
@@ -114,8 +120,11 @@ namespace chisel.src
             }
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
             if (copiedblockvoxels==null|| bmb == null || bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling); return; }
+            
             undovoxels = new List<uint>(bmb.VoxelCuboids);
             undoposition = blockSel.Position;
+            int changedvoxels = 0;
+            int originalvolume = (int)(bmb.VolumeRel*16f*16f*16f);
             //normal copy
             if (slot.Itemstack.Attributes.GetInt("toolMode", (int)enModes.FULLPASTE)==(int)enModes.FULLPASTE)
             {
@@ -129,6 +138,7 @@ namespace chisel.src
                     bmb.VoxelCuboids = CuboidStripMaterials(copiedblockvoxels, 0);
                 }
                 else { bmb.VoxelCuboids = new List<uint>(copiedblockvoxels); }
+                changedvoxels = originalvolume + copiedvolume;
             }
             //boolean merge
             else
@@ -165,6 +175,7 @@ namespace chisel.src
                                 if (setthisvoxel)
                                 {
                                     bmb.SetVoxel(new Vec3i(xc, yc, zc), true, null, cwm.Material, 1);
+                                    changedvoxels++;
                                 }
                             }
                             
@@ -178,9 +189,21 @@ namespace chisel.src
             }
             bmb.BlockName = "Copy of " + copiedname.Replace("Copy of ","");
             bmb.MarkDirty(true);
+            if (api is ICoreServerAPI && byPlayer?.WorldData.CurrentGameMode != EnumGameMode.Creative)
+            {
+
+                this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, CalcDamage(changedvoxels));
+
+            }
             handling = EnumHandHandling.PreventDefaultAction;
         }
+        protected virtual int CalcDamage(int numvoxels)
+        {
 
+            int basedamage = (int)(ChiselToolLoader.serverconfig.pantographBaseDurabilityMultiplier * (float)numvoxels);
+            if (basedamage < 0) { basedamage = 0; }
+            return basedamage;
+        }
         public virtual void Undo()
         {
             if (undovoxels != null)

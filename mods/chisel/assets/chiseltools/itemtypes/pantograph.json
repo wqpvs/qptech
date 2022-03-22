@@ -1,13 +1,13 @@
 {
 	"code": "pantograph",
 	"class": "ItemPantograph",
-	"tool": "Chisel",
+	
 	"drawtype": "json",
 	"shape": { "base": "item/tool/pantograph" },
 	"variantgroups": [
 		{
 			"code": "material",
-			"states": [ "iron", "meteoriciron", "steel" ]
+			"states": [ "steel" ]
 		}
 	],
 	"textures": {
@@ -110,8 +110,8 @@
 	},
 	"durabilitybytype": {
 		
-		"handwedge-iron": 2000,
-		"handwedge-meteoriciron": 2800,
-		"handwedge-steel": 5000
+		"pantograph-iron": 2000,
+		"pantograph-meteoriciron": 2800,
+		"pantograph-steel": 5000
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"code": "handwedge",
 	"class": "ItemWedge",
-	"tool": "Chisel",
+	
 	"drawtype": "json",
 	"shape": { "base": "item/tool/handwedge" },
 	"variantgroups": [

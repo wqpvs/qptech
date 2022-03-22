@@ -1,7 +1,7 @@
 {
 	"code": "handplaner",
 	"class": "ItemHandPlaner",
-	"tool": "Chisel",
+	
 	"drawtype": "json",
 	"shape": { "base": "item/tool/handplaner" },
 	"variantgroups": [

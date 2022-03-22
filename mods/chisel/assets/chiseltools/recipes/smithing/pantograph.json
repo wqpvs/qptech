@@ -1,0 +1,12 @@
+{
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["steel"] },
+	pattern: [[
+		
+		"#####_#####_#_#",
+		"____________#_#",
+		"#####_#####_#_#",
+		
+	]],
+	name: "Hand Planer",
+	output: { type: "item", code: "pantograph-{metal}"   }
+}

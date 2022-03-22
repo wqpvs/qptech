@@ -38,6 +38,7 @@ namespace chisel.src
         void ServerPreStart()
         {
             sapi.RegisterCommand("qpchisel-handplaner-toolusage", "Set how fast hand planer gets damaged when used. Default is 0.125. ", "", CmdSetHandPlanerMultiplier,Privilege.controlserver);
+            sapi.RegisterCommand("qpchisel-pantograph-toolusage", "Set how fast hand pantograph gets damaged when used. Default is 0.25. ", "", CmdSetPantographMultiplier, Privilege.controlserver);
             try
             {
                 serverconfig = sapi.LoadModConfig<ChiselToolServerData>(serverconfigfile);
@@ -76,12 +77,29 @@ namespace chisel.src
             sapi.StoreModConfig<ChiselToolServerData>(serverconfig, serverconfigfile);
             sapi.SendMessage(player, groupId, "Hand Planer tool usage rate SET to " + serverconfig.handPlanerBaseDurabilityMultiplier + "(Default is 0.125)", EnumChatType.CommandSuccess);
         }
+        private void CmdSetPantographMultiplier(IPlayer player, int groupId, CmdArgs args)
+        {
+            if (sapi == null) { return; }
+            if (serverconfig == null) { sapi.BroadcastMessageToAllGroups("QP Chisel Server Config doesn't exist.", EnumChatType.Notification); return; }
+            if (args == null || args.Length == 0)
+            {
+                sapi.SendMessage(player, groupId, "Pantograph tool usage rate is " + serverconfig.pantographBaseDurabilityMultiplier + "(Default is 0.25)", EnumChatType.CommandSuccess);
+                return;
+            }
+            float newvalue = args[0].ToFloat(0.125f);
+            serverconfig.pantographBaseDurabilityMultiplier = newvalue;
+            sapi.StoreModConfig<ChiselToolServerData>(serverconfig, serverconfigfile);
+            sapi.SendMessage(player, groupId, "Pantograph tool usage rate SET to " + serverconfig.handPlanerBaseDurabilityMultiplier + "(Default is 0.25)", EnumChatType.CommandSuccess);
+        }
+
+
 
         [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
         public class ChiselToolServerData
         {
             public int handPlanerBaseDurabilityUse = 1;
             public float handPlanerBaseDurabilityMultiplier = 0.125f;
+            public float pantographBaseDurabilityMultiplier = 0.25f;
             
         }
     }
