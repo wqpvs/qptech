@@ -187,7 +187,7 @@ namespace chisel.src
                 bmb.MarkDirty(true);
                 
             }
-            bmb.BlockName = "Copy of " + copiedname.Replace("Copy of ","");
+            bmb.BlockName = copiedname;
             bmb.MarkDirty(true);
             if (api is ICoreServerAPI && byPlayer?.WorldData.CurrentGameMode != EnumGameMode.Creative)
             {
