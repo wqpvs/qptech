@@ -34,8 +34,9 @@
 	"enabled": true,
 	"heldTpHitAnimation": "idle",
 	"creativeinventory": {
-		"chiseltools": [ "*" ]
+		"chiseltools": [ "*-iron","*-steel","*-meteoriciron" ]
 	},
+	
 	"guiTransform": {
 		"translation": {
 			"x": 0,
