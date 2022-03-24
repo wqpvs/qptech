@@ -7,7 +7,7 @@
 	"variantgroups": [
 		{
 			"code": "material",
-			"states": [ "steel","meteoriciron" ]
+			"states": [ "steel","meteoriciron","iron" ]
 		}
 	],
 	"textures": {
