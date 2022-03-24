@@ -2,7 +2,8 @@
 - hiding uncraftable variants of the hand planer (bronze/copper)
 - handbook update
 - remove "copy of for copied blocks"
-- tools default to 10x less durability usage
+- tools default to 50x less durability usage (run command: /qpchisel-resetdefaults if you want to reset)
+- pantograph added meteoriciron variant (seems like a good compromise)
 
 1.3
 - bugfix - tools counted as chisels when broken (and vice versa)

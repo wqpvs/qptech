@@ -1,5 +1,5 @@
 {
-	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["steel"] },
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["steel","meteoriciron"] },
 	pattern: [[
 		
 		"#####_#####_#_#",

@@ -107,11 +107,11 @@ namespace chisel.src
         public class ChiselToolServerData
         {
             public int handPlanerBaseDurabilityUse = 1;
-            public float handPlanerBaseDurabilityMultiplier = 0.0125f;
-            public float pantographBaseDurabilityMultiplier = 0.0125f;
+            public float handPlanerBaseDurabilityMultiplier = handplanerDefault;
+            public float pantographBaseDurabilityMultiplier = pantographDefault;
             public int pantographMinimumDamagePerOp = 1;
-            public static float handplanerDefault = 0.0125f;
-            public static float pantographDefault = 0.0125f;
+            public static float handplanerDefault = 0.00625f;
+            public static float pantographDefault = 0.00625f;
             public void Reset()
             {
                 handPlanerBaseDurabilityMultiplier = handplanerDefault;
