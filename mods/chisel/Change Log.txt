@@ -1,4 +1,9 @@
-﻿1.3.1
+﻿1.3.2
+- further reduced pantograph damage
+- pantograph - now only does right click function, if you want to copy change to copy mode (should help to prevent some accidents)
+	- plays snapshot sound when take copy
+	- plays scribble sound when pasting shapes
+1.3.1
 - hiding uncraftable variants of the hand planer (bronze/copper)
 - handbook update
 - remove "copy of for copied blocks"

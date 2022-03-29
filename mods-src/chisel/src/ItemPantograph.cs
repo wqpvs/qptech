@@ -31,7 +31,7 @@ namespace chisel.src
         SkillItem[] toolModes;
         WorldInteraction[] interactions;
         ICoreClientAPI capi;
-        public enum enModes {FULLPASTE,ADDPASTE,UNDO}
+        public enum enModes {COPY,FULLPASTE,ADDPASTE,UNDO}
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
@@ -40,13 +40,16 @@ namespace chisel.src
             {
                 SkillItem[] modes;
                 
-                modes = new SkillItem[3];
+                modes = new SkillItem[4];
+                modes[(int)enModes.COPY] = new SkillItem() { Code = new AssetLocation(enModes.COPY.ToString()), Name = Lang.Get("Copy Mode") };
                 modes[(int)enModes.FULLPASTE] = new SkillItem() { Code = new AssetLocation(enModes.FULLPASTE.ToString()), Name = Lang.Get("Replace with Copied Shape Mode") };
                 modes[(int)enModes.ADDPASTE] = new SkillItem() { Code = new AssetLocation(enModes.ADDPASTE.ToString()), Name = Lang.Get("Add Copied Shape Mode") };
                 modes[(int)enModes.UNDO] = new SkillItem() { Code = new AssetLocation(enModes.UNDO.ToString()), Name = Lang.Get("Undo Last Block Change") };
 
                 if (capi != null)
                 {
+                    modes[(int)enModes.COPY].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/takecopy.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.COPY].TexturePremultipliedAlpha = false;
                     modes[(int)enModes.FULLPASTE].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/copy.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.FULLPASTE].TexturePremultipliedAlpha = false;
                     modes[(int)enModes.ADDPASTE].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/add.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
@@ -58,21 +61,21 @@ namespace chisel.src
 
                 return modes;
             });
-            interactions = ObjectCacheUtil.GetOrCreate(api, "HandPlanerInteractions", () =>
+            interactions = ObjectCacheUtil.GetOrCreate(api, "PantographInteractions", () =>
             {
-               
+
                 return new WorldInteraction[]
                 {
                     new WorldInteraction()
                     {
-                        ActionLangCode = "Add Plane",
+                        ActionLangCode = "Perform Action",
                         MouseButton = EnumMouseButton.Right,
-                        
+
                     },
                     new WorldInteraction()
                     {
-                        ActionLangCode = "Remove Plane",
-                        MouseButton = EnumMouseButton.Left,
+                        ActionLangCode = "Mode Select",
+                        HotKeyCode="f"
 
                     }
                 };
@@ -81,18 +84,26 @@ namespace chisel.src
 
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
-            if (blockSel == null) { return; }
+            /*if (blockSel == null) { return; }
             IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
             if (!byEntity.World.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.BuildOrBreak))
             {
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
-            
-            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
-            if (bmb == null|| bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling); return; }
-            undovoxels = null;
+            MakeCopy(slot, byEntity, blockSel, entitySel, ref handling);*/
             handling = EnumHandHandling.PreventDefaultAction;
+
+            //TODO add a special sound?
+        }
+
+        public virtual void MakeCopy(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
+        {
+            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+            IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
+            if (bmb == null || bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling); return; }
+            undovoxels = null;
+            
             copiedname = bmb.BlockName;
             copiedblockvoxels = new List<uint>();
             copiedblockmaterials = new List<int>();
@@ -100,15 +111,17 @@ namespace chisel.src
             foreach (uint u in bmb.VoxelCuboids)
             {
                 copiedblockvoxels.Add(u);
-                
+
             }
             foreach (int m in bmb.MaterialIds)
             {
                 copiedblockmaterials.Add(m);
             }
-            api.World.PlaySoundAt(new AssetLocation("sounds/player/chalkdraw1"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
-            //TODO add a special sound?
+            
+            api.World.PlaySoundAt(new AssetLocation("sounds/filtercopy"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
         }
+
+
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
             if (blockSel == null) { return; }
@@ -118,6 +131,14 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
+
+            if (slot.Itemstack.Attributes.GetInt("toolMode", (int)enModes.COPY) == (int)enModes.COPY)
+            {
+                MakeCopy(slot, byEntity, blockSel, entitySel, ref handling);
+                handling = EnumHandHandling.PreventDefaultAction;
+                return;
+            }
+
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
             if (copiedblockvoxels==null|| bmb == null || bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling); return; }
             
@@ -126,7 +147,7 @@ namespace chisel.src
             int changedvoxels = 0;
             int originalvolume = (int)(bmb.VolumeRel*16f*16f*16f);
             //normal copy
-            if (slot.Itemstack.Attributes.GetInt("toolMode", (int)enModes.FULLPASTE)==(int)enModes.FULLPASTE)
+            if (slot.Itemstack.Attributes.GetInt("toolMode", (int)enModes.COPY)==(int)enModes.FULLPASTE)
             {
                 if (bmb.MaterialIds.Length < copiedblockmaterials.Count) //if we have a material mismatch just use material 0 for everything
                 {
@@ -189,6 +210,7 @@ namespace chisel.src
             }
             bmb.BlockName = copiedname;
             bmb.MarkDirty(true);
+            api.World.PlaySoundAt(new AssetLocation("sounds/player/chalkdraw1"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
             if (api is ICoreServerAPI && byPlayer?.WorldData.CurrentGameMode != EnumGameMode.Creative)
             {
                 int dmg = CalcDamage(changedvoxels);

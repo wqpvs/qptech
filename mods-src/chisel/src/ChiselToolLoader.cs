@@ -111,7 +111,7 @@ namespace chisel.src
             public float pantographBaseDurabilityMultiplier = pantographDefault;
             public int pantographMinimumDamagePerOp = 1;
             public static float handplanerDefault = 0.00625f;
-            public static float pantographDefault = 0.00625f;
+            public static float pantographDefault = 0.001f;
             public void Reset()
             {
                 handPlanerBaseDurabilityMultiplier = handplanerDefault;

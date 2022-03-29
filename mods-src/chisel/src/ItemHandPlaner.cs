@@ -124,7 +124,8 @@ namespace chisel.src
             }
             if (cutvoxels > 0)
             {
-                api.World.PlaySoundAt(new AssetLocation("chiseltools:sounds/stone_move") , blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
+                api.World.PlaySoundAt(new AssetLocation("chiseltools:sounds/stone_move") , blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 6, 0.25f);
+                
             }
             if (api is ICoreServerAPI)
             {
@@ -190,7 +191,7 @@ namespace chisel.src
             }
             if (cutvoxels > 0)
             {
-                api.World.PlaySoundAt(new AssetLocation("chiseltools:sounds/stone_move"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
+                api.World.PlaySoundAt(new AssetLocation("chiseltools:sounds/stone_move"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 0.25f);
             }
             if (api is ICoreServerAPI)
             {
