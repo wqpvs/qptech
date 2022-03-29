@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 186 130" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-3.87432,-3.51055)">
+        <g id="Mirror">
+            <g>
+                <g transform="matrix(1,0,0,1,-17.0046,15.0629)">
+                    <circle cx="76.288" cy="20.776" r="15.085"/>
+                </g>
+                <g transform="matrix(1,0,0,1,-29.4476,1.51338)">
+                    <rect x="80.623" y="56.005" width="32.338" height="8.581"/>
+                </g>
+                <g transform="matrix(1,0,0,1,-29.1417,-9.3714)">
+                    <rect x="80.623" y="56.005" width="32.338" height="8.581"/>
+                </g>
+                <g transform="matrix(1,0,0,1,-45.6167,28.0239)">
+                    <rect x="80.623" y="56.005" width="32.338" height="8.581"/>
+                </g>
+                <g transform="matrix(-0.69178,0.722108,-0.722108,-0.69178,163.866,72.6118)">
+                    <rect x="80.623" y="56.005" width="32.338" height="8.581"/>
+                </g>
+                <g transform="matrix(-0.69178,0.722108,-0.722108,-0.69178,135.298,70.489)">
+                    <rect x="80.623" y="56.005" width="32.338" height="8.581"/>
+                </g>
+                <g transform="matrix(0.808363,-1.45344,0.873928,0.486055,-84.4775,178.399)">
+                    <rect x="80.623" y="56.005" width="32.338" height="8.581"/>
+                </g>
+                <g transform="matrix(1,0,0,1,-18.608,1.51338)">
+                    <rect x="102.122" y="25.473" width="56.185" height="88.453"/>
+                </g>
+                <g id="Play" transform="matrix(2,2.71171e-31,-2.46519e-32,2,-328.815,-519.39)">
+                    <path d="M236,284.2C236,283.265 237.064,282.69 237.894,283.177L255.404,293.479C256.198,293.945 256.198,295.055 255.404,295.522C252.694,297.117 250.661,298.312 249.306,299.11C246.77,300.601 242.966,302.839 237.894,305.823C237.064,306.31 236,305.736 236,304.801L236,284.2Z"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
