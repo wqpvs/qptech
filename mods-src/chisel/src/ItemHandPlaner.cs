@@ -22,9 +22,7 @@ namespace chisel.src
     /// </summary>
     class ItemHandPlaner:Item
     {
-        int cutsize = 1; //for now we'll just leave it at 1x1 voxels, might change in future
-        int cutdepth = 0; //this was meant to be a counter, but right now is just used locally in each function
-       
+        
         //These will track the last thing the planer clicked on
         protected BlockPos lastpos;
         protected BlockFacing lastfacing=BlockFacing.DOWN;
@@ -38,7 +36,7 @@ namespace chisel.src
         {
             base.OnLoaded(api);
             if (api is ICoreClientAPI) { capi = api as ICoreClientAPI; }
-            toolModes = ObjectCacheUtil.GetOrCreate(api, "pantographToolModes", () =>
+            toolModes = ObjectCacheUtil.GetOrCreate(api, "PlanerToolModes", () =>
             {
                 SkillItem[] modes;
 
@@ -60,7 +58,7 @@ namespace chisel.src
 
                 return modes;
             });
-            interactions = ObjectCacheUtil.GetOrCreate(api, "PantographInteractions", () =>
+            interactions = ObjectCacheUtil.GetOrCreate(api, "PlanerInteractions", () =>
             {
 
                 return new WorldInteraction[]

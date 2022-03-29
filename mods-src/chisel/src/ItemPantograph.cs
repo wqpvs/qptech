@@ -30,6 +30,8 @@ namespace chisel.src
         string copiedname;
         SkillItem[] toolModes;
         WorldInteraction[] interactions;
+        
+
         ICoreClientAPI capi;
         public enum enModes {COPY,FULLPASTE,ADDPASTE,UNDO}
         public override void OnLoaded(ICoreAPI api)
@@ -72,14 +74,10 @@ namespace chisel.src
                         MouseButton = EnumMouseButton.Right,
 
                     },
-                    new WorldInteraction()
-                    {
-                        ActionLangCode = "Mode Select",
-                        HotKeyCode="f"
-
-                    }
+                   
                 };
             });
+            
         }
 
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
@@ -290,6 +288,7 @@ namespace chisel.src
         }
         public override WorldInteraction[] GetHeldInteractionHelp(ItemSlot inSlot)
         {
+            
             return interactions.Append(base.GetHeldInteractionHelp(inSlot));
         }
     }
