@@ -36,8 +36,8 @@ namespace chisel.src
 
                 modes = new SkillItem[4];
                 modes[(int)enModes.MOVE] = new SkillItem() { Code = new AssetLocation(enModes.MOVE.ToString()), Name = Lang.Get("Move Block") };
-                modes[(int)enModes.FLIP] = new SkillItem() { Code = new AssetLocation(enModes.FLIP.ToString()), Name = Lang.Get("Vertical Mirror") };
-                modes[(int)enModes.ROTATE] = new SkillItem() { Code = new AssetLocation(enModes.FLIP.ToString()), Name = Lang.Get("Rotate") };
+                modes[(int)enModes.FLIP] = new SkillItem() { Code = new AssetLocation(enModes.FLIP.ToString()), Name = Lang.Get("Mirror Block") };
+                modes[(int)enModes.ROTATE] = new SkillItem() { Code = new AssetLocation(enModes.FLIP.ToString()), Name = Lang.Get("Rotate Block") };
                 modes[(int)enModes.UNDO] = new SkillItem() { Code = new AssetLocation(enModes.UNDO.ToString()), Name = Lang.Get("Undo Last Block Change") };
 
                 if (capi != null)
@@ -100,7 +100,44 @@ namespace chisel.src
         }
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
-            
+
+            if(blockSel == null) { return; }
+            IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
+            if (!byEntity.World.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.BuildOrBreak))
+            {
+                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
+                return;
+            }
+            int cutvoxels = 0;
+            Backup(blockSel.Position);
+            if (slot.Itemstack.Attributes.GetInt("lastToolMode", (int)enModes.MOVE) == (int)enModes.MOVE)
+            {
+                cutvoxels = MoveChiseledBlock(blockSel);
+            }
+            else if (slot.Itemstack.Attributes.GetInt("lastToolMode", (int)enModes.MOVE) == (int)enModes.FLIP)
+            {
+                cutvoxels = MirrorBlock(blockSel);
+            }
+            else if (slot.Itemstack.Attributes.GetInt("lastToolMode", (int)enModes.MOVE) == (int)enModes.ROTATE)
+            {
+                cutvoxels = RotateBlock(blockSel);
+            }
+            if (cutvoxels > 0)
+            {
+                api.World.PlaySoundAt(new AssetLocation("chiseltools:sounds/stone_move"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 0.25f);
+            }
+            if (api is ICoreServerAPI)
+            {
+                if (byPlayer?.WorldData.CurrentGameMode == EnumGameMode.Creative)
+                {
+                    handling = EnumHandHandling.PreventDefaultAction;
+                }
+                else
+                {
+                    this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, CalcDamage(cutvoxels));
+                }
+            }
+
             handling = EnumHandHandling.PreventDefaultAction;
         }
 

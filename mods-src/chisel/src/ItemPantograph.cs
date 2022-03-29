@@ -43,9 +43,9 @@ namespace chisel.src
                 SkillItem[] modes;
                 
                 modes = new SkillItem[4];
-                modes[(int)enModes.COPY] = new SkillItem() { Code = new AssetLocation(enModes.COPY.ToString()), Name = Lang.Get("Copy Mode") };
-                modes[(int)enModes.FULLPASTE] = new SkillItem() { Code = new AssetLocation(enModes.FULLPASTE.ToString()), Name = Lang.Get("Replace with Copied Shape Mode") };
-                modes[(int)enModes.ADDPASTE] = new SkillItem() { Code = new AssetLocation(enModes.ADDPASTE.ToString()), Name = Lang.Get("Add Copied Shape Mode") };
+                modes[(int)enModes.COPY] = new SkillItem() { Code = new AssetLocation(enModes.COPY.ToString()), Name = Lang.Get("Snapshot Shape Mode") };
+                modes[(int)enModes.FULLPASTE] = new SkillItem() { Code = new AssetLocation(enModes.FULLPASTE.ToString()), Name = Lang.Get("Replace Shape Mode") };
+                modes[(int)enModes.ADDPASTE] = new SkillItem() { Code = new AssetLocation(enModes.ADDPASTE.ToString()), Name = Lang.Get("Add Shape Mode") };
                 modes[(int)enModes.UNDO] = new SkillItem() { Code = new AssetLocation(enModes.UNDO.ToString()), Name = Lang.Get("Undo Last Block Change") };
 
                 if (capi != null)
