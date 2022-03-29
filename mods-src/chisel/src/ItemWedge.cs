@@ -25,7 +25,7 @@ namespace chisel.src
         SkillItem[] toolModes;
         WorldInteraction[] interactions;
         ICoreClientAPI capi;
-        public enum enModes { MOVE,FLIP, UNDO }
+        public enum enModes { MOVE,FLIP,ROTATE,UNDO }
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
@@ -34,9 +34,10 @@ namespace chisel.src
             {
                 SkillItem[] modes;
 
-                modes = new SkillItem[3];
+                modes = new SkillItem[4];
                 modes[(int)enModes.MOVE] = new SkillItem() { Code = new AssetLocation(enModes.MOVE.ToString()), Name = Lang.Get("Move Block") };
                 modes[(int)enModes.FLIP] = new SkillItem() { Code = new AssetLocation(enModes.FLIP.ToString()), Name = Lang.Get("Vertical Mirror") };
+                modes[(int)enModes.ROTATE] = new SkillItem() { Code = new AssetLocation(enModes.FLIP.ToString()), Name = Lang.Get("Vertical Rotate") };
                 modes[(int)enModes.UNDO] = new SkillItem() { Code = new AssetLocation(enModes.UNDO.ToString()), Name = Lang.Get("Undo Last Block Change") };
 
                 if (capi != null)
@@ -45,6 +46,8 @@ namespace chisel.src
                     modes[(int)enModes.MOVE].TexturePremultipliedAlpha = false;
                     modes[(int)enModes.FLIP].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/material.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.FLIP].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.ROTATE].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/material.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.ROTATE].TexturePremultipliedAlpha = false;
                     modes[(int)enModes.UNDO].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/undo.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.UNDO].TexturePremultipliedAlpha = false;
                 }
@@ -144,9 +147,13 @@ namespace chisel.src
             {
                 cutvoxels = MoveChiseledBlock(blockSel);
             }
-            else
+            else if (slot.Itemstack.Attributes.GetInt("lastToolMode", (int)enModes.MOVE) == (int)enModes.FLIP)
             {
                 cutvoxels = VerticalMirrorBlock(blockSel);
+            }
+            else if (slot.Itemstack.Attributes.GetInt("lastToolMode", (int)enModes.MOVE) == (int)enModes.ROTATE)
+            {
+                cutvoxels = VerticalRotateBlock(blockSel);
             }
             if (cutvoxels > 0)
             {
@@ -234,38 +241,43 @@ namespace chisel.src
 
             }
 
-            /*
-            Vec3i writeoffset = new Vec3i(0, 0, 0);
-
-            //adjust the plane based on facing
-            if (blockSel.Face == BlockFacing.SOUTH) { writeoffset.Z = -1; }
-            else if (blockSel.Face == BlockFacing.NORTH) { writeoffset.Z = 1; }
-            else if (blockSel.Face == BlockFacing.EAST) { writeoffset.X = -1; }
-            else if (blockSel.Face == BlockFacing.WEST) { writeoffset.X = 1; }
-            else if (blockSel.Face == BlockFacing.UP) { writeoffset.Y = -1; }
-            else if (blockSel.Face == BlockFacing.DOWN) { writeoffset.Y = 1; }
-
+            
+            if (cuboids == null || cuboids.Count == 0) { return 0; }
+            bmb.VoxelCuboids = cuboids;
+            bmb.MarkDirty(true);
+            return 16 * 16; //todo calculate actual voxels based on the bounds of the cuboids
+        }
+        public virtual int VerticalRotateBlock(BlockSelection blockSel)
+        {
+            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+            if (bmb == null) { lastpos = null; return 0; }
+            if (bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { return 0; }
             List<uint> cuboids = new List<uint>();
-            //Loop thru the cuboids and find the material we are looking at
+            double angle = 90;
             foreach (uint voxint in bmb.VoxelCuboids)
             {
                 CuboidWithMaterial cwm = new CuboidWithMaterial();
                 //this static method converts the uint into a CubioidWithMaterial
                 BlockEntityMicroBlock.FromUint(voxint, cwm);
-                //Shift coordinates of every cuboid - possible issue - voxels stacking up at outside of object
-                cwm.X1 += writeoffset.X; cwm.X1 = GameMath.Clamp(cwm.X1, 0, 16);
-                cwm.X2 += writeoffset.X; cwm.X2 = GameMath.Clamp(cwm.X2, 0, 16);
-                if (cwm.X2 <= cwm.X1) { continue; }
-                cwm.Y1 += writeoffset.Y; cwm.Y1 = GameMath.Clamp(cwm.Y1, 0, 16);
-                cwm.Y2 += writeoffset.Y; cwm.Y2 = GameMath.Clamp(cwm.Y2, 0, 16);
-                if (cwm.Y2 <= cwm.Y1) { continue; }
-                cwm.Z1 += writeoffset.Z; cwm.Z1 = GameMath.Clamp(cwm.Z1, 0, 16);
-                cwm.Z2 += writeoffset.Z; cwm.Z2 = GameMath.Clamp(cwm.Z2, 0, 16);
-                if (cwm.Z2 <= cwm.Z1) { continue; }
-                uint voxelint = BlockEntityMicroBlock.ToUint(cwm.X1, cwm.Y1, cwm.Z1, cwm.X2, cwm.Y2, cwm.Z2, cwm.Material);
-                cuboids.Add(voxelint);
+                Cuboidi torotate = cwm as Cuboidi;
+                if (blockSel.Face == BlockFacing.EAST || blockSel.Face == BlockFacing.WEST)
+                {
+                    torotate = torotate.RotatedCopy(new Vec3d(angle, 0, 0), new Vec3d(8, 8, 8));
+                }
+                else if (blockSel.Face == BlockFacing.NORTH || blockSel.Face == BlockFacing.SOUTH)
+                {
+                    torotate = torotate.RotatedCopy(new Vec3d(0, 0, angle), new Vec3d(8, 8, 8));
+                }
+                else
+                {
+                    torotate = torotate.RotatedCopy(new Vec3d(0, angle, 0), new Vec3d(8, 8, 8));
+                }
+                //x&z should stay the same
+
+                cuboids.Add(BlockEntityMicroBlock.ToUint(torotate.MinX,torotate.MinY,torotate.MinZ,torotate.MaxX,torotate.MaxY,torotate.MaxZ,  cwm.Material));
+
             }
-            */
+
             if (cuboids == null || cuboids.Count == 0) { return 0; }
             bmb.VoxelCuboids = cuboids;
             bmb.MarkDirty(true);
