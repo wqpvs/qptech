@@ -178,6 +178,14 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
+            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+            if (bmb == null)
+            {
+                lastpos = null;
+
+                base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+                return;
+            }
             int cutvoxels = 0;
             Backup(blockSel.Position);
             if (slot.Itemstack.Attributes.GetInt("lastToolMode", (int)enModes.MOVE) == (int)enModes.MOVE)

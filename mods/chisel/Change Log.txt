@@ -1,4 +1,9 @@
-﻿1.4
+﻿1.4.1
+- enable left click to copy with pantograph again...idk what i was thinking xD
+- tool rack storage
+
+
+1.4
 - further reduced pantograph damage
 - pantograph - now only does right click function, if you want to copy change to copy mode (should help to prevent some accidents)
 	- plays snapshot sound when take copy

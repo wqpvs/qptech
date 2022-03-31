@@ -82,14 +82,14 @@ namespace chisel.src
 
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
-            /*if (blockSel == null) { return; }
+            if (blockSel == null) { return; }
             IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
             if (!byEntity.World.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.BuildOrBreak))
             {
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
-            MakeCopy(slot, byEntity, blockSel, entitySel, ref handling);*/
+            if (ChiselToolLoader.serverconfig.enablePantographLeftClickCopy) { MakeCopy(slot, byEntity, blockSel, entitySel, ref handling); }
             handling = EnumHandHandling.PreventDefaultAction;
 
             //TODO add a special sound?
@@ -129,16 +129,23 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
+            
+            
+           
 
+            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+            if (bmb == null)
+            {
+                base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+                return;
+            }
             if (slot.Itemstack.Attributes.GetInt("toolMode", (int)enModes.COPY) == (int)enModes.COPY)
             {
                 MakeCopy(slot, byEntity, blockSel, entitySel, ref handling);
                 handling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
-
-            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
-            if (copiedblockvoxels==null|| bmb == null || bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling); return; }
+            if (copiedblockvoxels==null|| bmb == null || bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);handling =EnumHandHandling.NotHandled;  return; }
             
             undovoxels = new List<uint>(bmb.VoxelCuboids);
             undoposition = blockSel.Position;

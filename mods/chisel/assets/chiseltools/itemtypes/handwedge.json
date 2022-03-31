@@ -27,8 +27,10 @@
 				"y": 0,
 				"z": 2
 			},
-			"scale": 1.25
-		}
+			"scale": 1.25,
+			
+		},
+		"rackable": true
 	},
 	"damagedby": [ "blockbreaking", "attacking" ],
 	"enabled": true,

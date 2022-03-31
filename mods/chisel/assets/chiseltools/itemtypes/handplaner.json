@@ -4,6 +4,7 @@
 	
 	"drawtype": "json",
 	"shape": { "base": "item/tool/handplaner" },
+	
 	"variantgroups": [
 		{
 			"code": "material",
@@ -28,7 +29,9 @@
 				"z": 2
 			},
 			"scale": 1.25
-		}
+		},
+		"rackable": true
+		
 	},
 	"damagedby": [ "blockbreaking", "attacking" ],
 	"enabled": true,

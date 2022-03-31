@@ -177,6 +177,14 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
+            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+            if (bmb == null) {
+                lastpos = null;
+                
+                base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+                return;
+            }
+            
             int cutvoxels = 0;
             Backup(blockSel.Position);
             if (slot.Itemstack.Attributes.GetInt("lastToolMode", (int)enModes.MATERIAL) == (int)enModes.MATERIAL)
@@ -190,7 +198,9 @@ namespace chisel.src
             if (cutvoxels > 0)
             {
                 api.World.PlaySoundAt(new AssetLocation("chiseltools:sounds/stone_move"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 0.25f);
+                handling = EnumHandHandling.PreventDefaultAction;
             }
+            
             if (api is ICoreServerAPI)
             {
                 if (byPlayer?.WorldData.CurrentGameMode == EnumGameMode.Creative)
@@ -202,8 +212,8 @@ namespace chisel.src
                     this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, CalcDamage(cutvoxels));
                 }
             }
+            
 
-            handling = EnumHandHandling.PreventDefaultAction;
         }
         
         /// <summary>
