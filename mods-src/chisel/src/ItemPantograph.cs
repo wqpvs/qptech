@@ -89,7 +89,7 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
-            if (ChiselToolLoader.serverconfig.enablePantographLeftClickCopy) { MakeCopy(slot, byEntity, blockSel, entitySel, ref handling); }
+           MakeCopy(slot, byEntity, blockSel, entitySel, ref handling); 
             handling = EnumHandHandling.PreventDefaultAction;
             api.World.PlaySoundAt(new AssetLocation("sounds/filtercopy"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
            
