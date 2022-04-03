@@ -1,6 +1,10 @@
-﻿1.4.3
+﻿1.4.4
+- bugfix: Copied Block data was global - so copying and pasting would get mixed up between users, now stored in stack data which also means that a copy is saved on a pantograph,even if you log out etc
+
+1.4.3
 - left click pantograph sound fixed
 - tools will no longer alter reinforced blocks (note you can still copy a reinforced block just not alter it)
+
 
 1.4.2
 - hotfix pantograph crash
