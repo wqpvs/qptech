@@ -156,14 +156,20 @@ namespace chisel.src
         public virtual void Undo(ItemSlot slot)
         {
             if (api is ICoreClientAPI) { return; }
+            
             List<uint> undovoxels = null;
-            BlockPos undoposition = null;
+            BlockPos undoposition = new BlockPos(0,0,0);
+
             try
             {
+                
                 byte[] voxdat = slot.Itemstack.Attributes.GetBytes("undovoxels", null);
                 if (voxdat == null) { return; }
                 undovoxels = SerializerUtil.Deserialize<List<uint>>(voxdat);
+                if (undovoxels == null) { return; }
+                
                 undoposition = slot.Itemstack.Attributes.GetBlockPos("undoposition", null);
+                if (undoposition == null) { return; }
                 //slot.Itemstack.Attributes.GetBytes("undovoxels", SerializerUtil.Deserialize<List<uint>>(undovoxels));
                 //slot.Itemstack.Attributes.SetBlockPos("undoposition", blockSel.Position);
             }
@@ -175,7 +181,7 @@ namespace chisel.src
             if (undovoxels != null && undoposition != null)
             {
                 BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(undoposition) as BlockEntityMicroBlock;
-                if (bmb == null) { undovoxels = null; }
+                if (bmb == null) { return; }
                 bmb.VoxelCuboids = new List<uint>(undovoxels);
                 bmb.MarkDirty(true);
                 undovoxels = null;
