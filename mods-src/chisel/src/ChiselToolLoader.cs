@@ -111,12 +111,15 @@ namespace chisel.src
             public float pantographBaseDurabilityMultiplier = pantographDefault;
             public int pantographMinimumDamagePerOp = 1;
             public bool enablePantographLeftClickCopy = true;
+            public bool pantographInstantMode = true;
             public static float handplanerDefault = 0.00625f;
             public static float pantographDefault = 0.001f;
+            public static bool pantographInstantModeDefault = true;
             public void Reset()
             {
                 handPlanerBaseDurabilityMultiplier = handplanerDefault;
                 pantographBaseDurabilityMultiplier = pantographDefault;
+                pantographInstantMode = pantographInstantModeDefault;
             }
         }
     }

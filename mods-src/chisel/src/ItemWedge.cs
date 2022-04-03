@@ -103,6 +103,11 @@ namespace chisel.src
 
             if(blockSel == null) { return; }
             IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
+            if (api.ModLoader.GetModSystem<ModSystemBlockReinforcement>()?.IsReinforced(blockSel.Position) == true)
+            {
+                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
+                return;
+            }
             if (!byEntity.World.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.BuildOrBreak))
             {
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
@@ -173,6 +178,11 @@ namespace chisel.src
         {
             if (blockSel == null) { return; }
             IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
+            if (api.ModLoader.GetModSystem<ModSystemBlockReinforcement>()?.IsReinforced(blockSel.Position) == true)
+            {
+                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
+                return;
+            }
             if (!byEntity.World.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.BuildOrBreak))
             {
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();

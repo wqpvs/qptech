@@ -91,8 +91,8 @@ namespace chisel.src
             }
             if (ChiselToolLoader.serverconfig.enablePantographLeftClickCopy) { MakeCopy(slot, byEntity, blockSel, entitySel, ref handling); }
             handling = EnumHandHandling.PreventDefaultAction;
-
-            //TODO add a special sound?
+            api.World.PlaySoundAt(new AssetLocation("sounds/filtercopy"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
+           
         }
 
         public virtual void MakeCopy(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
@@ -146,7 +146,11 @@ namespace chisel.src
                 return;
             }
             if (copiedblockvoxels==null|| bmb == null || bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);handling =EnumHandHandling.NotHandled;  return; }
-            
+            if (api.ModLoader.GetModSystem<ModSystemBlockReinforcement>()?.IsReinforced(blockSel.Position) == true)
+            {
+                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
+                return;
+            }
             undovoxels = new List<uint>(bmb.VoxelCuboids);
             undoposition = blockSel.Position;
             int changedvoxels = 0;

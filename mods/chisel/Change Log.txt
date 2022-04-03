@@ -1,4 +1,11 @@
-﻿1.4.1
+﻿1.4.3
+- left click pantograph sound fixed
+- tools will no longer alter reinforced blocks (note you can still copy a reinforced block just not alter it)
+
+1.4.2
+- hotfix pantograph crash
+
+1.4.1
 - enable left click to copy with pantograph again...idk what i was thinking xD
 - tool rack storage
 

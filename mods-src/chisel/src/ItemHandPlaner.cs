@@ -110,6 +110,11 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
+            if (api.ModLoader.GetModSystem<ModSystemBlockReinforcement>()?.IsReinforced(blockSel.Position) == true)
+            {
+                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
+                return;
+            }
             int cutvoxels = 0;
             Backup(blockSel.Position);
             if (slot.Itemstack.Attributes.GetInt("lastToolMode",(int) enModes.MATERIAL)==(int)enModes.MATERIAL)
@@ -172,6 +177,11 @@ namespace chisel.src
         {
             if (blockSel == null) { return; }
             IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
+            if (api.ModLoader.GetModSystem<ModSystemBlockReinforcement>()?.IsReinforced(blockSel.Position) == true)
+            {
+                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
+                return;
+            }
             if (!byEntity.World.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.BuildOrBreak))
             {
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
