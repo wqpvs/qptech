@@ -20,8 +20,7 @@ namespace chisel.src
         //These will track the last thing the planer clicked on
         protected BlockPos lastpos;
         protected BlockFacing lastfacing = BlockFacing.DOWN;
-        List<uint> undovoxels;
-        BlockPos undoposition;
+        
         SkillItem[] toolModes;
         WorldInteraction[] interactions;
         ICoreClientAPI capi;
@@ -90,7 +89,7 @@ namespace chisel.src
             slot.Itemstack.Attributes.SetInt("toolMode", toolMode);
             if (toolMode == (int)enModes.UNDO)
             {
-                Undo();
+                Undo(slot);
                 SetToolMode(slot, byPlayer, blockSel, slot.Itemstack.Attributes.GetInt("lastToolMode", 0));
             }
             else
@@ -114,7 +113,7 @@ namespace chisel.src
                 return;
             }
             int cutvoxels = 0;
-            Backup(blockSel.Position);
+            Backup(slot,blockSel.Position);
             if (slot.Itemstack.Attributes.GetInt("lastToolMode", (int)enModes.MOVE) == (int)enModes.MOVE)
             {
                 cutvoxels = MoveChiseledBlock(blockSel);
@@ -153,9 +152,27 @@ namespace chisel.src
             if (basedamage < 0) { basedamage = 0; }
             return basedamage;
         }
-        public virtual void Undo()
+        
+        public virtual void Undo(ItemSlot slot)
         {
-            if (undovoxels != null)
+            if (api is ICoreClientAPI) { return; }
+            List<uint> undovoxels = null;
+            BlockPos undoposition = null;
+            try
+            {
+                byte[] voxdat = slot.Itemstack.Attributes.GetBytes("undovoxels", null);
+                if (voxdat == null) { return; }
+                undovoxels = SerializerUtil.Deserialize<List<uint>>(voxdat);
+                undoposition = slot.Itemstack.Attributes.GetBlockPos("undoposition", null);
+                //slot.Itemstack.Attributes.GetBytes("undovoxels", SerializerUtil.Deserialize<List<uint>>(undovoxels));
+                //slot.Itemstack.Attributes.SetBlockPos("undoposition", blockSel.Position);
+            }
+            catch
+            {
+                return;
+            }
+
+            if (undovoxels != null && undoposition != null)
             {
                 BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(undoposition) as BlockEntityMicroBlock;
                 if (bmb == null) { undovoxels = null; }
@@ -165,13 +182,20 @@ namespace chisel.src
             }
         }
 
-        public virtual void Backup(BlockPos pos)
+        public virtual void Backup(ItemSlot slot, BlockPos pos)
         {
-            undovoxels = null;
-            undoposition = pos;
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(pos) as BlockEntityMicroBlock;
             if (bmb == null) { return; }
-            undovoxels = new List<uint>(bmb.VoxelCuboids);
+            
+            List<uint> undovoxels = new List<uint>(bmb.VoxelCuboids);
+            
+            if (api is ICoreServerAPI)
+            {
+                slot.Itemstack.Attributes.SetBytes("undovoxels", SerializerUtil.Serialize<List<uint>>(undovoxels));
+                slot.Itemstack.Attributes.SetBlockPos("undoposition", pos);
+                slot.MarkDirty();
+            }
+
         }
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
@@ -197,7 +221,7 @@ namespace chisel.src
                 return;
             }
             int cutvoxels = 0;
-            Backup(blockSel.Position);
+            Backup(slot,blockSel.Position);
             if (slot.Itemstack.Attributes.GetInt("lastToolMode", (int)enModes.MOVE) == (int)enModes.MOVE)
             {
                 cutvoxels = MoveChiseledBlock(blockSel);

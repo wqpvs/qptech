@@ -1,5 +1,6 @@
 ﻿1.4.4
 - bugfix: Copied Block data was global - so copying and pasting would get mixed up between users, now stored in stack data which also means that a copy is saved on a pantograph,even if you log out etc
+	- also applies to undo data for all three tools
 
 1.4.3
 - left click pantograph sound fixed
