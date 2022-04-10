@@ -11,7 +11,7 @@
 		"handle": [8,8]
 	},
 	"textures": {
-		"metal": "block/metal/ingot/iron"
+		"metal": "game:block/metal/ingot/iron"
 	},
 	"elements": [
 		{

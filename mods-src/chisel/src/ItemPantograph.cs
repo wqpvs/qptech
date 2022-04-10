@@ -251,7 +251,9 @@ namespace chisel.src
         protected virtual int CalcDamage(int numvoxels)
         {
 
+            if (ChiselToolLoader.serverconfig.fixedToolWear) { return (int)ChiselToolLoader.serverconfig.pantographMinimumDamagePerOp; }
             int basedamage = (int)(ChiselToolLoader.serverconfig.pantographBaseDurabilityMultiplier * (float)numvoxels);
+            
             basedamage = Math.Max(ChiselToolLoader.serverconfig.pantographMinimumDamagePerOp, basedamage);
             return basedamage;
         }

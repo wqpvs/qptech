@@ -17,8 +17,8 @@
     <OutputPath>.\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="chisel\assets\chiseltools\sounds\filtercopy.ogg" />
-    <Content Include="chisel\assets\chiseltools\sounds\stone_move.ogg" />
+    <Content Include="chisel\assets\game\sounds\filtercopy.ogg" />
+    <Content Include="chisel\assets\game\sounds\stone_move.ogg" />
     <Content Include="chisel\assets\game\textures\icons\add.svg" />
     <Content Include="chisel\assets\game\textures\icons\copy.svg" />
     <Content Include="chisel\assets\game\textures\icons\material.svg" />

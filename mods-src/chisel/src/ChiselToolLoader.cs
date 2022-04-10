@@ -112,9 +112,11 @@ namespace chisel.src
             public int pantographMinimumDamagePerOp = 1;
             public bool enablePantographLeftClickCopy = true;
             public bool pantographInstantMode = true;
+            public bool fixedToolWear = false;
             public static float handplanerDefault = 0.00625f;
             public static float pantographDefault = 0.001f;
             public static bool pantographInstantModeDefault = true;
+            public static bool fixedToolWearDefault = false;
             public void Reset()
             {
                 handPlanerBaseDurabilityMultiplier = handplanerDefault;
