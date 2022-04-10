@@ -12,7 +12,7 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 using Vintagestory.API.Server;
-using Vintagestory.API.Util;
+
 
 namespace chisel.src
 {
@@ -313,7 +313,15 @@ namespace chisel.src
         {
             return Math.Min(toolModes.Length - 1, slot.Itemstack.Attributes.GetInt("toolMode"));
         }
+        public override void OnUnloaded(ICoreAPI api)
+        {
+            for (int i = 0; toolModes != null && i < toolModes.Length; i++)
+            {
+                toolModes[i]?.Dispose();
+            }
 
+           
+        }
         public override void SetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel, int toolMode)
         {
             slot.Itemstack.Attributes.SetInt("toolMode", toolMode);

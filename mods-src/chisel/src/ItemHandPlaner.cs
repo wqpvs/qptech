@@ -181,7 +181,15 @@ namespace chisel.src
                 undovoxels = null;
             }
         }
+        public override void OnUnloaded(ICoreAPI api)
+        {
+            for (int i = 0; toolModes != null && i < toolModes.Length; i++)
+            {
+                toolModes[i]?.Dispose();
+            }
 
+
+        }
         public virtual void Backup(ItemSlot slot, BlockPos pos)
         {
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(pos) as BlockEntityMicroBlock;
