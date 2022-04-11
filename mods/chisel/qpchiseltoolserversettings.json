@@ -1,0 +1,9 @@
+{
+  "handPlanerBaseDurabilityUse": 1,
+  "handPlanerBaseDurabilityMultiplier": 0.00625,
+  "pantographBaseDurabilityMultiplier": 0.001,
+  "pantographMinimumDamagePerOp": 40,
+  "enablePantographLeftClickCopy": true,
+  "pantographInstantMode": true,
+  "fixedToolWear": true
+}
