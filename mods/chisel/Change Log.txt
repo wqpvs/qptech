@@ -1,4 +1,7 @@
-﻿1.4.5
+﻿1.4.6
+- fixed pantograph renaming unamed blocks to "copy"
+
+1.4.5
 - Added config option "fixedToolWear" - if true then the pantograph will always use pantographMinimumDamagePerOp for tool wear, ignoring number of voxels and ignoring pantographBaseDurabilityModifier
 - fixed a warning about a missing texture (thanks AleDark)
 - fixed a possible memory leak (thanks AleDark)

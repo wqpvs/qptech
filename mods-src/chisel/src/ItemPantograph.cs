@@ -237,7 +237,10 @@ namespace chisel.src
                 bmb.MarkDirty(true);
                 
             }
-            bmb.BlockName = slot.Itemstack.Attributes.GetString("copiedblockname", "copy"); 
+            string copyname= slot.Itemstack.Attributes.GetString("copiedblockname", "");
+            if (copyname != "") {
+                bmb.BlockName = copyname;
+            }
             bmb.MarkDirty(true);
             api.World.PlaySoundAt(new AssetLocation("sounds/player/chalkdraw1"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
             if (api is ICoreServerAPI && byPlayer?.WorldData.CurrentGameMode != EnumGameMode.Creative)
