@@ -121,7 +121,9 @@ namespace chisel.src
                 objectmesh = BlockEntityMicroBlock.CreateMesh(capi, copiedblockvoxels, copiedblockmaterials.ToArray() );
                 objectmesh.SetTexPos(capi.ItemTextureAtlas.GetPosition(this, "metal"));
                 objectmesh.Scale(new Vec3f(0.5f, 0.5f, 0.5f), 0.5f, 0.5f, 0.5f);
-                objectmesh.Translate(new Vec3f(0.25f, 0, 0));
+                objectmesh.Translate(new Vec3f(0.25f, 0, -0.25f));
+                
+                
                 objectmeshref = capi.Render.UploadMesh(objectmesh);
                 
             }
@@ -362,6 +364,16 @@ namespace chisel.src
                 renderinfo.ModelRef = objectmeshref;    
             }
             base.OnBeforeRender(capi, itemstack, target, ref renderinfo);
+        }
+       
+        public override void OnHeldRenderOpaque(ItemSlot inSlot, IClientPlayer byPlayer)
+        {
+            if (objectmesh != null)
+            {
+                objectmesh.Rotate(new Vec3f(0.5f+0.25f, 0, 0.5f-0.25f), 0, 0.05f, 0);;
+                capi.Render.UpdateMesh(objectmeshref,objectmesh);
+            }
+            base.OnHeldRenderOpaque(inSlot, byPlayer);
         }
     }
 }
