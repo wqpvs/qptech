@@ -29,8 +29,8 @@ namespace chisel.src
         
         SkillItem[] toolModes;
         WorldInteraction[] interactions;
-        
-
+        MeshData objectmesh;
+        MeshRef objectmeshref;
         ICoreClientAPI capi;
         public enum enModes {COPY,FULLPASTE,ADDPASTE,UNDO}
         public override void OnLoaded(ICoreAPI api)
@@ -102,18 +102,10 @@ namespace chisel.src
             
             
             string copiedname = bmb.BlockName;
-            List<uint>copiedblockvoxels = new List<uint>();
-            List<int>copiedblockmaterials = new List<int>();
+            List<uint>copiedblockvoxels = new List<uint>(bmb.VoxelCuboids);
+            List<int>copiedblockmaterials = new List<int>(bmb.MaterialIds);
             int copiedvolume = (int)(bmb.VolumeRel * 16f * 16f * 16f);
-            foreach (uint u in bmb.VoxelCuboids)
-            {
-                copiedblockvoxels.Add(u);
-
-            }
-            foreach (int m in bmb.MaterialIds)
-            {
-                copiedblockmaterials.Add(m);
-            }
+            
             if (api is ICoreServerAPI) {
                 byte[]bvox = SerializerUtil.Serialize<List<uint>>(copiedblockvoxels);
                 
@@ -122,6 +114,16 @@ namespace chisel.src
                 slot.Itemstack.Attributes.SetString("copiedblockname", copiedname);
                 slot.Itemstack.Attributes.SetInt("copiedblockmaterials",copiedblockmaterials.Count);
                 slot.MarkDirty();
+            }
+            if (api is ICoreClientAPI)
+            {
+                objectmeshref?.Dispose();
+                objectmesh = BlockEntityMicroBlock.CreateMesh(capi, copiedblockvoxels, copiedblockmaterials.ToArray() );
+                objectmesh.SetTexPos(capi.ItemTextureAtlas.GetPosition(this, "metal"));
+                objectmesh.Scale(new Vec3f(0.5f, 0.5f, 0.5f), 0.5f, 0.5f, 0.5f);
+                objectmesh.Translate(new Vec3f(0.25f, 0, 0));
+                objectmeshref = capi.Render.UploadMesh(objectmesh);
+                
             }
             api.World.PlaySoundAt(new AssetLocation("sounds/filtercopy"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
         }
@@ -351,6 +353,15 @@ namespace chisel.src
         {
             
             return interactions.Append(base.GetHeldInteractionHelp(inSlot));
+        }
+
+        public override void OnBeforeRender(ICoreClientAPI capi, ItemStack itemstack, EnumItemRenderTarget target, ref ItemRenderInfo renderinfo)
+        {
+            if (objectmeshref != null)
+            {
+                renderinfo.ModelRef = objectmeshref;    
+            }
+            base.OnBeforeRender(capi, itemstack, target, ref renderinfo);
         }
     }
 }
