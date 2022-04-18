@@ -93,7 +93,8 @@ namespace chisel.src
             api.World.PlaySoundAt(new AssetLocation("sounds/filtercopy"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
            
         }
-
+        //Vec3f displayoffset = new Vec3f(0.25f, 0, -0.25f);
+        Vec3f displayoffset = new Vec3f(0, 0, 0);
         public virtual void MakeCopy(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
@@ -118,10 +119,17 @@ namespace chisel.src
             if (api is ICoreClientAPI)
             {
                 objectmeshref?.Dispose();
+                
                 objectmesh = BlockEntityMicroBlock.CreateMesh(capi, copiedblockvoxels, copiedblockmaterials.ToArray() );
+                MeshData myshape;
+                capi.Tesselator.TesselateItem(this, out myshape);
+                myshape.Scale(new Vec3f(0.5f,0.5f,0.5f),2, 2, 2);
+                myshape.Translate(new Vec3f(0, -0.125f, 0));
+                
+                objectmesh.AddMeshData(myshape);
                 objectmesh.SetTexPos(capi.ItemTextureAtlas.GetPosition(this, "metal"));
                 objectmesh.Scale(new Vec3f(0.5f, 0.5f, 0.5f), 0.5f, 0.5f, 0.5f);
-                objectmesh.Translate(new Vec3f(0.25f, 0, -0.25f));
+                objectmesh.Translate(displayoffset);
                 
                 
                 objectmeshref = capi.Render.UploadMesh(objectmesh);
@@ -370,7 +378,7 @@ namespace chisel.src
         {
             if (objectmesh != null)
             {
-                objectmesh.Rotate(new Vec3f(0.5f+0.25f, 0, 0.5f-0.25f), 0, 0.05f, 0);;
+                objectmesh.Rotate(new Vec3f(0.5f+displayoffset.X, displayoffset.Y, 0.5f+displayoffset.Z), 0, 0.025f, 0);;
                 capi.Render.UpdateMesh(objectmeshref,objectmesh);
             }
             base.OnHeldRenderOpaque(inSlot, byPlayer);
