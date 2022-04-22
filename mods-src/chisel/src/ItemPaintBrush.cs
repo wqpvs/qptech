@@ -64,10 +64,8 @@ namespace chisel.src
             List<int> newmats = new List<int>(bmb.MaterialIds);
             newmats[selectedmat] = inkmat;
             bmb.MaterialIds = newmats.ToArray();
-            bmb.SetNowMaterial(selectedmat);
-            
             bmb.MarkDirty(true);
-            bmb.RegenMesh();
+            handling = EnumHandHandling.PreventDefaultAction;
         }
 
         //crossreferences items and blocks to a relevant block to use for a material
@@ -75,17 +73,46 @@ namespace chisel.src
         {
             int result = -1;
             if (forslot.Itemstack == null || forslot.Itemstack.StackSize == 0) { return result; }
-            if (forslot.Itemstack.Block == null) { return result; }
-            //TODO - make sure item in slot is valid as chisel material
-            //TODO - weird thing where mat change is temporary
+            if (forslot.Itemstack.Block == null||forslot.Itemstack.Block is BlockChisel) { return result; }
+            if (forslot.Itemstack.Block is BlockLiquidContainerTopOpened) { return DyeCrossReference(api,forslot); }
+            
+            bool canChiselSet = forslot.Itemstack.Block.Attributes?["canChisel"].Exists == true;
+            bool canChisel = forslot.Itemstack.Block.Attributes?["canChisel"].AsBool(false) == true;
+                        
+            if (canChiselSet && !canChisel) return -1;
+            if (forslot.Itemstack.Block.DrawType != EnumDrawType.Cube) return -1;
             if (forslot.Itemstack.Block != null) { return forslot.Itemstack.Block.Id; }
-            
-            
+            if (forslot.Itemstack.Block.SeasonColorMap != null || forslot.Itemstack.Block.ClimateColorMap != null) return -1;
+
             //Block testblock = api.World.BlockAccessor.GetBlock(new AssetLocation("game:creativeblock-18"));
-            
-            
-            
+
+
+
             return result;
+        }
+
+        public static int DyeCrossReference(ICoreAPI api, ItemSlot forslot)
+        {
+            
+            if (forslot == null || forslot.Itemstack == null || forslot.Itemstack.Block == null) { return -1; }
+            BlockLiquidContainerTopOpened container = forslot.Itemstack.Block as BlockLiquidContainerTopOpened;
+            if (container == null) { return -1; }
+            ItemStack containercontents = container.GetContent(forslot.Itemstack);
+            if (containercontents == null || containercontents.StackSize == 0||containercontents.Item==null) { return -1; }
+            
+            if (containercontents.Item.Code.ToString() == "game:dye-blue") { return api.World.GetBlock(new AssetLocation("game:creativeblock-18")).Id; }
+            else if (containercontents.Item.Code.ToString() == "game:dye-red") { return api.World.GetBlock(new AssetLocation("game:creativeblock-32")).Id; }
+            else if (containercontents.Item.Code.ToString() == "game:dye-yellow") { return api.World.GetBlock(new AssetLocation("game:creativeblock-36")).Id; }
+            else if (containercontents.Item.Code.ToString() == "game:dye-purple") { return api.World.GetBlock(new AssetLocation("game:creativeblock-26")).Id; }
+            else if (containercontents.Item.Code.ToString() == "game:dye-brown") { return api.World.GetBlock(new AssetLocation("game:creativeblock-2")).Id; }
+            else if (containercontents.Item.Code.ToString() == "game:dye-green") { return api.World.GetBlock(new AssetLocation("game:creativeblock-43")).Id; }
+            else if (containercontents.Item.Code.ToString() == "game:dye-orange") { return api.World.GetBlock(new AssetLocation("game:creativeblock-35")).Id; }
+            else if (containercontents.Item.Code.ToString() == "game:dye-black") { return api.World.GetBlock(new AssetLocation("game:creativeblock-65")).Id; }
+            else if (containercontents.Item.Code.ToString() == "game:dye-gray") { return api.World.GetBlock(new AssetLocation("game:creativeblock-72")).Id; }
+            else if (containercontents.Item.Code.ToString() == "game:dye-pink") { return api.World.GetBlock(new AssetLocation("game:creativeblock-63")).Id; }
+            else if (containercontents.Item.Code.ToString() == "game:dye-white") { return api.World.GetBlock(new AssetLocation("game:creativeblock-79")).Id; }
+
+            return -1;
         }
 
         //returns voxel coordinates of a block selection, accounting for facing etc
