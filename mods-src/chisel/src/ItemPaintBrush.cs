@@ -1,0 +1,102 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Vintagestory.API.Client;
+using Vintagestory.API.Common;
+using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
+using Vintagestory.API.MathTools;
+using Vintagestory.API.Util;
+using Vintagestory.GameContent;
+using Vintagestory.API.Server;
+
+namespace chisel.src
+{
+    
+    class ItemPaintBrush:Item
+    {
+        const int inkslotnumber = 0;
+        public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
+        {
+            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+            if (blockSel == null) { return; }
+            
+            //Do nothing if we don't have access to selected block
+            IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
+            if (!byEntity.World.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.BuildOrBreak))
+            {
+                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
+                return;
+            }
+            
+            //do nothing if we don't have a valid dye/ink block in slot 0
+            if (byPlayer.InventoryManager.ActiveHotbarSlotNumber == inkslotnumber) { return; }
+
+            
+            ItemSlot inkslot = byPlayer.InventoryManager.GetHotbarInventory()[inkslotnumber];
+            int inkmat = GetInkMat(api, inkslot);
+            if (inkmat == -1)
+            {
+                base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+                return;
+            }
+            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+            if (bmb == null)
+            {
+                base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+                return;
+            }
+
+            Vec3i s = GetVoxelHit(blockSel);
+            CuboidWithMaterial cwm = new CuboidWithMaterial();
+            byte selectedmat = 0;
+
+            foreach (uint voxint in bmb.VoxelCuboids)
+            {
+                //this static method converts the uint into a CubioidWithMaterial
+                BlockEntityMicroBlock.FromUint(voxint, cwm);
+                //if we're looking at this voxel we want to grab this material to use
+                if (cwm.Contains(s.X, s.Y, s.Z)) { selectedmat = cwm.Material; break; }
+            }
+            List<int> newmats = new List<int>(bmb.MaterialIds);
+            newmats[selectedmat] = inkmat;
+            bmb.MaterialIds = newmats.ToArray();
+            bmb.SetNowMaterial(selectedmat);
+            
+            bmb.MarkDirty(true);
+            bmb.RegenMesh();
+        }
+
+        //crossreferences items and blocks to a relevant block to use for a material
+        public static int GetInkMat(ICoreAPI api,ItemSlot forslot)
+        {
+            int result = -1;
+            if (forslot.Itemstack == null || forslot.Itemstack.StackSize == 0) { return result; }
+            if (forslot.Itemstack.Block == null) { return result; }
+            //TODO - make sure item in slot is valid as chisel material
+            //TODO - weird thing where mat change is temporary
+            if (forslot.Itemstack.Block != null) { return forslot.Itemstack.Block.Id; }
+            
+            
+            //Block testblock = api.World.BlockAccessor.GetBlock(new AssetLocation("game:creativeblock-18"));
+            
+            
+            
+            return result;
+        }
+
+        //returns voxel coordinates of a block selection, accounting for facing etc
+        public static Vec3i GetVoxelHit(BlockSelection blockSel)
+        {
+            //convert the hit point into voxel coordinates
+            Vec3i s = new Vec3i((int)(blockSel.HitPosition.X * 16f), (int)(blockSel.HitPosition.Y * 16f), (int)(blockSel.HitPosition.Z * 16f));
+            if (blockSel.Face == BlockFacing.SOUTH) { s.Z--; }
+            if (blockSel.Face == BlockFacing.UP) { s.Y--; }
+            if (blockSel.Face == BlockFacing.EAST) { s.X--; }
+            return s;
+        }
+    }
+}

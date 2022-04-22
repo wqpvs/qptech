@@ -31,6 +31,7 @@
     <Content Include="chisel\assets\game\textures\icons\undo.svg" />
     <Content Include="chisel\Change Log.txt" />
     <None Include="chisel\assets\chiseltools\config\handbook\chiseltools.json" />
+    <None Include="chisel\assets\chiseltools\itemtypes\paintbrush.json" />
     <None Include="chisel\assets\chiseltools\itemtypes\pantograph.json" />
     <None Include="chisel\assets\chiseltools\itemtypes\handwedge.json" />
     <None Include="chisel\assets\chiseltools\lang\en.json" />
