@@ -1,0 +1,12 @@
+{
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["iron", "meteoriciron", "steel"] },
+	pattern: [[
+		"________##",
+		"_########_",
+		"_##_____##",
+		"__########",
+		"_##_______"
+	]],
+	name: "Paint Brush Handles (x2)",
+	output: { type: "item", code: "paintbrush-{metal}", "stacksize": 2   }
+}

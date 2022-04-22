@@ -20,7 +20,7 @@ namespace chisel.src
     {
         //TODO - add tool wear in survival
         //  - add paintbrush graphic and sound effect
-        //  - add inventory usage of ink blocks in survival
+        //  - add check to not use paintbrush if materials match
         const int inkslotnumber = 0;
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
@@ -64,10 +64,25 @@ namespace chisel.src
                 //if we're looking at this voxel we want to grab this material to use
                 if (cwm.Contains(s.X, s.Y, s.Z)) { selectedmat = cwm.Material; break; }
             }
+            //if materials paint we don't want to do anything
+            if (bmb.MaterialIds[selectedmat] == inkmat) {
+                base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+                return;
+            }
             List<int> newmats = new List<int>(bmb.MaterialIds);
             newmats[selectedmat] = inkmat;
             bmb.MaterialIds = newmats.ToArray();
             bmb.MarkDirty(true);
+            
+            if (api is ICoreServerAPI && byPlayer?.WorldData.CurrentGameMode != EnumGameMode.Creative)
+            {
+                //Do tool wear
+                int dmg = CalcDamage();
+                this.DamageItem(api.World, byEntity, byPlayer.InventoryManager.ActiveHotbarSlot, dmg);
+                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
+                //inventory usage
+                UseInventory(api, inkslot);
+            }
             handling = EnumHandHandling.PreventDefaultAction;
         }
 
@@ -127,6 +142,32 @@ namespace chisel.src
             if (blockSel.Face == BlockFacing.UP) { s.Y--; }
             if (blockSel.Face == BlockFacing.EAST) { s.X--; }
             return s;
+        }
+        protected virtual int CalcDamage()
+        {
+
+            return ChiselToolLoader.serverconfig.paintBrushUseRate;
+        }
+
+        public static void UseInventory(ICoreAPI api,ItemSlot inkslot)
+        {
+        
+            if (inkslot == null) { return; }
+            if (inkslot.Itemstack == null) { return; }
+            if (inkslot.Itemstack.Block == null) { return; }
+            BlockLiquidContainerTopOpened container = inkslot.Itemstack.Block as BlockLiquidContainerTopOpened;
+            if (container != null)
+            {
+                ItemStack containercontents = container.GetContent(inkslot.Itemstack);
+                if (containercontents == null) { return; }
+                containercontents.StackSize-=ChiselToolLoader.serverconfig.paintBrushLiquidMultiplier;
+                if (containercontents.StackSize <= 0) { container.SetContent(inkslot.Itemstack,null); }
+                inkslot.MarkDirty();
+                return;
+            }
+            inkslot.Itemstack.StackSize-=1;
+            if (inkslot.Itemstack.StackSize <= 0) { inkslot.Itemstack = null; }
+            inkslot.MarkDirty();
         }
     }
 }

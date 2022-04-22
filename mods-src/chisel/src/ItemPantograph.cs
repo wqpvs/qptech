@@ -32,7 +32,7 @@ namespace chisel.src
         MeshData objectmesh;
         MeshRef objectmeshref;
         ICoreClientAPI capi;
-        SkillItem changeMatItem;
+        
         bool showcopiedshape = false;
         public enum enModes {COPY,FULLPASTE,ADDPASTE,UNDO,CHANGEMAT}
         public override void OnLoaded(ICoreAPI api)

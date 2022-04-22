@@ -110,19 +110,29 @@ namespace chisel.src
             public int handPlanerBaseDurabilityUse = 1;
             public float handPlanerBaseDurabilityMultiplier = handplanerDefault;
             public float pantographBaseDurabilityMultiplier = pantographDefault;
-            public int pantographMinimumDamagePerOp = 1;
+            public int pantographMinimumDamagePerOp = pantographMinimumDamagePerOpDefault;
             public bool enablePantographLeftClickCopy = true;
             public bool pantographInstantMode = true;
             public bool fixedToolWear = false;
+            public int paintBrushUseRate = paintBrushUseRateDefault;
+            public int paintBrushLiquidMultiplier = paintBrushLiquidMultiplierDefault;
             public static float handplanerDefault = 0.00625f;
             public static float pantographDefault = 0.001f;
             public static bool pantographInstantModeDefault = true;
             public static bool fixedToolWearDefault = false;
+            public static int paintBrushUseRateDefault = 10;
+            public static int pantographMinimumDamagePerOpDefault = 1;
+            public static int paintBrushLiquidMultiplierDefault = 10;
+
             public void Reset()
             {
                 handPlanerBaseDurabilityMultiplier = handplanerDefault;
+
                 pantographBaseDurabilityMultiplier = pantographDefault;
                 pantographInstantMode = pantographInstantModeDefault;
+                pantographMinimumDamagePerOp = pantographMinimumDamagePerOpDefault;
+                paintBrushUseRate = paintBrushUseRateDefault;
+                fixedToolWear = fixedToolWearDefault;
             }
         }
     }
