@@ -23,16 +23,18 @@ namespace chisel.src
     
     class ItemPantograph:Item
     {
-        
-        
-        
-        
+
+        const string copiedblockvoxelsK = "copiedblockvoxels";
+        const string copiedblocknameK = "copiedblockname";
+        const string copiedmaterialistK = "copiedmateriallist";
         SkillItem[] toolModes;
         WorldInteraction[] interactions;
         MeshData objectmesh;
         MeshRef objectmeshref;
         ICoreClientAPI capi;
-        public enum enModes {COPY,FULLPASTE,ADDPASTE,UNDO}
+        SkillItem changeMatItem;
+        bool showcopiedshape = false;
+        public enum enModes {COPY,FULLPASTE,ADDPASTE,UNDO,CHANGEMAT}
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
@@ -41,12 +43,12 @@ namespace chisel.src
             {
                 SkillItem[] modes;
                 
-                modes = new SkillItem[4];
+                modes = new SkillItem[5];
                 modes[(int)enModes.COPY] = new SkillItem() { Code = new AssetLocation(enModes.COPY.ToString()), Name = Lang.Get("Snapshot Shape Mode") };
                 modes[(int)enModes.FULLPASTE] = new SkillItem() { Code = new AssetLocation(enModes.FULLPASTE.ToString()), Name = Lang.Get("Replace Shape Mode") };
                 modes[(int)enModes.ADDPASTE] = new SkillItem() { Code = new AssetLocation(enModes.ADDPASTE.ToString()), Name = Lang.Get("Add Shape Mode") };
                 modes[(int)enModes.UNDO] = new SkillItem() { Code = new AssetLocation(enModes.UNDO.ToString()), Name = Lang.Get("Undo Last Block Change") };
-
+                modes[(int)enModes.CHANGEMAT] = new SkillItem() { Code = new AssetLocation(enModes.CHANGEMAT.ToString()), Name = Lang.Get("(Creative Only)Paste Materials") };
                 if (capi != null)
                 {
                     modes[(int)enModes.COPY].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/takecopy.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
@@ -57,9 +59,12 @@ namespace chisel.src
                     modes[(int)enModes.ADDPASTE].TexturePremultipliedAlpha = false;
                     modes[(int)enModes.UNDO].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/undo.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.UNDO].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.CHANGEMAT].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/paintbrush.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.CHANGEMAT].TexturePremultipliedAlpha = false;
+                    
                 }
-
-
+                
+               
                 return modes;
             });
             interactions = ObjectCacheUtil.GetOrCreate(api, "PantographInteractions", () =>
@@ -95,6 +100,7 @@ namespace chisel.src
         }
         //Vec3f displayoffset = new Vec3f(0.25f, 0, -0.25f);
         Vec3f displayoffset = new Vec3f(0, 0, 0);
+        
         public virtual void MakeCopy(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
@@ -109,14 +115,14 @@ namespace chisel.src
             
             if (api is ICoreServerAPI) {
                 byte[]bvox = SerializerUtil.Serialize<List<uint>>(copiedblockvoxels);
-                
+                byte[] bmat = SerializerUtil.Serialize<List<int>>(copiedblockmaterials);
 
-                slot.Itemstack.Attributes.SetBytes("copiedblockvoxels",bvox);
-                slot.Itemstack.Attributes.SetString("copiedblockname", copiedname);
-                slot.Itemstack.Attributes.SetInt("copiedblockmaterials",copiedblockmaterials.Count);
+                slot.Itemstack.Attributes.SetBytes(copiedblockvoxelsK,bvox);
+                slot.Itemstack.Attributes.SetString(copiedblocknameK, copiedname);
+                slot.Itemstack.Attributes.SetBytes(copiedmaterialistK, bmat);
                 slot.MarkDirty();
             }
-            if (api is ICoreClientAPI)
+            if (api is ICoreClientAPI && showcopiedshape)
             {
                 objectmeshref?.Dispose();
                 
@@ -164,14 +170,17 @@ namespace chisel.src
                 handling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
-            //Load settings from stack attributes
-            byte[] copvox = slot.Itemstack.Attributes.GetBytes("copiedblockvoxels", null);
-            if (copvox == null) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling); handling = EnumHandHandling.NotHandled; return; }
-            List<uint> copiedblockvoxels=null;
-            try{ copiedblockvoxels= SerializerUtil.Deserialize<List<uint>>(copvox); }
-            catch { }
-            int copiedblockmaterialcount = slot.Itemstack.Attributes.GetInt("copiedblockmaterials", 1);
-            if (copiedblockvoxels==null|| bmb == null || bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);handling =EnumHandHandling.NotHandled;  return; }
+            else if (slot.Itemstack.Attributes.GetInt("toolMode", (int)enModes.COPY) == (int)enModes.CHANGEMAT)
+            {
+                PasteMaterials(slot, blockSel);
+                handling = EnumHandHandling.PreventDefaultAction;
+                return;
+            }
+            List<uint> copiedblockvoxels = GetCopiedBlockVoxels(slot);
+            List<int> copiedblockmaterials = GetCopiedBlockMaterials(slot);
+            
+            if (copiedblockmaterials==null||copiedblockvoxels==null|| bmb == null || bmb.VoxelCuboids == null || bmb.VoxelCuboids.Count == 0) { base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);handling =EnumHandHandling.NotHandled;  return; }
+            int copiedblockmaterialcount = copiedblockmaterials.Count;
             if (api.ModLoader.GetModSystem<ModSystemBlockReinforcement>()?.IsReinforced(blockSel.Position) == true)
             {
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
@@ -321,12 +330,19 @@ namespace chisel.src
         }
         public override SkillItem[] GetToolModes(ItemSlot slot, IClientPlayer forPlayer, BlockSelection blockSel)
         {
+            
+            
+            
             return toolModes;
         }
 
         public override int GetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel)
         {
-            return Math.Min(toolModes.Length - 1, slot.Itemstack.Attributes.GetInt("toolMode"));
+            
+            int mode= Math.Min(toolModes.Length-1, slot.Itemstack.Attributes.GetInt("toolMode"));
+            
+
+            return mode;
         }
         public override void OnUnloaded(ICoreAPI api)
         {
@@ -334,7 +350,7 @@ namespace chisel.src
             {
                 toolModes[i]?.Dispose();
             }
-
+            objectmeshref?.Dispose();
            
         }
         public override void SetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel, int toolMode)
@@ -345,11 +361,67 @@ namespace chisel.src
                 Undo(slot);
                 SetToolMode(slot, byPlayer, blockSel, slot.Itemstack.Attributes.GetInt("lastToolMode",0));
             }
+            else if (toolMode == (int)enModes.CHANGEMAT && byPlayer.WorldData.CurrentGameMode != EnumGameMode.Creative)
+            {
+                
+                SetToolMode(slot, byPlayer, blockSel, 0);
+                slot.Itemstack.Attributes.SetInt("lastToolMode", 0);
+            }
             else
             {
                 slot.Itemstack.Attributes.SetInt("lastToolMode", toolMode);
             }
         }
+
+        List<uint>GetCopiedBlockVoxels(ItemSlot slot)
+        {
+            byte[] copvox = slot.Itemstack.Attributes.GetBytes(copiedblockvoxelsK, null);
+            List<uint> copiedblockvoxels = null;
+            try { copiedblockvoxels = SerializerUtil.Deserialize<List<uint>>(copvox); }
+            catch { }
+            return copiedblockvoxels;
+        }
+        
+        List<int>GetCopiedBlockMaterials(ItemSlot slot)
+        {
+            List<int> copiedmaterials = null;
+            byte[] copmat = slot.Itemstack.Attributes.GetBytes(copiedmaterialistK, null);
+            try { copiedmaterials = SerializerUtil.Deserialize<List<int>>(copmat); }
+            catch { }
+
+            return copiedmaterials;
+        }
+
+        /// <summary>
+        /// This will take the saved list of materials and apply it to the targeted block
+        /// </summary>
+        /// <param name="slot"></param>
+        /// <param name="blockSel"></param>
+        void PasteMaterials(ItemSlot slot, BlockSelection blockSel)
+        {
+            List<int> copiedmaterials = GetCopiedBlockMaterials(slot);
+
+            if (copiedmaterials == null) { return; }
+            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+            if (bmb == null) { return; }
+            //if the new list of mats is larger or the same size as target block no problem
+            if (bmb.MaterialIds.Count() <= copiedmaterials.Count()) { 
+                bmb.MaterialIds = copiedmaterials.ToArray();
+            }
+            //otherwise we'll only reset what is relevant
+            else
+            {
+                for (int c = 0; c < copiedmaterials.Count(); c++)
+                {
+                    bmb.MaterialIds[c] = copiedmaterials[c];
+                }
+            }
+            
+            bmb.MarkDirty(true);
+        }
+
+
+
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
         {
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
@@ -367,7 +439,7 @@ namespace chisel.src
 
         public override void OnBeforeRender(ICoreClientAPI capi, ItemStack itemstack, EnumItemRenderTarget target, ref ItemRenderInfo renderinfo)
         {
-            if (objectmeshref != null)
+            if (objectmeshref != null&&showcopiedshape)
             {
                 renderinfo.ModelRef = objectmeshref;    
             }
@@ -376,7 +448,7 @@ namespace chisel.src
        
         public override void OnHeldRenderOpaque(ItemSlot inSlot, IClientPlayer byPlayer)
         {
-            if (objectmesh != null)
+            if (objectmesh != null&&showcopiedshape)
             {
                 objectmesh.Rotate(new Vec3f(0.5f+displayoffset.X, displayoffset.Y, 0.5f+displayoffset.Z), 0, 0.025f, 0);;
                 capi.Render.UpdateMesh(objectmeshref,objectmesh);

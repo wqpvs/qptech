@@ -21,8 +21,12 @@
     <Content Include="chisel\assets\game\sounds\stone_move.ogg" />
     <Content Include="chisel\assets\game\textures\icons\add.svg" />
     <Content Include="chisel\assets\game\textures\icons\copy.svg" />
+    <Content Include="chisel\assets\game\textures\icons\flip.svg" />
     <Content Include="chisel\assets\game\textures\icons\material.svg" />
+    <Content Include="chisel\assets\game\textures\icons\paintbrush.svg" />
     <Content Include="chisel\assets\game\textures\icons\plane.svg" />
+    <Content Include="chisel\assets\game\textures\icons\push.svg" />
+    <Content Include="chisel\assets\game\textures\icons\rotation.svg" />
     <Content Include="chisel\assets\game\textures\icons\takecopy.svg" />
     <Content Include="chisel\assets\game\textures\icons\undo.svg" />
     <Content Include="chisel\Change Log.txt" />

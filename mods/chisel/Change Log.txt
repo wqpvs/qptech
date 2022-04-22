@@ -1,7 +1,8 @@
 ﻿1.5.0
 - tweak itempantograph snapshot (internal code stuff)
 - Pantograph - displays what block you are copying
-
+*Undo functions need to verify material lists!!
+*Crash when player switches gamemodes
 1.4.6
 - fixed pantograph renaming unamed blocks to "copy"
 
