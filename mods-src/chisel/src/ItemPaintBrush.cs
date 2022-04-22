@@ -18,6 +18,9 @@ namespace chisel.src
     
     class ItemPaintBrush:Item
     {
+        //TODO - add tool wear in survival
+        //  - add paintbrush graphic and sound effect
+        //  - add inventory usage of ink blocks in survival
         const int inkslotnumber = 0;
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {

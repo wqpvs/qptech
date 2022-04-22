@@ -3,7 +3,7 @@
 	"class": "ItemPaintBrush",
 	
 	"drawtype": "json",
-	"shape": { "base": "item/tool/pantograph" },
+	"shape": { "base": "item/tool/paintbrush" },
 	"variantgroups": [
 		{
 			"code": "material",

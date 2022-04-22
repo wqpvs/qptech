@@ -300,7 +300,7 @@ namespace chisel.src
                 return;
             }
 
-            if (undovoxels != null&&undoposition!=null)
+            if (undovoxels != null&&undoposition!=null&&undovoxels!=null)
             {
                 BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(undoposition) as BlockEntityMicroBlock;
                 if (bmb == null) { undovoxels = null; }
