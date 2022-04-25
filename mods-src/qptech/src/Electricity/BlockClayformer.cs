@@ -21,27 +21,22 @@ namespace qptech.src
         static Dictionary<string, string> variantlist;
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
-            if (variantlist == null) { LoadVariantList(api); }
+            
             //must sneak click
             if (!byPlayer.Entity.Controls.Sneak) { return base.OnBlockInteractStart(world, byPlayer, blockSel); }
             //must have a relevant item
             ItemStack stack = byPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack;
-            string itemorblockcode = "";
+            
             if (stack==null) {
-                BEEAssembler bee = (BEEAssembler) api.World.BlockAccessor.GetBlockEntity(blockSel.Position);
-                if (bee != null) { bee.OpenStatusGUI(); return true; }
+            
                 return base.OnBlockInteractStart(world, byPlayer, blockSel);
             }
-            if (stack.Item != null) { itemorblockcode = stack.Item.Code.ToString(); }
-            else if (stack.Block != null) { itemorblockcode = stack.Block.Code.ToString(); }
-            if (itemorblockcode == "") { return base.OnBlockInteractStart(world, byPlayer, blockSel); }
-            if (!variantlist.ContainsKey(itemorblockcode)) { return base.OnBlockInteractStart(world, byPlayer, blockSel); }
-            byPlayer.InventoryManager.ActiveHotbarSlot.TakeOut(1);
-            string newblockname = variantlist[itemorblockcode];
-            newblockname += "-"+this.LastCodePart();
-            Block newclayformer = world.GetBlock(new AssetLocation(newblockname));
-            if (newclayformer == null) { return base.OnBlockInteractStart(world, byPlayer, blockSel); }
-            world.BlockAccessor.SetBlock(newclayformer.BlockId, blockSel.Position);
+            else
+            {
+                BEEClayFormer clayformer= (BEEClayFormer)api.World.BlockAccessor.GetBlockEntity(blockSel.Position);
+                if (clayformer != null) { clayformer.SetCurrentItem(stack.Collectible.Code.ToString()); return true; }
+                
+            }
             return true;
         }
 

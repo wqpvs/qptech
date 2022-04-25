@@ -6,3 +6,6 @@
 	- new ClayFormer will accept all clay recipes, keep a production queue
 - Adjustments:
 	- log splitter gives 8 firewood now (Thanks Buggi)
+
+To Do:
+- clayformer needs to check production status before allowing a recipe change (or implement a queue)

@@ -18,7 +18,7 @@ namespace qptech.src
     public class BEEBaseDevice:BEElectric,IConduit
     {
         
-        public enum enDeviceState { IDLE, RUNNING, WARMUP, MATERIALHOLD, ERROR, POWERHOLD,PROCESSHOLD }
+        public enum enDeviceState { IDLE, RUNNING, WARMUP, MATERIALHOLD, ERROR, POWERHOLD,PROCESSHOLD,WAITOUTPUT }
         ILoadedSound ambientSound;
         string runsound = "";
         protected int requiredFlux = 1;     //how much TF to run

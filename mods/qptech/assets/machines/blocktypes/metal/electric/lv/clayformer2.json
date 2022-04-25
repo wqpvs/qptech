@@ -1,6 +1,6 @@
 {
 	"code": "clayformer2",
-	"class": "ElectricalBlock",
+	"class": "BlockClayformer",
 	"entityclass": "BEEClayformer",
 	"creativeinventory": {
 		"general": [ "*-east" ],
