@@ -65,15 +65,20 @@ namespace qptech.src
                     return;
                 }
             }
-            base.DoDeviceStart();
+            
            
         }
+
+        bool IsComplete => true;
+
         protected override void UsePower()
         {
-            if (deviceState==enDeviceState.WARMUP) { deviceState = enDeviceState.IDLE;return; }
-            if (deviceState == enDeviceState.IDLE) { DoDeviceStart(); }
-            if (deviceState == enDeviceState.MATERIALHOLD&&TryTakeMaterials()) { deviceState = enDeviceState.RUNNING;return; }
-
+            
+            if (!IsOn) { return; }
+            if (deviceState == enDeviceState.WARMUP) { deviceState = enDeviceState.IDLE;MarkDirty();return; }
+            if (deviceState == enDeviceState.IDLE) { DoDeviceStart();return; }
+            if (deviceState == enDeviceState.MATERIALHOLD&&currentRecipe!=null&&TryTakeMaterials()) { deviceState = enDeviceState.RUNNING;MarkDirty(); return; }
+            if (deviceState== enDeviceState.RUNNING||deviceState==enDeviceState.WAITOUTPUT && IsComplete) { DoDeviceComplete(); }
         }
         /// <summary>
         /// Check the production queue for another item, set currentItem and return true if new item was found
@@ -103,25 +108,35 @@ namespace qptech.src
             MarkDirty();
             return;
         }
+
+        protected override void DoDeviceComplete()
+        {
+            if (TryOutputProduct()) { deviceState = enDeviceState.IDLE; }
+            else { deviceState = enDeviceState.WAITOUTPUT; }
+        }
+
         //Attempt to take materials from the rmInputFace and returns true if succeeded
         bool TryTakeMaterials()
         {
             if (currentRecipe == null) { return false; }
             BlockPos checkpos = Pos.Copy().Offset(rmInputFace);
             //Check for a container at the rminputpos
-            var checkblock = Api.World.BlockAccessor.GetBlockEntity(checkpos) as BlockEntityContainer;
+            var checkblock = Api.World.BlockAccessor.GetBlockEntity(checkpos) as IBlockEntityContainer;
             if (checkblock == null) { return false; }
             if (checkblock.Inventory.Empty) { return false; }
             currentRecipeCost = ClayCost(currentRecipe); //just makes doubly sure we have right requirement
             int clayavailable = 0;
+            
             foreach (ItemSlot slot in checkblock.Inventory)
             {
                 if (slot == null || slot.Itemstack == null || slot.Empty) { continue; }
-                if (slot.Itemstack.Collectible.Code == currentRecipe.Ingredient.Code)
+                if (currentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack))
                 {
                     clayavailable += slot.Itemstack.StackSize;
-                    if (clayavailable >= currentRecipeCost) { break; }
+                    
                 }
+                
+                if (clayavailable >= currentRecipeCost) { break; }
             }
             if (clayavailable < currentRecipeCost) { return false; }
             //now that we have enough we need to take the clay
@@ -129,7 +144,7 @@ namespace qptech.src
             foreach (ItemSlot slot in checkblock.Inventory)
             {
                 if (slot == null || slot.Itemstack == null || slot.Empty) { continue; }
-                if (slot.Itemstack.Collectible.Code == currentRecipe.Ingredient.Code)
+                if (currentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack))
                 {
                     int takeclay = Math.Min(clayremaining, slot.Itemstack.StackSize);
                     slot.Itemstack.StackSize -= takeclay;
@@ -140,6 +155,29 @@ namespace qptech.src
                 }
             }
             return true;
+        }
+
+        //attempt to push finished product into the appropriate container or return false
+        bool TryOutputProduct()
+        {
+            if (currentRecipe == null) { return true; } //really this should be an error, but in this case it will reset the machine back to idle
+            BlockPos checkpos = Pos.Copy().Offset(fgOutputFace);
+            var checkblock = Api.World.BlockAccessor.GetBlockEntity(checkpos) as IBlockEntityContainer;
+            if (checkblock == null) { return false; }
+            DummyInventory di = new DummyInventory(Api,1);
+            di[0].Itemstack = currentRecipe.Output.ResolvedItemstack.Clone();
+            
+            foreach (ItemSlot slot in checkblock.Inventory)
+            {
+                int originalmaount = di[0].StackSize;
+                int moved = di[0].TryPutInto(Api.World, slot);
+                if (moved == originalmaount)
+                {
+                    slot.MarkDirty();
+                    return true;
+                }
+            }
+            return false;
         }
 
         public override void ToTreeAttributes(ITreeAttribute tree)
