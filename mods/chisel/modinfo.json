@@ -4,7 +4,7 @@
   "name": "chiseltools",
   "description": "Quentin's Chiseling Tools'",
   "author": "WQP",
-  "version": "1.5.0",
+  "version": "1.5",
   "dependency": {
     "game": ""
     

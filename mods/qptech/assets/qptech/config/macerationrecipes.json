@@ -136,7 +136,7 @@
 	"log": [
 		{
 			"outputmaterial": "game:firewood",
-			"outputquantity": 5,
+			"outputquantity": 8,
 			"odds": 100,
 			"type": "PARTIAL",
 			"machinename": "logsplitter"

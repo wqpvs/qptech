@@ -2,3 +2,7 @@
 - added QPTECHServerData class (currently hiding in QPTECHLoader)
    - temporay command /addpower will add one flux to the global power storage as a test
    - global power storage will be like a giant meta battery using special tech to create a global power pool
+- Additions:
+	- new ClayFormer will accept all clay recipes, keep a production queue
+- Adjustments:
+	- log splitter gives 8 firewood now (Thanks Buggi)

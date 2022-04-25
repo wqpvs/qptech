@@ -188,6 +188,7 @@ namespace qptech.src
             api.RegisterBlockEntityClass("BESlidingDoorCore", typeof(BESlidingDoorCore));
             api.RegisterBlockEntityClass("BEReportsClicks", typeof(BEReportsClicks));
             api.RegisterBlockEntityClass("BEDummyBlock", typeof(BEDummyBlock));
+            api.RegisterBlockEntityClass("BEEClayformer", typeof(BEEClayFormer));
         }
 
         private void RegisterDefaultItems()
