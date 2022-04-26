@@ -17,7 +17,10 @@ namespace qptech.src
     /// </summary>
     class BEEClayFormer:BEEBaseDevice
     {
-        
+        //TODO - some refactoring
+        // - store end item instead of recipe
+        // - look up all relevant recipes for that item when checking for available inventory
+        //      - 
         
         
         
@@ -109,11 +112,16 @@ namespace qptech.src
         /// <param name="toitem">Code to try to produce </param>
         public void SetCurrentItem(string toitem)
         {
-            if (Api is ICoreClientAPI) { return; }
-            
+            //if (Api is ICoreClientAPI) {  return; }
+            if (deviceState == enDeviceState.RUNNING||deviceState==enDeviceState.WAITOUTPUT)
+            {
+                PlaySound(Api, "sounds/error", Pos);
+                return;
+            }
             currentrecipecode = toitem;
             
             currentRecipeCost = ClayCost(CurrentRecipe);
+            PlaySound(Api, "sounds/filterset", Pos);
             return;
         }
 
@@ -138,7 +146,17 @@ namespace qptech.src
             foreach (ItemSlot slot in checkblock.Inventory)
             {
                 if (slot == null || slot.Itemstack == null || slot.Empty) { continue; }
-                if (CurrentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack))
+                bool goodslot = false;
+                if (CurrentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack)) { goodslot = true; }
+                else //if it doesn't work then try and find an alternate recipe
+                {
+                    ClayFormingRecipe alternaterecipe = GetRecipeForItemWithIngredient(Api,currentrecipecode, slot.Itemstack.Collectible.Code.ToString());
+                    if (alternaterecipe != null)
+                    {
+                        goodslot = true;
+                    }
+                }
+                if (goodslot)
                 {
                     clayavailable += slot.Itemstack.StackSize;
                     
@@ -156,7 +174,14 @@ namespace qptech.src
                 bool goodslot = false;
 
                 if (CurrentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack)) { goodslot = true; }
-                
+                else //if it doesn't work then try and find an alternate recipe
+                {
+                    ClayFormingRecipe alternaterecipe = GetRecipeForItemWithIngredient(Api, currentrecipecode, slot.Itemstack.Collectible.Code.ToString());
+                    if (alternaterecipe != null)
+                    {
+                        goodslot = true;
+                    }
+                }
 
                 if (goodslot){
                     int takeclay = Math.Min(clayremaining, slot.Itemstack.StackSize);
@@ -167,6 +192,7 @@ namespace qptech.src
                     if (clayremaining <= 0) { break; }
                 }
             }
+            
             return true;
         }
 
@@ -187,6 +213,7 @@ namespace qptech.src
                 if (moved == originalmaount)
                 {
                     slot.MarkDirty();
+                    PlaySound(Api, "sounds/doorslide", Pos);
                     return true;
                 }
             }
@@ -222,13 +249,13 @@ namespace qptech.src
         public static ClayFormingRecipe GetRecipeForItem(ICoreAPI Api, string clayformableitem)
         {
             if (Api == null) { return null; }
-            AssetLocation currental = new AssetLocation(clayformableitem);
+            
 
             List<ClayFormingRecipe> clayform = Api.GetClayformingRecipes();
             ClayFormingRecipe foundRecipe = clayform.FirstOrDefault(x => x.Output.Code.ToString() == clayformableitem);
             return foundRecipe;
         }
-
+        
         /// <summary>
         /// Calculate the clay cost (by counting voxels) of a clayforming recipe
         /// </summary>
@@ -244,5 +271,16 @@ namespace qptech.src
             }
             return usedvoxels/25;
         }
+        
+        public static ClayFormingRecipe GetRecipeForItemWithIngredient(ICoreAPI Api, string clayformableitem, string ingredient)
+        {
+            if (Api == null) { return null; }
+            List<ClayFormingRecipe> clayform = Api.GetClayformingRecipes();
+            ClayFormingRecipe foundRecipe = clayform.FirstOrDefault(x => x.Output.Code.ToString() == clayformableitem&&x.Ingredient.Code.ToString()==ingredient);
+            return foundRecipe;
+            
+        }
+
+        
     }
 }

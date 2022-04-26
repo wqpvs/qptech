@@ -9,5 +9,5 @@
 	},
 	width: 3,
 	height: 3,
-	output: { type: "block", code: "clayformer-bowl-east", quantity: 1  }
+	output: { type: "block", code: "clayformer2-bronze-east", quantity: 1  }
 }

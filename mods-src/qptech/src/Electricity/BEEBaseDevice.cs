@@ -10,6 +10,7 @@ using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 using Vintagestory.API.Server;
 using Vintagestory.API.Client;
+using Vintagestory.API.Util;
 
 namespace qptech.src
 {
@@ -23,7 +24,7 @@ namespace qptech.src
         string runsound = "";
         protected int requiredFlux = 1;     //how much TF to run
         protected double processingTime = 1000; //how many ticks for process to run
-        
+        protected const int clientplaysound = 999900001;
         protected string animationCode = "";
         protected string animation = "";
         protected float runAnimationSpeed = 1;
@@ -305,6 +306,45 @@ namespace qptech.src
         {
             return base.GetStatusUI();
         }
+        public static void PlaySound(ICoreAPI Api, string soundname, BlockPos pos)
+        {
+            if ((Api is ICoreClientAPI))
+            {
+                ILoadedSound pambientSound = ((IClientWorldAccessor)Api.World).LoadSound(new SoundParams()
+                {
+                    Location = new AssetLocation(soundname),
+                    ShouldLoop = false,
+                    Position = pos.ToVec3f().Add(0.5f, 0.25f, 0.5f),
+                    DisposeOnFinish = true,
+                    Volume = 2,
+                    Range = 15
+                });
+
+                pambientSound.Start();
+            }
+            else
+            {
+                byte[] data = SerializerUtil.Serialize<string>(soundname);
+                (Api as ICoreServerAPI).Network.BroadcastBlockEntityPacket(pos.X, pos.Y, pos.Z, clientplaysound, data);
+            }
+        }
+        public override void OnReceivedServerPacket(int packetid, byte[] data)
+        {
+            base.OnReceivedServerPacket(packetid, data);
+            if (packetid == clientplaysound)
+            {
+                string soundname = "";
+                try
+                {
+                    soundname = SerializerUtil.Deserialize<string>(data);
+                }
+                catch
+                {
+                    return;
+                }
+                PlaySound(Api,soundname,Pos);
+            }
+        }
     }
    
     public interface IConduit
@@ -312,4 +352,6 @@ namespace qptech.src
         int ReceiveItemOffer(ItemSlot offerslot, BlockFacing onFace);
         
     }
+
+    
 }

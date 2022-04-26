@@ -346,7 +346,7 @@ public AlloyRecipe GetMatchingAlloy(IWorldAccessor world, ItemStack[] stacks)
             }
         }
 
-        int clientplaysound = 999900001;
+        
 
         public override void OnReceivedServerPacket(int packetid, byte[] data)
         {
