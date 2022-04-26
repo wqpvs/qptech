@@ -4,9 +4,13 @@
 	"entityclass": "BEEAssembler",
 	"entityBehaviors": [ { "name": "Animatable" } ],
 	"creativeinventory": {
-		"general": [ "*-east" ],
-		"qptech": [ "*-east" ]
+		
+		"qptech": [ "" ]
 	},
+	drops: [
+		{ type: "block", code: "clayformer2-bronze-east" }
+	],
+	
 	"variantgroups": [
 		{
 			"code": "type",
@@ -17,13 +21,7 @@
 			"loadFromProperties": "abstract/horizontalorientation"
 		}
 	],
-	"behaviors": [
-
-		{
-			"name": "HorizontalOrientable",
-			"properties": { "dropBlockFace": "east" }
-		}
-	],
+	
 	"attributesbytype": {
 		"*-bowl-*": {
 

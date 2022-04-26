@@ -19,8 +19,9 @@ namespace qptech.src
     {
         
         
-        Queue<string> productionQueue;
+        
         ClayFormingRecipe currentRecipe;
+        public ClayFormingRecipe CurrentRecipe => currentRecipe;
         int currentRecipeCost=0; //how much clay is needed (cache for answer)
         BlockFacing rmInputFace;
         BlockFacing fgOutputFace;
@@ -28,7 +29,6 @@ namespace qptech.src
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            productionQueue = new Queue<string>();
             if (Block.Attributes == null) { return; }
             rmInputFace = BlockFacing.FromCode(Block.Attributes["inputFace"].AsString("up"));
             fgOutputFace = BlockFacing.FromCode(Block.Attributes["outputFace"].AsString("down"));
@@ -40,15 +40,9 @@ namespace qptech.src
         {
             if (!IsPowered) { deviceState = enDeviceState.POWERHOLD; return; }
             
-            if (currentRecipe==null && productionQueue.Count > 0)
+            if (currentRecipe==null)
             {
-                bool founditem=SetNextItem();
-                if (founditem)
-                {
-                    deviceState = enDeviceState.RUNNING;
-                    MarkDirty();
-                    return;
-                }
+                deviceState = enDeviceState.IDLE;
 
             }
             else
@@ -80,20 +74,7 @@ namespace qptech.src
             if (deviceState == enDeviceState.MATERIALHOLD&&currentRecipe!=null&&TryTakeMaterials()) { deviceState = enDeviceState.RUNNING;MarkDirty(); return; }
             if (deviceState== enDeviceState.RUNNING||deviceState==enDeviceState.WAITOUTPUT && IsComplete) { DoDeviceComplete(); }
         }
-        /// <summary>
-        /// Check the production queue for another item, set currentItem and return true if new item was found
-        /// </summary>
-        /// <returns></returns>
-        public bool SetNextItem()
-        {
-            if (productionQueue == null || productionQueue.Count == 0) { return false; }
-            string currentBlockCode = productionQueue.Dequeue();
-            currentRecipe = GetRecipeForItem(Api,currentBlockCode);
-            if (currentRecipe == null) { return false; }
-            currentRecipeCost = ClayCost(currentRecipe);
-            return true;
-        }
-
+        
         /// <summary>
         /// Attempts to add item to production queue if it's valid
         /// </summary>
@@ -101,11 +82,9 @@ namespace qptech.src
         public void SetCurrentItem(string toitem)
         {
             if (Api is ICoreClientAPI) { return; }
-            productionQueue.Enqueue(toitem);
             currentRecipe = GetRecipeForItem(Api, toitem);
             if (currentRecipe == null) { return; }
             currentRecipeCost = ClayCost(currentRecipe);
-            MarkDirty();
             return;
         }
 
@@ -198,9 +177,9 @@ namespace qptech.src
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
-            if (currentRecipe != null) { dsc.AppendLine("Current Recipe:" + currentRecipe.Output.Code.ToShortString()+" "+currentRecipeCost+" units of "+currentRecipe.Ingredient.Code.ToString()); }
+            
         }
-
+        
         /// <summary>
         /// Return a clayforming recipe for a given item code (or null)
         /// </summary>

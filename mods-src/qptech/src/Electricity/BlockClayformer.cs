@@ -8,7 +8,7 @@ using Vintagestory.API.Config;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
-
+using Vintagestory.API.MathTools;
 
 namespace qptech.src
 {
@@ -39,7 +39,19 @@ namespace qptech.src
             }
             return true;
         }
-
+        public override string GetPlacedBlockName(IWorldAccessor world, BlockPos pos)
+        {
+            BEEClayFormer cf = world.BlockAccessor.GetBlockEntity(pos) as BEEClayFormer;
+            if (cf == null)
+            {
+                return base.GetPlacedBlockName(world, pos);
+            }
+            if (cf.CurrentRecipe != null)
+            {
+                return "Clayformer (" + cf.CurrentRecipe.Output.ResolvedItemstack.GetName() + ")";
+            }
+            return base.GetPlacedBlockName(world, pos);
+        }
         static void LoadVariantList(ICoreAPI api)
         {
 

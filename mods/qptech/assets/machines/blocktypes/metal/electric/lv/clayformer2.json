@@ -31,22 +31,22 @@
 	"blockmaterial": "Metal",
 	"drawtype": "json",
 
-	"shape": { "base": "block/metal/electric/forge-lv" },
+	"shape": { "base": "block/metal/electric/clayformer" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/forge-lv",
+			"base": "block/metal/electric/clayformer",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/forge-lv",
+			"base": "block/metal/electric/clayformer",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/forge-lv",
+			"base": "block/metal/electric/clayformer",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/forge-lv",
+			"base": "block/metal/electric/clayformer",
 			"rotateY": 180
 		}
 	},

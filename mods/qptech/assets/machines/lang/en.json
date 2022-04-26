@@ -103,13 +103,8 @@
 	"blockdesc-powersink": "This is a test block for power systems, will suck up all connected power (currently needs to be placed before the electrical items)",
 	"block-powerflag": "Power Indicator",
 	"blockdesc-powerflag": "Diagnostic device, flips up if the device under it is powered",
-	"block-clayformer-bowl-*": "Clayformer-Bowls (LV)",
-	"block-clayformer-clayplanter-*": "Clayformer-Planter (LV)",
-	"block-clayformer-flowerpot-*": "Clayformer-Flower Pot (LV)",
-	"block-clayformer-ingotmold-*": "Clayformer-Ingot Mold (LV)",
-	"block-clayformer-redshingle-*": "Clayformer-Red Shingles (LV)",
-	"block-clayformer-fireshingle-*": "Clayformer-Fire Shingles (LV)",
-	"blockdesc-clayformer-*": "Place a container of clay on the input side, and if powered it will create unfired clay pieces of the current type. Sneak click with a valid completed & fired clay object to set the output. (Currently supports bowls, flowerpots, ingots, blue fire shingles, red fire shingles, and planters) Note: Craft the clay bowl version and switch from there.",
+	"block-clayformer-*": "Old & Busted Clayformer",
+	"blockdesc-clayformer-*": "Oh this clayformer sucks, break to drop the new & improved Clayformer!",
 	"pocketcontents": "Dimensional Storage",
 	"block-metalpress-lvsoftscrew-*": "Soft Metal Press [Screws] (LV)",
 	"blockdesc-metalpress-lvsoftscrew-*": "Finally, no more hammering screws! One metal rod->12 screws It's super effective! (Will eventually be changed to a cutting machien)",
@@ -244,7 +239,9 @@
 	"block-cableextruder-*": "Cable Extruder",
 	"blockdesc-cableextruder-*": "Feed in liquid rubber, and braided wires, and add some heat and it will make cables.",
 	"block-industrialblower-highpressure-*": "Industrial High Pressure Blower",
-	"blockdesc-industrialblower-highpressure-*": "Supplies the Air Flow process (5000 units)(units are currently generic, not related to any real world measurements)"
+	"blockdesc-industrialblower-highpressure-*": "Supplies the Air Flow process (5000 units)(units are currently generic, not related to any real world measurements)",
+	"block-clayformer2-*": "Clayformer 2.0",
+	"blockdesc-clayformer2-*": "Makes raw clay items. Set which item by crouching & right clicking with that item (eg: raw clay bowl). Takes clay from a container on top and outputs to a container on the bottom. <i>Try Electric Crucibles<i/>"
 
 
 }
