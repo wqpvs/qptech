@@ -144,6 +144,7 @@ namespace qptech.src
                     
                 }
                 
+                
                 if (clayavailable >= currentRecipeCost) { break; }
             }
             if (clayavailable < currentRecipeCost) { return false; }
@@ -152,8 +153,12 @@ namespace qptech.src
             foreach (ItemSlot slot in checkblock.Inventory)
             {
                 if (slot == null || slot.Itemstack == null || slot.Empty) { continue; }
-                if (CurrentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack))
-                {
+                bool goodslot = false;
+
+                if (CurrentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack)) { goodslot = true; }
+                
+
+                if (goodslot){
                     int takeclay = Math.Min(clayremaining, slot.Itemstack.StackSize);
                     slot.Itemstack.StackSize -= takeclay;
                     if (slot.Itemstack.StackSize <= 0) { slot.Itemstack = null; }
