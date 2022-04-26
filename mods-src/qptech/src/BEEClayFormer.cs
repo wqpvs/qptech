@@ -20,12 +20,31 @@ namespace qptech.src
         
         
         
-        ClayFormingRecipe currentRecipe;
-        public ClayFormingRecipe CurrentRecipe => currentRecipe;
+        
+        string currentrecipecode;
+        public ClayFormingRecipe CurrentRecipe {
+            get {
+                
+                if (Api!=null)
+                {
+                    return GetRecipeForItem(Api, currentrecipecode);
+                }
+                return null;
+            }
+            
+        }
         int currentRecipeCost=0; //how much clay is needed (cache for answer)
+        int CurrentRecipeCost {
+            get {
+                if (currentRecipeCost > 0) { return currentRecipeCost; }
+                if (CurrentRecipe == null) { return 0; }
+                currentRecipeCost = ClayCost(CurrentRecipe);
+                return currentRecipeCost;
+            }
+        }
         BlockFacing rmInputFace;
         BlockFacing fgOutputFace;
-
+        
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -40,7 +59,7 @@ namespace qptech.src
         {
             if (!IsPowered) { deviceState = enDeviceState.POWERHOLD; return; }
             
-            if (currentRecipe==null)
+            if (CurrentRecipe==null)
             {
                 deviceState = enDeviceState.IDLE;
 
@@ -51,6 +70,7 @@ namespace qptech.src
                 if (canstart)
                 {
                     deviceState = enDeviceState.RUNNING;
+                    starttime = Api.World.Calendar.TotalHours;
                     return;
                 }
                 else
@@ -62,17 +82,25 @@ namespace qptech.src
             
            
         }
-
-        bool IsComplete => true;
-
+        
+        
+        protected override double completetime => starttime + processingTime * CurrentRecipeCost;
         protected override void UsePower()
         {
             
             if (!IsOn) { return; }
             if (deviceState == enDeviceState.WARMUP) { deviceState = enDeviceState.IDLE;MarkDirty();return; }
             if (deviceState == enDeviceState.IDLE) { DoDeviceStart();return; }
-            if (deviceState == enDeviceState.MATERIALHOLD&&currentRecipe!=null&&TryTakeMaterials()) { deviceState = enDeviceState.RUNNING;MarkDirty(); return; }
-            if (deviceState== enDeviceState.RUNNING||deviceState==enDeviceState.WAITOUTPUT && IsComplete) { DoDeviceComplete(); }
+            if (deviceState == enDeviceState.MATERIALHOLD&&CurrentRecipe!=null&&TryTakeMaterials()) {
+                deviceState = enDeviceState.RUNNING;
+                currentRecipeCost = ClayCost(CurrentRecipe);
+                starttime = Api.World.Calendar.TotalHours;
+                MarkDirty();
+                return;
+            }
+            if ((deviceState== enDeviceState.RUNNING&&Api.World.Calendar.TotalHours > completetime) || deviceState==enDeviceState.WAITOUTPUT) {
+                DoDeviceComplete();
+            }
         }
         
         /// <summary>
@@ -82,9 +110,10 @@ namespace qptech.src
         public void SetCurrentItem(string toitem)
         {
             if (Api is ICoreClientAPI) { return; }
-            currentRecipe = GetRecipeForItem(Api, toitem);
-            if (currentRecipe == null) { return; }
-            currentRecipeCost = ClayCost(currentRecipe);
+            
+            currentrecipecode = toitem;
+            
+            currentRecipeCost = ClayCost(CurrentRecipe);
             return;
         }
 
@@ -97,19 +126,19 @@ namespace qptech.src
         //Attempt to take materials from the rmInputFace and returns true if succeeded
         bool TryTakeMaterials()
         {
-            if (currentRecipe == null) { return false; }
+            if (CurrentRecipe == null) { return false; }
             BlockPos checkpos = Pos.Copy().Offset(rmInputFace);
             //Check for a container at the rminputpos
             var checkblock = Api.World.BlockAccessor.GetBlockEntity(checkpos) as IBlockEntityContainer;
             if (checkblock == null) { return false; }
             if (checkblock.Inventory.Empty) { return false; }
-            currentRecipeCost = ClayCost(currentRecipe); //just makes doubly sure we have right requirement
+            currentRecipeCost = ClayCost(CurrentRecipe); //just makes doubly sure we have right requirement
             int clayavailable = 0;
             
             foreach (ItemSlot slot in checkblock.Inventory)
             {
                 if (slot == null || slot.Itemstack == null || slot.Empty) { continue; }
-                if (currentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack))
+                if (CurrentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack))
                 {
                     clayavailable += slot.Itemstack.StackSize;
                     
@@ -123,7 +152,7 @@ namespace qptech.src
             foreach (ItemSlot slot in checkblock.Inventory)
             {
                 if (slot == null || slot.Itemstack == null || slot.Empty) { continue; }
-                if (currentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack))
+                if (CurrentRecipe.Ingredient.SatisfiesAsIngredient(slot.Itemstack))
                 {
                     int takeclay = Math.Min(clayremaining, slot.Itemstack.StackSize);
                     slot.Itemstack.StackSize -= takeclay;
@@ -139,17 +168,17 @@ namespace qptech.src
         //attempt to push finished product into the appropriate container or return false
         bool TryOutputProduct()
         {
-            if (currentRecipe == null) { return true; } //really this should be an error, but in this case it will reset the machine back to idle
+            if (CurrentRecipe == null) { return true; } //really this should be an error, but in this case it will reset the machine back to idle
             BlockPos checkpos = Pos.Copy().Offset(fgOutputFace);
             var checkblock = Api.World.BlockAccessor.GetBlockEntity(checkpos) as IBlockEntityContainer;
             if (checkblock == null) { return false; }
             DummyInventory di = new DummyInventory(Api,1);
-            di[0].Itemstack = currentRecipe.Output.ResolvedItemstack.Clone();
+            di[0].Itemstack = CurrentRecipe.Output.ResolvedItemstack.Clone();
             
             foreach (ItemSlot slot in checkblock.Inventory)
             {
                 int originalmaount = di[0].StackSize;
-                int moved = di[0].TryPutInto(Api.World, slot);
+                int moved = di[0].TryPutInto(Api.World, slot,di[0].StackSize);
                 if (moved == originalmaount)
                 {
                     slot.MarkDirty();
@@ -162,16 +191,15 @@ namespace qptech.src
         public override void ToTreeAttributes(ITreeAttribute tree)
         {
             base.ToTreeAttributes(tree);
-            if (currentRecipe != null) { tree.SetString("currentRecipe",currentRecipe.Output.Code.ToString()); }
-            else { tree.SetString("currentRecipe", ""); }
+            if (CurrentRecipe != null) { tree.SetString("currentRecipe",currentrecipecode); }
+            
         }
     
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
-            string currentrecipecode = tree.GetString("currentRecipe", "");
-            currentRecipe = GetRecipeForItem(Api,currentrecipecode);
-            currentRecipeCost = ClayCost(currentRecipe);
+            currentrecipecode = tree.GetString("currentRecipe", "");
+            
         }
 
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)

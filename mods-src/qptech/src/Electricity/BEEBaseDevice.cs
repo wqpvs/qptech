@@ -27,7 +27,7 @@ namespace qptech.src
         protected string animationCode = "";
         protected string animation = "";
         protected float runAnimationSpeed = 1;
-        protected double completetime=>processingTime+starttime;
+        protected virtual double completetime=>processingTime+starttime;
         protected double starttime;
         public int RequiredFlux { get { return requiredFlux; } }
         //public bool IsPowered { get { return capacitor >= requiredFlux; } }
