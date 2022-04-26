@@ -26,15 +26,16 @@ namespace qptech.src
             if (!byPlayer.Entity.Controls.Sneak) { return base.OnBlockInteractStart(world, byPlayer, blockSel); }
             //must have a relevant item
             ItemStack stack = byPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack;
-            
+
+            BEEClayFormer clayformer = (BEEClayFormer)api.World.BlockAccessor.GetBlockEntity(blockSel.Position);
+            if (clayformer == null) { return base.OnBlockInteractStart(world, byPlayer, blockSel); }
             if (stack==null) {
-            
-                return base.OnBlockInteractStart(world, byPlayer, blockSel);
+                clayformer.HaltProduction();                
             }
             else
             {
-                BEEClayFormer clayformer= (BEEClayFormer)api.World.BlockAccessor.GetBlockEntity(blockSel.Position);
-                if (clayformer != null) { clayformer.SetCurrentItem(stack.Collectible.Code.ToString()); return true; }
+                
+                clayformer.SetCurrentItem(stack.Collectible.Code.ToString());
                 
             }
             return true;

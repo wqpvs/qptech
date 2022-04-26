@@ -74,6 +74,7 @@ namespace qptech.src
                 {
                     deviceState = enDeviceState.RUNNING;
                     starttime = Api.World.Calendar.TotalHours;
+                    
                     return;
                 }
                 else
@@ -123,6 +124,14 @@ namespace qptech.src
             currentRecipeCost = ClayCost(CurrentRecipe);
             PlaySound(Api, "sounds/filterset", Pos);
             return;
+        }
+
+        public void HaltProduction()
+        {
+            currentrecipecode = "";
+            currentRecipeCost = 0;
+            deviceState = enDeviceState.WARMUP;
+            PlaySound(Api, "sounds/clearfilter", Pos);
         }
 
         protected override void DoDeviceComplete()
