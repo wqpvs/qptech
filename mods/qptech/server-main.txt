@@ -1,0 +1,164 @@
+27.4.2022 06:11:25 [Notification] Server logger started.
+27.4.2022 06:11:25 [Notification] Game Version: v1.16.5 (Stable)
+27.4.2022 06:11:25 [Notification] C# Framework: Mono 6.12.0.122 (tarball Mon Feb 22 17:29:18 UTC 2021)
+27.4.2022 06:11:25 [Event] Launching server...
+27.4.2022 06:11:25 [Event] Server v1.16.5, network v1.16.5, api v1.7.0
+27.4.2022 06:11:25 [Notification] Entering runphase Initialization
+27.4.2022 06:11:25 [Event] Loading configuration...
+27.4.2022 06:11:25 [Notification] Entering runphase Configuration
+27.4.2022 06:11:25 [Notification] Using world seed: 12324536
+27.4.2022 06:11:25 [Notification] Loading savegame
+27.4.2022 06:11:25 [Notification] Loaded existing save game data. Playstyle: surviveandbuild, Playstyle Lang code: surviveandbuild-bands, WorldType: surviveandbuild-bands
+27.4.2022 06:11:25 [Notification] Savegame //home//sid_580869//vintageStory//Saves//default.vcdbs loaded
+27.4.2022 06:11:25 [Notification] World size = 1000000 256 1000000
+27.4.2022 06:11:25 [Event] Loading assets...
+27.4.2022 06:11:25 [Notification] Start discovering assets
+27.4.2022 06:11:25 [Notification] Found 1 base assets in category blocktypes
+27.4.2022 06:11:25 [Notification] Found 0 base assets in category itemtypes
+27.4.2022 06:11:25 [Notification] Found 18 base assets in category lang
+27.4.2022 06:11:25 [Notification] Found 0 base assets in category patches
+27.4.2022 06:11:25 [Notification] Found 22 base assets in category config
+27.4.2022 06:11:25 [Notification] Found 0 base assets in category worldproperties
+27.4.2022 06:11:25 [Notification] Found 0 base assets in category sounds
+27.4.2022 06:11:25 [Notification] Found 96 base assets in category shapes
+27.4.2022 06:11:25 [Notification] Found 30 base assets in category textures
+27.4.2022 06:11:25 [Notification] Found 0 base assets in category recipes
+27.4.2022 06:11:25 [Notification] Found 0 base assets in category worldgen
+27.4.2022 06:11:25 [Notification] Found 2 base assets in category entities
+27.4.2022 06:11:25 [Notification] Found 169 base assets in total
+27.4.2022 06:11:25 [Notification] Entering runphase AssetsReady
+27.4.2022 06:11:25 [Notification] Will search the following paths for mods:
+27.4.2022 06:11:25 [Notification]     /home/sid_580869/vintageStory/Mods
+27.4.2022 06:11:25 [Warning] [qptech] Failed parsing version string '1.8.0.pre1' at index 5: Expected PRE_RELEASE or BUILD_METADATA, found '.' (best guess: 1.8.0-pre1)
+27.4.2022 06:11:25 [Notification] Found 5 mods (0 disabled)
+27.4.2022 06:11:25 [Notification] Mods, sorted by dependency: chiseltools, qptech, game, creative, survival
+27.4.2022 06:11:25 [Notification] Instantiated 91 mod systems from 5 enabled mods
+27.4.2022 06:11:25 [Notification] External Origins in load order: modorigin@/home/sid_580869/vintageStory/assets/creative/, modorigin@/home/sid_580869/vintageStory/assets/survival/, mod@chiseltools1.5.zip, mod@qptech1.8.zip
+27.4.2022 06:11:25 [Notification] Found 417 external assets in category blocktypes
+27.4.2022 06:11:25 [Notification] Found 234 external assets in category itemtypes
+27.4.2022 06:11:25 [Notification] Found 5 external assets in category lang
+27.4.2022 06:11:25 [Notification] Found 10 external assets in category patches
+27.4.2022 06:11:25 [Notification] Found 48 external assets in category config
+27.4.2022 06:11:25 [Notification] Found 23 external assets in category worldproperties
+27.4.2022 06:11:25 [Notification] Found 23 external assets in category sounds
+27.4.2022 06:11:25 [Notification] Found 2478 external assets in category shapes
+27.4.2022 06:11:25 [Notification] Found 177 external assets in category textures
+27.4.2022 06:11:25 [Notification] Found 416 external assets in category recipes
+27.4.2022 06:11:25 [Notification] Found 364 external assets in category worldgen
+27.4.2022 06:11:25 [Notification] Found 57 external assets in category entities
+27.4.2022 06:11:25 [Notification] Found 0 external assets in category compatibility
+27.4.2022 06:11:25 [Notification] Reloaded lang file with mod assets
+27.4.2022 06:11:25 [Event] Loading save game...
+27.4.2022 06:11:25 [Notification] Entering runphase ModsAndConfigReady
+27.4.2022 06:11:25 [Notification] JsonPatch Loader: 2 patches total, successfully applied 2 patches, unmet conditions on 2 patches, no errors
+27.4.2022 06:11:25 [Notification] Reloaded 19 weather patterns, 5 wind patterns and 5 weather events
+27.4.2022 06:11:36 [Notification] BlockLoader: Entities, Blocks and Items loaded
+27.4.2022 06:11:36 [Notification] Started 83 systems on Server:
+27.4.2022 06:11:36 [Notification]     Mod 'VSEssentials.dll' (game):
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.Core
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.EntityPartitioning
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ErrorReporter
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.ModCompatiblityUtil
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.NoObf.ModJsonPatchLoader
+27.4.2022 06:11:36 [Notification]         Vintagestory.Essentials.PathfindSystem
+27.4.2022 06:11:36 [Notification]         Vintagestory.Essentials.PathFindDebug
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.JsonExport
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.ModBasicBlocksLoader
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.LeafBlockDecay
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.POIRegistry
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.RoomRegistry
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.WeatherSystemCommands
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.WeatherSystemServer
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.WorldMapManager
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.NoObf.ModRegistryObjectTypeLoader
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.LoadColorMaps
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ClothManager
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GridRecipeLoader
+27.4.2022 06:11:36 [Notification]     Mod 'VSSurvivalMod.dll' (survival):
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenPatchesPrePass
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenSnowLayer
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenTerra
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.SaplingControl
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.SurvivalCoreSystem
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenTerraPostProcess
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.ChiselBlockBulkSetMaterial
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenFromHeightmap
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenRockStrataNew
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.NpcControl
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenCreatures
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenMaps
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.WgenCommands
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.DebugSystem
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.UpgradeTasks
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.MyceliumSystem
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ModSystemAuction
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.LiquidItemStackRenderer
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.CharacterSystem
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.RecipeRegistrySystem
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.FruitingSystem
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ModSystemRifts
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ModSystemRiftWeather
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ModTemperature
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.CustomSpawnConditions
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.SystemTemporalStability
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ModSystemWearableStats
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ModSystemBlockReinforcement
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.GameEffects
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ModJournal
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ModLootRandomizer
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ModSleeping
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.TeleporterManager
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.Mechanics.MechanicalPowerMod
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenDeposits
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenStructures
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenCaves
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenBlockLayers
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenPonds
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenStructuresPosPass
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenVegetationAndPatches
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenRivulets
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenLightSurvival
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.RecipeLoader
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.TraderOutfits
+27.4.2022 06:11:36 [Notification]     Mod 'VSCreativeMod.dll' (creative):
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.Core
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.WorldEdit.WorldEdit
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenBlockLayersFlat
+27.4.2022 06:11:36 [Notification]         Vintagestory.ServerMods.GenLightCreative
+27.4.2022 06:11:36 [Notification]     Mod 'chiseltools1.5.zip' (chiseltools):
+27.4.2022 06:11:36 [Notification]         chisel.src.ChiselToolLoader
+27.4.2022 06:11:36 [Notification]     Mod 'qptech1.8.zip' (qptech):
+27.4.2022 06:11:36 [Notification]         Vintagestory.GameContent.ModdedFirePit
+27.4.2022 06:11:36 [Notification]         qptech.src.HVACEnvironmentUpdater
+27.4.2022 06:11:36 [Notification]         qptech.src.TextureTestLoader
+27.4.2022 06:11:36 [Notification]         qptech.src.QPTECHLoader
+27.4.2022 06:11:36 [Notification]         qptech.src.EntityHopper
+27.4.2022 06:11:36 [Notification]         qptech.src.IceBox
+27.4.2022 06:11:36 [Notification]         qptech.src.FirepitStoker
+27.4.2022 06:11:36 [Notification]         qptech.src.FirepitUnloader
+27.4.2022 06:11:36 [Notification]         qptech.src.FirepitLoader
+27.4.2022 06:11:36 [Notification]         qptech.src.networks.FlexNetworkManager
+27.4.2022 06:11:36 [Notification]         qptech.src.misc.AniTestLoader
+27.4.2022 06:11:36 [Notification]         qptech.src.misc.BEBlockSeekerLoader
+27.4.2022 06:11:36 [Notification]         qptech.src.misc.LoadPowerSink
+27.4.2022 06:11:36 [Notification]         qptech.src.misc.MBTLoader
+27.4.2022 06:11:39 [Event] 6 cooking recipes loaded
+27.4.2022 06:11:40 [Event] 548 crafting recipes loaded from 284 files
+27.4.2022 06:11:40 [Event] 7 metal alloys loaded
+27.4.2022 06:11:40 [Event] 245 smithing recipes loaded
+27.4.2022 06:11:40 [Event] 55 clay forming recipes loaded
+27.4.2022 06:11:40 [Event] 36 knapping recipes loaded
+27.4.2022 06:11:40 [Warning] Barrel recipe barrel recipe machines:recipes/barrel/cable.json, ingredient machines:liquidrubberportion does not define a litres attribute but a quantity, will assume quantity=litres for backwards compatibility.
+27.4.2022 06:11:40 [Event] 156 barrel recipes loaded
+27.4.2022 06:11:40 [Notification] Server map set
+27.4.2022 06:11:40 [Notification] Entering runphase LoadGame
+27.4.2022 06:11:40 [Notification] Entering runphase WorldReady
+27.4.2022 06:11:42 [Notification] Reloaded 35 tree generators
+27.4.2022 06:11:42 [Event] Loading 7x7x8 spawn chunks...
+27.4.2022 06:11:42 [Event] 0% (49 in queue)
+27.4.2022 06:11:42 [Event] Begin save game ticking...
+27.4.2022 06:11:42 [Notification] Entering runphase RunGame
+27.4.2022 06:11:42 [Notification] Successfully loaded 1 waypoints
+27.4.2022 06:11:42 [Notification] Starting server threads
+27.4.2022 06:11:42 [Event] Dedicated Server now running on Port 28000 and ip 209.126.1.252!
+27.4.2022 06:11:42 [Notification] All clients disconnected, pausing game calendar.

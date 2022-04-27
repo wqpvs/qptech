@@ -60,7 +60,7 @@ namespace qptech.src
 
         protected override void DoDeviceStart()
         {
-            if (!IsPowered) { deviceState = enDeviceState.POWERHOLD; return; }
+            if (!IsPowered) { deviceState= enDeviceState.POWERHOLD; return; }
             
             if (CurrentRecipe==null)
             {
@@ -93,6 +93,7 @@ namespace qptech.src
         {
             
             if (!IsOn) { return; }
+            if (deviceState == enDeviceState.POWERHOLD && IsPowered) { deviceState = enDeviceState.IDLE;MarkDirty();return; }
             if (deviceState == enDeviceState.WARMUP) { deviceState = enDeviceState.IDLE;MarkDirty();return; }
             if (deviceState == enDeviceState.IDLE) { DoDeviceStart();return; }
             if (deviceState == enDeviceState.MATERIALHOLD&&CurrentRecipe!=null&&TryTakeMaterials()) {
