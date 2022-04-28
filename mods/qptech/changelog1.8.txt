@@ -1,5 +1,8 @@
-﻿1.8.0
-- added QPTECHServerData class (currently hiding in QPTECHLoader)
+﻿1.8.1
+- Ukranian Translation, courtesy of Craluminium, thanks!
+
+1.8.0
+*internal added QPTECHServerData class (currently hiding in QPTECHLoader)
    - temporay command /addpower will add one flux to the global power storage as a test
    - global power storage will be like a giant meta battery using special tech to create a global power pool
 - Additions:
@@ -7,5 +10,4 @@
 - Adjustments:
 	- log splitter gives 8 firewood now (Thanks Buggi)
 
-To Do:
-- clayformer needs to check production status before allowing a recipe change (or implement a queue)
+

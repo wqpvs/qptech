@@ -46,6 +46,7 @@
     <None Include="chisel\assets\game\lang\en.json" />
     <None Include="chisel\modinfo.json" />
     <None Include="qptech\assets\game\lang\en.json" />
+    <None Include="qptech\assets\game\lang\ua.json" />
     <None Include="qptech\assets\game\shapes\block\can-full.json" />
     <None Include="qptech\assets\game\shapes\block\can-open.json" />
     <None Include="qptech\assets\game\shapes\block\can-sealed.json" />
