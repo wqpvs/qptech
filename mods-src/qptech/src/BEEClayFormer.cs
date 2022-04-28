@@ -18,11 +18,6 @@ namespace qptech.src
     class BEEClayFormer:BEEBaseDevice
     {
         //TODO - some refactoring
-        // - store end item instead of recipe
-        // - look up all relevant recipes for that item when checking for available inventory
-        //      - 
-        
-        
         
         string currentrecipecode;
         public ClayFormingRecipe CurrentRecipe {
@@ -247,7 +242,21 @@ namespace qptech.src
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
-            
+            if (deviceState == enDeviceState.RUNNING)
+            {
+                // started at 5 complete at 10 takes 
+                double totaltime = completetime - starttime;
+                double elapsedtime = Api.World.Calendar.TotalHours - starttime;
+                if (totaltime>0.1)
+                {
+                    double pct = (elapsedtime) / totaltime;
+                    int percent = (int)(pct * 100);
+                    if (percent > 0)
+                    {
+                        dsc.AppendLine(percent + "% complete");
+                    }
+                }
+            }
         }
         
         /// <summary>
