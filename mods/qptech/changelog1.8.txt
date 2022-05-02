@@ -1,5 +1,6 @@
 ﻿1.8.1
 - Ukranian Translation, courtesy of Craluminium, thanks!
+- fixed crash with coal stoker thanks Goldkin!
 
 1.8.0
 *internal added QPTECHServerData class (currently hiding in QPTECHLoader)

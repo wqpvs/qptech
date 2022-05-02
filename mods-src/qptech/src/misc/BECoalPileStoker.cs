@@ -41,7 +41,7 @@ namespace qptech.src.misc
         }
         BlockEntityStoneCoffin coffin; //find an active coffin for the cementation furnace
         List<Item> fuelitems;
-        public BlockPos TransporterPos => throw new NotImplementedException();
+        public BlockPos TransporterPos => Pos;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
