@@ -1,0 +1,12 @@
+{
+  "type": "code",
+  "modid": "modernblocks",
+  "name": "Modern Blocks",
+  "description": "Adding some build variety",
+  "author": "WQP",
+  "version": "1.0.0",
+  "dependency": {
+    "game": ""
+    
+  }
+}

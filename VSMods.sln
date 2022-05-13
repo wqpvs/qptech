@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "assets", "mods\assets.cspro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chisel", "mods-src\chisel\chisel.csproj", "{469E5A92-4ED2-4657-8954-A1A87398515A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "modernblocks", "mods-src\ModernBlocks\modernblocks.csproj", "{F184E767-D26E-49FB-B464-BD3F40A03F62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		assets|Any CPU = assets|Any CPU
@@ -48,6 +50,14 @@ Global
 		{469E5A92-4ED2-4657-8954-A1A87398515A}.Release x64|Any CPU.Build.0 = Release|Any CPU
 		{469E5A92-4ED2-4657-8954-A1A87398515A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{469E5A92-4ED2-4657-8954-A1A87398515A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F184E767-D26E-49FB-B464-BD3F40A03F62}.assets|Any CPU.ActiveCfg = Debug|Any CPU
+		{F184E767-D26E-49FB-B464-BD3F40A03F62}.assets|Any CPU.Build.0 = Debug|Any CPU
+		{F184E767-D26E-49FB-B464-BD3F40A03F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F184E767-D26E-49FB-B464-BD3F40A03F62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F184E767-D26E-49FB-B464-BD3F40A03F62}.Release x64|Any CPU.ActiveCfg = Release|Any CPU
+		{F184E767-D26E-49FB-B464-BD3F40A03F62}.Release x64|Any CPU.Build.0 = Release|Any CPU
+		{F184E767-D26E-49FB-B464-BD3F40A03F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F184E767-D26E-49FB-B464-BD3F40A03F62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
