@@ -19,11 +19,13 @@
 	"blockmaterial": "Metal",
 	"drawtype": "Cube",
 	"texturesByType": {
+
 		"*": {
 			"all": { "base": "block/siding-{type}-{color}" },
-			"up": { "base": "block/siding-boltandchannel-white" },
-			"down": { "base": "block/siding-boltandchannel-white" }
+			"up": { "base": "block/siding-smooth-{color}" },
+			"down": { "base": "block/siding-smooth-{color}" }
 		}
+		
 	},
 	"resistance": 1,
 	"sounds": {
