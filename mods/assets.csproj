@@ -422,7 +422,14 @@
     <None Include="qptech\modinfo.json" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="modernblocks\assets\modernblocks\textures\block\siding-boltandchannel-blue.png" />
+    <Content Include="modernblocks\assets\modernblocks\textures\block\siding-boltandchannel-white.png" />
+    <Content Include="modernblocks\assets\modernblocks\textures\block\siding-rolldoor-black.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\siding-rolldoor-blue.png" />
+    <Content Include="modernblocks\assets\modernblocks\textures\block\siding-rolldoor-gray.png" />
+    <Content Include="modernblocks\assets\modernblocks\textures\block\siding-rolldoor-red.png" />
+    <Content Include="modernblocks\assets\modernblocks\textures\block\siding-rolldoor-white.png" />
+    <Content Include="modernblocks\assets\modernblocks\textures\block\siding-rolldoor-yellow.png" />
     <Content Include="qptech\assets\game\sounds\clearfilter.ogg" />
     <Content Include="qptech\assets\game\sounds\crusher.ogg" />
     <Content Include="qptech\assets\game\sounds\deepmetalknock.ogg" />

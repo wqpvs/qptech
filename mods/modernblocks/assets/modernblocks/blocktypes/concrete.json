@@ -20,7 +20,9 @@
 	"drawtype": "Cube",
 	"texturesByType": {
 		"*": {
-			"all": { "base": "block/siding-{type}-{color}" }
+			"all": { "base": "block/siding-{type}-{color}" },
+			"up": { "base": "block/siding-boltandchannel-white" },
+			"down": { "base": "block/siding-boltandchannel-white" }
 		}
 	},
 	"resistance": 1,
