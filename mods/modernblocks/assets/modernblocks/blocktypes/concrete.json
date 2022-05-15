@@ -7,7 +7,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": ["rolldoor"]
+			"states": ["rolldoor","smooth"]
 		},
 		{
 			"code": "color",
@@ -21,9 +21,8 @@
 	"texturesByType": {
 
 		"*": {
-			"all": { "base": "block/siding-{type}-{color}" },
-			"up": { "base": "block/siding-smooth-{color}" },
-			"down": { "base": "block/siding-smooth-{color}" }
+			"all": { "base": "block/siding-{type}-{color}" }
+			
 		}
 		
 	},
