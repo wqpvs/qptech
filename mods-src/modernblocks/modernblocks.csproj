@@ -89,6 +89,7 @@
     <Compile Include="src\BEConnectedTextures.cs" />
     <Compile Include="src\ConnectedTextureRenderer.cs" />
     <Compile Include="src\BlockConnectedTexture.cs" />
+    <Compile Include="src\ModernBlockLoader.cs" />
   </ItemGroup>
   <Target Name="CopyToBin" AfterTargets="AfterBuild">
     <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'$(BinaryDir)/%(RecursiveDir)%(Filename)%(Extension)')" />

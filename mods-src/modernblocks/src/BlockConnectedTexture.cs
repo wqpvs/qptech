@@ -14,7 +14,7 @@ using Vintagestory.GameContent;
 using Vintagestory.API.Util;
 
 
-namespace modernblocks
+namespace modernblocks.src
 {
     class BlockConnectedTexture : Block
     {

@@ -13,7 +13,7 @@ using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 using Vintagestory.API.Util;
 
-namespace modernblocks
+namespace modernblocks.src
 {
     class BEConnectedTextures : BlockEntity, ITexPositionSource
     {
@@ -167,13 +167,5 @@ namespace modernblocks
         }
     }
 
-    public class MBTextureLoader : ModSystem
-    {
-        public override void Start(ICoreAPI api)
-        {
-            base.Start(api);
-            api.RegisterBlockEntityClass("BEConnectedTextures", typeof(BEConnectedTextures));
-            api.RegisterBlockClass("BlockConnectedTexture", typeof(BlockConnectedTexture));
-        }
-    }
+    
 }
