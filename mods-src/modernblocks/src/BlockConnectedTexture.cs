@@ -18,11 +18,7 @@ namespace modernblocks.src
 {
     class BlockConnectedTexture : Block
     {
-        public override void OnBlockPlaced(IWorldAccessor world, BlockPos blockPos, ItemStack byItemStack = null)
-        {
-            base.OnBlockPlaced(world, blockPos, byItemStack);
-
-        }
+        
 
         public override void OnNeighbourBlockChange(IWorldAccessor world, BlockPos pos, BlockPos neibpos)
         {

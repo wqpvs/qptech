@@ -41,6 +41,8 @@ namespace modernblocks.src
         MeshRef meshref;
         MeshData meshdata;
         Block gettextureblock;
+        Dictionary<BlockFacing, bool> oldneighbors;
+        TestRenderer testRenderer;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -52,7 +54,14 @@ namespace modernblocks.src
                 GenMesh(false);
 
             }
+            if (api is ICoreClientAPI )
+            {
 
+                capi = api as ICoreClientAPI;
+                capi.Event.RegisterRenderer(testRenderer = new TestRenderer(Pos, capi), EnumRenderStage.Opaque, "test");
+                testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/concretetile-nesw.png");
+                testRenderer.GenModel();
+            }
         }
 
 
@@ -61,19 +70,40 @@ namespace modernblocks.src
         public virtual void GenMesh(bool triggerneighbors)
         {
             if (capi == null) { return; }
-            meshref?.Dispose();
-            meshref = null;
-            meshdata = new MeshData();
+            
             Shape shape = capi.TesselatorManager.GetCachedShape(new AssetLocation("modernblocks:block/tiledconcrete"));
             ShapeElement shapeelement = shape.Elements[0];
+            
             Dictionary<BlockFacing, bool> neighbors = new Dictionary<BlockFacing, bool>();
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
                 //BEMultiBlockTexture bembt = capi.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BEMultiBlockTexture;
-                Block otherblock = capi.World.BlockAccessor.GetBlock(Pos.Copy().Offset(bf));
-                if (otherblock != Block) { neighbors[bf] = false; }
-                else { neighbors[bf] = true; }
+                
+                BEConnectedTextures otherblock= capi.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BEConnectedTextures;
+                if (otherblock==null) { neighbors[bf] = false; }
+                else {
+                    neighbors[bf] = true;
+                    
+                }
             }
+            //Do a check to see if neighbor set has changed if it hasn't changed we don't have to make a new mesh
+            if (oldneighbors == null)
+            {
+                oldneighbors = new Dictionary<BlockFacing, bool>(neighbors);
+            }
+            else
+            {
+                bool mismatch = false;
+                foreach (BlockFacing bf in BlockFacing.ALLFACES)
+                {
+                    if (oldneighbors[bf] != neighbors[bf]) { mismatch = true;break; }
+                }
+                if (!mismatch && meshref!=null) { return; }
+            }
+            if (meshref != null) { capi.Render.DeleteMesh(meshref); }
+            meshref?.Dispose();
+            meshref = null;
+            meshdata = new MeshData();
             foreach (String facename in shapeelement.Faces.Keys)
             {
                 if (facename == "up")
@@ -130,10 +160,7 @@ namespace modernblocks.src
                     if (!neighbors[BlockFacing.EAST]) { suffindex += 8; }
                     shapeelement.Faces[facename].Texture = "#" + suffix[suffindex];
                 }
-                else
-                {
-                    int a = 1; //what did i miss?
-                }
+                
 
             }
             capi.Tesselator.TesselateShape("tileconcrete" + Pos.ToString(), shape, out meshdata, this);
@@ -146,9 +173,16 @@ namespace modernblocks.src
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
 
+            if (meshdata == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
             mesher.AddMeshData(meshdata);
+            try
+            {
+                meshref = capi.Render.UploadMesh(meshdata);
+            }
+            catch
+            {
 
-            meshref = capi.Render.UploadMesh(meshdata);
+            }
             return true;
         }
 
@@ -161,8 +195,12 @@ namespace modernblocks.src
 
         public override void OnBlockRemoved()
         {
+            if (capi == null) { base.OnBlockRemoved();return; }
+            if (capi != null && meshref != null) { capi.Render.DeleteMesh(meshref); }
+
             meshref?.Dispose();
             meshref = null;
+            
             base.OnBlockRemoved();
         }
     }
