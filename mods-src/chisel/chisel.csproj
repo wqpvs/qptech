@@ -7,8 +7,8 @@
     <ProjectGuid>{469E5A92-4ED2-4657-8954-A1A87398515A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>modernblocks</RootNamespace>
-    <AssemblyName>modernblocks</AssemblyName>
+    <RootNamespace>chiseltools</RootNamespace>
+    <AssemblyName>chiseltools</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

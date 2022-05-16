@@ -44,7 +44,7 @@ namespace modernblocks.src
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            gettextureblock = api.World.BlockAccessor.GetBlock(new AssetLocation("machines:concretelargetile"));
+            gettextureblock = api.World.BlockAccessor.GetBlock(new AssetLocation("modernblocks:concretelargetile"));
             if (api is ICoreClientAPI)
             {
                 capi = api as ICoreClientAPI;
@@ -64,7 +64,7 @@ namespace modernblocks.src
             meshref?.Dispose();
             meshref = null;
             meshdata = new MeshData();
-            Shape shape = capi.TesselatorManager.GetCachedShape(new AssetLocation("machines:block/tiledconcrete"));
+            Shape shape = capi.TesselatorManager.GetCachedShape(new AssetLocation("modernblocks:block/tiledconcrete"));
             ShapeElement shapeelement = shape.Elements[0];
             Dictionary<BlockFacing, bool> neighbors = new Dictionary<BlockFacing, bool>();
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
