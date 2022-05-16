@@ -5,7 +5,7 @@
 
 	"creativeinventory": {
 
-		"qptech-decor": [ "*" ]
+		"modernblocks": [ "*" ]
 	},
 	"blockmaterial": "Stone",
 	"drawtype": "json",
