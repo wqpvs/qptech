@@ -185,7 +185,7 @@ namespace modernblocks.src
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
 
-            if (meshdata == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
+            /*if (meshdata == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
             mesher.AddMeshData(meshdata);
             try
             {
@@ -194,7 +194,7 @@ namespace modernblocks.src
             catch
             {
 
-            }
+            }*/
             return true;
         }
 
@@ -212,7 +212,7 @@ namespace modernblocks.src
 
             meshref?.Dispose();
             meshref = null;
-            
+            testRenderer?.Dispose();
             base.OnBlockRemoved();
         }
     }

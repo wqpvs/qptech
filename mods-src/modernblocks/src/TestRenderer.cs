@@ -18,6 +18,8 @@ namespace modernblocks.src
     ///    - (needs to accept code about which faces to show/hide - probably let the master block decide that)
     /// - when sending which faces to show, it should maybe send the hash of directions, which will be converted into appropriate UV offsets
     /// - will also accept fill colors
+    /// - random frame animation mode
+    /// - frame range animation mode?
     /// </summary>
     class TestRenderer:IRenderer
     {
@@ -94,13 +96,14 @@ namespace modernblocks.src
         public void GenModel()
         {
             quadModelRef?.Dispose();
+            Random r = new Random();
             float uoffset = 1;
             float sc = cellsize*uoffset;       //start coordinate, 0 would be bottom right of texture
             float ec = cellsize*(uoffset+1);//end coordinate, 1 would be top left of texture
 
-            float u1 = 3*cellsize;
+            float u1 = r.Next(0,4)*cellsize;
             float u2 = u1+cellsize;
-            float v1 = 2*cellsize;
+            float v1 = r.Next(0,4)*cellsize;
             float v2 = v1+cellsize;
 
             //I somehow figured this out by repeatedly facerolling on the keyboard face by face until it worked
