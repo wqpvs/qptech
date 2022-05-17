@@ -24,7 +24,7 @@ namespace modernblocks.src
         {
             base.OnNeighbourBlockChange(world, pos, neibpos);
             BEConnectedTextures bem = world.BlockAccessor.GetBlockEntity(pos) as BEConnectedTextures;
-            if (bem != null) { bem.GenMesh(false); }
+            if (bem != null) { bem.UpdateRenderer(); }
         }
     }
 }
