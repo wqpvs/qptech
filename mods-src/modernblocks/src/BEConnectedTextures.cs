@@ -15,8 +15,20 @@ using Vintagestory.API.Util;
 
 namespace modernblocks.src
 {
+    /// <summary>
+    /// Render a texture so the outer borders change automatically to have closed borders
+    /// Think we will do larger textures and then do appropriate UVs
+    /// So a 4x4 texture top 3x3 would be the outer ring, and 0x3 would be fully closed texture
+    /// (leaves 1x3,2x3,and 3x3 slots unused - maybe could do alternates or some other expansion?
+    /// Also would like:
+    /// user setable textures from a palette of graphics (like that MC chisel mod)
+    /// could maybe also sub in any texture if we can get the proper file reference (risks crashing though), would have to adjust uvs
+    /// Also could probably hav
+    /// </summary>
     class BEConnectedTextures : BlockEntity, ITexPositionSource
     {
+        
+        
         string[] suffix => new string[] { "0", "n", "e", "ne", "s", "ns", "es", "nes", "w", "wn", "ew", "wne", "sw", "swn", "esw", "nesw" };
         const int n_ = 1;
         const int e_ = 2;
@@ -59,7 +71,7 @@ namespace modernblocks.src
 
                 capi = api as ICoreClientAPI;
                 capi.Event.RegisterRenderer(testRenderer = new TestRenderer(Pos, capi), EnumRenderStage.Opaque, "test");
-                testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/concretetile-nesw.png");
+                testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/testgrid.png");
                 testRenderer.GenModel();
             }
         }

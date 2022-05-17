@@ -10,7 +10,13 @@
 	"blockmaterial": "Stone",
 	"drawtype": "json",
 	"shape": { "base": "block/tiledconcrete" },
+	"texturesByType": {
+		"*": {
+			"all": { "base": "block/connectedtextures/testgrid" }
 
+
+		}
+	},
 
 	"resistance": 1,
 	"sounds": {

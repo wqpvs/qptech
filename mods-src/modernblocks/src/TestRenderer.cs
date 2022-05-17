@@ -14,16 +14,7 @@ namespace modernblocks.src
 {
     class TestRenderer:IRenderer
     {
-        static float[] quadTextureCoords = {
-            0, 0,
-            1, 0,
-            1, 1,
-            0, 1
-        };
-
-        static int[] quadVertexIndices = {
-            0, 1, 2,    0, 2, 3
-        };
+        
         BlockPos pos;
         ICoreClientAPI api;
         MeshRef quadModelRef;
@@ -40,7 +31,7 @@ namespace modernblocks.src
             get { return 24; }
         }
 
-
+        string[] textures;
 
         public AssetLocation TextureName = null;
 
@@ -51,68 +42,77 @@ namespace modernblocks.src
 
             GenModel();
         }
+        #region meshbuildingdata
+        // N: Z=0, S: Z=1
+        // W: X=0, E: X=1
+        // D: Y=0, U: Y=1
+        static float ts = 0.25f;// 1f / 16f/4f;
+        
+        static readonly float[] cubeVertices =
+        {
+            0,0,0, //WDN 0
+            0,0,1, //WDS 1
+            0,1,0, //WUN 2
+            0,1,1, //WUS 3
+            
+ 
+        };
 
+        
+        #endregion
         public void GenModel()
         {
             quadModelRef?.Dispose();
 
-            
+            //
+            //
+            //
+            //
 
-            /*MeshData modeldata = QuadMeshUtil.GetQuad();
-            modeldata.Uv = new float[]
-            {
-            3/16f, 7/16f,
-            0, 7/16f,
-            0, 0,
-            3/16f, 0
+            //these are the UV coordinates
+            //normal textures are mapped on 16 = full texture (from the voxel measurements)
+            //these textures are 128 or 4x4 texture units
+
+
+
+            float[] quadTextureCoords = {
+                ts,ts, //0,0,0
+                ts,0, //0,0,1
+                0,ts, //0,1,0
+                0,0  //0,1,1
+            };
+            
+            //this is the pattern to build the mesh, two triangles
+            int[] quadVertexIndices = {
+                //0, 4, 6,    0,6,2, 
+                0,1,3,0,3,2
             };
 
-            modeldata.Rgba = new byte[4 * 4];
-            modeldata.Rgba.Fill((byte)255);
-            modeldata.Flags = new int[4 * 4];*/
+            
 
             MeshData m = new MeshData();
 
-            BlockPos d = pos;
-            
-            Vec3f doffset = new Vec3f(1,0,0);
-            
-            float[] quadVertices = {
-
-            0,0,0,
-            1,0,0,
-            1,1,0,
-            0,1,0
-            };
-            float[] xyz = new float[3 * 4];
-            for (int i = 0; i < 3 * 4; i++)
+            //XYZ these are the vertices on our cube
+            float[] xyz = new float[cubeVertices.Length];
+            for (int i = 0; i < cubeVertices.Length; i++)
             {
-                xyz[i] = quadVertices[i];
+                xyz[i] = cubeVertices[i];
             }
             m.SetXyz(xyz);
-            float[] uv = new float[2 * 4];
+
+            //Set the UV coordinates for the triangles
+            float[] uv = new float[quadTextureCoords.Length];
             for (int i = 0; i < uv.Length; i++)
             {
                 uv[i] = quadTextureCoords[i];
             }
             m.SetUv(uv);
-            m.SetVerticesCount(4);
+            m.SetVerticesCount(cubeVertices.Length);
             m.SetIndices(quadVertexIndices);
-            m.SetIndicesCount(3 * 2);
-
-
-
-            /*m.Uv = new float[]
-            {
-            3/16f, 7/16f,
-            0, 7/16f,
-            0, 0,
-            3/16f, 0
-            };*/
-
-            m.Rgba = new byte[4 * 4];
+            m.SetIndicesCount(quadVertexIndices.Length);
+            m.Rgba = new byte[quadTextureCoords.Length];
             m.Rgba.Fill((byte)255);
-            m.Flags = new int[4 * 4];
+            m.Flags = new int[quadTextureCoords.Length];
 
 
 
