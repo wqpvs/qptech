@@ -100,7 +100,7 @@ namespace modernblocks.src
 
             float u1 = 3*cellsize;
             float u2 = u1+cellsize;
-            float v1 = 1*cellsize;
+            float v1 = 2*cellsize;
             float v2 = v1+cellsize;
 
             //I somehow figured this out by repeatedly facerolling on the keyboard face by face until it worked
@@ -116,25 +116,25 @@ namespace modernblocks.src
                 u1 ,v2 , 
                 u1 ,v1,
                 //EAST
-                ec ,ec , 
-                sc ,ec , 
-                ec ,sc , 
-                sc ,sc,
+                u2 ,v2 , 
+                u1 ,v2 , 
+                u2 ,v1 , 
+                u1 ,v1,
                 //SOUTH
-                sc ,ec ,
-                sc, sc ,
-                ec ,ec,
-                ec ,sc ,
+                u1 ,v2 ,
+                u1, v1 ,
+                u2 ,v2,
+                u2 ,v1 ,
                 //UP
-                sc, sc ,
-                sc ,ec ,
-                ec ,sc ,
-                ec ,ec,
+                u1, v1 ,
+                u1 ,v2 ,
+                u2 ,v1 ,
+                u2 ,v2,
                 //DOWN
-                sc, ec ,
-                sc ,sc ,
-                ec ,ec ,
-                ec ,sc,
+                u1, v2 ,
+                u1 ,v1 ,
+                u2 ,v2 ,
+                u2 ,v1,
             };
             
             //this is the pattern to build the mesh, two triangles
