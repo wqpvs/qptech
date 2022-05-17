@@ -50,11 +50,26 @@ namespace modernblocks.src
         
         static readonly float[] cubeVertices =
         {
+            //WEST QUAD
             0,0,0, //WDN 0
             0,0,1, //WDS 1
             0,1,0, //WUN 2
             0,1,1, //WUS 3
-            
+            //NORTH QUAD
+            0,0,0, //WDN 4
+            0,1,0, //EDN 5
+            1,0,0, //EUN 6
+            1,1,0, //WUN 7
+            //EAST QUAD
+            1,0,0, //EDN 8
+            1,0,1, //EDS 9
+            1,1,0, //EUN 10
+            1,1,1, //EUS 11
+            //SOUTH QUAD
+            0,0,1, //WDN 12
+            0,1,1, //EDN 13
+            1,0,1, //EUN 14
+            1,1,1, //WUN 15
  
         };
 
@@ -91,17 +106,39 @@ namespace modernblocks.src
                 //oo ,ts , // 0,0,1
                 //ts ,oo , // 0,1,0
                 //oo ,oo  //  0,1,1
-                oo ,ts , // 0,0,0  This pattern is mirrored
+                //WEST
+                oo ,ts , // 0,0,0  
                 ts ,ts , // 0,0,1
                 oo ,oo , // 0,1,0
-                ts ,oo  //  0,1,1
+                ts ,oo,
+                //NORTH
+                ts ,ts , 
+                ts ,oo , 
+                oo ,ts , 
+                oo ,oo,
+                //EAST
+                ts ,ts , 
+                oo ,ts , 
+                ts ,oo , 
+                oo ,oo,
+                //SOUTH
+                
+                oo ,ts ,
+                oo, oo ,
+                
+                ts ,ts,
+                ts ,oo ,
+
             };
             
             //this is the pattern to build the mesh, two triangles
             //the vertex order for each triangle doesn't matter
             int[] quadVertexIndices = {
                 //0, 4, 6,    0,6,2, 
-                3,1,0,2,0,3
+                3,1,0,2,0,3, //West
+                3+4,1+4,4,2+4,4,3+4, //N
+                3+8,1+8,8,2+8,8,3+8, //E
+                3+12,1+12,12,2+12,12,3+12 //S
             };
             int numVerts = cubeVertices.Length / 3;
             
