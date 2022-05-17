@@ -75,6 +75,11 @@ namespace modernblocks.src
             0,1,1, //WUS 17
             1,1,0, //EUN 18
             1,1,1, //EUS 19
+            //LOWER QUAD
+            0,0,0, //WUN 16
+            0,0,1, //WUS 17
+            1,0,0, //EUN 18
+            1,0,1, //EUS 19
  
         };
 
@@ -97,24 +102,10 @@ namespace modernblocks.src
 
             float[] quadTextureCoords = {
                 
-                //ts ,ts , // 0,0,0  This pattern has NW rotated wrong (90 CW from where it should be)
-                //ts ,oo , // 0,0,1
-                //oo ,ts , // 0,1,0
-                //oo ,oo  //  0,1,1
-
-                //ts, oo , // 0,0,0  This pattern has NW rotate 90 CCW from where it should be  and mirrored
-                //ts ,ts , // 0,0,1
-                //oo ,oo , // 0,1,0
-                //oo ,ts  //  0,1,1
-
-                //ts ,ts , // 0,0,0  This pattern is mirrored
-                //oo ,ts , // 0,0,1
-                //ts ,oo , // 0,1,0
-                //oo ,oo  //  0,1,1
                 //WEST
-                oo ,ts , // 0,0,0  
-                ts ,ts , // 0,0,1
-                oo ,oo , // 0,1,0
+                oo ,ts ,
+                ts ,ts ,
+                oo ,oo ,
                 ts ,oo,
                 //NORTH
                 ts ,ts , 
@@ -132,12 +123,15 @@ namespace modernblocks.src
                 ts ,ts,
                 ts ,oo ,
                 //UP
-                
                 oo, oo ,
                 oo ,ts ,
-                
                 ts ,oo ,
                 ts ,ts,
+                //DOWN
+                oo, ts ,
+                oo ,oo ,
+                ts ,ts ,
+                ts ,oo,
             };
             
             //this is the pattern to build the mesh, two triangles
@@ -148,7 +142,8 @@ namespace modernblocks.src
                 3+4,1+4,4,2+4,4,3+4, //N
                 3+8,1+8,8,2+8,8,3+8, //E
                 3+12,1+12,12,2+12,12,3+12, //S
-                3+16,1+16,16,2+16,16,3+16 //U
+                3+16,1+16,16,2+16,16,3+16, //U
+                3+20,1+20,20,2+20,20,3+20 //U
             };
             int numVerts = cubeVertices.Length / 3;
             
