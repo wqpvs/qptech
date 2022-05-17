@@ -73,21 +73,37 @@ namespace modernblocks.src
             //normal textures are mapped on 16 = full texture (from the voxel measurements)
             //these textures are 128 or 4x4 texture units
 
-
+            float oo = 0;
 
             float[] quadTextureCoords = {
-                ts,ts, //0,0,0
-                ts,0, //0,0,1
-                0,ts, //0,1,0
-                0,0  //0,1,1
+                
+                //ts ,ts , // 0,0,0  This pattern has NW rotated wrong (90 CW from where it should be)
+                //ts ,oo , // 0,0,1
+                //oo ,ts , // 0,1,0
+                //oo ,oo  //  0,1,1
+
+                //ts, oo , // 0,0,0  This pattern has NW rotate 90 CCW from where it should be  and mirrored
+                //ts ,ts , // 0,0,1
+                //oo ,oo , // 0,1,0
+                //oo ,ts  //  0,1,1
+
+                //ts ,ts , // 0,0,0  This pattern is mirrored
+                //oo ,ts , // 0,0,1
+                //ts ,oo , // 0,1,0
+                //oo ,oo  //  0,1,1
+                oo ,ts , // 0,0,0  This pattern is mirrored
+                ts ,ts , // 0,0,1
+                oo ,oo , // 0,1,0
+                ts ,oo  //  0,1,1
             };
             
             //this is the pattern to build the mesh, two triangles
+            //the vertex order for each triangle doesn't matter
             int[] quadVertexIndices = {
                 //0, 4, 6,    0,6,2, 
-                0,1,3,0,3,2
+                3,1,0,2,0,3
             };
-
+            int numVerts = cubeVertices.Length / 3;
             
 
             MeshData m = new MeshData();
@@ -110,9 +126,9 @@ namespace modernblocks.src
             m.SetVerticesCount(cubeVertices.Length);
             m.SetIndices(quadVertexIndices);
             m.SetIndicesCount(quadVertexIndices.Length);
-            m.Rgba = new byte[quadTextureCoords.Length];
+            m.Rgba = new byte[numVerts*4];
             m.Rgba.Fill((byte)255);
-            m.Flags = new int[quadTextureCoords.Length];
+            m.Flags = new int[numVerts*4];
 
 
 
