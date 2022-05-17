@@ -12,6 +12,13 @@ using Vintagestory.API.Util;
 
 namespace modernblocks.src
 {
+    /// <summary>
+    /// TODO:
+    /// - break apart the cube and UV array code and assemble on the fly
+    ///    - (needs to accept code about which faces to show/hide - probably let the master block decide that)
+    /// - when sending which faces to show, it should maybe send the hash of directions, which will be converted into appropriate UV offsets
+    /// - will also accept fill colors
+    /// </summary>
     class TestRenderer:IRenderer
     {
         
@@ -43,11 +50,11 @@ namespace modernblocks.src
             GenModel();
         }
         #region meshbuildingdata
-        // N: Z=0, S: Z=1
-        // W: X=0, E: X=1
-        // D: Y=0, U: Y=1
-        static float ts = 0.25f;// 1f / 16f/4f;
         
+        static float cellsize = 0.25f;//each cell is 1/4 of a texture
+        
+        //idk how many brain cells i killed figuring this out, but here are the vertices to make a cube
+        //the vertices must be specified separately per side so the UVs can be freely altered
         static readonly float[] cubeVertices =
         {
             //WEST QUAD
@@ -82,56 +89,52 @@ namespace modernblocks.src
             1,0,1, //EUS 19
  
         };
-
-        
+  
         #endregion
         public void GenModel()
         {
             quadModelRef?.Dispose();
+            float uoffset = 1;
+            float sc = cellsize*uoffset;       //start coordinate, 0 would be bottom right of texture
+            float ec = cellsize*(uoffset+1);//end coordinate, 1 would be top left of texture
 
-            //
-            //
-            //
-            //
+            float u1 = 3*cellsize;
+            float u2 = u1+cellsize;
+            float v1 = 1*cellsize;
+            float v2 = v1+cellsize;
 
-            //these are the UV coordinates
-            //normal textures are mapped on 16 = full texture (from the voxel measurements)
-            //these textures are 128 or 4x4 texture units
-
-            float oo = 0;
-
+            //I somehow figured this out by repeatedly facerolling on the keyboard face by face until it worked
             float[] quadTextureCoords = {
-                
                 //WEST
-                oo ,ts ,
-                ts ,ts ,
-                oo ,oo ,
-                ts ,oo,
+                u1 ,v2 ,
+                u2 ,v2 ,
+                u1 ,v1 ,
+                u2 ,v1,
                 //NORTH
-                ts ,ts , 
-                ts ,oo , 
-                oo ,ts , 
-                oo ,oo,
+                u2 ,v2 , 
+                u2 ,v1 , 
+                u1 ,v2 , 
+                u1 ,v1,
                 //EAST
-                ts ,ts , 
-                oo ,ts , 
-                ts ,oo , 
-                oo ,oo,
+                ec ,ec , 
+                sc ,ec , 
+                ec ,sc , 
+                sc ,sc,
                 //SOUTH
-                oo ,ts ,
-                oo, oo ,
-                ts ,ts,
-                ts ,oo ,
+                sc ,ec ,
+                sc, sc ,
+                ec ,ec,
+                ec ,sc ,
                 //UP
-                oo, oo ,
-                oo ,ts ,
-                ts ,oo ,
-                ts ,ts,
+                sc, sc ,
+                sc ,ec ,
+                ec ,sc ,
+                ec ,ec,
                 //DOWN
-                oo, ts ,
-                oo ,oo ,
-                ts ,ts ,
-                ts ,oo,
+                sc, ec ,
+                sc ,sc ,
+                ec ,ec ,
+                ec ,sc,
             };
             
             //this is the pattern to build the mesh, two triangles
@@ -168,13 +171,23 @@ namespace modernblocks.src
             m.SetVerticesCount(cubeVertices.Length);
             m.SetIndices(quadVertexIndices);
             m.SetIndicesCount(quadVertexIndices.Length);
-            m.Rgba = new byte[numVerts*4];
-            m.Rgba.Fill((byte)255);
-            m.Flags = new int[numVerts*4];
+            
+            
+            m.Rgba = new byte[numVerts*4]; //colored vertex shading
 
-
-
-
+            /*this would randomly color all the vertices
+             *
+             Random r = new Random();
+             for (int vc=0; vc < numVerts*4; vc += 4)
+            {
+                
+                m.Rgba[vc] = (byte)r.Next(0,255);
+                m.Rgba[vc + 1] = (byte)r.Next(0, 255);
+                m.Rgba[vc + 2] = (byte)r.Next(0, 255);
+                m.Rgba[vc + 3] = (byte)255;
+            }*/
+            m.Rgba.Fill((byte)255);        //fill all white
+            m.Flags = new int[numVerts*4]; //not clear on what flags do
             quadModelRef = api.Render.UploadMesh(m);
         }
 
@@ -218,12 +231,7 @@ namespace modernblocks.src
             prog.ModelMatrix = ModelMat
                 .Identity()
                 .Translate(pos.X - camPos.X, pos.Y - camPos.Y, pos.Z - camPos.Z)
-                    //.Translate(wireoffset.X, wireoffset.Y, wireoffset.Z)
 
-                    //.Scale(1, 0.025f, 1)
-                    //.Translate(xzOffset / 16f, 1 / 16f , 8.5f / 16)
-                    //.RotateX(90 * GameMath.DEG2RAD)
-                    //.Scale(0.5f * 3 / 16f, 0.5f * 7 / 16f, 0.5f)
                     .Values
                 ;
             prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;
