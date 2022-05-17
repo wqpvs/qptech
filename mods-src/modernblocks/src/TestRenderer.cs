@@ -70,6 +70,11 @@ namespace modernblocks.src
             0,1,1, //EDN 13
             1,0,1, //EUN 14
             1,1,1, //WUN 15
+            //UPPER QUAD
+            0,1,0, //WUN 16
+            0,1,1, //WUS 17
+            1,1,0, //EUN 18
+            1,1,1, //EUS 19
  
         };
 
@@ -122,13 +127,17 @@ namespace modernblocks.src
                 ts ,oo , 
                 oo ,oo,
                 //SOUTH
-                
                 oo ,ts ,
                 oo, oo ,
-                
                 ts ,ts,
                 ts ,oo ,
-
+                //UP
+                
+                oo, oo ,
+                oo ,ts ,
+                
+                ts ,oo ,
+                ts ,ts,
             };
             
             //this is the pattern to build the mesh, two triangles
@@ -138,7 +147,8 @@ namespace modernblocks.src
                 3,1,0,2,0,3, //West
                 3+4,1+4,4,2+4,4,3+4, //N
                 3+8,1+8,8,2+8,8,3+8, //E
-                3+12,1+12,12,2+12,12,3+12 //S
+                3+12,1+12,12,2+12,12,3+12, //S
+                3+16,1+16,16,2+16,16,3+16 //U
             };
             int numVerts = cubeVertices.Length / 3;
             
