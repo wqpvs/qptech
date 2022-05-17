@@ -44,13 +44,14 @@ namespace modernblocks.src
         //string fulltexturename => basetexturename + suffix[directionmap];
 
         
-        Dictionary<BlockFacing, bool> oldneighbors;
+        List<BlockFacing> oldneighbors;
         TestRenderer testRenderer;
-
+        static Random r;
+        
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            
+            if (r == null) { r = new Random(); }
             if (api is ICoreClientAPI )
             {
 
@@ -72,10 +73,17 @@ namespace modernblocks.src
                 neighbors.Add(bf);
             }
             if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
-
+            if (oldneighbors!=null&& neighbors.Equals(oldneighbors)) { return; }
             capi.Event.RegisterRenderer(testRenderer = new TestRenderer(Pos, capi), EnumRenderStage.Opaque, "test");
             testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/testgrid.png");
+            testRenderer.facedata = new List<FaceData>();
+            FaceData fd = new FaceData();
+            fd.rgba = new byte[] { (byte)r.Next(0, 256), (byte)r.Next(0, 256), (byte)r.Next(0, 256), 255 };
+            fd.ucell = r.Next(0, 4);
+            fd.vcell = r.Next(0, 4);
+            testRenderer.facedata.Add(fd);
             testRenderer.GenModel();
+            oldneighbors = new List<BlockFacing>(neighbors);
         }
 
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)

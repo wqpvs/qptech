@@ -30,6 +30,7 @@ namespace modernblocks.src
         
         Matrixf ModelMat = new Matrixf();
         
+        
         public double RenderOrder
         {
             get { return 0.5; }
@@ -40,7 +41,7 @@ namespace modernblocks.src
             get { return 24; }
         }
 
-        string[] textures;
+        public List<FaceData> facedata;
 
         public AssetLocation TextureName = null;
 
@@ -53,7 +54,7 @@ namespace modernblocks.src
         }
         #region meshbuildingdata
         
-        static float cellsize = 0.25f;//each cell is 1/4 of a texture
+        
         
         //idk how many brain cells i killed figuring this out, but here are the vertices to make a cube
         //the vertices must be specified separately per side so the UVs can be freely altered
@@ -96,15 +97,13 @@ namespace modernblocks.src
         public void GenModel()
         {
             quadModelRef?.Dispose();
+            if (facedata == null||facedata.Count==0) { return; }
             Random r = new Random();
-            float uoffset = 1;
-            float sc = cellsize*uoffset;       //start coordinate, 0 would be bottom right of texture
-            float ec = cellsize*(uoffset+1);//end coordinate, 1 would be top left of texture
-
-            float u1 = r.Next(0,4)*cellsize;
-            float u2 = u1+cellsize;
-            float v1 = r.Next(0,4)*cellsize;
-            float v2 = v1+cellsize;
+            FaceData usedata = facedata[0];
+            float u1 = usedata.ucell*usedata.cellsize;
+            float u2 = u1+usedata.cellsize;
+            float v1 = usedata.vcell*usedata.cellsize;
+            float v2 = v1+usedata.cellsize;
 
             //I somehow figured this out by repeatedly facerolling on the keyboard face by face until it worked
             float[] quadTextureCoords = {
@@ -178,18 +177,17 @@ namespace modernblocks.src
             
             m.Rgba = new byte[numVerts*4]; //colored vertex shading
 
-            /*this would randomly color all the vertices
-             *
-             Random r = new Random();
+            
              for (int vc=0; vc < numVerts*4; vc += 4)
             {
                 
-                m.Rgba[vc] = (byte)r.Next(0,255);
-                m.Rgba[vc + 1] = (byte)r.Next(0, 255);
-                m.Rgba[vc + 2] = (byte)r.Next(0, 255);
-                m.Rgba[vc + 3] = (byte)255;
-            }*/
-            m.Rgba.Fill((byte)255);        //fill all white
+                m.Rgba[vc] = usedata.rgba[0];
+                m.Rgba[vc + 1] = usedata.rgba[1];
+                m.Rgba[vc + 2] = usedata.rgba[2];
+                m.Rgba[vc + 3] = usedata.rgba[3];
+            }
+            
+
             m.Flags = new int[numVerts*4]; //not clear on what flags do
             quadModelRef = api.Render.UploadMesh(m);
         }
@@ -254,5 +252,16 @@ namespace modernblocks.src
 
             quadModelRef?.Dispose();
         }
+    }
+
+    public class FaceData
+    {
+        public enum enFacing { NORTH,EAST,SOUTH,WEST,UP,DOWN};
+        public enFacing facing;
+        public float cellsize = 0.25f; //how many
+        public int ucell = 0;
+        public int vcell = 0;
+        public byte[] rgba = { 255, 255, 255, 255 };
+        
     }
 }
