@@ -21,16 +21,16 @@ namespace modernblocks.src
     /// - random frame animation mode
     /// - frame range animation mode?
     /// </summary>
-    class TestRenderer:IRenderer
+    class TestRenderer : IRenderer
     {
-        
+
         BlockPos pos;
         ICoreClientAPI api;
         MeshRef quadModelRef;
-        
+
         Matrixf ModelMat = new Matrixf();
-        
-        
+
+
         public double RenderOrder
         {
             get { return 0.5; }
@@ -53,12 +53,17 @@ namespace modernblocks.src
             GenModel();
         }
         #region meshbuildingdata
-        
-        
-        
+
+        //these define the points on the various cube faces
+        static readonly List<float> wQuadVertices = new List<float>(){ 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1 };
+        static readonly List<float> nQuadVertices = new List<float>() { 0,0,0, 0,1,0, 1,0,0, 1,1,0, };
+        static readonly List<float> eQuadVertices = new List<float>() { 1,0,0, 1,0,1, 1,1,0, 1,1,1};
+        static readonly List<float> sQuadVertices = new List<float>() { 0,0,1, 0,1,1, 1,0,1, 1,1,1, };
+        static readonly List<float> uQuadVertices = new List<float>() { 0,1,0, 0,1,1, 1,1,0, 1,1,1,};
+        static readonly List<float> dQuadVertices = new List<float>() { 0,0,0, 0,0,1, 1,0,0, 1,0,1 };
         //idk how many brain cells i killed figuring this out, but here are the vertices to make a cube
         //the vertices must be specified separately per side so the UVs can be freely altered
-        static readonly float[] cubeVertices =
+        /*static readonly float[] cubeVertices =
         {
             //WEST QUAD
             0,0,0, //WDN 0
@@ -91,20 +96,28 @@ namespace modernblocks.src
             1,0,0, //EUN 18
             1,0,1, //EUS 19
  
-        };
+        };*/
   
         #endregion
         public void GenModel()
         {
             quadModelRef?.Dispose();
             if (facedata == null||facedata.Count==0) { return; }
+           
+
             Random r = new Random();
             FaceData usedata = facedata[0];
             float u1 = usedata.ucell*usedata.cellsize;
             float u2 = u1+usedata.cellsize;
             float v1 = usedata.vcell*usedata.cellsize;
             float v2 = v1+usedata.cellsize;
-
+            List<float> cubeVertices = new List<float>();
+            cubeVertices.AddRange(wQuadVertices);
+            cubeVertices.AddRange(nQuadVertices);
+            cubeVertices.AddRange(eQuadVertices);
+            cubeVertices.AddRange(sQuadVertices);
+            cubeVertices.AddRange(uQuadVertices);
+            cubeVertices.AddRange(dQuadVertices);
             //I somehow figured this out by repeatedly facerolling on the keyboard face by face until it worked
             float[] quadTextureCoords = {
                 //WEST
@@ -150,14 +163,14 @@ namespace modernblocks.src
                 3+16,1+16,16,2+16,16,3+16, //U
                 3+20,1+20,20,2+20,20,3+20 //U
             };
-            int numVerts = cubeVertices.Length / 3;
+            int numVerts = cubeVertices.Count / 3;
             
 
             MeshData m = new MeshData();
 
             //XYZ these are the vertices on our cube
-            float[] xyz = new float[cubeVertices.Length];
-            for (int i = 0; i < cubeVertices.Length; i++)
+            float[] xyz = new float[cubeVertices.Count];
+            for (int i = 0; i < cubeVertices.Count; i++)
             {
                 xyz[i] = cubeVertices[i];
             }
@@ -170,7 +183,7 @@ namespace modernblocks.src
                 uv[i] = quadTextureCoords[i];
             }
             m.SetUv(uv);
-            m.SetVerticesCount(cubeVertices.Length);
+            m.SetVerticesCount(cubeVertices.Count);
             m.SetIndices(quadVertexIndices);
             m.SetIndicesCount(quadVertexIndices.Length);
             
