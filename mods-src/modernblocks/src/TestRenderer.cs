@@ -73,17 +73,20 @@ namespace modernblocks.src
            
 
             Random r = new Random();
-            FaceData usedata = facedata[0];
-            float u1 = usedata.ucell*usedata.cellsize;
-            float u2 = u1+usedata.cellsize;
-            float v1 = usedata.vcell*usedata.cellsize;
-            float v2 = v1+usedata.cellsize;
+            
             List<float> cubeVertices = new List<float>();
             List<int> cubeindices = new List<int>();
             List<float> cubeUVs = new List<float>();
             int vc = 0;
-            foreach (BlockFacing tbf in BlockFacing.ALLFACES)
+            
+            foreach (FaceData fd in facedata)
             {
+                BlockFacing tbf = fd.facing;
+                
+                float u1 = fd.ucell * fd.cellsize;
+                float u2 = u1 + fd.cellsize;
+                float v1 = fd.vcell * fd.cellsize;
+                float v2 = v1 + fd.cellsize;
                 cubeVertices.AddRange(cubeVertexLookup[tbf]);
                 cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
                 vc++;
@@ -130,55 +133,7 @@ namespace modernblocks.src
                 u2 ,v1 });
                 }
             }
-            
-            //I somehow figured this out by repeatedly facerolling on the keyboard face by face until it worked
-            float[] xquadTextureCoords = {
-                //WEST
-                u1 ,v2 ,
-                u2 ,v2 ,
-                u1 ,v1 ,
-                u2 ,v1,
-                //NORTH
-                u2 ,v2 , 
-                u2 ,v1 , 
-                u1 ,v2 , 
-                u1 ,v1,
-                //EAST
-                u2 ,v2 , 
-                u1 ,v2 , 
-                u2 ,v1 , 
-                u1 ,v1,
-                //SOUTH
-                u1 ,v2 ,
-                u1, v1 ,
-                u2 ,v2,
-                u2 ,v1 ,
-                //UP
-                u1, v1 ,
-                u1 ,v2 ,
-                u2 ,v1 ,
-                u2 ,v2,
-                //DOWN
-                u1, v2 ,
-                u1 ,v1 ,
-                u2 ,v2 ,
-                u2 ,v1,
-            };
-            
-            //this is the pattern to build the mesh, two triangles
-            //the vertex order for each triangle doesn't matter
-            /*int[] quadVertexIndices = {
-                //0, 4, 6,    0,6,2, 
-                3,1,0,2,0,3, //West
-                3+4,1+4,4,2+4,4,3+4, //N
-                3+8,1+8,8,2+8,8,3+8, //E
-                3+12,1+12,12,2+12,12,3+12, //S
-                3+16,1+16,16,2+16,16,3+16, //U
-                3+20,1+20,20,2+20,20,3+20 //U
-            };*/
             int numVerts = cubeVertices.Count / 3;
-            
-
             MeshData m = new MeshData();
 
             //XYZ these are the vertices on our cube
@@ -203,7 +158,7 @@ namespace modernblocks.src
             
             m.Rgba = new byte[numVerts*4]; //colored vertex shading
 
-            
+            FaceData usedata = facedata[0];
              for (int cc=0; cc < numVerts*4; cc += 4)
             {
                 
