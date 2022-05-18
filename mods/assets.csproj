@@ -424,23 +424,6 @@
     <None Include="qptech\modinfo.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concrete-dirty-open.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-0.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-e.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-es.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-esw.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-ew.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-n.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-ne.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-nes.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-nesw.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-ns.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-s.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-sw.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-swn.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-w.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-wn.png" />
-    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\concretetile-wne.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\testgrid.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\siding-boltandchannel-blue.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\siding-boltandchannel-white.png" />

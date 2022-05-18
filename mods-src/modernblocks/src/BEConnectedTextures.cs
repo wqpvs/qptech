@@ -27,19 +27,9 @@ namespace modernblocks.src
     /// </summary>
     class BEConnectedTextures : BlockEntity
     {
-        
-        
-        
-        
-        
-        
-
+    
         public Size2i AtlasSize => (Api as ICoreClientAPI).BlockTextureAtlas.Size;
         ICoreClientAPI capi;
-        //string basetexturename = "block/stone/concretetile/concretetile-";
-
-        //string fulltexturename => basetexturename + suffix[directionmap];
-
         
         List<BlockFacing> oldneighbors;
         TestRenderer testRenderer;
@@ -72,8 +62,8 @@ namespace modernblocks.src
                 Block nblock = Api.World.BlockAccessor.GetBlock(Pos.Copy().Offset(bf));
                 if (nblock == null||nblock.Id==0) { continue; }
                 neighbors.Add(bf);
-                BEConnectedTextures bect = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BEConnectedTextures;
-                if (bect!=null) { matchneighbors.Add(bf); } //TODO Add a check for texture or something
+                
+                if (nblock.Id==this.Block.Id) { matchneighbors.Add(bf); } //TODO Add a check for texture or something
                 
             }
             if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
