@@ -82,28 +82,57 @@ namespace modernblocks.src
             List<int> cubeindices = new List<int>();
             List<float> cubeUVs = new List<float>();
             int vc = 0;
+            foreach (BlockFacing tbf in BlockFacing.ALLFACES)
+            {
+                cubeVertices.AddRange(cubeVertexLookup[tbf]);
+                cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
+                vc++;
+                if (tbf == BlockFacing.WEST)
+                {
+                    cubeUVs.AddRange(new List<float>() {u1 ,v2 ,
+                u2 ,v2 ,
+                u1 ,v1 ,
+                u2 ,v1 });
+                }
+                else if (tbf == BlockFacing.NORTH)
+                {
+                    cubeUVs.AddRange(new List<float>() { u2 ,v2 ,
+                u2 ,v1 ,
+                u1 ,v2 ,
+                u1 ,v1});
+                }
+                else if (tbf == BlockFacing.EAST)
+                {
+                    cubeUVs.AddRange(new List<float>() { u2 ,v2 ,
+                u1 ,v2 ,
+                u2 ,v1 ,
+                u1 ,v1});
+                }
+                else if (tbf == BlockFacing.SOUTH)
+                {
+                    cubeUVs.AddRange(new List<float>() {u1 ,v2 ,
+                u1, v1 ,
+                u2 ,v2,
+                u2 ,v1 });
+                }
+                else if (tbf == BlockFacing.UP)
+                {
+                    cubeUVs.AddRange(new List<float>() { u1, v1 ,
+                u1 ,v2 ,
+                u2 ,v1 ,
+                u2 ,v2 });
+                }
+                else if (tbf == BlockFacing.DOWN)
+                {
+                    cubeUVs.AddRange(new List<float>() {u1, v2 ,
+                u1 ,v1 ,
+                u2 ,v2 ,
+                u2 ,v1 });
+                }
+            }
             
-            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.WEST]);
-            cubeindices.AddRange(new List<int>() { 3+vc*4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
-            vc++;
-
-            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.NORTH]);
-            cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
-            vc++;
-            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.EAST]);
-            cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
-            vc++;
-            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.SOUTH]);
-            cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
-            vc++;
-            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.UP]);
-            cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
-            vc++;
-            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.DOWN]);
-            cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
-            vc++;
             //I somehow figured this out by repeatedly facerolling on the keyboard face by face until it worked
-            float[] quadTextureCoords = {
+            float[] xquadTextureCoords = {
                 //WEST
                 u1 ,v2 ,
                 u2 ,v2 ,
@@ -161,10 +190,10 @@ namespace modernblocks.src
             m.SetXyz(xyz);
 
             //Set the UV coordinates for the triangles
-            float[] uv = new float[quadTextureCoords.Length];
+            float[] uv = new float[cubeUVs.Count];
             for (int i = 0; i < uv.Length; i++)
             {
-                uv[i] = quadTextureCoords[i];
+                uv[i] = cubeUVs[i];
             }
             m.SetUv(uv);
             m.SetVerticesCount(cubeVertices.Count);
