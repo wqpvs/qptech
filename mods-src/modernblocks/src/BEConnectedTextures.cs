@@ -30,10 +30,7 @@ namespace modernblocks.src
         
         
         
-        const int n_ = 1;
-        const int e_ = 2;
-        const int s_ = 4;
-        const int w_ = 8;
+        
         
         
 
@@ -56,10 +53,13 @@ namespace modernblocks.src
             {
 
                 capi = api as ICoreClientAPI;
-                UpdateRenderer();
+                RegisterDelayedCallback(DelayedStart,r.Next(1,20)); //hopefully lets world load and prevents all blocks updating at once
             }
         }
-
+        void DelayedStart(float dt)
+        {
+            UpdateRenderer();
+        }
         public virtual void UpdateRenderer()
         {
             if (capi == null) { return; }
@@ -77,13 +77,18 @@ namespace modernblocks.src
             capi.Event.RegisterRenderer(testRenderer = new TestRenderer(Pos, capi), EnumRenderStage.Opaque, "test");
             testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/testgrid.png");
             testRenderer.facedata = new List<FaceData>();
-            FaceData fd = new FaceData();
-            fd.rgba = new byte[] { (byte)r.Next(0, 256), (byte)r.Next(0, 256), (byte)r.Next(0, 256), 255 };
-            fd.ucell = r.Next(0, 4);
-            fd.vcell = r.Next(0, 4);
-            testRenderer.facedata.Add(fd);
-            testRenderer.GenModel();
-            oldneighbors = new List<BlockFacing>(neighbors);
+            BlockFacing testbf = BlockFacing.UP;
+            //foreach (BlockFacing bf in BlockFacing.ALLFACES)
+            //{
+                FaceData fd = new FaceData(testbf);
+                fd.SetConnectedTextures(neighbors.ToArray());
+                // Random colors: fd.rgba = new byte[] { (byte)r.Next(0, 256), (byte)r.Next(0, 256), (byte)r.Next(0, 256), 255 };
+                // Random cells: fd.ucell = r.Next(0, 4);
+                //               fd.vcell = r.Next(0, 4);
+                testRenderer.facedata.Add(fd);
+                testRenderer.GenModel();
+                oldneighbors = new List<BlockFacing>(neighbors);
+            //}
         }
 
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
