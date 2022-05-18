@@ -37,8 +37,8 @@ namespace modernblocks.src
         {
             {0,1+csz },{n_,1 },{e_,2+csz},{n_+e_,2},
             {s_,1+csz*2},{s_+n_,3+csz*2},{s_+e_,2+csz*2},{s_+n_+e_,1+3*csz},
-            {w_,csz*1},{w_+n_,0 },{w_+e_,3+csz*1},{w_+n_+e_,3+3*csz},
-            {w_+s_,csz*2},{w_+s_+n_,csz*3 },{e_+s_+w_,2+2*csz},{n_+e_+s_+w_,1+csz }
+            {w_,csz*1},{w_+n_,0 },{w_+e_,3+csz*1},{n_+e_+w_,3+3*csz},
+            {w_+s_,csz*2},{w_+s_+n_,csz*3 },{e_+s_+w_,2+3*csz},{n_+e_+s_+w_,3 }
 
         };
         /// <summary>
