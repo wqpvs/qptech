@@ -61,15 +61,15 @@ namespace modernblocks.src
             {
                 Block nblock = Api.World.BlockAccessor.GetBlock(Pos.Copy().Offset(bf));
                 if (nblock == null||nblock.Id==0) { continue; }
+                if (nblock.Id == this.Block.Id) { matchneighbors.Add(bf); } //TODO Add a check for texture or something
+                if (!nblock.SideOpaque[bf.Opposite.Index]&&!nblock.AllSidesOpaque) { continue; }
                 neighbors.Add(bf);
-                
-                if (nblock.Id==this.Block.Id) { matchneighbors.Add(bf); } //TODO Add a check for texture or something
                 
             }
             if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
             if (oldneighbors!=null&& neighbors.Equals(oldneighbors)) { return; }
             capi.Event.RegisterRenderer(testRenderer = new TestRenderer(Pos, capi), EnumRenderStage.Opaque, "test");
-            testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/testgrid.png");
+            testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/connectedsmoothstone-gray.png");
             testRenderer.facedata = new List<FaceData>();
             
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
