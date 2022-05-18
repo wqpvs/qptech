@@ -55,12 +55,14 @@ namespace modernblocks.src
         #region meshbuildingdata
 
         //these define the points on the various cube faces
-        static readonly List<float> wQuadVertices = new List<float>(){ 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1 };
-        static readonly List<float> nQuadVertices = new List<float>() { 0,0,0, 0,1,0, 1,0,0, 1,1,0, };
-        static readonly List<float> eQuadVertices = new List<float>() { 1,0,0, 1,0,1, 1,1,0, 1,1,1};
-        static readonly List<float> sQuadVertices = new List<float>() { 0,0,1, 0,1,1, 1,0,1, 1,1,1, };
-        static readonly List<float> uQuadVertices = new List<float>() { 0,1,0, 0,1,1, 1,1,0, 1,1,1,};
-        static readonly List<float> dQuadVertices = new List<float>() { 0,0,0, 0,0,1, 1,0,0, 1,0,1 };
+        static readonly Dictionary<BlockFacing, List<float>> cubeVertexLookup = new Dictionary<BlockFacing, List<float>>() {
+            { BlockFacing.WEST,new List<float>() { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1 } },
+            { BlockFacing.NORTH,new List<float>() { 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, } },
+            { BlockFacing.EAST,new List<float>() { 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1 } },
+            { BlockFacing.SOUTH,new List<float>() { 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, } },
+            { BlockFacing.UP,new List<float>() { 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, } },
+            { BlockFacing.DOWN,new List<float>() { 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1 } }
+        };
        
   
         #endregion
@@ -78,24 +80,26 @@ namespace modernblocks.src
             float v2 = v1+usedata.cellsize;
             List<float> cubeVertices = new List<float>();
             List<int> cubeindices = new List<int>();
+            List<float> cubeUVs = new List<float>();
             int vc = 0;
-            cubeVertices.AddRange(wQuadVertices);
+            
+            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.WEST]);
             cubeindices.AddRange(new List<int>() { 3+vc*4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
             vc++;
 
-            cubeVertices.AddRange(nQuadVertices);
+            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.NORTH]);
             cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
             vc++;
-            cubeVertices.AddRange(eQuadVertices);
+            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.EAST]);
             cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
             vc++;
-            cubeVertices.AddRange(sQuadVertices);
+            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.SOUTH]);
             cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
             vc++;
-            cubeVertices.AddRange(uQuadVertices);
+            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.UP]);
             cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
             vc++;
-            cubeVertices.AddRange(dQuadVertices);
+            cubeVertices.AddRange(cubeVertexLookup[BlockFacing.DOWN]);
             cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
             vc++;
             //I somehow figured this out by repeatedly facerolling on the keyboard face by face until it worked
