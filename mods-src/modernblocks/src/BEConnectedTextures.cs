@@ -77,9 +77,8 @@ namespace modernblocks.src
                 if (neighbors.Contains(bf)) { continue; }
                 FaceData fd = new FaceData(bf);
                 fd.SetConnectedTextures(matchneighbors.ToArray());
-                // Random colors: fd.rgba = new byte[] { (byte)r.Next(0, 256), (byte)r.Next(0, 256), (byte)r.Next(0, 256), 255 };
-                // Random cells: fd.ucell = r.Next(0, 4);
-                //               fd.vcell = r.Next(0, 4);
+                //fd.rgba = new byte[] { (byte)r.Next(0, 256), (byte)r.Next(0, 256), (byte)r.Next(0, 256), 255 };
+                //fd.rgba = new byte[] { 128, 128, 128, 255 };
                 testRenderer.facedata.Add(fd);
                 testRenderer.GenModel();
                 oldneighbors = new List<BlockFacing>(neighbors);
