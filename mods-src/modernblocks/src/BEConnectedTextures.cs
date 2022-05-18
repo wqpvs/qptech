@@ -65,12 +65,16 @@ namespace modernblocks.src
             if (capi == null) { return; }
             testRenderer?.Dispose();
             
-            List<BlockFacing> neighbors = new List<BlockFacing>();
+            List<BlockFacing> neighbors = new List<BlockFacing>(); //determines which faces to render
+            List<BlockFacing> matchneighbors = new List<BlockFacing>(); //determines which faces to connect
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
-                BlockEntity nblock = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf));
-                if (nblock == null) { continue; }
+                Block nblock = Api.World.BlockAccessor.GetBlock(Pos.Copy().Offset(bf));
+                if (nblock == null||nblock.Id==0) { continue; }
                 neighbors.Add(bf);
+                BEConnectedTextures bect = Api.World.BlockAccessor.GetBlockEntity(Pos.Copy().Offset(bf)) as BEConnectedTextures;
+                if (bect!=null) { matchneighbors.Add(bf); } //TODO Add a check for texture or something
+                
             }
             if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
             if (oldneighbors!=null&& neighbors.Equals(oldneighbors)) { return; }
@@ -81,7 +85,7 @@ namespace modernblocks.src
             //foreach (BlockFacing bf in BlockFacing.ALLFACES)
             //{
                 FaceData fd = new FaceData(testbf);
-                fd.SetConnectedTextures(neighbors.ToArray());
+                fd.SetConnectedTextures(matchneighbors.ToArray());
                 // Random colors: fd.rgba = new byte[] { (byte)r.Next(0, 256), (byte)r.Next(0, 256), (byte)r.Next(0, 256), 255 };
                 // Random cells: fd.ucell = r.Next(0, 4);
                 //               fd.vcell = r.Next(0, 4);
