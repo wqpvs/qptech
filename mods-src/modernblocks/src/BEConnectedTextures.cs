@@ -81,10 +81,11 @@ namespace modernblocks.src
             capi.Event.RegisterRenderer(testRenderer = new TestRenderer(Pos, capi), EnumRenderStage.Opaque, "test");
             testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/testgrid.png");
             testRenderer.facedata = new List<FaceData>();
-            BlockFacing testbf = BlockFacing.UP;
-            //foreach (BlockFacing bf in BlockFacing.ALLFACES)
-            //{
-                FaceData fd = new FaceData(testbf);
+            
+            foreach (BlockFacing bf in BlockFacing.ALLFACES)
+            {
+                if (neighbors.Contains(bf)) { continue; }
+                FaceData fd = new FaceData(bf);
                 fd.SetConnectedTextures(matchneighbors.ToArray());
                 // Random colors: fd.rgba = new byte[] { (byte)r.Next(0, 256), (byte)r.Next(0, 256), (byte)r.Next(0, 256), 255 };
                 // Random cells: fd.ucell = r.Next(0, 4);
@@ -92,7 +93,7 @@ namespace modernblocks.src
                 testRenderer.facedata.Add(fd);
                 testRenderer.GenModel();
                 oldneighbors = new List<BlockFacing>(neighbors);
-            //}
+            }
         }
 
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)

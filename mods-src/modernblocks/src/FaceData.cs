@@ -69,6 +69,41 @@ namespace modernblocks.src
                 if (!connectedneighbors.Contains(BlockFacing.SOUTH)) { nhash += (int)s_; }
                 if (!connectedneighbors.Contains(BlockFacing.WEST)) { nhash += (int)w_; }
             }
+            else if (facing == BlockFacing.DOWN)
+            {
+                if (!connectedneighbors.Contains(BlockFacing.SOUTH)) { nhash += (int)n_; }
+                if (!connectedneighbors.Contains(BlockFacing.EAST)) { nhash += (int)e_; }
+                if (!connectedneighbors.Contains(BlockFacing.NORTH)) { nhash += (int)s_; }
+                if (!connectedneighbors.Contains(BlockFacing.WEST)) { nhash += (int)w_; }
+            }
+            else if (facing == BlockFacing.NORTH)
+            {
+                if (!connectedneighbors.Contains(BlockFacing.UP)) { nhash += (int)n_; }
+                if (!connectedneighbors.Contains(BlockFacing.WEST)) { nhash += (int)e_; }
+                if (!connectedneighbors.Contains(BlockFacing.DOWN)) { nhash += (int)s_; }
+                if (!connectedneighbors.Contains(BlockFacing.EAST)) { nhash += (int)w_; }
+            }
+            else if (facing == BlockFacing.SOUTH)
+            {
+                if (!connectedneighbors.Contains(BlockFacing.UP)) { nhash += (int)n_; }
+                if (!connectedneighbors.Contains(BlockFacing.EAST)) { nhash += (int)e_; }
+                if (!connectedneighbors.Contains(BlockFacing.DOWN)) { nhash += (int)s_; }
+                if (!connectedneighbors.Contains(BlockFacing.WEST)) { nhash += (int)w_; }
+            }
+            else if (facing == BlockFacing.EAST)
+            {
+                if (!connectedneighbors.Contains(BlockFacing.UP)) { nhash += (int)n_; }
+                if (!connectedneighbors.Contains(BlockFacing.NORTH)) { nhash += (int)e_; }
+                if (!connectedneighbors.Contains(BlockFacing.DOWN)) { nhash += (int)s_; }
+                if (!connectedneighbors.Contains(BlockFacing.SOUTH)) { nhash += (int)w_; }
+            }
+            else if (facing == BlockFacing.WEST)
+            {
+                if (!connectedneighbors.Contains(BlockFacing.UP)) { nhash += (int)n_; }
+                if (!connectedneighbors.Contains(BlockFacing.SOUTH)) { nhash += (int)e_; }
+                if (!connectedneighbors.Contains(BlockFacing.DOWN)) { nhash += (int)s_; }
+                if (!connectedneighbors.Contains(BlockFacing.NORTH)) { nhash += (int)w_; }
+            }
             ucell = cftocell4[nhash] % csz;
             vcell = cftocell4[nhash] / csz;
 
