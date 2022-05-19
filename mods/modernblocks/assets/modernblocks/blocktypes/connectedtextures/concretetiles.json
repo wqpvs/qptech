@@ -12,7 +12,7 @@
 	"shape": { "base": "block/tiledconcrete" },
 	"texturesByType": {
 		"*": {
-			"all": { "base": "block/connectedtextures/testgrid" }
+			"all": { "base": "block/connectedtextures/connectedlinedstone-gray" }
 
 
 		}
