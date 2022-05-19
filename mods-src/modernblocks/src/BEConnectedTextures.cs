@@ -70,6 +70,7 @@ namespace modernblocks.src
             if (oldneighbors!=null&& neighbors.Equals(oldneighbors)) { return; }
             testRenderer = new TestRenderer(Pos, capi);
             testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/connectedlinedstone-gray.png");
+            
             testRenderer.facedata = new List<FaceData>();
             
             foreach (BlockFacing bf in BlockFacing.ALLFACES)

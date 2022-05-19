@@ -27,7 +27,7 @@ namespace modernblocks.src
         BlockPos pos;
         ICoreClientAPI capi;
         MeshRef cubeModelRef;
-
+        static MeshRef baseCubeModelRef;
         Matrixf ModelMat = new Matrixf();
 
 
@@ -49,6 +49,11 @@ namespace modernblocks.src
         {
             this.pos = pos;
             this.capi = api;
+            if (baseCubeModelRef == null || baseCubeModelRef.Disposed || !baseCubeModelRef.Initialized)
+            {
+                MeshData mesh = api.TesselatorManager.GetDefaultBlockMesh(api.World.BlockAccessor.GetBlock(pos));
+                baseCubeModelRef = api.Render.UploadMesh(mesh);
+            }
             capi.Event.EnqueueMainThreadTask(() =>
             {
                 capi.Event.RegisterRenderer(this, EnumRenderStage.Opaque, "bemodern");
@@ -68,14 +73,16 @@ namespace modernblocks.src
             { BlockFacing.UP,new List<float>() { 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, } },
             { BlockFacing.DOWN,new List<float>() { 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1 } }
         };
-       
-  
+
+
         #endregion
+
+        int texid = 0;
         public void GenModel()
         {
             cubeModelRef?.Dispose();
             if (facedata == null||facedata.Count==0) { return; }
-           
+            texid = capi.Render.GetOrLoadTexture(TextureName);
 
             Random r = new Random();
             
@@ -217,12 +224,7 @@ namespace modernblocks.src
             }
 
             
-
-            int texid = capi.Render.GetOrLoadTexture(TextureName);
             rpi.BindTexture2d(texid);
-
-
-
 
             prog.ModelMatrix = ModelMat
                 .Identity()
@@ -234,14 +236,15 @@ namespace modernblocks.src
             if (shadowPass)
             {
                 prog.ViewMatrix = Mat4f.Mul(new float[16], capi.Render.CurrentModelviewMatrix, ModelMatf);
-                
+                rpi.RenderMesh(baseCubeModelRef);
             }
             else
             {
                 
                 prog.ViewMatrix = rpi.CameraMatrixOriginf;
+                rpi.RenderMesh(cubeModelRef);
             }
-            rpi.RenderMesh(cubeModelRef);
+            
             prog.Stop();
             prevProg?.Use();
             rpi.GlEnableCullFace();
