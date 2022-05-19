@@ -187,7 +187,7 @@ namespace modernblocks.src
         public float[] ModelMatf = Mat4f.Create();
         public void OnRenderFrame(float deltaTime, EnumRenderStage stage)
         {
-            if (cubeModelRef == null) { return; }
+            if (cubeModelRef == null|| !cubeModelRef.Initialized||cubeModelRef.Disposed) { return; }
             bool shadowPass = stage != EnumRenderStage.Opaque;
             
             IRenderAPI rpi = capi.Render;
