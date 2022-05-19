@@ -177,41 +177,50 @@ namespace modernblocks.src
             m.Flags = new int[numVerts*4]; //not clear on what flags do
             cubeModelRef = capi.Render.UploadMesh(m);
         }
-
+        public float[] ModelMatf = Mat4f.Create();
         public void OnRenderFrame(float deltaTime, EnumRenderStage stage)
         {
             if (cubeModelRef == null) { return; }
-
+            bool shadowPass = stage != EnumRenderStage.Opaque;
+            
             IRenderAPI rpi = capi.Render;
+            IShaderProgram prevProg = rpi.CurrentActiveShader;
+            prevProg?.Stop();
             IClientWorldAccessor worldAccess = capi.World;
             EntityPos plrPos = worldAccess.Player.Entity.Pos;
             Vec3d camPos = worldAccess.Player.Entity.CameraPos;
 
             rpi.GlDisableCullFace();
+            
             IStandardShaderProgram prog = rpi.StandardShader;
             prog.Use();
-            prog.RgbaAmbientIn = rpi.AmbientColor;
-            prog.RgbaFogIn = rpi.FogColor;
-            prog.FogMinIn = rpi.FogMin;
-            prog.FogDensityIn = rpi.FogDensity;
-            prog.RgbaTint = ColorUtil.WhiteArgbVec;
-            prog.DontWarpVertices = 0;
-            prog.ExtraGodray = 0;
-            prog.AddRenderFlags = 0;
+
+            if (!shadowPass)
+            {
+                prog.RgbaAmbientIn = rpi.AmbientColor;
+                prog.RgbaFogIn = rpi.FogColor;
+                prog.FogMinIn = rpi.FogMin;
+                prog.FogDensityIn = rpi.FogDensity;
+                prog.RgbaTint = ColorUtil.WhiteArgbVec;
+                prog.DontWarpVertices = 0;
+                prog.ExtraGodray = 0;
+                prog.AddRenderFlags = 0;
+                Vec4f lightrgbs = capi.World.BlockAccessor.GetLightRGBs(pos.X, pos.Y, pos.Z);
+
+                int extraGlow = 0;
+
+                prog.RgbaLightIn = lightrgbs;
 
 
-            Vec4f lightrgbs = capi.World.BlockAccessor.GetLightRGBs(pos.X, pos.Y, pos.Z);
+                prog.ExtraGlow = extraGlow;
+                prog.NormalShaded = 0;
+            }
 
-            int extraGlow = 0;
-
-            prog.RgbaLightIn = lightrgbs;
-
-
-            prog.ExtraGlow = extraGlow;
-            prog.NormalShaded = 0;
+            
 
             int texid = capi.Render.GetOrLoadTexture(TextureName);
             rpi.BindTexture2d(texid);
+
 
 
 
@@ -222,13 +231,19 @@ namespace modernblocks.src
                     .Values
                 ;
             prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;
-            prog.ViewMatrix = rpi.CameraMatrixOriginf;
-
+            if (shadowPass)
+            {
+                prog.ViewMatrix = Mat4f.Mul(new float[16], capi.Render.CurrentModelviewMatrix, ModelMatf);
+                
+            }
+            else
+            {
+                
+                prog.ViewMatrix = rpi.CameraMatrixOriginf;
+            }
             rpi.RenderMesh(cubeModelRef);
-
-
-
             prog.Stop();
+            prevProg?.Use();
             rpi.GlEnableCullFace();
         }
 
