@@ -25,8 +25,8 @@ namespace modernblocks.src
     {
 
         BlockPos pos;
-        ICoreClientAPI api;
-        MeshRef quadModelRef;
+        ICoreClientAPI capi;
+        MeshRef cubeModelRef;
 
         Matrixf ModelMat = new Matrixf();
 
@@ -48,9 +48,14 @@ namespace modernblocks.src
         public TestRenderer(BlockPos pos, ICoreClientAPI api)
         {
             this.pos = pos;
-            this.api = api;
+            this.capi = api;
+            capi.Event.EnqueueMainThreadTask(() =>
+            {
+                capi.Event.RegisterRenderer(this, EnumRenderStage.Opaque, "bemodern");
+                capi.Event.RegisterRenderer(this, EnumRenderStage.ShadowFar, "bemodern");
+                capi.Event.RegisterRenderer(this, EnumRenderStage.ShadowNear, "bemodern");
+            }, "registerrenderers");
 
-            GenModel();
         }
         #region meshbuildingdata
 
@@ -68,7 +73,7 @@ namespace modernblocks.src
         #endregion
         public void GenModel()
         {
-            quadModelRef?.Dispose();
+            cubeModelRef?.Dispose();
             if (facedata == null||facedata.Count==0) { return; }
            
 
@@ -170,15 +175,15 @@ namespace modernblocks.src
             
 
             m.Flags = new int[numVerts*4]; //not clear on what flags do
-            quadModelRef = api.Render.UploadMesh(m);
+            cubeModelRef = capi.Render.UploadMesh(m);
         }
 
         public void OnRenderFrame(float deltaTime, EnumRenderStage stage)
         {
-            if (quadModelRef == null) { return; }
+            if (cubeModelRef == null) { return; }
 
-            IRenderAPI rpi = api.Render;
-            IClientWorldAccessor worldAccess = api.World;
+            IRenderAPI rpi = capi.Render;
+            IClientWorldAccessor worldAccess = capi.World;
             EntityPos plrPos = worldAccess.Player.Entity.Pos;
             Vec3d camPos = worldAccess.Player.Entity.CameraPos;
 
@@ -195,7 +200,7 @@ namespace modernblocks.src
             prog.AddRenderFlags = 0;
 
 
-            Vec4f lightrgbs = api.World.BlockAccessor.GetLightRGBs(pos.X, pos.Y, pos.Z);
+            Vec4f lightrgbs = capi.World.BlockAccessor.GetLightRGBs(pos.X, pos.Y, pos.Z);
 
             int extraGlow = 0;
 
@@ -205,7 +210,7 @@ namespace modernblocks.src
             prog.ExtraGlow = extraGlow;
             prog.NormalShaded = 0;
 
-            int texid = api.Render.GetOrLoadTexture(TextureName);
+            int texid = capi.Render.GetOrLoadTexture(TextureName);
             rpi.BindTexture2d(texid);
 
 
@@ -219,7 +224,7 @@ namespace modernblocks.src
             prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;
             prog.ViewMatrix = rpi.CameraMatrixOriginf;
 
-            rpi.RenderMesh(quadModelRef);
+            rpi.RenderMesh(cubeModelRef);
 
 
 
@@ -229,9 +234,12 @@ namespace modernblocks.src
 
         public void Dispose()
         {
-            api.Event.UnregisterRenderer(this, EnumRenderStage.Opaque);
+            capi.Event.UnregisterRenderer(this, EnumRenderStage.Opaque);
+            capi.Event.UnregisterRenderer(this, EnumRenderStage.ShadowFar);
+            capi.Event.UnregisterRenderer(this, EnumRenderStage.ShadowNear);
+            
 
-            quadModelRef?.Dispose();
+            cubeModelRef?.Dispose();
         }
     }
 
