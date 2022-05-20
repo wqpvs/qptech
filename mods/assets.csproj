@@ -428,6 +428,7 @@
     <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\connectedlinedstone-gray.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\connectedsmoothstone-gray.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\connectedtextures-glasstest.png" />
+    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\cultictree.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\testgrid.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\weirdcomputer.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\siding-boltandchannel-blue.png" />

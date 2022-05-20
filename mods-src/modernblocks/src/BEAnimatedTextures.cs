@@ -58,7 +58,7 @@ namespace modernblocks.src
             {
                 if (neighbors.Contains(bf)) { continue; }
                 FaceData fd = new FaceData(bf);
-                if (bf == BlockFacing.DOWN || bf == BlockFacing.UP||bf==BlockFacing.SOUTH)
+                /*if (bf == BlockFacing.DOWN || bf == BlockFacing.UP||bf==BlockFacing.SOUTH)
                 {
                     fd.vcell = 1;fd.ucell = 1;
                 }
@@ -67,12 +67,12 @@ namespace modernblocks.src
                     fd.vcell = 1;fd.ucell = 0;
                 }
                 else
-                {
+                {*/
                     float d = Pos.DistanceTo(capi.World.Player.Entity.Pos.AsBlockPos);
                     if (d < 3) { fd.SetCells(r.Next(7, 9)); }
                     else if (d < 7) { fd.SetCells(r.Next(0, 4)); }
                     else { fd.vcell = 1;fd.ucell = 2; }
-                }
+                //}
                 testRenderer.facedata.Add(fd);
                 testRenderer.GenModel();
             }

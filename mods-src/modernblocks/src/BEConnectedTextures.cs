@@ -68,7 +68,7 @@ namespace modernblocks.src
             if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
             if (oldneighbors!=null&& neighbors.Equals(oldneighbors)) { return; }
             testRenderer = new TestRenderer(Pos, capi);
-            testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/connectedlinedstone-gray.png");
+            testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/cultictree.png");
             
             testRenderer.facedata = new List<FaceData>();
             
