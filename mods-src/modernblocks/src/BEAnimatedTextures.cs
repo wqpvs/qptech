@@ -15,76 +15,68 @@ using Vintagestory.API.Util;
 
 namespace modernblocks.src
 {
-    /// <summary>
-    /// Render a texture so the outer borders change automatically to have closed borders
-    /// Think we will do larger textures and then do appropriate UVs
-    /// So a 4x4 texture top 3x3 would be the outer ring, and 0x3 would be fully closed texture
-    /// (leaves 1x3,2x3,and 3x3 slots unused - maybe could do alternates or some other expansion?
-    /// Also would like:
-    /// user setable textures from a palette of graphics (like that MC chisel mod)
-    /// could maybe also sub in any texture if we can get the proper file reference (risks crashing though), would have to adjust uvs
-    /// Also could probably hav
-    /// </summary>
-    class BEConnectedTextures : BlockEntity
+    class BEAnimatedTextures:BlockEntity
     {
-    
-        
-        ICoreClientAPI capi;
-        List<BlockFacing> oldneighbors;
         TestRenderer testRenderer;
         static Random r;
         
+        ICoreClientAPI capi;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
             if (r == null) { r = new Random(); }
-            if (api is ICoreClientAPI )
+            if (api is ICoreClientAPI)
             {
 
                 capi = api as ICoreClientAPI;
-                RegisterDelayedCallback(DelayedStart,r.Next(1,20)); //hopefully lets world load and prevents all blocks updating at once
+                
+                RegisterGameTickListener(Update, 200);
+                
             }
         }
-        void DelayedStart(float dt)
+        void Update(float df)
         {
-            UpdateRenderer();
-        }
-        public virtual void UpdateRenderer()
-        {
-            if (capi == null) { return; }
-            testRenderer?.Dispose();
-            
             List<BlockFacing> neighbors = new List<BlockFacing>(); //determines which faces to render
             List<BlockFacing> matchneighbors = new List<BlockFacing>(); //determines which faces to connect
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
                 Block nblock = Api.World.BlockAccessor.GetBlock(Pos.Copy().Offset(bf));
-                if (nblock == null||nblock.Id==0) { continue; }
+                if (nblock == null || nblock.Id == 0) { continue; }
                 if (nblock.Id == this.Block.Id) { matchneighbors.Add(bf); } //TODO Add a check for texture or something
-                if (!nblock.SideOpaque[bf.Opposite.Index]&&!nblock.AllSidesOpaque) { continue; }
+                if (!nblock.SideOpaque[bf.Opposite.Index] && !nblock.AllSidesOpaque) { continue; }
                 neighbors.Add(bf);
-                
+
             }
             if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
-            if (oldneighbors!=null&& neighbors.Equals(oldneighbors)) { return; }
-            testRenderer = new TestRenderer(Pos, capi);
-            testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/connectedlinedstone-gray.png");
-            
+
+            if (testRenderer == null) { testRenderer = new TestRenderer(Pos, capi); }
+            testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/weirdcomputer.png");
+
             testRenderer.facedata = new List<FaceData>();
-            
+
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
                 if (neighbors.Contains(bf)) { continue; }
                 FaceData fd = new FaceData(bf);
-                fd.SetConnectedTextures(matchneighbors.ToArray());
-                //fd.rgba = new byte[] { (byte)r.Next(0, 256), (byte)r.Next(0, 256), (byte)r.Next(0, 256), 255 };
-                //fd.rgba = new byte[] { 128, 128, 128, 255 };
+                if (bf == BlockFacing.DOWN || bf == BlockFacing.UP||bf==BlockFacing.SOUTH)
+                {
+                    fd.vcell = 1;fd.ucell = 1;
+                }
+                else if (bf == BlockFacing.EAST || bf == BlockFacing.WEST)
+                {
+                    fd.vcell = 1;fd.ucell = 0;
+                }
+                else
+                {
+                    float d = Pos.DistanceTo(capi.World.Player.Entity.Pos.AsBlockPos);
+                    if (d < 3) { fd.SetCells(r.Next(7, 9)); }
+                    else if (d < 7) { fd.SetCells(r.Next(0, 4)); }
+                    else { fd.vcell = 1;fd.ucell = 2; }
+                }
                 testRenderer.facedata.Add(fd);
                 testRenderer.GenModel();
-                oldneighbors = new List<BlockFacing>(neighbors);
             }
         }
-
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
 
@@ -100,21 +92,11 @@ namespace modernblocks.src
             }*/
             return true;
         }
-
-
-        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
-        {
-            base.GetBlockInfo(forPlayer, dsc);
-
-        }
-
         public override void OnBlockRemoved()
         {
-            if (capi == null) { base.OnBlockRemoved();return; }
+            if (capi == null) { base.OnBlockRemoved(); return; }
             testRenderer?.Dispose();
             base.OnBlockRemoved();
         }
     }
-
-    
 }

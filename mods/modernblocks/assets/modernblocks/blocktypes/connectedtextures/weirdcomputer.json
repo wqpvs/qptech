@@ -1,0 +1,26 @@
+{
+	"code": "weirdcomputer",
+		"class": "BlockConnectedTexture",
+	"entityclass": "BEAnimatedTextures",
+
+	"creativeinventory": {
+
+		"modernblocks": [ "*" ]
+	},
+	"blockmaterial": "Stone",
+	"drawtype": "json",
+	"shape": { "base": "block/tiledconcrete" },
+	"texturesByType": {
+		"*": {
+			"all": { "base": "block/connectedtextures/weirdcomputer" }
+
+
+		}
+	},
+
+	"resistance": 1,
+	"sounds": {
+		"place": "game:block/stone",
+		"walk": "game:walk/stone"
+	}
+}

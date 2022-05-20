@@ -23,6 +23,11 @@ namespace modernblocks.src
         public float cellsize = 0.25f; //how many
         public int ucell = 3;
         public int vcell = 0;
+        public void SetCells(int abs)
+        {
+            ucell = abs % csz;
+            vcell = abs / csz;
+        }
         public byte[] rgba = { 255, 255, 255, 255 };
         public FaceData(BlockFacing facing)
         {

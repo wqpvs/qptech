@@ -22,6 +22,7 @@ namespace modernblocks.src
             base.Start(api);
             api.RegisterBlockEntityClass("BEConnectedTextures", typeof(BEConnectedTextures));
             api.RegisterBlockClass("BlockConnectedTexture", typeof(BlockConnectedTexture));
+            api.RegisterBlockEntityClass("BEAnimatedTextures", typeof(BEAnimatedTextures));
         }
     }
 }

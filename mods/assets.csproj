@@ -45,6 +45,7 @@
     <None Include="chisel\assets\chiseltools\shapes\item\tool\pantograph.json" />
     <None Include="chisel\assets\game\lang\en.json" />
     <None Include="chisel\modinfo.json" />
+    <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\weirdcomputer.json" />
     <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\concretetiles.json" />
     <None Include="modernblocks\assets\modernblocks\blocktypes\siding.json" />
     <None Include="modernblocks\assets\modernblocks\shapes\block\tiledconcrete.json" />
@@ -428,6 +429,7 @@
     <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\connectedsmoothstone-gray.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\connectedtextures-glasstest.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\testgrid.png" />
+    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\weirdcomputer.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\siding-boltandchannel-blue.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\siding-boltandchannel-white.png" />
     <Content Include="modernblocks\assets\modernblocks\textures\block\siding-rolldoor-black.png" />
