@@ -11,6 +11,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.API.Client;
+using Vintagestory.GameContent;
 
 namespace qptech.src.misc
 {
@@ -24,7 +25,9 @@ namespace qptech.src.misc
         bool alreadyPlayedSound = false;
         bool loopsound = true;
         int soundoffdelaycounter = 0;
+        float tankcapacity = 100;
         
+        float usepertick = 1f;
         public static SimpleParticleProperties myParticles = new SimpleParticleProperties(1, 1, ColorUtil.ColorFromRgba(0, 0, 0,75), new Vec3d(), new Vec3d(), new Vec3f(), new Vec3f());
         ILoadedSound ambientSound;
         string runsound = "sounds/drillloop";
@@ -37,6 +40,7 @@ namespace qptech.src.misc
 
             handling = EnumHandHandling.Handled;
         }
+        public const string fuelattribute = "fuelintank";
         public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
             // - start particles
@@ -46,8 +50,11 @@ namespace qptech.src.misc
             // - break back block
             // - reset
             if (blockSel == null) { return false; }
-            int fuel = slot.Itemstack.Attributes.GetInt("fuel", 0);
-            fuel = 100; //TEMP TO TEST
+            float fuel = slot.Itemstack.Attributes.GetFloat(fuelattribute, 0);
+            if (capi == null && fuel<tankcapacity) {
+                BlockEntityContainer bec = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityContainer;
+                if (bec != null) { TryFuel(bec,slot); }
+            }
             if (fuel <= 0) { return false; }
             //if (!BlockFacing.HORIZONTALS.Contains(blockSel.Face)) { return false; } //not pointed at a block ahead, cancel
             if (secondsUsed > 0.25f && !soundplayed)
@@ -143,7 +150,12 @@ namespace qptech.src.misc
                     
                 }
                 nextactionat += actionspeed;
-                fuel--;
+                fuel -= usepertick;
+                if (!(api is ICoreClientAPI))
+                {
+                    slot.Itemstack.Attributes.SetFloat(fuelattribute, fuel);
+                    slot.MarkDirty();
+                }
             }
             return true;
         }
@@ -210,6 +222,42 @@ namespace qptech.src.misc
             }
 
         }
+
+        void TryFuel(BlockEntityContainer bec, ItemSlot myslot)
+        {
+            if (bec == null || capi != null) { return; }
+            if (bec.Inventory==null|| bec.Inventory.Empty) { return; }
+            foreach (ItemSlot slot in bec.Inventory)
+            {
+                if (slot == null || slot.Empty || slot.StackSize<=0) { continue; }
+                if (slot.Itemstack.Item == null) { continue; }
+                if (!IsFuel(slot.Itemstack.Item)) { continue; }
+
+                float fuel = slot.Itemstack.Attributes.GetFloat(fuelattribute, 0);
+                float needtofill = tankcapacity - fuel;
+                
+                float useamt = Math.Min( needtofill ,slot.StackSize);
+                if ((int)useamt > 1)
+                {
+                    slot.Itemstack.StackSize -= (int)Math.Ceiling(useamt);
+                    if (slot.Itemstack.StackSize <= 0) { slot.Itemstack = null; }
+                    fuel += useamt;
+                    slot.MarkDirty();
+                    bec.MarkDirty(true);
+                    myslot.Itemstack.Attributes.SetFloat(fuelattribute, fuel);
+                    myslot.MarkDirty();
+                }
+                
+            }
+        }
+
+        public virtual bool IsFuel(Item checkitem)
+        {
+            if (checkitem.Code.ToString().Contains("spiritportion")) { return true; }
+            return false;
+
+        }
+
         SkillItem[] toolModes;
         WorldInteraction[] interactions;
         
@@ -274,6 +322,19 @@ namespace qptech.src.misc
         {
             slot.Itemstack.Attributes.SetInt("toolMode", toolMode);
             
+        }
+        public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
+        {
+            base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
+            float fuel = inSlot.Itemstack.Attributes.GetFloat(fuelattribute, 0);
+            if (fuel <= 0)
+            {
+                dsc.Append("[NO FUEL!]");
+            }
+            else
+            {
+                dsc.Append("[FUEL " + Math.Ceiling(fuel / tankcapacity * 100) + "%]");
+            }
         }
     }
 
