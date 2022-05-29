@@ -24,7 +24,7 @@ namespace qptech.src.misc
         bool alreadyPlayedSound = false;
         bool loopsound = true;
         int soundoffdelaycounter = 0;
-        float fuel = 100;
+        
         public static SimpleParticleProperties myParticles = new SimpleParticleProperties(1, 1, ColorUtil.ColorFromRgba(0, 0, 0,75), new Vec3d(), new Vec3d(), new Vec3f(), new Vec3f());
         ILoadedSound ambientSound;
         string runsound = "sounds/drillloop";
@@ -46,6 +46,8 @@ namespace qptech.src.misc
             // - break back block
             // - reset
             if (blockSel == null) { return false; }
+            int fuel = slot.Itemstack.Attributes.GetInt("fuel", 0);
+            fuel = 100; //TEMP TO TEST
             if (fuel <= 0) { return false; }
             //if (!BlockFacing.HORIZONTALS.Contains(blockSel.Face)) { return false; } //not pointed at a block ahead, cancel
             if (secondsUsed > 0.25f && !soundplayed)
@@ -80,36 +82,47 @@ namespace qptech.src.misc
                 int sx = 0; int ex = 0;
                 int sy = 0; int ey = 0;
                 int sz = 0; int ez = 0;
-                if (blockSel.Face == BlockFacing.UP||blockSel.Face==BlockFacing.DOWN)
+
+                enModes mode = (enModes)GetToolMode(slot, (IPlayer)byEntity, blockSel);
+                if (mode != enModes.Drill1x1)
                 {
-                    sx = -1;ex = 1;sz = -1;ez = +1;
-                }
-                else if (blockSel.Face == BlockFacing.EAST || blockSel.Face == BlockFacing.WEST)
-                {
-                    sy = -1;ey = 1;
-                    sz = -1;ez = 1;
-                }
-                else if (blockSel.Face == BlockFacing.NORTH || blockSel.Face == BlockFacing.SOUTH)
-                {
-                    sy = -1;ey = 1;
-                    sx = -1;ex = 1;
-                }
-                
-                for (int xc = sx; xc < ex+1; xc++)
-                {
-                    for (int zc = sz; zc < ez + 1; zc++)
+                    if (blockSel.Face == BlockFacing.UP || blockSel.Face == BlockFacing.DOWN)
                     {
-                        for (int yc = sy; yc < ey + 1; yc++)
+                        sx = -1; ex = 1; sz = -1; ez = +1;
+
+                    }
+                    else if (blockSel.Face == BlockFacing.EAST || blockSel.Face == BlockFacing.WEST)
+                    {
+                        sy = -1; ey = 1;
+                        sz = -1; ez = 1;
+                    }
+                    else if (blockSel.Face == BlockFacing.NORTH || blockSel.Face == BlockFacing.SOUTH)
+                    {
+                        sy = -1; ey = 1;
+                        sx = -1; ex = 1;
+                    }
+                    for (int xc = sx; xc < ex + 1; xc++)
+                    {
+                        for (int zc = sz; zc < ez + 1; zc++)
                         {
-                            BlockPos newpos = blockSel.Position.Copy();
-                            newpos.X += xc;
-                            newpos.Y += yc;
-                            newpos.Z += zc;
-                            positions.Add(newpos);
+                            for (int yc = sy; yc < ey + 1; yc++)
+                            {
+                                BlockPos newpos = blockSel.Position.Copy();
+                                newpos.X += xc;
+                                newpos.Y += yc;
+                                newpos.Z += zc;
+                                positions.Add(newpos);
+                            }
                         }
                     }
-                }
 
+                }
+                
+                else
+                {
+                    positions.Add(blockSel.Position);
+                }
+                
                 foreach (BlockPos bp in positions)
                 {
                     
@@ -190,7 +203,71 @@ namespace qptech.src.misc
             }
 
         }
+        SkillItem[] toolModes;
+        WorldInteraction[] interactions;
         
+        public enum enModes { Drill1x1,Drill2x1,Drill3x1,Drill3x3 }
+        public override void OnLoaded(ICoreAPI api)
+        {
+            base.OnLoaded(api);
+            if (api is ICoreClientAPI) { capi = api as ICoreClientAPI; }
+            toolModes = ObjectCacheUtil.GetOrCreate(api, "DrillToolModes", () =>
+            {
+                SkillItem[] modes;
+
+                modes = new SkillItem[Enum.GetNames(typeof(enModes)).Length];
+                modes[(int)enModes.Drill1x1] = new SkillItem() { Code = new AssetLocation(enModes.Drill1x1.ToString()), Name = Lang.Get("Drill 1x1") };
+                modes[(int)enModes.Drill2x1] = new SkillItem() { Code = new AssetLocation(enModes.Drill2x1.ToString()), Name = Lang.Get("Drill 2x1") };
+                
+                modes[(int)enModes.Drill3x1] = new SkillItem() { Code = new AssetLocation(enModes.Drill3x1.ToString()), Name = Lang.Get("Drill 3x1") };
+                modes[(int)enModes.Drill3x3] = new SkillItem() { Code = new AssetLocation(enModes.Drill1x1.ToString()), Name = Lang.Get("Drill 3x3") };
+                
+                if (capi != null)
+                {
+                    modes[(int)enModes.Drill1x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/plane.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.Drill1x1].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.Drill2x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/plane.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.Drill2x1].TexturePremultipliedAlpha = false;
+                    
+                    modes[(int)enModes.Drill3x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/plane.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.Drill3x1].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.Drill3x3].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/plane.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.Drill3x3].TexturePremultipliedAlpha = false;
+                }
+
+
+                return modes;
+            });
+            interactions = ObjectCacheUtil.GetOrCreate(api, "DrillInteractions", () =>
+            {
+
+                return new WorldInteraction[]
+                {
+                    new WorldInteraction()
+                    {
+                        ActionLangCode = "Use Drill",
+                        MouseButton = EnumMouseButton.Right,
+
+                    },
+                    
+                };
+            });
+        }
+        public override SkillItem[] GetToolModes(ItemSlot slot, IClientPlayer forPlayer, BlockSelection blockSel)
+        {
+            return toolModes;
+        }
+
+        public override int GetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel)
+        {
+            return Math.Min(toolModes.Length - 1, slot.Itemstack.Attributes.GetInt("toolMode"));
+        }
+
+        public override void SetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel, int toolMode)
+        {
+            slot.Itemstack.Attributes.SetInt("toolMode", toolMode);
+            
+        }
     }
 
 }

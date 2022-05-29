@@ -20,12 +20,7 @@
 			"scale": 1.25
 		}
 	},
-	"variantgroups": [
-		{
-			"code": "material",
-			"states": [ "Fueled" ]
-		}
-	],
+	
 	
 	"enabled": true,
 	"heldTpHitAnimation": "idle",
