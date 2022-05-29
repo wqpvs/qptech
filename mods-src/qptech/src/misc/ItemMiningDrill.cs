@@ -82,24 +82,29 @@ namespace qptech.src.misc
                 int sx = 0; int ex = 0;
                 int sy = 0; int ey = 0;
                 int sz = 0; int ez = 0;
+                enModes currentmode = (enModes)slot.Itemstack.Attributes.GetInt("toolMode");
 
-                enModes mode = (enModes)GetToolMode(slot, (IPlayer)byEntity, blockSel);
-                if (mode != enModes.Drill1x1)
+
+                if (currentmode != enModes.Drill1x1)
                 {
                     if (blockSel.Face == BlockFacing.UP || blockSel.Face == BlockFacing.DOWN)
                     {
                         sx = -1; ex = 1; sz = -1; ez = +1;
-
+                        if (currentmode != enModes.Drill3x3){ sx = 0;sz = 0; }
                     }
                     else if (blockSel.Face == BlockFacing.EAST || blockSel.Face == BlockFacing.WEST)
                     {
                         sy = -1; ey = 1;
                         sz = -1; ez = 1;
+                        if (currentmode == enModes.Drill2x1) { sz = 0;ez = 0;sy = 0; }
+                        else if (currentmode == enModes.Drill3x1) { sz = 0;ez = 0; }
                     }
                     else if (blockSel.Face == BlockFacing.NORTH || blockSel.Face == BlockFacing.SOUTH)
                     {
                         sy = -1; ey = 1;
                         sx = -1; ex = 1;
+                        if (currentmode == enModes.Drill2x1) { sx = 0;ex = 0;sy = 0; }
+                        else if (currentmode == enModes.Drill3x1) { sx = 0;ex = 0; }
                     }
                     for (int xc = sx; xc < ex + 1; xc++)
                     {
