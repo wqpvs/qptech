@@ -1,4 +1,8 @@
-﻿1.8.1
+﻿1.8.2
+- fixed barrel recipe for cables to use braided copper wire (thanks cral)
+
+
+1.8.1
 - Ukranian Translation, courtesy of Craluminium, thanks!
 - fixed crash with coal stoker thanks Goldkin!
 

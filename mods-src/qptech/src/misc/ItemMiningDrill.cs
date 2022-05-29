@@ -69,6 +69,8 @@ namespace qptech.src.misc
             myParticles.SizeEvolve = new EvolvingNatFloat(EnumTransformFunction.LINEAR, 2);
             myParticles.ParticleModel = EnumParticleModel.Quad;
             byEntity.World.SpawnParticles(myParticles);
+            
+            myParticles.Color = ColorUtil.ToRgba(16, 16, 0, 32);
             myParticles.OpacityEvolve = new EvolvingNatFloat(EnumTransformFunction.LINEAR, -255);
             ToggleAmbientSounds(true, blockSel.Position);
             if (secondsUsed > nextactionat)

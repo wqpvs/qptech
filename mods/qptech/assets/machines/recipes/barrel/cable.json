@@ -2,7 +2,7 @@
 	code: "cable-copper",
 	ingredients: [
 		{ type: "item", code: "liquidrubberportion",  quantity: 1 },
-		{ type: "item", code: "wire-copper", quantity: 1 }
+		{ type: "item", code: "braidedwire-copper", quantity: 1 }
 	],
 	output: { type: "item", code: "cable-copper", stackSize: 1 }
 }
