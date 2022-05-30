@@ -475,6 +475,9 @@
     <Content Include="qptech\assets\game\textures\block\stopbutton.png" />
     <Content Include="qptech\assets\game\textures\block\tincan.png" />
     <Content Include="qptech\assets\game\textures\block\wiremill.png" />
+    <Content Include="qptech\assets\game\textures\icons\drill2x1.svg" />
+    <Content Include="qptech\assets\game\textures\icons\drill3x1.svg" />
+    <Content Include="qptech\assets\game\textures\icons\drill3x3.svg" />
     <Content Include="qptech\assets\machines\textures\block\castiron.png" />
     <Content Include="qptech\assets\machines\textures\block\castironpeekaboo.png" />
     <Content Include="qptech\assets\machines\textures\block\conductingbars.png" />
@@ -573,6 +576,7 @@
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-brass.png" />
     <Content Include="qptech\assets\machines\textures\item\resource\orepowder\orepowder-copper.png" />
     <Content Include="qptech\assets\machines\textures\item\tablet.png" />
+    <Content Include="qptech\assets\game\textures\icons\drill1x1.svg" />
     <Content Include="qptech\changelog1.8.txt" />
     <Content Include="qptech\qptech.dll" />
     <Content Include="qptech\qptech.pdb" />
@@ -586,5 +590,6 @@
     <Folder Include="qptech\assets\machines\shapes\block\glass\" />
     <Folder Include="qptech\assets\machines\shapes\block\indev\" />
     <Folder Include="qptech\assets\machines\shapes\block\liquid\" />
+    <Folder Include="qptech\assets\qptech\textures\" />
   </ItemGroup>
 </Project>

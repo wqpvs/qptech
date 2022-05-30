@@ -279,14 +279,14 @@ namespace qptech.src.misc
                 
                 if (capi != null)
                 {
-                    modes[(int)enModes.Drill1x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/plane.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.Drill1x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drill1x1.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.Drill1x1].TexturePremultipliedAlpha = false;
-                    modes[(int)enModes.Drill2x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/plane.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.Drill2x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drill2x1.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.Drill2x1].TexturePremultipliedAlpha = false;
                     
-                    modes[(int)enModes.Drill3x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/plane.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.Drill3x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drill3x1.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.Drill3x1].TexturePremultipliedAlpha = false;
-                    modes[(int)enModes.Drill3x3].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/plane.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.Drill3x3].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drill3x3.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.Drill3x3].TexturePremultipliedAlpha = false;
                 }
 
