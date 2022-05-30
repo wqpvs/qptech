@@ -340,6 +340,11 @@ namespace qptech.src.misc
                     PlaySound(api, "sounds/mechhammer", byPlayer.Entity.Pos.AsBlockPos);
                     return;
                 }
+               
+            }
+            else if (!mouseslot.Empty && mouseslot.Itemstack.Block != null)
+            {
+                  //eventually will be able to fill fuel here
             }
             slot.Itemstack.Attributes.SetInt("toolMode", toolMode);
         }

@@ -272,6 +272,7 @@
     <None Include="qptech\assets\machines\recipes\grid\part\wire-copper.json" />
     <None Include="qptech\assets\machines\recipes\grid\tool\pipewrench.json" />
     <None Include="qptech\assets\machines\recipes\grid\tool\screwdriver.json" />
+    <None Include="qptech\assets\machines\recipes\smithing\part\drillhead.json" />
     <None Include="qptech\assets\machines\recipes\smithing\part\heatingcoil.json" />
     <None Include="qptech\assets\machines\recipes\smithing\part\drilledplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\part\cruciblechamber.json" />

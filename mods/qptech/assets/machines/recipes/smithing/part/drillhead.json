@@ -1,0 +1,32 @@
+{
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["steel"] },
+	name: "plate",
+	pattern: [
+		[
+			"######",
+			"######",
+			"######",
+			"######",
+			"######",
+			"######"
+		],
+		[
+			"      ",
+			" #### ",
+			" #### ",
+			" #### ",
+			" #### ",
+			"      "
+		],
+		[
+			"      ",
+			"      ",
+			"  ##  ",
+			"  ##  ",
+			"      ",
+			"      "
+		]
+
+	],
+	output: { type: "item", code: "drillhead-{metal}"  }
+}
