@@ -149,6 +149,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\statusflag-up.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate.json" />
     <None Include="qptech\assets\machines\config\handbook\qptech.json" />
+    <None Include="qptech\assets\machines\itemtypes\part\hv\drillhead.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\cruciblechamber.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\heatingcoil.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\metalchannel.json" />
@@ -389,6 +390,7 @@
     <None Include="qptech\assets\machines\shapes\item\part\circuitboard.json" />
     <None Include="qptech\assets\machines\shapes\item\part\cruciblechamber.json" />
     <None Include="qptech\assets\machines\shapes\item\part\drilledplate.json" />
+    <None Include="qptech\assets\machines\shapes\item\part\drillhead.json" />
     <None Include="qptech\assets\machines\shapes\item\part\machineplate.json" />
     <None Include="qptech\assets\machines\shapes\item\part\metalchannel.json" />
     <None Include="qptech\assets\machines\shapes\item\part\mold-metalplate.json" />

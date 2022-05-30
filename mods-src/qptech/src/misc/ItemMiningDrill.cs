@@ -327,8 +327,21 @@ namespace qptech.src.misc
 
         public override void SetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel, int toolMode)
         {
+            var mouseslot = byPlayer.InventoryManager.MouseItemSlot;
+
+            if (!mouseslot.Empty && mouseslot.Itemstack.Item != null )
+            {
+                if (mouseslot.Itemstack.Item == api.World.GetItem(new AssetLocation("machines:drillhead-steel")))
+                {
+                    var stack = mouseslot.TakeOut(1);
+                    mouseslot.MarkDirty();
+                    slot.Itemstack.Attributes.SetFloat(drillheadattribute, 100);
+                    slot.MarkDirty();
+                    PlaySound(api, "sounds/mechhammer", byPlayer.Entity.Pos.AsBlockPos);
+                    return;
+                }
+            }
             slot.Itemstack.Attributes.SetInt("toolMode", toolMode);
-            
         }
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
         {
@@ -351,6 +364,24 @@ namespace qptech.src.misc
             {
                 dsc.Append("[DRILLHEAD " + Math.Ceiling(drill) + "%]");
             }
+        }
+        public static void PlaySound(ICoreAPI Api, string soundname, BlockPos pos)
+        {
+            if ((Api is ICoreClientAPI))
+            {
+                ILoadedSound pambientSound = ((IClientWorldAccessor)Api.World).LoadSound(new SoundParams()
+                {
+                    Location = new AssetLocation(soundname),
+                    ShouldLoop = false,
+                    Position = pos.ToVec3f().Add(0.5f, 0.25f, 0.5f),
+                    DisposeOnFinish = true,
+                    Volume = 2,
+                    Range = 15
+                });
+
+                pambientSound.Start();
+            }
+            
         }
     }
 

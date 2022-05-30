@@ -1,0 +1,107 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"darkiron": "block/metal/darkiron"
+	},
+	"elements": [
+		{
+			"name": "DrillBase",
+			"from": [ 6.0, 0.0, 9.0 ], 
+			"to": [ 10.0, 4.0, 13.0 ], 
+			"rotationOrigin": [ 8.0, 2.0, 13.0 ],
+			"faces": {
+				"north": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"east": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"south": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"west": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"up": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+				"down": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 4.0, 4.0 ] }
+			},
+			"children": [
+				{
+					"name": "Drill2",
+					"from": [ 0.5, 0.5, -3.0 ], 
+					"to": [ 3.5, 3.5, 0.0 ], 
+					"rotationOrigin": [ 2.0, 2.0, 0.0 ],
+					"rotationZ": 22.499996661474352,
+					"faces": {
+						"north": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+						"east": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+						"south": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+						"west": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+						"up": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] },
+						"down": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 3.0 ] }
+					},
+					"children": [
+						{
+							"name": "Drill3",
+							"from": [ 0.5, 0.5, -2.0 ], 
+							"to": [ 2.5, 2.5, 1.0 ], 
+							"rotationOrigin": [ 1.5, 1.5, 0.0 ],
+							"rotationZ": 22.500002047628104,
+							"faces": {
+								"north": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
+								"east": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 2.0 ] },
+								"south": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
+								"west": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 3.0, 2.0 ] },
+								"up": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 2.0, 3.0 ] },
+								"down": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 2.0, 3.0 ] }
+							},
+							"children": [
+								{
+									"name": "Drill4",
+									"from": [ 0.5, 0.5, -1.0 ], 
+									"to": [ 1.5, 1.5, 0.0 ], 
+									"rotationOrigin": [ 1.0, 1.0, 0.0 ],
+									"rotationZ": -44.999992699547086,
+									"faces": {
+										"north": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"east": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"south": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"west": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"up": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+										"down": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"animations": [
+		{
+			"name": "idle",
+			"code": "idle",
+			"quantityframes": 30,
+			"onActivityStopped": "Stop",
+			"onAnimationEnd": "Repeat",
+			"keyframes": [
+				{
+					"frame": 0,
+					"elements": {
+						"DrillBase": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -180.0 },
+						"Drill2": {  },
+						"Drill3": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -180.0 }
+					}
+				},
+				{
+					"frame": 29,
+					"elements": {
+						"DrillBase": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 180.0 },
+						"Drill2": {  },
+						"Drill3": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 180.0 }
+					}
+				}
+			]
+		}
+	]
+}
