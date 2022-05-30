@@ -26,9 +26,11 @@ namespace qptech.src.misc
         bool loopsound = true;
         int soundoffdelaycounter = 0;
         float tankcapacity = 100;
-        
-        float usepertick = 1f;
+        float drillheadusepertick = 0.1f;
+        float fuelusepertick = 1f;
         public static SimpleParticleProperties myParticles = new SimpleParticleProperties(1, 1, ColorUtil.ColorFromRgba(0, 0, 0,75), new Vec3d(), new Vec3d(), new Vec3f(), new Vec3f());
+        public const string fuelattribute = "fuelintank";
+        public const string drillheadattribute = "drillhead";
         ILoadedSound ambientSound;
         string runsound = "sounds/drillloop";
         ICoreClientAPI capi;
@@ -40,7 +42,7 @@ namespace qptech.src.misc
 
             handling = EnumHandHandling.Handled;
         }
-        public const string fuelattribute = "fuelintank";
+        
         public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
             // - start particles
@@ -51,6 +53,8 @@ namespace qptech.src.misc
             // - reset
             if (blockSel == null) { return false; }
             float fuel = slot.Itemstack.Attributes.GetFloat(fuelattribute, 0);
+            float drill = slot.Itemstack.Attributes.GetFloat(drillheadattribute, 100);
+            if (drill <= 0) { return false; }
             if (capi == null && fuel<tankcapacity) {
                 BlockEntityContainer bec = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityContainer;
                 if (bec != null) { TryFuel(bec,slot); }
@@ -146,14 +150,17 @@ namespace qptech.src.misc
                     if (tb.RequiredMiningTier > 5) { continue; }
                     if (!api.World.Claims.TryAccess(p, bp, EnumBlockAccessFlags.BuildOrBreak)) { continue; }
                     tb.OnBlockBroken(api.World, bp, p, 1);
-                
-                    
+                    drill -= drillheadusepertick;
+                    if (drill <= 0) { break; }
+
                 }
                 nextactionat += actionspeed;
-                fuel -= usepertick;
+                fuel -= fuelusepertick;
+                
                 if (!(api is ICoreClientAPI))
                 {
                     slot.Itemstack.Attributes.SetFloat(fuelattribute, fuel);
+                    slot.Itemstack.Attributes.SetFloat(drillheadattribute, drill);
                     slot.MarkDirty();
                 }
             }
@@ -327,6 +334,7 @@ namespace qptech.src.misc
         {
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
             float fuel = inSlot.Itemstack.Attributes.GetFloat(fuelattribute, 0);
+            float drill = inSlot.Itemstack.Attributes.GetFloat(drillheadattribute, 100);
             if (fuel <= 0)
             {
                 dsc.Append("[NO FUEL!]");
@@ -334,6 +342,14 @@ namespace qptech.src.misc
             else
             {
                 dsc.Append("[FUEL " + Math.Ceiling(fuel / tankcapacity * 100) + "%]");
+            }
+            if (drill <= 0)
+            {
+                dsc.Append("[MISSING/BROKEN DRILLHEAD!]");
+            }
+            else
+            {
+                dsc.Append("[DRILLHEAD " + Math.Ceiling(drill) + "%]");
             }
         }
     }
