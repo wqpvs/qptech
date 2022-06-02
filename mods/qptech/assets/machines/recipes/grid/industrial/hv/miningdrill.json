@@ -1,0 +1,40 @@
+{
+	ingredientPattern: "XDX	SMR	CCC",
+	ingredients: {
+		"X": {
+			"type": "item",
+			"code": "screw-steel",
+
+			"quantity": 2
+		},
+
+		"D": {
+			"type": "item",
+			"code": "drillhead-*"
+			
+		},
+		"M": {
+			"type": "item",
+			"code": "motor-mv",
+			"quantity": 1
+		},
+		"S": {
+			"type": "item",
+			"code": "machineplate-steel",
+			"quantity": 1
+		},
+		"R": {
+			"type": "block",
+			"code": "pipe-core-bluesteel",
+			"quantity": 2
+		},
+		"C": {
+			"type": "item",
+			"code": "metalchannel-steel",
+			"quantity": 1
+		}
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "miningdrill", quantity: 1  }
+}

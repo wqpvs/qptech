@@ -241,7 +241,10 @@
 	"block-industrialblower-highpressure-*": "Industrial High Pressure Blower",
 	"blockdesc-industrialblower-highpressure-*": "Supplies the Air Flow process (5000 units)(units are currently generic, not related to any real world measurements)",
 	"block-clayformer2-*": "Clayformer 2.0",
-	"blockdesc-clayformer2-*": "Makes raw clay items. Set which item by crouching & right clicking with that item (eg: raw clay bowl). Takes clay from a container on top and outputs to a container on the bottom. <i>Try Electric Crucibles<i/>"
-
+	"blockdesc-clayformer2-*": "Makes raw clay items. Set which item by crouching & right clicking with that item (eg: raw clay bowl). Takes clay from a container on top and outputs to a container on the bottom. <i>Try Electric Crucibles<i/>",
+	"item-miningdrill": "Mining Drill",
+	"itemdesc-miningdrill": "Alcohol fueled mining! Fueling: Right click with drill on a container of spirits. Drill Head replacement, press F and drag a new drill head on to the pop up menu. (Pop up menu used for selecting drill pattern as well)",
+	"item-drillhead-*": "Mining Drillhead (Steel)",
+	"itemdesc-drillhead-*": "Required for the mining drill. Part will wear out with use in the drill."
 
 }
