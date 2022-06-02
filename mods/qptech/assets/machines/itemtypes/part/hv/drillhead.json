@@ -50,76 +50,28 @@
 	"drawtype": "json",
 	"shape": { "base": "item/part/drillhead" },
 	
-	"guiTransform": {
-		"translation": {
-			"x": 0,
-			"y": 0,
-			"z": 0
-		},
-		"rotation": {
-			"x": -17,
-			"y": -26,
-			"z": -25
-		},
-		"origin": {
-			"x": 0.5,
-			"y": 0.3,
-			"z": 0.5
-		},
-		"scale": 1.75
+	
+		fpHandTransform: {
+		translation: { x: -0.1, y: 0.2, z: 0 },
+		rotation: { x: 48, y: 10, z: -42 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 2.86
 	},
-	"fpHandTransform": {
-		"translation": {
-			"x": -0.1,
-			"y": 0.2,
-			"z": 0
-		},
-		"rotation": {
-			"x": 90,
-			"y": 99,
-			"z": -42
-		},
-		"origin": {
-			"x": 0.5,
-			"y": 0,
-			"z": 0.5
-		},
-		"scale": 2.15
+	tpHandTransform: {
+		translation: { x: -1, y: -0.5, z: -0.95 },
+		rotation: { x: 0, y: -86, z: -90 },
+		scale: 0.88
 	},
-	"tpHandTransform": {
-		"translation": {
-			"x": 0,
-			"y": 0,
-			"z": 0
-		},
-		"rotation": {
-			"x": 0,
-			"y": 0,
-			"z": -90
-		},
-		"origin": {
-			"x": 0.1,
-			"y": 0.07,
-			"z": 0.15
-		},
-		"scale": 0.45
+		guiTransform: {
+		translation: { x: 0, y: -6, z: 0 },
+		rotation: { x: -109, y: -38, z: -144 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 2.52
 	},
-	"groundTransform": {
-		"translation": {
-			"x": 0,
-			"y": 0,
-			"z": 0
-		},
-		"rotation": {
-			"x": 0,
-			"y": 0,
-			"z": 0
-		},
-		"origin": {
-			"x": 0.5,
-			"y": 0,
-			"z": 0.5
-		},
-		"scale": 2.15
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 3.83
 	}
 }
