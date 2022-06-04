@@ -69,6 +69,7 @@ namespace qptech.src.misc
             // - break back block
             // - reset
             if (blockSel == null) { return false; }
+            IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
             float fuel = slot.Itemstack.Attributes.GetFloat(fuelattribute, 0);
             float drill = slot.Itemstack.Attributes.GetFloat(drillheadattribute, 100);
             if (drill <= 0) { return false; }
@@ -104,7 +105,7 @@ namespace qptech.src.misc
             if (secondsUsed > nextactionat)
             {
 
-                IPlayer p = api.World.NearestPlayer(byEntity.Pos.X, byEntity.Pos.Y, byEntity.Pos.Z);
+                
                 Block tb;
                 
                 List<BlockPos> positions = new List<BlockPos>();
@@ -114,13 +115,41 @@ namespace qptech.src.misc
                 int sz = 0; int ez = 0;
                 enModes currentmode = (enModes)slot.Itemstack.Attributes.GetInt("toolMode");
 
-
-                if (currentmode != enModes.Drill1x1)
+                if (currentmode == enModes.DrillX)
+                {
+                    if (blockSel.Face.IsVertical)
+                    {
+                        //101
+                        //010
+                        //101
+                        BlockPos newpos = blockSel.Position.Copy();
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.X--;
+                        newpos.Z--;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.X += 2;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Z += 2;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.X -= 2;
+                        positions.Add(newpos);
+                        
+                    }
+                }
+                else if (currentmode==enModes.Drill1x1)
+                {
+                    positions.Add(blockSel.Position);
+                }
+                else 
                 {
                     if (blockSel.Face == BlockFacing.UP || blockSel.Face == BlockFacing.DOWN)
                     {
                         sx = -1; ex = 1; sz = -1; ez = +1;
-                        if (currentmode != enModes.Drill3x3){ sx = 0;sz = 0; }
+                        if (currentmode != enModes.Drill3x3) { sx = 0;sz = 0; }
                     }
                     else if (blockSel.Face == BlockFacing.EAST || blockSel.Face == BlockFacing.WEST)
                     {
@@ -146,6 +175,7 @@ namespace qptech.src.misc
                                 newpos.X += xc;
                                 newpos.Y += yc;
                                 newpos.Z += zc;
+                                
                                 positions.Add(newpos);
                             }
                         }
@@ -153,11 +183,9 @@ namespace qptech.src.misc
 
                 }
                 
-                else
-                {
-                    positions.Add(blockSel.Position);
-                }
                 
+                DummySlot ds = new DummySlot();
+                ds.Itemstack = new ItemStack(api.World.GetItem(new AssetLocation("game:pickaxe-steel")), 1);
                 foreach (BlockPos bp in positions)
                 {
                     
@@ -165,14 +193,17 @@ namespace qptech.src.misc
 
                     if (tb == null) { continue; }
 
-                    int dummy = 1;
+                    
 
                     if (tb.MatterState != EnumMatterState.Solid) { continue; }
                     if (tb.RequiredMiningTier > 5) { continue; }
                     if (tb.BlockMaterial != EnumBlockMaterial.Stone&&tb.BlockMaterial!=EnumBlockMaterial.Ore) { continue; }
-                    if (!api.World.Claims.TryAccess(p, bp, EnumBlockAccessFlags.BuildOrBreak)) { continue; }
-                    
-                    tb.OnBlockBroken(api.World, bp, p, 1);
+                    if (!api.World.Claims.TryAccess(byPlayer, bp, EnumBlockAccessFlags.BuildOrBreak)) { continue; }
+                    api.World.BlockAccessor.BreakBlock(bp, byPlayer);
+
+
+
+
                     drill -= drillheadusepertick;
                     if (drill <= 0) { break; }
 
@@ -292,8 +323,8 @@ namespace qptech.src.misc
 
         SkillItem[] toolModes;
         WorldInteraction[] interactions;
-        
-        public enum enModes { Drill1x1,Drill2x1,Drill3x1,Drill3x3 }
+        //TODO add X pattern
+        public enum enModes { Drill1x1,Drill2x1,Drill3x1,Drill3x3,DrillX }
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
@@ -307,8 +338,8 @@ namespace qptech.src.misc
                 modes[(int)enModes.Drill2x1] = new SkillItem() { Code = new AssetLocation(enModes.Drill2x1.ToString()), Name = Lang.Get("Drill 2x1") };
                 
                 modes[(int)enModes.Drill3x1] = new SkillItem() { Code = new AssetLocation(enModes.Drill3x1.ToString()), Name = Lang.Get("Drill 3x1") };
-                modes[(int)enModes.Drill3x3] = new SkillItem() { Code = new AssetLocation(enModes.Drill1x1.ToString()), Name = Lang.Get("Drill 3x3") };
-                
+                modes[(int)enModes.Drill3x3] = new SkillItem() { Code = new AssetLocation(enModes.Drill3x3.ToString()), Name = Lang.Get("Drill 3x3") };
+                modes[(int)enModes.DrillX] = new SkillItem() { Code = new AssetLocation(enModes.DrillX.ToString()), Name = Lang.Get("Drill X") };
                 if (capi != null)
                 {
                     modes[(int)enModes.Drill1x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drill1x1.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
@@ -320,6 +351,8 @@ namespace qptech.src.misc
                     modes[(int)enModes.Drill3x1].TexturePremultipliedAlpha = false;
                     modes[(int)enModes.Drill3x3].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drill3x3.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.Drill3x3].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.DrillX].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drill3x3.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.DrillX].TexturePremultipliedAlpha = false;
                 }
 
 
