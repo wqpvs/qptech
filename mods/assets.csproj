@@ -482,6 +482,7 @@
     <Content Include="qptech\assets\game\textures\icons\drill2x1.svg" />
     <Content Include="qptech\assets\game\textures\icons\drill3x1.svg" />
     <Content Include="qptech\assets\game\textures\icons\drill3x3.svg" />
+    <Content Include="qptech\assets\game\textures\icons\drillx.svg" />
     <Content Include="qptech\assets\machines\textures\block\castiron.png" />
     <Content Include="qptech\assets\machines\textures\block\castironpeekaboo.png" />
     <Content Include="qptech\assets\machines\textures\block\conductingbars.png" />

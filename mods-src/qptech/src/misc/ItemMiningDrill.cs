@@ -19,7 +19,7 @@ namespace qptech.src.misc
     {
         float nextactionat = 0;
         bool soundplayed = false;
-        float actionspeed = 1f;
+        float actionspeed = 0.5f;
         float soundlevel = 1f;
         float SoundLevel => soundlevel;
         bool alreadyPlayedSound = false;
@@ -28,6 +28,7 @@ namespace qptech.src.misc
         float tankcapacity = 100;
         float drillheadusepertick = 0.1f;
         float fuelusepertick = 1f;
+        float startdelay = 0.1f;
         public static SimpleParticleProperties myParticles = new SimpleParticleProperties(1, 1, ColorUtil.ColorFromRgba(0, 0, 0,75), new Vec3d(), new Vec3d(), new Vec3f(), new Vec3f());
         public const string fuelattribute = "fuelintank";
         public const string drillheadattribute = "drillhead";
@@ -79,7 +80,7 @@ namespace qptech.src.misc
             }
             if (fuel <= 0) { return false; }
             //if (!BlockFacing.HORIZONTALS.Contains(blockSel.Face)) { return false; } //not pointed at a block ahead, cancel
-            if (secondsUsed > 0.25f && !soundplayed)
+            if (secondsUsed > startdelay && !soundplayed)
             {
                 //api.World.PlaySoundAt(new AssetLocation("sounds/quarrytemp"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, null, false, 8, 1);
                 soundplayed = true;
@@ -378,7 +379,7 @@ namespace qptech.src.misc
                     modes[(int)enModes.Drill3x1].TexturePremultipliedAlpha = false;
                     modes[(int)enModes.Drill3x3].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drill3x3.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.Drill3x3].TexturePremultipliedAlpha = false;
-                    modes[(int)enModes.DrillX].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drill3x3.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.DrillX].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drillx.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.DrillX].TexturePremultipliedAlpha = false;
                 }
 
