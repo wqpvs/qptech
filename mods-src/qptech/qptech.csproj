@@ -92,6 +92,7 @@
     <Compile Include="src\Electricity\ElectricityAPI.cs" />
     <Compile Include="src\Electricity\BEELightBulb.cs" />
     <Compile Include="src\Electricity\WireRenderer.cs" />
+    <Compile Include="src\gui\HUDMiningDrill.cs" />
     <Compile Include="src\itemtransport\GUITabletItemFilter.cs" />
     <Compile Include="src\itemtransport\GUIConveyor.cs" />
     <Compile Include="src\gui\GUIBEElectric.cs" />

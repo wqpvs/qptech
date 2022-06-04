@@ -31,9 +31,26 @@ namespace qptech.src.misc
         public static SimpleParticleProperties myParticles = new SimpleParticleProperties(1, 1, ColorUtil.ColorFromRgba(0, 0, 0,75), new Vec3d(), new Vec3d(), new Vec3f(), new Vec3f());
         public const string fuelattribute = "fuelintank";
         public const string drillheadattribute = "drillhead";
+        public static HUDMiningDrill hud;
         ILoadedSound ambientSound;
         string runsound = "sounds/drillloop";
         ICoreClientAPI capi;
+
+        public override void OnHeldIdle(ItemSlot slot, EntityAgent byEntity)
+        {
+            base.OnHeldIdle(slot, byEntity);
+            if (hud == null && capi!=null)
+            {
+                hud = new HUDMiningDrill(capi, slot.Itemstack);
+                hud.TryOpen();
+            }
+            else if (capi!=null)
+            {
+                hud.stack = slot.Itemstack;
+                if (!hud.IsOpened()) { hud.TryOpen(); }
+            }
+        }
+
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
             //base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
@@ -177,12 +194,14 @@ namespace qptech.src.misc
         public override void OnHeldDropped(IWorldAccessor world, IPlayer byPlayer, ItemSlot slot, int quantity, ref EnumHandling handling)
         {
             base.OnHeldDropped(world, byPlayer, slot, quantity, ref handling);
+            
             CleanSound();
         }
 
         public override void OnUnloaded(ICoreAPI api)
         {
             base.OnUnloaded(api);
+            
             CleanSound();
         }
 
