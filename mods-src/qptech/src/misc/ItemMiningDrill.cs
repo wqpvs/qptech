@@ -139,6 +139,44 @@ namespace qptech.src.misc
                         positions.Add(newpos);
                         
                     }
+                    else if (blockSel.Face.IsAxisWE)
+                    {
+                        BlockPos newpos = blockSel.Position.Copy();
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Y--;
+                        newpos.Z--;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Y += 2;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Z += 2;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Y -= 2;
+                        positions.Add(newpos);
+
+                    }
+                    else if (blockSel.Face.IsAxisNS)
+                    {
+                        BlockPos newpos = blockSel.Position.Copy();
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Y--;
+                        newpos.X--;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Y += 2;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.X += 2;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Y -= 2;
+                        positions.Add(newpos);
+
+                    }
                 }
                 else if (currentmode==enModes.Drill1x1)
                 {
@@ -182,28 +220,17 @@ namespace qptech.src.misc
                     }
 
                 }
-                
-                
-                DummySlot ds = new DummySlot();
-                ds.Itemstack = new ItemStack(api.World.GetItem(new AssetLocation("game:pickaxe-steel")), 1);
+  
                 foreach (BlockPos bp in positions)
                 {
                     
                     tb = api.World.BlockAccessor.GetBlock(bp);
-
                     if (tb == null) { continue; }
-
-                    
-
                     if (tb.MatterState != EnumMatterState.Solid) { continue; }
                     if (tb.RequiredMiningTier > 5) { continue; }
                     if (tb.BlockMaterial != EnumBlockMaterial.Stone&&tb.BlockMaterial!=EnumBlockMaterial.Ore) { continue; }
                     if (!api.World.Claims.TryAccess(byPlayer, bp, EnumBlockAccessFlags.BuildOrBreak)) { continue; }
                     api.World.BlockAccessor.BreakBlock(bp, byPlayer);
-
-
-
-
                     drill -= drillheadusepertick;
                     if (drill <= 0) { break; }
 
