@@ -31,7 +31,7 @@ namespace qptech.src.misc
         public static SimpleParticleProperties myParticles = new SimpleParticleProperties(1, 1, ColorUtil.ColorFromRgba(0, 0, 0,75), new Vec3d(), new Vec3d(), new Vec3f(), new Vec3f());
         public const string fuelattribute = "fuelintank";
         public const string drillheadattribute = "drillhead";
-        public static HUDMiningDrill hud;
+        public HUDMiningDrill hud;
         ILoadedSound ambientSound;
         string runsound = "sounds/drillloop";
         ICoreClientAPI capi;
@@ -42,12 +42,12 @@ namespace qptech.src.misc
             if (hud == null && capi!=null)
             {
                 hud = new HUDMiningDrill(capi, slot.Itemstack);
-                hud.TryOpen();
+                //hud.TryOpen();
             }
             else if (capi!=null)
             {
                 hud.stack = slot.Itemstack;
-                if (!hud.IsOpened()) { hud.TryOpen(); }
+                //if (!hud.IsOpened()) { hud.TryOpen(); }
             }
         }
 
@@ -162,10 +162,16 @@ namespace qptech.src.misc
                 {
                     
                     tb = api.World.BlockAccessor.GetBlock(bp);
+
                     if (tb == null) { continue; }
+
+                    int dummy = 1;
+
                     if (tb.MatterState != EnumMatterState.Solid) { continue; }
                     if (tb.RequiredMiningTier > 5) { continue; }
+                    if (tb.BlockMaterial != EnumBlockMaterial.Stone&&tb.BlockMaterial!=EnumBlockMaterial.Ore) { continue; }
                     if (!api.World.Claims.TryAccess(p, bp, EnumBlockAccessFlags.BuildOrBreak)) { continue; }
+                    
                     tb.OnBlockBroken(api.World, bp, p, 1);
                     drill -= drillheadusepertick;
                     if (drill <= 0) { break; }

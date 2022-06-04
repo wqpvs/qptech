@@ -18,8 +18,13 @@ namespace qptech.src.misc
     class HUDMiningDrill:HudElement
     {
         public ItemStack stack;
+        public override bool Focusable => false;
+        public override bool UnregisterOnClose => true;
+        public override bool CaptureAllInputs() { return false; }
+        public override bool ShouldReceiveKeyboardEvents() { return false; }
         EnumDialogType dialogType = EnumDialogType.HUD;
         public override EnumDialogType DialogType => dialogType;
+
         public HUDMiningDrill(ICoreClientAPI capi,ItemStack stack) : base(capi)
         {
             this.capi = capi;
@@ -42,16 +47,17 @@ namespace qptech.src.misc
         }
         public override void OnRenderGUI(float deltaTime)
         {
+            
             //See if our stack is valid with a drill in it
             if (capi == null || stack == null || stack.Item == null||stack.StackSize==0) {
-                TryClose();
+                SingleComposer.GetDynamicText("status").SetNewText("" );
                 base.OnRenderGUI(deltaTime);
 
             }
             
             float fuel = stack.Attributes.GetFloat(ItemMiningDrill.fuelattribute, -1);
             float drill = stack.Attributes.GetFloat(ItemMiningDrill.drillheadattribute, -1);
-            if (fuel == -1 || drill == -1) { TryClose(); base.OnRenderGUI(deltaTime); }
+            if (fuel == -1 || drill == -1) { SingleComposer.GetDynamicText("status").SetNewText(""); base.OnRenderGUI(deltaTime); }
             SingleComposer.GetDynamicText("status").SetNewText("Drill:"+Math.Ceiling(drill)+"% Fuel:"+fuel);
 
             base.OnRenderGUI(deltaTime);
