@@ -71,14 +71,15 @@ namespace qptech.src.misc
             // - reset
             if (blockSel == null) { return false; }
             IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
+            bool creative = byPlayer?.WorldData.CurrentGameMode == EnumGameMode.Creative;
             float fuel = slot.Itemstack.Attributes.GetFloat(fuelattribute, 0);
             float drill = slot.Itemstack.Attributes.GetFloat(drillheadattribute, 100);
-            if (drill <= 0) { return false; }
+            if (drill <= 0&&!creative) { return false; }
             if (capi == null && fuel<tankcapacity) {
                 BlockEntityContainer bec = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityContainer;
                 if (bec != null) { TryFuel(bec,slot); }
             }
-            if (fuel <= 0) { return false; }
+            if (fuel <= 0&&!creative) { return false; }
             //if (!BlockFacing.HORIZONTALS.Contains(blockSel.Face)) { return false; } //not pointed at a block ahead, cancel
             if (secondsUsed > startdelay && !soundplayed)
             {
@@ -287,12 +288,15 @@ namespace qptech.src.misc
                     if (tb.BlockMaterial != EnumBlockMaterial.Stone&&tb.BlockMaterial!=EnumBlockMaterial.Ore) { continue; }
                     if (!api.World.Claims.TryAccess(byPlayer, bp, EnumBlockAccessFlags.BuildOrBreak)) { continue; }
                     api.World.BlockAccessor.BreakBlock(bp, byPlayer);
-                    drill -= drillheadusepertick;
-                    if (drill <= 0) { break; }
+                    if (!creative)
+                    {
+                        drill -= drillheadusepertick;
+                        if (drill <= 0) { break; }
+                    }
 
                 }
                 nextactionat += actionspeed;
-                fuel -= fuelusepertick;
+                if (!creative) { fuel -= fuelusepertick; }
                 
                 if (!(api is ICoreClientAPI))
                 {
