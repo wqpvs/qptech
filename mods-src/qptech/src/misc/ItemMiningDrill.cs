@@ -37,20 +37,32 @@ namespace qptech.src.misc
         string runsound = "sounds/drillloop";
         ICoreClientAPI capi;
 
+        //While it's idle we'll constantly be building a list of affect blocks and hilighting htme
         public override void OnHeldIdle(ItemSlot slot, EntityAgent byEntity)
         {
             base.OnHeldIdle(slot, byEntity);
-            if (hud == null && capi!=null)
-            {
-                hud = new HUDMiningDrill(capi, slot.Itemstack);
-                //hud.TryOpen();
+            IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
+            ClearHighlights(api.World,byPlayer);
+            BlockSelection blockSel = byPlayer.CurrentBlockSelection;
+            if (blockSel == null) { return; }
+            
+            List<BlockPos> blocks = GetCurrentBlockList(blockSel,slot);
+            if (blocks == null || blocks.Count == 0) { return; }
+            List<int> colors = new List<int>();
+            for (int c = 0; c < blocks.Count; c++){
+                if (CanMine(api, blocks[c]))
+                {
+                    colors.Add(ColorUtil.ColorFromRgba(255, 255, 0, 128));
+                }
+                else
+                {
+                    colors.Add(ColorUtil.ColorFromRgba(255, 0, 0, 64));
+                }
             }
-            else if (capi!=null)
-            {
-                hud.stack = slot.Itemstack;
-                //if (!hud.IsOpened()) { hud.TryOpen(); }
-            }
+            api.World.HighlightBlocks(byPlayer, HighlightSlotId, blocks,colors);
         }
+        
+        
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
@@ -61,6 +73,186 @@ namespace qptech.src.misc
             handling = EnumHandHandling.Handled;
         }
         
+        /// <summary>
+        /// Returns a list of Block Positions based on a block selection and the current selected mining pattern
+        /// </summary>
+        /// <param name="blockSel">The Players' Block Selection</param>
+        /// <param name="slot">The Slot the Mining Drill is in</param>
+        /// <returns></returns>
+        public virtual List<BlockPos> GetCurrentBlockList(BlockSelection blockSel, ItemSlot slot)
+        {
+            
+
+            List<BlockPos> positions = new List<BlockPos>();
+
+            int sx = 0; int ex = 0;
+            int sy = 0; int ey = 0;
+            int sz = 0; int ez = 0;
+            enModes currentmode = (enModes)slot.Itemstack.Attributes.GetInt("toolMode");
+
+            if (currentmode == enModes.DrillX)
+            {
+                if (blockSel.Face.IsVertical)
+                {
+                    //101
+                    //010
+                    //101
+                    BlockPos newpos = blockSel.Position.Copy();
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.X--;
+                    newpos.Z--;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.X += 2;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Z += 2;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.X -= 2;
+                    positions.Add(newpos);
+
+                }
+                else if (blockSel.Face.IsAxisWE)
+                {
+                    BlockPos newpos = blockSel.Position.Copy();
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Y--;
+                    newpos.Z--;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Y += 2;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Z += 2;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Y -= 2;
+                    positions.Add(newpos);
+
+                }
+                else if (blockSel.Face.IsAxisNS)
+                {
+                    BlockPos newpos = blockSel.Position.Copy();
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Y--;
+                    newpos.X--;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Y += 2;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.X += 2;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Y -= 2;
+                    positions.Add(newpos);
+
+                }
+            }
+            else if (currentmode == enModes.DrillPLUS)
+            {
+                if (blockSel.Face.IsVertical)
+                {
+                    //010
+                    //101
+                    //010
+                    BlockPos newpos = blockSel.Position.Copy();
+                    newpos.Z--;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Z += 2;
+                    positions.Add(newpos);
+                    newpos = blockSel.Position.Copy();
+                    newpos.X--;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.X += 2;
+                    positions.Add(newpos);
+                }
+                else if (blockSel.Face.IsAxisWE)
+                {
+                    BlockPos newpos = blockSel.Position.Copy();
+                    newpos.Z--;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Z += 2;
+                    positions.Add(newpos);
+                    newpos = blockSel.Position.Copy();
+                    newpos.Y--;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Y += 2;
+                    positions.Add(newpos);
+
+                }
+                else if (blockSel.Face.IsAxisNS)
+                {
+                    BlockPos newpos = blockSel.Position.Copy();
+                    newpos.Y--;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.Y += 2;
+                    positions.Add(newpos);
+                    newpos = blockSel.Position.Copy();
+                    newpos.X--;
+                    positions.Add(newpos);
+                    newpos = newpos.Copy();
+                    newpos.X += 2;
+                    positions.Add(newpos);
+
+                }
+            }
+            else if (currentmode == enModes.Drill1x1)
+            {
+                positions.Add(blockSel.Position);
+            }
+            else
+            {
+                if (blockSel.Face.IsVertical) //special case need to also consider player facing
+                {
+
+                    if (currentmode == enModes.Drill2x1) { sy = -1; ey = 0; }
+                    else if (currentmode == enModes.Drill3x1) { sy = -2; ey = 0; }
+                    if (currentmode == enModes.Drill3x3) { sx = -1; ex = 1; sz = -1; ez = 1; }
+                }
+                else if (blockSel.Face == BlockFacing.EAST || blockSel.Face == BlockFacing.WEST)
+                {
+                    sy = -1; ey = 1;
+                    sz = -1; ez = 1;
+                    if (currentmode == enModes.Drill2x1) { sz = 0; ez = 0; sy = 0; }
+                    else if (currentmode == enModes.Drill3x1) { sz = 0; ez = 0; }
+                }
+                else if (blockSel.Face == BlockFacing.NORTH || blockSel.Face == BlockFacing.SOUTH)
+                {
+                    sy = -1; ey = 1;
+                    sx = -1; ex = 1;
+                    if (currentmode == enModes.Drill2x1) { sx = 0; ex = 0; sy = 0; }
+                    else if (currentmode == enModes.Drill3x1) { sx = 0; ex = 0; }
+                }
+                for (int xc = sx; xc < ex + 1; xc++)
+                {
+                    for (int zc = sz; zc < ez + 1; zc++)
+                    {
+                        for (int yc = sy; yc < ey + 1; yc++)
+                        {
+                            BlockPos newpos = blockSel.Position.Copy();
+                            newpos.X += xc;
+                            newpos.Y += yc;
+                            newpos.Z += zc;
+
+                            positions.Add(newpos);
+                        }
+                    }
+                }
+
+            }
+            return positions;
+        }
+
         public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
             // - start particles
@@ -107,176 +299,8 @@ namespace qptech.src.misc
             if (secondsUsed > nextactionat)
             {
 
-                
                 Block tb;
-                
-                List<BlockPos> positions = new List<BlockPos>();
-                
-                int sx = 0; int ex = 0;
-                int sy = 0; int ey = 0;
-                int sz = 0; int ez = 0;
-                enModes currentmode = (enModes)slot.Itemstack.Attributes.GetInt("toolMode");
-
-                if (currentmode == enModes.DrillX)
-                {
-                    if (blockSel.Face.IsVertical)
-                    {
-                        //101
-                        //010
-                        //101
-                        BlockPos newpos = blockSel.Position.Copy();
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.X--;
-                        newpos.Z--;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.X += 2;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Z += 2;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.X -= 2;
-                        positions.Add(newpos);
-                        
-                    }
-                    else if (blockSel.Face.IsAxisWE)
-                    {
-                        BlockPos newpos = blockSel.Position.Copy();
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Y--;
-                        newpos.Z--;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Y += 2;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Z += 2;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Y -= 2;
-                        positions.Add(newpos);
-
-                    }
-                    else if (blockSel.Face.IsAxisNS)
-                    {
-                        BlockPos newpos = blockSel.Position.Copy();
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Y--;
-                        newpos.X--;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Y += 2;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.X += 2;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Y -= 2;
-                        positions.Add(newpos);
-
-                    }
-                }
-                else if (currentmode == enModes.DrillPLUS)
-                {
-                    if (blockSel.Face.IsVertical)
-                    {
-                        //010
-                        //101
-                        //010
-                        BlockPos newpos = blockSel.Position.Copy();
-                        newpos.Z--;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Z+=2;
-                        positions.Add(newpos);
-                        newpos = blockSel.Position.Copy();
-                        newpos.X--;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.X +=2;
-                        positions.Add(newpos);
-                    }
-                    else if (blockSel.Face.IsAxisWE)
-                    {
-                        BlockPos newpos = blockSel.Position.Copy();
-                        newpos.Z--;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Z += 2;
-                        positions.Add(newpos);
-                        newpos = blockSel.Position.Copy();
-                        newpos.Y--;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Y += 2;
-                        positions.Add(newpos);
-
-                    }
-                    else if (blockSel.Face.IsAxisNS)
-                    {
-                        BlockPos newpos = blockSel.Position.Copy();
-                        newpos.Y--;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.Y += 2;
-                        positions.Add(newpos);
-                        newpos = blockSel.Position.Copy();
-                        newpos.X--;
-                        positions.Add(newpos);
-                        newpos = newpos.Copy();
-                        newpos.X += 2;
-                        positions.Add(newpos);
-
-                    }
-                }
-                else if (currentmode==enModes.Drill1x1)
-                {
-                    positions.Add(blockSel.Position);
-                }
-                else 
-                {
-                    if (blockSel.Face.IsVertical) //special case need to also consider player facing
-                    {
-                        
-                        if (currentmode == enModes.Drill2x1) { sy = -1; ey = 0; }
-                        else if (currentmode==enModes.Drill3x1) { sy = -2; ey = 0; }
-                        if (currentmode == enModes.Drill3x3) { sx = -1;ex = 1;sz = -1;ez = 1;}
-                    }
-                    else if (blockSel.Face == BlockFacing.EAST || blockSel.Face == BlockFacing.WEST)
-                    {
-                        sy = -1; ey = 1;
-                        sz = -1; ez = 1;
-                        if (currentmode == enModes.Drill2x1) { sz = 0;ez = 0;sy = 0; }
-                        else if (currentmode == enModes.Drill3x1) { sz = 0;ez = 0; }
-                    }
-                    else if (blockSel.Face == BlockFacing.NORTH || blockSel.Face == BlockFacing.SOUTH)
-                    {
-                        sy = -1; ey = 1;
-                        sx = -1; ex = 1;
-                        if (currentmode == enModes.Drill2x1) { sx = 0;ex = 0;sy = 0; }
-                        else if (currentmode == enModes.Drill3x1) { sx = 0;ex = 0; }
-                    }
-                    for (int xc = sx; xc < ex + 1; xc++)
-                    {
-                        for (int zc = sz; zc < ez + 1; zc++)
-                        {
-                            for (int yc = sy; yc < ey + 1; yc++)
-                            {
-                                BlockPos newpos = blockSel.Position.Copy();
-                                newpos.X += xc;
-                                newpos.Y += yc;
-                                newpos.Z += zc;
-                                
-                                positions.Add(newpos);
-                            }
-                        }
-                    }
-
-                }
+                List<BlockPos> positions = GetCurrentBlockList(blockSel, slot);
   
                 foreach (BlockPos bp in positions)
                 {
@@ -285,7 +309,7 @@ namespace qptech.src.misc
                     if (tb == null) { continue; }
                     if (tb.MatterState != EnumMatterState.Solid) { continue; }
                     if (tb.RequiredMiningTier > 5) { continue; }
-                    if (tb.BlockMaterial != EnumBlockMaterial.Stone&&tb.BlockMaterial!=EnumBlockMaterial.Ore) { continue; }
+                    if (!CanMine(tb)) { continue; }
                     if (!api.World.Claims.TryAccess(byPlayer, bp, EnumBlockAccessFlags.BuildOrBreak)) { continue; }
                     api.World.BlockAccessor.BreakBlock(bp, byPlayer);
                     if (!creative)
@@ -318,8 +342,23 @@ namespace qptech.src.misc
         public override void OnHeldDropped(IWorldAccessor world, IPlayer byPlayer, ItemSlot slot, int quantity, ref EnumHandling handling)
         {
             base.OnHeldDropped(world, byPlayer, slot, quantity, ref handling);
-            
+            ClearHighlights(world, byPlayer);
             CleanSound();
+        }
+        
+        
+        //return true/false if the drill can mine the given block
+        public virtual bool CanMine(ICoreAPI api,BlockPos atpos)
+        {
+            Block tb = api.World.BlockAccessor.GetBlock(atpos);
+            return CanMine(tb);
+            
+        }
+
+        public virtual bool CanMine(Block tryblock)
+        {
+            if (tryblock.BlockMaterial != EnumBlockMaterial.Stone && tryblock.BlockMaterial != EnumBlockMaterial.Ore) { return false; }
+            return true;
         }
 
         public override void OnUnloaded(ICoreAPI api)
@@ -517,6 +556,11 @@ namespace qptech.src.misc
             {
                 dsc.Append("[DRILLHEAD " + Math.Ceiling(drill) + "%]");
             }
+        }
+        public static int HighlightSlotId = 23;
+        public void ClearHighlights(IWorldAccessor world, IPlayer player)
+        {
+            world.HighlightBlocks(player, HighlightSlotId, new List<BlockPos>(), new List<int>());
         }
         public static void PlaySound(ICoreAPI Api, string soundname, BlockPos pos)
         {
