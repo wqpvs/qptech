@@ -1,0 +1,9 @@
+﻿1.9.0
+- fixed a server error loop with item transport
+- added: Mining Drill!
+   - right click on a bucket or barrel etc with drill to fuel with alcoholic spirits (brandies etc)
+   - press F to bring up the mining pattern
+   - drill head is made with steel on an anvil - the drill head will slowly wear down instead of the drill
+      - to replace the drill head press F with the drill and drop the drill head into any of the mode select buttons
+    - in creative mode drill head doesn't wear and fuel isn't consumed, although it can be refueled
+

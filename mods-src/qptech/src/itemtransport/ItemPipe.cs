@@ -116,22 +116,33 @@ namespace qptech.src.itemtransport
         {
             //if it has connections, make sure they're still there
             //if there aren't any connections, check and see if a destination can be set and connect
+            
+            //this nonsense is trying to figure out a server error
+            if (Api == null) { return; }
+            if (Api.World == null) { return; }
+            if (Api.World.BlockAccessor == null) { return; }
+
+
             destination = null;
             if (outputlocation == null) { return; }
             IItemTransporter trans = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as IItemTransporter;
             BlockEntityContainer outcont = Api.World.BlockAccessor.GetBlockEntity(outputlocation) as BlockEntityContainer;
             
-            if (trans == null && outcont==null) {MarkDirty(true);return; }
-            BlockEntityCrate crate = outcont as BlockEntityCrate;
-            if (crate != null && autofiltertocrate && !crate.Inventory.Empty)
+            if (trans == null && outcont==null) {MarkDirty();return; }
+            if (outcont != null)
             {
-                itemfilter = new ItemFilter();
-                itemfilter.filtercode = crate.Inventory[0].Itemstack.Collectible.Code.ToString();
-                MarkDirty();
+                BlockEntityCrate crate = outcont as BlockEntityCrate;
+                if (crate != null && autofiltertocrate && crate.Inventory!=null && !crate.Inventory.Empty)
+                {
+                    if (crate.Inventory[0] == null || crate.Inventory[0].Itemstack == null || crate.Inventory[0].Itemstack.Collectible == null) { MarkDirty();return; }
+                    itemfilter = new ItemFilter();
+                    itemfilter.filtercode = crate.Inventory[0].Itemstack.Collectible.Code.ToString();
+                    MarkDirty();
+                }
             }
             destination = outputlocation;
             
-            MarkDirty(true);
+            MarkDirty();
         }
 
         protected virtual void HandleStack()
