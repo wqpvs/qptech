@@ -179,16 +179,71 @@ namespace qptech.src.misc
 
                     }
                 }
+                else if (currentmode == enModes.DrillPLUS)
+                {
+                    if (blockSel.Face.IsVertical)
+                    {
+                        //010
+                        //101
+                        //010
+                        BlockPos newpos = blockSel.Position.Copy();
+                        newpos.Z--;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Z+=2;
+                        positions.Add(newpos);
+                        newpos = blockSel.Position.Copy();
+                        newpos.X--;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.X +=2;
+                        positions.Add(newpos);
+                    }
+                    else if (blockSel.Face.IsAxisWE)
+                    {
+                        BlockPos newpos = blockSel.Position.Copy();
+                        newpos.Z--;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Z += 2;
+                        positions.Add(newpos);
+                        newpos = blockSel.Position.Copy();
+                        newpos.Y--;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Y += 2;
+                        positions.Add(newpos);
+
+                    }
+                    else if (blockSel.Face.IsAxisNS)
+                    {
+                        BlockPos newpos = blockSel.Position.Copy();
+                        newpos.Y--;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.Y += 2;
+                        positions.Add(newpos);
+                        newpos = blockSel.Position.Copy();
+                        newpos.X--;
+                        positions.Add(newpos);
+                        newpos = newpos.Copy();
+                        newpos.X += 2;
+                        positions.Add(newpos);
+
+                    }
+                }
                 else if (currentmode==enModes.Drill1x1)
                 {
                     positions.Add(blockSel.Position);
                 }
                 else 
                 {
-                    if (blockSel.Face == BlockFacing.UP || blockSel.Face == BlockFacing.DOWN)
+                    if (blockSel.Face.IsVertical) //special case need to also consider player facing
                     {
-                        sx = -1; ex = 1; sz = -1; ez = +1;
-                        if (currentmode != enModes.Drill3x3) { sx = 0;sz = 0; }
+                        
+                        if (currentmode == enModes.Drill2x1) { sy = -1; ey = 0; }
+                        else if (currentmode==enModes.Drill3x1) { sy = -2; ey = 0; }
+                        if (currentmode == enModes.Drill3x3) { sx = -1;ex = 1;sz = -1;ez = 1;}
                     }
                     else if (blockSel.Face == BlockFacing.EAST || blockSel.Face == BlockFacing.WEST)
                     {
@@ -352,7 +407,7 @@ namespace qptech.src.misc
         SkillItem[] toolModes;
         WorldInteraction[] interactions;
         //TODO add X pattern
-        public enum enModes { Drill1x1,Drill2x1,Drill3x1,Drill3x3,DrillX }
+        public enum enModes { Drill1x1,Drill2x1,Drill3x1,Drill3x3,DrillX,DrillPLUS }
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
@@ -368,6 +423,7 @@ namespace qptech.src.misc
                 modes[(int)enModes.Drill3x1] = new SkillItem() { Code = new AssetLocation(enModes.Drill3x1.ToString()), Name = Lang.Get("Drill 3x1") };
                 modes[(int)enModes.Drill3x3] = new SkillItem() { Code = new AssetLocation(enModes.Drill3x3.ToString()), Name = Lang.Get("Drill 3x3") };
                 modes[(int)enModes.DrillX] = new SkillItem() { Code = new AssetLocation(enModes.DrillX.ToString()), Name = Lang.Get("Drill X") };
+                modes[(int)enModes.DrillPLUS] = new SkillItem() { Code = new AssetLocation(enModes.DrillPLUS.ToString()), Name = Lang.Get("Drill +") };
                 if (capi != null)
                 {
                     modes[(int)enModes.Drill1x1].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drill1x1.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
@@ -381,6 +437,8 @@ namespace qptech.src.misc
                     modes[(int)enModes.Drill3x3].TexturePremultipliedAlpha = false;
                     modes[(int)enModes.DrillX].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drillx.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
                     modes[(int)enModes.DrillX].TexturePremultipliedAlpha = false;
+                    modes[(int)enModes.DrillPLUS].WithIcon(capi, capi.Gui.LoadSvgWithPadding(new AssetLocation("textures/icons/drillplus.svg"), 48, 48, 5, ColorUtil.WhiteArgb));
+                    modes[(int)enModes.DrillPLUS].TexturePremultipliedAlpha = false;
                 }
 
 
