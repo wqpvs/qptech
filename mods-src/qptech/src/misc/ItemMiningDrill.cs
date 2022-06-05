@@ -37,7 +37,8 @@ namespace qptech.src.misc
         string runsound = "sounds/drillloop";
         ICoreClientAPI capi;
 
-        //While it's idle we'll constantly be building a list of affect blocks and hilighting htme
+        //While it's idle we'll constantly be building a list of affect blocks and hilighting them
+        //todo: need to check if the distance is within the current mining range (and leave clear if not)
         public override void OnHeldIdle(ItemSlot slot, EntityAgent byEntity)
         {
             base.OnHeldIdle(slot, byEntity);
@@ -266,12 +267,12 @@ namespace qptech.src.misc
             bool creative = byPlayer?.WorldData.CurrentGameMode == EnumGameMode.Creative;
             float fuel = slot.Itemstack.Attributes.GetFloat(fuelattribute, 0);
             float drill = slot.Itemstack.Attributes.GetFloat(drillheadattribute, 100);
-            if (drill <= 0&&!creative) { return false; }
+            if (drill <= 0&&!creative) { PlaySound(api, "sounds/error", byPlayer.Entity.Pos.AsBlockPos); return false; }
             if (capi == null && fuel<tankcapacity) {
                 BlockEntityContainer bec = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityContainer;
                 if (bec != null) { TryFuel(bec,slot); }
             }
-            if (fuel <= 0&&!creative) { return false; }
+            if (fuel <= 0&&!creative) { PlaySound(api, "sounds/error", byPlayer.Entity.Pos.AsBlockPos); return false; }
             //if (!BlockFacing.HORIZONTALS.Contains(blockSel.Face)) { return false; } //not pointed at a block ahead, cancel
             if (secondsUsed > startdelay && !soundplayed)
             {
