@@ -23,6 +23,7 @@ namespace qptech.src
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
             BETemporalPocket mypocket = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BETemporalPocket;
+            if (BETemporalPocket.OpenInventories.Contains(byPlayer.PlayerUID)) { return false; }
             if (mypocket!=null && mypocket.Busy) { return false; }
             //if (simpleinventory.openinventories != null && simpleinventory.openinventories.Contains(byPlayer.PlayerUID)) { return false; }
             return base.OnBlockInteractStart(world, byPlayer, blockSel);

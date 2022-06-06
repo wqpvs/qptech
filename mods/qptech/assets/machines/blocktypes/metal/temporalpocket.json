@@ -1,0 +1,81 @@
+{
+	"code": "temporalpocket",
+	"class": "BlockTemporalPocket",
+	"entityclass": "BETemporalPocket",
+	"attributes": {
+		"defaultType": "normal-generic",
+		"partialAttachable": true,
+		"inventoryClassName": "Pocket Dimension",
+		"types": [ "normal-generic" ],
+		"quantitySlots":  64 ,
+		quantityColumns: 9,
+		"storageType": 169 ,
+		"dialogTitleLangCode": "Pocket Dimension",
+		"typedOpenSound": { "normal-generic": "game:sounds/block/cokeovendoor-open" },
+		"typedCloseSound": { "normal-generic": "game:sounds/block/cokeovendoor-close" },
+		"heatingefficiency": 0,
+		
+	},
+	"behaviors": [
+		{ "name": "Lockable" },
+		{ "name": "Container" },
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "east" }
+		},
+		
+	],
+	"variantgroups": [
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+	"creativeinventory": {
+		"general": [ "*-east" ],
+		"qptech": [ "*-east" ]
+	},
+	"blockmaterial": "Metal",
+	"shape": { "base": "block/metal/itemhatch" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/metal/itemhatch",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/metal/itemhatch",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "block/metal/itemhatch",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "block/metal/itemhatch",
+			"rotateY": 180
+		}
+	},
+	"drawtype": "json",
+	"texturesByType": {
+		"*": {
+			"all": { "base": "block/machinery" }
+		}
+	},
+	"resistance": 1,
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	},
+	"guiTransform": {
+		"origin": {
+			"x": 0.5,
+			"y": 0.5,
+			"z": 0.5
+		},
+		"scale": 1
+	}
+
+}
