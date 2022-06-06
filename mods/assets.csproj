@@ -456,6 +456,7 @@
     <Content Include="qptech\assets\game\sounds\filtercopy.ogg" />
     <Content Include="qptech\assets\game\sounds\filterset.ogg" />
     <Content Include="qptech\assets\game\sounds\genloop.ogg" />
+    <Content Include="qptech\assets\machines\sounds\hmmm.ogg" />
     <Content Include="qptech\assets\game\sounds\industrialinjector.ogg" />
     <Content Include="qptech\assets\game\sounds\industrial01.ogg" />
     <Content Include="qptech\assets\game\sounds\mechhammer.ogg" />
