@@ -456,7 +456,7 @@
     <Content Include="qptech\assets\game\sounds\filtercopy.ogg" />
     <Content Include="qptech\assets\game\sounds\filterset.ogg" />
     <Content Include="qptech\assets\game\sounds\genloop.ogg" />
-    <Content Include="qptech\assets\game\sounds\block\hmmm.ogg" />
+    <Content Include="qptech\assets\machines\sounds\block\hmmm.ogg" />
     <Content Include="qptech\assets\game\sounds\industrialinjector.ogg" />
     <Content Include="qptech\assets\game\sounds\industrial01.ogg" />
     <Content Include="qptech\assets\game\sounds\mechhammer.ogg" />
@@ -596,10 +596,10 @@
   <ItemGroup>
     <Folder Include="chisel\assets\chiseltools\textures\icons\" />
     <Folder Include="qptech\assets\game\blocktypes\" />
+    <Folder Include="qptech\assets\game\sounds\block\" />
     <Folder Include="qptech\assets\machines\shapes\block\glass\" />
     <Folder Include="qptech\assets\machines\shapes\block\indev\" />
     <Folder Include="qptech\assets\machines\shapes\block\liquid\" />
-    <Folder Include="qptech\assets\machines\sounds\block\" />
     <Folder Include="qptech\assets\qptech\textures\" />
   </ItemGroup>
 </Project>
