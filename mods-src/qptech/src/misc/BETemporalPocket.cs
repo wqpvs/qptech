@@ -134,7 +134,7 @@ namespace qptech.src
         }
         void TryLoadInventory(IPlayer player)
         {
-            this.Inventory.DiscardAll();
+            this.Inventory.DropAll(Pos.ToVec3d());
 
             try
             {
