@@ -578,6 +578,7 @@
     <Content Include="qptech\assets\machines\textures\block\stone\concrete-white.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\mixer.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\standinblank.png" />
+    <Content Include="qptech\assets\machines\textures\block\temporalpocket.png" />
     <Content Include="qptech\assets\machines\textures\item\resource\temporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\item\rubbercrucible.png" />
     <Content Include="qptech\assets\machines\textures\item\redpaintedsteelwrench.png" />

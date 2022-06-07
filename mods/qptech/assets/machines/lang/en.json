@@ -245,6 +245,8 @@
 	"item-miningdrill": "Mining Drill",
 	"itemdesc-miningdrill": "Alcohol fueled mining! Fueling: Right click with drill on a container of spirits. Drill Head replacement, press F and drag a new drill head on to the pop up menu. (Pop up menu used for selecting drill pattern as well)",
 	"item-drillhead-*": "Mining Drillhead (Steel)",
-	"itemdesc-drillhead-*": "Required for the mining drill. Part will wear out with use in the drill."
+	"itemdesc-drillhead-*": "Required for the mining drill. Part will wear out with use in the drill.",
+	"block-temporalpocket-*": "Temporal Pocket",
+	"blockdesc-temporalpocket-*": "Dimensionally linked storage unit. NO THIS IS NOT AN ENDERCHEST STOP LOOKING AT ME LIKE THAT"
 
 }

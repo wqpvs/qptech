@@ -62,7 +62,7 @@
 	"drawtype": "json",
 	"texturesByType": {
 		"*": {
-			"all": { "base": "block/machinery" }
+			"all": { "base": "block/temporalpocket" }
 		}
 	},
 	"resistance": 1,
