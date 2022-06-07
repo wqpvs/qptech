@@ -18,7 +18,7 @@ using Vintagestory.ServerMods;
 
 namespace qptech.src
 {
-    class BlockTemporalPocket:BlockGenericTypedContainer
+    class BlockTemporalPocket:Block
     {
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {

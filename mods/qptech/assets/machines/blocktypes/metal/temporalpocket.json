@@ -8,12 +8,14 @@
 		defaultType: "normal-generic",
 		"types": [ "normal-generic" ],
 		"quantitySlots": 64,
-		"quantityColumns": { "normal-generic": 8 },
-		"storageType": { "normal-generic": 169 },
-		"dialogTitleLangCode": {
-			"normal-generic": "Dimensional Pocket"
+		quantityColumns: {
+			"*": 9
 		},
-		"typedOpenSound": { "normal-generic": "game:sounds/block/cokeovendoor-open" },
+		"storageType": { "normal-generic": 169 },
+		"dialogTitleLangCode": 
+			"Dimensional Pocket"
+		,
+		"typedOpenSound": "game:sounds/block/hmmm" ,
 		"typedCloseSound": { "normal-generic": "game:sounds/block/cokeovendoor-close" },
 		"heatingefficiency": 0.25
 
