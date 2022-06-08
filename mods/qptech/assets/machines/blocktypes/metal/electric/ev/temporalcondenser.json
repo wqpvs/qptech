@@ -37,26 +37,26 @@
 	"drawtype": "json",
 	"texturesByType": {
 		"*-hv-*" :{
-			"all": { "base": "block/metal/ingot/chargedtemporalsteel" }
+			"all": { "base": "block/metal/ingot/temporalsteel" }
 		},
 
 	},
-	"shape": { "base": "block/metal/electric/heatsink" },
+	"shape": { "base": "block/metal/temporalcondenser" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/heatsink",
+			"base": "block/metal/temporalcondenser",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/heatsink",
+			"base": "block/metal/temporalcondenser",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/heatsink",
+			"base": "block/metal/temporalcondenser",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/heatsink",
+			"base": "block/metal/temporalcondenser",
 			"rotateY": 180
 		}
 	},

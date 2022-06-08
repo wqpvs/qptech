@@ -17,12 +17,18 @@ using Vintagestory.API.Util;
 using Vintagestory.ServerMods;
 using qptech.src.extensions;
 using System.Text.RegularExpressions;
+using qptech.src.itemtransport;
 
 namespace qptech.src
 {
+    /// <summary>
+    /// The Temporal Condenser uses electricity and temporal instability to charge relvant materials (mainly temporal steel)
+    /// </summary>
     class BEETemporalCondenser:BEElectric
     {
         float chargereq = 10000;
+        ItemStack contents;
+
         
         public override void Initialize(ICoreAPI api)
         {
@@ -45,63 +51,78 @@ namespace qptech.src
             float stability=tempStabilitySystem.GetTemporalStability(Pos);
             if (stability > 0.9f) { return; }
             float stabbonus = Math.Min(1, 1 - stability)*10;
-            bool changed = false;
             //TODO: add bonuses for nearby rifts? spawn rifts on transform?
-            //check for containers with valid chargable items - eventually i'll add item attributes for this
-            foreach (BlockFacing bf in BlockFacing.ALLFACES)
-            {
-                BlockPos checkpos = Pos.Copy().Offset(bf);
-                BlockEntityContainer bec = Api.World.BlockAccessor.GetBlockEntity(checkpos) as BlockEntityContainer;
-                if (bec == null) { continue; }
-                if (bec.Inventory == null || bec.Inventory.Empty) { continue; }
-                foreach (ItemSlot slot in bec.Inventory)
+            
+            if (contents==null|| contents.StackSize == 0) { return; }
+            float requiredcharge = contents.Collectible.Attributes["temporalCharge"].AsFloat(0);
+            //if this isn't a chargeable object return;
+            if (requiredcharge == 0) { return; }
+            string temporalTransformBlockOrItem = contents.Attributes.GetString("temporalTransformBlockOrItem", "item");
+            float currentcharge = contents.Attributes.GetFloat("temporalcharge", 0);
+            string transformsto = contents.Collectible.Attributes["temporalTransformTo"].AsString("");
+            currentcharge += stabbonus / (float)contents.StackSize;
+
+            if (currentcharge >= requiredcharge) { 
+             
+                int qty = contents.StackSize;
+                if (temporalTransformBlockOrItem == "item")
                 {
-                    if (slot == null || slot.Itemstack==null|| slot.Empty||slot.StackSize<1) { return; }
-                    ItemStack stack = slot.Itemstack;
-                    string transformsto = stack.Collectible.Attributes["temporalTransformTo"].AsString("");
-                    if (transformsto == "") { continue; }
-                    float requiredcharge = stack.Collectible.Attributes["temporalCharge"].AsFloat(10000);
-                    float currentcharge = stack.Attributes.GetFloat("temporalcharge", 0);
-                    string temporalTransformBlockOrItem = stack.Attributes.GetString("temporalTransformBlockOrItem", "item");
-                    currentcharge += stabbonus/(float)stack.StackSize;
-                    //item is charged do the transform
-                    if (currentcharge > requiredcharge)
-                    {
-                        int qty = stack.StackSize;
-                        if (temporalTransformBlockOrItem == "item")
-                        {
-                            Item newitem = Api.World.GetItem(new AssetLocation(transformsto));
-                            ItemStack newstack = new ItemStack(newitem, qty);
-                            slot.Itemstack = newstack;
-                            
-                        }
-                        else
-                        {
-                            Block newblock = Api.World.GetBlock(new AssetLocation(transformsto));
-                            ItemStack newstack = new ItemStack(newblock, qty);
-                            slot.Itemstack = newstack;
-                        }
-                        slot.MarkDirty();
-                        changed = true;
-                        
-                    }
-                    //item is not charged save the value
-                    else
-                    {
-                        stack.Attributes.SetFloat("temporalcharge", currentcharge);
-                        slot.MarkDirty();
-                        changed = true;
-                    }
+                    Item newitem = Api.World.GetItem(new AssetLocation(transformsto));
+                    ItemStack newstack = new ItemStack(newitem, qty);
+                    contents = newstack;
+                    //TODO UPDATE RENDER MESH
                 }
-                if (changed) { bec.MarkDirty(); }
+                else
+                {
+                    Block newblock = Api.World.GetBlock(new AssetLocation(transformsto));
+                    ItemStack newstack = new ItemStack(newblock, qty);
+                    contents = newstack;
+                    //TODO UPDATE RENDER MESH
+                }
+               
             }
+            //item is not charged save the value
+            else
+            {
+                contents.Attributes.SetFloat("temporalcharge", currentcharge);
+
+            }
+      
         }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
             float stability = tempStabilitySystem.GetTemporalStability(Pos);
+            if (contents != null && contents.StackSize > 0)
+            {
+                float requiredcharge = contents.Collectible.Attributes["temporalCharge"].AsFloat(0);
+                
+                float currentcharge = contents.Attributes.GetFloat("temporalcharge", 0);
+                if (requiredcharge > 0)
+                {
+                    float pct = (float)Math.Ceiling(100*(currentcharge / requiredcharge) );
+                    dsc.AppendLine("Charging progress " + pct + "%");
+                }
+            }
             if (stability > 0.9f) { dsc.AppendLine("Insufficent Temporal Instability ("+stability+")"); }
             else { dsc.AppendLine("Temporal Instability Adequate ("+stability+")"); }
+        }
+
+        public override void ToTreeAttributes(ITreeAttribute tree)
+        {
+            
+            base.ToTreeAttributes(tree);
+            tree.SetItemstack("contents", contents);
+        }
+
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
+        {
+            base.FromTreeAttributes(tree, worldAccessForResolve);
+            contents = tree.GetItemstack("contents");
+            if (contents != null)
+            {
+                contents.ResolveBlockOrItem(worldAccessForResolve);
+            }
         }
     }
 }
