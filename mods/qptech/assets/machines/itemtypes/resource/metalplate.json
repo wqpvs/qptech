@@ -36,6 +36,13 @@
 
     }
   },
+  "attributesByType": {
+    "*=temporalsteel": {
+      "temporalCharge": 10000,
+      "temporalTransformTo": "metalplate-chargedtemporalsteel",
+      "temporalTransformBlockOrItem": "item"
+    }
+  },
   "variantgroups": [
     {
       "code": "metal",

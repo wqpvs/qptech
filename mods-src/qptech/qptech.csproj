@@ -89,6 +89,7 @@
     <Compile Include="src\Electricity\BEEMixer.cs" />
     <Compile Include="src\Electricity\BEEProcessingSupplier.cs" />
     <Compile Include="src\Electricity\BEERecipeProcessor.cs" />
+    <Compile Include="src\Electricity\BEETemporalCondenser.cs" />
     <Compile Include="src\Electricity\ElectricityAPI.cs" />
     <Compile Include="src\Electricity\BEELightBulb.cs" />
     <Compile Include="src\Electricity\WireRenderer.cs" />

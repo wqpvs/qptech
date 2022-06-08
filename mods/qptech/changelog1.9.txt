@@ -1,5 +1,7 @@
 ﻿1.9.1
-- maybe temporal pockets?
+- added temporal pocket
+- added temporal condenser
+- added charged temporal steel ingot, plate, and sheet
 
 1.9.0
 - fixed a server error loop with item transport
