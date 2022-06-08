@@ -28,12 +28,13 @@ namespace qptech.src
     {
         float chargereq = 10000;
         ItemStack contents;
-
+        
         
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
             tempStabilitySystem = api.ModLoader.GetModSystem<SystemTemporalStability>();
+            
         }
 
         public override void OnTick(float par)
@@ -89,6 +90,39 @@ namespace qptech.src
             }
       
         }
+
+        public virtual bool PlayerClicked(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
+        {
+            //if (capi != null) { return true; }
+
+            //Pull an item from the players hand if applicable
+            if ((contents == null || contents.StackSize == 0)&&(byPlayer.Entity.RightHandItemSlot.Itemstack!=null&&byPlayer.Entity.RightHandItemSlot.Itemstack.StackSize>0))
+            {
+                
+                
+                float requirecharge= byPlayer.Entity.RightHandItemSlot.Itemstack.Collectible.Attributes["temporalCharge"].AsFloat(0);
+                if (requirecharge == 0) { return false; }
+                contents = new ItemStack(byPlayer.Entity.RightHandItemSlot.Itemstack.Collectible, 1);
+                
+                byPlayer.Entity.RightHandItemSlot.Itemstack.StackSize--;
+                if (byPlayer.Entity.RightHandItemSlot.Itemstack.StackSize == 0) { byPlayer.Entity.RightHandItemSlot.Itemstack = null; }
+                byPlayer.Entity.RightHandItemSlot.MarkDirty();
+                //TODO Update renderer!
+                MarkDirty(true);
+                return true;
+            }
+            //Otherwise give item to player
+            else if (contents != null && contents.StackSize > 0 && byPlayer.Entity.RightHandItemSlot.Empty)
+            {
+                byPlayer.Entity.RightHandItemSlot.Itemstack = new ItemStack(contents.Collectible, contents.StackSize);
+                contents = null;
+                byPlayer.Entity.RightHandItemSlot.MarkDirty();
+                MarkDirty(true);
+                return true;
+            }
+            return false;
+        }
+
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
@@ -98,6 +132,7 @@ namespace qptech.src
                 float requiredcharge = contents.Collectible.Attributes["temporalCharge"].AsFloat(0);
                 
                 float currentcharge = contents.Attributes.GetFloat("temporalcharge", 0);
+                dsc.AppendLine("Loaded item: " + contents.Collectible.GetHeldItemName(contents));
                 if (requiredcharge > 0)
                 {
                     float pct = (float)Math.Ceiling(100*(currentcharge / requiredcharge) );

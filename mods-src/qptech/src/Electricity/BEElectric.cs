@@ -134,6 +134,7 @@ namespace qptech.src
         }
         public Size2i AtlasSize => (Api as ICoreClientAPI).BlockTextureAtlas.Size;
         protected ICoreClientAPI capi;
+        protected ICoreServerAPI sapi;
         protected Block atlasBlock; //this block will reference a shape which will reference all used textures
         protected List<string> displayTextures; //this is a list of texture file names, must be include in the atlas block's shape
         int texno = 0; //the index number
@@ -187,6 +188,10 @@ namespace qptech.src
                 wirerenderer.TextureName= new AssetLocation("machines:block/rubber/cable.png");
                 wirerenderer.bee = this;
                 wirerenderer.wireoffset = wireoffset;
+            }
+            else if (api is ICoreServerAPI)
+            {
+                sapi = api as ICoreServerAPI;
             }
             RegisterGameTickListener(OnTick, 75);
             notfirsttick = false;
@@ -785,7 +790,7 @@ namespace qptech.src
     
             return toChange;
         }
-
         
+
     }
 }

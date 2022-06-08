@@ -38,12 +38,17 @@ namespace qptech.src
         {
 
             var bee = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BEElectric;
-
+            
             if (bee != null && byPlayer.Entity.RightHandItemSlot.Itemstack == null)
             {
                 bee.OpenStatusGUI();
             }
             if (bee == null) return base.OnBlockInteractStart(world, byPlayer, blockSel);
+            var tc = bee as BEETemporalCondenser;
+            if (tc != null)
+            {
+                if (tc.PlayerClicked(world, byPlayer, blockSel)) { return true; } ;
+            }
             if (byPlayer.Entity.RightHandItemSlot.Itemstack == null) return base.OnBlockInteractStart(world, byPlayer, blockSel);
             if (byPlayer.Entity.RightHandItemSlot.Itemstack.Item == null) return base.OnBlockInteractStart(world, byPlayer, blockSel);
             string fcp = byPlayer.Entity.RightHandItemSlot.Itemstack.Item.CodeWithoutParts(1);
@@ -64,6 +69,7 @@ namespace qptech.src
             {
                 return bee.OnWireClick(world, byPlayer, blockSel);
             }
+            
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
 
