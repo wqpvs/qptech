@@ -127,6 +127,7 @@ namespace qptech.src
             api.RegisterBlockClass("BlockTemporalPocket", typeof(BlockTemporalPocket));
             api.RegisterBlockClass("BlockCannedMeal", typeof(BlockCannedMeal));
             api.RegisterBlockClass("BlockDummy", typeof(BlockDummy));
+            api.RegisterCollectibleBehaviorClass("CBTemporalChargeable", typeof(CBTemporalChargeable));
         }
 
         private void RegisterDefaultBlockEntitys()

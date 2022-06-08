@@ -63,7 +63,7 @@ namespace qptech.src
                     float requiredcharge = stack.Collectible.Attributes["temporalCharge"].AsFloat(10000);
                     float currentcharge = stack.Attributes.GetFloat("temporalcharge", 0);
                     string temporalTransformBlockOrItem = stack.Attributes.GetString("temporalTransformBlockOrItem", "item");
-                    currentcharge += stabbonus;
+                    currentcharge += stabbonus/(float)stack.StackSize;
                     //item is charged do the transform
                     if (currentcharge > requiredcharge)
                     {

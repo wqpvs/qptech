@@ -27,6 +27,11 @@
       }
     }
   ],
+  "behaviorsByType": {
+     "*-temporalsteel": [
+       {"name":"CBTemporalChargeable"}
+     ]
+  },
   "shape": { "base": "game:item/plate" },
   "maxstacksize": 8,
   "storageFlags": 5,
@@ -37,9 +42,9 @@
     }
   },
   "attributesByType": {
-    "*=temporalsteel": {
+    "*-temporalsteel": {
       "temporalCharge": 10000,
-      "temporalTransformTo": "metalplate-chargedtemporalsteel",
+      "temporalTransformTo": "machines:metalplate-chargedtemporalsteel",
       "temporalTransformBlockOrItem": "item"
     }
   },
