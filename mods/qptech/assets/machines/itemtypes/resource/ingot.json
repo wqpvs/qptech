@@ -31,23 +31,26 @@
   "attributes": {
     "reinforcementStrengthByType": {
 
-      "*-temporalsteel": 5000
+      "*-temporalsteel": 5000,
+      "*-chargedtemporalsteel": 6000
     },
     
     
     "requiresAnvilTierByType": {
       
-      "ingot-temporalsteel": 4
+      "ingot-temporalsteel": 4,
+      "ingot-chargedtemporalsteel": 5
     },
     
     "displaycaseable": true,
     "shelvable": true
   },
+
   "variantgroups": [
     {
       "code": "metal",
       
-      "states": [ "temporalsteel" ]
+      "states": [ "temporalsteel","chargedtemporalsteel" ]
     }
   ],
   "storageFlags": 5,
@@ -61,12 +64,21 @@
     "items": [ "*" ]
   },
   "materialDensityByType": {
-    "*-temporalsteel": 4000
-
+    "*-temporalsteel": 4000,
+    "*-chargedtemporalsteel": 8000
   },
   "combustiblePropsByType": {
     "ingot-temporalsteel": {
       "meltingPoint": 1400,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltedStack": {
+        "type": "item",
+        "code": "ingot-temporalsteel"
+      }
+    },
+    "ingot-chargedtemporalsteel": {
+      "meltingPoint": 2500,
       "meltingDuration": 30,
       "smeltedRatio": 1,
       "smeltedStack": {

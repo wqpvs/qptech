@@ -247,6 +247,12 @@
 	"item-drillhead-*": "Mining Drillhead (Steel)",
 	"itemdesc-drillhead-*": "Required for the mining drill. Part will wear out with use in the drill.",
 	"block-temporalpocket-*": "Temporal Pocket",
-	"blockdesc-temporalpocket-*": "Dimensionally linked storage unit. NO THIS IS NOT AN ENDERCHEST STOP LOOKING AT ME LIKE THAT"
+	"blockdesc-temporalpocket-*": "Dimensionally linked storage unit. NO THIS IS NOT AN ENDERCHEST STOP LOOKING AT ME LIKE THAT",
+	"item-ingot-chargedtemporalsteel": "Temporal Steel Ingot",
+	"itemdesc-ingot-chargedtemporalsteel": "Energized form of Temporal Steel",
+	"block-metalsheet-chargedtemporalsteel-*": "Charged Temporal Steel Sheet",
+	"blockdesc-metalsheet-chargedtemporalsteel-*": "Energized form of Temporal Steel",
+	"item-metalplate-chargedtemporalsteel": "Temporal Steel Metal Plate",
+	"itemdesc-metalplate-chargedtemporalsteel": "Energized form of Temporal Steel"
 
 }

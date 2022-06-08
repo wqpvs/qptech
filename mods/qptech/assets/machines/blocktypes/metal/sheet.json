@@ -8,7 +8,7 @@
   "variantgroups": [
     {
       "code": "metal",
-      "states": [ "temporalsteel" ]
+      "states": [ "temporalsteel","chargedtemporalsteel" ]
     },
     {
       "code": "side",
@@ -177,6 +177,15 @@
       "smeltedStack": {
         "type": "item",
         "code": "ingot-temporalsteel"
+      }
+    },
+    "metalsheet-chargedtemporalsteel": {
+      "meltingPoint": 2500,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltedStack": {
+        "type": "item",
+        "code": "ingot-chargedtemporalsteel"
       }
     }
   }

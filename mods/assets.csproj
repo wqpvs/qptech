@@ -530,6 +530,7 @@
     <Content Include="qptech\assets\machines\textures\block\machinery.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\hopper\machinery-border.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\hopper\tinbronze1.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\ingot\chargedtemporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\ingot\temporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\macerator\machinery-back.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\macerator\machinery-border-small.png" />
@@ -540,6 +541,7 @@
     <Content Include="qptech\assets\machines\textures\block\metal\metalpress\machinery-border-small.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\pipes\bluesteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\pipes\bronze.png" />
+    <Content Include="qptech\assets\machines\textures\block\metal\sheet\chargedtemporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\sheet\temporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\stairs\metal.png" />
     <Content Include="qptech\assets\machines\textures\block\metal\tank\bluesteel.png" />
@@ -579,6 +581,8 @@
     <Content Include="qptech\assets\machines\textures\block\tempblocks\mixer.png" />
     <Content Include="qptech\assets\machines\textures\block\tempblocks\standinblank.png" />
     <Content Include="qptech\assets\machines\textures\block\temporalpocket.png" />
+    <Content Include="qptech\assets\machines\textures\item\crudecircuitboard.png" />
+    <Content Include="qptech\assets\machines\textures\item\resource\chargedtemporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\item\resource\temporalsteel.png" />
     <Content Include="qptech\assets\machines\textures\item\rubbercrucible.png" />
     <Content Include="qptech\assets\machines\textures\item\redpaintedsteelwrench.png" />
@@ -598,6 +602,7 @@
     <Folder Include="chisel\assets\chiseltools\textures\icons\" />
     <Folder Include="qptech\assets\game\blocktypes\" />
     <Folder Include="qptech\assets\game\sounds\block\" />
+    <Folder Include="qptech\assets\machines\itemtypes\part\ev\" />
     <Folder Include="qptech\assets\machines\shapes\block\glass\" />
     <Folder Include="qptech\assets\machines\shapes\block\indev\" />
     <Folder Include="qptech\assets\machines\shapes\block\liquid\" />
