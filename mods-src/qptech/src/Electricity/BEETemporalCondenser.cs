@@ -96,6 +96,7 @@ namespace qptech.src
             //if (capi != null) { return true; }
 
             //Pull an item from the players hand if applicable
+            //TODO: Proper item transfer
             if ((contents == null || contents.StackSize == 0)&&(byPlayer.Entity.RightHandItemSlot.Itemstack!=null&&byPlayer.Entity.RightHandItemSlot.Itemstack.StackSize>0))
             {
                 
@@ -103,7 +104,8 @@ namespace qptech.src
                 float requirecharge= byPlayer.Entity.RightHandItemSlot.Itemstack.Collectible.Attributes["temporalCharge"].AsFloat(0);
                 if (requirecharge == 0) { return false; }
                 contents = new ItemStack(byPlayer.Entity.RightHandItemSlot.Itemstack.Collectible, 1);
-                
+                float copycharge = byPlayer.Entity.RightHandItemSlot.Itemstack.Attributes.GetFloat("temporalcharge", 0);
+                if (copycharge != 0) { contents.Attributes.SetFloat("temporalcharge", copycharge); }
                 byPlayer.Entity.RightHandItemSlot.Itemstack.StackSize--;
                 if (byPlayer.Entity.RightHandItemSlot.Itemstack.StackSize == 0) { byPlayer.Entity.RightHandItemSlot.Itemstack = null; }
                 byPlayer.Entity.RightHandItemSlot.MarkDirty();
@@ -115,6 +117,8 @@ namespace qptech.src
             else if (contents != null && contents.StackSize > 0 && byPlayer.Entity.RightHandItemSlot.Empty)
             {
                 byPlayer.Entity.RightHandItemSlot.Itemstack = new ItemStack(contents.Collectible, contents.StackSize);
+                float copycharge = contents.Attributes.GetFloat("temporalcharge", 0);
+                if (copycharge != 0) { byPlayer.Entity.RightHandItemSlot.Itemstack.Attributes.SetFloat("temporalcharge", copycharge); }
                 contents = null;
                 byPlayer.Entity.RightHandItemSlot.MarkDirty();
                 MarkDirty(true);
@@ -137,6 +141,10 @@ namespace qptech.src
                 {
                     float pct = (float)Math.Ceiling(100*(currentcharge / requiredcharge) );
                     dsc.AppendLine("Charging progress " + pct + "%");
+                }
+                else
+                {
+                    dsc.AppendLine("Charging Complete!");
                 }
             }
             if (stability > 0.9f) { dsc.AppendLine("Insufficent Temporal Instability ("+stability+")"); }
