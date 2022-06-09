@@ -47,7 +47,7 @@ namespace qptech.src
             {
                 TryCharge();
             }
-            if (Api is ICoreClientAPI && contents != null && meshdata == null) { GenMesh();MarkDirty(true); }
+            if (Api is ICoreClientAPI && contents!=null) { GenMesh();MarkDirty(true); }
         }
         SystemTemporalStability tempStabilitySystem;
         public virtual void TryCharge()
@@ -85,7 +85,7 @@ namespace qptech.src
                     ItemStack newstack = new ItemStack(newblock, qty);
                     contents = newstack;
                     GenMesh();
-                    MarkDirty(true);
+                     MarkDirty(true);
                     //TODO UPDATE RENDER MESH
                 }
                
@@ -135,9 +135,10 @@ namespace qptech.src
                 MarkDirty(true);
                 return true;
             }
-            return false;
+            return true;
         }
         MeshData meshdata;
+        float yrot = 0;
         public virtual void GenMesh()
         {
             //if we trigger a genmesh at the server, need to broadcast the instruction to update to the client
@@ -160,12 +161,25 @@ namespace qptech.src
                     tmpMetal = contents.Collectible.LastCodePart();
                     //if we hardcode this to tmpMetal = "temporalsteel"; it will render an iron ingot
                     
-                    tmpTextureSource = capi.Tesselator.GetTexSource(capi.World.GetBlock(new AssetLocation("machines:metalsheet-temporalsteel-down")));
+                    tmpTextureSource = capi.Tesselator.GetTexSource(capi.World.GetBlock(new AssetLocation("machines:metalsheet-"+tmpMetal+"-down")));
                     shape = capi.Assets.TryGet("game:shapes/block/stone/forge/ingotpile.json").ToObject<Shape>();
                     textureId = tmpTextureSource[tmpMetal].atlasTextureId;
                     capi.Tesselator.TesselateShape("block-fcr", shape, out meshdata, this, new Vec3f(0,4,0), 0, 0, 0, contents.StackSize);
                     
                     
+                }
+                else if (contents.Item.FirstCodePart() == "metalplate")
+                {
+
+                    tmpMetal = contents.Collectible.LastCodePart();
+                    //if we hardcode this to tmpMetal = "temporalsteel"; it will render an iron ingot
+
+                    tmpTextureSource = capi.Tesselator.GetTexSource(capi.World.GetBlock(new AssetLocation("machines:metalsheet-temporalsteel-down")));
+                    shape = capi.Assets.TryGet("game:shapes/block/stone/forge/platepile.json").ToObject<Shape>();
+                    textureId = tmpTextureSource[tmpMetal].atlasTextureId;
+                    capi.Tesselator.TesselateShape("block-fcr", shape, out meshdata, this, new Vec3f(0, 4, 0), 0, 0, 0, contents.StackSize);
+
+
                 }
                 else
                 {
@@ -178,8 +192,8 @@ namespace qptech.src
             }
             
             meshdata.Translate(new Vec3f(0, 0.25f, 0));
-
-            
+            meshdata.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, yrot* 0.0174533f, 0);
+            yrot += 1;
         }
         public override TextureAtlasPosition this[string textureCode]
         {
