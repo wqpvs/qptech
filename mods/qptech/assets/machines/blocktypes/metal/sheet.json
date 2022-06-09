@@ -5,6 +5,18 @@
   "attributes": {
 
   },
+  "attributesByType": {
+    "*-temporalsteel-*": {
+      "temporalCharge": 10000,
+      "temporalTransformTo": "machines:metalsheet-chargedtemporalsteel",
+      "temporalTransformBlockOrItem": "block"
+    }
+  },
+  "behaviorsByType": {
+     "*-temporalsteel-*": [
+       {"name":"CBTemporalChargeable"}
+     ]
+  },
   "variantgroups": [
     {
       "code": "metal",

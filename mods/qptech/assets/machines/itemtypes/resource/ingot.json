@@ -28,6 +28,11 @@
       }
     }
   ],
+  "behaviorsByType": {
+     "*-temporalsteel": [
+       {"name":"CBTemporalChargeable"}
+     ]
+  },
   "attributes": {
     "reinforcementStrengthByType": {
 
@@ -45,7 +50,13 @@
     "displaycaseable": true,
     "shelvable": true
   },
-
+  "attributesByType": {
+    "*-temporalsteel": {
+      "temporalCharge": 10000,
+      "temporalTransformTo": "machines:ingot-chargedtemporalsteel",
+      "temporalTransformBlockOrItem": "item"
+    }
+  },
   "variantgroups": [
     {
       "code": "metal",

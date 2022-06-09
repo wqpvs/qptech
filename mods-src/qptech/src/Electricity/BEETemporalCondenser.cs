@@ -34,7 +34,7 @@ namespace qptech.src
         {
             base.Initialize(api);
             tempStabilitySystem = api.ModLoader.GetModSystem<SystemTemporalStability>();
-            
+            if (api is ICoreClientAPI) { GenMesh(); }
         }
 
         public override void OnTick(float par)
@@ -44,6 +44,7 @@ namespace qptech.src
             {
                 TryCharge();
             }
+            if (Api is ICoreClientAPI && contents != null && meshdata == null) { GenMesh();MarkDirty(true); }
         }
         SystemTemporalStability tempStabilitySystem;
         public virtual void TryCharge()
@@ -72,12 +73,16 @@ namespace qptech.src
                     ItemStack newstack = new ItemStack(newitem, qty);
                     contents = newstack;
                     //TODO UPDATE RENDER MESH
+                    GenMesh();
+                    MarkDirty(true);
                 }
                 else
                 {
                     Block newblock = Api.World.GetBlock(new AssetLocation(transformsto));
                     ItemStack newstack = new ItemStack(newblock, qty);
                     contents = newstack;
+                    GenMesh();
+                    MarkDirty(true);
                     //TODO UPDATE RENDER MESH
                 }
                
@@ -90,7 +95,7 @@ namespace qptech.src
             }
       
         }
-
+        
         public virtual bool PlayerClicked(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
             //if (capi != null) { return true; }
@@ -110,6 +115,7 @@ namespace qptech.src
                 if (byPlayer.Entity.RightHandItemSlot.Itemstack.StackSize == 0) { byPlayer.Entity.RightHandItemSlot.Itemstack = null; }
                 byPlayer.Entity.RightHandItemSlot.MarkDirty();
                 //TODO Update renderer!
+                GenMesh();
                 MarkDirty(true);
                 return true;
             }
@@ -121,12 +127,56 @@ namespace qptech.src
                 if (copycharge != 0) { byPlayer.Entity.RightHandItemSlot.Itemstack.Attributes.SetFloat("temporalcharge", copycharge); }
                 contents = null;
                 byPlayer.Entity.RightHandItemSlot.MarkDirty();
+                GenMesh();
                 MarkDirty(true);
                 return true;
             }
             return false;
         }
+        MeshData meshdata;
+        public virtual void GenMesh()
+        {
+            //if we trigger a genmesh at the server, need to broadcast the instruction to update to the client
+            if (sapi != null)
+            {
+                sapi.Network.BroadcastBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)enPacketIDs.GenMesh, null);
+                return;
+            }
+            meshdata = null;
+            
+             //didn't feel like refactoring right now
+            if (contents == null || (contents.Item == null && contents.Block == null)) { return; }
 
+
+            if (contents.Class == EnumItemClass.Item)
+            {
+                capi.Tesselator.TesselateItem(contents.Item, out meshdata);
+            }
+            else
+            {
+                capi.Tesselator.TesselateBlock(contents.Block, out meshdata);
+            }
+
+
+            
+        }
+
+        public override void OnReceivedServerPacket(int packetid, byte[] data)
+        {
+            base.OnReceivedServerPacket(packetid, data);
+            if (packetid == (int)enPacketIDs.GenMesh) { GenMesh(); }
+        }
+
+        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
+        {
+            
+            if (meshdata == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
+            mesher.AddMeshData(meshdata); return false;
+            //try { mesher.AddMeshData(meshdata); }
+            //catch { return base.OnTesselation(mesher, tessThreadTesselator); }
+
+            //return base.OnTesselation(mesher, tessThreadTesselator);
+        }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);

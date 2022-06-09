@@ -569,7 +569,8 @@ namespace qptech.src
             ToggleMode = 99990003,
             Halt = 99990004,
             Wrench = 99990005,
-            Wire = 99990006
+            Wire = 99990006,
+            GenMesh = 99991005
         }
         public virtual void Wrench()
         {
