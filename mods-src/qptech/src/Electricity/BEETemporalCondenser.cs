@@ -28,8 +28,11 @@ namespace qptech.src
     {
         float chargereq = 10000;
         ItemStack contents;
-        
-        
+        string tmpMetal;
+        int textureId;
+        Shape shape;
+        ITexPositionSource tmpTextureSource;
+
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -127,6 +130,7 @@ namespace qptech.src
                 if (copycharge != 0) { byPlayer.Entity.RightHandItemSlot.Itemstack.Attributes.SetFloat("temporalcharge", copycharge); }
                 contents = null;
                 byPlayer.Entity.RightHandItemSlot.MarkDirty();
+                meshdata = null;
                 GenMesh();
                 MarkDirty(true);
                 return true;
@@ -150,17 +154,37 @@ namespace qptech.src
 
             if (contents.Class == EnumItemClass.Item)
             {
-                capi.Tesselator.TesselateItem(contents.Item, out meshdata);
+                if (contents.Item.FirstCodePart() == "ingot")
+                {
+                    
+                    tmpMetal = contents.Collectible.LastCodePart();
+                    //if we hardcode this to tmpMetal = "temporalsteel"; it will render an iron ingot
+                    
+                    tmpTextureSource = capi.Tesselator.GetTexSource(capi.World.GetBlock(new AssetLocation("machines:metalsheet-temporalsteel-down")));
+                    shape = capi.Assets.TryGet("game:shapes/block/stone/forge/ingotpile.json").ToObject<Shape>();
+                    textureId = tmpTextureSource[tmpMetal].atlasTextureId;
+                    capi.Tesselator.TesselateShape("block-fcr", shape, out meshdata, this, new Vec3f(0,4,0), 0, 0, 0, contents.StackSize);
+                    
+                    
+                }
+                else
+                {
+                    capi.Tesselator.TesselateItem(contents.Item, out meshdata);
+                }
             }
             else
             {
                 capi.Tesselator.TesselateBlock(contents.Block, out meshdata);
             }
-
+            
+            meshdata.Translate(new Vec3f(0, 0.25f, 0));
 
             
         }
-
+        public override TextureAtlasPosition this[string textureCode]
+        {
+            get { return tmpTextureSource["down"]; }
+        }
         public override void OnReceivedServerPacket(int packetid, byte[] data)
         {
             base.OnReceivedServerPacket(packetid, data);
@@ -170,12 +194,9 @@ namespace qptech.src
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
             
-            if (meshdata == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
+            if (meshdata == null||contents==null||contents.Collectible==null||contents.StackSize==0) { return base.OnTesselation(mesher, tessThreadTesselator); }
             mesher.AddMeshData(meshdata); return false;
-            //try { mesher.AddMeshData(meshdata); }
-            //catch { return base.OnTesselation(mesher, tessThreadTesselator); }
-
-            //return base.OnTesselation(mesher, tessThreadTesselator);
+            
         }
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {

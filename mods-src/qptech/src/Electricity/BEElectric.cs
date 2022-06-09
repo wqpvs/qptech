@@ -124,7 +124,7 @@ namespace qptech.src
         }
         
 
-        public TextureAtlasPosition this[string textureCode]
+        public virtual TextureAtlasPosition this[string textureCode]
         {
             get
             {
