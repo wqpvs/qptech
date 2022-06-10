@@ -27,7 +27,7 @@
 		"*-hv-*": {
 			"genFlux": 0,
 			"useFlux": 256,
-			
+			"runsound": "sounds/temporalcondenser",
 			"inputFace": "west",
 			"outputFace": "east"
 		}

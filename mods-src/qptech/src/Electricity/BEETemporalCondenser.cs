@@ -33,24 +33,55 @@ namespace qptech.src
         Shape shape;
         ITexPositionSource tmpTextureSource;
         private SimpleParticleProperties smokeParticles;
-
+        float soundlevel = 1f;
+        bool alreadyPlayedSound = false;
+        bool loopsound = true;
+        int soundoffdelaycounter = 0;
+        ILoadedSound ambientSound;
+        string runsound = "";
+        public virtual float SoundLevel
+        {
+            get { return soundlevel; }
+        }
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
             tempStabilitySystem = api.ModLoader.GetModSystem<SystemTemporalStability>();
+            if (Block.Attributes != null) { runsound = Block.Attributes["runsound"].AsString(runsound); }
             if (api is ICoreClientAPI) { GenMesh(); }
         }
 
         public override void OnTick(float par)
         {
             base.OnTick(par);
-            if (lastPower>=usePower && Api is ICoreServerAPI)
+            bool processing = false;
+
+            if (contents != null&&lastPower>=usePower) {
+                float requiredcharge = contents.Collectible.Attributes["temporalCharge"].AsFloat(0);
+
+                float currentcharge = contents.Attributes.GetFloat("temporalcharge", 0);
+                if (requiredcharge > 0 && currentcharge < requiredcharge)
+                {
+                    processing = true;
+                }
+            }
+            ToggleAmbientSounds(processing);
+            if (processing && Api is ICoreServerAPI)
             {
                 TryCharge();
             }
-            if (Api is ICoreClientAPI && contents!=null && lastPower>=usePower) {
-                GenMesh();MarkDirty(true);
-                DoRunningParticles();
+            if (Api is ICoreClientAPI){
+                
+                if (processing)
+                {
+                    yrotspeed = 1; 
+                    DoRunningParticles();
+                }
+                else
+                {
+                    yrotspeed = 0;
+                }
+                GenMesh(); MarkDirty(true);
             }
         }
         SystemTemporalStability tempStabilitySystem;
@@ -167,6 +198,7 @@ namespace qptech.src
         }
         MeshData meshdata;
         float yrot = 0;
+        float yrotspeed = 1;
         public virtual void GenMesh()
         {
             //if we trigger a genmesh at the server, need to broadcast the instruction to update to the client
@@ -221,7 +253,7 @@ namespace qptech.src
             
             meshdata.Translate(new Vec3f(0, 0.25f, 0));
             meshdata.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, yrot* 0.0174533f, 0);
-            yrot += 1;
+            yrot += yrotspeed;
         }
         public override TextureAtlasPosition this[string textureCode]
         {
@@ -279,6 +311,42 @@ namespace qptech.src
             {
                 contents.ResolveBlockOrItem(worldAccessForResolve);
             }
+        }
+        public void ToggleAmbientSounds(bool on)
+        {
+            if (Api.Side != EnumAppSide.Client) return;
+            if (runsound == "" || SoundLevel == 0) { return; }
+            if (on)
+            {
+
+                if (ambientSound == null || !ambientSound.IsPlaying && (!alreadyPlayedSound || loopsound))
+                {
+                    ambientSound = ((IClientWorldAccessor)Api.World).LoadSound(new SoundParams()
+                    {
+                        Location = new AssetLocation(runsound),
+                        ShouldLoop = loopsound,
+                        Position = Pos.ToVec3f().Add(0.5f, 0.25f, 0.5f),
+                        DisposeOnFinish = false,
+                        Volume = SoundLevel,
+                        Range = 10
+                    });
+                    soundoffdelaycounter = 0;
+                    ambientSound.Start();
+                    alreadyPlayedSound = true;
+                }
+            }
+            else if (loopsound && soundoffdelaycounter < 10)
+            {
+                soundoffdelaycounter++;
+            }
+            else
+            {
+                ambientSound?.Stop();
+                ambientSound?.Dispose();
+                ambientSound = null;
+                alreadyPlayedSound = false;
+            }
+
         }
     }
 }
