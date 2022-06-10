@@ -43,7 +43,7 @@ namespace qptech.src
         public override void OnTick(float par)
         {
             base.OnTick(par);
-            if (IsPowered && Api is ICoreServerAPI)
+            if (lastPower>=usePower && Api is ICoreServerAPI)
             {
                 TryCharge();
             }
