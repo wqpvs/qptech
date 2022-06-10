@@ -107,9 +107,9 @@
     }
   },
   "blockmaterial": "Metal",
-  "creativeinventory": {
-    "general": [ "*-down" ],
-    "decorative": [ "*-down" ]
+ "creativeinventory": {
+    "qptech-parts": [ "*-down" ]
+    
   },
   "replaceable": 300,
   "resistance": 2,

@@ -29,8 +29,8 @@ namespace qptech.src.misc
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
         {
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
-            float charge=inSlot.Itemstack.Attributes.GetFloat("temporalcharge", 0);
-            float requiredcharge=inSlot.Itemstack.Collectible.Attributes["temporalCharge"].AsFloat(0);
+            float charge=inSlot.Itemstack.Attributes.GetFloat(BEETemporalCondenser.requiredTemporalChargeKey, 0);
+            float requiredcharge=inSlot.Itemstack.Collectible.Attributes[BEETemporalCondenser.requiredTemporalChargeKey].AsFloat(0);
             if (requiredcharge != 0)
             {
                 float pct = charge / requiredcharge * 100f;

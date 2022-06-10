@@ -71,8 +71,8 @@
     "metal": { "base": "block/metal/ingot/{metal}" }
   },
   "creativeinventory": {
-    "general": [ "*" ],
-    "items": [ "*" ]
+    "qptech-parts": [ "*" ]
+    
   },
   "materialDensityByType": {
     "*-temporalsteel": 4000,

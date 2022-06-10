@@ -56,8 +56,8 @@
   ],
   "texture": { "base": "block/metal/ingot/{metal}" },
   "creativeinventory": {
-    "general": [ "*" ],
-    "items": [ "*" ]
+    "qptech-parts": [ "*" ]
+    
   },
   "materialDensityByType": {
 

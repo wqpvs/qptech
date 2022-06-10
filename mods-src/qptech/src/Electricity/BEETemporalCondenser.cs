@@ -39,7 +39,7 @@ namespace qptech.src
         int soundoffdelaycounter = 0;
         ILoadedSound ambientSound;
         string runsound = "";
-        public const string requiredTemporalChargeKey= "temporalCharge";
+        public static string requiredTemporalChargeKey=> "temporalCharge";
         
         public virtual float SoundLevel
         {
@@ -67,13 +67,13 @@ namespace qptech.src
                     processing = true;
                 }
             }
-            ToggleAmbientSounds(processing);
+            
             if (processing && Api is ICoreServerAPI)
             {
                 TryCharge();
             }
             if (Api is ICoreClientAPI){
-                
+                ToggleAmbientSounds(processing);
                 if (processing)
                 {
                     yrotspeed = 1; 
@@ -304,7 +304,17 @@ namespace qptech.src
             base.ToTreeAttributes(tree);
             tree.SetItemstack("contents", contents);
         }
-
+        public override void OnBlockBroken(IPlayer byPlayer = null)
+        {
+            if (contents!=null && contents.StackSize > 0)
+            {
+                DummyInventory di = new DummyInventory(Api, 1);
+                di[0].Itemstack = contents;
+                di.DropAll(new Vec3d(Pos.X,Pos.Y,Pos.Z));
+                contents = null;
+            }
+            base.OnBlockBroken(byPlayer);
+        }
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);

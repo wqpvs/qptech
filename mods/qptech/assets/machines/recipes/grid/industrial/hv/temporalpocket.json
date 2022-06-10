@@ -1,0 +1,16 @@
+{
+	ingredientPattern: "PPP	P P	PPP",
+	ingredients: {
+		"P": {
+			"type": "item",
+			"code": "metalplate-chargedtemporalsteel",
+
+			"quantity": 1
+		}
+
+		
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "temporalpocket-east", quantity: 1  }
+}
