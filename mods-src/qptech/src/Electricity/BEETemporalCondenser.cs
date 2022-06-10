@@ -39,6 +39,8 @@ namespace qptech.src
         int soundoffdelaycounter = 0;
         ILoadedSound ambientSound;
         string runsound = "";
+        public const string requiredTemporalChargeKey= "temporalCharge";
+        
         public virtual float SoundLevel
         {
             get { return soundlevel; }
@@ -57,9 +59,9 @@ namespace qptech.src
             bool processing = false;
 
             if (contents != null&&lastPower>=usePower) {
-                float requiredcharge = contents.Collectible.Attributes["temporalCharge"].AsFloat(0);
+                float requiredcharge = contents.Collectible.Attributes[requiredTemporalChargeKey].AsFloat(0);
 
-                float currentcharge = contents.Attributes.GetFloat("temporalcharge", 0);
+                float currentcharge = contents.Attributes.GetFloat(requiredTemporalChargeKey, 0);
                 if (requiredcharge > 0 && currentcharge < requiredcharge)
                 {
                     processing = true;
@@ -94,11 +96,11 @@ namespace qptech.src
             //TODO: add bonuses for nearby rifts? spawn rifts on transform?
             
             if (contents==null|| contents.StackSize == 0) { return; }
-            float requiredcharge = contents.Collectible.Attributes["temporalCharge"].AsFloat(0);
+            float requiredcharge = contents.Collectible.Attributes[requiredTemporalChargeKey].AsFloat(0);
             //if this isn't a chargeable object return;
             if (requiredcharge == 0) { return; }
             string temporalTransformBlockOrItem = contents.Attributes.GetString("temporalTransformBlockOrItem", "item");
-            float currentcharge = contents.Attributes.GetFloat("temporalcharge", 0);
+            float currentcharge = contents.Attributes.GetFloat(requiredTemporalChargeKey, 0);
             string transformsto = contents.Collectible.Attributes["temporalTransformTo"].AsString("");
             currentcharge += stabbonus / (float)contents.StackSize;
 
@@ -128,7 +130,7 @@ namespace qptech.src
             //item is not charged save the value
             else
             {
-                contents.Attributes.SetFloat("temporalcharge", currentcharge);
+                contents.Attributes.SetFloat(requiredTemporalChargeKey, currentcharge);
 
             }
       
@@ -168,11 +170,11 @@ namespace qptech.src
             {
                 
                 
-                float requirecharge= byPlayer.Entity.RightHandItemSlot.Itemstack.Collectible.Attributes["temporalCharge"].AsFloat(0);
+                float requirecharge= byPlayer.Entity.RightHandItemSlot.Itemstack.Collectible.Attributes[requiredTemporalChargeKey].AsFloat(0);
                 if (requirecharge == 0) { return false; }
                 contents = new ItemStack(byPlayer.Entity.RightHandItemSlot.Itemstack.Collectible, 1);
-                float copycharge = byPlayer.Entity.RightHandItemSlot.Itemstack.Attributes.GetFloat("temporalcharge", 0);
-                if (copycharge != 0) { contents.Attributes.SetFloat("temporalcharge", copycharge); }
+                float copycharge = byPlayer.Entity.RightHandItemSlot.Itemstack.Attributes.GetFloat(requiredTemporalChargeKey, 0);
+                if (copycharge != 0) { contents.Attributes.SetFloat(requiredTemporalChargeKey, copycharge); }
                 byPlayer.Entity.RightHandItemSlot.Itemstack.StackSize--;
                 if (byPlayer.Entity.RightHandItemSlot.Itemstack.StackSize == 0) { byPlayer.Entity.RightHandItemSlot.Itemstack = null; }
                 byPlayer.Entity.RightHandItemSlot.MarkDirty();
@@ -185,8 +187,8 @@ namespace qptech.src
             else if (contents != null && contents.StackSize > 0 && byPlayer.Entity.RightHandItemSlot.Empty)
             {
                 byPlayer.Entity.RightHandItemSlot.Itemstack = new ItemStack(contents.Collectible, contents.StackSize);
-                float copycharge = contents.Attributes.GetFloat("temporalcharge", 0);
-                if (copycharge != 0) { byPlayer.Entity.RightHandItemSlot.Itemstack.Attributes.SetFloat("temporalcharge", copycharge); }
+                float copycharge = contents.Attributes.GetFloat(requiredTemporalChargeKey, 0);
+                if (copycharge != 0) { byPlayer.Entity.RightHandItemSlot.Itemstack.Attributes.SetFloat(requiredTemporalChargeKey, copycharge); }
                 contents = null;
                 byPlayer.Entity.RightHandItemSlot.MarkDirty();
                 meshdata = null;
@@ -278,9 +280,9 @@ namespace qptech.src
             float stability = tempStabilitySystem.GetTemporalStability(Pos);
             if (contents != null && contents.StackSize > 0)
             {
-                float requiredcharge = contents.Collectible.Attributes["temporalCharge"].AsFloat(0);
+                float requiredcharge = contents.Collectible.Attributes[requiredTemporalChargeKey].AsFloat(0);
                 
-                float currentcharge = contents.Attributes.GetFloat("temporalcharge", 0);
+                float currentcharge = contents.Attributes.GetFloat(requiredTemporalChargeKey, 0);
                 dsc.AppendLine("Loaded item: " + contents.Collectible.GetHeldItemName(contents));
                 if (requiredcharge > 0)
                 {
