@@ -32,6 +32,7 @@ namespace qptech.src
         int textureId;
         Shape shape;
         ITexPositionSource tmpTextureSource;
+        private SimpleParticleProperties smokeParticles;
 
         public override void Initialize(ICoreAPI api)
         {
@@ -47,7 +48,10 @@ namespace qptech.src
             {
                 TryCharge();
             }
-            if (Api is ICoreClientAPI && contents!=null) { GenMesh();MarkDirty(true); }
+            if (Api is ICoreClientAPI && contents!=null && lastPower>=usePower) {
+                GenMesh();MarkDirty(true);
+                DoRunningParticles();
+            }
         }
         SystemTemporalStability tempStabilitySystem;
         public virtual void TryCharge()
@@ -98,7 +102,31 @@ namespace qptech.src
             }
       
         }
-        
+        public virtual void DoRunningParticles()
+        {
+            //Temp code for steam particles, def needs to be moved to json
+            
+            smokeParticles = new SimpleParticleProperties(
+                    0, 6, //min qty/max qty
+                    ColorUtil.ToRgba(64, 128, 255, 64), //color
+                    new Vec3d(0.25, 28, 0.25), //min pos
+                    new Vec3d(0.75, 32, 0.75), //max pos
+                    new Vec3f(-1 / 32f, 0.2f, -1 / 32f), //min velocity
+                    new Vec3f(1 / 32f, 1f, 1 / 32f), //max velocity
+                    0.25f, //particle life
+                    -0.025f / 4, //particle gravity
+                    0.2f, //min size
+                    0.6f, //max size
+                    EnumParticleModel.Quad
+                );
+
+            smokeParticles.SizeEvolve = new EvolvingNatFloat(EnumTransformFunction.LINEAR, -0.25f);
+            smokeParticles.SelfPropelled = true;
+            smokeParticles.AddPos.Set(8 / 16.0, 0, 8 / 16.0);
+            smokeParticles.MinPos.Set(Pos.X + 4 / 16f, Pos.Y + 3 / 16f, Pos.Z + 4 / 16f);
+            Api.World.SpawnParticles(smokeParticles);
+            
+        }
         public virtual bool PlayerClicked(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
             //if (capi != null) { return true; }
