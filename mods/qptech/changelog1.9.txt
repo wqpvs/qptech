@@ -1,7 +1,25 @@
-﻿1.9.1
+﻿1.10.1
 - added temporal pocket
 - added temporal condenser
 - added charged temporal steel ingot, plate, and sheet
+
+INDEV/TODO
+Temporal Condenser Recipe
+- MV Motor
+- Temporal Steel sheet
+- rubber sheet
+- rubber gasket
+- machinery block - advanced
+   - steel sheets
+   - circuit board
+   - cable
+
+Mold Machine
+- steel mold (or iron?)
+- steel machinery block
+- cables
+- requires heat
+
 
 1.9.0
 - fixed a server error loop with item transport
