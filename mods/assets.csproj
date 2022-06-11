@@ -155,6 +155,7 @@
     <None Include="qptech\assets\machines\itemtypes\part\hv\drillhead.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\cruciblechamber.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\heatingcoil.json" />
+    <None Include="qptech\assets\machines\itemtypes\part\mv\industrialchannel.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\metalchannel.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\bolt.json" />
     <None Include="qptech\assets\machines\itemtypes\part\mv\ring.json" />
