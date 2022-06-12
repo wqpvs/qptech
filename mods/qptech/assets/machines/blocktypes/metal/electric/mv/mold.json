@@ -1,0 +1,82 @@
+{
+	"code": "mold",
+	"class": "ElectricalBlock",
+	"entityclass": "BEEMixer",
+	"creativeinventory": {
+		"general": [ "*-east" ],
+		"qptech": [ "*-east" ]
+	},
+	"entityBehaviors": [
+		{ "name": "Animatable" },
+	
+	],
+	"behaviors": [
+
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "east" }
+		}
+	],
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "mv" ]
+		},
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+
+	"attributesByType": {
+
+		"*-mv-*": {
+			"genFlux": 0,"useFlux": 8,
+			"recipegroups": [ "RubberSheet" ],
+			"inputFace": "up","outputFace": "east",
+			"animationCode": "run","animation": "run","runAnimationSpeed": 1,
+			"processingTime": 2000
+			
+		}
+	},
+	
+	"blockmaterial": "Metal",
+	"drawtype": "json",
+
+	"shape": { "base": "block/metal/crucible" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/metal/crucible",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/metal/crucible",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "block/metal/crucible",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "block/metal/crucible",
+			"rotateY": 180
+		}
+	},
+	"lightAbsorption": 0,
+	"resistance": 1,
+	"sideAo": { "all": false },
+	"sidesolid": {
+		"all": false,
+		"up": true
+	},
+	"sideopaque": {
+		"all": false
+	},
+
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	}
+
+
+}

@@ -2,6 +2,8 @@
 - added temporal pocket
 - added temporal condenser
 - added charged temporal steel ingot, plate, and sheet
+- need better rubber texture
+- fixed crash with BEERecipeProcessor based machiens
 
 INDEV/TODO
 Temporal Condenser Recipe

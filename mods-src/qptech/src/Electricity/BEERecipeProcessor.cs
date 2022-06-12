@@ -166,7 +166,7 @@ namespace qptech.src
                 if (!ok) { continue; }
                 else { canmake = mr;break; }
             }
-            if (canmake == null) { return; }
+            if (canmake == null||checkinv==null) { return; }
             
             // If we can make something extract the ingredients
 

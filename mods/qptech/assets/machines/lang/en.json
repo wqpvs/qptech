@@ -254,7 +254,7 @@
 	"blockdesc-metalsheet-chargedtemporalsteel-*": "Energized form of Temporal Steel",
 	"item-metalplate-chargedtemporalsteel": "Charged Temporal Steel Metal Plate",
 	"itemdesc-metalplate-chargedtemporalsteel": "Energized form of Temporal Steel",
-	"item-industrialsheet-rubber-*": "Sheet of Rubber",
+	"block-industrialsheet-rubber-*": "Sheet of Rubber",
 	"item-industrialchannel-rubber":  "Rubber Gasket",
 	"block-temporalcondenser-*": "Temporal Condenser",
 	"blockdesc-temporalcondenser-*": "When powered and placed in an Temporally Unstable area, will add temporal charge to relevant items."

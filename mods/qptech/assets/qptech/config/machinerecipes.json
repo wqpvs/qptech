@@ -614,6 +614,17 @@
       
     ],
     "output": [{"validitems": [ "game:ingot-blistersteel" ],"quantity": 1}]
+  },
+  {
+    "name": "RubberSheet",
+    "processingTime": 3000,"processingsteps": {"heating": 500},
+    "ingredients": [
+      { "validitems": [ "machines:liquidrubberportion"],"quantity": 100},
+      
+    ],
+    "output": [{"validitems": [ "machines:industrialsheet-rubber-down" ],"quantity": 1}]
   }
+  
+  
 ]
 
