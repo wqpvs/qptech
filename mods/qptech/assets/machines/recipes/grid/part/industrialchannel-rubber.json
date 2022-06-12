@@ -1,0 +1,19 @@
+{
+	ingredientPattern: "SR",
+	ingredients: {
+		"R": {
+			"type": "block",
+			"code": "industrialsheet-rubber-down",
+			
+			
+			"quantity": 1
+		},
+		
+		"S": { type: "item", code: "game:knife-*", isTool: true }
+		
+		
+	},
+	width: 2,
+	height: 1,
+	output: { type: "item", code: "industrialchannel-rubber", quantity: 2  }
+}

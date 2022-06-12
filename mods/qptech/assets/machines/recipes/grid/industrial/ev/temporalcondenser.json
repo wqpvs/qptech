@@ -1,0 +1,40 @@
+{
+	ingredientPattern: "XGX	SMT	XCX",
+	ingredients: {
+		"X": {
+			"type": "item",
+			"code": "screw-steel",
+
+			"quantity": 1
+		},
+		"G": {
+			"type": "item",
+			"code": "industrialchannel-rubber",
+			"quantity": 4
+		},
+		
+		"M": {
+			"type": "item",
+			"code": "motor-mv",
+			"quantity": 1
+		},
+		"S": {
+			"type": "block",
+			"code": "machineryblock-steel",
+			"quantity": 1
+		},
+		"T": {
+			"type": "block",
+			"code": "metalsheet-temporalsteel-down",
+			"quantity": 2
+		},
+		"C": {
+			"type": "item",
+			"code": "cable-copper",
+			"quantity": 2
+		}
+	},
+	width: 3,
+	height: 3,
+	"output": { "type": "block", "code": "temporalcondenser-hv-east", "quantity": 1  }
+}

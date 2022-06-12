@@ -257,6 +257,8 @@
 	"block-industrialsheet-rubber-*": "Sheet of Rubber",
 	"item-industrialchannel-rubber":  "Rubber Gasket",
 	"block-temporalcondenser-*": "Temporal Condenser",
-	"blockdesc-temporalcondenser-*": "When powered and placed in an Temporally Unstable area, will add temporal charge to relevant items."
+	"blockdesc-temporalcondenser-*": "When powered and placed in an Temporally Unstable area, will add temporal charge to relevant items.",
+	"block-mold-*": "Rubber Sheet Mold",
+	"blockdesc-mold-*": "Pipe in liquid rubber, and add industrial heating to output rubber sheets. (Outputs to the right)"
 
 }
