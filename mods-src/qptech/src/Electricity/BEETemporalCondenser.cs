@@ -92,7 +92,7 @@ namespace qptech.src
             if (tempStabilitySystem == null) { return; }
             float stability=tempStabilitySystem.GetTemporalStability(Pos);
             if (stability > 0.9f) { return; }
-            float stabbonus = Math.Min(1, 1 - stability)*10;
+            float stabbonus = (float)Math.Pow( Math.Min(1, (1 - (double)stability))*3,3);
             //TODO: add bonuses for nearby rifts? spawn rifts on transform?
             
             if (contents==null|| contents.StackSize == 0) { return; }
@@ -107,9 +107,11 @@ namespace qptech.src
             if (currentcharge >= requiredcharge) { 
              
                 int qty = contents.StackSize;
+                if (qty == 0) { return; }
                 if (temporalTransformBlockOrItem == "item")
                 {
                     Item newitem = Api.World.GetItem(new AssetLocation(transformsto));
+                    
                     ItemStack newstack = new ItemStack(newitem, qty);
                     contents = newstack;
                     //TODO UPDATE RENDER MESH
@@ -306,6 +308,7 @@ namespace qptech.src
         }
         public override void OnBlockBroken(IPlayer byPlayer = null)
         {
+            ClearSound();
             if (contents!=null && contents.StackSize > 0)
             {
                 DummyInventory di = new DummyInventory(Api, 1);
@@ -315,6 +318,23 @@ namespace qptech.src
             }
             base.OnBlockBroken(byPlayer);
         }
+        public override void OnBlockUnloaded()
+        {
+            base.OnBlockUnloaded();
+            ClearSound();
+        }
+        public override void OnBlockRemoved()
+        {
+            ClearSound();
+            base.OnBlockRemoved();
+        }
+        public void ClearSound()
+        {
+            ambientSound?.Stop();
+            ambientSound?.Dispose();
+            ambientSound = null;
+        }
+
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
