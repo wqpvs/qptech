@@ -93,8 +93,14 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
-
-           MakeCopy(slot, byEntity, blockSel, entitySel, ref handling); 
+            BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
+            if (bmb == null)
+            {
+                TryChangeBlockToChisel(blockSel, byEntity, byPlayer);
+                handling = EnumHandHandling.PreventDefaultAction;
+                return;
+            }
+            MakeCopy(slot, byEntity, blockSel, entitySel, ref handling); 
             handling = EnumHandHandling.PreventDefaultAction;
             api.World.PlaySoundAt(new AssetLocation("sounds/filtercopy"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
            
@@ -155,26 +161,11 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
-
-            
-            Block bl = api.World.BlockAccessor.GetBlock(blockSel.Position);
-
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
-            if (!(bl is BlockChisel))
+            if (bmb == null)
             {
+                TryChangeBlockToChisel(blockSel,byEntity,byPlayer);
                 handling = EnumHandHandling.PreventDefaultAction;
-                string blockName = bl.GetPlacedBlockName(byEntity.World, blockSel.Position);
-                Block chiseledblock = byEntity.World.GetBlock(new AssetLocation("chiseledblock"));
-
-                if (!IsChiselingAllowedFor(bl, byPlayer)) { return; }
-
-                byEntity.World.BlockAccessor.SetBlock(chiseledblock.BlockId, blockSel.Position);
-
-                BlockEntityChisel be = byEntity.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityChisel;
-                if (be == null) return;
-
-                be.WasPlaced(bl,blockName );
-                
                 return;
             }
             if (slot.Itemstack.Attributes.GetInt("toolMode", (int)enModes.COPY) == (int)enModes.COPY)
@@ -286,9 +277,17 @@ namespace chisel.src
             handling = EnumHandHandling.PreventDefaultAction;
         }
 
-        public bool TryChangeBlockToChisel()
+        public bool TryChangeBlockToChisel(BlockSelection blockSel, Entity byEntity, IPlayer byPlayer)
         {
+            Block bl = api.World.BlockAccessor.GetBlock(blockSel.Position);
+            string blockName = bl.GetPlacedBlockName(byEntity.World, blockSel.Position);
+            Block chiseledblock = byEntity.World.GetBlock(new AssetLocation("chiseledblock"));
+            if (!IsChiselingAllowedFor(bl, byPlayer)) { return false; }
+            byEntity.World.BlockAccessor.SetBlock(chiseledblock.BlockId, blockSel.Position);
+            BlockEntityChisel be = byEntity.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityChisel;
+            if (be == null) return false;
 
+            be.WasPlaced(bl, blockName);
             return true;
         }
 
