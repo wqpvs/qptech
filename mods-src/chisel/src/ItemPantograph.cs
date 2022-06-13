@@ -93,6 +93,7 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
+
            MakeCopy(slot, byEntity, blockSel, entitySel, ref handling); 
             handling = EnumHandHandling.PreventDefaultAction;
             api.World.PlaySoundAt(new AssetLocation("sounds/filtercopy"), blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, byPlayer, true, 12, 1);
@@ -154,14 +155,26 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
                 return;
             }
+
             
-            
-           
+            Block bl = api.World.BlockAccessor.GetBlock(blockSel.Position);
 
             BlockEntityMicroBlock bmb = api.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMicroBlock;
-            if (bmb == null)
+            if (!(bl is BlockChisel))
             {
-                base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+                handling = EnumHandHandling.PreventDefaultAction;
+                string blockName = bl.GetPlacedBlockName(byEntity.World, blockSel.Position);
+                Block chiseledblock = byEntity.World.GetBlock(new AssetLocation("chiseledblock"));
+
+                if (!IsChiselingAllowedFor(bl, byPlayer)) { return; }
+
+                byEntity.World.BlockAccessor.SetBlock(chiseledblock.BlockId, blockSel.Position);
+
+                BlockEntityChisel be = byEntity.World.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityChisel;
+                if (be == null) return;
+
+                be.WasPlaced(bl,blockName );
+                
                 return;
             }
             if (slot.Itemstack.Attributes.GetInt("toolMode", (int)enModes.COPY) == (int)enModes.COPY)
@@ -271,6 +284,52 @@ namespace chisel.src
                 byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
             }
             handling = EnumHandHandling.PreventDefaultAction;
+        }
+
+        public bool TryChangeBlockToChisel()
+        {
+
+            return true;
+        }
+
+        public bool IsChiselingAllowedFor(Block block, IPlayer player)
+        {
+            if (block is BlockChisel) return true;
+
+            // First priority: microblockChiseling disabled
+            ITreeAttribute worldConfig = api.World.Config;
+            string mode = worldConfig.GetString("microblockChiseling");
+            if (mode == "off") return false;
+
+
+            // Second priority: canChisel flag
+            bool canChiselSet = block.Attributes?["canChisel"].Exists == true;
+            bool canChisel = block.Attributes?["canChisel"].AsBool(false) == true;
+
+            if (canChisel) return true;
+            if (canChiselSet && !canChisel) return false;
+
+
+            // Third prio: Never non cubic blocks
+            if (block.DrawType != EnumDrawType.Cube) return false;
+
+            // Fourth prio: Never tinted blocks (because then the chiseled block would have the wrong colors)
+            if (block.SeasonColorMap != null || block.ClimateColorMap != null) return false;
+
+            // Otherwise if in creative mode, sure go ahead
+            if (player?.WorldData.CurrentGameMode == EnumGameMode.Creative) return true;
+
+
+            // Lastly go by the config value
+            if (mode == "stonewood")
+            {
+                // Saratys definitely required Exception to the rule #312
+                if (block.Code.Path.Contains("mudbrick")) return true;
+
+                return block.BlockMaterial == EnumBlockMaterial.Wood || block.BlockMaterial == EnumBlockMaterial.Stone || block.BlockMaterial == EnumBlockMaterial.Ore || block.BlockMaterial == EnumBlockMaterial.Ceramic;
+            }
+
+            return true;
         }
         protected virtual int CalcDamage(int numvoxels)
         {
