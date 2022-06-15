@@ -6,14 +6,19 @@
 - fixed crash with BEERecipeProcessor based machines
 - added Rubber Mold Machine - pipe in rubber, add heat, and get rubber sheets out
 - added rubber sheets (made in new rubber mold machien), and rubber gaskets (made for now with knife + rubber sheet)
-
-
-
 Mold Machine
 - steel mold (or iron?)
 - steel machinery block
 - cables
 - requires heat
+Balance:
+- motors now only require 1 steel sheet instead of 2
+- braided wire now only requires 3 wires instead of 4 (manual recipe)
+- rotors now need two rods instead of 1 but stators use 1 ring instead of 2
+
+IDEAS:
+- saw mill for planks
+- something to make charcoal
 
 
 1.9.0
