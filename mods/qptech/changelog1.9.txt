@@ -5,16 +5,19 @@
 - need better rubber texture
 - fixed crash with BEERecipeProcessor based machines
 - added Rubber Mold Machine - pipe in rubber, add heat, and get rubber sheets out
-- added rubber sheets (made in new rubber mold machien), and rubber gaskets (made for now with knife + rubber sheet)
+- added rubber sheets (made in new rubber mold machine), and rubber gaskets (made for now with knife + rubber sheet)
 Mold Machine
 - steel mold (or iron?)
 - steel machinery block
 - cables
 - requires heat
-Balance:
+Balance: (goal to let you at least build something with your first steel cook)
 - motors now only require 1 steel sheet instead of 2
 - braided wire now only requires 3 wires instead of 4 (manual recipe)
 - rotors now need two rods instead of 1 but stators use 1 ring instead of 2
+- advanced bloomery only requires 1 steel pipe
+Fixes:
+- BEEAssembler Based devices (mainly presses) now have power on/off buttons
 
 IDEAS:
 - saw mill for planks

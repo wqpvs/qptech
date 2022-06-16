@@ -16,16 +16,17 @@ namespace qptech.src
         {
             api = capi;
         }
+        BEEAssembler bea;
         public void SetupDialog(BEEAssembler bea)
         {
             if (bea == null) { return; }
             if (bea.Materials == null) { return; }
-            
+            this.bea = bea;
             ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterMiddle);
 
             // Just a simple 300x100 pixel box with 40 pixels top spacing for the title bar
             ElementBounds textBounds = ElementBounds.Fixed(0, 40, 600, 600);
-
+            ElementBounds buttonBounds = ElementBounds.Fixed(0, 30, 100, 20);
             // Background boundaries. Again, just make it fit it's child elements, then add the text as a child element
             ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
             bgBounds.BothSizing = ElementSizing.FitToChildren;
@@ -53,6 +54,8 @@ namespace qptech.src
             statustext += "<strong>STATUS: " + bea.Status + "</strong></font><br><br>";
             statustext += "Making <strong>" + bea.FG.ToUpper() + "</strong><br><br>";
             statustext += "Requires <strong>" + bea.RM +"</strong>";
+            string powerbutton = "TURN OFF";
+            if (!bea.IsOn) { powerbutton = "TURN ON"; }
             if (bea.Materials.Length > 0&&bea.DeviceState==BEEBaseDevice.enDeviceState.MATERIALHOLD)
             {
                 
@@ -73,10 +76,16 @@ namespace qptech.src
                 .AddShadedDialogBG(bgBounds)
                 .AddDialogTitleBar("Metal Press Status", OnTitleBarCloseClicked)
                 .AddRichtext(statustext, CairoFont.WhiteDetailText(), textBounds)
-                
+                .AddButton(powerbutton, onTogglePower, buttonBounds, CairoFont.WhiteDetailText())
                 .Compose()
             ;
 
+        }
+        public virtual bool onTogglePower()
+        {
+            bea.TogglePowerButton();
+            TryClose();
+            return true;
         }
         public override bool TryOpen()
         {
