@@ -22,6 +22,8 @@ Fixes:
 IDEAS:
 - saw mill for planks
 - something to make charcoal
+- keyed inventory - some kind of programmable, copyable key
+    - could in theory generate like "treasure chests" - create keys, and save inventory
 
 
 1.9.0

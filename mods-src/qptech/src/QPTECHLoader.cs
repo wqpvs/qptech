@@ -128,6 +128,7 @@ namespace qptech.src
             api.RegisterBlockClass("BlockCannedMeal", typeof(BlockCannedMeal));
             api.RegisterBlockClass("BlockDummy", typeof(BlockDummy));
             api.RegisterCollectibleBehaviorClass("CBTemporalChargeable", typeof(CBTemporalChargeable));
+            api.RegisterEntity("PathLimitedEntity", typeof(PathLimitedEntity));
         }
 
         private void RegisterDefaultBlockEntitys()

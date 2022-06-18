@@ -1,0 +1,44 @@
+{
+  "code": "testentity",
+  "class": "PathLimitedEntity",
+  "hitboxSize": {
+    "x": 0.4,
+    "y": 0.5
+  },
+  "deadHitboxSize": {
+    "x": 0.4,
+    "y": 0.5
+  },
+  "eyeHeight": 0.4,
+  "drops": [],
+  "client": {
+    "renderer": "Shape",
+    "shape": { "base": "block/indev/test" },
+    
+    "behaviors": [
+      
+      {
+        "code": "controlledphysics",
+        "stepHeight": 0.2
+      },
+      
+      { "code": "interpolateposition" }
+    ]
+    
+  },
+  "server": {
+    "behaviors": [
+      
+      {
+        "code": "controlledphysics",
+        "stepHeight": 0.2
+      }
+      
+    ]
+  },
+  "sounds": {
+    "hurt": "creature/figure-hurt",
+    "death": "creature/figure-death",
+    "idle": "creature/figure-idle"
+  }
+}

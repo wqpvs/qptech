@@ -153,6 +153,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\statusflag-up.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate.json" />
     <None Include="qptech\assets\machines\config\handbook\qptech.json" />
+    <None Include="qptech\assets\machines\entities\testentity.json" />
     <None Include="qptech\assets\machines\itemtypes\part\hv\drillhead.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\cruciblechamber.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\heatingcoil.json" />
@@ -293,6 +294,7 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
+    <None Include="qptech\assets\machines\shapes\block\indev\test.json" />
     <None Include="qptech\assets\machines\shapes\block\invisible.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\bloomery.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\boiler.json" />
@@ -614,7 +616,6 @@
     <Folder Include="qptech\assets\game\sounds\block\" />
     <Folder Include="qptech\assets\machines\itemtypes\part\ev\" />
     <Folder Include="qptech\assets\machines\shapes\block\glass\" />
-    <Folder Include="qptech\assets\machines\shapes\block\indev\" />
     <Folder Include="qptech\assets\machines\shapes\block\liquid\" />
     <Folder Include="qptech\assets\qptech\textures\" />
   </ItemGroup>

@@ -13,16 +13,17 @@
 	"elements": [
 		{
 			"name": "Cube1",
-			"from": [ 5.0, 2.0, 0.0 ], 
-			"to": [ 11.0, 4.0, 14.0 ], 
-			"rotationOrigin": [ 5.0, 2.0, 0.0 ],
+			"from": [ 16.0, 2.0, 5.0 ], 
+			"to": [ 22.0, 4.0, 21.0 ], 
+			"rotationOrigin": [ 16.0, 2.0, 5.0 ],
+			"rotationY": -90.0,
 			"faces": {
 				"north": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 6.0, 2.0 ] },
-				"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 14.0, 2.0 ] },
+				"east": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
 				"south": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 6.0, 2.0 ] },
-				"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 14.0, 2.0 ] },
-				"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 6.0, 14.0 ] },
-				"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 6.0, 14.0 ] }
+				"west": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+				"up": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 6.0, 16.0 ] },
+				"down": { "texture": "#darksteelplate", "uv": [ 0.0, 0.0, 6.0, 16.0 ] }
 			},
 			"children": [
 				{
