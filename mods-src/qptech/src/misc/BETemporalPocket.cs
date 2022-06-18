@@ -30,7 +30,7 @@ namespace qptech.src
         public string inventoryClassName = "temporalpocket";
         public string dialogTitleLangCode = "Temporal Pocket";
         public bool retrieveOnly = false;
-
+        ICoreServerAPI sapi;
         public static List<string> OpenInventories
         {
             get
@@ -57,7 +57,10 @@ namespace qptech.src
             {
                 InitInventory(Block);
             }
-
+            if (api is ICoreServerAPI)
+            {
+                sapi = api as ICoreServerAPI;
+            }
             base.Initialize(api);
         }
         
@@ -124,9 +127,9 @@ namespace qptech.src
         {
             Api.World.BlockAccessor.GetChunkAtBlockPos(Pos)?.MarkModified();
         }
-        public virtual string GetChestFilename(IPlayer player)
+        public virtual string GetPlayerStorageKey(IPlayer player)
         {
-            return RemoveSpecialCharacters(player.PlayerUID) + "tchest.json";
+            return player.PlayerUID + "tchest";
         }
         public static string RemoveSpecialCharacters(string str)
         {
@@ -138,10 +141,16 @@ namespace qptech.src
 
             try
             {
-                byte[] data= ApiExtensions.LoadOrCreateDataFile<List<byte>>(Api, GetChestFilename(player)).ToArray();
-                TreeAttribute loadtree = TreeAttribute.CreateFromBytes(data);
-                
 
+                List<byte> datalist = sapi.WorldManager.SaveGame.GetData<List<byte>>(GetPlayerStorageKey(player));
+                byte[] data;
+                ITreeAttribute loadtree=null;
+                if (datalist != null)
+                {
+                    data = datalist.ToArray();
+                    loadtree = TreeAttribute.CreateFromBytes(data);
+                }
+                
                 if (loadtree != null) {
                     ItemSlot[]slots=Inventory.SlotsFromTreeAttributes(loadtree);
                     int c = 0;
@@ -196,8 +205,9 @@ namespace qptech.src
             //newtree will have correctly have the inventory at this point
             byte[] data = newtree.ToBytes();
             List<byte> datalist = data.ToList<byte>();
-            ApiExtensions.SaveDataFile<List<byte>>(Api, GetChestFilename(player), datalist);
 
+            //SAVE TO FILE ApiExtensions.SaveDataFile<List<byte>>(Api, GetChestFilename(player), datalist);
+            sapi.WorldManager.SaveGame.StoreData<List<byte>>(GetPlayerStorageKey(player), datalist);
             
             this.Inventory.DiscardAll();
         }

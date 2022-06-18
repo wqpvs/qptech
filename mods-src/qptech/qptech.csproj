@@ -102,6 +102,7 @@
     <Compile Include="src\itemtransport\IItemTransporter.cs" />
     <Compile Include="src\itemtransport\ItemFilter.cs" />
     <Compile Include="src\itemtransport\ItemSplitter.cs" />
+    <Compile Include="src\itemtransport\StorageDepot.cs" />
     <Compile Include="src\itemtransport\TabletTool.cs" />
     <Compile Include="src\misc\BEAnimator.cs" />
     <Compile Include="src\misc\BEBlockSeeker.cs" />
