@@ -36,7 +36,11 @@ namespace qptech.src.misc
             base.Initialize(properties, api, InChunkIndex3d);
             if (api is ICoreServerAPI)
             {
-                ServerPos.SetPos(ServerPos.XYZ.AsBlockPos.ToVec3d());
+                Vec3d begin = ServerPos.XYZ;
+                begin.X = Math.Floor(begin.X);
+                begin.Y = Math.Floor(begin.Y);
+                begin.Z = Math.Floor(begin.Z);
+                ServerPos.SetPos(begin);
                 FindPath();
             }
         }
@@ -56,7 +60,7 @@ namespace qptech.src.misc
             pathprogress += pathdir * pathspeed;
             
             
-            if (pathprogress >=1) { FindPath(); }
+            if (pathprogress >=1) { pathprogress = 1; FindPath(); }
             ServerPos.SetPos(pathpos);
 
         }
@@ -178,9 +182,26 @@ namespace qptech.src.misc
             }
             if (moving)
             {
+                pathprogress = 0;
                 heading = newheading;
                 pathstart = ServerPos.XYZ;
                 pathend = pathstart + newheading.Normald;
+                if (newheading == BlockFacing.SOUTH)
+                {
+                    ServerPos.SetYaw(0* 0.0174533f);
+                }
+                else if (newheading == BlockFacing.EAST)
+                {
+                    ServerPos.SetYaw(90 * 0.0174533f);
+                }
+                else if (newheading == BlockFacing.NORTH)
+                {
+                    ServerPos.SetYaw(180 * 0.0174533f);
+                }
+                else if (newheading == BlockFacing.WEST)
+                {
+                    ServerPos.SetYaw(270* 0.0174533f);
+                }
             }
             else
             {
