@@ -30,7 +30,10 @@ namespace qptech.src.misc
         double pathspeed = 0.1f;
         bool moving = false;
         BlockFacing heading = BlockFacing.NORTH;
-        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress), GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress));
+        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress)+0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress)+0.5);
+        
+        //TODO - LERP BETWEEN PURE BLOCK POS, AND USE AN OFFSET FOR DISPLAYING TRAIN
+        
         public override void Initialize(EntityProperties properties, ICoreAPI api, long InChunkIndex3d)
         {
             base.Initialize(properties, api, InChunkIndex3d);
@@ -40,7 +43,7 @@ namespace qptech.src.misc
                 begin.X = Math.Floor(begin.X);
                 begin.Y = Math.Floor(begin.Y);
                 begin.Z = Math.Floor(begin.Z);
-                ServerPos.SetPos(begin);
+                pathstart = begin;
                 FindPath();
             }
         }
@@ -56,11 +59,11 @@ namespace qptech.src.misc
 
         void Move()
         {
-            if (!moving) { return; }
+            if (!moving||pathend==null) { return; }
             pathprogress += pathdir * pathspeed;
             
             
-            if (pathprogress >=1) { pathprogress = 1; FindPath(); }
+            if (pathprogress >=1) { pathprogress = 1;pathstart = pathend; FindPath(); }
             ServerPos.SetPos(pathpos);
 
         }
@@ -69,7 +72,7 @@ namespace qptech.src.misc
         {
             moving = false;
             pathprogress = 0;
-            BlockPos p = ServerPos.AsBlockPos;
+            BlockPos p = pathstart.AsBlockPos;
             Block b = Api.World.BlockAccessor.GetBlock(p);
             if (!b.FirstCodePart().Contains("rails")) { moving = false;return; }
             Block n = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.NORTH));
@@ -184,23 +187,24 @@ namespace qptech.src.misc
             {
                 pathprogress = 0;
                 heading = newheading;
-                pathstart = ServerPos.XYZ;
+                
                 pathend = pathstart + newheading.Normald;
+
                 if (newheading == BlockFacing.SOUTH)
                 {
-                    ServerPos.SetYaw(0* 0.0174533f);
+                    ServerPos.SetYaw(180* 0.0174533f);
                 }
                 else if (newheading == BlockFacing.EAST)
                 {
-                    ServerPos.SetYaw(90 * 0.0174533f);
+                    ServerPos.SetYaw(270 * 0.0174533f);
                 }
                 else if (newheading == BlockFacing.NORTH)
                 {
-                    ServerPos.SetYaw(180 * 0.0174533f);
+                    ServerPos.SetYaw(0 * 0.0174533f);
                 }
                 else if (newheading == BlockFacing.WEST)
                 {
-                    ServerPos.SetYaw(270* 0.0174533f);
+                    ServerPos.SetYaw(90* 0.0174533f);
                 }
             }
             else
