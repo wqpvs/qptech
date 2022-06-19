@@ -117,13 +117,13 @@ namespace qptech.src.misc
                 else if (!eOK && sOK) { newheading = BlockFacing.SOUTH; moving = true; }
                 else if (eOK && sOK)
                 {
-                    if (heading == BlockFacing.EAST )
+                    if (heading == BlockFacing.NORTH )
                     {
-                        newheading = BlockFacing.SOUTH; moving = true;
+                        newheading = BlockFacing.EAST; moving = true;
                     }
                     else
                     {
-                        newheading = BlockFacing.EAST;moving = true;
+                        newheading = BlockFacing.SOUTH;moving = true;
                     }
                 }
                 
@@ -134,13 +134,13 @@ namespace qptech.src.misc
                 else if (!wOK && nOK) { newheading = BlockFacing.NORTH; moving = true; }
                 else if (wOK && nOK)
                 {
-                    if (heading == BlockFacing.WEST)
+                    if (heading == BlockFacing.SOUTH)
                     {
-                        newheading = BlockFacing.NORTH; moving = true;
+                        newheading = BlockFacing.WEST; moving = true;
                     }
                     else
                     {
-                        newheading = BlockFacing.WEST; moving = true;
+                        newheading = BlockFacing.NORTH; moving = true;
                     }
                 }
             }
@@ -150,13 +150,29 @@ namespace qptech.src.misc
                 else if (!eOK && nOK) { newheading = BlockFacing.NORTH; moving = true; }
                 else if (eOK && nOK)
                 {
-                    if (heading == BlockFacing.EAST)
+                    if (heading == BlockFacing.SOUTH)
                     {
-                        newheading = BlockFacing.NORTH; moving = true;
+                        newheading = BlockFacing.EAST; moving = true;
                     }
                     else
                     {
-                        newheading = BlockFacing.EAST; moving = true;
+                        newheading = BlockFacing.NORTH; moving = true;
+                    }
+                }
+            }
+            else if (b.LastCodePart().Contains("curved_sw"))
+            {
+                if (sOK && !wOK) { newheading = BlockFacing.SOUTH; moving = true; }
+                else if (!sOK && wOK) { newheading = BlockFacing.WEST; moving = true; }
+                else if (sOK && wOK)
+                {
+                    if (heading == BlockFacing.NORTH)
+                    {
+                        newheading = BlockFacing.WEST; moving = true;
+                    }
+                    else
+                    {
+                        newheading = BlockFacing.SOUTH; moving = true;
                     }
                 }
             }
