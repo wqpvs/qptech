@@ -17,10 +17,7 @@
     
     "behaviors": [
       
-      {
-        "code": "controlledphysics",
-        "stepHeight": 0.2
-      },
+      
       
       { "code": "interpolateposition" }
     ]
@@ -29,10 +26,7 @@
   "server": {
     "behaviors": [
       
-      {
-        "code": "controlledphysics",
-        "stepHeight": 0.2
-      }
+     
       
     ]
   },
