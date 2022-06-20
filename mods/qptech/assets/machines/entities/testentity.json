@@ -2,12 +2,12 @@
   "code": "testentity",
   "class": "PathLimitedEntity",
   "hitboxSize": {
-    "x": 0.4,
-    "y": 0.5
+    "x": 1,
+    "y": 1
   },
   "deadHitboxSize": {
-    "x": 0.4,
-    "y": 0.5
+    "x": 1,
+    "y": 1
   },
   "eyeHeight": 0.4,
   "drops": [],

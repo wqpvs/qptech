@@ -72,8 +72,19 @@ namespace qptech.src.misc
         public virtual void Start()
         {
             moving = true;
+
             FindPath();
         }
+        public virtual void Start(Vec3d hitPostion)
+        {
+            if (hitPostion.X == 0.5 && heading==BlockFacing.EAST) { heading = BlockFacing.WEST; }
+            else if (hitPostion.X==-0.5 && heading == BlockFacing.WEST) { heading = BlockFacing.EAST; }
+            else if (hitPostion.Z==0.5 && heading == BlockFacing.SOUTH) { heading = BlockFacing.NORTH; }
+            else if (hitPostion.Z==-0.5 && heading == BlockFacing.NORTH) { heading = BlockFacing.SOUTH; }
+            
+            Start();
+        }
+
         long msinteract;
         public override void OnInteract(EntityAgent byEntity, ItemSlot itemslot, Vec3d hitPosition, EnumInteractMode mode)
         {
@@ -82,7 +93,7 @@ namespace qptech.src.misc
             msinteract = Api.World.ElapsedMilliseconds+200;
             if (Api is ICoreServerAPI) { 
                 if (moving) { Stop(); }
-                else { Start(); }
+                else { Start(hitPosition); }
             }
         }
 
