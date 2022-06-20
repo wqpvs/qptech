@@ -34,7 +34,11 @@ namespace qptech.src.misc
         BlockFacing heading = BlockFacing.NORTH;
         Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress)+0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress)+0.5);
         string pathcodecontains = "rails";
-        public virtual bool hasInventory => true;
+        
+        InventoryGeneric inventory;
+        public virtual InventoryGeneric Inventory => inventory;
+        int inventorysize = 1;
+
         public override bool IsInteractable
         {
             get { return true; }
@@ -48,6 +52,7 @@ namespace qptech.src.misc
             }
             if (api is ICoreServerAPI)
             {
+                inventory = new InventoryGeneric(inventorysize, "cart", "cart", Api);
                 GetBehavior<EntityBehaviorPassivePhysics>().OnPhysicsTickCallback = onPhysicsTickCallback;
                 ep = api.ModLoader.GetModSystem<EntityPartitioning>();
                 Vec3d begin = ServerPos.XYZ;
@@ -298,7 +303,7 @@ namespace qptech.src.misc
             }
             return true;
         }
-
+        public virtual string inventorykey => "cartinventory";
         public override void ToBytes(BinaryWriter writer, bool forClient)
         {
             base.ToBytes(writer, forClient);
@@ -306,7 +311,17 @@ namespace qptech.src.misc
             {
                 WatchedAttributes.SetBool("moving", moving);
                 WatchedAttributes.SetString("heading", heading.ToString());
+                if (inventory == null)
+                {
+                    inventory = new InventoryGeneric(inventorysize, "cart", Api);
+                }
+                TreeAttribute newtree = new TreeAttribute();
+
+                Inventory.SlotsToTreeAttributes(Inventory.ToArray<ItemSlot>(), newtree);
+                byte[] data = newtree.ToBytes();
                 
+                WatchedAttributes.SetBytes(inventorykey, data);
+                int spy = 1;
             }
         }
         public override void FromBytes(BinaryReader reader, bool fromServer)
@@ -315,6 +330,30 @@ namespace qptech.src.misc
             moving = WatchedAttributes.GetBool("moving");
             string tryheading = WatchedAttributes.GetString("heading");
             heading = BlockFacing.FromCode(tryheading);
+            byte[] data = WatchedAttributes.GetBytes(inventorykey);
+            
+            if (data != null&&data.Length>0)
+            {
+                TreeAttribute loadtree = TreeAttribute.CreateFromBytes(data);
+                if (loadtree != null)
+                {
+                    ItemSlot[] slots = Inventory.SlotsFromTreeAttributes(loadtree);
+                    int c = 0;
+                    foreach (ItemSlot slot in slots)
+                    {
+                        if (!slot.Empty)
+                        {
+                            Inventory[c] = slot;
+                        }
+                        c++;
+                        if (c == Inventory.Count) { break; }
+                    }
+                    Inventory.ResolveBlocksOrItems();
+
+                }
+                return;
+            }
+            
             
         }
     }

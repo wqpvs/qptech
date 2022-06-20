@@ -259,7 +259,7 @@ namespace qptech.src
                 }
                 else
                 {
-                    ITreeAttribute inventroytree = tree.GetTreeAttribute("inventory");
+                    
                     
 
                     InitInventory(null);
