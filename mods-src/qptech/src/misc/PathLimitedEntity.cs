@@ -29,22 +29,60 @@ namespace qptech.src.misc
         double pathprogress=0;
         double pathspeed = 0.1f;
         bool moving = false;
+        CollisionTester collTester = new CollisionTester();
+        EntityPartitioning ep;
         BlockFacing heading = BlockFacing.NORTH;
         Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress)+0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress)+0.5);
-        
-        //TODO - LERP BETWEEN PURE BLOCK POS, AND USE AN OFFSET FOR DISPLAYING TRAIN
-        
+        string pathcodecontains = "rails";
+
+        public override bool IsInteractable
+        {
+            get { return true; }
+        }
         public override void Initialize(EntityProperties properties, ICoreAPI api, long InChunkIndex3d)
         {
             base.Initialize(properties, api, InChunkIndex3d);
+            if (Attributes != null)
+            {
+                pathcodecontains = Attributes.GetString("pathcodecontains", pathcodecontains);
+            }
             if (api is ICoreServerAPI)
             {
+                GetBehavior<EntityBehaviorPassivePhysics>().OnPhysicsTickCallback = onPhysicsTickCallback;
+                ep = api.ModLoader.GetModSystem<EntityPartitioning>();
                 Vec3d begin = ServerPos.XYZ;
                 begin.X = Math.Floor(begin.X);
                 begin.Y = Math.Floor(begin.Y);
                 begin.Z = Math.Floor(begin.Z);
                 pathstart = begin;
                 FindPath();
+            }
+        }
+        private void onPhysicsTickCallback(float dtFac)
+        {
+            
+
+            
+        }
+        public virtual void Stop()
+        {
+            moving = false;
+            
+        }
+        public virtual void Start()
+        {
+            moving = true;
+            FindPath();
+        }
+        long msinteract;
+        public override void OnInteract(EntityAgent byEntity, ItemSlot itemslot, Vec3d hitPosition, EnumInteractMode mode)
+        {
+            base.OnInteract(byEntity, itemslot, hitPosition, mode);
+            if (Api.World.ElapsedMilliseconds + 200 < msinteract) { return; }
+            msinteract = Api.World.ElapsedMilliseconds+200;
+            if (Api is ICoreServerAPI) { 
+                if (moving) { Stop(); }
+                else { Start(); }
             }
         }
 
@@ -68,21 +106,21 @@ namespace qptech.src.misc
 
         }
 
-        void FindPath()
+        protected virtual void FindPath()
         {
             moving = false;
             pathprogress = 0;
             BlockPos p = pathstart.AsBlockPos;
             Block b = Api.World.BlockAccessor.GetBlock(p);
-            if (!b.FirstCodePart().Contains("rails")) { moving = false;return; }
+            if (!b.FirstCodePart().Contains(pathcodecontains)) { moving = false;return; }
             Block n = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.NORTH));
             Block s = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.SOUTH));
             Block e = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.EAST));
             Block w = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.WEST));
-            bool nOK = n.FirstCodePart().Contains("rails");
-            bool eOK = e.FirstCodePart().Contains("rails");
-            bool sOK = s.FirstCodePart().Contains("rails");
-            bool wOK = w.FirstCodePart().Contains("rails");
+            bool nOK = n.FirstCodePart().Contains(pathcodecontains);
+            bool eOK = e.FirstCodePart().Contains(pathcodecontains);
+            bool sOK = s.FirstCodePart().Contains(pathcodecontains);
+            bool wOK = w.FirstCodePart().Contains(pathcodecontains);
             BlockFacing newheading = heading;
             //pick new destination based on block we are currently in, where we were headed, and if the possible destination blocks were rails
             if (b.LastCodePart().Contains("flat_ns"))
@@ -211,6 +249,27 @@ namespace qptech.src.misc
             {
                 bool oops = true;
             }
+        }
+
+        
+
+        public override void ToBytes(BinaryWriter writer, bool forClient)
+        {
+            base.ToBytes(writer, forClient);
+            if (!forClient)
+            {
+                WatchedAttributes.SetBool("moving", moving);
+                WatchedAttributes.SetString("heading", heading.ToString());
+                
+            }
+        }
+        public override void FromBytes(BinaryReader reader, bool fromServer)
+        {
+            base.FromBytes(reader, fromServer);
+            moving = WatchedAttributes.GetBool("moving");
+            string tryheading = WatchedAttributes.GetString("heading");
+            heading = BlockFacing.FromCode(tryheading);
+            
         }
     }
 }
