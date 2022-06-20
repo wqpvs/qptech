@@ -34,7 +34,7 @@ namespace qptech.src.misc
         BlockFacing heading = BlockFacing.NORTH;
         Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress)+0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress)+0.5);
         string pathcodecontains = "rails";
-
+        public virtual bool hasInventory => true;
         public override bool IsInteractable
         {
             get { return true; }
@@ -112,13 +112,18 @@ namespace qptech.src.misc
             pathprogress += pathdir * pathspeed;
             
             
-            if (pathprogress >=1) { pathprogress = 1;pathstart = pathend; FindPath(); }
+            if (pathprogress >=1) {
+                pathprogress = 1;pathstart = pathend;
+                
+                FindPath();
+            }
             ServerPos.SetPos(pathpos);
 
         }
 
         protected virtual void FindPath()
         {
+            if (!HandleInventory()) { return; }
             moving = false;
             pathprogress = 0;
             BlockPos p = pathstart.AsBlockPos;
@@ -261,8 +266,38 @@ namespace qptech.src.misc
                 bool oops = true;
             }
         }
-
-        
+/// <summary>
+/// Handle Inventory - check for various spots to load & unload
+/// </summary>
+/// <returns>true=ok to move, false=wait</returns>
+        protected virtual bool HandleInventory()
+        {
+            //Check below for hopper
+            BlockPos p = ServerPos.AsBlockPos;
+            p.Y -= 2;
+            BlockEntity b = Api.World.BlockAccessor.GetBlockEntity(p);
+            if (p == null)
+            {
+                return true;
+            }
+            BlockEntityItemFlow flow = b as BlockEntityItemFlow;
+            if (flow != null&&flow.Inventory!=null)
+            {
+                
+                foreach (ItemSlot slot in flow.Inventory)
+                {
+                    //temporary just add some magic coal
+                    if (slot.Empty)
+                    {
+                        slot.Itemstack= new ItemStack(Api.World.GetItem(new AssetLocation("game:charcoal")), 1);
+                        slot.MarkDirty();
+                        return false;
+                        
+                    }
+                }
+            }
+            return true;
+        }
 
         public override void ToBytes(BinaryWriter writer, bool forClient)
         {
