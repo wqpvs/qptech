@@ -38,7 +38,7 @@ namespace qptech.src.misc
         InventoryGeneric inventory;
         public virtual InventoryGeneric Inventory => inventory;
         int inventorysize = 1;
-
+        
         public override bool IsInteractable
         {
             get { return true; }
@@ -342,7 +342,9 @@ namespace qptech.src.misc
 /// <returns>true=ok to move, false=wait</returns>
         protected virtual bool HandleInventory()
         {
-            return HandleUnloading()&&HandleLoading();
+            bool shouldmove= HandleUnloading()&&HandleLoading();
+            if (!shouldmove) { TrySaveInventory(); }
+            return shouldmove;
         }
         
         
@@ -370,7 +372,7 @@ namespace qptech.src.misc
                         int moved =myslot.TryPutInto(Api.World, slot);
                         myslot.MarkDirty();
                         slot.MarkDirty();
-                        if (moved > 0) { TrySaveInventory(); return false; }
+                        if (moved > 0) {  return false; }
                         
                     }
                 }
@@ -399,7 +401,7 @@ namespace qptech.src.misc
                     int moved = srcslot.TryPutInto(Api.World, destslot);
                     srcslot.MarkDirty();
                     destslot.MarkDirty();
-                    if (moved > 0) { TrySaveInventory(); return false; }
+                    if (moved > 0) {  return false; }
                 }
             }
             return true;
@@ -409,7 +411,8 @@ namespace qptech.src.misc
         public virtual string inventorykey => "cartinventory";
         public override void ToBytes(BinaryWriter writer, bool forClient)
         {
-            base.ToBytes(writer, forClient);
+            
+            
             if (!forClient)
             {
                 WatchedAttributes.SetBool("moving", moving);
@@ -417,7 +420,7 @@ namespace qptech.src.misc
                 
                 
             }
-            
+            base.ToBytes(writer, forClient);
         }
         string holding="Empty" ;
         public override void FromBytes(BinaryReader reader, bool fromServer)
@@ -433,5 +436,28 @@ namespace qptech.src.misc
         {
             return "Minecart (" + holding + ")";
         }
+
+        public override void OnEntityDespawn(EntityDespawnReason despawn)
+        {
+            base.OnEntityDespawn(despawn);
+            if (sapi != null) {
+                if (despawn.reason == EnumDespawnReason.Death || despawn.reason == EnumDespawnReason.Removed)
+                {
+                    Inventory.DropAll(ServerPos.XYZ);
+                }
+                TrySaveInventory();
+            }
+        }
+
+        public override void OnEntityLoaded()
+        {
+            base.OnEntityLoaded();
+            if (Api is ICoreServerAPI)
+            {
+                TryLoadInventory();
+            }
+        }
+
+        
     }
 }
