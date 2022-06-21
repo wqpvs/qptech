@@ -34,7 +34,7 @@ namespace qptech.src.misc
         BlockFacing heading = BlockFacing.NORTH;
         Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress)+0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress)+0.5);
         string pathcodecontains = "rails";
-        
+        ICoreServerAPI sapi;
         InventoryGeneric inventory;
         public virtual InventoryGeneric Inventory => inventory;
         int inventorysize = 1;
@@ -52,7 +52,9 @@ namespace qptech.src.misc
             }
             if (api is ICoreServerAPI)
             {
+                sapi = api as ICoreServerAPI;
                 inventory = new InventoryGeneric(inventorysize, "cart", "cart", Api);
+                TryLoadInventory();
                 GetBehavior<EntityBehaviorPassivePhysics>().OnPhysicsTickCallback = onPhysicsTickCallback;
                 ep = api.ModLoader.GetModSystem<EntityPartitioning>();
                 Vec3d begin = ServerPos.XYZ;
@@ -88,6 +90,69 @@ namespace qptech.src.misc
             else if (hitPostion.Z==-0.5 && heading == BlockFacing.NORTH) { heading = BlockFacing.SOUTH; }
             
             Start();
+        }
+
+        string GetEntityStorageKey()
+        {
+            return "cartinventory" + EntityId.ToString();
+        }
+
+        void TryLoadInventory()
+        {
+            if (sapi == null) { return; }   
+
+            try
+            {
+
+                List<byte> datalist = sapi.WorldManager.SaveGame.GetData<List<byte>>(GetEntityStorageKey());
+                byte[] data;
+                ITreeAttribute loadtree = null;
+                if (datalist != null)
+                {
+                    data = datalist.ToArray();
+                    loadtree = TreeAttribute.CreateFromBytes(data);
+                }
+
+                if (loadtree != null)
+                {
+                    ItemSlot[] slots = Inventory.SlotsFromTreeAttributes(loadtree);
+                    int c = 0;
+                    foreach (ItemSlot slot in slots)
+                    {
+                        if (!slot.Empty)
+                        {
+                            Inventory[c] = slot;
+                        }
+                        c++;
+                        if (c == Inventory.Count) { break; }
+                    }
+                    Inventory.ResolveBlocksOrItems();
+
+                }
+            }
+            catch
+            {
+                int oops = 1;
+            }
+
+            
+        }
+
+        void TrySaveInventory()
+        {
+            if (Api is ICoreClientAPI) { return; }
+            TreeAttribute newtree = new TreeAttribute();
+
+            Inventory.SlotsToTreeAttributes(Inventory.ToArray<ItemSlot>(), newtree);
+
+            //newtree will have correctly have the inventory at this point
+            byte[] data = newtree.ToBytes();
+            List<byte> datalist = data.ToList<byte>();
+
+            //SAVE TO FILE ApiExtensions.SaveDataFile<List<byte>>(Api, GetChestFilename(player), datalist);
+            sapi.WorldManager.SaveGame.StoreData<List<byte>>(GetEntityStorageKey(), datalist);
+
+            
         }
 
         long msinteract;
@@ -305,7 +370,7 @@ namespace qptech.src.misc
                         int moved =myslot.TryPutInto(Api.World, slot);
                         myslot.MarkDirty();
                         slot.MarkDirty();
-                        if (moved > 0) { return false; }
+                        if (moved > 0) { TrySaveInventory(); return false; }
                         
                     }
                 }
@@ -334,7 +399,7 @@ namespace qptech.src.misc
                     int moved = srcslot.TryPutInto(Api.World, destslot);
                     srcslot.MarkDirty();
                     destslot.MarkDirty();
-                    if (moved > 0) { return false; }
+                    if (moved > 0) { TrySaveInventory(); return false; }
                 }
             }
             return true;
@@ -349,28 +414,10 @@ namespace qptech.src.misc
             {
                 WatchedAttributes.SetBool("moving", moving);
                 WatchedAttributes.SetString("heading", heading.ToString());
-                if (Inventory == null)
-                {
-                    inventory = new InventoryGeneric(inventorysize, "cart", Api);
-                }
-                if (Inventory.Empty) { WatchedAttributes.SetString("holding", "Empty"); }
-                else
-                {
-                    foreach (ItemSlot slot in Inventory)
-                    {
-                        if (!slot.Empty)
-                        {
-                            WatchedAttributes.SetString("holding", slot.GetStackName());
-                        }
-                    }
-                }
-                TreeAttribute newtree = new TreeAttribute();
-                Inventory.SlotsToTreeAttributes(Inventory.ToArray<ItemSlot>(), newtree);
-                byte[] data = newtree.ToBytes();
-                writer.Write(data.Length);
-                writer.Write(data);
+                
                 
             }
+            
         }
         string holding="Empty" ;
         public override void FromBytes(BinaryReader reader, bool fromServer)
@@ -380,41 +427,7 @@ namespace qptech.src.misc
             string tryheading = WatchedAttributes.GetString("heading");
             holding = WatchedAttributes.GetString("holding");
             heading = BlockFacing.FromCode(tryheading);
-            if (fromServer)
-            {
-                try
-                {
-                    int datasize = reader.ReadInt32();
-                    byte[] data = reader.ReadBytes(datasize);
-
-                    if (data != null && data.Length > 0)
-                    {
-                        TreeAttribute loadtree = TreeAttribute.CreateFromBytes(data);
-                        if (loadtree != null)
-                        {
-                            if (Inventory == null)
-                            {
-                                inventory = new InventoryGeneric(inventorysize, "cart", Api);
-                            }
-                            ItemSlot[] slots = Inventory.SlotsFromTreeAttributes(loadtree);
-                            int c = 0;
-                            foreach (ItemSlot slot in slots)
-                            {
-                                if (!slot.Empty)
-                                {
-                                    Inventory[c] = slot;
-                                }
-                                c++;
-                                if (c == Inventory.Count) { break; }
-                            }
-                            Inventory.ResolveBlocksOrItems();
-
-                        }
-                        return;
-                    }
-                }
-                catch { }
-            }
+            
         }
         public override string GetName()
         {
