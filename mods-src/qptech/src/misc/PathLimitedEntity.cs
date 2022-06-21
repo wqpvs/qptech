@@ -277,32 +277,70 @@ namespace qptech.src.misc
 /// <returns>true=ok to move, false=wait</returns>
         protected virtual bool HandleInventory()
         {
+            return HandleUnloading()&&HandleLoading();
+        }
+        
+        
+        protected virtual bool HandleUnloading()
+        {
+            if (Inventory.Empty) { return true; }
             //Check below for hopper
             BlockPos p = ServerPos.AsBlockPos;
-            p.Y -= 2;
+            p.Y -= 1;
             BlockEntity b = Api.World.BlockAccessor.GetBlockEntity(p);
             if (p == null)
             {
                 return true;
             }
-            BlockEntityItemFlow flow = b as BlockEntityItemFlow;
-            if (flow != null&&flow.Inventory!=null)
+            BlockEntityGenericTypedContainer outcont = b as BlockEntityGenericTypedContainer;
+            if (outcont != null&&outcont.Inventory!=null)
             {
-                
-                foreach (ItemSlot slot in flow.Inventory)
-                {
-                    //temporary just add some magic coal
-                    if (slot.Empty)
+                foreach (ItemSlot myslot in Inventory) {
+                    if (myslot == null || myslot.Empty) { continue; }
+                    foreach (ItemSlot slot in outcont.Inventory)
                     {
-                        slot.Itemstack= new ItemStack(Api.World.GetItem(new AssetLocation("game:charcoal")), 1);
+                        
+                        if (!slot.CanHold(myslot)) { continue; }
+                        
+                        int moved =myslot.TryPutInto(Api.World, slot);
+                        myslot.MarkDirty();
                         slot.MarkDirty();
-                        return false;
+                        if (moved > 0) { return false; }
                         
                     }
                 }
             }
             return true;
         }
+
+        public virtual bool HandleLoading()
+        {
+            BlockPos p = ServerPos.AsBlockPos;
+            p.Y += 1;
+            BlockEntity b = Api.World.BlockAccessor.GetBlockEntity(p);
+            if (b == null)
+            {
+                return true;
+            }
+            BlockEntityGenericTypedContainer incont = b as BlockEntityGenericTypedContainer;
+            if (incont == null || incont.Inventory.Empty) { return true; }
+            foreach (ItemSlot srcslot in incont.Inventory)
+            {
+                if (srcslot == null || srcslot.Empty) { continue; }
+                foreach (ItemSlot destslot in Inventory)
+                {
+                    if (destslot == null) { continue; }
+                    if (!destslot.CanHold(srcslot)) { continue; }
+                    int moved = srcslot.TryPutInto(Api.World, destslot);
+                    srcslot.MarkDirty();
+                    destslot.MarkDirty();
+                    if (moved > 0) { return false; }
+                }
+            }
+            return true;
+        }
+
+
         public virtual string inventorykey => "cartinventory";
         public override void ToBytes(BinaryWriter writer, bool forClient)
         {
@@ -311,50 +349,76 @@ namespace qptech.src.misc
             {
                 WatchedAttributes.SetBool("moving", moving);
                 WatchedAttributes.SetString("heading", heading.ToString());
-                if (inventory == null)
+                if (Inventory == null)
                 {
                     inventory = new InventoryGeneric(inventorysize, "cart", Api);
                 }
+                if (Inventory.Empty) { WatchedAttributes.SetString("holding", "Empty"); }
+                else
+                {
+                    foreach (ItemSlot slot in Inventory)
+                    {
+                        if (!slot.Empty)
+                        {
+                            WatchedAttributes.SetString("holding", slot.GetStackName());
+                        }
+                    }
+                }
                 TreeAttribute newtree = new TreeAttribute();
-
                 Inventory.SlotsToTreeAttributes(Inventory.ToArray<ItemSlot>(), newtree);
                 byte[] data = newtree.ToBytes();
+                writer.Write(data.Length);
+                writer.Write(data);
                 
-                WatchedAttributes.SetBytes(inventorykey, data);
-                int spy = 1;
             }
         }
+        string holding="Empty" ;
         public override void FromBytes(BinaryReader reader, bool fromServer)
         {
             base.FromBytes(reader, fromServer);
             moving = WatchedAttributes.GetBool("moving");
             string tryheading = WatchedAttributes.GetString("heading");
+            holding = WatchedAttributes.GetString("holding");
             heading = BlockFacing.FromCode(tryheading);
-            byte[] data = WatchedAttributes.GetBytes(inventorykey);
-            
-            if (data != null&&data.Length>0)
+            if (fromServer)
             {
-                TreeAttribute loadtree = TreeAttribute.CreateFromBytes(data);
-                if (loadtree != null)
+                try
                 {
-                    ItemSlot[] slots = Inventory.SlotsFromTreeAttributes(loadtree);
-                    int c = 0;
-                    foreach (ItemSlot slot in slots)
-                    {
-                        if (!slot.Empty)
-                        {
-                            Inventory[c] = slot;
-                        }
-                        c++;
-                        if (c == Inventory.Count) { break; }
-                    }
-                    Inventory.ResolveBlocksOrItems();
+                    int datasize = reader.ReadInt32();
+                    byte[] data = reader.ReadBytes(datasize);
 
+                    if (data != null && data.Length > 0)
+                    {
+                        TreeAttribute loadtree = TreeAttribute.CreateFromBytes(data);
+                        if (loadtree != null)
+                        {
+                            if (Inventory == null)
+                            {
+                                inventory = new InventoryGeneric(inventorysize, "cart", Api);
+                            }
+                            ItemSlot[] slots = Inventory.SlotsFromTreeAttributes(loadtree);
+                            int c = 0;
+                            foreach (ItemSlot slot in slots)
+                            {
+                                if (!slot.Empty)
+                                {
+                                    Inventory[c] = slot;
+                                }
+                                c++;
+                                if (c == Inventory.Count) { break; }
+                            }
+                            Inventory.ResolveBlocksOrItems();
+
+                        }
+                        return;
+                    }
                 }
-                return;
+                catch { }
             }
-            
-            
+        }
+        public override string GetName()
+        {
+            return "Minecart (" + holding + ")";
         }
     }
 }
