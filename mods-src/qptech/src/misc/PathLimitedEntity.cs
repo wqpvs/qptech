@@ -161,9 +161,44 @@ namespace qptech.src.misc
             base.OnInteract(byEntity, itemslot, hitPosition, mode);
             if (Api.World.ElapsedMilliseconds + 200 < msinteract) { return; }
             msinteract = Api.World.ElapsedMilliseconds+200;
-            if (Api is ICoreServerAPI) { 
-                if (moving) { Stop(); }
-                else { Start(hitPosition); }
+            if (Api is ICoreServerAPI) {
+                if (mode == EnumInteractMode.Interact&&Inventory!=null)
+                {
+                    //allow right click with item stack to load cart
+                    if (itemslot != null && !itemslot.Empty)
+                    {
+                        foreach (ItemSlot myslot in Inventory)
+                        {
+                            if (myslot.CanHold(itemslot))
+                            {
+                                itemslot.TryPutInto(Api.World,myslot,itemslot.StackSize);
+                                itemslot.MarkDirty();
+                                myslot.MarkDirty();
+                                TrySaveInventory();
+                                return;
+                            }
+                        }
+                    }
+                    else if (itemslot != null && itemslot.Empty)
+                    {
+                        foreach (ItemSlot myslot in Inventory)
+                        {
+                            if (itemslot.CanHold(myslot))
+                            {
+                                myslot.TryPutInto(Api.World, itemslot,myslot.StackSize);
+                                itemslot.MarkDirty();
+                                myslot.MarkDirty();
+                                TrySaveInventory();
+                                return;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (moving) { Stop(); }
+                    else { Start(hitPosition); }
+                }
             }
         }
 
@@ -383,7 +418,7 @@ namespace qptech.src.misc
         public virtual bool HandleLoading()
         {
             BlockPos p = ServerPos.AsBlockPos;
-            p.Y += 1;
+            p.Y +=2;
             BlockEntity b = Api.World.BlockAccessor.GetBlockEntity(p);
             if (b == null)
             {

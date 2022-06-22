@@ -5,10 +5,10 @@
   "attributes": {
     "waterTightContainerProps": {
       "containable": true,
-      "itemsPerLitre": 1,
+      "itemsPerLitre": 100,
       "texture": { "base": "game:block/liquidrubber" },
       "tintIndex": 2,
-      itemsPerLitre: 100,
+      
       "whenSpilled": {
         "action": "DropContents",
         "stack": {
