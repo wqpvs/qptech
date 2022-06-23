@@ -502,22 +502,42 @@ namespace qptech.src.misc
 
 
         public virtual string inventorykey => "cartinventory";
+
+
         public virtual void MarkMovementDirty()
         {
             WatchedAttributes.MarkPathDirty("moving");
             WatchedAttributes.MarkPathDirty("heading");
             WatchedAttributes.MarkPathDirty("startpathset");
+            WatchedAttributes.MarkPathDirty("pathstart");
+            WatchedAttributes.MarkPathDirty("pathend");
+            WatchedAttributes.MarkPathDirty("pathprogress");
+            WatchedAttributes.MarkPathDirty("pathdir");
+            //WatchedAttributes.MarkPathDirty("pathendX");
+            //WatchedAttributes.MarkPathDirty("pathendY");
+            //WatchedAttributes.MarkPathDirty("pathendZ");
+            //WatchedAttributes.MarkPathDirty("pathstartX");
+            //WatchedAttributes.MarkPathDirty("pathstartY");
+            //WatchedAttributes.MarkPathDirty("pathstartZ");
         }
         public override void ToBytes(BinaryWriter writer, bool forClient)
         {
-            
-            
+
+
             if (!forClient)
             {
                 WatchedAttributes.SetBool("moving", moving);
                 WatchedAttributes.SetString("heading", heading.ToString());
                 WatchedAttributes.SetBool("startpathset", startpathset);
                 WatchedAttributes.SetString("holding", holding);
+                WatchedAttributes.SetDouble("pathdir", pathdir);
+                WatchedAttributes.SetDouble("pathprogress", pathprogress);
+                WatchedAttributes.SetDouble("pathendX", pathend.X);
+                WatchedAttributes.SetDouble("pathendY", pathend.Y);
+                WatchedAttributes.SetDouble("pathendZ", pathend.Z);
+                WatchedAttributes.SetDouble("pathstartX", pathstart.X);
+                WatchedAttributes.SetDouble("pathstartY", pathstart.Y);
+                WatchedAttributes.SetDouble("pathstartZ", pathstart.Z);
             }
             base.ToBytes(writer, forClient);
         }
@@ -530,6 +550,33 @@ namespace qptech.src.misc
             holding = WatchedAttributes.GetString("holding");
             heading = BlockFacing.FromCode(tryheading);
             startpathset = WatchedAttributes.GetBool("startpathset");
+            pathdir = WatchedAttributes.GetDouble("pathdir", 1);
+            pathprogress = WatchedAttributes.GetDouble("pathprogress", 0);
+            pathend = new Vec3d(
+                WatchedAttributes.GetDouble("pathendX",0),
+                WatchedAttributes.GetDouble("pathendY",0),
+                WatchedAttributes.GetDouble("pathendZ",0)
+                );
+            pathstart = new Vec3d(
+                WatchedAttributes.GetDouble("pathstartX", 0),
+                WatchedAttributes.GetDouble("pathstartY", 0),
+                WatchedAttributes.GetDouble("pathstartZ", 0)
+                );
+            if (pathstart.Y == 0 || pathend.Y == 0)
+            {
+                startpathset = false;
+
+            }
+            /*
+             WatchedAttributes.SetDouble("pathdir", pathdir);
+                WatchedAttributes.SetDouble("pathprogress", pathprogress);
+                WatchedAttributes.SetDouble("pathendX", pathend.X);
+                WatchedAttributes.SetDouble("pathendY", pathend.Y);
+                WatchedAttributes.SetDouble("pathendZ", pathend.Z);
+                WatchedAttributes.SetDouble("pathstartX", pathstart.X);
+                WatchedAttributes.SetDouble("pathstartY", pathstart.Y);
+                WatchedAttributes.SetDouble("pathstartZ", pathstart.Z); 
+              */
         }
         public override string GetName()
         {
@@ -563,3 +610,4 @@ namespace qptech.src.misc
         
     }
 }
+
