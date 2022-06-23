@@ -57,7 +57,7 @@ namespace qptech.src.misc
                 sapi = api as ICoreServerAPI;
                 inventory = new InventoryGeneric(inventorysize, "cart", "cart", Api);
                 TryLoadInventory();
-                
+                TryStartPath();
                 ep = api.ModLoader.GetModSystem<EntityPartitioning>();
                 
             }
@@ -137,12 +137,13 @@ namespace qptech.src.misc
                     Inventory.ResolveBlocksOrItems();
 
                 }
+                UpdateInventoryDisplay();
             }
             catch
             {
                 int oops = 1;
             }
-
+            
             
         }
 
@@ -159,10 +160,32 @@ namespace qptech.src.misc
 
             //SAVE TO FILE ApiExtensions.SaveDataFile<List<byte>>(Api, GetChestFilename(player), datalist);
             sapi.WorldManager.SaveGame.StoreData<List<byte>>(GetEntityStorageKey(), datalist);
+            UpdateInventoryDisplay();
 
-            
+
         }
-
+        public virtual void UpdateInventoryDisplay()
+        {
+            if (Inventory != null)
+            {
+                if (Inventory.Empty)
+                {
+                    holding = "Empty";
+                    WatchedAttributes.SetString("holding", holding);
+                    WatchedAttributes.MarkPathDirty("holding");
+                }
+                else
+                {
+                    foreach (ItemSlot slot in Inventory)
+                    {
+                        if (slot == null || slot.Empty) { continue; }
+                        holding = slot.Itemstack.Collectible.GetHeldItemName(slot.Itemstack);
+                        WatchedAttributes.SetString("holding", holding);
+                        WatchedAttributes.MarkPathDirty("holding");
+                    }
+                }
+            }
+        }
         long msinteract;
         public override void OnInteract(EntityAgent byEntity, ItemSlot itemslot, Vec3d hitPosition, EnumInteractMode mode)
         {
@@ -183,6 +206,9 @@ namespace qptech.src.misc
                                 itemslot.MarkDirty();
                                 myslot.MarkDirty();
                                 TrySaveInventory();
+                                
+                                holding = myslot.Itemstack.Collectible.GetHeldItemName(myslot.Itemstack);
+                                WatchedAttributes.MarkPathDirty("holding");
                                 return;
                             }
                         }
@@ -196,6 +222,11 @@ namespace qptech.src.misc
                                 myslot.TryPutInto(Api.World, itemslot,myslot.StackSize);
                                 itemslot.MarkDirty();
                                 myslot.MarkDirty();
+                                if (myslot.Empty)
+                                {
+                                    holding = "Empty";
+                                    WatchedAttributes.MarkPathDirty("holding");
+                                }
                                 TrySaveInventory();
                                 return;
                             }
@@ -372,6 +403,7 @@ namespace qptech.src.misc
                 pathprogress = 0;
                 heading = newheading;
                 
+                
                 pathend = pathstart + newheading.Normald;
 
                 if (newheading == BlockFacing.SOUTH)
@@ -390,6 +422,7 @@ namespace qptech.src.misc
                 {
                     ServerPos.SetYaw(90* 0.0174533f);
                 }
+                MarkMovementDirty();
             }
             else
             {
@@ -469,6 +502,12 @@ namespace qptech.src.misc
 
 
         public virtual string inventorykey => "cartinventory";
+        public virtual void MarkMovementDirty()
+        {
+            WatchedAttributes.MarkPathDirty("moving");
+            WatchedAttributes.MarkPathDirty("heading");
+            WatchedAttributes.MarkPathDirty("startpathset");
+        }
         public override void ToBytes(BinaryWriter writer, bool forClient)
         {
             
@@ -478,7 +517,7 @@ namespace qptech.src.misc
                 WatchedAttributes.SetBool("moving", moving);
                 WatchedAttributes.SetString("heading", heading.ToString());
                 WatchedAttributes.SetBool("startpathset", startpathset);
-                
+                WatchedAttributes.SetString("holding", holding);
             }
             base.ToBytes(writer, forClient);
         }
@@ -494,7 +533,7 @@ namespace qptech.src.misc
         }
         public override string GetName()
         {
-            return "Minecart (" + holding + ")";
+            return "Minecart (" + WatchedAttributes.GetString("holding") + ")";
         }
 
         public override void OnEntityDespawn(EntityDespawnReason despawn)
