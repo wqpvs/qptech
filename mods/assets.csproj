@@ -98,6 +98,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\itemfilterentrance.json" />
     <None Include="qptech\assets\machines\blocktypes\other\coalpilestoker.json" />
+    <None Include="qptech\assets\machines\blocktypes\other\verticalwoodenrail.json" />
     <None Include="qptech\assets\machines\blocktypes\other\rubbersheet.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-drainer.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-sprinkler.json" />
@@ -221,6 +222,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\crusher-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\cable-extruder.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\wiremill.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\other\woodenrails.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\coalpilestoker.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidpumpconvert.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidhorpump.json" />

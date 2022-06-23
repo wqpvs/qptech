@@ -1,0 +1,73 @@
+{
+  "code": "verticalwoodenrails",
+  
+  "behaviors": [
+	
+		{
+			"name": "HorizontalOrientable",
+			
+		}
+		
+	],
+  
+  
+  "variantgroups": [
+    
+    {
+      "code": "side",
+      "states": [ "north", "east", "south", "west" ]
+    }
+  ],
+  "shapebytype": {
+    
+    "*-north": {
+      "base": "game:block/wood/rails/raised_ns",
+      "rotateY": 0
+    },
+    "*-east": {
+      "base": "game:block/wood/rails/raised_ns",
+      
+      "rotateY": 270
+      
+    },
+    "*-west": {
+      "base": "game:block/wood/rails/raised_ns",
+      
+      "rotateY": 90
+      
+    },
+    "*-south": {
+      "base": "game:block/wood/rails/raised_ns",
+      "rotateY": 180
+    }
+  },
+  "sidesolidByType": {
+    "*": {
+      "all": false,
+      "down": false
+    },
+    
+  },
+  "sideopaqueByType": {
+    "*": {
+      "all": false
+      
+    }
+  },
+
+  "blockmaterial": "Wood",
+ "creativeinventory": {
+    "qptech": [ "*" ]
+    
+  },
+  "replaceable": 300,
+  "resistance": 2,
+  "lightAbsorption": 1,
+  "emitSideAo": {
+    "all": false
+  },
+  
+  
+  
+ 
+}

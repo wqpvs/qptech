@@ -21,18 +21,18 @@ using System.Text.RegularExpressions;
 
 namespace qptech.src.misc
 {
-    class PathLimitedEntity:Entity
+    class PathLimitedEntity : Entity
     {
         Vec3d pathstart;
         Vec3d pathend;
         double pathdir = 1;
-        double pathprogress=0;
+        double pathprogress = 0;
         double pathspeed = 0.1f;
         bool moving = false;
         CollisionTester collTester = new CollisionTester();
         EntityPartitioning ep;
         BlockFacing heading = BlockFacing.NORTH;
-        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress)+0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress)+0.5);
+        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + 0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + 0.5);
         string pathcodecontains = "rails";
         string dropitem = "machines:creature-testentity";
         ICoreServerAPI sapi;
@@ -40,7 +40,7 @@ namespace qptech.src.misc
         public virtual InventoryGeneric Inventory => inventory;
         int inventorysize = 1;
         bool startpathset = false;
-        
+        public override bool ApplyGravity => false;
         public override bool IsInteractable
         {
             get { return true; }
@@ -289,8 +289,23 @@ namespace qptech.src.misc
             moving = false;
             pathprogress = 0;
             BlockPos p = pathstart.AsBlockPos;
-            Block b = Api.World.BlockAccessor.GetBlock(p);
-            if (!b.FirstCodePart().Contains(pathcodecontains)) { moving = false;return; }
+            
+            Block b;
+            
+            b = Api.World.BlockAccessor.GetBlock(p);
+            if (!b.FirstCodePart().Contains(pathcodecontains)) {
+                for (int c = 0; c < 2; c++)
+                {
+                    
+                    p.Y -= 1;
+                    b = Api.World.BlockAccessor.GetBlock(p);
+                    if (b.FirstCodePart().Contains(pathcodecontains)) { break; }
+                }
+                if (!b.FirstCodePart().Contains(pathcodecontains))
+                {
+                    moving = false; Die(); return;
+                }
+            }
             Block n = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.NORTH));
             Block s = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.SOUTH));
             Block e = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.EAST));
@@ -300,8 +315,35 @@ namespace qptech.src.misc
             bool sOK = s.FirstCodePart().Contains(pathcodecontains);
             bool wOK = w.FirstCodePart().Contains(pathcodecontains);
             BlockFacing newheading = heading;
+            double vertical = 0;
             //pick new destination based on block we are currently in, where we were headed, and if the possible destination blocks were rails
-            if (b.LastCodePart().Contains("flat_ns"))
+            if (b.Code.ToString().Contains("vertical"))
+            {
+                
+                if (b.LastCodePart().Contains("north"))
+                {
+                    n = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.NORTH).Offset(BlockFacing.UP));
+                    s = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.SOUTH).Offset(BlockFacing.DOWN));
+                    nOK= n.FirstCodePart().Contains(pathcodecontains);
+                    sOK = s.FirstCodePart().Contains(pathcodecontains);
+                    if (nOK && !sOK) { newheading = BlockFacing.NORTH;moving = true; }
+                    else if (!nOK && sOK){ newheading = BlockFacing.SOUTH;moving = true; }
+                    else if (nOK&&sOK) {
+                        if (heading == BlockFacing.NORTH || heading == BlockFacing.SOUTH)
+                        {
+                            newheading = heading; moving = true;
+                        }
+                        else
+                        {
+                            newheading = BlockFacing.SOUTH;moving = true;
+                        }
+                    }
+                    if (newheading == BlockFacing.NORTH) { vertical = 1; }
+                    else { vertical = -1; }
+                }
+
+            }
+            else if (b.LastCodePart().Contains("flat_ns"))
             {
                 if (nOK && !sOK) { newheading = BlockFacing.NORTH; moving = true; }
                 else if (!nOK && sOK) { newheading = BlockFacing.SOUTH;moving = true; }
@@ -403,11 +445,12 @@ namespace qptech.src.misc
             {
                 startpathset = true;
                 pathprogress = 0;
+                
                 heading = newheading;
                 
                 
                 pathend = pathstart + newheading.Normald;
-
+                pathend.Y += vertical;
                 if (newheading == BlockFacing.SOUTH)
                 {
                     ServerPos.SetYaw(180* 0.0174533f);
