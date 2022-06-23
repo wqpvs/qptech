@@ -154,6 +154,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate.json" />
     <None Include="qptech\assets\machines\config\handbook\qptech.json" />
     <None Include="qptech\assets\machines\entities\testentity.json" />
+    <None Include="qptech\assets\machines\itemtypes\entity\creature.json" />
     <None Include="qptech\assets\machines\itemtypes\part\hv\drillhead.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\cruciblechamber.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\heatingcoil.json" />

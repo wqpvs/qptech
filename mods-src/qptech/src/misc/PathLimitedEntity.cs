@@ -34,10 +34,12 @@ namespace qptech.src.misc
         BlockFacing heading = BlockFacing.NORTH;
         Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress)+0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress)+0.5);
         string pathcodecontains = "rails";
+        string dropitem = "machines:creature-testentity";
         ICoreServerAPI sapi;
         InventoryGeneric inventory;
         public virtual InventoryGeneric Inventory => inventory;
         int inventorysize = 1;
+        bool startpathset = false;
         
         public override bool IsInteractable
         {
@@ -55,22 +57,28 @@ namespace qptech.src.misc
                 sapi = api as ICoreServerAPI;
                 inventory = new InventoryGeneric(inventorysize, "cart", "cart", Api);
                 TryLoadInventory();
-                GetBehavior<EntityBehaviorPassivePhysics>().OnPhysicsTickCallback = onPhysicsTickCallback;
+                
                 ep = api.ModLoader.GetModSystem<EntityPartitioning>();
-                Vec3d begin = ServerPos.XYZ;
-                begin.X = Math.Floor(begin.X);
-                begin.Y = Math.Floor(begin.Y);
-                begin.Z = Math.Floor(begin.Z);
-                pathstart = begin;
-                FindPath();
+                
             }
         }
-        private void onPhysicsTickCallback(float dtFac)
+        /*public override void OnEntitySpawn()
         {
+            base.OnEntitySpawn();
+            if (Api is ICoreClientAPI) { return; }
+            sapi = Api as ICoreServerAPI;
+            inventory = new InventoryGeneric(inventorysize, "cart", "cart", Api);
+            TryLoadInventory();
             
-
-            
-        }
+            ep = Api.ModLoader.GetModSystem<EntityPartitioning>();
+            Vec3d begin = ServerPos.XYZ;
+            begin.X = Math.Floor(begin.X);
+            begin.Y = Math.Floor(begin.Y);
+            begin.Z = Math.Floor(begin.Z);
+            pathstart = begin;
+            FindPath();
+        }*/
+        
         public virtual void Stop()
         {
             moving = false;
@@ -196,17 +204,33 @@ namespace qptech.src.misc
                 }
                 else
                 {
+                    if (itemslot != null && itemslot.Itemstack != null && itemslot.Itemstack.Item != null && itemslot.Itemstack.Collectible.Code.ToString().Contains("wrench"))
+                    {
+                        Die(EnumDespawnReason.PickedUp);
+                    }
                     if (moving) { Stop(); }
                     else { Start(hitPosition); }
                 }
             }
         }
-
+        public virtual void TryStartPath()
+        {
+            Vec3d begin = ServerPos.XYZ;
+            begin.X = Math.Floor(begin.X);
+            begin.Y = Math.Floor(begin.Y);
+            begin.Z = Math.Floor(begin.Z);
+            pathstart = begin;
+            FindPath();
+        }
         public override void OnGameTick(float dt)
         {
             base.OnGameTick(dt);
             if (Api is ICoreServerAPI)
             {
+                if (!startpathset)
+                {
+                    TryStartPath();
+                }
                 Move();
             }
         }
@@ -344,6 +368,7 @@ namespace qptech.src.misc
             }
             if (moving)
             {
+                startpathset = true;
                 pathprogress = 0;
                 heading = newheading;
                 
@@ -452,7 +477,7 @@ namespace qptech.src.misc
             {
                 WatchedAttributes.SetBool("moving", moving);
                 WatchedAttributes.SetString("heading", heading.ToString());
-                
+                WatchedAttributes.SetBool("startpathset", startpathset);
                 
             }
             base.ToBytes(writer, forClient);
@@ -465,7 +490,7 @@ namespace qptech.src.misc
             string tryheading = WatchedAttributes.GetString("heading");
             holding = WatchedAttributes.GetString("holding");
             heading = BlockFacing.FromCode(tryheading);
-            
+            startpathset = WatchedAttributes.GetBool("startpathset");
         }
         public override string GetName()
         {
@@ -476,14 +501,17 @@ namespace qptech.src.misc
         {
             base.OnEntityDespawn(despawn);
             if (sapi != null) {
-                if (despawn.reason == EnumDespawnReason.Death || despawn.reason == EnumDespawnReason.Removed)
+                if (despawn.reason == EnumDespawnReason.Death || despawn.reason == EnumDespawnReason.Removed||despawn.reason==EnumDespawnReason.PickedUp)
                 {
                     Inventory.DropAll(ServerPos.XYZ);
+                    DummyInventory di = new DummyInventory(Api, 1);
+                    di[0].Itemstack = new ItemStack(Api.World.GetItem(new AssetLocation(dropitem)), 1);
+                    di.DropAll(ServerPos.XYZ);
                 }
                 TrySaveInventory();
             }
         }
-
+        
         public override void OnEntityLoaded()
         {
             base.OnEntityLoaded();
