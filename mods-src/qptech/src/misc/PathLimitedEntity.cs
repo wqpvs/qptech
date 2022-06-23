@@ -112,12 +112,13 @@ namespace qptech.src.misc
             try
             {
 
-                List<byte> datalist = sapi.WorldManager.SaveGame.GetData<List<byte>>(GetEntityStorageKey());
-                byte[] data;
+                //List<byte> datalist = sapi.WorldManager.SaveGame.GetData<List<byte>>(GetEntityStorageKey());
+                
+                byte[]data = WatchedAttributes.GetBytes(inventorykey);
                 ITreeAttribute loadtree = null;
-                if (datalist != null)
+                if (data != null)
                 {
-                    data = datalist.ToArray();
+                    
                     loadtree = TreeAttribute.CreateFromBytes(data);
                 }
 
@@ -157,9 +158,10 @@ namespace qptech.src.misc
             //newtree will have correctly have the inventory at this point
             byte[] data = newtree.ToBytes();
             List<byte> datalist = data.ToList<byte>();
-
+            WatchedAttributes.SetBytes(inventorykey, data);
+            WatchedAttributes.MarkPathDirty(inventorykey);
             //SAVE TO FILE ApiExtensions.SaveDataFile<List<byte>>(Api, GetChestFilename(player), datalist);
-            sapi.WorldManager.SaveGame.StoreData<List<byte>>(GetEntityStorageKey(), datalist);
+            //sapi.WorldManager.SaveGame.StoreData<List<byte>>(GetEntityStorageKey(), datalist);
             UpdateInventoryDisplay();
 
 
@@ -582,7 +584,7 @@ namespace qptech.src.misc
         {
             return "Minecart (" + WatchedAttributes.GetString("holding") + ")";
         }
-
+        
         public override void OnEntityDespawn(EntityDespawnReason despawn)
         {
             base.OnEntityDespawn(despawn);
