@@ -32,7 +32,7 @@ namespace qptech.src.misc
         CollisionTester collTester = new CollisionTester();
         EntityPartitioning ep;
         BlockFacing heading = BlockFacing.NORTH;
-        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + 0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + 0.5);
+        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + 0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress)-1, GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + 0.5);
         string pathcodecontains = "rails";
         string dropitem = "machines:creature-testentity";
         ICoreServerAPI sapi;
