@@ -399,6 +399,29 @@ namespace qptech.src.misc
                 TryAdd(orgpos, BlockFacing.NORTH, ref exits);
                 TryAdd(orgpos, BlockFacing.EAST, ref exits);
             }
+            else if (fcp.Contains("vertical"))
+            {
+                if (lcp.Contains("north"))
+                {
+                    TryAdd(orgpos.Copy().Offset(BlockFacing.UP), BlockFacing.NORTH, ref exits);
+                    TryAdd(orgpos, BlockFacing.SOUTH, ref exits);
+                }
+                else if (lcp.Contains("south"))
+                {
+                    TryAdd(orgpos.Copy().Offset(BlockFacing.UP), BlockFacing.SOUTH, ref exits);
+                    TryAdd(orgpos, BlockFacing.NORTH, ref exits);
+                }
+                else if (lcp.Contains("east"))
+                {
+                    TryAdd(orgpos.Copy().Offset(BlockFacing.UP), BlockFacing.EAST, ref exits);
+                    TryAdd(orgpos, BlockFacing.WEST, ref exits);
+                }
+                else if (lcp.Contains("west"))
+                {
+                    TryAdd(orgpos.Copy().Offset(BlockFacing.UP), BlockFacing.WEST, ref exits);
+                    TryAdd(orgpos, BlockFacing.EAST, ref exits);
+                }
+            }
             //find an exit, first choice is an exit matching the heading, otherwise use the first available
             //no exit, fail!
             if (exits.Count == 0) { return false; }
