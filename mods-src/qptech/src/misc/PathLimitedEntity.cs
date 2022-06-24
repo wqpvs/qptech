@@ -32,7 +32,7 @@ namespace qptech.src.misc
         CollisionTester collTester = new CollisionTester();
         EntityPartitioning ep;
         BlockFacing heading = BlockFacing.NORTH;
-        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + 0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress)-1, GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + 0.5);
+        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + 0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + 0.5);
         string pathcodecontains = "rails";
         string dropitem = "machines:creature-testentity";
         ICoreServerAPI sapi;
@@ -288,175 +288,49 @@ namespace qptech.src.misc
             if (!HandleInventory()) { return; }
             moving = false;
             pathprogress = 0;
-            BlockPos p = pathstart.AsBlockPos;
+            BlockPos currentP = pathstart.AsBlockPos;
             
-            Block b;
+            Block currentBlock;
             
-            b = Api.World.BlockAccessor.GetBlock(p);
-            if (!b.FirstCodePart().Contains(pathcodecontains)) {
-                for (int c = 0; c < 2; c++)
+            currentBlock = Api.World.BlockAccessor.GetBlock(currentP);
+            
+            if (!isRail(currentBlock)) {
+                for (int c = 0; c < 1; c++)
                 {
                     
-                    p.Y -= 1;
-                    b = Api.World.BlockAccessor.GetBlock(p);
-                    if (b.FirstCodePart().Contains(pathcodecontains)) { break; }
+                    currentP.Y -= 1;
+                    currentBlock = Api.World.BlockAccessor.GetBlock(currentP);
+                    if (isRail(currentBlock)) { break; }
                 }
-                if (!b.FirstCodePart().Contains(pathcodecontains))
+                if (!isRail(currentBlock))
                 {
                     moving = false; Die(); return;
                 }
             }
-            Block n = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.NORTH));
-            Block s = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.SOUTH));
-            Block e = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.EAST));
-            Block w = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.WEST));
-            bool nOK = n.FirstCodePart().Contains(pathcodecontains);
-            bool eOK = e.FirstCodePart().Contains(pathcodecontains);
-            bool sOK = s.FirstCodePart().Contains(pathcodecontains);
-            bool wOK = w.FirstCodePart().Contains(pathcodecontains);
+            
             BlockFacing newheading = heading;
-            double vertical = 0;
+            
+            BlockPos outpos;
             //pick new destination based on block we are currently in, where we were headed, and if the possible destination blocks were rails
-            if (b.Code.ToString().Contains("vertical"))
-            {
-                
-                if (b.LastCodePart().Contains("north"))
-                {
-                    n = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.NORTH).Offset(BlockFacing.UP));
-                    s = Api.World.BlockAccessor.GetBlock(p.Copy().Offset(BlockFacing.SOUTH).Offset(BlockFacing.DOWN));
-                    nOK= n.FirstCodePart().Contains(pathcodecontains);
-                    sOK = s.FirstCodePart().Contains(pathcodecontains);
-                    if (nOK && !sOK) { newheading = BlockFacing.NORTH;moving = true; }
-                    else if (!nOK && sOK){ newheading = BlockFacing.SOUTH;moving = true; }
-                    else if (nOK&&sOK) {
-                        if (heading == BlockFacing.NORTH || heading == BlockFacing.SOUTH)
-                        {
-                            newheading = heading; moving = true;
-                        }
-                        else
-                        {
-                            newheading = BlockFacing.SOUTH;moving = true;
-                        }
-                    }
-                    if (newheading == BlockFacing.NORTH) { vertical = 1; }
-                    else { vertical = -1; }
-                }
-
-            }
-            else if (b.LastCodePart().Contains("flat_ns"))
-            {
-                if (nOK && !sOK) { newheading = BlockFacing.NORTH; moving = true; }
-                else if (!nOK && sOK) { newheading = BlockFacing.SOUTH;moving = true; }
-                else if (nOK && sOK)
-                {
-                    //this is a ns track and we were already going ns continue
-                    if (heading == BlockFacing.NORTH ||heading == BlockFacing.SOUTH) { newheading = heading; moving = true; }
-                    else if (heading == BlockFacing.EAST) { newheading = BlockFacing.SOUTH; moving = true; }//always turn right
-                    else  { newheading = BlockFacing.NORTH; moving = true; }
-                }
-                else
-                {
-                    bool oops = true;
-                }
-            }
-            else if (b.LastCodePart().Contains("flat_we"))
-            {
-                if (eOK && !wOK) { newheading = BlockFacing.EAST;moving = true; }
-                else if (!eOK && wOK) { newheading = BlockFacing.WEST;moving = true; }
-                else if (eOK && wOK) {
-                    if (heading == BlockFacing.WEST || heading == BlockFacing.EAST)
-                    {
-                        newheading = heading;moving = true;
-                    }
-                    else if (heading == BlockFacing.NORTH) { newheading = BlockFacing.EAST; moving = true; }
-                    else { newheading = BlockFacing.WEST; moving = true; }
-                }
-                else
-                {
-                    bool oops = true;
-                }
-            }
-            else if (b.LastCodePart().Contains("curved_es"))
-            {
-                if (eOK && !sOK) { newheading = BlockFacing.EAST; moving = true; }
-                else if (!eOK && sOK) { newheading = BlockFacing.SOUTH; moving = true; }
-                else if (eOK && sOK)
-                {
-                    if (heading == BlockFacing.NORTH )
-                    {
-                        newheading = BlockFacing.EAST; moving = true;
-                    }
-                    else
-                    {
-                        newheading = BlockFacing.SOUTH;moving = true;
-                    }
-                }
-                
-            }
-            else if (b.LastCodePart().Contains("curved_wn"))
-            {
-                if (wOK && !nOK) { newheading = BlockFacing.WEST; moving = true; }
-                else if (!wOK && nOK) { newheading = BlockFacing.NORTH; moving = true; }
-                else if (wOK && nOK)
-                {
-                    if (heading == BlockFacing.SOUTH)
-                    {
-                        newheading = BlockFacing.WEST; moving = true;
-                    }
-                    else
-                    {
-                        newheading = BlockFacing.NORTH; moving = true;
-                    }
-                }
-            }
-            else if (b.LastCodePart().Contains("curved_ne"))
-            {
-                if (eOK && !nOK) { newheading = BlockFacing.EAST; moving = true; }
-                else if (!eOK && nOK) { newheading = BlockFacing.NORTH; moving = true; }
-                else if (eOK && nOK)
-                {
-                    if (heading == BlockFacing.SOUTH)
-                    {
-                        newheading = BlockFacing.EAST; moving = true;
-                    }
-                    else
-                    {
-                        newheading = BlockFacing.NORTH; moving = true;
-                    }
-                }
-            }
-            else if (b.LastCodePart().Contains("curved_sw"))
-            {
-                if (sOK && !wOK) { newheading = BlockFacing.SOUTH; moving = true; }
-                else if (!sOK && wOK) { newheading = BlockFacing.WEST; moving = true; }
-                else if (sOK && wOK)
-                {
-                    if (heading == BlockFacing.NORTH)
-                    {
-                        newheading = BlockFacing.WEST; moving = true;
-                    }
-                    else
-                    {
-                        newheading = BlockFacing.SOUTH; moving = true;
-                    }
-                }
-            }
+            moving = CheckExit(currentBlock, heading, currentP, out newheading, out outpos);
+            
+           
             if (moving)
             {
                 startpathset = true;
                 pathprogress = 0;
                 
+                pathend = outpos.ToVec3d();
                 heading = newheading;
-                
-                
-                pathend = pathstart + newheading.Normald;
-                pathend.Y += vertical;
+
                 if (newheading == BlockFacing.SOUTH)
                 {
+                    //ServerPos.SetYaw(0 * 0.0174533f);
                     ServerPos.SetYaw(180* 0.0174533f);
                 }
                 else if (newheading == BlockFacing.EAST)
                 {
+                    //ServerPos.SetYaw(90 * 0.0174533f);
                     ServerPos.SetYaw(270 * 0.0174533f);
                 }
                 else if (newheading == BlockFacing.NORTH)
@@ -472,6 +346,56 @@ namespace qptech.src.misc
             else
             {
                 bool oops = true;
+            }
+        }
+        public  bool isRail(Block testblock)
+        {
+            if (testblock.FirstCodePart().Contains(pathcodecontains)) { return true; }
+            return false;
+        }
+        public bool isRail(BlockPos checkpos)
+        {
+            Block testblock = Api.World.BlockAccessor.GetBlock(checkpos);
+            if (isRail(testblock)) { return true; }
+            return false;
+        }
+        public virtual bool CheckExit(Block startblock,BlockFacing orgheading, BlockPos orgpos, out BlockFacing newheading, out BlockPos newgoal)
+        {     
+            newheading = orgheading;
+            newgoal = orgpos;
+            string fcp = startblock.FirstCodePart();
+            string lcp = startblock.LastCodePart();
+            Dictionary<BlockFacing, BlockPos> exits = new Dictionary<BlockFacing, BlockPos>();
+            if (!isRail(startblock)) { return false; }
+            if (lcp.Contains("flat_ns"))
+            {
+                TryAdd(orgpos,BlockFacing.NORTH, ref exits);
+                TryAdd(orgpos,BlockFacing.SOUTH, ref exits);
+            }
+            else if (lcp.Contains("flat_we"))
+            {
+                TryAdd(orgpos, BlockFacing.EAST, ref exits);
+                TryAdd(orgpos, BlockFacing.WEST, ref exits);
+            }
+            //find an exit, first choice is an exit matching the heading, otherwise use the first available
+            if (exits.Count == 0) { return false; }
+            if (exits.ContainsKey(orgheading)) { newgoal = exits[heading]; return true; }
+            else
+            {
+                newheading = exits.Keys.First();
+                newgoal = exits[newheading];
+                return true;
+            }
+            
+        }
+        void TryAdd(BlockPos orgpos, BlockFacing addface, ref Dictionary<BlockFacing, BlockPos> exits)
+        {
+            BlockPos checkpos = orgpos.Copy().Offset(addface);
+            if (isRail(checkpos)) { exits[addface] = checkpos; }
+            else
+            {
+                checkpos.Offset(BlockFacing.DOWN);
+                if (isRail(checkpos)) { exits[addface] = checkpos; }
             }
         }
 /// <summary>
