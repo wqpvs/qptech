@@ -371,22 +371,68 @@ namespace qptech.src.misc
             {
                 TryAdd(orgpos,BlockFacing.NORTH, ref exits);
                 TryAdd(orgpos,BlockFacing.SOUTH, ref exits);
+                
             }
             else if (lcp.Contains("flat_we"))
             {
                 TryAdd(orgpos, BlockFacing.EAST, ref exits);
                 TryAdd(orgpos, BlockFacing.WEST, ref exits);
+                
+            }
+            else if (lcp.Contains("curved_es"))
+            {
+                TryAdd(orgpos, BlockFacing.EAST, ref exits);
+                TryAdd(orgpos, BlockFacing.SOUTH, ref exits);  
+            }
+            else if (lcp.Contains("curved_sw"))
+            {
+                TryAdd(orgpos, BlockFacing.SOUTH, ref exits);
+                TryAdd(orgpos, BlockFacing.WEST, ref exits);
+            }
+            else if (lcp.Contains("curved_wn"))
+            {
+                TryAdd(orgpos, BlockFacing.WEST, ref exits);
+                TryAdd(orgpos, BlockFacing.NORTH, ref exits);
+            }
+            else if (lcp.Contains("curved_ne"))
+            {
+                TryAdd(orgpos, BlockFacing.NORTH, ref exits);
+                TryAdd(orgpos, BlockFacing.EAST, ref exits);
             }
             //find an exit, first choice is an exit matching the heading, otherwise use the first available
+            //no exit, fail!
             if (exits.Count == 0) { return false; }
+            //if we can keep going in same direction do so
             if (exits.ContainsKey(orgheading)) { newgoal = exits[heading]; return true; }
-            else
+            //if there's only one exit, go that way
+            if (exits.Keys.Count == 1)
             {
                 newheading = exits.Keys.First();
                 newgoal = exits[newheading];
                 return true;
             }
-            
+            //almost last choice is to go in a non-opposite direction
+            foreach (BlockFacing key in exits.Keys)
+            {
+                if (key != orgheading.Opposite)
+                {
+                    newheading = key;
+                    newgoal = exits[newheading];
+                    return true;
+                }
+            }
+            //fine well reverse then (searching probably isn't necessary at this point)
+            foreach (BlockFacing key in exits.Keys)
+            {
+                if (key == orgheading.Opposite)
+                {
+                    newheading = key;
+                    newgoal = exits[newheading];
+                    return true;
+                }
+            }
+            //this is a really odd case
+            return false;
         }
         void TryAdd(BlockPos orgpos, BlockFacing addface, ref Dictionary<BlockFacing, BlockPos> exits)
         {
