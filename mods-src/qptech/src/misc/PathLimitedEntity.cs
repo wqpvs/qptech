@@ -27,7 +27,13 @@ namespace qptech.src.misc
         Vec3d pathend;
         double pathdir = 1;
         double pathprogress = 0;
-        double pathspeed = 0.1f;
+        double pathspeed {
+            get{
+                if (pathend.Y > pathstart.Y) { return 0.075; }
+                else if (pathend.Y < pathstart.Y) { return 0.125; }
+                return 0.1;
+            }
+        }
         bool moving = false;
         CollisionTester collTester = new CollisionTester();
         EntityPartitioning ep;

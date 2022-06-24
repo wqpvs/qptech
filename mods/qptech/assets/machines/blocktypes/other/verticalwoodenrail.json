@@ -54,7 +54,9 @@
       
     }
   },
-
+  textures: {
+		wood: { base: "game:block/wood/planks/generic" },
+	},
   "blockmaterial": "Wood",
  "creativeinventory": {
     "qptech": [ "*" ]
