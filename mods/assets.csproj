@@ -317,6 +317,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wiremill.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\temporalcondenser.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\turbine.json" />
+    <None Include="qptech\assets\machines\shapes\block\switchingrails-flat_ns.json" />
     <None Include="qptech\assets\machines\shapes\block\texturecube.json" />
     <None Include="qptech\assets\machines\shapes\block\tiledconcrete.json" />
     <None Include="qptech\assets\machines\shapes\item\clay\rubbercrucible.json" />
