@@ -61,7 +61,6 @@
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\inputhatch.json" />
-    <None Include="qptech\assets\machines\blocktypes\indev\unused\loco.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\unused\rail.json" />
     <None Include="qptech\assets\machines\blocktypes\itemfilterexit.json" />
     <None Include="qptech\assets\machines\blocktypes\itemtransport\itemsplitter.json" />
@@ -155,7 +154,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\statusflag-up.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate.json" />
     <None Include="qptech\assets\machines\config\handbook\qptech.json" />
-    <None Include="qptech\assets\machines\entities\testentity.json" />
+    <None Include="qptech\assets\machines\entities\minecart.json" />
     <None Include="qptech\assets\machines\itemtypes\entity\creature.json" />
     <None Include="qptech\assets\machines\itemtypes\part\hv\drillhead.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\cruciblechamber.json" />
@@ -297,7 +296,7 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
-    <None Include="qptech\assets\machines\shapes\block\indev\test.json" />
+    <None Include="qptech\assets\machines\shapes\block\rails\minecart.json" />
     <None Include="qptech\assets\machines\shapes\block\invisible.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\bloomery.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\boiler.json" />
@@ -317,7 +316,9 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wiremill.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\temporalcondenser.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\turbine.json" />
-    <None Include="qptech\assets\machines\shapes\block\switchingrails-flat_ns.json" />
+    <None Include="qptech\assets\machines\shapes\block\rails\railswitch-down.json" />
+    <None Include="qptech\assets\machines\shapes\block\rails\railswitch-up.json" />
+    <None Include="qptech\assets\machines\shapes\block\rails\switchingrails-flat_ns.json" />
     <None Include="qptech\assets\machines\shapes\block\texturecube.json" />
     <None Include="qptech\assets\machines\shapes\block\tiledconcrete.json" />
     <None Include="qptech\assets\machines\shapes\item\clay\rubbercrucible.json" />
@@ -428,7 +429,7 @@
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriver.json" />
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\shapes\item\worn\jetpack.json" />
-    <None Include="qptech\assets\machines\shapes\tempmachine.json" />
+    <None Include="qptech\assets\machines\shapes\block\rails\tempmachine.json" />
     <None Include="qptech\assets\machines\textures\block\copperspool.psd" />
     <None Include="qptech\assets\machines\textures\block\glass\glass-colour.aseprite" />
     <None Include="qptech\assets\machines\textures\block\metal\generator\machinery-glass.aseprite" />
@@ -620,6 +621,7 @@
     <Folder Include="qptech\assets\game\sounds\block\" />
     <Folder Include="qptech\assets\machines\itemtypes\part\ev\" />
     <Folder Include="qptech\assets\machines\shapes\block\glass\" />
+    <Folder Include="qptech\assets\machines\shapes\block\indev\" />
     <Folder Include="qptech\assets\machines\shapes\block\liquid\" />
     <Folder Include="qptech\assets\qptech\textures\" />
   </ItemGroup>

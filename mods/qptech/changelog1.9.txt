@@ -1,5 +1,5 @@
 ﻿1.10.1
-- added temporal pocket
+Temporal Pockets!
 - added temporal condenser
 - added charged temporal steel ingot, plate, and sheet
 - need better rubber texture
@@ -7,10 +7,15 @@
 - added Rubber Mold Machine - pipe in rubber, add heat, and get rubber sheets out
 - added rubber sheets (made in new rubber mold machine), and rubber gaskets (made for now with knife + rubber sheet)
 Mold Machine
+- currently used to make rubber sheets from liquid rubber
 - steel mold (or iron?)
 - steel machinery block
 - cables
 - requires heat
+Minecarts!
+- currently uses vanilla wooden rails, and custom vertical rails
+- auto switching tracks *can be locked with wrench
+- load and unload into containers (above to load, below to unload)
 Balance: (goal to let you at least build something with your first steel cook)
 - motors now only require 1 steel sheet instead of 2
 - braided wire now only requires 3 wires instead of 4 (manual recipe)

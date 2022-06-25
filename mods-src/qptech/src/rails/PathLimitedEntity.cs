@@ -19,7 +19,7 @@ using Vintagestory.API.MathTools;
 using qptech.src.extensions;
 using System.Text.RegularExpressions;
 
-namespace qptech.src.misc
+namespace qptech.src.rails
 {
     class PathLimitedEntity : Entity
     {
@@ -40,7 +40,7 @@ namespace qptech.src.misc
         BlockFacing heading = BlockFacing.NORTH;
         Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + 0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + 0.5);
         string pathcodecontains = "rails";
-        string dropitem = "machines:creature-testentity";
+        string dropitem = "machines:creature-minecart";
         ICoreServerAPI sapi;
         InventoryGeneric inventory;
         public virtual InventoryGeneric Inventory => inventory;
@@ -293,7 +293,7 @@ namespace qptech.src.misc
         // should pause if there's a cart not heading towards us, or reverse direction if it is heading our way
         protected virtual bool CheckOtherCart()
         {
-            Entity checkentity = ep.GetNearestEntity(pathend, 1, (e) => {
+            Entity checkentity = ep.GetNearestEntity(pathend, 0.5, (e) => {
                 if (e.EntityId == EntityId) { return false; }
                 if (!(e is PathLimitedEntity)) { return false; }
                 return true;

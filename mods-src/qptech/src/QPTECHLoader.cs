@@ -13,6 +13,7 @@ using qptech.src.pipes;
 using qptech.src.networks;
 using qptech.src.itemtransport;
 using qptech.src.Electricity;
+using qptech.src.rails;
 using Vintagestory.API.Util;
 using Vintagestory.API.Datastructures;
 using ProtoBuf;

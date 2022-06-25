@@ -1,5 +1,5 @@
 {
-  "code": "testentity",
+  "code": "minecart",
   "class": "PathLimitedEntity",
   "hitboxSize": {
     "x": 1,
@@ -13,7 +13,7 @@
   "drops": [],
   "client": {
     "renderer": "Shape",
-    "shape": { "base": "block/indev/test" },
+    "shape": { "base": "machines:block/rails/minecart" },
     
     "behaviors": [
       

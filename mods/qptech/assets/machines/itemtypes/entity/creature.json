@@ -4,13 +4,13 @@
 	maxstacksize: 64,
 	variantgroups: [
 		{ code: "type", states: [
-			"testentity"
+			"minecart"
 		] },
 	],
 	
 	
 	shapeByType: {
-		"creature-testentity": { base: "block/indev/test" }
+		"creature-minecart": { base: "machines:block/rails/minecart" }
 		
 	},
 	
