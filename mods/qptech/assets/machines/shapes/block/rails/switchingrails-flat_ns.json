@@ -112,182 +112,29 @@
 				{
 					"name": "Main Rail Segmented",
 					"from": [ -5.5, 1.0, -7.5 ], 
-					"to": [ -3.5, 2.5, -5.5 ], 
+					"to": [ -3.5, 2.5, 8.5 ], 
 					"rotationOrigin": [ -7.5, 0.0, -7.5 ],
 					"faces": {
 						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
+						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 1.5 ] },
 						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
-						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] }
-					},
-					"children": [
-						{
-							"name": "Rail13",
-							"from": [ 0.0, 0.0, 4.0 ], 
-							"to": [ 2.0, 1.5, 12.0 ], 
-							"rotationOrigin": [ -2.0, -1.0, 4.0 ],
-							"faces": {
-								"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 8.0, 1.5 ] },
-								"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 8.0, 1.5 ] },
-								"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 8.0 ] },
-								"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 8.0 ] }
-							}
-						},
-						{
-							"name": "Rail straight bit",
-							"from": [ 0.0, 0.0, 14.0 ], 
-							"to": [ 2.0, 1.5, 16.0 ], 
-							"rotationOrigin": [ 1.5, -1.0, 15.5 ],
-							"faces": {
-								"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
-								"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] }
-							}
-						}
-					]
+						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 1.5 ] },
+						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 16.0 ] },
+						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 16.0 ] }
+					}
 				},
 				{
 					"name": "Main Rail Segmented15",
 					"from": [ 4.5, 1.0, -7.5 ], 
-					"to": [ 6.5, 2.5, -5.5 ], 
+					"to": [ 6.5, 2.5, 8.5 ], 
 					"rotationOrigin": [ 2.5, 0.0, -7.5 ],
 					"faces": {
 						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
+						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 1.5 ] },
 						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
-						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] }
-					},
-					"children": [
-						{
-							"name": "Rail17",
-							"from": [ 0.0, 0.0, 4.0 ], 
-							"to": [ 2.0, 1.5, 12.0 ], 
-							"rotationOrigin": [ -2.0, -1.0, 4.0 ],
-							"faces": {
-								"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 8.0, 1.5 ] },
-								"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 8.0, 1.5 ] },
-								"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 8.0 ] },
-								"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 8.0 ] }
-							}
-						},
-						{
-							"name": "Rail17",
-							"from": [ 0.0, 0.0, 14.0 ], 
-							"to": [ 2.0, 1.5, 16.0 ], 
-							"rotationOrigin": [ -2.0, -1.0, 14.0 ],
-							"faces": {
-								"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.5 ] },
-								"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
-								"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] }
-							}
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "railrootmain16",
-			"from": [ 7.5, 0.0, 7.5 ], 
-			"to": [ 8.5, 4.0, 8.5 ], 
-			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
-			"faces": {
-				"north": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "enabled": false },
-				"east": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "enabled": false },
-				"south": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "enabled": false },
-				"west": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "enabled": false },
-				"up": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-				"down": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-			},
-			"children": [
-				{
-					"name": "Rotateable segment20",
-					"from": [ -7.5, 1.0, 4.5 ], 
-					"to": [ -5.25, 2.25, 6.5 ], 
-					"rotationOrigin": [ -7.5, 0.0, 5.0 ],
-					"rotationY": 45.0,
-					"faces": {
-						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
-						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] }
-					}
-				},
-				{
-					"name": "Rotateable segment21",
-					"from": [ -7.5, 1.0, -5.5 ], 
-					"to": [ -5.25, 2.25, -3.5 ], 
-					"rotationOrigin": [ -7.5, 0.0, -5.0 ],
-					"rotationY": 45.0,
-					"faces": {
-						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
-						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] }
-					}
-				}
-			]
-		},
-		{
-			"name": "railrootmain17",
-			"from": [ 7.5, 0.0, 7.5 ], 
-			"to": [ 8.5, 4.0, 8.5 ], 
-			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
-			"rotationY": -180.0,
-			"faces": {
-				"north": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "enabled": false },
-				"east": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "enabled": false },
-				"south": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "enabled": false },
-				"west": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "enabled": false },
-				"up": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false },
-				"down": { "texture": "#darkiron", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "enabled": false }
-			},
-			"children": [
-				{
-					"name": "Rotateable segment18",
-					"from": [ -7.5, 1.0, 4.5 ], 
-					"to": [ -5.25, 2.25, 6.5 ], 
-					"rotationOrigin": [ -7.5, 0.0, 5.0 ],
-					"rotationY": 45.0,
-					"faces": {
-						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
-						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] }
-					}
-				},
-				{
-					"name": "Rotateable segment19",
-					"from": [ -7.5, 1.0, -5.5 ], 
-					"to": [ -5.25, 2.25, -3.5 ], 
-					"rotationOrigin": [ -7.5, 0.0, -5.0 ],
-					"rotationY": 45.0,
-					"faces": {
-						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
-						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
-						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 2.0 ] }
+						"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 1.5 ] },
+						"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 16.0 ] },
+						"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 16.0 ] }
 					}
 				}
 			]

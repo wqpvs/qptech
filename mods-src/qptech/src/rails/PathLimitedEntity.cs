@@ -15,7 +15,6 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Util;
 using Vintagestory.ServerMods;
-using Vintagestory.API.MathTools;
 using qptech.src.extensions;
 using System.Text.RegularExpressions;
 
@@ -340,18 +339,7 @@ namespace qptech.src.rails
            
             if (moving)
             {
-                if (currentBlock.Attributes != null)
-                {
-                    string switchblock = currentBlock.Attributes["railswitch"].AsString(null);
-                    if (switchblock != null)
-                    {
-                        Block newrail = Api.World.GetBlock(new AssetLocation(switchblock));
-                        if (newrail != null)
-                        {
-                            Api.World.BlockAccessor.SetBlock(newrail.BlockId, currentP);
-                        }
-                    }
-                }
+                
                 startpathset = true;
                 pathprogress = 0;
                 

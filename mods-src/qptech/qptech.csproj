@@ -111,6 +111,7 @@
     <Compile Include="src\misc\CBTemporalChargeable.cs" />
     <Compile Include="src\misc\ItemWire.cs" />
     <Compile Include="src\misc\ItemMiningDrill.cs" />
+    <Compile Include="src\rails\BlockSignalSwitch.cs" />
     <Compile Include="src\rails\PathLimitedEntity.cs" />
     <Compile Include="src\multiblock\BEDummyBlock.cs" />
     <Compile Include="src\multiblock\BlockDummy.cs" />

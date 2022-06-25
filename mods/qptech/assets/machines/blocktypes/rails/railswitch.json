@@ -1,0 +1,69 @@
+{
+	"code": "signalswitch",
+	"class": "BlockSignalSwitch",
+	
+	"attributes": {
+		
+
+	},
+	"behaviors": [
+		{ "name": "Lockable" },
+		{ "name": "Container" },
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "east" }
+		},
+		
+	],
+	"variantgroups": [
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+	"creativeinventory": {
+		"general": [ "*-east" ],
+		"qptech": [ "*-east" ]
+	},
+	"blockmaterial": "Metal",
+	"shape": { "base": "block/rails/railswitch-down" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/rails/railswitch-down",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/rails/railswitch-down",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "block/rails/railswitch-down",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "block/rails/railswitch-down",
+			"rotateY": 180
+		}
+	},
+	"drawtype": "json",
+	
+	"resistance": 1,
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	},
+	"guiTransform": {
+		"origin": {
+			"x": 0.5,
+			"y": 0.5,
+			"z": 0.5
+		},
+		"scale": 1
+	},
+	
+		"selectionBox": { x1: 0.125, y1: 0, z1: 0.15, x2: 0.75, y2: 0.8125, z2: 0.75 }
+		
+}
