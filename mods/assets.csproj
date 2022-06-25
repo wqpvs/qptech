@@ -98,6 +98,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\itemfilterentrance.json" />
     <None Include="qptech\assets\machines\blocktypes\other\coalpilestoker.json" />
+    <None Include="qptech\assets\machines\blocktypes\other\switchingrails.json" />
     <None Include="qptech\assets\machines\blocktypes\other\verticalwoodenrail.json" />
     <None Include="qptech\assets\machines\blocktypes\other\rubbersheet.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-drainer.json" />

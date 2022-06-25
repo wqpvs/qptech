@@ -340,6 +340,18 @@ namespace qptech.src.misc
            
             if (moving)
             {
+                if (currentBlock.Attributes != null)
+                {
+                    string switchblock = currentBlock.Attributes["railswitch"].AsString(null);
+                    if (switchblock != null)
+                    {
+                        Block newrail = Api.World.GetBlock(new AssetLocation(switchblock));
+                        if (newrail != null)
+                        {
+                            Api.World.BlockAccessor.SetBlock(newrail.BlockId, currentP);
+                        }
+                    }
+                }
                 startpathset = true;
                 pathprogress = 0;
                 
