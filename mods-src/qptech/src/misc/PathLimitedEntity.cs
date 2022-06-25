@@ -277,9 +277,9 @@ namespace qptech.src.misc
         void Move()
         {
             if (!moving||pathend==null) { return; }
+            if (CheckOtherCart()) { return; }
             pathprogress += pathdir * pathspeed;
-            
-            
+           
             if (pathprogress >=1) {
                 pathprogress = 1;pathstart = pathend;
                 
@@ -287,6 +287,23 @@ namespace qptech.src.misc
             }
             ServerPos.SetPos(pathpos);
 
+        }
+
+        //check for other carts at destination
+        // should pause if there's a cart not heading towards us, or reverse direction if it is heading our way
+        protected virtual bool CheckOtherCart()
+        {
+            Entity checkentity = ep.GetNearestEntity(pathend, 1, (e) => {
+                if (e.EntityId == EntityId) { return false; }
+                if (!(e is PathLimitedEntity)) { return false; }
+                return true;
+            });
+            
+            if (checkentity == null) { return false; }
+            PathLimitedEntity other = checkentity as PathLimitedEntity;
+            //if (other.heading == heading.Opposite) { heading = heading.Opposite; FindPath(); }
+            heading = heading.Opposite; FindPath();
+            return true;
         }
 
         protected virtual void FindPath()
