@@ -22,6 +22,9 @@ namespace qptech.src.rails
 {
     class PathLimitedEntity : Entity
     {
+        
+        //TODO: Collision checking needs fixing - make sure to use offset somehow
+        
         Vec3d pathstart;
         Vec3d pathend;
         double pathdir = 1;
@@ -34,10 +37,13 @@ namespace qptech.src.rails
             }
         }
         bool moving = false;
+        public virtual bool isHeavy => Inventory != null && !Inventory.Empty;
         CollisionTester collTester = new CollisionTester();
         EntityPartitioning ep;
         BlockFacing heading = BlockFacing.NORTH;
-        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + 0.5, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress), GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + 0.5);
+        Vec3d pathoffset = new Vec3d(0.5, 0, 0.5);
+        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + pathoffset.X, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress)+pathoffset.Y, GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + pathoffset.Z);
+        
         string pathcodecontains = "rails";
         string dropitem = "machines:creature-minecart";
         ICoreServerAPI sapi;
@@ -292,7 +298,7 @@ namespace qptech.src.rails
         // should pause if there's a cart not heading towards us, or reverse direction if it is heading our way
         protected virtual bool CheckOtherCart()
         {
-            Entity checkentity = ep.GetNearestEntity(pathend, 0.5, (e) => {
+            Entity checkentity = ep.GetNearestEntity(pathend+pathoffset, 0.5, (e) => {
                 if (e.EntityId == EntityId) { return false; }
                 if (!(e is PathLimitedEntity)) { return false; }
                 return true;
@@ -342,7 +348,11 @@ namespace qptech.src.rails
                 
                 startpathset = true;
                 pathprogress = 0;
-                
+                if (currentBlock is BlockDetectorRail)
+                {
+                    BlockDetectorRail dr = currentBlock as BlockDetectorRail;
+                    dr.CartDetected(Api, this, currentP);
+                }
                 pathend = outpos.ToVec3d();
                 heading = newheading;
 

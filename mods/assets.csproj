@@ -97,8 +97,9 @@
     <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\itemfilterentrance.json" />
     <None Include="qptech\assets\machines\blocktypes\other\coalpilestoker.json" />
-    <None Include="qptech\assets\machines\blocktypes\other\switchingrails.json" />
-    <None Include="qptech\assets\machines\blocktypes\other\verticalwoodenrail.json" />
+    <None Include="qptech\assets\machines\blocktypes\rails\detectorrails.json" />
+    <None Include="qptech\assets\machines\blocktypes\rails\switchingrails.json" />
+    <None Include="qptech\assets\machines\blocktypes\rails\verticalwoodenrail.json" />
     <None Include="qptech\assets\machines\blocktypes\other\rubbersheet.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-drainer.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-sprinkler.json" />
@@ -297,6 +298,8 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
+    <None Include="qptech\assets\machines\shapes\block\rails\detectorrail-down-flat_ns.json" />
+    <None Include="qptech\assets\machines\shapes\block\rails\detectorrail-up-flat_ns.json" />
     <None Include="qptech\assets\machines\shapes\block\rails\minecart.json" />
     <None Include="qptech\assets\machines\shapes\block\invisible.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\bloomery.json" />

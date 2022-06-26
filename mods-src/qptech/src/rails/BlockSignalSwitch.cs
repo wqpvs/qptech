@@ -19,9 +19,15 @@ namespace qptech.src.rails
     {
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
-            BlockPos checkpos = blockSel.Position.Copy().Offset(BlockFacing.FromCode(LastCodePart()));
+            
+            ActivateSwitch(world, blockSel.Position);
+            return true;
+        }
+        public virtual void ActivateSwitch(IWorldAccessor world, BlockPos checkpos)
+        {
+            checkpos = checkpos.Copy().Offset(BlockFacing.FromCode(LastCodePart()));
             Block checkblock = world.BlockAccessor.GetBlock(checkpos);
-            if (checkblock.Attributes == null) { return base.OnBlockInteractStart(world, byPlayer, blockSel); }
+            if (checkblock.Attributes == null) { return; }
             string switchblock = checkblock.Attributes["railswitch"].AsString(null);
             if (switchblock != null)
             {
@@ -29,10 +35,9 @@ namespace qptech.src.rails
                 if (newrail != null)
                 {
                     world.BlockAccessor.SetBlock(newrail.BlockId, checkpos);
-                    return true;
+                    return ;
                 }
             }
-            return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
     }
 }
