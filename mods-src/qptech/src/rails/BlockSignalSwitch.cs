@@ -23,19 +23,34 @@ namespace qptech.src.rails
             ActivateSwitch(world, blockSel.Position);
             return true;
         }
-        public virtual void ActivateSwitch(IWorldAccessor world, BlockPos checkpos)
+        public virtual void ActivateSwitch(IWorldAccessor world, BlockPos pos)
         {
-            checkpos = checkpos.Copy().Offset(BlockFacing.FromCode(LastCodePart()));
+            BlockPos checkpos = pos.Copy().Offset(BlockFacing.FromCode(LastCodePart()));
             Block checkblock = world.BlockAccessor.GetBlock(checkpos);
-            if (checkblock.Attributes == null) { return; }
-            string switchblock = checkblock.Attributes["railswitch"].AsString(null);
-            if (switchblock != null)
+            if (checkblock.Attributes != null)
             {
-                Block newrail = world.GetBlock(new AssetLocation(switchblock));
-                if (newrail != null)
+                string switchblock = checkblock.Attributes["railswitch"].AsString(null);
+                if (switchblock != null)
                 {
-                    world.BlockAccessor.SetBlock(newrail.BlockId, checkpos);
-                    return ;
+                    Block newrail = world.GetBlock(new AssetLocation(switchblock));
+                    if (newrail != null)
+                    {
+                        world.BlockAccessor.SetBlock(newrail.BlockId, checkpos);
+                        
+                    }
+                }
+            }
+            Block me = world.BlockAccessor.GetBlock(pos);
+            if (me.Attributes != null)
+            {
+                string switchme = me.Attributes["replace"].AsString(null);
+                if (switchme != null)
+                {
+                    Block newswitch = world.GetBlock(new AssetLocation(switchme));
+                    if (switchme != null)
+                    {
+                        world.BlockAccessor.SetBlock(newswitch.Id, pos);
+                    }
                 }
             }
         }

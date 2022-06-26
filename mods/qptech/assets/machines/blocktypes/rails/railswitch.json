@@ -2,9 +2,16 @@
 	"code": "signalswitch",
 	"class": "BlockSignalSwitch",
 	
-	"attributes": {
-		
-
+	"attributesByType": {
+		 
+		 "*-down-north": {"replace":"machines:signalswitch-up-north"},
+		 "*-down-east": {"replace":"machines:signalswitch-up-east"},
+		 "*-down-south": {"replace":"machines:signalswitch-up-south"},
+		 "*-down-west": {"replace":"machines:signalswitch-up-west"},
+		 "*-up-north": {"replace":"machines:signalswitch-down-north"},
+		 "*-up-east": {"replace":"machines:signalswitch-down-east"},
+		 "*-up-south": {"replace":"machines:signalswitch-down-south"},
+		 "*-up-west": {"replace":"machines:signalswitch-down-west"},
 	},
 	"behaviors": [
 		{ "name": "Lockable" },
@@ -12,38 +19,35 @@
 		{
 			"name": "HorizontalOrientable",
 			"properties": { "dropBlockFace": "east" }
-		},
+		}
 		
 	],
 	"variantgroups": [
+		{
+			"code": "state","states": ["up","down"]
+		},
 		{
 			"code": "side",
 			"loadFromProperties": "abstract/horizontalorientation"
 		}
 	],
+
 	"creativeinventory": {
-		"general": [ "*-east" ],
-		"qptech": [ "*-east" ]
+		"general": [ "*-down-east" ],
+		"qptech": [ "*-down-east" ]
 	},
 	"blockmaterial": "Metal",
-	"shape": { "base": "block/rails/railswitch-down" },
+	"shape": { "base": "block/rails/railswitch-{state}" },
 	"shapeByType": {
-		"*-north": {
-			"base": "block/rails/railswitch-down",
-			"rotateY": 0
-		},
-		"*-east": {
-			"base": "block/rails/railswitch-down",
-			"rotateY": 270
-		},
-		"*-west": {
-			"base": "block/rails/railswitch-down",
-			"rotateY": 90
-		},
-		"*-south": {
-			"base": "block/rails/railswitch-down",
-			"rotateY": 180
-		}
+		"*-up-north": {"base": "block/rails/railswitch-up","rotateY": 0},
+		"*-up-east": {"base": "block/rails/railswitch-up","rotateY": 270},
+		"*-up-west": {"base": "block/rails/railswitch-up","rotateY": 90},
+		"*-up-south": {"base": "block/rails/railswitch-up","rotateY": 180},
+		"*-down-north": {"base": "block/rails/railswitch-down","rotateY": 0},
+		"*-down-east": {"base": "block/rails/railswitch-down","rotateY": 270},
+		"*-down-west": {"base": "block/rails/railswitch-down","rotateY": 90},
+		"*-down-south": {"base": "block/rails/railswitch-down","rotateY": 180},
+		
 	},
 	"drawtype": "json",
 	
