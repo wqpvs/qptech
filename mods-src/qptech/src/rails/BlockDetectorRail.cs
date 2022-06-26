@@ -30,8 +30,27 @@ namespace qptech.src.rails
             {
                 BlockPos checkpos = blockpos.Copy().Offset(bf);
                 BlockSignalSwitch signalswitch = api.World.BlockAccessor.GetBlock(checkpos) as BlockSignalSwitch;
-                if (signalswitch == null) { continue; }
-                signalswitch.ActivateSwitch(api.World, checkpos);
+                if (signalswitch != null)
+                {
+                    signalswitch.ActivateSwitch(api.World, checkpos);
+                }
+                else
+                {
+                    Block checkblock = api.World.BlockAccessor.GetBlock(checkpos);
+                    if (checkblock.Attributes != null)
+                    {
+                        string switchblock = checkblock.Attributes["railswitch"].AsString(null);
+                        if (switchblock != null)
+                        {
+                            Block newrail = api.World.GetBlock(new AssetLocation(switchblock));
+                            if (newrail != null)
+                            {
+                                api.World.BlockAccessor.SetBlock(newrail.BlockId, checkpos);
+
+                            }
+                        }
+                    }
+                }
             }
             api.World.BlockAccessor.SetBlock(replaceblock.BlockId, blockpos);
         }

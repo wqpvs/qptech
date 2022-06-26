@@ -1,4 +1,17 @@
-﻿1.10.1
+﻿TODO:
+- special rails placement ew/ns depending on facing
+- placed carts should start in direction player is facing
+- extend signals somehow
+- recipes needed:
+    - carts
+    - vanilla rails
+    - vertical rails
+    - switches
+    - detector rails
+    - switching rails
+- future stuff:
+    - block behaviour for signals, or interface
+1.10.1
 Temporal Pockets!
 - added temporal condenser
 - added charged temporal steel ingot, plate, and sheet
@@ -16,6 +29,8 @@ Minecarts!
 - currently uses vanilla wooden rails, and custom vertical rails
 - auto switching tracks *can be locked with wrench
 - load and unload into containers (above to load, below to unload)
+- railway switches will change direction of switching rails
+- detector rail will flip railway switches and switching rails
 Balance: (goal to let you at least build something with your first steel cook)
 - motors now only require 1 steel sheet instead of 2
 - braided wire now only requires 3 wires instead of 4 (manual recipe)
