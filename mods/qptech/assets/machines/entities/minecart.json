@@ -13,8 +13,8 @@
   "drops": [],
   "client": {
     "renderer": "Shape",
+	size: 1.2,
     "shape": { "base": "machines:block/rails/minecart" },
-    
     "behaviors": [
       
       { code: "passivephysics",

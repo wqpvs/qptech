@@ -1,16 +1,12 @@
 {
   "code": "verticalwoodenrails",
-  
   "behaviors": [
 	
 		{
-			"name": "HorizontalOrientable",
+			"name": "HorizontalOrientable"
 			
 		}
-		
 	],
-  
-  
   "variantgroups": [
     
     {
@@ -21,23 +17,21 @@
   "shapebytype": {
     
     "*-north": {
-      "base": "game:block/wood/rails/raised_ns",
+      "base": "block/rails/raised_ns",
       "rotateY": 0
     },
     "*-east": {
-      "base": "game:block/wood/rails/raised_ns",
-      
+      "base": "block/rails/raised_ns",
       "rotateY": 270
       
     },
     "*-west": {
-      "base": "game:block/wood/rails/raised_ns",
-      
+      "base": "block/rails/raised_ns",
       "rotateY": 90
       
     },
     "*-south": {
-      "base": "game:block/wood/rails/raised_ns",
+      "base": "block/rails/raised_ns",
       "rotateY": 180
     }
   },
@@ -59,7 +53,7 @@
 	},
   "blockmaterial": "Wood",
  "creativeinventory": {
-    "qptech": [ "*" ]
+    "qptech": [ "*-north" ]
     
   },
   "replaceable": 300,
