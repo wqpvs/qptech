@@ -125,6 +125,7 @@ namespace qptech.src
             api.RegisterBlockClass("BlockItemTransport", typeof(BlockItemTransport));
             api.RegisterBlockClass("BlockSignalSwitch", typeof(BlockSignalSwitch));
             api.RegisterBlockClass("BlockDetectorRail", typeof(BlockDetectorRail));
+            api.RegisterBlockClass("BlockRail", typeof(BlockRail));
             api.RegisterBlockClass("BlockDoorPart", typeof(BlockDoorPart));
             api.RegisterBlockClass("BlockTemporalPocket", typeof(BlockTemporalPocket));
             api.RegisterBlockClass("BlockCannedMeal", typeof(BlockCannedMeal));

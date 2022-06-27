@@ -4,6 +4,7 @@
 - extend signals somehow
 - cart placer/breaker?
 - depot (cart pauser basically)
+- use animations
 - recipes needed:
     - carts
     - vanilla rails

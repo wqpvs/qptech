@@ -112,6 +112,7 @@
     <Compile Include="src\misc\ItemWire.cs" />
     <Compile Include="src\misc\ItemMiningDrill.cs" />
     <Compile Include="src\rails\BlockDetectorRail.cs" />
+    <Compile Include="src\rails\BlockRail.cs" />
     <Compile Include="src\rails\BlockSignalSwitch.cs" />
     <Compile Include="src\rails\MinecartEntity.cs" />
     <Compile Include="src\multiblock\BEDummyBlock.cs" />

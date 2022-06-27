@@ -73,22 +73,27 @@ namespace qptech.src.rails
                 
             }
         }
-        /*public override void OnEntitySpawn()
+        public override void OnEntitySpawn()
         {
             base.OnEntitySpawn();
             if (Api is ICoreClientAPI) { return; }
-            sapi = Api as ICoreServerAPI;
-            inventory = new InventoryGeneric(inventorysize, "cart", "cart", Api);
-            TryLoadInventory();
-            
-            ep = Api.ModLoader.GetModSystem<EntityPartitioning>();
-            Vec3d begin = ServerPos.XYZ;
-            begin.X = Math.Floor(begin.X);
-            begin.Y = Math.Floor(begin.Y);
-            begin.Z = Math.Floor(begin.Z);
-            pathstart = begin;
-            FindPath();
-        }*/
+            //for some reason attributes don't show up - maybe they don't work with entities?
+            if (Attributes != null)
+            {
+                string test = Attributes.GetString("randomnonsense");
+               
+            }
+            if (WatchedAttributes.HasAttribute("guardedPlayerUid"))
+            {
+                IPlayer myplayer =Api.World.PlayerByUid(WatchedAttributes.GetString("guardedPlayerUid"));
+                if (myplayer == null) { return; }
+                float yaw = myplayer.Entity.SidedPos.Yaw;
+                heading = BlockFacing.HorizontalFromAngle(yaw);
+                startpathset = false;
+                WatchedAttributes.RemoveAttribute("guardedPlayerUid");
+                WatchedAttributes.MarkPathDirty("heading");
+            }
+        }
         
         public virtual void Stop()
         {

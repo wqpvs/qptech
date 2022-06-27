@@ -14,7 +14,7 @@
 		{ "code": "state", "states": ["up","down"]},
 		{ code: "type", states: ["flat_ns", "flat_we"] }
 	],
-	creativeinventory: { "qptech": ["*-up-*"] },
+	creativeinventory: { "qptech": ["detectorrails-up-flat_ns"] },
 	shapeByType: {
 		
 		"*-down-flat_we":  { "base": "machines:block/rails/detectorrail-down-flat_ns",rotateY:90 },

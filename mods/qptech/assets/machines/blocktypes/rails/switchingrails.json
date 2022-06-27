@@ -1,6 +1,6 @@
 {
 	code: "switchedrails",
-	
+	"class": "BlockRail",
 	behaviors: [ {name: "Unstable"} ],
 	
 	"attributesByType": {
@@ -10,7 +10,7 @@
 	variantgroups: [
 		{ code: "type", states: ["flat_ns", "flat_we"] }
 	],
-	creativeinventory: { "qptech": ["*"] },
+	creativeinventory: { "qptech": ["*-flat_ns"] },
 	shapeByType: {
 		"*-curved_sw": { base: "game:block/wood/rails/curved_es", rotateY: 270 },
 		"*-curved_wn": { base: "game:block/wood/rails/curved_es", rotateY: 180 },

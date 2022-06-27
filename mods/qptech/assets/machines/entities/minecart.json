@@ -2,7 +2,9 @@
   "code": "minecart",
   "class": "MinecartEntity",
   "attributes": {
-    "setGuardedEntityAttribute": true
+    "setGuardedEntityAttribute": true,
+    "randomnonsense": "hmmmm"
+    
   },
   "hitboxSize": {
     "x": 1,
@@ -40,10 +42,6 @@
 			}
       
     ]
-  },
-  "sounds": {
-    "hurt": "creature/figure-hurt",
-    "death": "creature/figure-death",
-    "idle": "creature/figure-idle"
   }
+  
 }

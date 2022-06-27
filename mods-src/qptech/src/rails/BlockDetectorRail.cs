@@ -15,7 +15,7 @@ using Vintagestory.API.Common.Entities;
 
 namespace qptech.src.rails
 {
-    class BlockDetectorRail:Block
+    class BlockDetectorRail:BlockRail
     {
         public void CartDetected(ICoreAPI api, MinecartEntity cart,BlockPos blockpos)
         {
@@ -54,5 +54,7 @@ namespace qptech.src.rails
             }
             api.World.BlockAccessor.SetBlock(replaceblock.BlockId, blockpos);
         }
+
+        
     }
 }
