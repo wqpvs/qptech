@@ -356,7 +356,7 @@ namespace qptech.src.rails
                 if (currentBlock is IRailwaySignalReceiver)
                 {
                     IRailwaySignalReceiver dr = currentBlock as IRailwaySignalReceiver;
-                    dr.ReceiveRailwaySignal(Api.World, currentP,16,"cart");
+                    dr.ReceiveRailwaySignal(Api.World, currentP,isHeavy?16:8,"cart");
                 }
                 pathend = outpos.ToVec3d();
                 heading = newheading;
