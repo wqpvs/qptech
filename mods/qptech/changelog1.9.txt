@@ -1,5 +1,4 @@
 ﻿TODO:
-- special rails placement ew/ns depending on facing
 - placed carts should start in direction player is facing
 - extend signals somehow
 - cart placer/breaker?

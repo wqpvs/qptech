@@ -15,46 +15,53 @@ using Vintagestory.API.Common.Entities;
 
 namespace qptech.src.rails
 {
-    class BlockDetectorRail:BlockRail
+    class BlockDetectorRail:BlockRail,IRailwaySignalReceiver
     {
-        public void CartDetected(ICoreAPI api, MinecartEntity cart,BlockPos blockpos)
+        protected void CartDetected(IWorldAccessor world, BlockPos blockpos,int strength,string signal)
         {
-            if (api==null||cart==null||Attributes == null) { return; }
+            
+            if (world==null||Attributes == null) { return; }
+            if (!signal.Contains("cart")) { return; }
             string replace = Attributes["replace"].AsString(null);
             if (replace == null) { return; }
-            Block replaceblock = api.World.GetBlock(new AssetLocation(replace));
+            Block replaceblock = world.GetBlock(new AssetLocation(replace));
             if (replaceblock == null) { return; }
             
             //search for and activate switches - this will eventually be a generic switching behaviour
             foreach(BlockFacing bf in BlockFacing.ALLFACES)
             {
                 BlockPos checkpos = blockpos.Copy().Offset(bf);
-                BlockSignalSwitch signalswitch = api.World.BlockAccessor.GetBlock(checkpos) as BlockSignalSwitch;
+                IRailwaySignalReceiver signalswitch = world.BlockAccessor.GetBlock(checkpos) as IRailwaySignalReceiver;
                 if (signalswitch != null)
                 {
-                    signalswitch.ActivateSwitch(api.World, checkpos);
+                    signalswitch.ReceiveRailwaySignal(world, checkpos,strength,signal);
                 }
                 else
                 {
-                    Block checkblock = api.World.BlockAccessor.GetBlock(checkpos);
+                    Block checkblock = world.BlockAccessor.GetBlock(checkpos);
                     if (checkblock.Attributes != null)
                     {
                         string switchblock = checkblock.Attributes["railswitch"].AsString(null);
                         if (switchblock != null)
                         {
-                            Block newrail = api.World.GetBlock(new AssetLocation(switchblock));
+                            Block newrail = world.GetBlock(new AssetLocation(switchblock));
                             if (newrail != null)
                             {
-                                api.World.BlockAccessor.SetBlock(newrail.BlockId, checkpos);
+                                world.BlockAccessor.SetBlock(newrail.BlockId, checkpos);
 
                             }
                         }
                     }
                 }
             }
-            api.World.BlockAccessor.SetBlock(replaceblock.BlockId, blockpos);
+            world.BlockAccessor.SetBlock(replaceblock.BlockId, blockpos);
         }
 
-        
+        public virtual void ReceiveRailwaySignal(IWorldAccessor world, BlockPos pos,int strength, string signal)
+        {
+            strength--;
+            if (strength <= 0) { return; }
+            CartDetected(world,pos,strength,signal);
+        }
     }
 }

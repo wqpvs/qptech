@@ -353,10 +353,10 @@ namespace qptech.src.rails
                 
                 startpathset = true;
                 pathprogress = 0;
-                if (currentBlock is BlockDetectorRail)
+                if (currentBlock is IRailwaySignalReceiver)
                 {
-                    BlockDetectorRail dr = currentBlock as BlockDetectorRail;
-                    dr.CartDetected(Api, this, currentP);
+                    IRailwaySignalReceiver dr = currentBlock as IRailwaySignalReceiver;
+                    dr.ReceiveRailwaySignal(Api.World, currentP,16,"cart");
                 }
                 pathend = outpos.ToVec3d();
                 heading = newheading;
