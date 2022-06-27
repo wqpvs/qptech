@@ -29,8 +29,30 @@
 			},
       
       { "code": "interpolateposition" }
-    ]
-    
+    ],
+    animations: [
+			{
+				code: "hurt",
+				animation: "hurt", 
+				animationSpeed: 2.2,
+				weight: 10,
+				blendMode: "AddAverage" 
+			},
+			{ 
+				code: "idle", 
+				animation: "idle",
+				blendMode: "AddAverage",
+				easeOutSpeed: 4,
+				triggeredBy: { defaultAnim: true },
+			},
+			{ 
+				code: "walk",
+				animation: "walk",
+				blendMode: "AddAverage",
+				easeOutSpeed: 4,
+				triggeredBy: { defaultAnim: true },
+			}
+		]
   },
   "server": {
     "behaviors": [
