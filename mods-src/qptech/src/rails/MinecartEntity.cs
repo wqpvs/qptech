@@ -20,7 +20,7 @@ using System.Text.RegularExpressions;
 
 namespace qptech.src.rails
 {
-    class PathLimitedEntity : Entity
+    class MinecartEntity : Entity
     {
         
         //TODO: Collision checking needs fixing - make sure to use offset somehow
@@ -300,12 +300,12 @@ namespace qptech.src.rails
         {
             Entity checkentity = ep.GetNearestEntity(pathend+pathoffset, 0.5, (e) => {
                 if (e.EntityId == EntityId) { return false; }
-                if (!(e is PathLimitedEntity)) { return false; }
+                if (!(e is MinecartEntity)) { return false; }
                 return true;
             });
             
             if (checkentity == null) { return false; }
-            PathLimitedEntity other = checkentity as PathLimitedEntity;
+            MinecartEntity other = checkentity as MinecartEntity;
             //if (other.heading == heading.Opposite) { heading = heading.Opposite; FindPath(); }
             heading = heading.Opposite; FindPath();
             return true;

@@ -17,7 +17,7 @@ namespace qptech.src.rails
 {
     class BlockDetectorRail:Block
     {
-        public void CartDetected(ICoreAPI api, PathLimitedEntity cart,BlockPos blockpos)
+        public void CartDetected(ICoreAPI api, MinecartEntity cart,BlockPos blockpos)
         {
             if (api==null||cart==null||Attributes == null) { return; }
             string replace = Attributes["replace"].AsString(null);

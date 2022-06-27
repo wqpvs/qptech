@@ -113,7 +113,7 @@
     <Compile Include="src\misc\ItemMiningDrill.cs" />
     <Compile Include="src\rails\BlockDetectorRail.cs" />
     <Compile Include="src\rails\BlockSignalSwitch.cs" />
-    <Compile Include="src\rails\PathLimitedEntity.cs" />
+    <Compile Include="src\rails\MinecartEntity.cs" />
     <Compile Include="src\multiblock\BEDummyBlock.cs" />
     <Compile Include="src\multiblock\BlockDummy.cs" />
     <Compile Include="src\networks\BEProcessToProcess.cs" />

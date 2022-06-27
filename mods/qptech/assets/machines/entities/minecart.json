@@ -1,6 +1,9 @@
 {
   "code": "minecart",
-  "class": "PathLimitedEntity",
+  "class": "MinecartEntity",
+  "attributes": {
+    "setGuardedEntityAttribute": true
+  },
   "hitboxSize": {
     "x": 1,
     "y": 1
