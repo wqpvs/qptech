@@ -315,7 +315,22 @@ namespace qptech.src.rails
             heading = heading.Opposite; FindPath();
             return true;
         }
-
+        public virtual int SignalStrength()
+        {
+            int emptystrength = 5;
+            int maxstrength =11;
+            if (Inventory == null || inventory.Empty) { return emptystrength; }
+            int cap = 0; int used = 0;
+            foreach (ItemSlot slot in Inventory)
+            {
+                if (slot.Empty) { cap += slot.MaxSlotStackSize;continue; }
+                used += slot.Itemstack.StackSize;
+                cap += Math.Min(slot.MaxSlotStackSize, slot.Itemstack.Collectible.MaxStackSize);
+            }
+            if (cap == 0) { return emptystrength; }
+            
+            return (int)(((float)used/(float)(cap))*(float)maxstrength)+emptystrength ;
+        }
         protected virtual void FindPath()
         {
             if (!HandleInventory()) { return; }
@@ -356,7 +371,7 @@ namespace qptech.src.rails
                 if (currentBlock is IRailwaySignalReceiver)
                 {
                     IRailwaySignalReceiver dr = currentBlock as IRailwaySignalReceiver;
-                    dr.ReceiveRailwaySignal(Api.World, currentP,isHeavy?16:8,"cart");
+                    dr.ReceiveRailwaySignal(Api.World, currentP,SignalStrength(),"cart");
                 }
                 pathend = outpos.ToVec3d();
                 heading = newheading;
