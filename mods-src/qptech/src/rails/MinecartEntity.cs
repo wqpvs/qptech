@@ -68,7 +68,7 @@ namespace qptech.src.rails
                 sapi = api as ICoreServerAPI;
                 inventory = new InventoryGeneric(inventorysize, "cart", "cart", Api);
                 TryLoadInventory();
-                TryStartPath();
+                //TryStartPath();
                 ep = api.ModLoader.GetModSystem<EntityPartitioning>();
                 
             }
@@ -333,7 +333,9 @@ namespace qptech.src.rails
         }
         protected virtual void FindPath()
         {
-            if (!HandleInventory()) { return; }
+            
+            if (!HandleInventory()) { return; } //don't move if inventory has been changed
+            if (!HandleRail()) { return; } //don't move if rail says not to
             moving = false;
             pathprogress = 0;
             BlockPos currentP = pathstart.AsBlockPos;
@@ -520,6 +522,16 @@ namespace qptech.src.rails
                 if (isRail(checkpos)) { exits[addface] = checkpos; }
             }
         }
+        //returns true if ok to move or false if cart should hold
+        protected virtual bool HandleRail()
+        {
+            BlockPos currentP = pathstart.AsBlockPos;
+            var railblock = Api.World.BlockAccessor.GetBlock(currentP) as BlockRail;
+            if (railblock == null) { return true; } //might not be a valid spot but find path should handle that
+            string railstate = railblock.GetRailState(Api.World, currentP, this);
+            if (railstate == "HOLD") { return false; }
+            return true;
+        }
 /// <summary>
 /// Handle Inventory - check for various spots to load & unload
 /// </summary>
@@ -550,7 +562,7 @@ namespace qptech.src.rails
                     if (myslot == null || myslot.Empty) { continue; }
                     foreach (ItemSlot slot in outcont.Inventory)
                     {
-                        
+                        if (slot == null ) { continue; }
                         if (!slot.CanHold(myslot)) { continue; }
                         
                         int moved =myslot.TryPutInto(Api.World, slot);

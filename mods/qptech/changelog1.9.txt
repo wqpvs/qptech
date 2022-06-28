@@ -6,7 +6,7 @@
 - use animations
 - recipes needed:
     - carts
-    - vanilla rails
+    
     - vertical rails
     - switches
     - detector rails

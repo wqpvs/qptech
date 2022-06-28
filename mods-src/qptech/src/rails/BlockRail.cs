@@ -17,6 +17,22 @@ namespace qptech.src.rails
 {
     class BlockRail:Block
     {
+        public virtual string GetRailState(IWorldAccessor world, BlockPos pos, MinecartEntity cart)
+        {
+            var railblock = world.BlockAccessor.GetBlock(pos) as BlockRail;
+            
+            if (railblock != null)
+            {
+                //option one check for a static railstate
+                if (railblock.Attributes != null)
+                {
+                    return railblock.Attributes["railstate"].AsString("");
+                }
+            }
+            //option two: (TODO) check for stack attributes
+            //option three: (TODO) check for relevant block behaviours and pass query on
+            return "";
+        }
         public override bool TryPlaceBlock(IWorldAccessor world, IPlayer byPlayer, ItemStack itemstack, BlockSelection blockSel, ref string failureCode)
         {
 
