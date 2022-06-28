@@ -298,6 +298,8 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
+    <None Include="qptech\assets\machines\shapes\block\rails\cartstopper-off-flat_ns.json" />
+    <None Include="qptech\assets\machines\shapes\block\rails\cartstopper-on-flat_ns.json" />
     <None Include="qptech\assets\machines\shapes\block\rails\detectorrail-down-flat_ns.json" />
     <None Include="qptech\assets\machines\shapes\block\rails\detectorrail-up-flat_ns.json" />
     <None Include="qptech\assets\machines\shapes\block\rails\minecart.json" />
@@ -322,6 +324,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\turbine.json" />
     <None Include="qptech\assets\machines\shapes\block\rails\railswitch-down.json" />
     <None Include="qptech\assets\machines\shapes\block\rails\railswitch-up.json" />
+    <None Include="qptech\assets\machines\shapes\block\rails\raised_ns.json" />
     <None Include="qptech\assets\machines\shapes\block\rails\switchingrails-flat_ns.json" />
     <None Include="qptech\assets\machines\shapes\block\texturecube.json" />
     <None Include="qptech\assets\machines\shapes\block\tiledconcrete.json" />
