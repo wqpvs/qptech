@@ -550,18 +550,10 @@ namespace qptech.src.rails
                     if (myslot == null || myslot.Empty) { continue; }
                     foreach (ItemSlot slot in outcont.Inventory)
                     {
-                        if (Api == null || World == null) { break; }
-                        if (slot == null || outcont == null || myslot == null) { continue; }
+                        
                         if (!slot.CanHold(myslot)) { continue; }
-                        int moved = 0;
-                        try
-                        {
-                            moved = myslot.TryPutInto(Api.World, slot);
-                        }
-                        catch
-                        {
-                            break;
-                        }
+                        
+                        int moved =myslot.TryPutInto(Api.World, slot);
                         myslot.MarkDirty();
                         slot.MarkDirty();
                         if (moved > 0) {  return false; }
