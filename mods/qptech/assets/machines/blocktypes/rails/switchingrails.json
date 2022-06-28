@@ -11,6 +11,9 @@
 		{ code: "type", states: ["flat_ns", "flat_we"] }
 	],
 	creativeinventory: { "qptech": ["*-flat_ns"] },
+	drops: [
+		{ type: "block", code: "machines:switchedrails-flat_ns" }
+	],
 	shapeByType: {
 		"*-curved_sw": { base: "game:block/wood/rails/curved_es", rotateY: 270 },
 		"*-curved_wn": { base: "game:block/wood/rails/curved_es", rotateY: 180 },

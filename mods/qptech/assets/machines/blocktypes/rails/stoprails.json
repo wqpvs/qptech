@@ -32,6 +32,9 @@
 	sideopaque: {
 		all: false
 	},
+	drops: [
+		{ type: "block", code: "machines:stoprails-on-flat_ns" }
+	],
 	resistance: 0.5,
 	lightAbsorption: 0,
 	collisionbox: null,

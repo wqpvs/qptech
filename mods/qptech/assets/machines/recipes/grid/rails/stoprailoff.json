@@ -1,0 +1,10 @@
+{
+	ingredientPattern: "R",
+	ingredients: {
+		"R": { type: "block", code: "machines:stoprails-on-flat_ns", quantity: 1 },
+
+	},
+	width: 1,
+	height: 1,
+	output: { type: "block", code: "machines:stoprails-off-flat_ns", quantity: 1  }
+}
