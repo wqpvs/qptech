@@ -8,7 +8,7 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"shinyiron": "block/shinyiron",
+		"shinyiron": "block/metal/darkiron",
 		"chevrons": "block/chevrons",
 		"oak1": "block/oak1"
 	},

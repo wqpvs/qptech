@@ -14,7 +14,7 @@
 		
 	},
 	
-	creativeinventory: { "general": ["*"], "qptech": ["*"]},
+	creativeinventory: { "general": ["*"], "R&R": ["*"]},
 	materialDensity: 600,
 	guiTransformByType: {
 		

@@ -30,6 +30,15 @@
     <Content Include="chisel\assets\game\textures\icons\takecopy.svg" />
     <Content Include="chisel\assets\game\textures\icons\undo.svg" />
     <Content Include="chisel\Change Log.txt" />
+    <Content Include="qptech\assets\machines\textures\block\chevrons.png" />
+    <Content Include="qptech\assets\machines\textures\block\shinyiron.png" />
+    <Content Include="rustandrails\assets\rustandrails\textures\block\chevrons.png" />
+    <Content Include="rustandrails\assets\rustandrails\textures\block\copperspool.png" />
+    <Content Include="rustandrails\assets\rustandrails\textures\block\metal\darkiron.png" />
+    <Content Include="rustandrails\assets\rustandrails\textures\block\oak1.png" />
+    <Content Include="rustandrails\assets\rustandrails\textures\block\rubber\cable.png" />
+    <Content Include="rustandrails\assets\rustandrails\textures\block\shinybrass.png" />
+    <Content Include="rustandrails\assets\rustandrails\textures\block\shinyiron.png" />
     <None Include="chisel\assets\chiseltools\config\handbook\chiseltools.json" />
     <None Include="chisel\assets\chiseltools\itemtypes\paintbrush.json" />
     <None Include="chisel\assets\chiseltools\itemtypes\pantograph.json" />
@@ -97,10 +106,11 @@
     <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\itemfilterentrance.json" />
     <None Include="qptech\assets\machines\blocktypes\other\coalpilestoker.json" />
-    <None Include="rustandrails\assets\rustandrails\blocktypes\rails\detectorrails.json" />
-    <None Include="rustandrails\assets\rustandrails\blocktypes\rails\stoprails.json" />
-    <None Include="rustandrails\assets\rustandrails\blocktypes\rails\switchingrails.json" />
-    <None Include="rustandrails\assets\rustandrails\blocktypes\rails\verticalwoodenrail.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\detectorrails.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\railhopper.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\stoprails.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\switchingrails.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\verticalwoodenrail.json" />
     <None Include="qptech\assets\machines\blocktypes\other\rubbersheet.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-drainer.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-sprinkler.json" />
@@ -142,7 +152,7 @@
     <None Include="qptech\assets\machines\blocktypes\dummy-element.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-closed-bluesteel.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-segment-bluesteel.json" />
-    <None Include="rustandrails\assets\rustandrails\blocktypes\rails\railswitch.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\railswitch.json" />
     <None Include="qptech\assets\machines\blocktypes\stone\firebox.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitloader.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitstoker.json" />
@@ -516,9 +526,9 @@
     <Content Include="qptech\assets\game\textures\icons\drill3x3.svg" />
     <Content Include="qptech\assets\game\textures\icons\drillplus.svg" />
     <Content Include="qptech\assets\game\textures\icons\drillx.svg" />
-    <Content Include="qptech\assets\qptech\textures\block\cart\frontback.png" />
-    <Content Include="qptech\assets\qptech\textures\block\cart\insides.png" />
-    <Content Include="qptech\assets\qptech\textures\block\cart\sides.png" />
+    <Content Include="rustandrails\assets\rustandrails\textures\block\cart\frontback.png" />
+    <Content Include="rustandrails\assets\rustandrails\textures\block\cart\insides.png" />
+    <Content Include="rustandrails\assets\rustandrails\textures\block\cart\sides.png" />
     <Content Include="qptech\assets\machines\textures\block\castiron.png" />
     <Content Include="qptech\assets\machines\textures\block\castironpeekaboo.png" />
     <Content Include="qptech\assets\machines\textures\block\conductingbars.png" />
@@ -640,7 +650,7 @@
     <Folder Include="qptech\assets\machines\shapes\block\glass\" />
     <Folder Include="qptech\assets\machines\shapes\block\indev\" />
     <Folder Include="qptech\assets\machines\shapes\block\liquid\" />
+    <Folder Include="qptech\assets\qptech\textures\block\" />
     <Folder Include="rustandrails\assets\rustandrails\shapes\item\" />
-    <Folder Include="rustandrails\assets\rustandrails\textures\" />
   </ItemGroup>
 </Project>

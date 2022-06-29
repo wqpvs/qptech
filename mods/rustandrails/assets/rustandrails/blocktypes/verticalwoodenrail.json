@@ -53,7 +53,7 @@
 	},
   "blockmaterial": "Wood",
  "creativeinventory": {
-    "qptech": [ "*-north" ]
+    "R&R": [ "*-north" ]
     
   },
   "replaceable": 300,

@@ -1,0 +1,80 @@
+{
+	"code": "railhopper",
+	"entityclass": "GenericTypedContainer",
+	"attributes": {
+		"partialAttachable": true,
+		"inventoryClassName": "chest",
+		"types": [ "normal-generic" ],
+		"quantitySlots": { "normal-generic": 1 },
+		"storageType": { "normal-generic": 169 },
+		"dialogTitleLangCode": {
+			"normal-generic": "content"
+		},
+		"typedOpenSound": { "normal-generic": "game:sounds/block/cokeovendoor-open" },
+		"typedCloseSound": { "normal-generic": "game:sounds/block/cokeovendoor-close" },
+		"heatingefficiency": 0.25
+
+	},
+	"behaviors": [
+		{ "name": "Lockable" },
+		{ "name": "Container" },
+		{
+			"name": "HorizontalOrientable",
+			"properties": { "dropBlockFace": "east" }
+		},
+		
+	],
+	"variantgroups": [
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+	"creativeinventory": {
+		
+		"R&R": [ "*-east" ]
+	},
+	"blockmaterial": "Metal",
+	"shape": { "base": "block/metal/itemhatch" },
+	"shapeByType": {
+		"*-north": {
+			"base": "block/metal/itemhatch",
+			"rotateY": 0
+		},
+		"*-east": {
+			"base": "block/metal/itemhatch",
+			"rotateY": 270
+		},
+		"*-west": {
+			"base": "block/metal/itemhatch",
+			"rotateY": 90
+		},
+		"*-south": {
+			"base": "block/metal/itemhatch",
+			"rotateY": 180
+		}
+	},
+	"drawtype": "json",
+	"texturesByType": {
+		"*": {
+			"all": { "base": "block/metal/darkiron" }
+		}
+	},
+	"resistance": 1,
+	"sideopaque": {
+		"all": false
+	},
+	"sounds": {
+		"place": "game:block/anvil",
+		"walk": "game:walk/stone"
+	},
+	"guiTransform": {
+		"origin": {
+			"x": 0.5,
+			"y": 0.5,
+			"z": 0.5
+		},
+		"scale": 1
+	}
+
+}

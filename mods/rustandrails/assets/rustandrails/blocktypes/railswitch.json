@@ -33,8 +33,8 @@
 	],
 
 	"creativeinventory": {
-		"general": [ "*-down-east" ],
-		"qptech": [ "*-down-east" ]
+		
+		"R&R": [ "*-down-east" ]
 	},
 	"blockmaterial": "Metal",
 	"shape": { "base": "block/rails/railswitch-{state}" },

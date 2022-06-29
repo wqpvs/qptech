@@ -1,29 +1,25 @@
 {
-	code: "detectorrails",
-	"class": "BlockDetectorRail",
+	code: "stoprails",
+	"class": "BlockRail",
 	behaviors: [ {name: "Unstable"} ],
 	
 	"attributesByType": {
-		 "*-up-flat_ns": {"replace": "rustandrails:detectorrails-down-flat_ns"},
-		 "*-up-flat_we": {"replace": "rustandrails:detectorrails-down-flat_we"},
-		 "*-down-flat_ns": {"replace": "rustandrails:detectorrails-up-flat_ns"},
-		 "*-down-flat_we": {"replace": "rustandrails:detectorrails-up-flat_we"}
+		"*-off-flat_we": {"railswitch": "rustandrails:stoprails-on-flat_we"},
+		"*-on-flat_we": {"railswitch": "rustandrails:stoprails-off-flat_we","railstate": "HOLD"},
+		"*-off-flat_ns": {"railswitch": "rustandrails:stoprails-on-flat_ns"},
+		"*-on-flat_ns": {"railswitch": "rustandrails:stoprails-off-flat_ns","railstate": "HOLD"},
 	},
-	
 	variantgroups: [
-		{ "code": "state", "states": ["up","down"]},
+		{"code": "state","states": ["off","on"]},
 		{ code: "type", states: ["flat_ns", "flat_we"] }
 	],
-	creativeinventory: { "qptech": ["detectorrails-up-flat_ns"] },
-		drops: [
-		{ type: "block", code: "rustandrails:detectorrails-up-flat_ns" }
-	],
+	creativeinventory: { "R&R": ["*-on-flat_ns"] },
 	shapeByType: {
 		
-		"*-down-flat_we":  { "base": "rustandrails:block/rails/detectorrail-down-flat_ns",rotateY:90 },
-		"*-down-flat_ns":  { base: "rustandrails:block/rails/detectorrail-down-flat_ns", rotateY: 0 },
-		"*-up-flat_we":  { base: "rustandrails:block/rails/detectorrail-up-flat_ns", rotateY: 90 },
-		"*-up-flat_ns":  { base: "rustandrails:block/rails/detectorrail-up-flat_ns", rotateY: 0 },
+		"*-off-flat_we":  { base: "rustandrails:block/rails/cartstopper-off-flat_ns", rotateY: 90 },
+		"*-off-flat_ns":  { base: "rustandrails:block/rails/cartstopper-off-flat_ns", rotateY: 0 },
+		"*-on-flat_we":  { base: "rustandrails:block/rails/cartstopper-on-flat_ns", rotateY: 90 },
+		"*-on-flat_ns":  { base: "rustandrails:block/rails/cartstopper-on-flat_ns", rotateY: 0 },
 		"*": { base: "game:block/wood/rails/{type}" },
 	},
 	blockmaterial: "Wood",
@@ -36,6 +32,9 @@
 	sideopaque: {
 		all: false
 	},
+	drops: [
+		{ type: "block", code: "rustandrails:stoprails-on-flat_ns" }
+	],
 	resistance: 0.5,
 	lightAbsorption: 0,
 	collisionbox: null,
