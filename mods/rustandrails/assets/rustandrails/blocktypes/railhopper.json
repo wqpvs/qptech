@@ -35,29 +35,29 @@
 		"R&R": [ "*-east" ]
 	},
 	"blockmaterial": "Metal",
-	"shape": { "base": "block/metal/itemhatch" },
+	"shape": { "base": "block/rails/railhopper" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/itemhatch",
+			"base": "block/rails/railhopper",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/itemhatch",
+			"base": "block/rails/railhopper",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/itemhatch",
+			"base": "block/rails/railhopper",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/itemhatch",
+			"base": "block/rails/railhopper",
 			"rotateY": 180
 		}
 	},
 	"drawtype": "json",
 	"texturesByType": {
 		"*": {
-			"all": { "base": "block/metal/darkiron" }
+			"all": { "base": "game:block/metal/sheet/copper1" }
 		}
 	},
 	"resistance": 1,
