@@ -1,26 +1,29 @@
 {
-	code: "switchedrails",
-	"class": "BlockRail",
+	code: "detectorrails",
+	"class": "BlockDetectorRail",
 	behaviors: [ {name: "Unstable"} ],
 	
 	"attributesByType": {
-		"*-flat_we": {"railswitch": "machines:switchedrails-flat_ns"},
-		"*-flat_ns": {"railswitch": "machines:switchedrails-flat_we"}
+		 "*-up-flat_ns": {"replace": "rustandrails:detectorrails-down-flat_ns"},
+		 "*-up-flat_we": {"replace": "rustandrails:detectorrails-down-flat_we"},
+		 "*-down-flat_ns": {"replace": "rustandrails:detectorrails-up-flat_ns"},
+		 "*-down-flat_we": {"replace": "rustandrails:detectorrails-up-flat_we"}
 	},
+	
 	variantgroups: [
+		{ "code": "state", "states": ["up","down"]},
 		{ code: "type", states: ["flat_ns", "flat_we"] }
 	],
-	creativeinventory: { "qptech": ["*-flat_ns"] },
-	drops: [
-		{ type: "block", code: "machines:switchedrails-flat_ns" }
+	creativeinventory: { "qptech": ["detectorrails-up-flat_ns"] },
+		drops: [
+		{ type: "block", code: "rustandrails:detectorrails-up-flat_ns" }
 	],
 	shapeByType: {
-		"*-curved_sw": { base: "game:block/wood/rails/curved_es", rotateY: 270 },
-		"*-curved_wn": { base: "game:block/wood/rails/curved_es", rotateY: 180 },
-		"*-curved_ne": { base: "game:block/wood/rails/curved_es", rotateY: 90 },
-		"*-flat_we":  { base: "machines:block/rails/switchingrails-flat_ns", rotateY: 90 },
-		"*-flat_ns":  { base: "machines:block/rails/switchingrails-flat_ns", rotateY: 0 },
-		"*-raised_we":  { base: "game:block/wood/rails/raised_ns", rotateY: 90 },
+		
+		"*-down-flat_we":  { "base": "rustandrails:block/rails/detectorrail-down-flat_ns",rotateY:90 },
+		"*-down-flat_ns":  { base: "rustandrails:block/rails/detectorrail-down-flat_ns", rotateY: 0 },
+		"*-up-flat_we":  { base: "rustandrails:block/rails/detectorrail-up-flat_ns", rotateY: 90 },
+		"*-up-flat_ns":  { base: "rustandrails:block/rails/detectorrail-up-flat_ns", rotateY: 0 },
 		"*": { base: "game:block/wood/rails/{type}" },
 	},
 	blockmaterial: "Wood",

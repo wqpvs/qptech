@@ -13,7 +13,6 @@ using qptech.src.pipes;
 using qptech.src.networks;
 using qptech.src.itemtransport;
 using qptech.src.Electricity;
-using qptech.src.rails;
 using Vintagestory.API.Util;
 using Vintagestory.API.Datastructures;
 using ProtoBuf;
@@ -123,15 +122,13 @@ namespace qptech.src
 
 
             api.RegisterBlockClass("BlockItemTransport", typeof(BlockItemTransport));
-            api.RegisterBlockClass("BlockSignalSwitch", typeof(BlockSignalSwitch));
-            api.RegisterBlockClass("BlockDetectorRail", typeof(BlockDetectorRail));
-            api.RegisterBlockClass("BlockRail", typeof(BlockRail));
+            
             api.RegisterBlockClass("BlockDoorPart", typeof(BlockDoorPart));
             api.RegisterBlockClass("BlockTemporalPocket", typeof(BlockTemporalPocket));
             api.RegisterBlockClass("BlockCannedMeal", typeof(BlockCannedMeal));
             api.RegisterBlockClass("BlockDummy", typeof(BlockDummy));
             api.RegisterCollectibleBehaviorClass("CBTemporalChargeable", typeof(CBTemporalChargeable));
-            api.RegisterEntity("MinecartEntity", typeof(MinecartEntity));
+            
         }
 
         private void RegisterDefaultBlockEntitys()

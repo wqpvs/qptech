@@ -10,7 +10,7 @@
 	
 	
 	shapeByType: {
-		"creature-minecart": { base: "machines:block/rails/minecart" }
+		"creature-minecart": { base: "rustandrails:block/rails/minecart" }
 		
 	},
 	

@@ -4,14 +4,14 @@
 	
 	"attributesByType": {
 		 
-		 "*-down-north": {"replace":"machines:signalswitch-up-north"},
-		 "*-down-east": {"replace":"machines:signalswitch-up-east"},
-		 "*-down-south": {"replace":"machines:signalswitch-up-south"},
-		 "*-down-west": {"replace":"machines:signalswitch-up-west"},
-		 "*-up-north": {"replace":"machines:signalswitch-down-north"},
-		 "*-up-east": {"replace":"machines:signalswitch-down-east"},
-		 "*-up-south": {"replace":"machines:signalswitch-down-south"},
-		 "*-up-west": {"replace":"machines:signalswitch-down-west"},
+		 "*-down-north": {"replace":"rustandrails:signalswitch-up-north"},
+		 "*-down-east": {"replace":"rustandrails:signalswitch-up-east"},
+		 "*-down-south": {"replace":"rustandrails:signalswitch-up-south"},
+		 "*-down-west": {"replace":"rustandrails:signalswitch-up-west"},
+		 "*-up-north": {"replace":"rustandrails:signalswitch-down-north"},
+		 "*-up-east": {"replace":"rustandrails:signalswitch-down-east"},
+		 "*-up-south": {"replace":"rustandrails:signalswitch-down-south"},
+		 "*-up-west": {"replace":"rustandrails:signalswitch-down-west"},
 	},
 	"behaviors": [
 		{ "name": "Lockable" },

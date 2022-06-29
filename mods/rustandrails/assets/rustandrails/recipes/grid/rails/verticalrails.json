@@ -1,7 +1,7 @@
 {
 	ingredientPattern: "R",
 	ingredients: {
-		"R": { type: "block", code: "machines:verticalwoodenrails-north", quantity: 1 },
+		"R": { type: "block", code: "rustandrails:verticalwoodenrails-north", quantity: 1 },
 
 	},
 	width: 1,

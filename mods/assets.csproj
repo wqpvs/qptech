@@ -97,10 +97,10 @@
     <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\itemfilterentrance.json" />
     <None Include="qptech\assets\machines\blocktypes\other\coalpilestoker.json" />
-    <None Include="qptech\assets\machines\blocktypes\rails\detectorrails.json" />
-    <None Include="qptech\assets\machines\blocktypes\rails\stoprails.json" />
-    <None Include="qptech\assets\machines\blocktypes\rails\switchingrails.json" />
-    <None Include="qptech\assets\machines\blocktypes\rails\verticalwoodenrail.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\rails\detectorrails.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\rails\stoprails.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\rails\switchingrails.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\rails\verticalwoodenrail.json" />
     <None Include="qptech\assets\machines\blocktypes\other\rubbersheet.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-drainer.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-sprinkler.json" />
@@ -142,7 +142,7 @@
     <None Include="qptech\assets\machines\blocktypes\dummy-element.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-closed-bluesteel.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-segment-bluesteel.json" />
-    <None Include="qptech\assets\machines\blocktypes\rails\railswitch.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\rails\railswitch.json" />
     <None Include="qptech\assets\machines\blocktypes\stone\firebox.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitloader.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitstoker.json" />
@@ -157,8 +157,8 @@
     <None Include="qptech\assets\machines\blocktypes\metal\statusflag-up.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate.json" />
     <None Include="qptech\assets\machines\config\handbook\qptech.json" />
-    <None Include="qptech\assets\machines\entities\minecart.json" />
-    <None Include="qptech\assets\machines\itemtypes\entity\creature.json" />
+    <None Include="rustandrails\assets\rustandrails\entities\minecart.json" />
+    <None Include="rustandrails\assets\rustandrails\itemtypes\creature.json" />
     <None Include="qptech\assets\machines\itemtypes\part\hv\drillhead.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\cruciblechamber.json" />
     <None Include="qptech\assets\machines\itemtypes\part\lv\heatingcoil.json" />
@@ -225,11 +225,11 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\crusher-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\cable-extruder.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\wiremill.json" />
-    <None Include="qptech\assets\machines\recipes\grid\rails\stoprailoff.json" />
-    <None Include="qptech\assets\machines\recipes\grid\rails\stoprailon.json" />
-    <None Include="qptech\assets\machines\recipes\grid\rails\woodenrailfromvert.json" />
-    <None Include="qptech\assets\machines\recipes\grid\rails\verticalrails.json" />
-    <None Include="qptech\assets\machines\recipes\grid\rails\woodenrails.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\stoprailoff.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\stoprailon.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\woodenrailfromvert.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\verticalrails.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\woodenrails.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\coalpilestoker.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidpumpconvert.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidhorpump.json" />
@@ -303,11 +303,11 @@
     <None Include="qptech\assets\machines\recipes\smithing\part\screw.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\pullplate.json" />
     <None Include="qptech\assets\machines\recipes\smithing\tool\screwdriverhead.json" />
-    <None Include="qptech\assets\machines\shapes\block\rails\cartstopper-off-flat_ns.json" />
-    <None Include="qptech\assets\machines\shapes\block\rails\cartstopper-on-flat_ns.json" />
-    <None Include="qptech\assets\machines\shapes\block\rails\detectorrail-down-flat_ns.json" />
-    <None Include="qptech\assets\machines\shapes\block\rails\detectorrail-up-flat_ns.json" />
-    <None Include="qptech\assets\machines\shapes\block\rails\minecart.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\cartstopper-off-flat_ns.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\cartstopper-on-flat_ns.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\detectorrail-down-flat_ns.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\detectorrail-up-flat_ns.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\minecart.json" />
     <None Include="qptech\assets\machines\shapes\block\invisible.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\bloomery.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\boiler.json" />
@@ -327,10 +327,10 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wiremill.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\temporalcondenser.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\turbine.json" />
-    <None Include="qptech\assets\machines\shapes\block\rails\railswitch-down.json" />
-    <None Include="qptech\assets\machines\shapes\block\rails\railswitch-up.json" />
-    <None Include="qptech\assets\machines\shapes\block\rails\raised_ns.json" />
-    <None Include="qptech\assets\machines\shapes\block\rails\switchingrails-flat_ns.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\railswitch-down.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\railswitch-up.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\raised_ns.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\switchingrails-flat_ns.json" />
     <None Include="qptech\assets\machines\shapes\block\texturecube.json" />
     <None Include="qptech\assets\machines\shapes\block\tiledconcrete.json" />
     <None Include="qptech\assets\machines\shapes\item\clay\rubbercrucible.json" />
@@ -441,7 +441,7 @@
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriver.json" />
     <None Include="qptech\assets\machines\shapes\item\tool\screwdriverhead.json" />
     <None Include="qptech\assets\machines\shapes\item\worn\jetpack.json" />
-    <None Include="qptech\assets\machines\shapes\block\rails\tempmachine.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\tempmachine.json" />
     <None Include="qptech\assets\machines\textures\block\copperspool.psd" />
     <None Include="qptech\assets\machines\textures\block\glass\glass-colour.aseprite" />
     <None Include="qptech\assets\machines\textures\block\metal\generator\machinery-glass.aseprite" />
@@ -456,6 +456,7 @@
     <None Include="qptech\assets\qptech\config\metalpressswaps.json" />
     <None Include="qptech\assets\qptech\config\orelookups.json" />
     <None Include="qptech\modinfo.json" />
+    <None Include="rustandrails\assets\rustandrails\lang\en.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\connectedlinedstone-gray.png" />
@@ -515,6 +516,9 @@
     <Content Include="qptech\assets\game\textures\icons\drill3x3.svg" />
     <Content Include="qptech\assets\game\textures\icons\drillplus.svg" />
     <Content Include="qptech\assets\game\textures\icons\drillx.svg" />
+    <Content Include="qptech\assets\qptech\textures\block\cart\frontback.png" />
+    <Content Include="qptech\assets\qptech\textures\block\cart\insides.png" />
+    <Content Include="qptech\assets\qptech\textures\block\cart\sides.png" />
     <Content Include="qptech\assets\machines\textures\block\castiron.png" />
     <Content Include="qptech\assets\machines\textures\block\castironpeekaboo.png" />
     <Content Include="qptech\assets\machines\textures\block\conductingbars.png" />
@@ -631,10 +635,12 @@
     <Folder Include="chisel\assets\chiseltools\textures\icons\" />
     <Folder Include="qptech\assets\game\blocktypes\" />
     <Folder Include="qptech\assets\game\sounds\block\" />
+    <Folder Include="qptech\assets\machines\itemtypes\entity\" />
     <Folder Include="qptech\assets\machines\itemtypes\part\ev\" />
     <Folder Include="qptech\assets\machines\shapes\block\glass\" />
     <Folder Include="qptech\assets\machines\shapes\block\indev\" />
     <Folder Include="qptech\assets\machines\shapes\block\liquid\" />
-    <Folder Include="qptech\assets\qptech\textures\" />
+    <Folder Include="rustandrails\assets\rustandrails\shapes\item\" />
+    <Folder Include="rustandrails\assets\rustandrails\textures\" />
   </ItemGroup>
 </Project>

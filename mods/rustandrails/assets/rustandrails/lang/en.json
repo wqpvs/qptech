@@ -1,0 +1,14 @@
+{
+	
+	"block-detectorrails-*": "Detector Rail",
+	"blockdesc-detectorrails-*": "Sends a signal in all directions when a cart passes overhead. Will also receive and transmit other rail signals. Signal strength will depend on how full the cart is.",
+	"block-switchedrails-*": "Switched Rail",
+	"blockdesc-switchedrails-*": "Will change directions when a signal is received. Does not transmit signals.",
+	"block-stoprails-on-*": "Cart Stopping Rail (ON)",
+	"block-stoprails-off-*": "Cart Stopping Rail (OFF)",
+	"blockdesc-stoprails-*": "Will stop a cart if in the ON position, or allow cart to pass if in OFF position. Will change positions when it receives a signal. Does not transmit signals.",
+	"block-verticalwoodenrails-*": "Wooden Rail (vertical)",
+	"block-signalswitch-*": "Signal Switch",
+	"blockdesc-signalswitch-*": "Will send a strong signal in one direction when right clicked by player. Also transmits signals it receives in one direction."
+
+}

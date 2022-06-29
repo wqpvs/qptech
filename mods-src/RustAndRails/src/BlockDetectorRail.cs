@@ -13,7 +13,7 @@ using Vintagestory.API;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common.Entities;
 
-namespace qptech.src.rails
+namespace RustAndRails.src
 {
     class BlockDetectorRail:BlockRail,IRailwaySignalReceiver
     {

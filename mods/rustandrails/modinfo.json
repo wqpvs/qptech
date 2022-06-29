@@ -1,0 +1,12 @@
+{
+  "type": "code",
+  "modid": "rustandrails",
+  "name": "Rust & Rails",
+  "description": "Rust & Rails",
+  "author": "WQP",
+  "version": "0.0.1",
+  "dependency": {
+    "game": ""
+    
+  }
+}

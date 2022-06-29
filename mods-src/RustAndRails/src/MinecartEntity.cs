@@ -15,10 +15,9 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Util;
 using Vintagestory.ServerMods;
-using qptech.src.extensions;
 using System.Text.RegularExpressions;
 
-namespace qptech.src.rails
+namespace RustAndRails.src
 {
     class MinecartEntity : Entity
     {
@@ -45,7 +44,7 @@ namespace qptech.src.rails
         Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + pathoffset.X, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress)+pathoffset.Y, GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + pathoffset.Z);
         
         string pathcodecontains = "rails";
-        string dropitem = "machines:creature-minecart";
+        string dropitem = "rustandrails:creature-minecart";
         ICoreServerAPI sapi;
         InventoryGeneric inventory;
         public virtual InventoryGeneric Inventory => inventory;

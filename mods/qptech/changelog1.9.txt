@@ -1,18 +1,17 @@
 ﻿TODO:
 - placed carts should start in direction player is facing
 - extend signals somehow
+- ridable carts
 - cart placer/breaker?
-- depot (cart pauser basically)
 - use animations
 - recipes needed:
     - carts
-    
     - vertical rails
     - switches
     - detector rails
     - switching rails
-- future stuff:
-    - block behaviour for signals, or interface
+    - stop rails
+
 1.10.1
 Temporal Pockets!
 - added temporal condenser
@@ -33,6 +32,7 @@ Minecarts!
 - load and unload into containers (above to load, below to unload)
 - railway switches will change direction of switching rails
 - detector rail will flip railway switches and switching rails
+- stop rails for starting and stopping carts
 Balance: (goal to let you at least build something with your first steel cook)
 - motors now only require 1 steel sheet instead of 2
 - braided wire now only requires 3 wires instead of 4 (manual recipe)

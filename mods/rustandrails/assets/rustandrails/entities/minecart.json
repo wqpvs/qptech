@@ -19,7 +19,7 @@
   "client": {
     "renderer": "Shape",
 	size: 1.2,
-    "shape": { "base": "machines:block/rails/minecart" },
+    "shape": { "base": "rustandrails:block/rails/minecart" },
     "behaviors": [
       
       { code: "passivephysics",

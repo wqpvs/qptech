@@ -12,7 +12,7 @@ using Vintagestory.API.Server;
 using Vintagestory.API;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common.Entities;
-namespace qptech.src.rails
+namespace RustAndRails.src
 {
     interface IRailwaySignalReceiver
     {

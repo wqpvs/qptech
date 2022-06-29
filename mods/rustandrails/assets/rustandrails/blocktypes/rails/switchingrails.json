@@ -1,25 +1,26 @@
 {
-	code: "stoprails",
+	code: "switchedrails",
 	"class": "BlockRail",
 	behaviors: [ {name: "Unstable"} ],
 	
 	"attributesByType": {
-		"*-off-flat_we": {"railswitch": "machines:stoprails-on-flat_we"},
-		"*-on-flat_we": {"railswitch": "machines:stoprails-off-flat_we","railstate": "HOLD"},
-		"*-off-flat_ns": {"railswitch": "machines:stoprails-on-flat_ns"},
-		"*-on-flat_ns": {"railswitch": "machines:stoprails-off-flat_ns","railstate": "HOLD"},
+		"*-flat_we": {"railswitch": "rustandrails:switchedrails-flat_ns"},
+		"*-flat_ns": {"railswitch": "rustandrails:switchedrails-flat_we"}
 	},
 	variantgroups: [
-		{"code": "state","states": ["off","on"]},
 		{ code: "type", states: ["flat_ns", "flat_we"] }
 	],
-	creativeinventory: { "qptech": ["*-on-flat_ns"] },
+	creativeinventory: { "qptech": ["*-flat_ns"] },
+	drops: [
+		{ type: "block", code: "rustandrails:switchedrails-flat_ns" }
+	],
 	shapeByType: {
-		
-		"*-off-flat_we":  { base: "machines:block/rails/cartstopper-off-flat_ns", rotateY: 90 },
-		"*-off-flat_ns":  { base: "machines:block/rails/cartstopper-off-flat_ns", rotateY: 0 },
-		"*-on-flat_we":  { base: "machines:block/rails/cartstopper-on-flat_ns", rotateY: 90 },
-		"*-on-flat_ns":  { base: "machines:block/rails/cartstopper-on-flat_ns", rotateY: 0 },
+		"*-curved_sw": { base: "game:block/wood/rails/curved_es", rotateY: 270 },
+		"*-curved_wn": { base: "game:block/wood/rails/curved_es", rotateY: 180 },
+		"*-curved_ne": { base: "game:block/wood/rails/curved_es", rotateY: 90 },
+		"*-flat_we":  { base: "rustandrails:block/rails/switchingrails-flat_ns", rotateY: 90 },
+		"*-flat_ns":  { base: "rustandrails:block/rails/switchingrails-flat_ns", rotateY: 0 },
+		"*-raised_we":  { base: "game:block/wood/rails/raised_ns", rotateY: 90 },
 		"*": { base: "game:block/wood/rails/{type}" },
 	},
 	blockmaterial: "Wood",
@@ -32,9 +33,6 @@
 	sideopaque: {
 		all: false
 	},
-	drops: [
-		{ type: "block", code: "machines:stoprails-on-flat_ns" }
-	],
 	resistance: 0.5,
 	lightAbsorption: 0,
 	collisionbox: null,
