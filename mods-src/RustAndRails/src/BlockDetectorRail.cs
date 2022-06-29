@@ -41,8 +41,8 @@ namespace RustAndRails.src
                     Block checkblock = world.BlockAccessor.GetBlock(checkpos);
                     if (checkblock.Attributes != null)
                     {
-                        string switchblock = checkblock.Attributes["railswitch"].AsString(null);
-                        if (switchblock != null)
+                        string switchblock = checkblock.Attributes["railswitch"].AsString("");
+                        if (switchblock != "")
                         {
                             Block newrail = world.GetBlock(new AssetLocation(switchblock));
                             if (newrail != null)

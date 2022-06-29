@@ -20,7 +20,7 @@ namespace RustAndRails.src
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
             //Note this means the player switching this will send a very strong signal
-            ActivateSwitch(world, blockSel.Position,16,"");
+            ReceiveRailwaySignal(world, blockSel.Position,16,"SWITCH");
             return true;
         }
         protected virtual void ActivateSwitch(IWorldAccessor world, BlockPos pos,int strength,string signal)

@@ -207,13 +207,16 @@ namespace RustAndRails.src
         public override void OnInteract(EntityAgent byEntity, ItemSlot itemslot, Vec3d hitPosition, EnumInteractMode mode)
         {
             base.OnInteract(byEntity, itemslot, hitPosition, mode);
+            IPlayer byPlayer = byEntity as IPlayer;
             if (Api.World.ElapsedMilliseconds + 200 < msinteract) { return; }
             msinteract = Api.World.ElapsedMilliseconds+200;
             if (Api is ICoreServerAPI) {
                 if (mode == EnumInteractMode.Interact&&Inventory!=null)
                 {
                     //allow right click with item stack to load cart
-                    if (itemslot != null && !itemslot.Empty)
+                    
+
+                    if (itemslot != null && !itemslot.Empty )
                     {
                         foreach (ItemSlot myslot in Inventory)
                         {
@@ -230,6 +233,7 @@ namespace RustAndRails.src
                             }
                         }
                     }
+                    
                     else if (itemslot != null && itemslot.Empty)
                     {
                         foreach (ItemSlot myslot in Inventory)
@@ -252,7 +256,7 @@ namespace RustAndRails.src
                 }
                 else
                 {
-                    if (itemslot != null && itemslot.Itemstack != null && itemslot.Itemstack.Item != null && itemslot.Itemstack.Collectible.Code.ToString().Contains("wrench"))
+                    if (byEntity.Controls.Sneak)
                     {
                         Die(EnumDespawnReason.PickedUp);
                     }

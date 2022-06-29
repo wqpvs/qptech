@@ -15,13 +15,8 @@
 		{ type: "block", code: "rustandrails:switchedrails-flat_ns" }
 	],
 	shapeByType: {
-		"*-curved_sw": { base: "game:block/wood/rails/curved_es", rotateY: 270 },
-		"*-curved_wn": { base: "game:block/wood/rails/curved_es", rotateY: 180 },
-		"*-curved_ne": { base: "game:block/wood/rails/curved_es", rotateY: 90 },
 		"*-flat_we":  { base: "rustandrails:block/rails/switchingrails-flat_ns", rotateY: 90 },
 		"*-flat_ns":  { base: "rustandrails:block/rails/switchingrails-flat_ns", rotateY: 0 },
-		"*-raised_we":  { base: "game:block/wood/rails/raised_ns", rotateY: 90 },
-		"*": { base: "game:block/wood/rails/{type}" },
 	},
 	blockmaterial: "Wood",
 	textures: {
