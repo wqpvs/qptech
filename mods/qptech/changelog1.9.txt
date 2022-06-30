@@ -1,6 +1,7 @@
 ﻿TODO (for 1.10.1 release):
 - Fix mining drill leaving highlight blocks around
 - creative mode cables shouldn't be used up
+- server side bug: recipe processors - will quickly make things when missing processes instead of not running
 
 1.10.1
 Temporal Pockets!

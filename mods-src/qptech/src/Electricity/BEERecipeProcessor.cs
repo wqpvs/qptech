@@ -96,7 +96,7 @@ namespace qptech.src
             else if (Api.World.ElapsedMilliseconds < recipefinishedat)
             {
                 if (!CheckProcessing()){
-                    recipefinishedat = Api.World.ElapsedMilliseconds + 250; 
+                    recipefinishedat +=250; 
                     deviceState = enDeviceState.PROCESSHOLD;
                     MarkDirty();
                 }
@@ -125,7 +125,10 @@ namespace qptech.src
                 if (ips == null) { continue; }
                 foreach (string key in mr.processingsteps.Keys)
                 {
-                    if (ips.RequestProcessing(key, mr.processingsteps[key])&&todo.Contains(key)) { todo.Remove(key); }
+                    if (ips.RequestProcessing(key, mr.processingsteps[key])&&todo.Contains(key)) {
+                        
+                        todo.Remove(key);
+                    }
                 }
             }
             if (todo.Count == 0) { return true; }
@@ -135,6 +138,7 @@ namespace qptech.src
                 statusmessage += missing + "(" + mr.processingsteps[missing] + "), ";
             }
             statusmessage += "]";
+            
             return false;
         }
         protected override void DoDeviceStart()
