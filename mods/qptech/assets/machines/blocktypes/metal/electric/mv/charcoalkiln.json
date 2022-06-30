@@ -30,11 +30,11 @@
 			"useFlux": 8,
 			
 			
-			"recipegroups": [ "Charcoal (Sticks)","Charcoal (Firewood)" ],
+			"recipegroups": [ "Charcoal (Sticks)","Charcoal (Firewood)","Coke" ],
 			"inputFace": "west",
 			"outputFace": "east",
-			"animationCode": "run",
-			"animation": "run",
+			"animationCode": "",
+			"animation": "",
 			"runAnimationSpeed": 1,
 			"processingTime": 10000
 		}
@@ -42,22 +42,22 @@
 	},
 	"blockmaterial": "Metal",
 	"drawtype": "json",
-	"shape": { "base": "block/metal/electric/electrickiln-lv" },
+	"shape": { "base": "block/metal/electric/charcoalkiln" },
 	"shapeByType": {
 		"*-north": {
-			"base": "block/metal/electric/electrickiln-lv",
+			"base": "block/metal/electric/charcoalkiln",
 			"rotateY": 0
 		},
 		"*-east": {
-			"base": "block/metal/electric/electrickiln-lv",
+			"base": "block/metal/electric/charcoalkiln",
 			"rotateY": 270
 		},
 		"*-west": {
-			"base": "block/metal/electric/electrickiln-lv",
+			"base": "block/metal/electric/charcoalkiln",
 			"rotateY": 90
 		},
 		"*-south": {
-			"base": "block/metal/electric/electrickiln-lv",
+			"base": "block/metal/electric/charcoalkiln",
 			"rotateY": 180
 		}
 	},

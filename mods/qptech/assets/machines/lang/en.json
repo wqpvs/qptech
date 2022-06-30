@@ -259,6 +259,8 @@
 	"block-temporalcondenser-*": "Temporal Condenser",
 	"blockdesc-temporalcondenser-*": "When powered and placed in an Temporally Unstable area, will add temporal charge to relevant items.",
 	"block-mold-*": "Rubber Sheet Mold",
-	"blockdesc-mold-*": "Pipe in liquid rubber, and add industrial heating to output rubber sheets. (Outputs to the right)"
+	"blockdesc-mold-*": "Pipe in liquid rubber, and add industrial heating to output rubber sheets. (Outputs to the right)",
+	"block-charcoalkiln-*": "Electric Pyrolysis Kiln",
+	"blockdesc-charcoalkiln-*":  "Makes charcoal from sticks or firewood, and coke from coal. Needs an appropriate heater block and an industrial fans to function"
 
 }
