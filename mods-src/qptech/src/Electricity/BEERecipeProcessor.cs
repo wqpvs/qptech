@@ -170,30 +170,33 @@ namespace qptech.src
                 if (!ok) { continue; }
                 else { canmake = mr;break; }
             }
-            if (canmake == null||checkinv==null) { return; }
-            
+            if (canmake == null) { return; }
+
             // If we can make something extract the ingredients
 
             foreach (MachineRecipeItems mi in canmake.ingredients)
             {
                 int countdown = mi.quantity;
-                foreach (ItemSlot checkslot in checkinv)
+                if (checkinv != null)
                 {
-                    if (checkslot.Empty) { continue; }
-                    
-                    string checkcode = "";
-                    ItemStack checkstack = checkslot.Itemstack;
+                    foreach (ItemSlot checkslot in checkinv)
+                    {
+                        if (checkslot.Empty) { continue; }
 
-                    bool isblock = false;
-                    if (checkstack.Item != null) { checkcode = checkstack.Item.Code.ToString(); }
-                    else { checkcode = checkstack.Block.Code.ToString(); isblock = true; }
-                    if (!mi.Match(checkcode)) { continue; }
-                    int maxtake = Math.Min(countdown, checkstack.StackSize);
-                    checkstack.StackSize -= maxtake;
-                    countdown -= maxtake;
-                    if (checkstack.StackSize <= 0) { checkslot.Itemstack = null; }
-                    checkslot.MarkDirty();
-                    if (countdown <= 0) { break; }
+                        string checkcode = "";
+                        ItemStack checkstack = checkslot.Itemstack;
+
+                        bool isblock = false;
+                        if (checkstack.Item != null) { checkcode = checkstack.Item.Code.ToString(); }
+                        else { checkcode = checkstack.Block.Code.ToString(); isblock = true; }
+                        if (!mi.Match(checkcode)) { continue; }
+                        int maxtake = Math.Min(countdown, checkstack.StackSize);
+                        checkstack.StackSize -= maxtake;
+                        countdown -= maxtake;
+                        if (checkstack.StackSize <= 0) { checkslot.Itemstack = null; }
+                        checkslot.MarkDirty();
+                        if (countdown <= 0) { break; }
+                    }
                 }
                 if (countdown > 0) { countdown -= TryAdditionalDraw(mi,countdown); }
             }

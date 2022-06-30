@@ -592,7 +592,7 @@
     "output": [
       {
         "validitems": [ "machines:liquidrubberportion" ],
-        "quantity": 4
+        "quantity": 50
       }
     ]
 
@@ -601,7 +601,7 @@
     "name": "Copper Cable",
     "processingTime": 3000,"processingsteps": {"heating": 500},
     "ingredients": [
-      { "validitems": [ "machines:liquidrubberportion"],"quantity": 100},
+      { "validitems": [ "machines:liquidrubberportion"],"quantity": 50},
       { "validitems": [ "machines:braidedwire-copper" ],"quantity": 1}
     ],
     "output": [{"validitems": [ "machines:cable-copper" ],"quantity": 1}]
@@ -619,7 +619,7 @@
     "name": "RubberSheet",
     "processingTime": 3000,"processingsteps": {"heating": 500},
     "ingredients": [
-      { "validitems": [ "machines:liquidrubberportion"],"quantity": 100},
+      { "validitems": [ "machines:liquidrubberportion"],"quantity": 50}
       
     ],
     "output": [{"validitems": [ "machines:industrialsheet-rubber-down" ],"quantity": 1}]
