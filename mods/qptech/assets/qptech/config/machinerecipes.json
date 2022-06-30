@@ -629,21 +629,24 @@
     "processingsteps": {"heating": 1000,"airflow":2000},
     "processingTime": 10000,
     "ingredients": [{"validitems": [ "game:stick" ],"quantity": 32}],
-    "output": [{"validitems": [ "game:charcoal" ],"quantity": 1}]
+    "output": [{"validitems": [ "game:charcoal" ],"quantity": 1}],
+    "noattributes": true
   },
   {
     "name": "Charcoal (Firewood)",
     "processingsteps": {"heating": 1000,"airflow":1000},
     "processingTime": 10000,
     "ingredients": [{"validitems": [ "game:firewood" ],"quantity": 16}],
-    "output": [{"validitems": [ "game:charcoal" ],"quantity": 4}]
+    "output": [{"validitems": [ "game:charcoal" ],"quantity": 4}],
+    "noattributes": true
   },
   {
     "name": "Coke",
-    "processingsteps": {"heating": 2000,"airflow":5000},
+    "processingsteps": {"heating": 1500,"airflow":5000},
     "processingTime": 20000,
     "ingredients": [{"validitems": [ "game:ore-lignite","game:ore-bituminouscoal" ],"quantity": 16}],
-    "output": [{"validitems": [ "game:coke" ],"quantity": 16}]
+    "output": [{"validitems": [ "game:coke" ],"quantity": 16}],
+    "noattributes": true
   }
   
 ]

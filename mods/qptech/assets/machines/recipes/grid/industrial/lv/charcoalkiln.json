@@ -1,0 +1,17 @@
+{
+	ingredientPattern: "TIS	IBI	_I_",
+	ingredients: {
+		"T": { type: "item", code: "screwdriver-*", isTool: true },
+		"I": { type: "item", code: "game:metalplate-iron", "quantity": 1 },
+		"S": { type: "item", code: "screw-*", quantity: 4},
+		"B": {
+			"type": "block",
+			"code": "machinerybloc*",
+			"quantity": 1
+		},
+
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "charcoalkiln-lv-east", quantity: 1  }
+}

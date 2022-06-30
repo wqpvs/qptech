@@ -258,7 +258,7 @@ namespace qptech.src
                 else { newstack = new ItemStack(makeblock, outitem.quantity); }
                 
                 di[0].Itemstack = newstack;
-                if (mr.processingsteps!=null&&mr.processingsteps.ContainsKey("heating"))
+                if (mr.processingsteps!=null&&mr.processingsteps.ContainsKey("heating")&&!mr.noattributes)
                 {
                     di[0].Itemstack.Collectible.SetTemperature(Api.World, di[0].Itemstack, (float)mr.processingsteps["heating"]);
                 }
@@ -271,7 +271,7 @@ namespace qptech.src
                         if (di.Empty) { break; }
 
 
-                        int rem=di[0].TryPutInto(Api.World, tryslot);
+                        int rem=di[0].TryPutInto(Api.World, tryslot,di[0].StackSize);
                         MarkDirty();
                         di.MarkSlotDirty(0);
                     }
@@ -398,7 +398,7 @@ namespace qptech.src
         public MachineRecipeItems[] output;
         public MachineWildCard[] wildcards;
         public MachineRecipe() { }
-        
+        public bool noattributes=false;
     }
     class MachineRecipeItems
     {
