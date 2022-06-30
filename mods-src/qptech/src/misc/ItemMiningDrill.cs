@@ -53,11 +53,11 @@ namespace qptech.src.misc
             for (int c = 0; c < blocks.Count; c++){
                 if (CanMine(api, blocks[c]))
                 {
-                    colors.Add(ColorUtil.ColorFromRgba(255, 255, 0, 128));
+                    colors.Add(ColorUtil.ColorFromRgba(255, 255, 0, 32));
                 }
                 else
                 {
-                    colors.Add(ColorUtil.ColorFromRgba(255, 0, 0, 64));
+                    colors.Add(ColorUtil.ColorFromRgba(255, 0, 0, 32));
                 }
             }
             api.World.HighlightBlocks(byPlayer, HighlightSlotId, blocks,colors);
@@ -337,6 +337,8 @@ namespace qptech.src.misc
         {
             soundplayed = false;
             nextactionat = 0;
+            IPlayer byPlayer = (byEntity as EntityPlayer)?.Player;
+            ClearHighlights(api.World, byPlayer);
             CleanSound();
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
         }

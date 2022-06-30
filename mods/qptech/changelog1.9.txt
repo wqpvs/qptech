@@ -31,6 +31,7 @@ Balance: (goal to let you at least build something with your first steel cook)
 Fixes:
 - BEEAssembler Based devices (mainly presses) now have power on/off buttons
 - Recipe Processor based machines should try to put more than a single item into output slots if possible
+- Recipe Processor machines were instantly fixing recipes that were missing processing steps
 
 IDEAS:
 - saw mill for planks
