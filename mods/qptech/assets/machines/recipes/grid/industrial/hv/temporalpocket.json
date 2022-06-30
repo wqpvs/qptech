@@ -2,8 +2,8 @@
 	ingredientPattern: "PPP	P P	PPP",
 	ingredients: {
 		"P": {
-			"type": "item",
-			"code": "metalplate-chargedtemporalsteel",
+			"type": "block",
+			"code": "metalsheet-chargedtemporalsteel-down",
 
 			"quantity": 1
 		}

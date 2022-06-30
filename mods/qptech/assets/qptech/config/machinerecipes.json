@@ -623,8 +623,21 @@
       
     ],
     "output": [{"validitems": [ "machines:industrialsheet-rubber-down" ],"quantity": 1}]
+  },
+  {
+    "name": "Charcoal (Sticks)",
+    "processingsteps": {"heating": 1000,"airflow":5000},
+    "processingTime": 10000,
+    "ingredients": [{"validitems": [ "game:stick" ],"quantity": 32}],
+    "output": [{"validitems": [ "game:charcoal" ],"quantity": 1}]
+  },
+  {
+    "name": "Charcoal (Firewood)",
+    "processingsteps": {"heating": 1000,"airflow":5000},
+    "processingTime": 10000,
+    "ingredients": [{"validitems": [ "game:firewood" ],"quantity": 4}],
+    "output": [{"validitems": [ "game:charcoal" ],"quantity": 1}]
   }
-  
   
 ]
 

@@ -1,16 +1,6 @@
-﻿TODO:
-- placed carts should start in direction player is facing
-- extend signals somehow
-- ridable carts
-- cart placer/breaker?
-- use animations
-- recipes needed:
-    - carts
-    - vertical rails
-    - switches
-    - detector rails
-    - switching rails
-    - stop rails
+﻿TODO (for 1.10.1 release):
+- Fix mining drill leaving highlight blocks around
+- creative mode cables shouldn't be used up
 
 1.10.1
 Temporal Pockets!
@@ -26,13 +16,7 @@ Mold Machine
 - steel machinery block
 - cables
 - requires heat
-Minecarts!
-- currently uses vanilla wooden rails, and custom vertical rails
-- auto switching tracks *can be locked with wrench
-- load and unload into containers (above to load, below to unload)
-- railway switches will change direction of switching rails
-- detector rail will flip railway switches and switching rails
-- stop rails for starting and stopping carts
+
 Balance: (goal to let you at least build something with your first steel cook)
 - motors now only require 1 steel sheet instead of 2
 - braided wire now only requires 3 wires instead of 4 (manual recipe)
@@ -46,6 +30,9 @@ IDEAS:
 - something to make charcoal
 - keyed inventory - some kind of programmable, copyable key
     - could in theory generate like "treasure chests" - create keys, and save inventory
+-cast iron oven upgrade - make interior like a clay oven, and the hob like a firepit
+- sheet roller should be changed to an recipe porcessor and add in ingots->plates
+- 
 
 
 1.9.0

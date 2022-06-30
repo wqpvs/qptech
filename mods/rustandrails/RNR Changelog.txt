@@ -1,0 +1,14 @@
+﻿0.0.2
+TODO:
+- placed carts should start in direction player is facing
+- extend signals somehow
+- ridable carts
+- cart placer/breaker?
+- use animations
+- recipes needed:
+    - carts
+    - vertical rails
+    - switches
+    - detector rails
+    - switching rails
+    - stop rails
