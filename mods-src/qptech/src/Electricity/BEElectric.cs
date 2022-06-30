@@ -626,7 +626,10 @@ namespace qptech.src
                             ItemStack phand = fromPlayer.Entity.RightHandItemSlot.Itemstack;
                             if (fromPlayer.Entity.RightHandItemSlot.Itemstack == null || fromPlayer.Entity.RightHandItemSlot.Itemstack.StackSize == 0) { return; }
                             if (fromPlayer.Entity.RightHandItemSlot.Itemstack.Item == null || !fromPlayer.Entity.RightHandItemSlot.Itemstack.Item.Code.ToString().StartsWith("machines:cable")) { return; }
-                            fromPlayer.Entity.RightHandItemSlot.Itemstack.StackSize--;
+                            if ((fromPlayer?.WorldData.CurrentGameMode == EnumGameMode.Survival))
+                            {
+                                fromPlayer.Entity.RightHandItemSlot.Itemstack.StackSize--;
+                            }
                             if (fromPlayer.Entity.RightHandItemSlot.Itemstack.StackSize == 0)
                             {
                                 fromPlayer.Entity.RightHandItemSlot.Itemstack = null;

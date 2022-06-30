@@ -1,7 +1,5 @@
 ﻿TODO (for 1.10.1 release):
-- Fix mining drill leaving highlight blocks around
-- creative mode cables shouldn't be used up
-- server side bug: recipe processors - will quickly make things when missing processes instead of not running
+? Fix mining drill leaving highlight blocks around
 
 1.10.1
 Temporal Pockets!
@@ -32,6 +30,7 @@ Fixes:
 - BEEAssembler Based devices (mainly presses) now have power on/off buttons
 - Recipe Processor based machines should try to put more than a single item into output slots if possible
 - Recipe Processor machines were instantly fixing recipes that were missing processing steps
+- when in creative mode copper cables are no longer used up when linking machines
 
 IDEAS:
 - saw mill for planks
