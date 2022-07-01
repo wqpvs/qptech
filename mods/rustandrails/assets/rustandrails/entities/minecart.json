@@ -4,7 +4,6 @@
   "attributes": {
     "setGuardedEntityAttribute": true,
     "randomnonsense": "hmmmm"
-    
   },
   "hitboxSize": {
     "x": 1,
@@ -14,56 +13,62 @@
     "x": 1,
     "y": 1
   },
-  "eyeHeight": 0.4,
+  "eyeHeight": 1,
+  "knockbackResistance": 1,
   "drops": [],
   "client": {
     "renderer": "Shape",
-	size: 1.2,
+    "size": 1.2,
     "shape": { "base": "rustandrails:block/rails/minecart" },
     "behaviors": [
-      
-      { code: "passivephysics",
-				groundDragFactor: 1,
-				airDragFactor: 0.25,
-				gravityFactor: 0.75
-			},
-      
-      { "code": "interpolateposition" }
+      {
+        "code": "passivephysics",
+        "groundDragFactor": 1,
+        "airDragFactor": 0.25,
+        "gravityFactor": 0.75
+      },
+      {
+        "code": "interpolateposition"
+      }
     ],
-    animations: [
-			{
-				code: "hurt",
-				animation: "hurt", 
-				animationSpeed: 2.2,
-				weight: 10,
-				blendMode: "AddAverage" 
-			},
-			{ 
-				code: "idle", 
-				animation: "idle",
-				blendMode: "AddAverage",
-				easeOutSpeed: 4,
-				triggeredBy: { defaultAnim: true },
-			},
-			{ 
-				code: "walk",
-				animation: "walk",
-				blendMode: "AddAverage",
-				easeOutSpeed: 4,
-				triggeredBy: { defaultAnim: true },
-			}
-		]
+    "animations": [
+      {
+        "code": "hurt",
+        "animation": "hurt",
+        "animationSpeed": 2.2,
+        "weight": 10,
+        "blendMode": "AddAverage"
+      },
+      {
+        "code": "idle",
+        "animation": "idle",
+        "blendMode": "AddAverage",
+        "easeOutSpeed": 5
+      },
+      {
+        "code": "walk",
+        "animation": "walk",
+        "animationSpeed": 0.95,
+        "easeInSpeed": 1,
+        "easeOutSpeed": 5,
+        "weight": 20,
+        "blendMode": "AddAverage"
+      }
+    ]
   },
   "server": {
     "behaviors": [
-      
-     { code: "passivephysics",
-				groundDragFactor: 1,
-				airDragFactor: 0.25,
-				gravityFactor: 0.75
-			}
-      
+      {
+        "code": "passivephysics",
+        "groundDragFactor": 1,
+        "airDragFactor": 0.25,
+        "gravityFactor": 0.75
+      },
+      {
+        "code": "health",
+        "currenthealth": 100,
+        "maxhealth": 100
+      }
     ]
   }
-  
 }

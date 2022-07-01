@@ -96,13 +96,13 @@ namespace RustAndRails.src
         
         public virtual void Stop()
         {
+            AnimManager.StopAnimation("walk");
             moving = false;
-            
         }
         public virtual void Start()
         {
             moving = true;
-
+            AnimManager.StartAnimation("walk");
             FindPath();
         }
         public virtual void Start(Vec3d hitPostion)

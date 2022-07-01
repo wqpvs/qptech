@@ -993,56 +993,26 @@
 		{
 			"name": "walk",
 			"code": "walk",
-			"quantityframes": 30,
+			"quantityframes": 15,
 			"onActivityStopped": "EaseOut",
 			"onAnimationEnd": "Repeat",
 			"keyframes": [
 				{
 					"frame": 0,
 					"elements": {
-						"Master": { "offsetX": 0.0, "offsetY": 0.2, "offsetZ": 0.0 },
-						"Wood Frame Left": {  },
-						"Wheel Bar Front": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -180.0 },
-						"Wheel Bar Back": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -180.0 }
-					}
-				},
-				{
-					"frame": 5,
-					"elements": {
-						"Master": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 }
-					}
-				},
-				{
-					"frame": 10,
-					"elements": {
-						"Master": { "offsetX": 0.0, "offsetY": 0.1, "offsetZ": 0.0 }
-					}
-				},
-				{
-					"frame": 15,
-					"elements": {
-						"Master": { "offsetX": 0.0, "offsetY": 0.25, "offsetZ": 0.0 }
-					}
-				},
-				{
-					"frame": 20,
-					"elements": {
-						"Master": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0 }
-					}
-				},
-				{
-					"frame": 28,
-					"elements": {
-
-					}
-				},
-				{
-					"frame": 29,
-					"elements": {
 						"Master": { "offsetX": 0.0, "offsetY": 0.1, "offsetZ": 0.0 },
 						"Wood Frame Left": {  },
-						"Wheel Bar Front": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 180.0 },
-						"Wheel Bar Back": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 180.0 }
+						"Wheel Bar Front": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -182.0 },
+						"Wheel Bar Back": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -182.0 }
+					}
+				},
+				{
+					"frame": 14,
+					"elements": {
+						"Master": {  },
+						"Wood Frame Left": {  },
+						"Wheel Bar Front": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 179.0 },
+						"Wheel Bar Back": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 179.0 }
 					}
 				}
 			]
