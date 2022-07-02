@@ -336,21 +336,22 @@ namespace RustAndRails.src
         }
         protected virtual void FindPath()
         {
-            
+
             if (!HandleInventory()) { return; } //don't move if inventory has been changed
             if (!HandleRail()) { return; } //don't move if rail says not to
             moving = false;
             pathprogress = 0;
             BlockPos currentP = pathstart.AsBlockPos;
-            
+
             Block currentBlock;
-            
+
             currentBlock = Api.World.BlockAccessor.GetBlock(currentP);
-            
-            if (!isRail(currentBlock)) {
+
+            if (!isRail(currentBlock))
+            {
                 for (int c = 0; c < 1; c++)
                 {
-                    
+
                     currentP.Y -= 1;
                     currentBlock = Api.World.BlockAccessor.GetBlock(currentP);
                     if (isRail(currentBlock)) { break; }
@@ -360,59 +361,44 @@ namespace RustAndRails.src
                     moving = false; Die(); return;
                 }
             }
-            
+
             BlockFacing newheading = heading;
-            
+
             BlockPos outpos;
             //pick new destination based on block we are currently in, where we were headed, and if the possible destination blocks were rails
             moving = CheckExit(currentBlock, heading, currentP, out newheading, out outpos);
-            
-           
+
+
             if (moving)
             {
-                
+
                 startpathset = true;
                 pathprogress = 0;
                 if (currentBlock is IRailwaySignalReceiver)
                 {
                     IRailwaySignalReceiver dr = currentBlock as IRailwaySignalReceiver;
-                    dr.ReceiveRailwaySignal(Api.World, currentP,SignalStrength(),"cart");
+                    dr.ReceiveRailwaySignal(Api.World, currentP, SignalStrength(), "cart");
                 }
                 pathend = outpos.ToVec3d();
                 heading = newheading;
-                float yaw = ServerPos.Yaw;
-                float southyaw= 180 * 0.0174533f;
-                float eastyaw = 270 * 0.0174533f;
-                float northyaw = 0;
-                float westyaw = 90 * 0.0174533f;
+
                 if (newheading == BlockFacing.SOUTH)
                 {
                     //ServerPos.SetYaw(0 * 0.0174533f);
-                    float cmpNorth = Math.Abs(yaw - northyaw);
-                    float cmpSouth = Math.Abs(yaw - southyaw);
-                    if (cmpNorth < cmpSouth) { ServerPos.SetYaw(northyaw); }
-                    else { ServerPos.SetYaw(southyaw); }
+                    ServerPos.SetYaw(180 * 0.0174533f);
                 }
                 else if (newheading == BlockFacing.EAST)
                 {
-                    float cmpWest = Math.Abs(yaw - westyaw);
-                    float cmpEast = Math.Abs(yaw - eastyaw);
-                    if (cmpWest < cmpEast) { ServerPos.SetYaw(westyaw); }
-                    else { ServerPos.SetYaw(eastyaw); }
+                    //ServerPos.SetYaw(90 * 0.0174533f);
+                    ServerPos.SetYaw(270 * 0.0174533f);
                 }
                 else if (newheading == BlockFacing.NORTH)
                 {
-                    float cmpNorth = Math.Abs(yaw - northyaw);
-                    float cmpSouth = Math.Abs(yaw - southyaw);
-                    if (cmpNorth < cmpSouth) { ServerPos.SetYaw(northyaw); }
-                    else { ServerPos.SetYaw(southyaw); }
+                    ServerPos.SetYaw(0 * 0.0174533f);
                 }
                 else if (newheading == BlockFacing.WEST)
                 {
-                    float cmpWest = Math.Abs(yaw - westyaw);
-                    float cmpEast = Math.Abs(yaw - eastyaw);
-                    if (cmpWest < cmpEast) { ServerPos.SetYaw(westyaw); }
-                    else { ServerPos.SetYaw(eastyaw); }
+                    ServerPos.SetYaw(90 * 0.0174533f);
                 }
                 MarkMovementDirty();
             }
