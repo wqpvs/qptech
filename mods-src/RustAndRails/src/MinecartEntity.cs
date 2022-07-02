@@ -380,24 +380,39 @@ namespace RustAndRails.src
                 }
                 pathend = outpos.ToVec3d();
                 heading = newheading;
-
+                float yaw = ServerPos.Yaw;
+                float southyaw= 180 * 0.0174533f;
+                float eastyaw = 270 * 0.0174533f;
+                float northyaw = 0;
+                float westyaw = 90 * 0.0174533f;
                 if (newheading == BlockFacing.SOUTH)
                 {
                     //ServerPos.SetYaw(0 * 0.0174533f);
-                    ServerPos.SetYaw(180* 0.0174533f);
+                    float cmpNorth = Math.Abs(yaw - northyaw);
+                    float cmpSouth = Math.Abs(yaw - southyaw);
+                    if (cmpNorth < cmpSouth) { ServerPos.SetYaw(northyaw); }
+                    else { ServerPos.SetYaw(southyaw); }
                 }
                 else if (newheading == BlockFacing.EAST)
                 {
-                    //ServerPos.SetYaw(90 * 0.0174533f);
-                    ServerPos.SetYaw(270 * 0.0174533f);
+                    float cmpWest = Math.Abs(yaw - westyaw);
+                    float cmpEast = Math.Abs(yaw - eastyaw);
+                    if (cmpWest < cmpEast) { ServerPos.SetYaw(westyaw); }
+                    else { ServerPos.SetYaw(eastyaw); }
                 }
                 else if (newheading == BlockFacing.NORTH)
                 {
-                    ServerPos.SetYaw(0 * 0.0174533f);
+                    float cmpNorth = Math.Abs(yaw - northyaw);
+                    float cmpSouth = Math.Abs(yaw - southyaw);
+                    if (cmpNorth < cmpSouth) { ServerPos.SetYaw(northyaw); }
+                    else { ServerPos.SetYaw(southyaw); }
                 }
                 else if (newheading == BlockFacing.WEST)
                 {
-                    ServerPos.SetYaw(90* 0.0174533f);
+                    float cmpWest = Math.Abs(yaw - westyaw);
+                    float cmpEast = Math.Abs(yaw - eastyaw);
+                    if (cmpWest < cmpEast) { ServerPos.SetYaw(westyaw); }
+                    else { ServerPos.SetYaw(eastyaw); }
                 }
                 MarkMovementDirty();
             }
