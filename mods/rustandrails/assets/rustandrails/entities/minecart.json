@@ -48,7 +48,7 @@
       {
         "code": "walk",
         "animation": "walk",
-        "animationSpeed": 1.35,
+        "animationSpeed": 0.95,
         "easeInSpeed": 1,
         "easeOutSpeed": 5,
         "weight": 20,
