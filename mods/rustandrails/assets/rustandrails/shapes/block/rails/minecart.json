@@ -993,7 +993,7 @@
 		{
 			"name": "walk",
 			"code": "walk",
-			"quantityframes": 15,
+			"quantityframes": 38,
 			"onActivityStopped": "EaseOut",
 			"onAnimationEnd": "Repeat",
 			"keyframes": [
@@ -1002,17 +1002,17 @@
 					"elements": {
 						"Master": { "offsetX": 0.0, "offsetY": 0.1, "offsetZ": 0.0 },
 						"Wood Frame Left": {  },
-						"Wheel Bar Front": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -182.0 },
-						"Wheel Bar Back": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -182.0 }
+						"Wheel Bar Back": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -180.0 },
+						"Wheel Bar Front": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -180.0 }
 					}
 				},
 				{
-					"frame": 14,
+					"frame": 37,
 					"elements": {
 						"Master": {  },
 						"Wood Frame Left": {  },
-						"Wheel Bar Front": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 179.0 },
-						"Wheel Bar Back": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 179.0 }
+						"Wheel Bar Back": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 180.0 },
+						"Wheel Bar Front": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 180.0 }
 					}
 				}
 			]
