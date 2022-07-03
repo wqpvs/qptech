@@ -28,13 +28,15 @@ namespace RustAndRails.src
         Vec3d pathend;
         double pathdir = 1;
         double pathprogress = 0;
-        double pathspeed {
+        public virtual double pathspeed {
             get{
-                if (pathend.Y > pathstart.Y) { return 0.075; }
-                else if (pathend.Y < pathstart.Y) { return 0.125; }
-                return 0.1;
+                if (pathend.Y > pathstart.Y) { return 0.5*powerlevel*basespeed; }
+                else if (pathend.Y < pathstart.Y) { return 1.5*powerlevel*basespeed; }
+                return basespeed*powerlevel;
             }
         }
+        public virtual double powerlevel => 1;
+        public double basespeed = 0.1;
         bool moving = false;
         public virtual bool isHeavy => Inventory != null && !Inventory.Empty;
         CollisionTester collTester = new CollisionTester();
@@ -58,9 +60,11 @@ namespace RustAndRails.src
         public override void Initialize(EntityProperties properties, ICoreAPI api, long InChunkIndex3d)
         {
             base.Initialize(properties, api, InChunkIndex3d);
-            if (Attributes != null)
+            if (properties.Attributes != null)
             {
-                pathcodecontains = Attributes.GetString("pathcodecontains", pathcodecontains);
+                pathcodecontains = properties.Attributes["pathcodecontains"].AsString(pathcodecontains);
+                basespeed = properties.Attributes["basespeed"].AsDouble(basespeed);
+                dropitem = properties.Attributes["dropitem"].AsString(dropitem);
             }
             if (api is ICoreServerAPI)
             {

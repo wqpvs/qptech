@@ -3,7 +3,9 @@
   "class": "MinecartEntity",
   "attributes": {
       "setGuardedEntityAttribute": true,
-      "thisisbs": true
+      "basespeed": 0.15,
+      "pathcodecontains": "rails",
+      "dropitem": "rustandrails:creature-minecart"
     },
   "hitboxSize": {
     "x": 1,
