@@ -48,8 +48,8 @@
       {
         "code": "walk",
         "animation": "walk",
-        "animationSpeed": 0.95,
-        "easeInSpeed": 1,
+        "animationSpeed": 1.5,
+        "easeInSpeed": 3,
         "easeOutSpeed": 5,
         "weight": 20,
         "blendMode": "AddAverage"
