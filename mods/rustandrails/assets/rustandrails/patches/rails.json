@@ -1,0 +1,17 @@
+[
+  {
+    "file": "game:blocktypes/wood/rails.json",
+    "path": "/attributes/handbook/exclude",
+    "op": "remove"
+  },
+  {
+    "file": "game:blocktypes/wood/rails.json",
+    "path": "/attributes/handbook/excludeByType",
+    "op": "add",
+    "value": {
+      "*-flat_ns": false,
+      "*": true
+    }
+  }
+  
+]

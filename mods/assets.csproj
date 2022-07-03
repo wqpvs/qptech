@@ -238,10 +238,11 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\crusher-mv.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\cable-extruder.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\wiremill.json" />
+    <None Include="rustandrails\assets\rustandrails\patches\rails.json" />
     <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\stoprailoff.json" />
     <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\stoprailon.json" />
-    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\woodenrailfromvert.json" />
-    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\verticalrails.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\verticalfromrails.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\railsfromvertial.json" />
     <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\woodenrails.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\coalpilestoker.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidpumpconvert.json" />
