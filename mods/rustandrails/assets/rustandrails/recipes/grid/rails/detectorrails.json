@@ -1,0 +1,12 @@
+{
+	ingredientPattern: "MR	FP",
+	ingredients: {
+		"R": { type: "block", code: "game:woodenrails-flat_ns", quantity: 1 },
+		"P": { "type": "block","code": "game:metal-parts","quantity": 1},
+		"M": { "type": "item","code": "game:metalplate-iron","quantity": 1},
+		"F":  {"type": "item","code": "game:fat","quantity": 1}
+	},
+	width: 2,
+	height: 2,
+	output: { type: "block", code: "rustandrails:detectorrails-up-flat_ns", quantity: 1  }
+}

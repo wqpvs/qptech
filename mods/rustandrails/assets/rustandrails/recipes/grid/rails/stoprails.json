@@ -1,0 +1,12 @@
+{
+	ingredientPattern: "R	I",
+	ingredients: {
+		"R": { type: "block", code: "rustandrails:switchedrails-flat_ns", quantity: 1 },
+		
+		"I": { "type": "item","code": "game:ingot-iron","quantity": 1},
+		
+	},
+	width: 1,
+	height: 2,
+	output: { type: "block", code: "rustandrails:stoprails-on-flat_ns", quantity: 1  }
+}

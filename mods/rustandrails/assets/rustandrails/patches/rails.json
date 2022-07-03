@@ -12,6 +12,15 @@
       "*-flat_ns": false,
       "*": true
     }
-  }
+  },
   
+  {
+    "file": "game:blocktypes/wood/rails.json",
+    "path": "/creativeinventory/R&R",
+    "op": "add",
+    "value": [
+      "woodenrails-flat_ns"
+    ]
+  }
 ]
+  

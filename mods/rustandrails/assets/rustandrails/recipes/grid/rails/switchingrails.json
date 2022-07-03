@@ -1,0 +1,12 @@
+{
+	ingredientPattern: "DR	F_",
+	ingredients: {
+		"R": { type: "block", code: "game:woodenrails-flat_ns", quantity: 1 },
+		
+		"D": { "type": "block","code": "rustandrails:detectorrails-up-flat_ns","quantity": 1},
+		"F":  {"type": "item","code": "game:fat","quantity": 1}
+	},
+	width: 2,
+	height: 2,
+	output: { type: "block", code: "rustandrails:switchedrails-flat_ns", quantity: 1  }
+}

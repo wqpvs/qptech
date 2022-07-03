@@ -155,7 +155,7 @@
     <None Include="qptech\assets\machines\blocktypes\dummy-element.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-closed-bluesteel.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-segment-bluesteel.json" />
-    <None Include="rustandrails\assets\rustandrails\blocktypes\railswitch.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\signalswitch.json" />
     <None Include="qptech\assets\machines\blocktypes\stone\firebox.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitloader.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitstoker.json" />
@@ -239,6 +239,11 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\cable-extruder.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\wiremill.json" />
     <None Include="rustandrails\assets\rustandrails\patches\rails.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\stoprails.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\railhopper.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\switchingrails.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\detectorrails.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\signalswitch.json" />
     <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\stoprailoff.json" />
     <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\stoprailon.json" />
     <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\verticalfromrails.json" />

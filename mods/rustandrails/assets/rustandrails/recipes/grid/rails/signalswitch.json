@@ -1,0 +1,12 @@
+{
+	ingredientPattern: "_SF	WPW",
+	ingredients: {
+		"S": { type: "block", code: "game:signpost", quantity: 1 },
+		"P": { "type": "block","code": "game:metal-parts","quantity": 1},
+		"W":  {"type": "item","code": "game:plank-*","quantity": 2},
+		"F":  {"type": "item","code": "game:fat","quantity": 1}
+	},
+	width: 3,
+	height: 2,
+	output: { type: "block", code: "rustandrails:signalswitch-down-east", quantity: 1  }
+}

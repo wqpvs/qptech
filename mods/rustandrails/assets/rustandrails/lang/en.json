@@ -11,6 +11,8 @@
 	"block-signalswitch-*": "Signal Switch",
 	"blockdesc-signalswitch-*": "Will send a strong signal in one direction when right clicked by player. Also transmits signals it receives in one direction.",
 	"block-railhopper-*": "Rail Hopper",
-	"blockdesc-raillhopper-*": "A one slot container that can support rails on top of it. (Put rails on top and carts will automatically unload if they can when above the hopper)"
+	"blockdesc-raillhopper-*": "A one slot container that can support rails on top of it. (Put rails on top and carts will automatically unload if they can when above the hopper)",
+	"item-creature-minecart": "Minecart",
+	"itemdesc-creature-minecart": "Your basic self powered minecart. Crouch+Left Click to break. Right click to load/unload with items. Left Click to start and stop."
 
 }

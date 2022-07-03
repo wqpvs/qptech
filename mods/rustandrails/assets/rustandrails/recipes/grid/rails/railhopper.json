@@ -1,0 +1,12 @@
+{
+	ingredientPattern: "M	H	M",
+	ingredients: {
+		"H": { type: "block", code: "game:hopper", quantity: 1 },
+		
+		"M": { "type": "item","code": "game:metalplate-iron","quantity": 1},
+		
+	},
+	width: 1,
+	height: 3,
+	output: { type: "block", code: "rustandrails:railhopper-east", quantity: 1  }
+}
