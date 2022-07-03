@@ -340,6 +340,7 @@
     <None Include="qptech\assets\machines\shapes\block\metal\electric\wiremill.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\temporalcondenser.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\turbine.json" />
+    <None Include="rustandrails\assets\rustandrails\shapes\block\rails\railhopper.json" />
     <None Include="rustandrails\assets\rustandrails\shapes\block\rails\railswitch-down.json" />
     <None Include="rustandrails\assets\rustandrails\shapes\block\rails\railswitch-up.json" />
     <None Include="rustandrails\assets\rustandrails\shapes\block\rails\raised_ns.json" />

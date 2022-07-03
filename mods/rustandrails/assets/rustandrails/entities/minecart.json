@@ -2,9 +2,9 @@
   "code": "minecart",
   "class": "MinecartEntity",
   "attributes": {
-    "setGuardedEntityAttribute": true,
-    "randomnonsense": "hmmmm"
-  },
+      "setGuardedEntityAttribute": true,
+      "thisisbs": true
+    },
   "hitboxSize": {
     "x": 1,
     "y": 1
@@ -54,7 +54,8 @@
         "weight": 20,
         "blendMode": "AddAverage"
       }
-    ]
+    ],
+    
   },
   "server": {
     "behaviors": [
@@ -69,6 +70,8 @@
         "currenthealth": 100,
         "maxhealth": 100
       }
-    ]
+    ],
+    
+
   }
 }

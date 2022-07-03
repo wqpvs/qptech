@@ -8,7 +8,9 @@
 		] },
 	],
 	
-	
+	"attributesByType": {
+		 "creature-minecart": {"setGuardedEntityAttribute":true}
+	},
 	shapeByType: {
 		"creature-minecart": { base: "rustandrails:block/rails/minecart" }
 		
