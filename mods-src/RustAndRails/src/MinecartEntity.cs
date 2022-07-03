@@ -19,6 +19,16 @@ using System.Text.RegularExpressions;
 
 namespace RustAndRails.src
 {
+    /// <summary>
+    /// A basic self powered minecart, several attributes:
+    /*
+      "setGuardedEntityAttribute": true             - 99% of time include this, assigns a player and allows the cart to start in the direction it was placed
+      "basespeed": 0.15,                            - (optional 0.15 default) how fast it goes, is approximate walking speed of a seraph (just a bit slower) 
+      "pathcodecontains": "rails",                  - (optional "rails" default) the item code must contain this text to be considered a rail
+      "dropitem": "rustandrails:creature-minecart"  - This is the item that will drop when the cart is broken, creature-minecart is an item that spawns a minecart
+    */
+
+    /// </summary>
     class MinecartEntity : Entity
     {
         
