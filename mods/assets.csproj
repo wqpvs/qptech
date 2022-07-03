@@ -239,6 +239,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\cable-extruder.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\wiremill.json" />
     <None Include="rustandrails\assets\rustandrails\patches\rails.json" />
+    <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\minecart.json" />
     <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\stoprails.json" />
     <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\railhopper.json" />
     <None Include="rustandrails\assets\rustandrails\recipes\grid\rails\switchingrails.json" />

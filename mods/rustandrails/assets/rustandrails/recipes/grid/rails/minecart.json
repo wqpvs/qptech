@@ -1,0 +1,12 @@
+{
+	ingredientPattern: "WMW	MWM	APA",
+	ingredients: {
+		"A": { type: "block", code: "game:woodenaxle-ud", quantity: 1 },
+		"W": { "type": "item","code": "game:plank-*","quantity": 2},
+		"M": { "type": "item","code": "game:metalplate-iron","quantity": 1},
+		"P":  {"type": "block","code": "game:metal-parts","quantity": 1}
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "rustandrails:creature-minecart", quantity: 1  }
+}
