@@ -2,7 +2,7 @@
 	ingredientPattern: "TSB",
 	ingredients: {
 		"B": { type: "item", code: "drilledplate-*bronze", quantity: 1 },
-		"S": { type: "item", code: "screw-brass", quantity: 4 },
+		"S": { type: "item", code: "screw-*", quantity: 4 },
 		"T": { type: "item", code: "screwdriver-*", isTool: true }
 		
 		

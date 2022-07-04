@@ -1,5 +1,5 @@
 {
-	ingredientPattern: "STS	PBM	S_S",
+	ingredientPattern: "SMS	MBM	SPS",
 	ingredients: {
 		"T": { type: "item", code: "screwdriver-*", isTool: true },
 		"P": { type: "item", code: "wire-*", quantity: 1},
@@ -9,5 +9,5 @@
 	},
 	width: 3,
 	height: 3,
-	output: { type: "block", code: "generator-primitive-east", quantity: 1  }
+	output: { type: "block", code: "macerator-lv-east", quantity: 1  }
 }

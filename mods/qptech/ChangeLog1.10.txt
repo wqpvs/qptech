@@ -1,0 +1,14 @@
+﻿1.10.2
+- added iron machinery block, can be used instead of bronze for:
+   - clayformer
+   - electric forge
+   - electric kiln
+   - primitive generator
+   - logsplitter
+   - macerator
+   - metal punch
+- all recipes that used brass screws should now be able to use any screws
+- lvpunch can now handle steel & iron, since it is such a limited use machine
+- added a Hardened Screw Cutter - can make steel & brass screws, get 16 screws per rod
+
+

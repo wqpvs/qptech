@@ -13,7 +13,7 @@
 		},
 		"B": {
 			"type": "block",
-			"code": "machineryblock",
+			"code": "machineryblock-iron",
 			"quantity": 1
 		},
 		"M": {

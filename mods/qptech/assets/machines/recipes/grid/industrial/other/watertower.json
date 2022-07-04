@@ -23,7 +23,7 @@
 		},
 		"S": {
 			"type": "item",
-			"code": "screw-brass",
+			"code": "screw-*",
 			"quantity": 1
 		}
 	},

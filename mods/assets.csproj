@@ -32,6 +32,7 @@
     <Content Include="chisel\Change Log.txt" />
     <Content Include="qptech\assets\machines\textures\block\chevrons.png" />
     <Content Include="qptech\assets\machines\textures\block\shinyiron.png" />
+    <Content Include="qptech\ChangeLog1.10.txt" />
     <Content Include="rustandrails\assets\rustandrails\textures\block\chevrons.png" />
     <Content Include="rustandrails\assets\rustandrails\textures\block\copperspool.png" />
     <Content Include="rustandrails\assets\rustandrails\textures\block\metal\darkiron.png" />
@@ -91,6 +92,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\powerrod.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />
     <None Include="qptech\assets\machines\blocktypes\dummy.json" />
+    <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-iron.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\temporalpocket.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\sheet.json" />
     <None Include="qptech\assets\machines\blocktypes\other\door\slidingdoor.json" />
@@ -108,6 +110,16 @@
     <None Include="qptech\assets\machines\blocktypes\itemfilterentrance.json" />
     <None Include="qptech\assets\machines\blocktypes\other\coalpilestoker.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\charcoalkiln.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\lv\clayformer_fromiron.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\lv\electricforge-fromiron.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\lv\electrickiln-fromiron.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\lv\generator-primitive-fromiron.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\lv\logsplitter-fromiron.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\lv\macerator-fromiron.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvpunch from iron.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvpunch.json" />
+    <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvhardscrew.json" />
+    <None Include="qptech\assets\machines\recipes\grid\part\machineryblock-iron.json" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\charcoalkiln.json" />
     <None Include="rustandrails\assets\rustandrails\blocktypes\detectorrails.json" />
     <None Include="rustandrails\assets\rustandrails\blocktypes\railhopper.json" />
@@ -254,7 +266,6 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidpumpconvert.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidhorpump.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\fluidpump.json" />
-    <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvpunch.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvhardmetalplate.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\machineryblock-steel.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\mv\sheetroller.json" />

@@ -9,7 +9,7 @@
 		},
 		"B": { type: "block", code: "machineryblock", quantity: 1},
 		"M": { type: "item", code: "motor-primitive", quantity: 1},
-		"S": { type: "item", code: "screw-brass", quantity: 4},
+		"S": { type: "item", code: "screw-*", quantity: 4},
 		"I": { "type":  "item", "code": "game:metalplate-iron","quantity": 2},
 		"R": { "type":  "item", "code": "rod-brass","quantity": 4},
 		"H": { "type": "item", "code":  "heavymold-metalplate","quantity": 1}

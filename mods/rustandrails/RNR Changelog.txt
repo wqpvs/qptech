@@ -1,4 +1,8 @@
-﻿0.0.2
+﻿1.0.0
+- added recipes for everything
+- placed carts will now start moving the direction they are placed
+- slight cart speed up (about walking speed)
+
 TODO:
 - placed carts should start in direction player is facing
 - extend signals somehow

@@ -107,7 +107,9 @@
 	"blockdesc-clayformer-*": "Oh this clayformer sucks, break to drop the new & improved Clayformer!",
 	"pocketcontents": "Dimensional Storage",
 	"block-metalpress-lvsoftscrew-*": "Soft Metal Press [Screws] (LV)",
-	"blockdesc-metalpress-lvsoftscrew-*": "Finally, no more hammering screws! One metal rod->12 screws It's super effective! (Will eventually be changed to a cutting machien)",
+	"blockdesc-metalpress-lvsoftscrew-*": "Finally, no more hammering screws! One metal rod->12 screws It's super effective! (Will eventually be changed to a cutting machine)",
+	"block-metalpress-lvhardscrew-*": "Hardened Screw Cutter (LV)",
+	"blockdesc-metalpress-lvhardscrew-*": "Finally, no more hammering screws! Also makes steel screws. One metal rod->16 screws It's super effective! (Will eventually be changed to a cutting machine)",
 	"block-metalpress-lvsoftmetalplate-*": "Soft Metal Press [Metal Plates] (LV)",
 	"blockdesc-metalpress-lvsoftmetalplate-*": "Takes heated ingots from input container on left and stamps into metal plates, outputting them on container to the right.",
 	"block-metalpress-lvsoftrod-*": "Soft Metal Press [Rods] (LV)",
@@ -261,6 +263,8 @@
 	"block-mold-*": "Rubber Sheet Mold",
 	"blockdesc-mold-*": "Pipe in liquid rubber, and add industrial heating to output rubber sheets. (Outputs to the right)",
 	"block-charcoalkiln-*": "Electric Pyrolysis Kiln",
-	"blockdesc-charcoalkiln-*":  "Makes charcoal from sticks or firewood, and coke from coal. Needs an appropriate heater block and an industrial fans to function"
+	"blockdesc-charcoalkiln-*":  "Makes charcoal from sticks or firewood, and coke from coal. Needs an appropriate heater block and an industrial fans to function",
+	"block-machineryblock-iron": "Iron Machine Hull",
+	"blockdesc-machineryblock-iron": "Used in various recipes."
 
 }

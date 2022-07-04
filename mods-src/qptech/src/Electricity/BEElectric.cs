@@ -21,6 +21,7 @@ namespace qptech.src
         /*base class to handle electrical devices*/
         bool showextrainfo = false; //if true will show NetworkID and MemberID in block info
         bool acceptsdirectpower = true;
+        
         WireRenderer wirerenderer;
         public virtual bool AcceptsDirectPower => acceptsdirectpower;
         public virtual bool showToggleButton => false;
@@ -346,10 +347,10 @@ namespace qptech.src
                     if (othernet != null) { NetworkJoin(pnw.NetworkID); anychange = true; }
                 }
                 //Torn on this - if I don't remove them the wires render and look odd, but then there's no chance of relinking
-                /*foreach (BlockPos remove in removestaleconnections)
-                {
-                    DirectLinks.Remove(remove);
-                }*/
+                //foreach (BlockPos remove in removestaleconnections)
+                //{
+                //    DirectLinks.Remove(remove);
+                //}
                 if (anychange) { MarkDirty(true); }
             }
         }

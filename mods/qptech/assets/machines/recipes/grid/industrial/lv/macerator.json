@@ -3,9 +3,9 @@
 	ingredients: {
 		"T": { type: "item", code: "screwdriver-*", isTool: true },
 		"P": { type: "item", code: "wire-*", quantity: 1},
-		"B": { type: "block", code: "machineryblock", quantity: 1},
+		"B": { type: "block", code: "machineryblock-iron", quantity: 1},
 		"M": { type: "item", code: "motor-primitive", quantity: 1},
-		"S": { type: "item", code: "screw-brass", quantity: 1}
+		"S": { type: "item", code: "screw-*", quantity: 1}
 	},
 	width: 3,
 	height: 3,

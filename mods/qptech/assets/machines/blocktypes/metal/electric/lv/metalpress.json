@@ -10,7 +10,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "lvsoftmetalplate", "lvsoftscrew", "lvsoftrod", "lvbender", "lvpunch", "lvhardmetalplate" ]
+			"states": [ "lvsoftmetalplate", "lvsoftscrew", "lvsoftrod", "lvbender", "lvpunch", "lvhardmetalplate","lvhardscrew" ]
 		},
 		{
 			"code": "side",
@@ -79,7 +79,7 @@
 			"runAnimationSpeed": 1,
 			"processingTime": 3000,
 			"heatRequirement": 800,
-			"materials": [ "tinbronze", "bismuthbronze", "blackbronze" ]
+			"materials": [ "tinbronze", "bismuthbronze", "blackbronze","iron","steel" ]
 
 		},
 		"*-lvsoftscrew-*": {
@@ -133,6 +133,24 @@
 			"processingTime": 3000,
 			"heatRequirement": 800,
 			"materials": [ "copper" ]
+		},
+		"*-lvhardscrew-*": {
+			"genFlux": 0,
+			"useFlux": 8,
+			"receptionFaces": [ "north" ],
+			"inputFace": "west",
+			"outputFace": "east",
+			"inputQuantity": 1,
+			"outputQuantity": 16,
+			"recipe": "machines:screw",
+			"ingredient": "rod",
+			"animationCode": "process",
+			"animation": "process",
+			"runAnimationSpeed": 1,
+			"processingTime": 4000,
+			"heatRequirement": 1000,
+			"materials": [ "brass","steel" ]
+
 		}
 
 	},
