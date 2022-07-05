@@ -1,0 +1,39 @@
+{
+	"__comment": "Loads a slope block from an .obj model",
+	code: "objtest",
+	enabled: true,
+	behaviors: [{name: "HorizontalOrientable"}],
+	attributes: {
+		handbook: {
+			exclude: true
+		}
+	},
+	variantgroups: [
+		{ code:"side", loadFromProperties: "abstract/horizontalorientation" }
+	],	
+	creativeinventory: { "meta": ["*-north"] },
+	shape: {
+		format: "obj", 
+		base: "block/cuttingmachine", 
+		rotateYByType: {
+			"*-north": 0,
+			"*-east": 270,
+			"*-south": 180,
+			"*-west": 90
+		}
+	},
+	textures: {
+		obj: { base: "item/redpaintedsteelwrench" }
+	},
+	blockmaterial: "Ceramic",
+	replaceable: 900,
+	lightAbsorption: 0,
+	resistance: 0.25,
+	sideopaque: {
+		all: false
+	},
+	sounds: {
+		walk: "walk/stone",
+		place: "block/ceramicplace"
+	}
+}
