@@ -20,7 +20,8 @@
 		},
 		"S": {
 			"type": "block",
-			"code": "machineryblock-steel",
+			"code": "machineryblock-*",
+			allowedVariants: ["iron",  "steel"],
 			"quantity": 1
 		},
 		"R": {
