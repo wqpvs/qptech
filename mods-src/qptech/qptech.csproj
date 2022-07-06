@@ -163,6 +163,8 @@
     <Compile Include="src\multiblock\BEWaterTower.cs" />
     <Compile Include="src\misc\BlockCannedMeal.cs" />
     <Compile Include="src\Electricity\ElectricalBlock.cs" />
+    <Compile Include="src\procanim\BEBProceduralAnimator.cs" />
+    <Compile Include="src\procanim\BETestAnimationUser.cs" />
     <Compile Include="src\QPTechClientConfig.cs" />
     <Compile Include="src\QPTECHLoader.cs" />
     <Compile Include="src\misc\BlockEntityHiddenHopper.cs" />

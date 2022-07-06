@@ -69,6 +69,7 @@
     <None Include="qptech\assets\machines\blocktypes\deco\industrialglass.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\enderchest.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\anitest.json" />
+    <None Include="qptech\assets\machines\blocktypes\indev\cuttingmachineblade.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\objtest.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\powerhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\indev\multiblock\heaterblock.json" />
@@ -121,6 +122,8 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvpunch.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvhardscrew.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\machineryblock-iron.json" />
+    <None Include="qptech\assets\machines\shapes\block\cuttingmachine.obj" />
+    <None Include="qptech\assets\machines\shapes\block\cuttingmachineblade.obj" />
     <None Include="qptech\assets\machines\shapes\block\metal\electric\charcoalkiln.json" />
     <None Include="qptech\assets\machines\shapes\block\testobj.obj" />
     <None Include="rustandrails\assets\rustandrails\blocktypes\detectorrails.json" />

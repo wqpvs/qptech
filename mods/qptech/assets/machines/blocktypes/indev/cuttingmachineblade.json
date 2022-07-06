@@ -1,28 +1,12 @@
 {
 	"__comment": "Loads a slope block from an .obj model",
-	code: "objtest",
-	entityClass: "Generic",
+	code: "cuttingmachineblade",
 	enabled: true,
-	behaviors: [{name: "HorizontalOrientable"}],
-	"entityBehaviors": [
-    {
-      "name": "BEBProceduralAnimator"
-    }
-  ],
-	
-	variantgroups: [
-		{ code:"side", loadFromProperties: "abstract/horizontalorientation" }
-	],	
 	creativeinventory: { "qptech": ["*-north"] },
 	shape: {
 		format: "obj", 
-		base: "block/cuttingmachine", 
-		rotateYByType: {
-			"*-north": 0,
-			"*-east": 270,
-			"*-south": 180,
-			"*-west": 90
-		}
+		base: "block/cuttingmachineblade", 
+	
 	},
 	textures: {
 		obj: { base: "block/metal/bluepaintedwornsteelplate" }

@@ -13,6 +13,7 @@ using qptech.src.pipes;
 using qptech.src.networks;
 using qptech.src.itemtransport;
 using qptech.src.Electricity;
+using qptech.src.procanim;
 using Vintagestory.API.Util;
 using Vintagestory.API.Datastructures;
 using ProtoBuf;
@@ -212,6 +213,8 @@ namespace qptech.src
             api.RegisterBlockClass("BlockDummy", typeof(BlockDummy));
             api.RegisterBlockEntityClass("BEEMixer", typeof(BEEMixer));
             api.RegisterBlockEntityClass("BECoalPileStoker", typeof(BECoalPileStoker));
+            api.RegisterBlockEntityBehaviorClass("BEBProceduralAnimator", typeof(BEBProceduralAnimator));
+            
             //api.RegisterBlockClass("BlockElectricMotor", typeof(BlockElectricMotor));
             //api.RegisterBlockEntityClass("BEEMotor", typeof(BEEMotor));
         }
