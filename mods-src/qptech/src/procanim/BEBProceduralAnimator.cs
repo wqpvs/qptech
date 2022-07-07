@@ -72,7 +72,7 @@ namespace qptech.src.procanim
         }
         public void OnClientTick(float df)
         {
-           
+            SetProcAnimation("run");
             GenMesh();
             blockEntity.MarkDirty(true);
         }
@@ -96,16 +96,30 @@ namespace qptech.src.procanim
             ModelTransform nowtransform = new ModelTransform();
             ModelTransform s = pani.frames[currentanimationkey].transformstart;
             ModelTransform e = pani.frames[currentanimationkey].transformend;
-            if (s == null || e == null) { return; }
-            float anipct = (float)currentanimationframe / (float)pani.frames[currentanimationkey].framelength;
-            if (s.Origin != null)
+            if (s != null && e != null)
             {
-                nowtransform.Origin = s.Origin;
+                
+                float anipct = (float)currentanimationframe / (float)pani.frames[currentanimationkey].framelength;
+                if (s.Origin != null)
+                {
+                    nowtransform.Origin = s.Origin;
+                }
+                if (s.Rotation != null && e.Rotation != null)
+                {
+                    nowtransform.Rotation = LerpVec3f(s.Rotation, e.Rotation, anipct);
+                    meshdata.Rotate(s.Origin, nowtransform.Rotation.X * GameMath.DEG2RAD, nowtransform.Rotation.Y * GameMath.DEG2RAD, nowtransform.Rotation.Z * GameMath.DEG2RAD);
+                }
             }
-            if (s.Rotation != null && e.Rotation != null)
+            //rotate block in cardinal directions if necessary
+            if (blockEntity.Block.HasBlockBehavior<BlockBehaviorHorizontalOrientable>())
             {
-                nowtransform.Rotation = LerpVec3f(s.Rotation, e.Rotation, anipct);
-                meshdata.Rotate(s.Origin, nowtransform.Rotation.X * GameMath.DEG2RAD, nowtransform.Rotation.Y * GameMath.DEG2RAD, nowtransform.Rotation.Z * GameMath.DEG2RAD);
+                string direction = blockEntity.Block.LastCodePart();
+                float yrot = 0;
+                if (direction == "east") { yrot = 270; }
+                else if (direction == "south") { yrot = 180; }
+                else if (direction== "west"){ yrot = 90; }
+                yrot *= GameMath.DEG2RAD;
+                meshdata.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, yrot, 0);
             }
             //update animation frame
             currentanimationframe++;
