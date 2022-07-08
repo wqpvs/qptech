@@ -1,4 +1,6 @@
-﻿1.10.2
+﻿1.10.3
+
+1.10.2
 - Be sure to check out the qptech wiki! Http://qptech.wiki
 - added iron machinery block, can be used instead of bronze for:
    - clayformer
