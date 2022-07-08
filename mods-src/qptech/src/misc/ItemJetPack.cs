@@ -39,7 +39,7 @@ namespace qptech.src.misc
                 
             Vec3d vecthrust = Vec3d.Zero;
             bool hovermode = false;
-            if (byEntity.Pos.Motion.Y < maxSpeed && byEntity.HeadPitch<-0.05f)
+            if (byEntity.Pos.Motion.Y < maxSpeed )
             {
                 byEntity.Pos.Motion.Y = thrust*throttlePercent;
             }
