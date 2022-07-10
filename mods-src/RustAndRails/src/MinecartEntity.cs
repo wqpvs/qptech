@@ -28,12 +28,54 @@ namespace RustAndRails.src
       "dropitem": "rustandrails:creature-minecart"  - This is the item that will drop when the cart is broken, creature-minecart is an item that spawns a minecart
     */
 
-    /// </summary>
-    class MinecartEntity : Entity
+    
+
+
+    public class MinecartEntity : Entity,IMountableSupplier
     {
-        
+
         //TODO: Collision checking needs fixing - make sure to use offset somehow
-        
+        public MinecartEntity()
+        {
+            seats = new List<EntityMinecartSeat>();
+            seats.Add(new EntityMinecartSeat(this, 0, 0, 0));
+        }
+        public bool IsMountedBy(Entity entity)
+        {
+            if (seats == null || seats.Count == 0) { return false; }
+            foreach (EntityMinecartSeat s in seats)
+            {
+                if (s.Passenger == entity) { return true; }
+            }
+            return false;
+        }
+        public Vec3f GetMountOffset(Entity entity)
+        {
+            EntityMinecartSeat seat = null;
+            foreach (EntityMinecartSeat s in seats)
+            {
+                if (s.Passenger == entity) { seat = s;break; }
+            }
+            if (seat != null)
+            {
+                return new Vec3f(
+                    seat.MountOffsetDist * (float)-Math.Cos(Pos.Yaw),
+                    seat.MountOffsetY,
+                    seat.MountOffsetDist * (float)Math.Sin(Pos.Yaw)
+                );
+            }
+
+            return null;
+        }
+
+        public int seatcount = 1;
+        List<EntityMinecartSeat> seats;
+        public EntityMinecartSeat GetSeat(int seat)
+        {
+            if (seats==null||seats.Count == 0) { return null; }
+            seat = Math.Min(seat, seats.Count);
+            return seats[seat];
+        }
         Vec3d pathstart;
         Vec3d pathend;
         double pathdir = 1;
@@ -227,9 +269,15 @@ namespace RustAndRails.src
             if (Api is ICoreServerAPI) {
                 if (mode == EnumInteractMode.Interact&&Inventory!=null)
                 {
+                    //shift+right click with no item stack to try and mount cart
+                    if (byEntity.Controls.Sneak)
+                    {
+                        PlayerClickMount(byEntity);
+                        return;
+                    }
+                    
                     //allow right click with item stack to load cart
                     
-
                     if (itemslot != null && !itemslot.Empty )
                     {
                         foreach (ItemSlot myslot in Inventory)
@@ -277,6 +325,19 @@ namespace RustAndRails.src
                     if (moving) { Stop(); }
                     else { Start(hitPosition); }
                 }
+            }
+        }
+
+        //code to mount player to seat if possible
+        public virtual void PlayerClickMount(Entity byEntity)
+        {
+            if (seatcount==0||seats==null) { return; }
+            IPlayer p = byEntity as IPlayer;
+            if (p == null) { return; }
+            foreach (EntityMinecartSeat s in seats)
+            {
+                if (s.Passenger != null && s.Passenger != byEntity) { return; }
+                if (p.Entity.TryMount(s)) { break; } //Successful mount
             }
         }
         public virtual void TryStartPath()
@@ -660,6 +721,10 @@ namespace RustAndRails.src
                 WatchedAttributes.SetDouble("pathstartY", pathstart.Y);
                 WatchedAttributes.SetDouble("pathstartZ", pathstart.Z);
             }
+            foreach (EntityMinecartSeat s in seats)
+            {
+                writer.Write(s.Passenger?.EntityId ?? (long)0);
+            }
             base.ToBytes(writer, forClient);
         }
         string holding="Empty" ;
@@ -686,6 +751,19 @@ namespace RustAndRails.src
             if (pathstart.Y == 0 || pathend.Y == 0)
             {
                 startpathset = false;
+
+            }
+            for (int c = 0; c < seatcount; c++)
+            {
+                try // need try since previous versions did not save this, so will
+                {   // read out of bounds when loading old entities
+                    seats[c].PassengerEntityIdForInit = reader.ReadInt64();
+                    
+                }
+                catch (Exception e)
+                {
+                    // ignore
+                }
 
             }
             /*
@@ -730,5 +808,130 @@ namespace RustAndRails.src
 
         
     }
+    
+    public class EntityMinecartSeat : IMountable
+    {
+        public static string NAME = "MinecartEntitySeat";
+
+        public readonly MinecartEntity Host;
+
+        
+
+        public readonly int Seat;
+
+        public readonly float MountOffsetY; // vertical player offset
+
+        public readonly float MountOffsetDist; // offset scalar along boat forward axis
+
+        public EntityControls controls = new EntityControls();
+
+        public EntityAgent Passenger = null;
+
+        internal long PassengerEntityIdForInit = 0;
+
+        public EntityMinecartSeat(MinecartEntity host, int seatnumber, float mountOffsetDist, float mountOffsetY)
+        {
+            controls.OnAction = this.onControls;
+            this.Host = host;
+            this.Seat = seatnumber;
+            this.MountOffsetY = mountOffsetY;
+            this.MountOffsetDist = mountOffsetDist;
+        }
+
+        public static IMountable GetMountable(IWorldAccessor world, TreeAttribute tree)
+        {
+            Entity entityHost = world.GetEntityById(tree.GetLong("hostId"));
+            if (entityHost != null && entityHost is MinecartEntity)
+            {
+                int seat = tree.GetInt("seat");
+                return (entityHost as MinecartEntity).GetSeat(seat);
+            }
+            return null;
+        }
+
+        public IMountableSupplier MountSupplier => Host;
+
+        public Vec3d MountPosition
+        {
+            get
+            {
+                // equivalent to:
+                // return this.Host.SidedPos.XYZ.AheadCopy(MountOffsetDist, 0f, this.Host.SidedPos.Yaw).OffsetCopy(0.0, MountOffsetY, 0.0);
+                return this.Host.SidedPos.XYZ.AddCopy(
+                    MountOffsetDist * -Math.Cos(this.Host.SidedPos.Yaw),
+                    MountOffsetY,
+                    MountOffsetDist * Math.Sin(this.Host.SidedPos.Yaw)
+                );
+            }
+        }
+
+        public string SuggestedAnimation
+        {
+            get { return "sitflooridle"; }
+        }
+
+        public EntityControls Controls
+        {
+            get { return this.controls; }
+        }
+
+        public float? MountYaw
+        {
+            get { return this.Host.SidedPos.Yaw; }
+        }
+
+        public void DidUnmount(EntityAgent entityAgent)
+        {
+            // Console.WriteLine("[{0}] DidUnmount: {1}", this.Host.World.Side, entityAgent);
+            this.Passenger = null;
+        }
+
+        public void DidMount(EntityAgent entityAgent)
+        {
+            // Console.WriteLine("[{0}] DidMount: {1}", this.Host.World.Side, entityAgent);
+
+            if (this.Passenger != null && this.Passenger != entityAgent)
+            {
+                // Console.WriteLine("[{0}] DidMount: {1} INVALID, PASSENGER != NULL && PASSENGER != ENTITY", this.Host.World.Side, entityAgent);
+                this.Passenger.TryUnmount();
+                return;
+            }
+
+            this.Passenger = entityAgent;
+
+            // try stop certain common animations, does not work
+            entityAgent.StopAnimation("swim");
+            entityAgent.StopAnimation("swimidle");
+            entityAgent.StopAnimation("glide");
+        }
+
+        public void MountableToTreeAttributes(TreeAttribute tree)
+        {
+            tree.SetString("className", EntityMinecartSeat.NAME);
+            tree.SetLong("hostId", this.Host.EntityId);
+            tree.SetInt("seat", (int)this.Seat);
+        }
+
+        internal void onControls(EnumEntityAction action, bool on, ref EnumHandling handled)
+        {
+            // Console.WriteLine("[{0}] onControls", this.Host.World.Side);
+
+            // unmounting issue: when gently tapping sneak (shift) to unmount
+            // sometimes this does not send to server, so player unmounts on
+            // client but not server.
+            // so instead: unmount on client, send unmount packet to server
+            // to unmount the corresponding seat
+            if (this.Host.World.Side == EnumAppSide.Client)
+            {
+                if (action == EnumEntityAction.Sneak && on)
+                {
+                    this.Passenger?.TryUnmount();
+                    controls.StopAllMovement();
+                    //this.Host.XRowboatMod.ClientSendUnmountPacket(this.Host.EntityId, this.Seat);
+                }
+            }
+        }
+    }
+
 }
 
