@@ -28,63 +28,23 @@ namespace RustAndRails.src
       "dropitem": "rustandrails:creature-minecart"  - This is the item that will drop when the cart is broken, creature-minecart is an item that spawns a minecart
     */
 
-    
-
-
-    public class MinecartEntity : Entity,IMountableSupplier
+    /// </summary>
+    class MinecartEntity : Entity, IMountableSupplier, IMountable
     {
 
         //TODO: Collision checking needs fixing - make sure to use offset somehow
-        public MinecartEntity()
-        {
-            seats = new List<EntityMinecartSeat>();
-            seats.Add(new EntityMinecartSeat(this, 0, 0, 0));
-        }
-        public bool IsMountedBy(Entity entity)
-        {
-            if (seats == null || seats.Count == 0) { return false; }
-            foreach (EntityMinecartSeat s in seats)
-            {
-                if (s.Passenger == entity) { return true; }
-            }
-            return false;
-        }
-        public Vec3f GetMountOffset(Entity entity)
-        {
-            EntityMinecartSeat seat = null;
-            foreach (EntityMinecartSeat s in seats)
-            {
-                if (s.Passenger == entity) { seat = s;break; }
-            }
-            if (seat != null)
-            {
-                return new Vec3f(
-                    seat.MountOffsetDist * (float)-Math.Cos(Pos.Yaw),
-                    seat.MountOffsetY,
-                    seat.MountOffsetDist * (float)Math.Sin(Pos.Yaw)
-                );
-            }
-
-            return null;
-        }
-
-        public int seatcount = 1;
-        List<EntityMinecartSeat> seats;
-        public EntityMinecartSeat GetSeat(int seat)
-        {
-            if (seats==null||seats.Count == 0) { return null; }
-            seat = Math.Min(seat, seats.Count);
-            return seats[seat];
-        }
+        public string NAME => "MINECART";
         Vec3d pathstart;
         Vec3d pathend;
         double pathdir = 1;
         double pathprogress = 0;
-        public virtual double pathspeed {
-            get{
-                if (pathend.Y > pathstart.Y) { return 0.5*powerlevel*basespeed; }
-                else if (pathend.Y < pathstart.Y) { return 1.5*powerlevel*basespeed; }
-                return basespeed*powerlevel;
+        public virtual double pathspeed
+        {
+            get
+            {
+                if (pathend.Y > pathstart.Y) { return 0.5 * powerlevel * basespeed; }
+                else if (pathend.Y < pathstart.Y) { return 1.5 * powerlevel * basespeed; }
+                return basespeed * powerlevel;
             }
         }
         public virtual double powerlevel => 1;
@@ -95,8 +55,8 @@ namespace RustAndRails.src
         EntityPartitioning ep;
         BlockFacing heading = BlockFacing.NORTH;
         Vec3d pathoffset = new Vec3d(0.5, 0, 0.5);
-        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + pathoffset.X, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress)+pathoffset.Y, GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + pathoffset.Z);
-        
+        Vec3d pathpos => new Vec3d(GameMath.Lerp(pathstart.X, pathend.X, pathprogress) + pathoffset.X, GameMath.Lerp(pathstart.Y, pathend.Y, pathprogress) + pathoffset.Y, GameMath.Lerp(pathstart.Z, pathend.Z, pathprogress) + pathoffset.Z);
+
         string pathcodecontains = "rails";
         string dropitem = "rustandrails:creature-minecart";
         ICoreServerAPI sapi;
@@ -125,7 +85,7 @@ namespace RustAndRails.src
                 TryLoadInventory();
                 //TryStartPath();
                 ep = api.ModLoader.GetModSystem<EntityPartitioning>();
-                
+
             }
         }
         public override void OnEntitySpawn()
@@ -136,11 +96,11 @@ namespace RustAndRails.src
             if (Attributes != null)
             {
                 string test = Attributes.GetString("randomnonsense");
-               
+
             }
             if (WatchedAttributes.HasAttribute("guardedPlayerUid"))
             {
-                IPlayer myplayer =Api.World.PlayerByUid(WatchedAttributes.GetString("guardedPlayerUid"));
+                IPlayer myplayer = Api.World.PlayerByUid(WatchedAttributes.GetString("guardedPlayerUid"));
                 if (myplayer == null) { return; }
                 float yaw = myplayer.Entity.SidedPos.Yaw;
                 heading = BlockFacing.HorizontalFromAngle(yaw);
@@ -149,7 +109,7 @@ namespace RustAndRails.src
                 WatchedAttributes.MarkPathDirty("heading");
             }
         }
-        
+
         public virtual void Stop()
         {
             AnimManager.StopAnimation("walk");
@@ -163,11 +123,11 @@ namespace RustAndRails.src
         }
         public virtual void Start(Vec3d hitPostion)
         {
-            if (hitPostion.X == 0.5 && heading==BlockFacing.EAST) { heading = BlockFacing.WEST; }
-            else if (hitPostion.X==-0.5 && heading == BlockFacing.WEST) { heading = BlockFacing.EAST; }
-            else if (hitPostion.Z==0.5 && heading == BlockFacing.SOUTH) { heading = BlockFacing.NORTH; }
-            else if (hitPostion.Z==-0.5 && heading == BlockFacing.NORTH) { heading = BlockFacing.SOUTH; }
-            
+            if (hitPostion.X == 0.5 && heading == BlockFacing.EAST) { heading = BlockFacing.WEST; }
+            else if (hitPostion.X == -0.5 && heading == BlockFacing.WEST) { heading = BlockFacing.EAST; }
+            else if (hitPostion.Z == 0.5 && heading == BlockFacing.SOUTH) { heading = BlockFacing.NORTH; }
+            else if (hitPostion.Z == -0.5 && heading == BlockFacing.NORTH) { heading = BlockFacing.SOUTH; }
+
             Start();
         }
 
@@ -178,18 +138,18 @@ namespace RustAndRails.src
 
         void TryLoadInventory()
         {
-            if (sapi == null) { return; }   
+            if (sapi == null) { return; }
 
             try
             {
 
                 //List<byte> datalist = sapi.WorldManager.SaveGame.GetData<List<byte>>(GetEntityStorageKey());
-                
-                byte[]data = WatchedAttributes.GetBytes(inventorykey);
+
+                byte[] data = WatchedAttributes.GetBytes(inventorykey);
                 ITreeAttribute loadtree = null;
                 if (data != null)
                 {
-                    
+
                     loadtree = TreeAttribute.CreateFromBytes(data);
                 }
 
@@ -215,8 +175,8 @@ namespace RustAndRails.src
             {
                 int oops = 1;
             }
-            
-            
+
+
         }
 
         void TrySaveInventory()
@@ -265,52 +225,45 @@ namespace RustAndRails.src
             base.OnInteract(byEntity, itemslot, hitPosition, mode);
             IPlayer byPlayer = byEntity as IPlayer;
             if (Api.World.ElapsedMilliseconds + 200 < msinteract) { return; }
-            msinteract = Api.World.ElapsedMilliseconds+200;
-            if (Api is ICoreClientAPI)
+            msinteract = Api.World.ElapsedMilliseconds + 200;
+            if (mode == EnumInteractMode.Interact && byEntity.Controls.Sneak)
             {
-                if (mode == EnumInteractMode.Interact && byEntity.Controls.Sneak)
-                {
-                    PlayerClickMount();
-                }
+                if ((this as IMountableSupplier).IsMountedBy(byEntity as Entity)) { return; }
+                byEntity.TryMount(this);
+                return;
             }
-            else if (Api is ICoreServerAPI) {
-                if (mode == EnumInteractMode.Interact&&Inventory!=null)
+            if (Api is ICoreServerAPI)
+            {
+                if (mode == EnumInteractMode.Interact && Inventory != null)
                 {
-                    //shift+right click with no item stack to try and mount cart
-                    if (byEntity.Controls.Sneak)
-                    {
-                        
-                        
-                        return;
-                    }
-                    
                     //allow right click with item stack to load cart
-                    
-                    if (itemslot != null && !itemslot.Empty )
+
+
+                    if (itemslot != null && !itemslot.Empty)
                     {
                         foreach (ItemSlot myslot in Inventory)
                         {
                             if (myslot.CanHold(itemslot))
                             {
-                                itemslot.TryPutInto(Api.World,myslot,itemslot.StackSize);
+                                itemslot.TryPutInto(Api.World, myslot, itemslot.StackSize);
                                 itemslot.MarkDirty();
                                 myslot.MarkDirty();
                                 TrySaveInventory();
-                                
+
                                 holding = myslot.Itemstack.Collectible.GetHeldItemName(myslot.Itemstack);
                                 WatchedAttributes.MarkPathDirty("holding");
                                 return;
                             }
                         }
                     }
-                    
+
                     else if (itemslot != null && itemslot.Empty)
                     {
                         foreach (ItemSlot myslot in Inventory)
                         {
                             if (itemslot.CanHold(myslot))
                             {
-                                myslot.TryPutInto(Api.World, itemslot,myslot.StackSize);
+                                myslot.TryPutInto(Api.World, itemslot, myslot.StackSize);
                                 itemslot.MarkDirty();
                                 myslot.MarkDirty();
                                 if (myslot.Empty)
@@ -335,46 +288,6 @@ namespace RustAndRails.src
                 }
             }
         }
-        public override void OnReceivedClientPacket(IServerPlayer player, int packetid, byte[] data)
-        {
-            base.OnReceivedClientPacket(player, packetid, data);
-            if (packetid == 99990000)
-            {
-                PlayerClickMount(player);
-            }
-        }
-        //code to mount player to seat if possible
-        public virtual void PlayerClickMount()
-        {
-            if (Api is ICoreClientAPI)
-            {
-                if (seatcount == 0 || seats == null) { return; }
-                ICoreClientAPI capi = Api as ICoreClientAPI;
-                IPlayer player = capi.World.Player;
-                capi.Network.SendEntityPacket(this.EntityId, 99990000, null);
-            }
-           
-        }
-
-        public virtual void PlayerClickMount(IServerPlayer player)
-        {
-            if (Api is ICoreClientAPI) { return; }
-            //TODO Send server packet that we tried to mount!
-            EntityMinecartSeat mountedseat = null;
-            foreach (EntityMinecartSeat s in seats)
-            {
-                if (s.Passenger != null && s.Passenger != player.Entity) { return; }
-                if (player.Entity.TryMount(s)) {
-                    mountedseat = s;
-                    break;
-                } //Successful mount
-            }
-            if (mountedseat != null)
-            {
-                bool yay = true;
-            }
-        }
-
         public virtual void TryStartPath()
         {
             Vec3d begin = ServerPos.XYZ;
@@ -399,13 +312,14 @@ namespace RustAndRails.src
 
         void Move()
         {
-            if (!moving||pathend==null) { return; }
+            if (!moving || pathend == null) { return; }
             if (CheckOtherCart()) { return; }
             pathprogress += pathdir * pathspeed;
-           
-            if (pathprogress >=1) {
-                pathprogress = 1;pathstart = pathend;
-                
+
+            if (pathprogress >= 1)
+            {
+                pathprogress = 1; pathstart = pathend;
+
                 FindPath();
             }
             ServerPos.SetPos(pathpos);
@@ -416,12 +330,12 @@ namespace RustAndRails.src
         // should pause if there's a cart not heading towards us, or reverse direction if it is heading our way
         protected virtual bool CheckOtherCart()
         {
-            Entity checkentity = ep.GetNearestEntity(pathend+pathoffset, 0.5, (e) => {
+            Entity checkentity = ep.GetNearestEntity(pathend + pathoffset, 0.5, (e) => {
                 if (e.EntityId == EntityId) { return false; }
                 if (!(e is MinecartEntity)) { return false; }
                 return true;
             });
-            
+
             if (checkentity == null) { return false; }
             MinecartEntity other = checkentity as MinecartEntity;
             //if (other.heading == heading.Opposite) { heading = heading.Opposite; FindPath(); }
@@ -431,18 +345,18 @@ namespace RustAndRails.src
         public virtual int SignalStrength()
         {
             int emptystrength = 5;
-            int maxstrength =11;
+            int maxstrength = 11;
             if (Inventory == null || inventory.Empty) { return emptystrength; }
             int cap = 0; int used = 0;
             foreach (ItemSlot slot in Inventory)
             {
-                if (slot.Empty) { cap += slot.MaxSlotStackSize;continue; }
+                if (slot.Empty) { cap += slot.MaxSlotStackSize; continue; }
                 used += slot.Itemstack.StackSize;
                 cap += Math.Min(slot.MaxSlotStackSize, slot.Itemstack.Collectible.MaxStackSize);
             }
             if (cap == 0) { return emptystrength; }
-            
-            return (int)(((float)used/(float)(cap))*(float)maxstrength)+emptystrength ;
+
+            return (int)(((float)used / (float)(cap)) * (float)maxstrength) + emptystrength;
         }
         protected virtual void FindPath()
         {
@@ -517,7 +431,7 @@ namespace RustAndRails.src
                 bool oops = true;
             }
         }
-        public  bool isRail(Block testblock)
+        public bool isRail(Block testblock)
         {
             if (testblock.FirstCodePart().Contains(pathcodecontains)) { return true; }
             return false;
@@ -528,8 +442,8 @@ namespace RustAndRails.src
             if (isRail(testblock)) { return true; }
             return false;
         }
-        public virtual bool CheckExit(Block startblock,BlockFacing orgheading, BlockPos orgpos, out BlockFacing newheading, out BlockPos newgoal)
-        {     
+        public virtual bool CheckExit(Block startblock, BlockFacing orgheading, BlockPos orgpos, out BlockFacing newheading, out BlockPos newgoal)
+        {
             newheading = orgheading;
             newgoal = orgpos;
             string fcp = startblock.FirstCodePart();
@@ -538,20 +452,20 @@ namespace RustAndRails.src
             if (!isRail(startblock)) { return false; }
             if (lcp.Contains("flat_ns"))
             {
-                TryAdd(orgpos,BlockFacing.NORTH, ref exits);
-                TryAdd(orgpos,BlockFacing.SOUTH, ref exits);
-                
+                TryAdd(orgpos, BlockFacing.NORTH, ref exits);
+                TryAdd(orgpos, BlockFacing.SOUTH, ref exits);
+
             }
             else if (lcp.Contains("flat_we"))
             {
                 TryAdd(orgpos, BlockFacing.EAST, ref exits);
                 TryAdd(orgpos, BlockFacing.WEST, ref exits);
-                
+
             }
             else if (lcp.Contains("curved_es"))
             {
                 TryAdd(orgpos, BlockFacing.EAST, ref exits);
-                TryAdd(orgpos, BlockFacing.SOUTH, ref exits);  
+                TryAdd(orgpos, BlockFacing.SOUTH, ref exits);
             }
             else if (lcp.Contains("curved_sw"))
             {
@@ -646,18 +560,18 @@ namespace RustAndRails.src
             if (railstate == "HOLD") { return false; }
             return true;
         }
-/// <summary>
-/// Handle Inventory - check for various spots to load & unload
-/// </summary>
-/// <returns>true=ok to move, false=wait</returns>
+        /// <summary>
+        /// Handle Inventory - check for various spots to load & unload
+        /// </summary>
+        /// <returns>true=ok to move, false=wait</returns>
         protected virtual bool HandleInventory()
         {
-            bool shouldmove= HandleUnloading()&&HandleLoading();
+            bool shouldmove = HandleUnloading() && HandleLoading();
             if (!shouldmove) { TrySaveInventory(); }
             return shouldmove;
         }
-        
-        
+
+
         protected virtual bool HandleUnloading()
         {
             if (Inventory.Empty) { return true; }
@@ -670,20 +584,21 @@ namespace RustAndRails.src
                 return true;
             }
             BlockEntityGenericTypedContainer outcont = b as BlockEntityGenericTypedContainer;
-            if (outcont != null&&outcont.Inventory!=null)
+            if (outcont != null && outcont.Inventory != null)
             {
-                foreach (ItemSlot myslot in Inventory) {
+                foreach (ItemSlot myslot in Inventory)
+                {
                     if (myslot == null || myslot.Empty) { continue; }
                     foreach (ItemSlot slot in outcont.Inventory)
                     {
-                        if (slot == null ) { continue; }
+                        if (slot == null) { continue; }
                         if (!slot.CanHold(myslot)) { continue; }
-                        
-                        int moved =myslot.TryPutInto(Api.World, slot);
+
+                        int moved = myslot.TryPutInto(Api.World, slot);
                         myslot.MarkDirty();
                         slot.MarkDirty();
-                        if (moved > 0) {  return false; }
-                        
+                        if (moved > 0) { return false; }
+
                     }
                 }
             }
@@ -693,7 +608,7 @@ namespace RustAndRails.src
         public virtual bool HandleLoading()
         {
             BlockPos p = ServerPos.AsBlockPos;
-            p.Y +=2;
+            p.Y += 2;
             BlockEntity b = Api.World.BlockAccessor.GetBlockEntity(p);
             if (b == null)
             {
@@ -711,7 +626,7 @@ namespace RustAndRails.src
                     int moved = srcslot.TryPutInto(Api.World, destslot);
                     srcslot.MarkDirty();
                     destslot.MarkDirty();
-                    if (moved > 0) {  return false; }
+                    if (moved > 0) { return false; }
                 }
             }
             return true;
@@ -720,6 +635,19 @@ namespace RustAndRails.src
 
         public virtual string inventorykey => "cartinventory";
 
+        IMountableSupplier IMountable.MountSupplier => this as IMountableSupplier;
+
+        Vec3d IMountable.MountPosition => new Vec3d(Pos.X,Pos.Y,Pos.Z);
+
+        float? IMountable.MountYaw => Pos.Yaw;
+
+        string IMountable.SuggestedAnimation 
+        {
+            get { return "sitflooridle"; }
+        }
+
+        EntityControls controls = new EntityControls();
+        EntityControls IMountable.Controls => controls;
 
         public virtual void MarkMovementDirty()
         {
@@ -756,10 +684,9 @@ namespace RustAndRails.src
                 WatchedAttributes.SetDouble("pathstartY", pathstart.Y);
                 WatchedAttributes.SetDouble("pathstartZ", pathstart.Z);
             }
-            
             base.ToBytes(writer, forClient);
         }
-        string holding="Empty" ;
+        string holding = "Empty";
         public override void FromBytes(BinaryReader reader, bool fromServer)
         {
             base.FromBytes(reader, fromServer);
@@ -771,9 +698,9 @@ namespace RustAndRails.src
             pathdir = WatchedAttributes.GetDouble("pathdir", 1);
             pathprogress = WatchedAttributes.GetDouble("pathprogress", 0);
             pathend = new Vec3d(
-                WatchedAttributes.GetDouble("pathendX",0),
-                WatchedAttributes.GetDouble("pathendY",0),
-                WatchedAttributes.GetDouble("pathendZ",0)
+                WatchedAttributes.GetDouble("pathendX", 0),
+                WatchedAttributes.GetDouble("pathendY", 0),
+                WatchedAttributes.GetDouble("pathendZ", 0)
                 );
             pathstart = new Vec3d(
                 WatchedAttributes.GetDouble("pathstartX", 0),
@@ -785,7 +712,6 @@ namespace RustAndRails.src
                 startpathset = false;
 
             }
-            
             /*
              WatchedAttributes.SetDouble("pathdir", pathdir);
                 WatchedAttributes.SetDouble("pathprogress", pathprogress);
@@ -801,12 +727,13 @@ namespace RustAndRails.src
         {
             return "Minecart (" + WatchedAttributes.GetString("holding") + ")";
         }
-        
+
         public override void OnEntityDespawn(EntityDespawnReason despawn)
         {
             base.OnEntityDespawn(despawn);
-            if (sapi != null) {
-                if (despawn.reason == EnumDespawnReason.Death || despawn.reason == EnumDespawnReason.Removed||despawn.reason==EnumDespawnReason.PickedUp)
+            if (sapi != null)
+            {
+                if (despawn.reason == EnumDespawnReason.Death || despawn.reason == EnumDespawnReason.Removed || despawn.reason == EnumDespawnReason.PickedUp)
                 {
                     Inventory.DropAll(ServerPos.XYZ);
                     DummyInventory di = new DummyInventory(Api, 1);
@@ -816,7 +743,7 @@ namespace RustAndRails.src
                 TrySaveInventory();
             }
         }
-        
+
         public override void OnEntityLoaded()
         {
             base.OnEntityLoaded();
@@ -825,133 +752,34 @@ namespace RustAndRails.src
                 TryLoadInventory();
             }
         }
+        Entity passenger = null;
+        bool IMountableSupplier.IsMountedBy(Entity entity)
+        {
+            return true;
+        }
 
-        
+        Vec3f IMountableSupplier.GetMountOffset(Entity entity)
+        {
+            return new Vec3f(0, 0.5f, 0);
+        }
+
+        void IMountable.MountableToTreeAttributes(TreeAttribute tree)
+        {
+            tree.SetString("className", this.NAME);
+            tree.SetLong("hostId", this.EntityId);
+            
+        }
+
+        void IMountable.DidUnmount(EntityAgent entityAgent)
+        {
+            passenger = null;
+        }
+
+        void IMountable.DidMount(EntityAgent entityAgent)
+        {
+            passenger = entityAgent;
+        }
     }
     
-    public class EntityMinecartSeat : IMountable
-    {
-        public static string NAME = "MinecartEntitySeat";
-
-        public readonly MinecartEntity Host;
-
-        
-
-        public readonly int Seat;
-
-        public readonly float MountOffsetY; // vertical player offset
-
-        public readonly float MountOffsetDist; // offset scalar along boat forward axis
-
-        public EntityControls controls = new EntityControls();
-
-        public EntityAgent Passenger = null;
-
-        internal long PassengerEntityIdForInit = 0;
-
-        public EntityMinecartSeat(MinecartEntity host, int seatnumber, float mountOffsetDist, float mountOffsetY)
-        {
-            controls.OnAction = this.onControls;
-            this.Host = host;
-            this.Seat = seatnumber;
-            this.MountOffsetY = mountOffsetY;
-            this.MountOffsetDist = mountOffsetDist;
-        }
-
-        public static IMountable GetMountable(IWorldAccessor world, TreeAttribute tree)
-        {
-            Entity entityHost = world.GetEntityById(tree.GetLong("hostId"));
-            if (entityHost != null && entityHost is MinecartEntity)
-            {
-                int seat = tree.GetInt("seat");
-                return (entityHost as MinecartEntity).GetSeat(seat);
-            }
-            return null;
-        }
-
-        public IMountableSupplier MountSupplier => Host;
-
-        public Vec3d MountPosition
-        {
-            get
-            {
-                // equivalent to:
-                // return this.Host.SidedPos.XYZ.AheadCopy(MountOffsetDist, 0f, this.Host.SidedPos.Yaw).OffsetCopy(0.0, MountOffsetY, 0.0);
-                return this.Host.SidedPos.XYZ.AddCopy(
-                    MountOffsetDist * -Math.Cos(this.Host.SidedPos.Yaw),
-                    MountOffsetY,
-                    MountOffsetDist * Math.Sin(this.Host.SidedPos.Yaw)
-                );
-            }
-        }
-
-        public string SuggestedAnimation
-        {
-            get { return "sitflooridle"; }
-        }
-
-        public EntityControls Controls
-        {
-            get { return this.controls; }
-        }
-
-        public float? MountYaw
-        {
-            get { return this.Host.SidedPos.Yaw; }
-        }
-
-        public void DidUnmount(EntityAgent entityAgent)
-        {
-            // Console.WriteLine("[{0}] DidUnmount: {1}", this.Host.World.Side, entityAgent);
-            this.Passenger = null;
-        }
-
-        public void DidMount(EntityAgent entityAgent)
-        {
-            // Console.WriteLine("[{0}] DidMount: {1}", this.Host.World.Side, entityAgent);
-
-            if (this.Passenger != null && this.Passenger != entityAgent)
-            {
-                // Console.WriteLine("[{0}] DidMount: {1} INVALID, PASSENGER != NULL && PASSENGER != ENTITY", this.Host.World.Side, entityAgent);
-                this.Passenger.TryUnmount();
-                return;
-            }
-
-            this.Passenger = entityAgent;
-
-            // try stop certain common animations, does not work
-            entityAgent.StopAnimation("swim");
-            entityAgent.StopAnimation("swimidle");
-            entityAgent.StopAnimation("glide");
-        }
-
-        public void MountableToTreeAttributes(TreeAttribute tree)
-        {
-            tree.SetString("className", EntityMinecartSeat.NAME);
-            tree.SetLong("hostId", this.Host.EntityId);
-            tree.SetInt("seat", (int)this.Seat);
-        }
-
-        internal void onControls(EnumEntityAction action, bool on, ref EnumHandling handled)
-        {
-            // Console.WriteLine("[{0}] onControls", this.Host.World.Side);
-
-            // unmounting issue: when gently tapping sneak (shift) to unmount
-            // sometimes this does not send to server, so player unmounts on
-            // client but not server.
-            // so instead: unmount on client, send unmount packet to server
-            // to unmount the corresponding seat
-            if (this.Host.World.Side == EnumAppSide.Client)
-            {
-                if (action == EnumEntityAction.Sneak && on)
-                {
-                    this.Passenger?.TryUnmount();
-                    controls.StopAllMovement();
-                    //this.Host.XRowboatMod.ClientSendUnmountPacket(this.Host.EntityId, this.Seat);
-                }
-            }
-        }
-    }
-
 }
 
