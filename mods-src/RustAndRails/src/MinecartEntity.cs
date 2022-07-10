@@ -29,11 +29,11 @@ namespace RustAndRails.src
     */
 
     /// </summary>
-    class MinecartEntity : Entity, IMountableSupplier, IMountable
+    class MinecartEntity : Entity
     {
 
         //TODO: Collision checking needs fixing - make sure to use offset somehow
-        public string NAME => "MINECART";
+
         Vec3d pathstart;
         Vec3d pathend;
         double pathdir = 1;
@@ -72,7 +72,6 @@ namespace RustAndRails.src
         public override void Initialize(EntityProperties properties, ICoreAPI api, long InChunkIndex3d)
         {
             base.Initialize(properties, api, InChunkIndex3d);
-            
             if (properties.Attributes != null)
             {
                 pathcodecontains = properties.Attributes["pathcodecontains"].AsString(pathcodecontains);
@@ -227,12 +226,6 @@ namespace RustAndRails.src
             IPlayer byPlayer = byEntity as IPlayer;
             if (Api.World.ElapsedMilliseconds + 200 < msinteract) { return; }
             msinteract = Api.World.ElapsedMilliseconds + 200;
-            if (mode == EnumInteractMode.Interact && byEntity.Controls.Sneak)
-            {
-                if ((this as IMountableSupplier).IsMountedBy(byEntity as Entity)) { return; }
-                byEntity.TryMount(this as IMountable);
-                return;
-            }
             if (Api is ICoreServerAPI)
             {
                 if (mode == EnumInteractMode.Interact && Inventory != null)
@@ -636,19 +629,6 @@ namespace RustAndRails.src
 
         public virtual string inventorykey => "cartinventory";
 
-        IMountableSupplier IMountable.MountSupplier => this as IMountableSupplier;
-
-        Vec3d IMountable.MountPosition => new Vec3d(Pos.X,Pos.Y,Pos.Z);
-
-        float? IMountable.MountYaw => Pos.Yaw;
-
-        string IMountable.SuggestedAnimation 
-        {
-            get { return "sitflooridle"; }
-        }
-
-        EntityControls controls = new EntityControls();
-        EntityControls IMountable.Controls => controls;
 
         public virtual void MarkMovementDirty()
         {
@@ -669,8 +649,7 @@ namespace RustAndRails.src
         public override void ToBytes(BinaryWriter writer, bool forClient)
         {
 
-            if (passenger == null) { WatchedAttributes.SetLong("passenger", -1); }
-            else { WatchedAttributes.SetLong("passenger", passenger.EntityId); }
+
             if (!forClient)
             {
                 WatchedAttributes.SetBool("moving", moving);
@@ -714,12 +693,6 @@ namespace RustAndRails.src
                 startpathset = false;
 
             }
-            long passengerid = WatchedAttributes.GetLong("passenger", -1);
-            if (passengerid == -1) { passenger = null; }
-            else
-            {
-                passenger = Api.World.GetEntityById(passengerid);
-            }
             /*
              WatchedAttributes.SetDouble("pathdir", pathdir);
                 WatchedAttributes.SetDouble("pathprogress", pathprogress);
@@ -760,35 +733,8 @@ namespace RustAndRails.src
                 TryLoadInventory();
             }
         }
-        Entity passenger = null;
-        bool IMountableSupplier.IsMountedBy(Entity entity)
-        {
-            if (passenger == null) { return false; }
-            if (passenger.EntityId == entity.EntityId) { return true; }
-            return false;
-        }
 
-        Vec3f IMountableSupplier.GetMountOffset(Entity entity)
-        {
-            return new Vec3f(0, 0.5f, 0);
-        }
 
-        void IMountable.MountableToTreeAttributes(TreeAttribute tree)
-        {
-            
-            tree.SetLong("entityID", this.EntityId);
-        }
-
-        void IMountable.DidUnmount(EntityAgent entityAgent)
-        {
-            passenger = null;
-        }
-
-        void IMountable.DidMount(EntityAgent entityAgent)
-        {
-            passenger = entityAgent;
-        }
     }
-    
 }
 
