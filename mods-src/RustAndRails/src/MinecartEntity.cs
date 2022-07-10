@@ -72,6 +72,7 @@ namespace RustAndRails.src
         public override void Initialize(EntityProperties properties, ICoreAPI api, long InChunkIndex3d)
         {
             base.Initialize(properties, api, InChunkIndex3d);
+            
             if (properties.Attributes != null)
             {
                 pathcodecontains = properties.Attributes["pathcodecontains"].AsString(pathcodecontains);
@@ -229,7 +230,7 @@ namespace RustAndRails.src
             if (mode == EnumInteractMode.Interact && byEntity.Controls.Sneak)
             {
                 if ((this as IMountableSupplier).IsMountedBy(byEntity as Entity)) { return; }
-                byEntity.TryMount(this);
+                byEntity.TryMount(this as IMountable);
                 return;
             }
             if (Api is ICoreServerAPI)
@@ -668,7 +669,8 @@ namespace RustAndRails.src
         public override void ToBytes(BinaryWriter writer, bool forClient)
         {
 
-
+            if (passenger == null) { WatchedAttributes.SetLong("passenger", -1); }
+            else { WatchedAttributes.SetLong("passenger", passenger.EntityId); }
             if (!forClient)
             {
                 WatchedAttributes.SetBool("moving", moving);
@@ -711,6 +713,12 @@ namespace RustAndRails.src
             {
                 startpathset = false;
 
+            }
+            long passengerid = WatchedAttributes.GetLong("passenger", -1);
+            if (passengerid == -1) { passenger = null; }
+            else
+            {
+                passenger = Api.World.GetEntityById(passengerid);
             }
             /*
              WatchedAttributes.SetDouble("pathdir", pathdir);
@@ -755,7 +763,9 @@ namespace RustAndRails.src
         Entity passenger = null;
         bool IMountableSupplier.IsMountedBy(Entity entity)
         {
-            return true;
+            if (passenger == null) { return false; }
+            if (passenger.EntityId == entity.EntityId) { return true; }
+            return false;
         }
 
         Vec3f IMountableSupplier.GetMountOffset(Entity entity)
@@ -765,9 +775,8 @@ namespace RustAndRails.src
 
         void IMountable.MountableToTreeAttributes(TreeAttribute tree)
         {
-            tree.SetString("className", this.NAME);
-            tree.SetLong("hostId", this.EntityId);
             
+            tree.SetLong("entityID", this.EntityId);
         }
 
         void IMountable.DidUnmount(EntityAgent entityAgent)
