@@ -266,13 +266,21 @@ namespace RustAndRails.src
             IPlayer byPlayer = byEntity as IPlayer;
             if (Api.World.ElapsedMilliseconds + 200 < msinteract) { return; }
             msinteract = Api.World.ElapsedMilliseconds+200;
-            if (Api is ICoreServerAPI) {
+            if (Api is ICoreClientAPI)
+            {
+                if (mode == EnumInteractMode.Interact && byEntity.Controls.Sneak)
+                {
+                    PlayerClickMount();
+                }
+            }
+            else if (Api is ICoreServerAPI) {
                 if (mode == EnumInteractMode.Interact&&Inventory!=null)
                 {
                     //shift+right click with no item stack to try and mount cart
                     if (byEntity.Controls.Sneak)
                     {
-                        PlayerClickMount(byEntity);
+                        
+                        
                         return;
                     }
                     
@@ -327,19 +335,46 @@ namespace RustAndRails.src
                 }
             }
         }
-
-        //code to mount player to seat if possible
-        public virtual void PlayerClickMount(Entity byEntity)
+        public override void OnReceivedClientPacket(IServerPlayer player, int packetid, byte[] data)
         {
-            if (seatcount==0||seats==null) { return; }
-            IPlayer p = byEntity as IPlayer;
-            if (p == null) { return; }
-            foreach (EntityMinecartSeat s in seats)
+            base.OnReceivedClientPacket(player, packetid, data);
+            if (packetid == 99990000)
             {
-                if (s.Passenger != null && s.Passenger != byEntity) { return; }
-                if (p.Entity.TryMount(s)) { break; } //Successful mount
+                PlayerClickMount(player);
             }
         }
+        //code to mount player to seat if possible
+        public virtual void PlayerClickMount()
+        {
+            if (Api is ICoreClientAPI)
+            {
+                if (seatcount == 0 || seats == null) { return; }
+                ICoreClientAPI capi = Api as ICoreClientAPI;
+                IPlayer player = capi.World.Player;
+                capi.Network.SendEntityPacket(this.EntityId, 99990000, null);
+            }
+           
+        }
+
+        public virtual void PlayerClickMount(IServerPlayer player)
+        {
+            if (Api is ICoreClientAPI) { return; }
+            //TODO Send server packet that we tried to mount!
+            EntityMinecartSeat mountedseat = null;
+            foreach (EntityMinecartSeat s in seats)
+            {
+                if (s.Passenger != null && s.Passenger != player.Entity) { return; }
+                if (player.Entity.TryMount(s)) {
+                    mountedseat = s;
+                    break;
+                } //Successful mount
+            }
+            if (mountedseat != null)
+            {
+                bool yay = true;
+            }
+        }
+
         public virtual void TryStartPath()
         {
             Vec3d begin = ServerPos.XYZ;
@@ -721,10 +756,7 @@ namespace RustAndRails.src
                 WatchedAttributes.SetDouble("pathstartY", pathstart.Y);
                 WatchedAttributes.SetDouble("pathstartZ", pathstart.Z);
             }
-            foreach (EntityMinecartSeat s in seats)
-            {
-                writer.Write(s.Passenger?.EntityId ?? (long)0);
-            }
+            
             base.ToBytes(writer, forClient);
         }
         string holding="Empty" ;
@@ -753,19 +785,7 @@ namespace RustAndRails.src
                 startpathset = false;
 
             }
-            for (int c = 0; c < seatcount; c++)
-            {
-                try // need try since previous versions did not save this, so will
-                {   // read out of bounds when loading old entities
-                    seats[c].PassengerEntityIdForInit = reader.ReadInt64();
-                    
-                }
-                catch (Exception e)
-                {
-                    // ignore
-                }
-
-            }
+            
             /*
              WatchedAttributes.SetDouble("pathdir", pathdir);
                 WatchedAttributes.SetDouble("pathprogress", pathprogress);
