@@ -1,21 +1,21 @@
 {
   "code": "verticalwoodenrails",
   "behaviors": [
-	
-		{
-			"name": "HorizontalOrientable"
-			
-		}
-	],
+    {
+      "name": "Unstable"
+    },
+    {
+      "name": "HorizontalOrientable"
+    }
+  ],
   "variantgroups": [
-    
     {
       "code": "side",
       "states": [ "north", "east", "south", "west" ]
     }
   ],
   "shapebytype": {
-    
+
     "*-north": {
       "base": "block/rails/raised_ns",
       "rotateY": 0
@@ -23,47 +23,37 @@
     "*-east": {
       "base": "block/rails/raised_ns",
       "rotateY": 270
-      
+
     },
     "*-west": {
       "base": "block/rails/raised_ns",
       "rotateY": 90
-      
+
     },
     "*-south": {
       "base": "block/rails/raised_ns",
       "rotateY": 180
     }
   },
-  "sidesolidByType": {
-    "*": {
-      "all": false,
-      "down": false
-    },
-    
-  },
-  "sideopaqueByType": {
-    "*": {
-      "all": false
-      
-    }
-  },
-  textures: {
-		wood: { base: "game:block/wood/planks/generic" },
-	},
-  "blockmaterial": "Wood",
- "creativeinventory": {
-    "R&R": [ "*-north" ]
-    
-  },
-  "replaceable": 300,
-  "resistance": 2,
-  "lightAbsorption": 1,
-  "emitSideAo": {
+  "sidesolid": {
     "all": false
   },
-  
-  
-  
- 
+  "sideopaque": {
+    "all": false
+  },
+  "textures": {
+    "wood": { "base": "block/rails/wooden/oak" }
+  },
+  "blockmaterial": "Wood",
+  "creativeinventory": {
+    "R&R": [ "*-north" ]
+  },
+  "sounds": {
+    "place": "block/planks",
+    "hit": "block/planks",
+    "break": "block/planks",
+    "walk": "walk/wood"
+  },
+  "resistance": 0.5,
+  "lightAbsorption": 0
 }

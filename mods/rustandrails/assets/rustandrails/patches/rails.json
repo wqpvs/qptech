@@ -13,7 +13,6 @@
       "*": true
     }
   },
-  
   {
     "file": "game:blocktypes/wood/rails.json",
     "path": "/creativeinventory/R&R",
@@ -21,6 +20,48 @@
     "value": [
       "woodenrails-flat_ns"
     ]
+  },
+  {
+    "op": "replace",
+    "path": "/shapeByType/*/base",
+    "value": "rustandrails:block/rails/{type}",
+    "file": "game:blocktypes/wood/rails.json"
+  },
+  {
+    "op": "replace",
+    "path": "/shapeByType/*-curved_ne/base",
+    "value": "rustandrails:block/rails/curved_es",
+    "file": "game:blocktypes/wood/rails.json"
+  },
+  {
+    "op": "replace",
+    "path": "/shapeByType/*-curved_sw/base",
+    "value": "rustandrails:block/rails/curved_es",
+    "file": "game:blocktypes/wood/rails.json"
+  },
+  {
+    "op": "replace",
+    "path": "/shapeByType/*-curved_wn/base",
+    "value": "rustandrails:block/rails/curved_es",
+    "file": "game:blocktypes/wood/rails.json"
+  },
+  {
+    "op": "replace",
+    "path": "/shapeByType/*-flat_we/base",
+    "value": "rustandrails:block/rails/flat_ns",
+    "file": "game:blocktypes/wood/rails.json"
+  },
+  {
+    "op": "replace",
+    "path": "/shapeByType/*-raised_we/base",
+    "value": "rustandrails:block/rails/raised_ns",
+    "file": "game:blocktypes/wood/rails.json"
+  },
+  {
+    "op": "replace",
+    "path": "/textures/wood/base",
+    "value": "rustandrails:block/rails/wooden/oak",
+    "file": "game:blocktypes/wood/rails.json"
   }
 ]
   
