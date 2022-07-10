@@ -1,6 +1,4 @@
-﻿1.10.3-pre.1
-- fix soaker pipe so pipe isn't marked as tool
-- 1.17 rc compat
+﻿1.10.3
 
 1.10.2
 - Be sure to check out the qptech wiki! Http://qptech.wiki

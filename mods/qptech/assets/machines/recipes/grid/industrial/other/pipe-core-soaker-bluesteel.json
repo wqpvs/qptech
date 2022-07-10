@@ -15,8 +15,8 @@
 		},
 		"P": {
 			"type": "block",
-			"code": "pipe-core-bluesteel"
-			
+			"code": "pipe-core-bluesteel",
+			"isTool": true
 		}
 	},
 	"width": 1,
