@@ -21,7 +21,7 @@ namespace modernblocks.src
     /// - random frame animation mode
     /// - frame range animation mode?
     /// </summary>
-    class TestRenderer : IRenderer
+    class ConnectedTextureRenderer : IRenderer
     {
 
         BlockPos pos;
@@ -45,7 +45,7 @@ namespace modernblocks.src
 
         public AssetLocation TextureName = null;
 
-        public TestRenderer(BlockPos pos, ICoreClientAPI api)
+        public ConnectedTextureRenderer(BlockPos pos, ICoreClientAPI api)
         {
             this.pos = pos;
             this.capi = api;

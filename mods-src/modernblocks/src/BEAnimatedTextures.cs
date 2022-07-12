@@ -17,7 +17,7 @@ namespace modernblocks.src
 {
     class BEAnimatedTextures:BlockEntity
     {
-        TestRenderer testRenderer;
+        ConnectedTextureRenderer testRenderer;
         static Random r;
         
         ICoreClientAPI capi;
@@ -49,7 +49,7 @@ namespace modernblocks.src
             }
             if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
 
-            if (testRenderer == null) { testRenderer = new TestRenderer(Pos, capi); }
+            if (testRenderer == null) { testRenderer = new ConnectedTextureRenderer(Pos, capi); }
             testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/weirdcomputer.png");
 
             testRenderer.facedata = new List<FaceData>();

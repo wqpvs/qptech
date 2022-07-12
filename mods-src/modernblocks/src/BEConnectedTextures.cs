@@ -31,7 +31,7 @@ namespace modernblocks.src
         
         ICoreClientAPI capi;
         List<BlockFacing> oldneighbors;
-        TestRenderer testRenderer;
+        ConnectedTextureRenderer testRenderer;
         static Random r;
         
         public override void Initialize(ICoreAPI api)
@@ -67,7 +67,7 @@ namespace modernblocks.src
             }
             if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
             if (oldneighbors!=null&& neighbors.Equals(oldneighbors)) { return; }
-            testRenderer = new TestRenderer(Pos, capi);
+            testRenderer = new ConnectedTextureRenderer(Pos, capi);
             testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/cultictree.png");
             
             testRenderer.facedata = new List<FaceData>();
