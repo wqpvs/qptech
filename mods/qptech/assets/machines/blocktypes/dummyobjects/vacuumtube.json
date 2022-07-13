@@ -1,0 +1,15 @@
+{
+	"code": "vacuumtubedummy",
+	entityClass: "Generic",
+	
+	"creativeinventory": {"qptech-parts": [ "" ]},
+	shape: {format: "obj",base: "block/vacuumtube"},
+	"textures": {
+		"obj": { "base": "block/vacuumtube" },
+		
+	},
+	"maxstacksize": 64,
+	"sideopaque": {
+		"all": false
+	},
+}

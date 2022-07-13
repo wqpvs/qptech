@@ -1,12 +1,19 @@
 {
-	"code": "vacuumtube",
+	"code": "vacuum",
 	entityClass: "Generic",
+
 	"creativeinventory": {"qptech-parts": [ "*" ]},
 	shape: {format: "obj",base: "block/vacuumtube"},
 	"textures": {
 		"obj": { "base": "block/vacuumtube" },
 		
 	},
+	"variantgroups": [
+		{
+			"code": "state",
+			"states": [ "casing","tube" ]
+		}
+	],
 	"maxstacksize": 64,
 	"sideopaque": {
 		"all": false

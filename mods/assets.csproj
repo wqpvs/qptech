@@ -93,7 +93,7 @@
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\powernode.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\powerrod.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\electric\wires\wireplate-tin-electricjunction.json" />
-    <None Include="qptech\assets\machines\blocktypes\dummy.json" />
+    <None Include="qptech\assets\machines\blocktypes\dummyobjects\dummy.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-iron.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\temporalpocket.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\sheet.json" />
@@ -111,7 +111,8 @@
     <None Include="qptech\assets\machines\blocktypes\metal\machineryblock-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\itemfilterentrance.json" />
     <None Include="qptech\assets\machines\blocktypes\other\coalpilestoker.json" />
-    <None Include="qptech\assets\machines\blocktypes\indev\vacuumtube.json" />
+    <None Include="qptech\assets\machines\blocktypes\dummyobjects\vacuumtube.json" />
+    <None Include="qptech\assets\machines\itemtypes\part\mv\vacuum.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\charcoalkiln.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\clayformer_fromiron.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\electricforge-fromiron.json" />
@@ -134,13 +135,13 @@
     <None Include="rustandrails\assets\rustandrails\blocktypes\switchingrails.json" />
     <None Include="rustandrails\assets\rustandrails\blocktypes\verticalwoodenrail.json" />
     <None Include="qptech\assets\machines\blocktypes\other\rubbersheet.json" />
-    <None Include="qptech\assets\machines\blocktypes\pipe-drainer.json" />
-    <None Include="qptech\assets\machines\blocktypes\pipe-sprinkler.json" />
+    <None Include="qptech\assets\machines\blocktypes\dummyobjects\pipe-drainer.json" />
+    <None Include="qptech\assets\machines\blocktypes\dummyobjects\pipe-sprinkler.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-soaker-bluesteel.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-bluesteel.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-closed-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-core-bronze.json" />
-    <None Include="qptech\assets\machines\blocktypes\pipe-segment-bronze.json" />
+    <None Include="qptech\assets\machines\blocktypes\dummyobjects\pipe-segment-bronze.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\tank.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\itemhatch.json" />
     <None Include="qptech\assets\machines\blocktypes\metal\stairs\girder.json" />
@@ -171,9 +172,9 @@
     <None Include="qptech\assets\machines\blocktypes\indev\unused\barrel.json" />
     <None Include="qptech\assets\machines\blocktypes\other\cabinet.json" />
     <None Include="qptech\assets\machines\blocktypes\other\castironovenlarge.json" />
-    <None Include="qptech\assets\machines\blocktypes\dummy-element.json" />
+    <None Include="qptech\assets\machines\blocktypes\dummyobjects\dummy-element.json" />
     <None Include="qptech\assets\machines\blocktypes\pipe-closed-bluesteel.json" />
-    <None Include="qptech\assets\machines\blocktypes\pipe-segment-bluesteel.json" />
+    <None Include="qptech\assets\machines\blocktypes\dummyobjects\pipe-segment-bluesteel.json" />
     <None Include="rustandrails\assets\rustandrails\blocktypes\signalswitch.json" />
     <None Include="qptech\assets\machines\blocktypes\stone\firebox.json" />
     <None Include="qptech\assets\machines\blocktypes\other\firepitloader.json" />

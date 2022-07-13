@@ -91,6 +91,10 @@ namespace qptech.src
         {
             if (tempStabilitySystem == null) { return; }
             float stability=tempStabilitySystem.GetTemporalStability(Pos);
+            if (!Api.World.Config.GetBool("temporalStability", true))
+            {
+                stability = 0.4f;
+            }
             if (stability > 0.9f) { return; }
             float stabbonus = (float)Math.Pow( Math.Min(1, (1 - (double)stability))*3,3);
             //TODO: add bonuses for nearby rifts? spawn rifts on transform?

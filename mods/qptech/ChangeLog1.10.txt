@@ -1,4 +1,7 @@
 ﻿1.10.3
+- temporal condenser will now work in worlds where temporal stability has been disabled
+- new parts:
+  - vacuum tube
 
 1.10.2
 - Be sure to check out the qptech wiki! Http://qptech.wiki
