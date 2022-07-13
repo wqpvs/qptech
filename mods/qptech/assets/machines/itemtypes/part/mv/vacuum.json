@@ -4,9 +4,9 @@
 
 	"creativeinventory": {"qptech-parts": [ "*" ]},
 	shape: {format: "obj",base: "block/vacuumtube"},
-	"textures": {
-		"obj": { "base": "block/vacuumtube" },
-		
+	"texturesByType": {
+		"*-tube": {"obj": { "base": "block/vacuumtube" }},
+		"*-casing": {"obj": { "base": "block/glass/industrialglass-plain" }}
 	},
 	"variantgroups": [
 		{

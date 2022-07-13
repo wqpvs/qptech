@@ -32,7 +32,7 @@
 
 		"*-mv-*": {
 			"genFlux": 0,"useFlux": 8,
-			"recipegroups": [ "RubberSheet","VacuumTubeCasing" ],
+			"recipegroups": [ "Rubber Sheet","Vacuum Tube Casing" ],
 			"inputFace": "up","outputFace": "east",
 			"animationCode": "run","animation": "run","runAnimationSpeed": 1,
 			"processingTime": 2000

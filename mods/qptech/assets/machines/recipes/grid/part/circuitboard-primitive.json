@@ -1,31 +1,27 @@
 {
-	ingredientPattern: "_CT	_S_	WC_",
+	ingredientPattern: "V	W	S",
 	ingredients: {
 		"S": {
 			"type": "block",
-			"code": "metalsheet-temporalsteel-down",
+			"code": "game:metalsheet-copper-down",
 			"quantity": 1
 		},
 		"W": {
 			"type": "item",
 			"code": "braidedwire-copper",
-			"quantity": 1
+			"quantity": 2
 		},
-		"C": {
-			"type": "block",
-			"code": "game:metalsheet-copper-down",
-			"quantity": 1
-		},
-		"T": {
+		
+		"V": {
 			"type": "item",
-			"code": "stator-mv",
-			"quantity": 1
+			"code": "vacuum-tube",
+			"quantity": 2
 		}
 
 	},
-	width: 3,
+	width: 1,
 	height: 3,
-	output: { type: "item", code: "circuitboard-primitive", quantity: 4 }
+	output: { type: "item", code: "circuitboard-primitive", quantity: 1 }
 }
 
 

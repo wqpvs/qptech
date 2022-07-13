@@ -1,0 +1,15 @@
+{
+	ingredientPattern: "DI	SR	PB",
+	ingredients: {
+		"R": { type: "item", code: "braidedwire-copper", quantity: 3 },
+		"P": { type: "item", code: "vacuum-casing", "quantity": 1 },
+		"D": { type: "item", code: "screwdriver-*", isTool: true },
+		"I": { type: "item", code: "game:solderingiron", isTool: true },
+		"S": { type: "item", code: "screw-*", quantity: 1 },
+		"B": { type: "item", code: "game:solderbar-*", quantity: 1 },
+		
+	},
+	width: 2,
+	height: 3,
+	output: { type: "item", code: "vacuum-tube", quantity: 1  }
+}

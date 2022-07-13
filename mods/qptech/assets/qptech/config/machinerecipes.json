@@ -616,7 +616,7 @@
     "output": [{"validitems": [ "game:ingot-blistersteel" ],"quantity": 1}]
   },
   {
-    "name": "RubberSheet",
+    "name": "Rubber Sheet",
     "processingTime": 3000,"processingsteps": {"heating": 500},
     "ingredients": [
       { "validitems": [ "machines:liquidrubberportion"],"quantity": 50}
@@ -647,6 +647,14 @@
     "ingredients": [{"validitems": [ "game:ore-lignite","game:ore-bituminouscoal" ],"quantity": 16}],
     "output": [{"validitems": [ "game:coke" ],"quantity": 16}],
     "noattributes": true
+  },
+  {
+    "name": "Vacuum Tube Casing",
+    "processingsteps": {"heating": 1000},
+    "processingTime": 20000,
+    "ingredients": [{"validitems": [ "game:glassslab-plain-down-free" ],"quantity": 1}],
+    "output": [{"validitems": [ "machines:vacuum-casing" ],"quantity": 1}],
+    "noattributes": false
   }
   
 ]

@@ -6,7 +6,7 @@
 	"variantgroups": [
 		{
 			"code": "level",
-			"states": [ "primitive" ]
+			"states": [ "primitive","temporal" ]
 		}
 	],
 	"attributes": {
@@ -37,6 +37,10 @@
 	],
 	"drawtype": "json",
 	"shape": { "base": "item/part/circuitboard" },
+	"texturesByType": {
+		
+		"*-temporal": {"crudecircuitboard": { "base": "item/temporalcircuitboard" }}
+	},
 	"maxstacksize": 4,
 	"guiTransform": {
 		"translation": {

@@ -32,6 +32,7 @@
     <Content Include="chisel\Change Log.txt" />
     <Content Include="qptech\assets\machines\textures\block\chevrons.png" />
     <Content Include="qptech\assets\machines\textures\block\shinyiron.png" />
+    <Content Include="qptech\assets\machines\textures\item\temporalcircuitboard.png" />
     <Content Include="qptech\ChangeLog1.10.txt" />
     <Content Include="rustandrails\assets\rustandrails\textures\block\chevrons.png" />
     <Content Include="rustandrails\assets\rustandrails\textures\block\copperspool.png" />
@@ -123,6 +124,8 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvpunch from iron.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvpunch.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvhardscrew.json" />
+    <None Include="qptech\assets\machines\recipes\grid\part\circuitboard-temporal.json" />
+    <None Include="qptech\assets\machines\recipes\grid\part\vacuum-tube.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\machineryblock-iron.json" />
     <None Include="qptech\assets\machines\shapes\block\cuttingmachine.obj" />
     <None Include="qptech\assets\machines\shapes\block\cuttingmachineblade.obj" />

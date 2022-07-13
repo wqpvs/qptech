@@ -217,7 +217,8 @@
 	"blockdesc-concrete-*": "Concrete building block made in a mixer from sand, quicklime, stones, and water or the appropriate dye",
 	"block-industrialglass-*": "Industrial Glass Block",
 	"blockdesc-industrialglass-*": "Purified glass block made with water and crushed quartz in a mixer.",
-	"item-circuitboard-*": "Circuit Board",
+	"item-circuitboard-primitive": "Crude Circuit Board",
+	"item-circuitboard-temporal": "Temporal Circuit Board",
 	"itemdesc-circuitboard-*": "An integral component to many things!",
 	"block-itempipe-*": "Item Transport Pipe",
 	"blockdesc-itempipe-*": "Move items into and out of containers. Setup filters by right clicking withing in your hand. Change direction by right clicking with the pipe wrench.",
@@ -260,11 +261,15 @@
 	"item-industrialchannel-rubber":  "Rubber Gasket",
 	"block-temporalcondenser-*": "Temporal Condenser",
 	"blockdesc-temporalcondenser-*": "When powered and placed in an Temporally Unstable area, will add temporal charge to relevant items.",
-	"block-mold-*": "Rubber Sheet Mold",
-	"blockdesc-mold-*": "Pipe in liquid rubber, and add industrial heating to output rubber sheets. (Outputs to the right)",
+	"block-mold-*": "Parts Mold",
+	"blockdesc-mold-*": "Makes various parts. Can pipe in liquid or use an input chest on the left. Outputs on the right",
 	"block-charcoalkiln-*": "Electric Pyrolysis Kiln",
 	"blockdesc-charcoalkiln-*":  "Makes charcoal from sticks or firewood, and coke from coal. Needs an appropriate heater block and an industrial fans to function",
 	"block-machineryblock-iron": "Iron Machine Hull",
-	"blockdesc-machineryblock-iron": "Used in various recipes."
+	"blockdesc-machineryblock-iron": "Used in various recipes.",
+	"item-vacuum-casing": "Vacuum Tube Casing",
+	"itemdesc-vacuum-casing": "Made in a Parts Mold machine out of plain glass slabs.",
+	"item-vacuum-tube": "Vacuum Tube",
+	"itemdesc-vacuum-tube": "A useful early electronic part. Made from a casing, solider, and copper."
 
 }

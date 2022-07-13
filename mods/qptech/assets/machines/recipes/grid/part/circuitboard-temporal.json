@@ -1,0 +1,31 @@
+{
+	ingredientPattern: "_CT	_S_	WC_",
+	ingredients: {
+		"S": {
+			"type": "block",
+			"code": "metalsheet-temporalsteel-down",
+			"quantity": 1
+		},
+		"W": {
+			"type": "item",
+			"code": "braidedwire-copper",
+			"quantity": 1
+		},
+		"C": {
+			"type": "block",
+			"code": "game:metalsheet-copper-down",
+			"quantity": 1
+		},
+		"T": {
+			"type": "item",
+			"code": "stator-mv",
+			"quantity": 1
+		}
+
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "circuitboard-temporal", quantity: 4 }
+}
+
+

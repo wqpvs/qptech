@@ -1,7 +1,18 @@
 ﻿1.10.3
 - temporal condenser will now work in worlds where temporal stability has been disabled
+- Rubber Mold machine now called Parts Mold
 - new parts:
-  - vacuum tube
+  - vacuum tube (added recipe to parts mold)
+  - vacuum tube casing (with grid recipe)
+  - Crude Circuit board now uses a vacuum tube
+  - new Temporal Circuit board has the crude circuit board's recipe
+- changes:
+  - Crusher Module recipe:
+     - can use any metal for pounder cap
+     - can use any screw type
+  - Industrial Blower:
+     - can use any circuit board type, including newly modified crude circuit board, so temporal steel (and mixer) not required
+
 
 1.10.2
 - Be sure to check out the qptech wiki! Http://qptech.wiki

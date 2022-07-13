@@ -1,5 +1,5 @@
 {
-	ingredientPattern: "XGX	SMT	XCX",
+	ingredientPattern: "AGX	SMT	XCX",
 	ingredients: {
 		"X": {
 			"type": "item",
@@ -16,6 +16,11 @@
 		"M": {
 			"type": "item",
 			"code": "motor-mv",
+			"quantity": 1
+		},
+		"A": {
+			"type": "item",
+			"code": "circuitboard-temporal",
 			"quantity": 1
 		},
 		"S": {
