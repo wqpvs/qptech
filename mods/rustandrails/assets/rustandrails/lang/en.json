@@ -1,18 +1,19 @@
 {
-	
-	"block-detectorrails-*": "Detector Rail",
+
+	"block-detectorrails-*": "Detector rail",
 	"blockdesc-detectorrails-*": "Sends a signal in all directions when a cart passes overhead. Will also receive and transmit other rail signals. Signal strength will depend on how full the cart is.",
-	"block-switchedrails-*": "Switched Rail",
+	"block-switchedrails-*": "Switched rail",
 	"blockdesc-switchedrails-*": "Will change directions when a signal is received. Does not transmit signals.",
-	"block-stoprails-on-*": "Cart Stopping Rail (ON)",
-	"block-stoprails-off-*": "Cart Stopping Rail (OFF)",
+	"block-stoprails-on-*": "Cart Stopping rail (ON)",
+	"block-stoprails-off-*": "Cart Stopping rail (OFF)",
 	"blockdesc-stoprails-*": "Will stop a cart if in the ON position, or allow cart to pass if in OFF position. Will change positions when it receives a signal. Does not transmit signals.",
-	"block-verticalwoodenrails-*": "Wooden Rail (vertical)",
+	"block-verticalwoodenrails-*": "Wooden rails (Vertical)",
+	"block-verticalmetalrails-*": "Metal rails (Vertical)",
 	"block-signalswitch-*": "Signal Switch",
 	"blockdesc-signalswitch-*": "Will send a strong signal in one direction when right clicked by player. Also transmits signals it receives in one direction.",
 	"block-railhopper-*": "Rail Hopper",
 	"blockdesc-raillhopper-*": "A one slot container that can support rails on top of it. (Put rails on top and carts will automatically unload if they can when above the hopper)",
+	"block-metalrails-*": "Metal rails",
 	"item-creature-minecart": "Minecart",
 	"itemdesc-creature-minecart": "Your basic self powered minecart. Crouch+Left Click to break. Right click to load/unload with items. Left Click to start and stop."
-
 }

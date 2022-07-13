@@ -32,7 +32,7 @@
 	],
 	"creativeinventory": {
 		
-		"R&R": [ "*-east" ]
+		"r&r": [ "*-east" ]
 	},
 	"blockmaterial": "Metal",
 	"shape": { "base": "block/rails/railhopper" },
