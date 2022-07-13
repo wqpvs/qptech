@@ -15,7 +15,7 @@
   },
   {
     "file": "game:blocktypes/wood/rails.json",
-    "path": "/creativeinventory/R&R",
+    "path": "/creativeinventory/r&r",
     "op": "add",
     "value": [
       "woodenrails-flat_ns"
@@ -58,9 +58,16 @@
     "file": "game:blocktypes/wood/rails.json"
   },
   {
-    "op": "replace",
-    "path": "/textures/wood/base",
-    "value": "rustandrails:block/rails/wooden/oak",
+    "op": "remove",
+    "path": "/textures/wood",
+    "file": "blocktypes/wood/rails.json"
+  },
+  {
+    "op": "add",
+    "path": "/textures/material",
+    "value": {
+      "base": "rustandrails:block/rails/wooden/rail"
+    },
     "file": "game:blocktypes/wood/rails.json"
   }
 ]

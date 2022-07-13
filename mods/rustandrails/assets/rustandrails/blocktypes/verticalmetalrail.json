@@ -1,5 +1,5 @@
 {
-  "code": "verticalwoodenrails",
+  "code": "verticalmetalrails",
   "behaviors": [
     {
       "name": "Unstable"
@@ -42,7 +42,7 @@
     "all": false
   },
   "textures": {
-    "material": { "base": "block/rails/wooden/rail" }
+    "material": { "base": "block/rails/metal/rail" }
   },
   "collisionSelectionBoxesByType": {
     "*-north": [
@@ -124,15 +124,15 @@
       }
     ]
   },
-  "blockmaterial": "Wood",
+  "blockmaterial": "Metal",
   "creativeinventory": {
     "r&r": [ "*-north" ]
   },
   "sounds": {
-    "place": "game:block/planks",
-    "hit": "game:block/planks",
-    "break": "game:block/planks",
-    "walk": "game:walk/planks"
+    "place": "game:block/plate",
+    "hit": "game:block/plate",
+    "break": "game:block/plate",
+    "walk": "game:walk/wood"
   },
   "resistance": 0.5,
   "lightAbsorption": 0

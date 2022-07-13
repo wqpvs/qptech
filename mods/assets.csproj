@@ -130,9 +130,11 @@
     <None Include="qptech\assets\machines\shapes\block\testobj.obj" />
     <None Include="qptech\assets\machines\shapes\block\vacuumtube.obj" />
     <None Include="rustandrails\assets\rustandrails\blocktypes\detectorrails.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\metalrails.json" />
     <None Include="rustandrails\assets\rustandrails\blocktypes\railhopper.json" />
     <None Include="rustandrails\assets\rustandrails\blocktypes\stoprails.json" />
     <None Include="rustandrails\assets\rustandrails\blocktypes\switchingrails.json" />
+    <None Include="rustandrails\assets\rustandrails\blocktypes\verticalmetalrail.json" />
     <None Include="rustandrails\assets\rustandrails\blocktypes\verticalwoodenrail.json" />
     <None Include="qptech\assets\machines\blocktypes\other\rubbersheet.json" />
     <None Include="qptech\assets\machines\blocktypes\dummyobjects\pipe-drainer.json" />
