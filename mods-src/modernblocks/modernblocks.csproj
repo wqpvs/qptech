@@ -87,6 +87,7 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="src\BEAnimatedTextures.cs" />
+    <Compile Include="src\BEConnectedTextureWithRenderer.cs" />
     <Compile Include="src\BEConnectedTextures.cs" />
     <Compile Include="src\BlockConnectedTexture.cs" />
     <Compile Include="src\FaceData.cs" />

@@ -18,13 +18,15 @@ namespace modernblocks.src
 {
     class BlockConnectedTexture : Block
     {
-        
+        //to do this should actually trigger an update in 3x3x3 area around the placed block on other ct blocks
 
         public override void OnNeighbourBlockChange(IWorldAccessor world, BlockPos pos, BlockPos neibpos)
         {
             base.OnNeighbourBlockChange(world, pos, neibpos);
             BEConnectedTextures bem = world.BlockAccessor.GetBlockEntity(pos) as BEConnectedTextures;
-            if (bem != null) { bem.UpdateRenderer(); }
+            if (bem != null) { 
+                bem.FindNeighbours();
+            }
         }
     }
 }

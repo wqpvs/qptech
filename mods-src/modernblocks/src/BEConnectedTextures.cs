@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Config;
-using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
-using Vintagestory.API.Server;
-using Vintagestory.GameContent;
-using Vintagestory.API.Util;
 
 namespace modernblocks.src
 {
     /// <summary>
+    /// 
+    /// This version will create the textures using ontesslation instead of a renderer:
+    /// idea only update the textures when block placed (send the update command to 
+    /// 3x3x3 blocks when a new ct block is placed)
+    /// Also maybe cache generated meshes somehow, so if a block has the same setup it could jsut use a pregenerated mesh?
+    /// 
+    /// 
+    /// Also store last setup somehow so when the chunk loads it'll just use what it had before
+    /// 
     /// Render a texture so the outer borders change automatically to have closed borders
     /// Think we will do larger textures and then do appropriate UVs
     /// So a 4x4 texture top 3x3 would be the outer ring, and 0x3 would be fully closed texture
@@ -23,7 +25,7 @@ namespace modernblocks.src
     /// Also would like:
     /// user setable textures from a palette of graphics (like that MC chisel mod)
     /// could maybe also sub in any texture if we can get the proper file reference (risks crashing though), would have to adjust uvs
-    /// Also could probably hav
+    /// 
     /// </summary>
     class BEConnectedTextures : BlockEntity
     {
@@ -31,9 +33,11 @@ namespace modernblocks.src
         
         ICoreClientAPI capi;
         List<BlockFacing> oldneighbors;
-        ConnectedTextureRenderer testRenderer;
-        static Random r;
         
+        static Random r;
+        //MeshRef cubeModelRef;
+        public List<FaceData> facedata;
+        public AssetLocation TextureName = null;
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -42,17 +46,17 @@ namespace modernblocks.src
             {
 
                 capi = api as ICoreClientAPI;
-                RegisterDelayedCallback(DelayedStart,r.Next(1,20)); //hopefully lets world load and prevents all blocks updating at once
+                //RegisterDelayedCallback(DelayedStart,r.Next(1,20)); //hopefully lets world load and prevents all blocks updating at once
             }
         }
-        void DelayedStart(float dt)
-        {
-            UpdateRenderer();
-        }
-        public virtual void UpdateRenderer()
+        //void DelayedStart(float dt)
+        //{
+        //    FindNeighbours();
+       // }
+        public virtual void FindNeighbours()
         {
             if (capi == null) { return; }
-            testRenderer?.Dispose();
+            
             
             List<BlockFacing> neighbors = new List<BlockFacing>(); //determines which faces to render
             List<BlockFacing> matchneighbors = new List<BlockFacing>(); //determines which faces to connect
@@ -67,10 +71,10 @@ namespace modernblocks.src
             }
             if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
             if (oldneighbors!=null&& neighbors.Equals(oldneighbors)) { return; }
-            testRenderer = new ConnectedTextureRenderer(Pos, capi);
-            testRenderer.TextureName = new AssetLocation("modernblocks:block/connectedtextures/cultictree.png");
             
-            testRenderer.facedata = new List<FaceData>();
+            TextureName = new AssetLocation("modernblocks:block/connectedtextures/cultictree.png");
+            
+            facedata = new List<FaceData>();
             
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
@@ -78,26 +82,147 @@ namespace modernblocks.src
                 FaceData fd = new FaceData(bf);
                 fd.SetConnectedTextures(matchneighbors.ToArray());
                 //fd.rgba = new byte[] { (byte)r.Next(0, 256), (byte)r.Next(0, 256), (byte)r.Next(0, 256), 255 };
-                //fd.rgba = new byte[] { 128, 128, 128, 255 };
-                testRenderer.facedata.Add(fd);
-                testRenderer.GenModel();
+                fd.rgba = new byte[] { 128, 128, 128, 255 };
+                facedata.Add(fd);
+                
                 oldneighbors = new List<BlockFacing>(neighbors);
             }
+            GenModel();
         }
+        int texid = 0;
+        //these define the points on the various cube faces
+        public static readonly Dictionary<BlockFacing, List<float>> cubeVertexLookup = new Dictionary<BlockFacing, List<float>>() {
+            { BlockFacing.WEST,new List<float>() { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1 } },
+            { BlockFacing.NORTH,new List<float>() { 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, } },
+            { BlockFacing.EAST,new List<float>() { 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1 } },
+            { BlockFacing.SOUTH,new List<float>() { 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, } },
+            { BlockFacing.UP,new List<float>() { 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, } },
+            { BlockFacing.DOWN,new List<float>() { 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1 } }
+        };
+        MeshData m;
+        public void GenModel()
+        {
+            //cubeModelRef?.Dispose();
+            
+            if (facedata == null || facedata.Count == 0) { return; }
+            texid = capi.Render.GetOrLoadTexture(TextureName);
 
+            List<float> cubeVertices = new List<float>();
+            List<int> cubeindices = new List<int>();
+            List<float> cubeUVs = new List<float>();
+            int vc = 0;
+
+            foreach (FaceData fd in facedata)
+            {
+                BlockFacing tbf = fd.facing;
+
+                float u1 = fd.ucell * fd.cellsize;
+                float u2 = u1 + fd.cellsize;
+                float v1 = fd.vcell * fd.cellsize;
+                float v2 = v1 + fd.cellsize;
+                cubeVertices.AddRange(cubeVertexLookup[tbf]);
+                cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
+                vc++;
+                if (tbf == BlockFacing.WEST)
+                {
+                    cubeUVs.AddRange(new List<float>() {u1 ,v2 ,
+                u2 ,v2 ,
+                u1 ,v1 ,
+                u2 ,v1 });
+                }
+                else if (tbf == BlockFacing.NORTH)
+                {
+                    cubeUVs.AddRange(new List<float>() { u2 ,v2 ,
+                u2 ,v1 ,
+                u1 ,v2 ,
+                u1 ,v1});
+                }
+                else if (tbf == BlockFacing.EAST)
+                {
+                    cubeUVs.AddRange(new List<float>() { u2 ,v2 ,
+                u1 ,v2 ,
+                u2 ,v1 ,
+                u1 ,v1});
+                }
+                else if (tbf == BlockFacing.SOUTH)
+                {
+                    cubeUVs.AddRange(new List<float>() {u1 ,v2 ,
+                u1, v1 ,
+                u2 ,v2,
+                u2 ,v1 });
+                }
+                else if (tbf == BlockFacing.UP)
+                {
+                    cubeUVs.AddRange(new List<float>() { u1, v1 ,
+                u1 ,v2 ,
+                u2 ,v1 ,
+                u2 ,v2 });
+                }
+                else if (tbf == BlockFacing.DOWN)
+                {
+                    cubeUVs.AddRange(new List<float>() {u1, v2 ,
+                u1 ,v1 ,
+                u2 ,v2 ,
+                u2 ,v1 });
+                }
+            }
+            int numVerts = cubeVertices.Count / 3;
+            m = new MeshData();
+
+            //XYZ these are the vertices on our cube
+            float[] xyz = new float[cubeVertices.Count];
+            for (int i = 0; i < cubeVertices.Count; i++)
+            {
+                xyz[i] = cubeVertices[i];
+            }
+            m.SetXyz(xyz);
+
+            //Set the UV coordinates for the triangles
+            float[] uv = new float[cubeUVs.Count];
+            for (int i = 0; i < uv.Length; i++)
+            {
+                uv[i] = cubeUVs[i];
+            }
+            m.SetUv(uv);
+            m.SetVerticesCount(cubeVertices.Count);
+            m.SetIndices(cubeindices.ToArray());
+            m.SetIndicesCount(cubeindices.Count);
+
+
+            m.Rgba = new byte[numVerts * 4]; //colored vertex shading
+
+            FaceData usedata = facedata[0];
+            for (int cc = 0; cc < numVerts * 4; cc += 4)
+            {
+
+                m.Rgba[cc] = usedata.rgba[0];
+                m.Rgba[cc + 1] = usedata.rgba[1];
+                m.Rgba[cc + 2] = usedata.rgba[2];
+                m.Rgba[cc + 3] = usedata.rgba[3];
+            }
+
+
+            m.Flags = new int[numVerts * 4]; //not clear on what flags do
+            ITexPositionSource tps = capi.Tesselator.GetTexSource(this.Block);
+           
+            m.SetTexPos(tps["n"]);
+            capi.Tesselator.TesselateBlock(Block, out m);
+            //cubeModelRef = capi.Render.UploadMesh(m);
+        }
+        public float[] ModelMatf = Mat4f.Create();
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
         {
-
-            /*if (meshdata == null) { return base.OnTesselation(mesher, tessThreadTesselator); }
-            mesher.AddMeshData(meshdata);
-            try
-            {
-                meshref = capi.Render.UploadMesh(meshdata);
+            bool oktorender = true;
+            if (m==null) {
+               
+                if (m == null)
+                {
+                    oktorender = false;
+                }
             }
-            catch
-            {
-
-            }*/
+            
+            if (!oktorender) { return base.OnTesselation(mesher, tessThreadTesselator); }
+            mesher.AddMeshData(m);
             return true;
         }
 
@@ -111,7 +236,7 @@ namespace modernblocks.src
         public override void OnBlockRemoved()
         {
             if (capi == null) { base.OnBlockRemoved();return; }
-            testRenderer?.Dispose();
+            
             base.OnBlockRemoved();
         }
     }
