@@ -177,7 +177,7 @@ namespace qptech.src
                 ;
                 prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;
                 prog.ViewMatrix = rpi.CameraMatrixOriginf;
-
+                if (quadModelRef.Disposed) { prog.Stop(); return; }
                 rpi.RenderMesh(quadModelRef);
             
 

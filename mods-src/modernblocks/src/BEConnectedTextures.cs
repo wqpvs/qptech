@@ -46,13 +46,13 @@ namespace modernblocks.src
             {
 
                 capi = api as ICoreClientAPI;
-                //RegisterDelayedCallback(DelayedStart,r.Next(1,20)); //hopefully lets world load and prevents all blocks updating at once
+                RegisterDelayedCallback(DelayedStart,r.Next(1,20)); //hopefully lets world load and prevents all blocks updating at once
             }
         }
-        //void DelayedStart(float dt)
-        //{
-        //    FindNeighbours();
-       // }
+        void DelayedStart(float dt)
+        {
+            FindNeighbours();
+        }
         public virtual void FindNeighbours()
         {
             if (capi == null) { return; }
@@ -141,14 +141,22 @@ namespace modernblocks.src
                 {
                     if (uvget == vend)
                     {
-                        uvget = vstart + uvsize ;
+                        uvget = vstart + uvsize +uvsize*3 ;
+                    }
+                    else
+                    {
+                        uvget = vstart +uvsize*3;
                     }
                 }
                 else //U
                 {
                     if (uvget == uend)
                     {
-                        uvget = ustart + uvsize ;
+                        uvget = ustart + uvsize + uvsize*0;
+                    }
+                    else
+                    {
+                        uvget = ustart + uvsize*0;
                     }
                 }
                 m.Uv[c] = uvget;
