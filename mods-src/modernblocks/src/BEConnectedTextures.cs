@@ -107,106 +107,52 @@ namespace modernblocks.src
             if (facedata == null || facedata.Count == 0) { return; }
             texid = capi.Render.GetOrLoadTexture(TextureName);
 
-            List<float> cubeVertices = new List<float>();
-            List<int> cubeindices = new List<int>();
-            List<float> cubeUVs = new List<float>();
-            int vc = 0;
 
-            foreach (FaceData fd in facedata)
-            {
-                BlockFacing tbf = fd.facing;
-
-                float u1 = fd.ucell * fd.cellsize;
-                float u2 = u1 + fd.cellsize;
-                float v1 = fd.vcell * fd.cellsize;
-                float v2 = v1 + fd.cellsize;
-                cubeVertices.AddRange(cubeVertexLookup[tbf]);
-                cubeindices.AddRange(new List<int>() { 3 + vc * 4, 1 + vc * 4, 0 + vc * 4, 2 + vc * 4, 0 + vc * 4, 3 + vc * 4 });
-                vc++;
-                if (tbf == BlockFacing.WEST)
-                {
-                    cubeUVs.AddRange(new List<float>() {u1 ,v2 ,
-                u2 ,v2 ,
-                u1 ,v1 ,
-                u2 ,v1 });
-                }
-                else if (tbf == BlockFacing.NORTH)
-                {
-                    cubeUVs.AddRange(new List<float>() { u2 ,v2 ,
-                u2 ,v1 ,
-                u1 ,v2 ,
-                u1 ,v1});
-                }
-                else if (tbf == BlockFacing.EAST)
-                {
-                    cubeUVs.AddRange(new List<float>() { u2 ,v2 ,
-                u1 ,v2 ,
-                u2 ,v1 ,
-                u1 ,v1});
-                }
-                else if (tbf == BlockFacing.SOUTH)
-                {
-                    cubeUVs.AddRange(new List<float>() {u1 ,v2 ,
-                u1, v1 ,
-                u2 ,v2,
-                u2 ,v1 });
-                }
-                else if (tbf == BlockFacing.UP)
-                {
-                    cubeUVs.AddRange(new List<float>() { u1, v1 ,
-                u1 ,v2 ,
-                u2 ,v1 ,
-                u2 ,v2 });
-                }
-                else if (tbf == BlockFacing.DOWN)
-                {
-                    cubeUVs.AddRange(new List<float>() {u1, v2 ,
-                u1 ,v1 ,
-                u2 ,v2 ,
-                u2 ,v1 });
-                }
-            }
-            int numVerts = cubeVertices.Count / 3;
             m = new MeshData();
 
-            //XYZ these are the vertices on our cube
-            float[] xyz = new float[cubeVertices.Count];
-            for (int i = 0; i < cubeVertices.Count; i++)
-            {
-                xyz[i] = cubeVertices[i];
-            }
-            m.SetXyz(xyz);
-
-            //Set the UV coordinates for the triangles
-            float[] uv = new float[cubeUVs.Count];
-            for (int i = 0; i < uv.Length; i++)
-            {
-                uv[i] = cubeUVs[i];
-            }
-            m.SetUv(uv);
-            m.SetVerticesCount(cubeVertices.Count);
-            m.SetIndices(cubeindices.ToArray());
-            m.SetIndicesCount(cubeindices.Count);
-
-
-            m.Rgba = new byte[numVerts * 4]; //colored vertex shading
-
-            FaceData usedata = facedata[0];
-            for (int cc = 0; cc < numVerts * 4; cc += 4)
-            {
-
-                m.Rgba[cc] = usedata.rgba[0];
-                m.Rgba[cc + 1] = usedata.rgba[1];
-                m.Rgba[cc + 2] = usedata.rgba[2];
-                m.Rgba[cc + 3] = usedata.rgba[3];
-            }
-
-
-            m.Flags = new int[numVerts * 4]; //not clear on what flags do
-            ITexPositionSource tps = capi.Tesselator.GetTexSource(this.Block);
-           
-            m.SetTexPos(tps["n"]);
             capi.Tesselator.TesselateBlock(Block, out m);
+            float[] uvmorpher = m.Uv;
+            //find UV origin and size
+           
+            float ustart = 1;
+            float uend = 0;
+            float vstart =1;
+            float vend = 0;
+            for (int c = 0; c < m.Uv.Length; c++)
+            {
+                float thisuv = m.Uv[c];
+                if (c % 2 == 0)//this is even so it's a V
+                {
+                    if (thisuv > vend) { vend = thisuv; }
+                    if (thisuv < vstart) { vstart = thisuv; }
+                }
+                else
+                {
+                    if (thisuv > uend) { uend = thisuv; }
+                    if (thisuv < ustart) { ustart = thisuv; }
+                }
+            }
+            float uvsize = (uend - ustart) / 4;
+
+            for (int c = 0; c < m.Uv.Length; c++)
+            {
+                float uvget = m.Uv[c];
+                if (c % 2 == 0) //V
+                {
+                    if (uvget == vend)
+                    {
+                        uvget = vstart + uvsize ;
+                    }
+                }
+                else //U
+                {
+                    if (uvget == uend)
+                    {
+                        uvget = ustart + uvsize ;
+                    }
+                }
+                m.Uv[c] = uvget;
+            }
             //cubeModelRef = capi.Render.UploadMesh(m);
         }
         public float[] ModelMatf = Mat4f.Create();
@@ -223,6 +169,7 @@ namespace modernblocks.src
             
             if (!oktorender) { return base.OnTesselation(mesher, tessThreadTesselator); }
             mesher.AddMeshData(m);
+            
             return true;
         }
 

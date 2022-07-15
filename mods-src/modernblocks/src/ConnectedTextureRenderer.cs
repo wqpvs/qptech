@@ -183,6 +183,7 @@ namespace modernblocks.src
 
             m.Flags = new int[numVerts*4]; //not clear on what flags do
             cubeModelRef = capi.Render.UploadMesh(m);
+            int holdit = 1;
         }
         public float[] ModelMatf = Mat4f.Create();
         public void OnRenderFrame(float deltaTime, EnumRenderStage stage)
