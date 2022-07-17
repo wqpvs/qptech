@@ -32,7 +32,7 @@ namespace modernblocks.src
     
         
         ICoreClientAPI capi;
-        List<BlockFacing> oldneighbors;
+        
         
         static Random r;
         //MeshRef cubeModelRef;
@@ -56,9 +56,10 @@ namespace modernblocks.src
         public virtual void FindNeighbours()
         {
             if (capi == null) { return; }
-            
-            
-            List<BlockFacing> neighbors = new List<BlockFacing>(); //determines which faces to render
+
+            //
+            //Not using neigbors, will calc uv for all sides
+            //List<BlockFacing> neighbors = new List<BlockFacing>(); //determines which faces to render
             List<BlockFacing> matchneighbors = new List<BlockFacing>(); //determines which faces to connect
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
@@ -66,38 +67,36 @@ namespace modernblocks.src
                 if (nblock == null||nblock.Id==0) { continue; }
                 if (nblock.Id == this.Block.Id) { matchneighbors.Add(bf); } //TODO Add a check for texture or something
                 if (!nblock.SideOpaque[bf.Opposite.Index]&&!nblock.AllSidesOpaque) { continue; }
-                neighbors.Add(bf);
+                //neighbors.Add(bf);
                 
             }
-            if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
-            if (oldneighbors!=null&& neighbors.Equals(oldneighbors)) { return; }
-            
-            TextureName = new AssetLocation("modernblocks:block/connectedtextures/cultictree.png");
+            //if (neighbors.Count() == 6) { return; } //if neighbours on all sides we don't need to do any rendering
+            //if (oldneighbors!=null&& neighbors.Equals(oldneighbors)) { return; }
             
             facedata = new List<FaceData>();
             
             foreach (BlockFacing bf in BlockFacing.ALLFACES)
             {
-                if (neighbors.Contains(bf)) { continue; }
                 FaceData fd = new FaceData(bf);
                 fd.SetConnectedTextures(matchneighbors.ToArray());
-                //fd.rgba = new byte[] { (byte)r.Next(0, 256), (byte)r.Next(0, 256), (byte)r.Next(0, 256), 255 };
-                fd.rgba = new byte[] { 128, 128, 128, 255 };
+   
                 facedata.Add(fd);
-                
-                oldneighbors = new List<BlockFacing>(neighbors);
             }
             GenModel();
         }
-        int texid = 0;
-        //these define the points on the various cube faces
-        public static readonly Dictionary<BlockFacing, List<float>> cubeVertexLookup = new Dictionary<BlockFacing, List<float>>() {
-            { BlockFacing.WEST,new List<float>() { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1 } },
-            { BlockFacing.NORTH,new List<float>() { 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, } },
-            { BlockFacing.EAST,new List<float>() { 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1 } },
-            { BlockFacing.SOUTH,new List<float>() { 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, } },
-            { BlockFacing.UP,new List<float>() { 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, } },
-            { BlockFacing.DOWN,new List<float>() { 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1 } }
+        //int texid = 0;
+        
+        //this (unused) enum shows the uv index that a given face starts at - will remove later
+        public enum UVReference { NORTH=0,EAST=8,SOUTH=16,WEST=24,UP=32,DOWN=40 }
+        
+        //This array is to find which face a given UV index is part of for the standard cube
+        public static BlockFacing[] UVIndices = {
+            BlockFacing.NORTH, BlockFacing.NORTH, BlockFacing.NORTH, BlockFacing.NORTH, BlockFacing.NORTH, BlockFacing.NORTH, BlockFacing.NORTH, BlockFacing.NORTH,
+            BlockFacing.EAST,BlockFacing.EAST,BlockFacing.EAST,BlockFacing.EAST,BlockFacing.EAST,BlockFacing.EAST,BlockFacing.EAST,BlockFacing.EAST,
+            BlockFacing.SOUTH,BlockFacing.SOUTH,BlockFacing.SOUTH,BlockFacing.SOUTH,BlockFacing.SOUTH,BlockFacing.SOUTH,BlockFacing.SOUTH,BlockFacing.SOUTH,
+            BlockFacing.WEST,BlockFacing.WEST,BlockFacing.WEST,BlockFacing.WEST,BlockFacing.WEST,BlockFacing.WEST,BlockFacing.WEST,BlockFacing.WEST,
+            BlockFacing.UP,BlockFacing.UP,BlockFacing.UP,BlockFacing.UP,BlockFacing.UP,BlockFacing.UP,BlockFacing.UP,BlockFacing.UP,
+            BlockFacing.DOWN,BlockFacing.DOWN,BlockFacing.DOWN,BlockFacing.DOWN,BlockFacing.DOWN,BlockFacing.DOWN,BlockFacing.DOWN,BlockFacing.DOWN
         };
         MeshData m;
         public void GenModel()
@@ -105,8 +104,7 @@ namespace modernblocks.src
             //cubeModelRef?.Dispose();
             
             if (facedata == null || facedata.Count == 0) { return; }
-            texid = capi.Render.GetOrLoadTexture(TextureName);
-
+            //texid = capi.Render.GetOrLoadTexture(TextureName);
 
             m = new MeshData();
 
@@ -139,31 +137,12 @@ namespace modernblocks.src
                 float uvget = m.Uv[c];
                 float voffset = 0;
                 float  uoffset = 0;
+                BlockFacing thisindex = UVIndices[c];
+                if (thisindex == BlockFacing.UP)
+                {
+                    uoffset = 0;voffset = 3;
+                }
                 
-                if (c>=0&&c<8)
-                {//NORTH FACE
-                    voffset = 1;uoffset = 0;
-                }
-                else if (c >= 8 && c < 16)
-                {//EAST FACE
-                    voffset = 1;uoffset = 0;
-                }
-                else if (c>=16 && c < 24)
-                {//SOUTH FACE
-                    voffset = 1;uoffset = 0;
-                }
-                else if (c>=24 && c < 32)
-                {//WEST FACE
-                    voffset = 1;uoffset = 0;
-                }
-                else if (c>=32 && c < 40)
-                {//UP FACE
-                    voffset = 1;uoffset = 0;
-                }
-                else
-                {//DOWN
-                    voffset = 3; uoffset = 0;
-                }
                 if (c % 2 == 0) //V
                 {
                     if (uvget == vend)
