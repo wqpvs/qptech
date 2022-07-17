@@ -30,6 +30,7 @@
     <Content Include="chisel\assets\game\textures\icons\takecopy.svg" />
     <Content Include="chisel\assets\game\textures\icons\undo.svg" />
     <Content Include="chisel\Change Log.txt" />
+    <Content Include="modernblocks\assets\modernblocks\textures\block\connectedtextures\cobblewithcoppertrim.png" />
     <Content Include="qptech\assets\machines\textures\block\chevrons.png" />
     <Content Include="qptech\assets\machines\textures\block\shinyiron.png" />
     <Content Include="qptech\assets\machines\textures\item\temporalcircuitboard.png" />
@@ -57,6 +58,7 @@
     <None Include="chisel\assets\chiseltools\shapes\item\tool\pantograph.json" />
     <None Include="chisel\assets\game\lang\en.json" />
     <None Include="chisel\modinfo.json" />
+    <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\cobblewithtrim.json" />
     <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\concretetiles-smooth.json" />
     <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\weirdcomputer.json" />
     <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\concretetiles.json" />

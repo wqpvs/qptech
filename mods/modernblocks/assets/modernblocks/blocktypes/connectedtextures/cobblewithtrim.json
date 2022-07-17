@@ -1,0 +1,26 @@
+{
+	"code": "ct-polishedsandstone",
+	"class": "BlockConnectedTexture",
+	"entityclass": "BEConnectedTextures",
+
+	"creativeinventory": {
+
+		"modernblocks": [ "*" ]
+	},
+	"blockmaterial": "Stone",
+	"drawtype": "json",
+	"shape": { "base": "block/tiledconcrete" },
+	"texturesByType": {
+		"*": {
+			"all": { "base": "block/connectedtextures/ctpolishedsandstone" }
+
+
+		}
+	},
+
+	"resistance": 1,
+	"sounds": {
+		"place": "game:block/stone",
+		"walk": "game:walk/stone"
+	}
+}
