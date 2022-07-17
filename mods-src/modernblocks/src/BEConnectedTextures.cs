@@ -32,7 +32,7 @@ namespace modernblocks.src
     
         
         ICoreClientAPI capi;
-        
+        bool meshdoneonce = false;
         
         static Random r;
         //MeshRef cubeModelRef;
@@ -46,12 +46,18 @@ namespace modernblocks.src
             {
 
                 capi = api as ICoreClientAPI;
-                RegisterDelayedCallback(DelayedStart,r.Next(1,20)); //hopefully lets world load and prevents all blocks updating at once
+                //RegisterDelayedCallback(DelayedStart,r.Next(1,20)); //hopefully lets world load and prevents all blocks updating at once
+                ticker=RegisterGameTickListener(DelayedStart, 50);
             }
         }
+        long ticker = 0;
         void DelayedStart(float dt)
         {
-            FindNeighbours();
+            if (!meshdoneonce)
+            {
+                FindNeighbours();
+            }
+            UnregisterGameTickListener(ticker);
         }
         public virtual void FindNeighbours()
         {
@@ -112,6 +118,8 @@ namespace modernblocks.src
             float[] uvmorpher = m.Uv;
             //find UV origin and size
            
+            //We don't know what UVs are being used, so we're going to go thru the UVs
+            //  and find the min and max U and V and then break that down into cells
             float ustart = 1;
             float uend = 0;
             float vstart =1;
@@ -131,18 +139,21 @@ namespace modernblocks.src
                 }
             }
             float uvsize = (uend - ustart) / 4;
-
+            //Go through Each UV index and remap based on which part of the texture we want
             for (int c = 0; c < m.Uv.Length; c++)
             {
                 float uvget = m.Uv[c];
                 float voffset = 0;
                 float  uoffset = 0;
                 BlockFacing thisindex = UVIndices[c];
-                if (thisindex == BlockFacing.UP)
+                FaceData usefd = facedata.Find(f => f.facing == thisindex);
+                if (usefd != null)
                 {
-                    uoffset = 0;voffset = 3;
+                    //NOTE Somehow had to flip U & V compared to the facedata but oh well it works!
+                    voffset = usefd.ucell;
+                    uoffset = usefd.vcell;
                 }
-                
+                //This is remaps the UVs based on the calculated uv coordinates
                 if (c % 2 == 0) //V
                 {
                     if (uvget == vend)
@@ -167,7 +178,8 @@ namespace modernblocks.src
                 }
                 m.Uv[c] = uvget;
             }
-
+            meshdoneonce = true;
+            MarkDirty(true);
             //cubeModelRef = capi.Render.UploadMesh(m);
         }
         public float[] ModelMatf = Mat4f.Create();
@@ -201,6 +213,8 @@ namespace modernblocks.src
             
             base.OnBlockRemoved();
         }
+
+        
     }
 
     
