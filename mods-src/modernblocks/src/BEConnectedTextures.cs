@@ -137,30 +137,58 @@ namespace modernblocks.src
             for (int c = 0; c < m.Uv.Length; c++)
             {
                 float uvget = m.Uv[c];
+                float voffset = 0;
+                float  uoffset = 0;
+                
+                if (c>=0&&c<8)
+                {//NORTH FACE
+                    voffset = 1;uoffset = 0;
+                }
+                else if (c >= 8 && c < 16)
+                {//EAST FACE
+                    voffset = 1;uoffset = 0;
+                }
+                else if (c>=16 && c < 24)
+                {//SOUTH FACE
+                    voffset = 1;uoffset = 0;
+                }
+                else if (c>=24 && c < 32)
+                {//WEST FACE
+                    voffset = 1;uoffset = 0;
+                }
+                else if (c>=32 && c < 40)
+                {//UP FACE
+                    voffset = 1;uoffset = 0;
+                }
+                else
+                {//DOWN
+                    voffset = 3; uoffset = 0;
+                }
                 if (c % 2 == 0) //V
                 {
                     if (uvget == vend)
                     {
-                        uvget = vstart + uvsize +uvsize*3 ;
+                        uvget = vstart + uvsize +uvsize*voffset ;
                     }
                     else
                     {
-                        uvget = vstart +uvsize*3;
+                        uvget = vstart +uvsize*voffset;
                     }
                 }
                 else //U
                 {
                     if (uvget == uend)
                     {
-                        uvget = ustart + uvsize + uvsize*0;
+                        uvget = ustart + uvsize + uvsize*uoffset;
                     }
                     else
                     {
-                        uvget = ustart + uvsize*0;
+                        uvget = ustart + uvsize*uoffset;
                     }
                 }
                 m.Uv[c] = uvget;
             }
+
             //cubeModelRef = capi.Render.UploadMesh(m);
         }
         public float[] ModelMatf = Mat4f.Create();
