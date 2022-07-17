@@ -1,18 +1,18 @@
 {
-	"code": "weirdcomputer",
-		"class": "BlockConnectedTexture",
-	"entityclass": "BEAnimatedTextures",
+	"code": "concretelargetile-smoot",
+	"class": "BlockConnectedTexture",
+	"entityclass": "BEConnectedTextures",
 
 	"creativeinventory": {
 
-		"modernblocks": [ "" ]
+		"modernblocks": [ "*" ]
 	},
 	"blockmaterial": "Stone",
 	"drawtype": "json",
 	"shape": { "base": "block/tiledconcrete" },
 	"texturesByType": {
 		"*": {
-			"all": { "base": "block/connectedtextures/weirdcomputer" }
+			"all": { "base": "block/connectedtextures/connectedsmoothstone-gray" }
 
 
 		}
