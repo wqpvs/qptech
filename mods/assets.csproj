@@ -58,7 +58,9 @@
     <None Include="chisel\assets\chiseltools\shapes\item\tool\pantograph.json" />
     <None Include="chisel\assets\game\lang\en.json" />
     <None Include="chisel\modinfo.json" />
-    <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\cobblewithtrim.json" />
+    <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\ctslab.json" />
+    <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\testregularblock.json" />
+    <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\ctpolishedsandstone.json" />
     <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\concretetiles-smooth.json" />
     <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\weirdcomputer.json" />
     <None Include="modernblocks\assets\modernblocks\blocktypes\connectedtextures\concretetiles.json" />

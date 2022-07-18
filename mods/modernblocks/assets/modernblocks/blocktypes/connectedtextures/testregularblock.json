@@ -1,24 +1,24 @@
 {
-	"code": "concretelargetile",
+	"code": "testregularblock",
 	"class": "BlockConnectedTexture",
 	"entityclass": "BEConnectedTextures",
 
 	"creativeinventory": {
 
-		"modernblocks": [ "*" ]
+		"modernblocks": [ "" ]
 	},
 	"blockmaterial": "Stone",
-
+	"attributes": {
+		"canChisel": false
+	},
 	"texturesByType": {
 		"*": {
-			"all": { "base": "block/connectedtextures/connectedlinedstone-gray" }
+			"all": { "base": "block/connectedtextures/ctpolishedsandstone" }
 
 
 		}
 	},
-	"attributes": {
-		"canChisel": false
-	},
+	
 	"resistance": 1,
 	"sounds": {
 		"place": "game:block/stone",

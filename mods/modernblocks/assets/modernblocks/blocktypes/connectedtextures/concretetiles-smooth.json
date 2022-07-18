@@ -8,8 +8,9 @@
 		"modernblocks": [ "*" ]
 	},
 	"blockmaterial": "Stone",
-	"drawtype": "json",
-	"shape": { "base": "block/tiledconcrete" },
+	"attributes": {
+		"canChisel": false
+	},
 	"texturesByType": {
 		"*": {
 			"all": { "base": "block/connectedtextures/connectedsmoothstone-gray" }
