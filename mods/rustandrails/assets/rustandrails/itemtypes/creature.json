@@ -16,7 +16,7 @@
 		
 	},
 	
-	creativeinventory: { "general": ["*"], "R&R": ["*"]},
+	creativeinventory: { "general": ["*"], "r&r": ["*"]},
 	materialDensity: 600,
 	guiTransformByType: {
 		

@@ -1,4 +1,5 @@
 ﻿1.10.3
+- Be sure to check out the qptech wiki! Http://qptech.wiki
 - temporal condenser will now work in worlds where temporal stability has been disabled
 - Rubber Mold machine now called Parts Mold
 - new parts:
@@ -12,6 +13,8 @@
      - can use any screw type
   - Industrial Blower:
      - can use any circuit board type, including newly modified crude circuit board, so temporal steel (and mixer) not required
+
+
 
 
 1.10.2

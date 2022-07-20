@@ -16,7 +16,7 @@
 	creativeinventory: { "qptech": ["*-north"] },
 	shape: {
 		format: "obj", 
-		base: "block/cuttingmachine", 
+		base: "block/quickr26test", 
 		rotateYByType: {
 			"*-north": 0,
 			"*-east": 270,

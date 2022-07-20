@@ -133,7 +133,7 @@ namespace qptech.src.Electricity
                 if (makeitem != null) { newstack = new ItemStack(makeitem, outitem.quantity); }
                 else { newstack = new ItemStack(makeblock, outitem.quantity); }
                 if (newstack == null) { deviceState = enDeviceState.ERROR; return; }
-                if (newstack.Item!=null&&newstack.Item.Attributes.KeyExists("waterTightContainerProps"))
+                if (newstack.Item!=null&&newstack.Item.Attributes!=null&&newstack.Item.Attributes.KeyExists("waterTightContainerProps"))
                 {
                     WaterTightContainableProps liquidpros = newstack.Item.Attributes["waterTightContainerProps"].AsObject<WaterTightContainableProps>();
                     newstack.StackSize *= (int)liquidpros.ItemsPerLitre;
