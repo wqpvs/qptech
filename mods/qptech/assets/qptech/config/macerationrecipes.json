@@ -167,7 +167,7 @@
 		{
 			"outputmaterial": "game:resin",
 			"outputquantity": 2,
-			"odds": 10,
+			"odds": 75,
 			"type": "DIRECT"
 		}
 	],
