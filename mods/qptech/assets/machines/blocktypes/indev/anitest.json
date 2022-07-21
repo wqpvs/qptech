@@ -4,8 +4,8 @@
 	"entityclass": "BEAnimator",
 	"entityBehaviors": [ { "name": "Animatable" } ],
 	"creativeinventory": {
-		"general": [ "*-east" ],
-		"qptech": [ "*-east" ]
+		
+		"qptech": [ "" ]
 	},
 
 	"variantgroups": [

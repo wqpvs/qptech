@@ -15,6 +15,7 @@
      - can use any circuit board type, including newly modified crude circuit board, so temporal steel (and mixer) not required
   - Macerator increase resin out put from logs
   - primitive electric motor can be made with any machine plate or rod
+  - can make smelter furance with iron
 
 
 
