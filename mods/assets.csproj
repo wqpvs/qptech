@@ -130,6 +130,7 @@
     <None Include="qptech\assets\machines\recipes\grid\industrial\lv\metalpress-lvhardscrew.json" />
     <None Include="qptech\assets\machines\recipes\grid\industrial\other\smelterfurancefromiron.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\circuitboard-temporal.json" />
+    <None Include="qptech\assets\machines\recipes\grid\part\metal-parts.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\vacuum-tube.json" />
     <None Include="qptech\assets\machines\recipes\grid\part\machineryblock-iron.json" />
     <None Include="qptech\assets\machines\shapes\block\cuttingmachine.obj" />

@@ -4,9 +4,6 @@
   "name": "QPTECH",
   "description": "Making your life better thru technology",
   "author": "WQP",
-  "version": "1.10.3pre.3",
-  "dependency": {
-    "game": "1.16.3"
-    
-  }
+  "version": "1.10.3-pre.4"
+  
 }

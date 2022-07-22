@@ -1,4 +1,7 @@
-﻿1.10.3
+﻿1.10.4
+- Added a recipe to make vanilla Metal Parts (Helps if you also have R&R installed)
+
+1.10.3
 - Be sure to check out the qptech wiki! Http://qptech.wiki
 - temporal condenser will now work in worlds where temporal stability has been disabled
 - Rubber Mold machine now called Parts Mold

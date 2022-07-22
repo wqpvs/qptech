@@ -1,0 +1,14 @@
+{
+	ingredientPattern: "DS	PR	_S",
+	ingredients: {
+		"R": { type: "item", code: "ring-steel", quantity: 1 },
+		"P": { type: "item", code: "rod-steel", "quantity": 1 },
+		"D": { type: "item", code: "screwdriver-*", isTool: true },
+		"S": { type: "item", code: "screw-steel", quantity: 1 },
+		
+		
+	},
+	width: 2,
+	height: 3,
+	output: { type: "block", code: "game:metal-parts", quantity: 1  }
+}
