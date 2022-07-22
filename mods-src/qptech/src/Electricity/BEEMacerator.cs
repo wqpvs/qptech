@@ -178,6 +178,7 @@ namespace qptech.src
         public int inputquantity = 1;
         public float odds=1;
         public string suffix="";
+        public string[] clearcodeparts ; //This will be stripped out of the output item's code
         public enTypes type = enTypes.SWAP;
         public bool stripingredientheader = false;
         public static Random rand = new Random();
@@ -249,6 +250,7 @@ namespace qptech.src
             if (!CanMacerate(co, api,machinename)) { return outputstack; }
             string fcp = co.FirstCodePart();
             string fullcode = co.Code.ToString();
+
             CrushingProperties crp = co.CrushingProps;
             if (crp != null && machinename == "macerator")
             {
@@ -326,6 +328,13 @@ namespace qptech.src
                     {
                         
                         al = al.Replace(fcp, mr.outputmaterial);
+                        if (mr.clearcodeparts != null && mr.clearcodeparts.Length > 0)
+                        {
+                            foreach (string badstring in mr.clearcodeparts)
+                            {
+                                al = al.Replace(badstring, "");
+                            }
+                        }
                         if (mr.stripingredientheader)
                         {
                             al=al.Replace("game:", "machines:");
@@ -345,6 +354,13 @@ namespace qptech.src
                     else if (mr.type== enTypes.PARTIAL)
                     {
                         al = mr.outputmaterial;
+                    }
+                    if (mr.clearcodeparts!=null&&mr.clearcodeparts.Length>0)
+                    {
+                        foreach (string clearstring in mr.clearcodeparts)
+                        {
+                            al.Replace(clearstring, "");
+                        }
                     }
                     if (mr.suffix != "") { al = al + mr.suffix; }
                     int outqty = mr.outputquantity;

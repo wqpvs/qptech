@@ -1,5 +1,9 @@
 ﻿1.10.4
 - Added a recipe to make vanilla Metal Parts (Helps if you also have R&R installed)
+- to do:
+    - add a saw mill - maybe requires industrial torque
+    - assembling machines
+    - multiblock parts pouring machine (to replace smithed items?)
 
 1.10.3
 - Be sure to check out the qptech wiki! Http://qptech.wiki
