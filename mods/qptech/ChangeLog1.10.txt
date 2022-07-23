@@ -1,7 +1,8 @@
 ﻿1.10.4
 - Added a recipe to make vanilla Metal Parts (Helps if you also have R&R installed)
+- Added sawmill 1 log -> 16 planks (temp graphics same as log splitter)
 - to do:
-    - add a saw mill - maybe requires industrial torque
+    
     - assembling machines
     - multiblock parts pouring machine (to replace smithed items?)
 

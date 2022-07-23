@@ -270,6 +270,8 @@
 	"item-vacuum-casing": "Vacuum Tube Casing",
 	"itemdesc-vacuum-casing": "Made in a Parts Mold machine out of plain glass slabs.",
 	"item-vacuum-tube": "Vacuum Tube",
-	"itemdesc-vacuum-tube": "A useful early electronic part. Made from a casing, solider, and copper."
+	"itemdesc-vacuum-tube": "A useful early electronic part. Made from a casing, solider, and copper.",
+	"block-sawmill-*": "Saw Mill",
+	"blockdesc-sawmill-*": "Efficient plank production. Input on left, out put on right"
 
 }

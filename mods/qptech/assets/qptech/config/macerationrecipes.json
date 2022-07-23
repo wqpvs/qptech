@@ -148,9 +148,9 @@
 			"type": "PARTIAL"
 		},
 		{
-			"clearcodeparts":["game:","log-placed-","-ud"],
-			"outputmaterial": "plank",
-			"outputquantity": 1,
+			"clearcodeparts":["placed-","-ud"],
+			"outputmaterial": "planks",
+			"outputquantity": 16,
 			"odds": 100,
 			"type": "SWAP",
 			"machinename": "sawmill",

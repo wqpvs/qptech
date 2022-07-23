@@ -334,6 +334,7 @@ namespace qptech.src
                             {
                                 al = al.Replace(badstring, "");
                             }
+                            int a = 1;
                         }
                         if (mr.stripingredientheader)
                         {
